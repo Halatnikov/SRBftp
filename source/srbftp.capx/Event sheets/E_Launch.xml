@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2eventsheet>
+    <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
+    <name>E_Launch</name>
+    <events>
+        <event-block sid="402510541015359">
+            <conditions>
+                <condition id="-8" inverted="1" name="Compare two values" sid="284861290814945" type="System">
+                    <param id="0" name="First value">loadingprogress</param>
+                    <param id="1" name="Comparison">0</param>
+                    <param id="2" name="Second value">1</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="0" name="Set text" sid="742669139781917" type="Text_Static">
+                    <param id="0" name="Text">&quot;LOADING... &quot;&amp;round(loadingprogress*100)&amp;&quot;%&quot;</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="898303947690208">
+            <conditions>
+                <condition id="-25" name="On loader layout complete" sid="420926277253790" type="System" />
+            </conditions>
+            <actions>
+                <action id="0" name="Set text" sid="634740051233986" type="Text_Static">
+                    <param id="0" name="Text">&quot;LOADING MUSIC&quot;</param>
+                </action>
+                <action id="1" name="Request project file" sid="551204676005009" type="AJAX">
+                    <param id="0" name="Tag">&quot;&quot;</param>
+                    <param id="1" name="File">musiclist.txt</param>
+                </action>
+            </actions>
+            <sub-events>
+                <event-block sid="983584534152981">
+                    <conditions>
+                        <condition id="-32" name="Is on platform" sid="478767096215538" type="System">
+                            <param id="0" name="Platform">10</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Go to layout" sid="299632078212316" type="System">
+                            <param id="0" name="Layout">Menu_Main</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="749043220192761" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentMenu</param>
+                            <param id="1" name="Value">&quot;preload&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="577701731203591">
+            <conditions>
+                <condition id="3" name="On any completed" sid="295608534640901" type="AJAX" />
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="208394413855859">
+                    <conditions>
+                        <condition id="-12" name="Repeat" sid="961588946131281" type="System">
+                            <param id="0" name="Count">tokencount(AJAX.LastData,newline)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="9" name="Preload (by name)" sid="653564971495067" type="BetterAudio">
+                            <param id="0" name="Folder">1</param>
+                            <param id="1" name="Audio file name">tokenat(AJAX.LastData,loopindex,newline)</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="692662319117731">
+            <conditions>
+                <condition id="1" name="Preloads complete" sid="292864581976322" type="BetterAudio" />
+                <condition id="-4" name="Trigger once while true" sid="681619582458869" type="System" />
+            </conditions>
+            <actions>
+                <action id="-2" name="Go to layout" sid="252482936868320" type="System">
+                    <param id="0" name="Layout">Menu_Main</param>
+                </action>
+                <action id="-10" name="Set value" sid="855007215295098" type="Var_Game">
+                    <param id="0" name="Instance variable">CurrentMenu</param>
+                    <param id="1" name="Value">&quot;preload&quot;</param>
+                </action>
+            </actions>
+        </event-block>
+    </events>
+</c2eventsheet>
