@@ -2,7 +2,7 @@
 <c2project>
     <name>Sonic Robo-Blast! From The Past</name>
     <description>Original games by Sonikku - Johnathan Wallbank and SSNTails - A.J. Freda</description>
-    <version>0.2.0</version>
+    <version>0.2.1-2</version>
     <author>Halatnikov</author>
     <author-email></author-email>
     <author-website>https://halatnikov.github.io</author-website>
@@ -21,6 +21,7 @@
         <plugin author="Toby R" id="Globals" version="1">Globals</plugin>
         <plugin author="Yann Granjon" id="JSON" version="1">JSON</plugin>
         <plugin author="Scirra" id="Keyboard" version="1">Keyboard</plugin>
+        <plugin author="Scirra" id="LocalStorage" version="1">Local storage</plugin>
         <plugin author="Scirra" id="Mouse" version="1">Mouse</plugin>
         <plugin author="Scirra" id="NinePatch" version="1">9-patch</plugin>
         <plugin author="Scirra" id="NodeWebkit" version="1">NW.js</plugin>
@@ -166,6 +167,18 @@
             <object-type global="1" name="JSON_AutoUpdater" sid="786951546076076">
                 <plugin id="JSON" />
             </object-type>
+            <object-type global="1" name="JSON_AudioPreload" sid="998840539944831">
+                <plugin id="JSON" />
+                <instance-variables>
+                    <instance-variable name="CurrentTask" sid="429003126564775" type="string" />
+                    <instance-variable name="AudioSize" sid="762748204792995" type="number" />
+                    <instance-variable name="LevelPreloaded" sid="703973728226478" type="boolean" />
+                    <instance-variable name="LevelLayout" sid="661382165620558" type="string" />
+                </instance-variables>
+            </object-type>
+            <object-type name="LocalStorage" sid="420361013405810">
+                <plugin id="LocalStorage" />
+            </object-type>
         </object-folder>
         <object-folder name=".Variables">
             <object-type global="1" name="Var_Level" sid="368901035900150">
@@ -181,6 +194,7 @@
                     <instance-variable name="Level_Music" sid="740076136377127" type="string" />
                     <instance-variable name="Level_Next" sid="101736545897727" type="string" />
                     <instance-variable name="Level_FinishAfterBoss" sid="325545359230551" type="boolean" />
+                    <instance-variable name="Level_GUIOutline" sid="674753233995257" type="number" />
                     <instance-variable name="Special_SavedLevel" sid="902966220088024" type="string" />
                     <instance-variable name="Special_SavedX" sid="660560719921554" type="number" />
                     <instance-variable name="Special_SavedY" sid="449241527343496" type="number" />
@@ -209,7 +223,7 @@
                     <instance-variable name="Rings" sid="288380673646240" type="number" />
                     <instance-variable name="Score" sid="597922672116083" type="number" />
                     <instance-variable name="ScoreGuardPenalty" sid="257110915293919" type="number" />
-                    <instance-variable name="ScorePerfect" sid="169773760291612" type="boolean" />
+                    <instance-variable name="ScorePerfect" sid="989114378049831" type="number" />
                     <instance-variable name="TotalScore" sid="311489704774587" type="number" />
                     <instance-variable name="TotalDeaths" sid="944223218783714" type="number" />
                     <instance-variable name="SpringTimer" sid="281117062051879" type="number" />
@@ -377,11 +391,37 @@
                         </behavior-type>
                     </behaviors>
                     <animation-folder>
-                        <animation framecount="4" loop="1" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="299428171793454" speed="10">
+                        <animation framecount="4" loop="1" name="Default_0" pingpong="0" repeatcount="1" repeatto="0" sid="299428171793454" speed="10">
                             <frame duration="1" hotspotX="0.538462" hotspotY="0.518519" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\objects\ring__1.png" />
                             <frame duration="1" hotspotX="0.5" hotspotY="0.521739" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\objects\ring__2.png" />
                             <frame duration="1" hotspotX="0.52381" hotspotY="0.521739" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\objects\ring__3.png" />
                             <frame duration="1" hotspotX="0.538462" hotspotY="0.521739" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\objects\ring__4.png" />
+                        </animation>
+                        <animation framecount="24" loop="1" name="Default_1" pingpong="0" repeatcount="1" repeatto="0" sid="657257749062519" speed="30">
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\srb1.5\assets\objects\ring_01.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\srb1.5\assets\objects\ring_02.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\srb1.5\assets\objects\ring_03.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\srb1.5\assets\objects\ring_04.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\srb1.5\assets\objects\ring_05.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\srb1.5\assets\objects\ring_06.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\srb1.5\assets\objects\ring_07.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\srb1.5\assets\objects\ring_08.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\srb1.5\assets\objects\ring_09.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\srb1.5\assets\objects\ring_10.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\srb1.5\assets\objects\ring_11.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\srb1.5\assets\objects\ring_12.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\srb1.5\assets\objects\ring_13.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\srb1.5\assets\objects\ring_14.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\srb1.5\assets\objects\ring_15.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\srb1.5\assets\objects\ring_16.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\srb1.5\assets\objects\ring_17.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\srb1.5\assets\objects\ring_18.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\srb1.5\assets\objects\ring_19.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\srb1.5\assets\objects\ring_20.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\srb1.5\assets\objects\ring_21.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\srb1.5\assets\objects\ring_22.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\srb1.5\assets\objects\ring_23.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\srb1.5\assets\objects\ring_24.png" />
                         </animation>
                     </animation-folder>
                 </object-type>
@@ -709,6 +749,24 @@
                                     <point x="0.34375" y="0.5" />
                                 </collision-poly>
                             </frame>
+                        </animation>
+                    </animation-folder>
+                </object-type>
+                <object-type name="EffectsF_HitIndicator" sid="289072811143899">
+                    <plugin id="Sprite" />
+                    <animation-folder>
+                        <animation framecount="11" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="179172038851982" speed="45">
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                            <frame duration="2" hotspotX="0.5" hotspotY="0.5" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                            <frame duration="1" hotspotX="1" hotspotY="1" />
                         </animation>
                     </animation-folder>
                 </object-type>
@@ -4623,7 +4681,7 @@
                     </animation>
                 </animation-folder>
             </object-type>
-            <object-type name="SkinE1TGF_Knuckles" sid="174662477389898">
+            <object-type name="SkinE1TGF_SrbIIKnuckles" sid="174662477389898">
                 <plugin id="Sprite" />
                 <animation-folder>
                     <animation framecount="7" loop="0" name="Idle" pingpong="0" repeatcount="1" repeatto="0" sid="321699284028152" speed="6">
@@ -7991,8 +8049,11 @@
             </object-type>
             <object-type name="Object2_Spring" sid="946649463307463">
                 <plugin id="Sprite" />
+                <instance-variables>
+                    <instance-variable name="Reskin" sid="486503532230685" type="number" />
+                </instance-variables>
                 <animation-folder>
-                    <animation framecount="6" loop="0" name="Yellow" pingpong="0" repeatcount="1" repeatto="0" sid="190083204190010" speed="12">
+                    <animation framecount="6" loop="0" name="Yellow_0" pingpong="0" repeatcount="1" repeatto="0" sid="190083204190010" speed="12">
                         <frame duration="1" hotspotX="0.5" hotspotY="0.5">
                             <collision-poly>
                                 <point x="0" y="0.34375" />
@@ -8042,7 +8103,7 @@
                             </collision-poly>
                         </frame>
                     </animation>
-                    <animation framecount="6" loop="0" name="Red" pingpong="0" repeatcount="1" repeatto="0" sid="540542129623837" speed="12">
+                    <animation framecount="6" loop="0" name="Red_0" pingpong="0" repeatcount="1" repeatto="0" sid="540542129623837" speed="12">
                         <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb2\assets\objects\redspring_2.png">
                             <collision-poly>
                                 <point x="0" y="0.34375" />
@@ -8089,6 +8150,26 @@
                                 <point x="1" y="0.34375" />
                                 <point x="1" y="1" />
                                 <point x="0" y="1" />
+                            </collision-poly>
+                        </frame>
+                    </animation>
+                    <animation framecount="1" loop="0" name="Yellow_1" pingpong="0" repeatcount="1" repeatto="0" sid="974428419408294" speed="5">
+                        <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\srb1.5\assets\objects\spring.png">
+                            <collision-poly>
+                                <point x="0.03125" y="0.21875" />
+                                <point x="0.96875" y="0.21875" />
+                                <point x="0.96875" y="1" />
+                                <point x="0.03125" y="1" />
+                            </collision-poly>
+                        </frame>
+                    </animation>
+                    <animation framecount="1" loop="0" name="Red_1" pingpong="0" repeatcount="1" repeatto="0" sid="106494605913716" speed="5">
+                        <frame duration="1" hotspotX="0.5" hotspotY="0.5">
+                            <collision-poly>
+                                <point x="0.03125" y="0.21875" />
+                                <point x="0.96875" y="0.21875" />
+                                <point x="0.96875" y="1" />
+                                <point x="0.03125" y="1" />
                             </collision-poly>
                         </frame>
                     </animation>
@@ -8453,6 +8534,37 @@
                     </animation>
                 </animation-folder>
             </object-type>
+            <object-type name="ObjectE15_3SLMovingPlatformSensor" sid="542583559867565">
+                <plugin id="Sprite" />
+                <animation-folder>
+                    <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="941188120805944" speed="5">
+                        <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                    </animation>
+                </animation-folder>
+            </object-type>
+            <object-type name="Object1_6EPSwimmingStart" sid="728915281605459">
+                <plugin id="Sprite" />
+                <animation-folder>
+                    <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="679549326628281" speed="5">
+                        <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                    </animation>
+                </animation-folder>
+            </object-type>
+            <object-type name="Object1_5VFireBubbleSpawner" sid="736275004859308">
+                <plugin id="Sprite" />
+                <animation-folder>
+                    <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="765690721102732" speed="5">
+                        <frame duration="1" hotspotX="0.5" hotspotY="0">
+                            <collision-poly>
+                                <point x="0" y="1" />
+                                <point x="0" y="0" />
+                                <point x="1" y="0" />
+                                <point x="1" y="1" />
+                            </collision-poly>
+                        </frame>
+                    </animation>
+                </animation-folder>
+            </object-type>
         </object-folder>
         <object-folder name="Tiles">
             <object-folder name="SRB1">
@@ -8549,7 +8661,7 @@
                     <plugin id="TiledBg" />
                     <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\lz3.png" />
                 </object-type>
-                <object-type name="Tile1_Bridge" sid="816438407829473">
+                <object-type name="Tile1_1KBBridge" sid="816438407829473">
                     <plugin id="TiledBg" />
                     <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\tile_kbz_3.png" />
                 </object-type>
@@ -8885,21 +8997,105 @@
                     <plugin id="TiledBg" />
                     <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\6echidnapolis\5.png" />
                 </object-type>
-                <object-type name="Tile1_1KB3" sid="433327905087098">
-                    <plugin id="TiledBg" />
-                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\1.png" />
+                <object-type name="Deco1_5VLava3" sid="405358077894443">
+                    <plugin id="Sprite" />
+                    <animation-folder>
+                        <animation framecount="3" loop="1" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="304647926473702" speed="3">
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\5volcano\lavafall_1.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\5volcano\lavafall_2.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\5volcano\lavafall_3.png" />
+                        </animation>
+                    </animation-folder>
                 </object-type>
-                <object-type name="Tile1_1KB4" sid="920462325927736">
-                    <plugin id="TiledBg" />
-                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\2.png" />
+                <object-type name="Deco1_6EPPlatform" sid="572329714115182">
+                    <plugin id="Sprite" />
+                    <behaviors>
+                        <behavior-type name="Solid" sid="452086678937975">
+                            <behavior id="solid" />
+                        </behavior-type>
+                    </behaviors>
+                    <animation-folder>
+                        <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="381224790553399" speed="5">
+                            <frame duration="1" hotspotX="0" hotspotY="0" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\6echidnapolis\platform.png">
+                                <collision-poly>
+                                    <point x="0.015625" y="0" />
+                                    <point x="0.984375" y="0" />
+                                    <point x="0.984375" y="1" />
+                                    <point x="0.015625" y="1" />
+                                </collision-poly>
+                            </frame>
+                        </animation>
+                    </animation-folder>
                 </object-type>
-                <object-type name="Tile1_1KB5" sid="898082914103156">
-                    <plugin id="TiledBg" />
-                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\3.png" />
+                <object-type name="Deco1_6EPStairs" sid="823370434939590">
+                    <plugin id="Sprite" />
+                    <animation-folder>
+                        <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="870186929444934" speed="5">
+                            <frame duration="1" hotspotX="0" hotspotY="0">
+                                <collision-poly>
+                                    <point x="1" y="1" />
+                                    <point x="0" y="1" />
+                                    <point x="0" y="0" />
+                                    <point x="1" y="0" />
+                                </collision-poly>
+                            </frame>
+                        </animation>
+                    </animation-folder>
                 </object-type>
-                <object-type name="Tile1_1KB6" sid="876137418125570">
+                <object-type name="BG1_6EP2" sid="264089563824092">
                     <plugin id="TiledBg" />
-                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\8.png" />
+                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\6echidnapolis\bg2.png" />
+                </object-type>
+                <object-type name="BG1_6EP3" sid="357771151554922">
+                    <plugin id="TiledBg" />
+                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\6echidnapolis\bg2.png" />
+                </object-type>
+                <object-type name="Deco1_6EPPillar" sid="395310809155675">
+                    <plugin id="TiledBg" />
+                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\6echidnapolis\pillar.png" />
+                </object-type>
+                <object-type name="Deco1_6EPWater" sid="151370569490051">
+                    <plugin id="TiledBg" />
+                    <effects>
+                        <effect-type name="Inverse">
+                            <effect id="inverse" />
+                        </effect-type>
+                        <effect-type name="Subtract">
+                            <effect id="subtract" />
+                        </effect-type>
+                    </effects>
+                    <texture />
+                </object-type>
+                <object-type name="Deco1_6EPWaterTop" sid="955251930550489">
+                    <plugin id="TiledSprite" />
+                    <effects>
+                        <effect-type name="Inverse">
+                            <effect id="inverse" />
+                        </effect-type>
+                        <effect-type name="Subtract">
+                            <effect id="subtract" />
+                        </effect-type>
+                    </effects>
+                    <animation-folder>
+                        <animation framecount="2" loop="1" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="335806206862450" speed="5">
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\6echidnapolis\water_1.png">
+                                <collision-poly>
+                                    <point x="0" y="0" />
+                                    <point x="1" y="0" />
+                                    <point x="1" y="0.9375" />
+                                    <point x="0" y="0.9375" />
+                                </collision-poly>
+                            </frame>
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\6echidnapolis\water_2.png">
+                                <collision-poly>
+                                    <point x="0" y="0" />
+                                    <point x="1" y="0" />
+                                    <point x="1" y="0.9375" />
+                                    <point x="0" y="0.9375" />
+                                </collision-poly>
+                            </frame>
+                        </animation>
+                    </animation-folder>
                 </object-type>
             </object-folder>
             <object-folder name="SRB2">
@@ -8992,16 +9188,6 @@
                 <object-type name="Tile2_2THZ2_Platform" sid="584790144518961">
                     <plugin id="TiledBg" />
                     <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb2\assets\tiles\thz2_3.png" />
-                </object-type>
-                <object-type name="BG2_ChristmasSnow" sid="187191786794446">
-                    <plugin id="Sprite" />
-                    <animation-folder>
-                        <animation framecount="3" loop="1" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="440741212367740" speed="2">
-                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\snow_2.png" />
-                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\snow_1.png" />
-                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\snow_3.png" />
-                        </animation>
-                    </animation-folder>
                 </object-type>
                 <object-type name="BG2_1GFZ1Unused" sid="762051941030848">
                     <plugin id="TiledBg" />
@@ -9392,15 +9578,15 @@
                     <plugin id="TiledBg" />
                     <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\srb1.5\assets\sl\thing3.png" />
                 </object-type>
-                <object-type name="BGE15_3SL3_1" sid="587969196473362">
+                <object-type name="BGE15_3SL2_1" sid="587969196473362">
                     <plugin id="TiledBg" />
                     <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\srb1.5\assets\unused\sl1.png" />
                 </object-type>
-                <object-type name="BGE15_3SL3_2" sid="274864411227006">
+                <object-type name="BGE15_3SL2_2" sid="274864411227006">
                     <plugin id="TiledBg" />
                     <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\srb1.5\assets\unused\sl2.png" />
                 </object-type>
-                <object-type name="BGE15_3SL3_3" sid="211974536071438">
+                <object-type name="BGE15_3SL2_3" sid="211974536071438">
                     <plugin id="TiledBg" />
                     <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\srb1.5\assets\unused\sl3.png" />
                 </object-type>
@@ -9487,6 +9673,271 @@
                 <object-type name="TileE1Sp_1GGBridge" sid="564005464995146">
                     <plugin id="TiledBg" />
                     <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\1special\assets\knothole base\3_2.png" />
+                </object-type>
+            </object-folder>
+            <object-folder name="SRB2Christmas">
+                <object-type name="BG2C_ChristmasSnow" sid="187191786794446">
+                    <plugin id="Sprite" />
+                    <animation-folder>
+                        <animation framecount="3" loop="1" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="440741212367740" speed="2">
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\snow_2.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\snow_1.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\snow_3.png" />
+                        </animation>
+                    </animation-folder>
+                </object-type>
+                <object-type name="Tile2C_1GFZ1" sid="495884173026394">
+                    <plugin id="TiledBg" />
+                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\gfz1.png" />
+                </object-type>
+                <object-type name="Tile2C_1GFZ2" sid="731584041547225">
+                    <plugin id="TiledBg" />
+                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\gfz2.png" />
+                </object-type>
+                <object-type name="Tile2C_1GFZBridge" sid="266433569747622">
+                    <plugin id="TiledBg" />
+                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\gfz3.png" />
+                </object-type>
+                <object-type name="Tile2C_2THZ1_1" sid="297634707621883">
+                    <plugin id="TiledBg" />
+                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\thz1.png" />
+                </object-type>
+                <object-type name="Tile2C_2THZ1_Bridge" sid="490402257874658">
+                    <plugin id="TiledBg" />
+                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\thz6.png" />
+                </object-type>
+                <object-type name="Tile2C_2THZ2_Platform" sid="900056204458524">
+                    <plugin id="TiledBg" />
+                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\thz5.png" />
+                </object-type>
+                <object-type name="Tile2C_2THZ2_1" sid="232296846478430">
+                    <plugin id="TiledBg" />
+                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\thz3.png" />
+                </object-type>
+                <object-type name="Tile2C_2THZ2_2" sid="870461216965916">
+                    <plugin id="TiledBg" />
+                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\thz4.png" />
+                </object-type>
+            </object-folder>
+            <object-folder name="ExtraOriginal">
+                <object-type name="SlopeX_MZLongLeft" sid="985363473535050">
+                    <plugin id="Sprite" />
+                    <behaviors>
+                        <behavior-type name="Solid" sid="459655296177727">
+                            <behavior id="solid" />
+                        </behavior-type>
+                        <behavior-type name="Jumpthru" sid="715464491106174">
+                            <behavior id="jumpthru" />
+                        </behavior-type>
+                    </behaviors>
+                    <animation-folder>
+                        <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="759578063512955" speed="5">
+                            <frame duration="1" hotspotX="0" hotspotY="0" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\7.png">
+                                <collision-poly>
+                                    <point x="1" y="0" />
+                                    <point x="1" y="1" />
+                                    <point x="0" y="1" />
+                                    <point x="0" y="0.5" />
+                                </collision-poly>
+                            </frame>
+                        </animation>
+                    </animation-folder>
+                </object-type>
+                <object-type name="BGX_MZTorch" sid="838772225254198">
+                    <plugin id="Sprite" />
+                    <animation-folder>
+                        <animation framecount="2" loop="1" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="998194983995951" speed="5">
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5">
+                                <collision-poly>
+                                    <point x="1" y="1" />
+                                    <point x="0" y="1" />
+                                    <point x="0" y="0" />
+                                    <point x="1" y="0" />
+                                </collision-poly>
+                            </frame>
+                        </animation>
+                    </animation-folder>
+                </object-type>
+                <object-type name="BGX_MZWindow" sid="450074693227262">
+                    <plugin id="Sprite" />
+                    <animation-folder>
+                        <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="854812430713729" speed="5">
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\11.png" />
+                        </animation>
+                    </animation-folder>
+                </object-type>
+                <object-type name="BGX_MZCollumn1Top" sid="304373573511425">
+                    <plugin id="Sprite" />
+                    <animation-folder>
+                        <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="199572133429197" speed="5">
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\13.png" />
+                        </animation>
+                    </animation-folder>
+                </object-type>
+                <object-type name="BGX_MZCollumn2Top" sid="418076610777048">
+                    <plugin id="Sprite" />
+                    <animation-folder>
+                        <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="884890958951059" speed="5">
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\14.png" />
+                        </animation>
+                    </animation-folder>
+                </object-type>
+                <object-type name="DecoX_MZPillarBottom" sid="929378810132189">
+                    <plugin id="Sprite" />
+                    <animation-folder>
+                        <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="524767316304986" speed="5">
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\15.png" />
+                        </animation>
+                    </animation-folder>
+                </object-type>
+                <object-type name="DecoX_MZPillarTop" sid="803056384683715">
+                    <plugin id="Sprite" />
+                    <animation-folder>
+                        <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="935995476717469" speed="5">
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\17.png" />
+                        </animation>
+                    </animation-folder>
+                </object-type>
+                <object-type name="DecoX_MZPillarBroken" sid="397538641639598">
+                    <plugin id="Sprite" />
+                    <animation-folder>
+                        <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="425160615567742" speed="5">
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\18.png" />
+                        </animation>
+                    </animation-folder>
+                </object-type>
+                <object-type name="DecoX_MZPillarTopSmall" sid="966059417943379">
+                    <plugin id="Sprite" />
+                    <animation-folder>
+                        <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="530572922614186" speed="5">
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\19.png" />
+                        </animation>
+                    </animation-folder>
+                </object-type>
+                <object-type name="BGX_MZUFOs" sid="864309168736159">
+                    <plugin id="Sprite" />
+                    <animation-folder>
+                        <animation framecount="12" loop="1" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="988395991727939" speed="6">
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                        </animation>
+                    </animation-folder>
+                </object-type>
+                <object-type name="SlopeX_MZRight" sid="466109441477627">
+                    <plugin id="Sprite" />
+                    <behaviors>
+                        <behavior-type name="Solid" sid="141984163472819">
+                            <behavior id="solid" />
+                        </behavior-type>
+                        <behavior-type name="Jumpthru" sid="512463199958886">
+                            <behavior id="jumpthru" />
+                        </behavior-type>
+                    </behaviors>
+                    <animation-folder>
+                        <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="763690815863144" speed="5">
+                            <frame duration="1" hotspotX="0" hotspotY="0" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\4.png">
+                                <collision-poly>
+                                    <point x="0" y="0" />
+                                    <point x="1" y="0.5" />
+                                    <point x="1" y="1" />
+                                    <point x="0" y="1" />
+                                </collision-poly>
+                            </frame>
+                        </animation>
+                    </animation-folder>
+                </object-type>
+                <object-type name="SlopeX_MZLeft" sid="190943217414702">
+                    <plugin id="Sprite" />
+                    <behaviors>
+                        <behavior-type name="Solid" sid="195631163293316">
+                            <behavior id="solid" />
+                        </behavior-type>
+                        <behavior-type name="Jumpthru" sid="185589323358856">
+                            <behavior id="jumpthru" />
+                        </behavior-type>
+                    </behaviors>
+                    <animation-folder>
+                        <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="329769425802150" speed="5">
+                            <frame duration="1" hotspotX="0" hotspotY="0" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\5.png">
+                                <collision-poly>
+                                    <point x="1" y="0" />
+                                    <point x="1" y="1" />
+                                    <point x="0" y="1" />
+                                    <point x="0" y="0.5" />
+                                </collision-poly>
+                            </frame>
+                        </animation>
+                    </animation-folder>
+                </object-type>
+                <object-type name="SlopeX_MZLongRight" sid="891636685766040">
+                    <plugin id="Sprite" />
+                    <behaviors>
+                        <behavior-type name="Solid" sid="871927187109856">
+                            <behavior id="solid" />
+                        </behavior-type>
+                        <behavior-type name="Jumpthru" sid="623843394252415">
+                            <behavior id="jumpthru" />
+                        </behavior-type>
+                    </behaviors>
+                    <animation-folder>
+                        <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="810179974266237" speed="5">
+                            <frame duration="1" hotspotX="0" hotspotY="0" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\6.png">
+                                <collision-poly>
+                                    <point x="0" y="0" />
+                                    <point x="1" y="0.5" />
+                                    <point x="1" y="1" />
+                                    <point x="0" y="1" />
+                                </collision-poly>
+                            </frame>
+                        </animation>
+                    </animation-folder>
+                </object-type>
+                <object-type name="BGX_MZInterrior" sid="838770218302515">
+                    <plugin id="TiledBg" />
+                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\9.png" />
+                </object-type>
+                <object-type name="BGX_MZSmallBricks" sid="727145353936495">
+                    <plugin id="TiledBg" />
+                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\10.png" />
+                </object-type>
+                <object-type name="BGX_MZCollumn1" sid="641664551170752">
+                    <plugin id="TiledBg" />
+                    <texture />
+                </object-type>
+                <object-type name="BGX_MZCollumn2" sid="361843863110420">
+                    <plugin id="TiledBg" />
+                    <texture />
+                </object-type>
+                <object-type name="DecoX_MZPillar" sid="832968407850832">
+                    <plugin id="TiledBg" />
+                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\16.png" />
+                </object-type>
+                <object-type name="TileX_MZ2" sid="433327905087098">
+                    <plugin id="TiledBg" />
+                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\1.png" />
+                </object-type>
+                <object-type name="TileX_MZ1" sid="920462325927736">
+                    <plugin id="TiledBg" />
+                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\2.png" />
+                </object-type>
+                <object-type name="DecoX_MZSmallBrick" sid="898082914103156">
+                    <plugin id="TiledBg" />
+                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\3.png" />
+                </object-type>
+                <object-type name="DecoX_MZSmallBrickDark" sid="876137418125570">
+                    <plugin id="TiledBg" />
+                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\8.png" />
                 </object-type>
             </object-folder>
         </object-folder>
@@ -9725,6 +10176,76 @@
                             <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\hudmisc\menucursor_1.png" />
                         </animation>
                     </animation-folder>
+                </object-type>
+                <object-type name="Menu_LevelSelect" sid="491133583280976">
+                    <plugin id="Sprite" />
+                    <animation-folder>
+                        <animation framecount="12" loop="0" name="srb1" pingpong="0" repeatcount="1" repeatto="0" sid="574542677630032" speed="5">
+                            <frame duration="1" hotspotX="1" hotspotY="1" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\1_00.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\1_11.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\1_12.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\1_21.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\1_22.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\1_31.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\1_32.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\1_41.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\1_42.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\1_51.png" />
+                            <frame duration="1" hotspotX="1" hotspotY="1" />
+                        </animation>
+                        <animation framecount="10" loop="0" name="srb2" pingpong="0" repeatcount="1" repeatto="0" sid="317521470608985" speed="5">
+                            <frame duration="1" hotspotX="1" hotspotY="1" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\icon_2.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\2_11.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\2_12.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\2_13.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\2_21.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\2_22.png" />
+                            <frame duration="1" hotspotX="1" hotspotY="1" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\2_23.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\2_31.png" />
+                            <frame duration="1" hotspotX="1" hotspotY="1" />
+                        </animation>
+                    </animation-folder>
+                </object-type>
+                <object-type name="Menu_SkinSelect" sid="197001293436631">
+                    <plugin id="Sprite" />
+                    <animation-folder>
+                        <animation framecount="11" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="462749112642735" speed="5">
+                            <frame duration="1" hotspotX="1" hotspotY="1" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                            <frame duration="1" hotspotX="0.511628" hotspotY="0.5" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.511111" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                            <frame duration="1" hotspotX="0.509434" hotspotY="0.507246" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.512821" />
+                            <frame duration="1" hotspotX="0.516129" hotspotY="0.511111" />
+                            <frame duration="1" hotspotX="0.516129" hotspotY="0.511111" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.508475">
+                                <collision-poly>
+                                    <point x="1" y="1" />
+                                    <point x="0" y="1" />
+                                    <point x="0" y="0" />
+                                    <point x="1" y="0" />
+                                </collision-poly>
+                            </frame>
+                            <frame duration="1" hotspotX="1" hotspotY="1" />
+                        </animation>
+                    </animation-folder>
+                </object-type>
+                <object-type name="Menu_TextBox" sid="759907817614277">
+                    <plugin id="TextBox" />
+                    <instance-variables>
+                        <instance-variable name="ID" sid="928405797206580" type="number" />
+                    </instance-variables>
+                </object-type>
+                <object-type name="HUD_TextStatic" sid="896491053038082">
+                    <plugin id="Text" />
+                    <effects>
+                        <effect-type name="Outline">
+                            <effect id="outline" />
+                        </effect-type>
+                    </effects>
                 </object-type>
             </object-folder>
             <object-folder name="SRB1menus">
@@ -10496,6 +11017,11 @@
                 </object-type>
                 <object-type name="HUD_SkinName" sid="613443966475632">
                     <plugin id="Text" />
+                    <effects>
+                        <effect-type name="Outline">
+                            <effect id="outline" />
+                        </effect-type>
+                    </effects>
                 </object-type>
                 <object-type name="HUD_BossIcon" sid="276908568777152">
                     <plugin id="Sprite" />
@@ -12222,6 +12748,45 @@
                 <plugin id="TiledBg" />
                 <texture />
             </object-type>
+            <object-type name="CutsceneF_Demo1" sid="377422890072633">
+                <plugin id="Sprite" />
+                <animation-folder>
+                    <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="292822809541840" speed="5">
+                        <frame duration="1" hotspotX="0.500602" hotspotY="0.50065" />
+                    </animation>
+                </animation-folder>
+            </object-type>
+            <object-type name="CutsceneF_Demo2" sid="466677438274910">
+                <plugin id="Sprite" />
+                <effects>
+                    <effect-type name="Scroll">
+                        <effect id="scroll" />
+                    </effect-type>
+                </effects>
+                <animation-folder>
+                    <animation framecount="2" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="770332193688305" speed="0">
+                        <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                        <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                    </animation>
+                </animation-folder>
+            </object-type>
+            <object-type name="CutsceneF_Demo3" sid="582211491846543">
+                <plugin id="Sprite" />
+                <animation-folder>
+                    <animation framecount="2" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="603496609166071" speed="0">
+                        <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                        <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                    </animation>
+                </animation-folder>
+            </object-type>
+            <object-type name="CutsceneF_Demo4" sid="746717181762465">
+                <plugin id="Sprite" />
+                <animation-folder>
+                    <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="910111495028725" speed="5">
+                        <frame duration="1" hotspotX="0.545455" hotspotY="0.545455" />
+                    </animation>
+                </animation-folder>
+            </object-type>
         </object-folder>
         <object-folder name="SonicPong">
             <object-type name="Pong_Ball" sid="936457007573731">
@@ -12578,470 +13143,16 @@
                 <texture />
             </object-type>
         </object-folder>
-        <object-type name="TextBox" sid="759907817614277">
-            <plugin id="TextBox" />
-            <instance-variables>
-                <instance-variable name="ID" sid="928405797206580" type="number" />
-            </instance-variables>
-        </object-type>
-        <object-type name="Sprite" sid="736275004859308">
-            <plugin id="Sprite" />
-            <animation-folder>
-                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="765690721102732" speed="5">
-                    <frame duration="1" hotspotX="0.5" hotspotY="0">
-                        <collision-poly>
-                            <point x="0" y="1" />
-                            <point x="0" y="0" />
-                            <point x="1" y="0" />
-                            <point x="1" y="1" />
-                        </collision-poly>
-                    </frame>
-                </animation>
-            </animation-folder>
-        </object-type>
-        <object-type name="Sprite2" sid="405358077894443">
-            <plugin id="Sprite" />
-            <animation-folder>
-                <animation framecount="3" loop="1" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="304647926473702" speed="3">
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\5volcano\lavafall_1.png" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\5volcano\lavafall_2.png" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\5volcano\lavafall_3.png" />
-                </animation>
-            </animation-folder>
-        </object-type>
-        <object-type name="TiledBackground" sid="264089563824092">
-            <plugin id="TiledBg" />
-            <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\6echidnapolis\bg2.png" />
-        </object-type>
-        <object-type name="TiledBackground2" sid="395310809155675">
-            <plugin id="TiledBg" />
-            <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\6echidnapolis\pillar.png" />
-        </object-type>
-        <object-type name="Sprite3" sid="823370434939590">
-            <plugin id="Sprite" />
-            <animation-folder>
-                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="870186929444934" speed="5">
-                    <frame duration="1" hotspotX="0" hotspotY="0">
-                        <collision-poly>
-                            <point x="1" y="1" />
-                            <point x="0" y="1" />
-                            <point x="0" y="0" />
-                            <point x="1" y="0" />
-                        </collision-poly>
-                    </frame>
-                </animation>
-            </animation-folder>
-        </object-type>
-        <object-type name="Sprite4" sid="572329714115182">
-            <plugin id="Sprite" />
-            <behaviors>
-                <behavior-type name="Solid" sid="452086678937975">
-                    <behavior id="solid" />
-                </behavior-type>
-            </behaviors>
-            <animation-folder>
-                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="381224790553399" speed="5">
-                    <frame duration="1" hotspotX="0" hotspotY="0" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\6echidnapolis\platform.png">
-                        <collision-poly>
-                            <point x="0.015625" y="0" />
-                            <point x="0.984375" y="0" />
-                            <point x="0.984375" y="1" />
-                            <point x="0.015625" y="1" />
-                        </collision-poly>
-                    </frame>
-                </animation>
-            </animation-folder>
-        </object-type>
-        <object-type name="TiledSprite" sid="955251930550489">
-            <plugin id="TiledSprite" />
-            <effects>
-                <effect-type name="Inverse">
-                    <effect id="inverse" />
-                </effect-type>
-                <effect-type name="Subtract">
-                    <effect id="subtract" />
-                </effect-type>
-            </effects>
-            <animation-folder>
-                <animation framecount="2" loop="1" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="335806206862450" speed="5">
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\6echidnapolis\water_1.png">
-                        <collision-poly>
-                            <point x="0" y="0" />
-                            <point x="1" y="0" />
-                            <point x="1" y="0.9375" />
-                            <point x="0" y="0.9375" />
-                        </collision-poly>
-                    </frame>
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\6echidnapolis\water_2.png">
-                        <collision-poly>
-                            <point x="0" y="0" />
-                            <point x="1" y="0" />
-                            <point x="1" y="0.9375" />
-                            <point x="0" y="0.9375" />
-                        </collision-poly>
-                    </frame>
-                </animation>
-            </animation-folder>
-        </object-type>
-        <object-type name="TiledBackground3" sid="151370569490051">
-            <plugin id="TiledBg" />
-            <effects>
-                <effect-type name="Inverse">
-                    <effect id="inverse" />
-                </effect-type>
-                <effect-type name="Subtract">
-                    <effect id="subtract" />
-                </effect-type>
-            </effects>
-            <texture />
-        </object-type>
-        <object-type name="TiledBackground4" sid="357771151554922">
-            <plugin id="TiledBg" />
-            <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\6echidnapolis\bg2.png" />
-        </object-type>
-        <object-type name="Sprite5" sid="728915281605459">
-            <plugin id="Sprite" />
-            <animation-folder>
-                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="679549326628281" speed="5">
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
-                </animation>
-            </animation-folder>
-        </object-type>
-        <object-type name="Sprite6" sid="864309168736159">
-            <plugin id="Sprite" />
-            <animation-folder>
-                <animation framecount="12" loop="1" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="988395991727939" speed="6">
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
-                </animation>
-            </animation-folder>
-        </object-type>
-        <object-type name="Sprite7" sid="466109441477627">
-            <plugin id="Sprite" />
-            <behaviors>
-                <behavior-type name="Solid" sid="141984163472819">
-                    <behavior id="solid" />
-                </behavior-type>
-                <behavior-type name="Jumpthru" sid="512463199958886">
-                    <behavior id="jumpthru" />
-                </behavior-type>
-            </behaviors>
-            <animation-folder>
-                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="763690815863144" speed="5">
-                    <frame duration="1" hotspotX="0" hotspotY="0" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\4.png">
-                        <collision-poly>
-                            <point x="0" y="0" />
-                            <point x="1" y="0.5" />
-                            <point x="1" y="1" />
-                            <point x="0" y="1" />
-                        </collision-poly>
-                    </frame>
-                </animation>
-            </animation-folder>
-        </object-type>
-        <object-type name="Sprite8" sid="190943217414702">
-            <plugin id="Sprite" />
-            <behaviors>
-                <behavior-type name="Solid" sid="195631163293316">
-                    <behavior id="solid" />
-                </behavior-type>
-                <behavior-type name="Jumpthru" sid="185589323358856">
-                    <behavior id="jumpthru" />
-                </behavior-type>
-            </behaviors>
-            <animation-folder>
-                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="329769425802150" speed="5">
-                    <frame duration="1" hotspotX="0" hotspotY="0" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\5.png">
-                        <collision-poly>
-                            <point x="1" y="0" />
-                            <point x="1" y="1" />
-                            <point x="0" y="1" />
-                            <point x="0" y="0.5" />
-                        </collision-poly>
-                    </frame>
-                </animation>
-            </animation-folder>
-        </object-type>
-        <object-type name="Sprite9" sid="891636685766040">
-            <plugin id="Sprite" />
-            <behaviors>
-                <behavior-type name="Solid" sid="871927187109856">
-                    <behavior id="solid" />
-                </behavior-type>
-                <behavior-type name="Jumpthru" sid="623843394252415">
-                    <behavior id="jumpthru" />
-                </behavior-type>
-            </behaviors>
-            <animation-folder>
-                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="810179974266237" speed="5">
-                    <frame duration="1" hotspotX="0" hotspotY="0" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\6.png">
-                        <collision-poly>
-                            <point x="0" y="0" />
-                            <point x="1" y="0.5" />
-                            <point x="1" y="1" />
-                            <point x="0" y="1" />
-                        </collision-poly>
-                    </frame>
-                </animation>
-            </animation-folder>
-        </object-type>
-        <object-type name="Sprite10" sid="985363473535050">
-            <plugin id="Sprite" />
-            <behaviors>
-                <behavior-type name="Solid" sid="459655296177727">
-                    <behavior id="solid" />
-                </behavior-type>
-                <behavior-type name="Jumpthru" sid="715464491106174">
-                    <behavior id="jumpthru" />
-                </behavior-type>
-            </behaviors>
-            <animation-folder>
-                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="759578063512955" speed="5">
-                    <frame duration="1" hotspotX="0" hotspotY="0" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\7.png">
-                        <collision-poly>
-                            <point x="1" y="0" />
-                            <point x="1" y="1" />
-                            <point x="0" y="1" />
-                            <point x="0" y="0.5" />
-                        </collision-poly>
-                    </frame>
-                </animation>
-            </animation-folder>
-        </object-type>
-        <object-type name="Sprite11" sid="838772225254198">
-            <plugin id="Sprite" />
-            <animation-folder>
-                <animation framecount="2" loop="1" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="998194983995951" speed="5">
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5">
-                        <collision-poly>
-                            <point x="1" y="1" />
-                            <point x="0" y="1" />
-                            <point x="0" y="0" />
-                            <point x="1" y="0" />
-                        </collision-poly>
-                    </frame>
-                </animation>
-            </animation-folder>
-        </object-type>
-        <object-type name="TiledBackground5" sid="838770218302515">
-            <plugin id="TiledBg" />
-            <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\9.png" />
-        </object-type>
-        <object-type name="TiledBackground6" sid="727145353936495">
-            <plugin id="TiledBg" />
-            <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\10.png" />
-        </object-type>
-        <object-type name="Sprite12" sid="450074693227262">
-            <plugin id="Sprite" />
-            <animation-folder>
-                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="854812430713729" speed="5">
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\11.png" />
-                </animation>
-            </animation-folder>
-        </object-type>
-        <object-type name="Sprite13" sid="304373573511425">
-            <plugin id="Sprite" />
-            <animation-folder>
-                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="199572133429197" speed="5">
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\13.png" />
-                </animation>
-            </animation-folder>
-        </object-type>
-        <object-type name="Sprite14" sid="418076610777048">
-            <plugin id="Sprite" />
-            <animation-folder>
-                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="884890958951059" speed="5">
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\14.png" />
-                </animation>
-            </animation-folder>
-        </object-type>
-        <object-type name="TiledBackground7" sid="641664551170752">
-            <plugin id="TiledBg" />
-            <texture />
-        </object-type>
-        <object-type name="TiledBackground8" sid="361843863110420">
-            <plugin id="TiledBg" />
-            <texture />
-        </object-type>
-        <object-type name="Sprite15" sid="929378810132189">
-            <plugin id="Sprite" />
-            <animation-folder>
-                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="524767316304986" speed="5">
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\15.png" />
-                </animation>
-            </animation-folder>
-        </object-type>
-        <object-type name="TiledBackground9" sid="832968407850832">
-            <plugin id="TiledBg" />
-            <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\16.png" />
-        </object-type>
-        <object-type name="Sprite16" sid="803056384683715">
-            <plugin id="Sprite" />
-            <animation-folder>
-                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="935995476717469" speed="5">
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\17.png" />
-                </animation>
-            </animation-folder>
-        </object-type>
-        <object-type name="Sprite17" sid="397538641639598">
-            <plugin id="Sprite" />
-            <animation-folder>
-                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="425160615567742" speed="5">
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\18.png" />
-                </animation>
-            </animation-folder>
-        </object-type>
-        <object-type name="Sprite18" sid="966059417943379">
-            <plugin id="Sprite" />
-            <animation-folder>
-                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="530572922614186" speed="5">
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\marblezone\19.png" />
-                </animation>
-            </animation-folder>
-        </object-type>
-        <object-type name="Sprite19" sid="377422890072633">
-            <plugin id="Sprite" />
-            <animation-folder>
-                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="292822809541840" speed="5">
-                    <frame duration="1" hotspotX="0.500602" hotspotY="0.50065" />
-                </animation>
-            </animation-folder>
-        </object-type>
-        <object-type name="Sprite20" sid="289072811143899">
-            <plugin id="Sprite" />
-            <animation-folder>
-                <animation framecount="11" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="179172038851982" speed="45">
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
-                    <frame duration="2" hotspotX="0.5" hotspotY="0.5" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
-                    <frame duration="1" hotspotX="1" hotspotY="1" />
-                </animation>
-            </animation-folder>
-        </object-type>
-        <object-type name="Sprite21" sid="491133583280976">
-            <plugin id="Sprite" />
-            <animation-folder>
-                <animation framecount="12" loop="0" name="srb1" pingpong="0" repeatcount="1" repeatto="0" sid="574542677630032" speed="5">
-                    <frame duration="1" hotspotX="1" hotspotY="1" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\1_00.png" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\1_11.png" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\1_12.png" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\1_21.png" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\1_22.png" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\1_31.png" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\1_32.png" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\1_41.png" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\1_42.png" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\1_51.png" />
-                    <frame duration="1" hotspotX="1" hotspotY="1" />
-                </animation>
-                <animation framecount="10" loop="0" name="srb2" pingpong="0" repeatcount="1" repeatto="0" sid="317521470608985" speed="5">
-                    <frame duration="1" hotspotX="1" hotspotY="1" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\icon_2.png" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\2_11.png" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\2_12.png" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\2_13.png" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\2_21.png" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\2_22.png" />
-                    <frame duration="1" hotspotX="1" hotspotY="1" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\2_23.png" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\discord rich presence\big\2_31.png" />
-                    <frame duration="1" hotspotX="1" hotspotY="1" />
-                </animation>
-            </animation-folder>
-        </object-type>
-        <object-type name="Sprite22" sid="542583559867565">
-            <plugin id="Sprite" />
-            <animation-folder>
-                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="941188120805944" speed="5">
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
-                </animation>
-            </animation-folder>
-        </object-type>
-        <object-type name="Sprite23" sid="197001293436631">
-            <plugin id="Sprite" />
-            <animation-folder>
-                <animation framecount="11" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="462749112642735" speed="5">
-                    <frame duration="1" hotspotX="1" hotspotY="1" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
-                    <frame duration="1" hotspotX="0.511628" hotspotY="0.5" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.511111" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
-                    <frame duration="1" hotspotX="0.509434" hotspotY="0.507246" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.512821" />
-                    <frame duration="1" hotspotX="0.516129" hotspotY="0.511111" />
-                    <frame duration="1" hotspotX="0.516129" hotspotY="0.511111" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.508475">
-                        <collision-poly>
-                            <point x="1" y="1" />
-                            <point x="0" y="1" />
-                            <point x="0" y="0" />
-                            <point x="1" y="0" />
-                        </collision-poly>
-                    </frame>
-                    <frame duration="1" hotspotX="1" hotspotY="1" />
-                </animation>
-            </animation-folder>
-        </object-type>
-        <object-type name="Sprite24" sid="582211491846543">
-            <plugin id="Sprite" />
-            <animation-folder>
-                <animation framecount="2" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="603496609166071" speed="0">
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
-                </animation>
-            </animation-folder>
-        </object-type>
-        <object-type name="Sprite25" sid="466677438274910">
-            <plugin id="Sprite" />
-            <effects>
-                <effect-type name="Scroll">
-                    <effect id="scroll" />
-                </effect-type>
-            </effects>
-            <animation-folder>
-                <animation framecount="2" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="770332193688305" speed="0">
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
-                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
-                </animation>
-            </animation-folder>
-        </object-type>
-        <object-type name="Sprite26" sid="746717181762465">
-            <plugin id="Sprite" />
-            <animation-folder>
-                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="910111495028725" speed="5">
-                    <frame duration="1" hotspotX="0.545455" hotspotY="0.545455" />
-                </animation>
-            </animation-folder>
-        </object-type>
     </object-folder>
     <families>
         <family name="LevelTiles" plugin-id="TiledBg" sid="888312723616125">
             <members>
+                <member>DecoX_MZSmallBrick</member>
+                <member>DecoX_MZSmallBrickDark</member>
                 <member>Special_Invisible</member>
                 <member>Tile1_1KB1</member>
                 <member>Tile1_1KB2</member>
-                <member>Tile1_1KB3</member>
-                <member>Tile1_1KB4</member>
-                <member>Tile1_1KB5</member>
-                <member>Tile1_1KB6</member>
+                <member>Tile1_1KBBridge</member>
                 <member>Tile1_2GF1</member>
                 <member>Tile1_2GF2</member>
                 <member>Tile1_2GFBoss1</member>
@@ -13069,7 +13180,6 @@
                 <member>Tile1_6EP2</member>
                 <member>Tile1_6EP3</member>
                 <member>Tile1_6EP4</member>
-                <member>Tile1_Bridge</member>
                 <member>Tile1S_1A</member>
                 <member>Tile1S_2GU1</member>
                 <member>Tile1S_2GU2</member>
@@ -13093,6 +13203,8 @@
                 <member>TileE15_4IP</member>
                 <member>TileE1Sp_1GG1</member>
                 <member>TileE1Sp_1GGBridge</member>
+                <member>TileX_MZ1</member>
+                <member>TileX_MZ2</member>
             </members>
             <behaviors>
                 <behavior-type name="Solid" sid="598934429613892">
@@ -13112,7 +13224,7 @@
                 <member>SkinE1Fid_Sonic3</member>
                 <member>SkinE1Rem_Sonic</member>
                 <member>SkinE1Sp_SpecialSonic</member>
-                <member>SkinE1TGF_Knuckles</member>
+                <member>SkinE1TGF_SrbIIKnuckles</member>
                 <member>SkinE1TGF_SrbIITails</member>
                 <member>SkinXsecret_PlaceholderBox</member>
             </members>
@@ -13396,6 +13508,7 @@
             </properties>
         </global-instance>
         <global-instance type="jsZip" uid="8309" />
+        <global-instance type="LocalStorage" uid="8917" />
     </global-instances>
     <sounds-folder />
     <music-folder />
@@ -13408,19 +13521,11 @@
             <file name="icon-256.png" />
             <file name="loading-logo.png" />
         </file-folder>
-        <file-folder name="srb2christmas">
-            <file name="cTile2_1GFZ1.png" />
-            <file name="cTile2_1GFZ2.png" />
-            <file name="cTile2_1GFZBridge.png" />
-            <file name="cTile2_2THZ1_1.png" />
-            <file name="cTile2_2THZ2_1.png" />
-            <file name="cTile2_2THZ2_2.png" />
-            <file name="cTile2_2THZ2_Platform.png" />
-            <file name="cTile2_2THZ1_Bridge.png" />
-        </file-folder>
         <file name="funny.txt" />
         <file name="credits.txt" />
         <file name="default_config.ini" />
-        <file name="musiclist.txt" />
+        <file name="audiolist.ini" />
+        <file name="credits.webm" />
+        <file name="sage2022.webm" />
     </files-folder>
 </c2project>
