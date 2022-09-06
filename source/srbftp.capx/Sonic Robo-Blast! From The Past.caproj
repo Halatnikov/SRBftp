@@ -2,7 +2,7 @@
 <c2project>
     <name>Sonic Robo-Blast! From The Past</name>
     <description>Original games by Sonikku - Johnathan Wallbank and SSNTails - A.J. Freda</description>
-    <version>0.2.1-2</version>
+    <version>0.2.1-3</version>
     <author>Halatnikov</author>
     <author-email></author-email>
     <author-website>https://halatnikov.github.io</author-website>
@@ -205,6 +205,7 @@
                     <instance-variable name="Local_P2Score" sid="490336071048552" type="number" />
                     <instance-variable name="Local_LapOfHonour" sid="526079323652340" type="number" />
                     <instance-variable name="Pong_Lives" sid="583908492378675" type="number" />
+                    <instance-variable name="ZoneResetTimer" sid="270535598542224" type="number" />
                 </instance-variables>
             </object-type>
             <object-type global="1" name="Var_Player" sid="435158768718076">
@@ -258,6 +259,7 @@
                     <instance-variable name="UsedSpecialTokens" sid="890994957150961" type="string" />
                     <instance-variable name="Cheats_Thok" sid="504365754754966" type="boolean" />
                     <instance-variable name="Cheats_SpinDash" sid="947044738928533" type="boolean" />
+                    <instance-variable name="ZoneResetTimer" sid="523941753995350" type="number" />
                 </instance-variables>
             </object-type>
             <object-type global="1" name="Var_Miscellanious" sid="861604502276634">
@@ -7000,6 +7002,10 @@
             </object-type>
             <object-type name="Enemy2_3DSZSwim" sid="209688435605248">
                 <plugin id="Sprite" />
+                <instance-variables>
+                    <instance-variable name="InitialX" sid="954885481017480" type="number" />
+                    <instance-variable name="InitialY" sid="763150206361134" type="number" />
+                </instance-variables>
                 <behaviors>
                     <behavior-type name="Spline" sid="852840670064251">
                         <behavior id="Rex_Spline" />
@@ -8554,11 +8560,11 @@
                 <plugin id="Sprite" />
                 <animation-folder>
                     <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="765690721102732" speed="5">
-                        <frame duration="1" hotspotX="0.5" hotspotY="0">
+                        <frame duration="1" hotspotX="0.5" hotspotY="0.5">
                             <collision-poly>
                                 <point x="0" y="1" />
-                                <point x="0" y="0" />
-                                <point x="1" y="0" />
+                                <point x="0" y="0.5" />
+                                <point x="1" y="0.5" />
                                 <point x="1" y="1" />
                             </collision-poly>
                         </frame>
@@ -9525,7 +9531,7 @@
                                 </collision-poly>
                             </frame>
                         </animation>
-                        <animation framecount="2" loop="1" name="RiffRaff" pingpong="0" repeatcount="1" repeatto="0" sid="617803851189410" speed="8">
+                        <animation framecount="2" loop="1" name="RiffRaff" pingpong="0" repeatcount="1" repeatto="0" sid="617803851189410" speed="24">
                             <frame duration="1" hotspotX="0.514286" hotspotY="0.512195" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\srb1.5\assets\enemies\riffraff.png" />
                             <frame duration="1" hotspotX="0.514286" hotspotY="0.512195" />
                         </animation>
@@ -9613,6 +9619,14 @@
                 <object-type name="DecoE15_4IPFence" sid="831963991596658">
                     <plugin id="TiledBg" />
                     <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\srb1.5\assets\ip\2.png" />
+                </object-type>
+                <object-type name="DecoE15_Warning" sid="758019969699929">
+                    <plugin id="Sprite" />
+                    <animation-folder>
+                        <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="825046340351463" speed="5">
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                        </animation>
+                    </animation-folder>
                 </object-type>
             </object-folder>
             <object-folder name="ExtraSRB1Special">
@@ -10241,6 +10255,11 @@
                 </object-type>
                 <object-type name="HUD_TextStatic" sid="896491053038082">
                     <plugin id="Text" />
+                    <behaviors>
+                        <behavior-type name="Flash" sid="822035892661691">
+                            <behavior id="Flash" />
+                        </behavior-type>
+                    </behaviors>
                     <effects>
                         <effect-type name="Outline">
                             <effect id="outline" />
@@ -13143,6 +13162,72 @@
                 <texture />
             </object-type>
         </object-folder>
+        <object-type name="Sprite" sid="334938987352425">
+            <plugin id="Sprite" />
+            <instance-variables>
+                <instance-variable name="InitialY" sid="371038091360091" type="number" />
+            </instance-variables>
+            <behaviors>
+                <behavior-type name="LiteTween" sid="889460683859745">
+                    <behavior id="lunarray_LiteTween" />
+                </behavior-type>
+                <behavior-type name="DestroyOutsideLayout" sid="316932036531023">
+                    <behavior id="destroy" />
+                </behavior-type>
+            </behaviors>
+            <animation-folder>
+                <animation framecount="2" loop="1" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="860992156779900" speed="10">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.46875" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\bosses\5volcano\miniboss_fire_1.png">
+                        <image-point name="Imagepoint 1" x="0" y="1" />
+                        <image-point name="Imagepoint 2" x="1" y="1" />
+                        <image-point name="Imagepoint 3" x="0" y="0.09375" />
+                        <image-point name="Imagepoint 4" x="1" y="0.09375" />
+                        <collision-poly>
+                            <point x="0.214844" y="0.904297" />
+                            <point x="0.00976563" y="0.463867" />
+                            <point x="0.09375" y="0.17334" />
+                            <point x="0.310547" y="0" />
+                            <point x="0.5625" y="0" />
+                            <point x="0.901367" y="0.257813" />
+                            <point x="0.806641" y="0.875" />
+                        </collision-poly>
+                    </frame>
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.46875" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\bosses\5volcano\miniboss_fire_2.png">
+                        <image-point name="Imagepoint 2" x="1" y="1" />
+                        <image-point name="Imagepoint 1" x="0" y="1" />
+                        <image-point name="Imagepoint 3" x="0" y="0" />
+                        <image-point name="Imagepoint 4" x="1" y="0" />
+                        <collision-poly>
+                            <point x="0.214844" y="0.904297" />
+                            <point x="0.00976563" y="0.463867" />
+                            <point x="0.09375" y="0.17334" />
+                            <point x="0.310547" y="0" />
+                            <point x="0.5625" y="0" />
+                            <point x="0.901367" y="0.257813" />
+                            <point x="0.806641" y="0.875" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="Sprite2" sid="969554341384749">
+            <plugin id="Sprite" />
+            <behaviors>
+                <behavior-type name="Bullet" sid="528930602128693">
+                    <behavior id="Bullet" />
+                </behavior-type>
+                <behavior-type name="DestroyOutsideLayout" sid="214651548843402">
+                    <behavior id="destroy" />
+                </behavior-type>
+            </behaviors>
+            <animation-folder>
+                <animation framecount="3" loop="1" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="243154614552216" speed="15">
+                    <frame duration="1" hotspotX="0.6" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\objects\5v_lavaparticles_1.png" />
+                    <frame duration="1" hotspotX="0.6" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\objects\5v_lavaparticles_2.png" />
+                    <frame duration="1" hotspotX="0.6" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\objects\5v_lavaparticles_3.png" />
+                </animation>
+            </animation-folder>
+        </object-type>
     </object-folder>
     <families>
         <family name="LevelTiles" plugin-id="TiledBg" sid="888312723616125">
@@ -13525,7 +13610,5 @@
         <file name="credits.txt" />
         <file name="default_config.ini" />
         <file name="audiolist.ini" />
-        <file name="credits.webm" />
-        <file name="sage2022.webm" />
     </files-folder>
 </c2project>
