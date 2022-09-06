@@ -246,6 +246,27 @@
                                         <action id="-9" name="Destroy" sid="456887506280771" type="EffectsF_SmallBubble" />
                                         <action id="-9" name="Destroy" sid="906826246466206" type="EffectsF_ProjectileTrail" />
                                         <action id="-9" name="Destroy" sid="876678467465139" type="EffectsF_HitIndicator" />
+                                        <action id="-9" name="Destroy" sid="172965691936885" type="Effects_RingLoss" />
+                                    </actions>
+                                </event-block>
+                                <event-block sid="482663593995354">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="581688119396712" type="Var_Level">
+                                            <param id="0" name="Instance variable">Level_Game</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                        <condition id="-15" name="Pick nearest/furthest" sid="892930706259816" type="Engine_CameraZone">
+                                            <param id="0" name="Which">0</param>
+                                            <param id="1" name="X">Engine_Player.X</param>
+                                            <param id="2" name="Y">Engine_Player.Y</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-4" name="Set position to another object" sid="725137112915793" type="Engine_Camera">
+                                            <param id="0" name="Object">Engine_CameraZone</param>
+                                            <param id="1" name="Image point (optional)">0</param>
+                                        </action>
                                     </actions>
                                 </event-block>
                                 <comment>checkpoint respawn</comment>
@@ -272,29 +293,6 @@
                                             <param id="1" name="Value">0</param>
                                         </action>
                                     </actions>
-                                    <sub-events>
-                                        <event-block sid="482663593995354">
-                                            <conditions>
-                                                <condition id="-7" name="Compare instance variable" sid="581688119396712" type="Var_Level">
-                                                    <param id="0" name="Instance variable">Level_Game</param>
-                                                    <param id="1" name="Comparison">0</param>
-                                                    <param id="2" name="Value">1</param>
-                                                </condition>
-                                                <condition id="-33" name="Pick by comparison" sid="892930706259816" type="System">
-                                                    <param id="0" name="Object">Engine_CameraZone</param>
-                                                    <param id="1" name="Expression">Engine_CameraZone.ID</param>
-                                                    <param id="2" name="Comparison">0</param>
-                                                    <param id="3" name="Value">1</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="-4" name="Set position to another object" sid="725137112915793" type="Engine_Camera">
-                                                    <param id="0" name="Object">Engine_CameraZone</param>
-                                                    <param id="1" name="Image point (optional)">0</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                    </sub-events>
                                 </event-block>
                                 <comment>(with checkpoint)</comment>
                                 <event-block sid="954351137548374">
@@ -317,29 +315,6 @@
                                             <param id="1" name="Value">Special_Checkpoint.SavedScore</param>
                                         </action>
                                     </actions>
-                                    <sub-events>
-                                        <event-block sid="565467103781726">
-                                            <conditions>
-                                                <condition id="-7" name="Compare instance variable" sid="355132646214661" type="Var_Level">
-                                                    <param id="0" name="Instance variable">Level_Game</param>
-                                                    <param id="1" name="Comparison">0</param>
-                                                    <param id="2" name="Value">1</param>
-                                                </condition>
-                                                <condition id="-33" name="Pick by comparison" sid="243969267153830" type="System">
-                                                    <param id="0" name="Object">Engine_CameraZone</param>
-                                                    <param id="1" name="Expression">Engine_CameraZone.ID</param>
-                                                    <param id="2" name="Comparison">0</param>
-                                                    <param id="3" name="Value">Special_Checkpoint.SavedCamera</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="-4" name="Set position to another object" sid="967738537623651" type="Engine_Camera">
-                                                    <param id="0" name="Object">Engine_CameraZone</param>
-                                                    <param id="1" name="Image point (optional)">0</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                    </sub-events>
                                 </event-block>
                             </sub-events>
                         </event-block>
@@ -422,6 +397,7 @@
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">&quot;teleport&quot;</param>
                                 </condition>
+                                <condition behavior="MoveTo" id="3" inverted="1" name="Is moving" sid="501030839443948" type="Engine_Camera" />
                             </conditions>
                             <actions />
                             <sub-events>
@@ -1464,6 +1440,160 @@
                                 </action>
                                 <action disabled="1" id="-8" name="Scroll to object" sid="135923454369216" type="System">
                                     <param id="0" name="Object">Engine_Camera</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment></comment>
+                        <event-block sid="568076661248082">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="822483783972543" type="Var_Level">
+                                    <param id="0" name="Instance variable">Level_Game</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="352030468897216" type="JSON_Configuration">
+                                    <param id="0" name="Instance variable">GameplayInstantCamera</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                                <condition id="-8" name="Is boolean instance variable set" sid="236594119346966" type="Engine_Camera">
+                                    <param id="0" name="Instance variable">Enabled</param>
+                                </condition>
+                                <condition behavior="MoveTo" id="3" name="Is moving" sid="913743404740919" type="Engine_Camera" />
+                                <condition id="-7" name="Compare instance variable" sid="204939721162920" type="JSON_Configuration">
+                                    <param id="0" name="Instance variable">GameplayCameraPause</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action behavior="Platform" id="11" name="Set enabled" sid="170238350569014" type="Engine_Player">
+                                    <param id="0" name="State">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="342927701188294">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="754761342878533" type="Var_Level">
+                                    <param id="0" name="Instance variable">Level_Game</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="503633106789521" type="JSON_Configuration">
+                                    <param id="0" name="Instance variable">GameplayInstantCamera</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                                <condition id="-8" name="Is boolean instance variable set" sid="897103906636188" type="Engine_Camera">
+                                    <param id="0" name="Instance variable">Enabled</param>
+                                </condition>
+                                <condition behavior="MoveTo" id="1" inverted="1" name="Compare speed" sid="116593862952657" type="Engine_Camera">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Speed">0</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="358945054131244" type="JSON_Configuration">
+                                    <param id="0" name="Instance variable">GameplayCameraPause</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-13" name="Set boolean" sid="452736989921150" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevelActive</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="746753948217212">
+                            <conditions>
+                                <condition behavior="MoveTo" id="0" name="On hit target position" sid="343630122505111" type="Engine_Camera" />
+                                <condition id="-7" name="Compare instance variable" sid="621232921681634" type="Var_Level">
+                                    <param id="0" name="Instance variable">Level_Game</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="553048066738822" type="JSON_Configuration">
+                                    <param id="0" name="Instance variable">GameplayInstantCamera</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                                <condition id="-8" name="Is boolean instance variable set" sid="912048833658498" type="Engine_Camera">
+                                    <param id="0" name="Instance variable">Enabled</param>
+                                </condition>
+                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="921447240999828" type="Var_Level">
+                                    <param id="0" name="Instance variable">Pause</param>
+                                </condition>
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="226282426024580" type="Var_Player">
+                                    <param id="0" name="Instance variable">State</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;swimming&quot;</param>
+                                </condition>
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="130606754907654" type="Var_Player">
+                                    <param id="0" name="Instance variable">State</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;teleport&quot;</param>
+                                </condition>
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="378536370781523" type="Var_Player">
+                                    <param id="0" name="Instance variable">Finished</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">-1</param>
+                                </condition>
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="970695610894961" type="Var_Player">
+                                    <param id="0" name="Instance variable">Finished</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="539594617214236" type="JSON_Configuration">
+                                    <param id="0" name="Instance variable">GameplayCameraPause</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action behavior="Platform" id="11" name="Set enabled" sid="605323110120278" type="Engine_Player">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="292091584893585">
+                            <conditions>
+                                <condition behavior="MoveTo" id="0" name="On hit target position" sid="341987006198427" type="Engine_Camera" />
+                                <condition id="-7" name="Compare instance variable" sid="213100944017281" type="Var_Level">
+                                    <param id="0" name="Instance variable">Level_Game</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="773635113364034" type="JSON_Configuration">
+                                    <param id="0" name="Instance variable">GameplayInstantCamera</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                                <condition id="-8" name="Is boolean instance variable set" sid="294611345096037" type="Engine_Camera">
+                                    <param id="0" name="Instance variable">Enabled</param>
+                                </condition>
+                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="911561863642097" type="Var_Level">
+                                    <param id="0" name="Instance variable">Pause</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="652888906918841" type="Var_Player">
+                                    <param id="0" name="Instance variable">Finished</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="479553823561774" type="Var_Game">
+                                    <param id="0" name="Instance variable">TimerGlobal</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Value">4</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="584282151927263" type="JSON_Configuration">
+                                    <param id="0" name="Instance variable">GameplayCameraPause</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-13" name="Set boolean" sid="793626721785595" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevelActive</param>
+                                    <param id="1" name="Value">1</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -2752,10 +2882,6 @@
                                     <param id="0" name="Instance variable">Checkpoint</param>
                                     <param id="1" name="Value">Special_Checkpoint.id</param>
                                 </action>
-                                <action id="-10" name="Set value" sid="647750762062238" type="Special_Checkpoint">
-                                    <param id="0" name="Instance variable">SavedCamera</param>
-                                    <param id="1" name="Value">Engine_Camera.CurrentZone</param>
-                                </action>
                                 <action id="-10" name="Set value" sid="557241494099903" type="Special_Checkpoint">
                                     <param id="0" name="Instance variable">SavedScore</param>
                                     <param id="1" name="Value">Var_Player.Score</param>
@@ -3451,6 +3577,11 @@
                                     <conditions>
                                         <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="770935638126960" type="Var_Player">
                                             <param id="0" name="Instance variable">Shield</param>
+                                        </condition>
+                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="331318772548665" type="Var_Player">
+                                            <param id="0" name="Instance variable">IncincibilityTimer</param>
+                                            <param id="1" name="Comparison">5</param>
+                                            <param id="2" name="Value">1</param>
                                         </condition>
                                         <condition behavior="Flash" id="0" inverted="1" name="Is flashing" sid="476689981534990" type="PlayerSkins" />
                                     </conditions>
@@ -6486,11 +6617,6 @@
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">0</param>
                                 </condition>
-                                <condition disabled="1" id="-7" inverted="1" name="Compare instance variable" sid="454877279158116" type="Enemies">
-                                    <param id="0" name="Instance variable">MovementType</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;null&quot;</param>
-                                </condition>
                             </conditions>
                             <actions />
                             <sub-events>
@@ -6600,6 +6726,11 @@
                                             <param id="0" name="Instance variable">State</param>
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">&quot;crouch&quot;</param>
+                                        </condition>
+                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="189718603671190" type="Enemies">
+                                            <param id="0" name="Instance variable">MovementType</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;null&quot;</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -11347,7 +11478,7 @@
                                 </action>
                                 <action id="0" name="Call function" sid="203525407363165" type="Function">
                                     <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;Eruption&quot;{###}&quot;&quot;{###}2</param>
+                                    <param id="1" name="Parameter {n}">&quot;Eruption&quot;{###}&quot;Eruption&quot;{###}2</param>
                                 </action>
                                 <action behavior="ScrollTo" id="0" name="Shake" sid="142426813305951" type="Engine_Camera">
                                     <param id="0" name="Magnitude">4</param>
@@ -11371,7 +11502,7 @@
                             <actions>
                                 <action id="0" name="Call function" sid="418803570670971" type="Function">
                                     <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;Eruption&quot;{###}&quot;&quot;{###}2</param>
+                                    <param id="1" name="Parameter {n}">&quot;Eruption&quot;{###}&quot;Eruption&quot;{###}2</param>
                                 </action>
                                 <action behavior="ScrollTo" id="0" name="Shake" sid="337079472906620" type="Engine_Camera">
                                     <param id="0" name="Magnitude">4</param>
@@ -11616,6 +11747,7 @@
                         <action behavior="MoveTo" id="0" name="Set enabled" sid="687073208272912" type="Bosses">
                             <param id="0" name="State">1</param>
                         </action>
+                        <action id="-9" name="Destroy" sid="228104574641423" type="EffectsF_ProjectileTrail" />
                     </actions>
                     <sub-events>
                         <event-block sid="455886534624031">
@@ -11765,6 +11897,16 @@
                         </action>
                         <action behavior="8Direction" id="8" name="Set enabled" sid="146438914204932" type="Engine_Player">
                             <param id="0" name="State">0</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="376203850357243" type="EffectsF_ProjectileTrail">
+                            <param id="0" name="Opacity">Self.Opacity</param>
+                        </action>
+                        <action behavior="Fade" id="4" name="Set fade-out time" sid="812685899578846" type="EffectsF_ProjectileTrail">
+                            <param id="0" name="Fade-out time">0</param>
+                        </action>
+                        <action behavior="Fade" id="0" name="Restart fade" sid="971143789283618" type="EffectsF_ProjectileTrail" />
+                        <action id="-16" name="Set opacity" sid="896872595137978" type="EffectsF_ProjectileTrail">
+                            <param id="0" name="Opacity">Self.Opacity</param>
                         </action>
                     </actions>
                     <sub-events>

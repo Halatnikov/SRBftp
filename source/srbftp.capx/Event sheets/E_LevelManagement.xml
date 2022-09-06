@@ -1549,6 +1549,12 @@
                                 <action id="-16" name="Wait" sid="217902090747104" type="System">
                                     <param id="0" name="Seconds">5</param>
                                 </action>
+                                <action id="0" name="Set text" sid="250242051205575" type="Object_Text">
+                                    <param id="0" name="Text">&quot;Don&apos;t forget to take regular breaks!&quot;&amp;newline&amp;&quot;You can press Esc to pause!&quot;</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="883486039281296" type="System">
+                                    <param id="0" name="Seconds">3</param>
+                                </action>
                                 <action id="-13" name="Set boolean" sid="498693570488300" type="Var_Player">
                                     <param id="0" name="Instance variable">CanMove</param>
                                     <param id="1" name="Value">1</param>
@@ -1579,7 +1585,7 @@
                                     <param id="0" name="Visibility">1</param>
                                 </action>
                                 <action id="0" name="Set text" sid="429381165377540" type="Object_Text">
-                                    <param id="0" name="Text">&quot;You can jump up here, by simply pressing jump (default: enter)&quot;</param>
+                                    <param id="0" name="Text">&quot;You can jump up here, by simply pressing Enter&quot;</param>
                                 </action>
                                 <action id="-16" name="Wait" sid="290378367592534" type="System">
                                     <param id="0" name="Seconds">3</param>
@@ -2759,6 +2765,10 @@
                         <action behavior="Solid" id="0" name="Set enabled" sid="167076171807567" type="Object1_4IP2Puzzle2Block">
                             <param id="0" name="State">1</param>
                         </action>
+                        <action id="-10" name="Set value" sid="974193909816184" type="Object1_4IP2Puzzle2Block">
+                            <param id="0" name="Instance variable">counter</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
                     </actions>
                 </event-block>
                 <event-block sid="980463566627960">
@@ -2781,6 +2791,10 @@
                             <param id="0" name="Start Mode">0</param>
                             <param id="1" name="Force use current">0</param>
                         </action>
+                        <action id="-11" name="Add to" sid="509973606535483" type="Object1_4IP2Puzzle2Block">
+                            <param id="0" name="Instance variable">counter</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
                     </actions>
                 </event-block>
                 <event-block sid="579100787184970">
@@ -2794,10 +2808,37 @@
                         <action behavior="LiteTween" id="11" name="Reverse" sid="309413066006540" type="Object1_4IP2Puzzle2Block">
                             <param id="0" name="Reverse mode">1</param>
                         </action>
-                        <action id="5" name="Set frame" sid="966351280057928" type="Object1_4IP2Puzzle2Block">
-                            <param id="0" name="Frame number">choose(0,1,2,3,4)</param>
-                        </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="782622462206069">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="404436654357386" type="Object1_4IP2Puzzle2Block">
+                                    <param id="0" name="Instance variable">counter</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Value">4</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="5" name="Set frame" sid="966351280057928" type="Object1_4IP2Puzzle2Block">
+                                    <param id="0" name="Frame number">choose(0,1,2,3,4)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="407174069194270">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="957389764093485" type="Object1_4IP2Puzzle2Block">
+                                    <param id="0" name="Instance variable">counter</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Value">5</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="5" name="Set frame" sid="363049868382368" type="Object1_4IP2Puzzle2Block">
+                                    <param id="0" name="Frame number">4</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block sid="238589236877539">
                     <conditions>
@@ -3255,7 +3296,7 @@
                             <conditions />
                             <actions>
                                 <action id="-16" name="Wait" sid="867824342818386" type="System">
-                                    <param id="0" name="Seconds">1</param>
+                                    <param id="0" name="Seconds">2</param>
                                 </action>
                                 <action behavior="LiteTween" id="26" name="Create/Initialize tween" sid="110198844693280" type="Object1_5VRisingLava">
                                     <param id="0" name="Tweened property">8</param>
@@ -3319,13 +3360,13 @@
                             <conditions />
                             <actions>
                                 <action id="-16" name="Wait" sid="294283952471040" type="System">
-                                    <param id="0" name="Seconds">1</param>
+                                    <param id="0" name="Seconds">1.5</param>
                                 </action>
                                 <action behavior="LiteTween" id="26" name="Create/Initialize tween" sid="513215795638830" type="Object1_5VRisingLava">
                                     <param id="0" name="Tweened property">8</param>
                                     <param id="1" name="Function">0</param>
                                     <param id="2" name="Target">&quot;416&quot;</param>
-                                    <param id="3" name="Duration">10</param>
+                                    <param id="3" name="Duration">8</param>
                                     <param id="4" name="Enforce mode">0</param>
                                 </action>
                                 <action behavior="LiteTween" id="10" name="Start" sid="904243459948585" type="Object1_5VRisingLava">
@@ -4968,5 +5009,41 @@
                 </event-block>
             </sub-events>
         </event-group>
+        <event-block sid="772815842288431">
+            <conditions>
+                <condition id="-11" name="For Each" sid="638644867476247" type="System">
+                    <param id="0" name="Object">DecoE15_4IPUnusedEnemies</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="723287041591889">
+                    <conditions>
+                        <condition id="-1" name="Compare X" sid="546482916384334" type="Engine_Player">
+                            <param id="0" name="Comparison">3</param>
+                            <param id="1" name="X co-ordinate">DecoE15_4IPUnusedEnemies.X</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="7" name="Set mirrored" sid="265302839370606" type="DecoE15_4IPUnusedEnemies">
+                            <param id="0" name="State">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="136065091864878">
+                    <conditions>
+                        <condition id="-1" name="Compare X" sid="281427789679683" type="Engine_Player">
+                            <param id="0" name="Comparison">4</param>
+                            <param id="1" name="X co-ordinate">DecoE15_4IPUnusedEnemies.X</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="7" name="Set mirrored" sid="456583163686630" type="DecoE15_4IPUnusedEnemies">
+                            <param id="0" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
     </events>
 </c2eventsheet>
