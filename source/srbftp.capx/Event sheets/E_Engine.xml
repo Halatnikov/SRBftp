@@ -397,7 +397,6 @@
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">&quot;teleport&quot;</param>
                                 </condition>
-                                <condition behavior="MoveTo" id="3" inverted="1" name="Is moving" sid="501030839443948" type="Engine_Camera" />
                             </conditions>
                             <actions />
                             <sub-events>
@@ -1811,6 +1810,9 @@
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">0</param>
                                         </condition>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="930152785795052" type="Var_Level">
+                                            <param id="0" name="Instance variable">TimerLevelActive</param>
+                                        </condition>
                                     </conditions>
                                     <actions>
                                         <action id="-10" name="Set value" sid="424222222868522" type="Var_Player">
@@ -1890,6 +1892,9 @@
                                             <param id="0" name="Instance variable">IncincibilityTimer</param>
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">0</param>
+                                        </condition>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="908976812295942" type="Var_Level">
+                                            <param id="0" name="Instance variable">TimerLevelActive</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -1986,6 +1991,9 @@
                                             <param id="0" name="Instance variable">IncincibilityTimer</param>
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">0</param>
+                                        </condition>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="448688405064838" type="Var_Level">
+                                            <param id="0" name="Instance variable">TimerLevelActive</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -2246,11 +2254,11 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-4" name="Set position to another object" sid="468585315404308" type="Effects_Invulnerability">
+                                <action id="-4" name="Set position to another object" sid="468585315404308" type="EffectsF_Invulnerability">
                                     <param id="0" name="Object">PlayerSkins</param>
                                     <param id="1" name="Image point (optional)">1</param>
                                 </action>
-                                <action id="-24" name="Move to top" sid="427319573429427" type="Effects_Invulnerability" />
+                                <action id="-24" name="Move to top" sid="427319573429427" type="EffectsF_Invulnerability" />
                             </actions>
                         </event-block>
                         <event-block sid="223194038631587">
@@ -2262,7 +2270,7 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-15" name="Set visible" sid="552281294826045" type="Effects_Invulnerability">
+                                <action id="-15" name="Set visible" sid="552281294826045" type="EffectsF_Invulnerability">
                                     <param id="0" name="Visibility">1</param>
                                 </action>
                             </actions>
@@ -2299,7 +2307,7 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-15" name="Set visible" sid="706188026046750" type="Effects_Invulnerability">
+                                <action id="-15" name="Set visible" sid="706188026046750" type="EffectsF_Invulnerability">
                                     <param id="0" name="Visibility">0</param>
                                 </action>
                             </actions>
@@ -3477,6 +3485,9 @@
                                 <action id="3" name="Start" sid="582170752648697" type="Projectile1_2GF1Boss">
                                     <param id="0" name="From">0</param>
                                 </action>
+                                <action id="3" name="Start" sid="133286072207107" type="Projectile1_4IP2Boss">
+                                    <param id="0" name="From">0</param>
+                                </action>
                             </actions>
                         </event-block>
                         <event-block sid="907134040485832">
@@ -3488,6 +3499,7 @@
                             </conditions>
                             <actions>
                                 <action id="2" name="Stop" sid="481001442539000" type="Projectile1_2GF1Boss" />
+                                <action id="2" name="Stop" sid="911221235734967" type="Projectile1_4IP2Boss" />
                             </actions>
                         </event-block>
                         <comment>=srb1 spikes</comment>
@@ -3803,27 +3815,27 @@
                                 </condition>
                                 <condition id="-4" name="Trigger once while true" sid="414357234611999" type="System" />
                                 <condition id="-11" name="For Each" sid="206748987349380" type="System">
-                                    <param id="0" name="Object">Object1_5VFireBubbleSpawner</param>
+                                    <param id="0" name="Object">Hazard1_5VFireBubbleSpawner</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="0" name="Spawn another object" sid="893076598159281" type="Object1_5VFireBubbleSpawner">
-                                    <param id="0" name="Object">Sprite</param>
+                                <action id="0" name="Spawn another object" sid="893076598159281" type="Hazard1_5VFireBubbleSpawner">
+                                    <param id="0" name="Object">Hazard1_5VFireBubble</param>
                                     <param id="1" name="Layer">&quot;Player&quot;</param>
                                     <param id="2" name="Image point">0</param>
                                 </action>
-                                <action id="-10" name="Set value" sid="533287381634802" type="Sprite">
+                                <action id="-10" name="Set value" sid="533287381634802" type="Hazard1_5VFireBubble">
                                     <param id="0" name="Instance variable">InitialY</param>
                                     <param id="1" name="Value">Self.Y</param>
                                 </action>
-                                <action behavior="LiteTween" id="26" name="Create/Initialize tween" sid="140837009931152" type="Sprite">
+                                <action behavior="LiteTween" id="26" name="Create/Initialize tween" sid="140837009931152" type="Hazard1_5VFireBubble">
                                     <param id="0" name="Tweened property">8</param>
                                     <param id="1" name="Function">2</param>
                                     <param id="2" name="Target">str(Self.Y-132)</param>
                                     <param id="3" name="Duration">0.75</param>
                                     <param id="4" name="Enforce mode">0</param>
                                 </action>
-                                <action behavior="LiteTween" id="10" name="Start" sid="465136822753047" type="Sprite">
+                                <action behavior="LiteTween" id="10" name="Start" sid="465136822753047" type="Hazard1_5VFireBubble">
                                     <param id="0" name="Start Mode">0</param>
                                     <param id="1" name="Force use current">0</param>
                                 </action>
@@ -3831,20 +3843,20 @@
                         </event-block>
                         <event-block sid="978444475051348">
                             <conditions>
-                                <condition behavior="LiteTween" id="4" name="On tween end" sid="653428345722093" type="Sprite" />
+                                <condition behavior="LiteTween" id="4" name="On tween end" sid="653428345722093" type="Hazard1_5VFireBubble" />
                             </conditions>
                             <actions>
-                                <action id="8" name="Set flipped" sid="413346379903924" type="Sprite">
+                                <action id="8" name="Set flipped" sid="413346379903924" type="Hazard1_5VFireBubble">
                                     <param id="0" name="State">0</param>
                                 </action>
-                                <action behavior="LiteTween" id="26" name="Create/Initialize tween" sid="289456609959175" type="Sprite">
+                                <action behavior="LiteTween" id="26" name="Create/Initialize tween" sid="289456609959175" type="Hazard1_5VFireBubble">
                                     <param id="0" name="Tweened property">8</param>
                                     <param id="1" name="Function">1</param>
                                     <param id="2" name="Target">str(Self.Y+132)</param>
                                     <param id="3" name="Duration">0.75</param>
                                     <param id="4" name="Enforce mode">0</param>
                                 </action>
-                                <action behavior="LiteTween" id="10" name="Start" sid="519839394574248" type="Sprite">
+                                <action behavior="LiteTween" id="10" name="Start" sid="519839394574248" type="Hazard1_5VFireBubble">
                                     <param id="0" name="Start Mode">0</param>
                                     <param id="1" name="Force use current">0</param>
                                 </action>
@@ -3852,160 +3864,160 @@
                         </event-block>
                         <event-block sid="368024857825001">
                             <conditions>
-                                <condition id="-2" name="Compare Y" sid="327437635888463" type="Sprite">
+                                <condition id="-2" name="Compare Y" sid="327437635888463" type="Hazard1_5VFireBubble">
                                     <param id="0" name="Comparison">2</param>
                                     <param id="1" name="Y co-ordinate">Self.InitialY-32</param>
                                 </condition>
                                 <condition id="-4" name="Trigger once while true" sid="133565523987975" type="System" />
                             </conditions>
                             <actions>
-                                <action id="0" name="Spawn another object" sid="497040338346508" type="Sprite">
-                                    <param id="0" name="Object">Sprite2</param>
+                                <action id="0" name="Spawn another object" sid="497040338346508" type="Hazard1_5VFireBubble">
+                                    <param id="0" name="Object">Effects1_5VFireBubbleParticle</param>
                                     <param id="1" name="Layer">&quot;Player&quot;</param>
                                     <param id="2" name="Image point">1</param>
                                 </action>
-                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="410849921801166" type="Sprite2">
+                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="410849921801166" type="Effects1_5VFireBubbleParticle">
                                     <param id="0" name="Angle">225</param>
                                 </action>
-                                <action behavior="Bullet" id="0" name="Set speed" sid="393903995198487" type="Sprite2">
+                                <action behavior="Bullet" id="0" name="Set speed" sid="393903995198487" type="Effects1_5VFireBubbleParticle">
                                     <param id="0" name="Speed">175</param>
                                 </action>
-                                <action id="0" name="Spawn another object" sid="125213154845298" type="Sprite">
-                                    <param id="0" name="Object">Sprite2</param>
+                                <action id="0" name="Spawn another object" sid="125213154845298" type="Hazard1_5VFireBubble">
+                                    <param id="0" name="Object">Effects1_5VFireBubbleParticle</param>
                                     <param id="1" name="Layer">&quot;Player&quot;</param>
                                     <param id="2" name="Image point">1</param>
                                 </action>
-                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="586295756611508" type="Sprite2">
+                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="586295756611508" type="Effects1_5VFireBubbleParticle">
                                     <param id="0" name="Angle">210</param>
                                 </action>
-                                <action behavior="Bullet" id="0" name="Set speed" sid="542340148345421" type="Sprite2">
+                                <action behavior="Bullet" id="0" name="Set speed" sid="542340148345421" type="Effects1_5VFireBubbleParticle">
                                     <param id="0" name="Speed">200</param>
                                 </action>
-                                <action id="0" name="Spawn another object" sid="641298763759826" type="Sprite">
-                                    <param id="0" name="Object">Sprite2</param>
+                                <action id="0" name="Spawn another object" sid="641298763759826" type="Hazard1_5VFireBubble">
+                                    <param id="0" name="Object">Effects1_5VFireBubbleParticle</param>
                                     <param id="1" name="Layer">&quot;Player&quot;</param>
                                     <param id="2" name="Image point">2</param>
                                 </action>
-                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="691869403243984" type="Sprite2">
+                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="691869403243984" type="Effects1_5VFireBubbleParticle">
                                     <param id="0" name="Angle">315</param>
                                 </action>
-                                <action behavior="Bullet" id="0" name="Set speed" sid="302620633341853" type="Sprite2">
+                                <action behavior="Bullet" id="0" name="Set speed" sid="302620633341853" type="Effects1_5VFireBubbleParticle">
                                     <param id="0" name="Speed">175</param>
                                 </action>
-                                <action id="0" name="Spawn another object" sid="259061639059609" type="Sprite">
-                                    <param id="0" name="Object">Sprite2</param>
+                                <action id="0" name="Spawn another object" sid="259061639059609" type="Hazard1_5VFireBubble">
+                                    <param id="0" name="Object">Effects1_5VFireBubbleParticle</param>
                                     <param id="1" name="Layer">&quot;Player&quot;</param>
                                     <param id="2" name="Image point">2</param>
                                 </action>
-                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="811728728058530" type="Sprite2">
+                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="811728728058530" type="Effects1_5VFireBubbleParticle">
                                     <param id="0" name="Angle">330</param>
                                 </action>
-                                <action behavior="Bullet" id="0" name="Set speed" sid="503056227034317" type="Sprite2">
+                                <action behavior="Bullet" id="0" name="Set speed" sid="503056227034317" type="Effects1_5VFireBubbleParticle">
                                     <param id="0" name="Speed">200</param>
                                 </action>
                             </actions>
                         </event-block>
                         <event-block sid="338480439501381">
                             <conditions>
-                                <condition id="0" name="On collision with another object" sid="267326649569681" type="Sprite">
-                                    <param id="0" name="Object">Object1_5VFireBubbleSpawner</param>
+                                <condition id="0" name="On collision with another object" sid="267326649569681" type="Hazard1_5VFireBubble">
+                                    <param id="0" name="Object">Hazard1_5VFireBubbleSpawner</param>
                                 </condition>
-                                <condition id="8" name="Is flipped" sid="277231236070066" type="Sprite" />
+                                <condition id="8" name="Is flipped" sid="277231236070066" type="Hazard1_5VFireBubble" />
                             </conditions>
                             <actions>
-                                <action id="0" name="Spawn another object" sid="958782340621835" type="Sprite">
-                                    <param id="0" name="Object">Sprite2</param>
+                                <action id="0" name="Spawn another object" sid="958782340621835" type="Hazard1_5VFireBubble">
+                                    <param id="0" name="Object">Effects1_5VFireBubbleParticle</param>
                                     <param id="1" name="Layer">&quot;Player&quot;</param>
                                     <param id="2" name="Image point">1</param>
                                 </action>
-                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="713809847482975" type="Sprite2">
+                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="713809847482975" type="Effects1_5VFireBubbleParticle">
                                     <param id="0" name="Angle">240</param>
                                 </action>
-                                <action behavior="Bullet" id="0" name="Set speed" sid="614421212480326" type="Sprite2">
+                                <action behavior="Bullet" id="0" name="Set speed" sid="614421212480326" type="Effects1_5VFireBubbleParticle">
                                     <param id="0" name="Speed">150</param>
                                 </action>
-                                <action id="0" name="Spawn another object" sid="631325194431078" type="Sprite">
-                                    <param id="0" name="Object">Sprite2</param>
+                                <action id="0" name="Spawn another object" sid="631325194431078" type="Hazard1_5VFireBubble">
+                                    <param id="0" name="Object">Effects1_5VFireBubbleParticle</param>
                                     <param id="1" name="Layer">&quot;Player&quot;</param>
                                     <param id="2" name="Image point">1</param>
                                 </action>
-                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="346500319929762" type="Sprite2">
+                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="346500319929762" type="Effects1_5VFireBubbleParticle">
                                     <param id="0" name="Angle">225</param>
                                 </action>
-                                <action behavior="Bullet" id="0" name="Set speed" sid="827249945063116" type="Sprite2">
+                                <action behavior="Bullet" id="0" name="Set speed" sid="827249945063116" type="Effects1_5VFireBubbleParticle">
                                     <param id="0" name="Speed">175</param>
                                 </action>
-                                <action id="0" name="Spawn another object" sid="231891377588257" type="Sprite">
-                                    <param id="0" name="Object">Sprite2</param>
+                                <action id="0" name="Spawn another object" sid="231891377588257" type="Hazard1_5VFireBubble">
+                                    <param id="0" name="Object">Effects1_5VFireBubbleParticle</param>
                                     <param id="1" name="Layer">&quot;Player&quot;</param>
                                     <param id="2" name="Image point">1</param>
                                 </action>
-                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="230952868811349" type="Sprite2">
+                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="230952868811349" type="Effects1_5VFireBubbleParticle">
                                     <param id="0" name="Angle">210</param>
                                 </action>
-                                <action behavior="Bullet" id="0" name="Set speed" sid="423528756621141" type="Sprite2">
+                                <action behavior="Bullet" id="0" name="Set speed" sid="423528756621141" type="Effects1_5VFireBubbleParticle">
                                     <param id="0" name="Speed">200</param>
                                 </action>
-                                <action id="0" name="Spawn another object" sid="100426029187029" type="Sprite">
-                                    <param id="0" name="Object">Sprite2</param>
+                                <action id="0" name="Spawn another object" sid="100426029187029" type="Hazard1_5VFireBubble">
+                                    <param id="0" name="Object">Effects1_5VFireBubbleParticle</param>
                                     <param id="1" name="Layer">&quot;Player&quot;</param>
                                     <param id="2" name="Image point">2</param>
                                 </action>
-                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="907682863254567" type="Sprite2">
+                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="907682863254567" type="Effects1_5VFireBubbleParticle">
                                     <param id="0" name="Angle">300</param>
                                 </action>
-                                <action behavior="Bullet" id="0" name="Set speed" sid="599144550018351" type="Sprite2">
+                                <action behavior="Bullet" id="0" name="Set speed" sid="599144550018351" type="Effects1_5VFireBubbleParticle">
                                     <param id="0" name="Speed">150</param>
                                 </action>
-                                <action id="0" name="Spawn another object" sid="632698859245721" type="Sprite">
-                                    <param id="0" name="Object">Sprite2</param>
+                                <action id="0" name="Spawn another object" sid="632698859245721" type="Hazard1_5VFireBubble">
+                                    <param id="0" name="Object">Effects1_5VFireBubbleParticle</param>
                                     <param id="1" name="Layer">&quot;Player&quot;</param>
                                     <param id="2" name="Image point">2</param>
                                 </action>
-                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="863604640691568" type="Sprite2">
+                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="863604640691568" type="Effects1_5VFireBubbleParticle">
                                     <param id="0" name="Angle">315</param>
                                 </action>
-                                <action behavior="Bullet" id="0" name="Set speed" sid="663164378182838" type="Sprite2">
+                                <action behavior="Bullet" id="0" name="Set speed" sid="663164378182838" type="Effects1_5VFireBubbleParticle">
                                     <param id="0" name="Speed">175</param>
                                 </action>
-                                <action id="0" name="Spawn another object" sid="767919964638182" type="Sprite">
-                                    <param id="0" name="Object">Sprite2</param>
+                                <action id="0" name="Spawn another object" sid="767919964638182" type="Hazard1_5VFireBubble">
+                                    <param id="0" name="Object">Effects1_5VFireBubbleParticle</param>
                                     <param id="1" name="Layer">&quot;Player&quot;</param>
                                     <param id="2" name="Image point">2</param>
                                 </action>
-                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="208696864807636" type="Sprite2">
+                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="208696864807636" type="Effects1_5VFireBubbleParticle">
                                     <param id="0" name="Angle">330</param>
                                 </action>
-                                <action behavior="Bullet" id="0" name="Set speed" sid="103249303470491" type="Sprite2">
+                                <action behavior="Bullet" id="0" name="Set speed" sid="103249303470491" type="Effects1_5VFireBubbleParticle">
                                     <param id="0" name="Speed">200</param>
                                 </action>
-                                <action id="-9" name="Destroy" sid="350812304035062" type="Sprite" />
+                                <action id="-9" name="Destroy" sid="350812304035062" type="Hazard1_5VFireBubble" />
                             </actions>
                         </event-block>
                         <event-block sid="830961808565839">
                             <conditions>
-                                <condition id="0" name="On collision with another object" sid="459682372717320" type="Sprite2">
+                                <condition id="0" name="On collision with another object" sid="459682372717320" type="Effects1_5VFireBubbleParticle">
                                     <param id="0" name="Object">Deco1_5VLava1</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-9" name="Destroy" sid="105475122476431" type="Sprite2" />
+                                <action id="-9" name="Destroy" sid="105475122476431" type="Effects1_5VFireBubbleParticle" />
                             </actions>
                         </event-block>
                         <event-block sid="310374199056631">
                             <conditions>
-                                <condition id="0" name="On collision with another object" sid="237482019348933" type="Sprite2">
+                                <condition id="0" name="On collision with another object" sid="237482019348933" type="Effects1_5VFireBubbleParticle">
                                     <param id="0" name="Object">LevelTiles</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-9" name="Destroy" sid="619425361033642" type="Sprite2" />
+                                <action id="-9" name="Destroy" sid="619425361033642" type="Effects1_5VFireBubbleParticle" />
                             </actions>
                         </event-block>
                         <event-block sid="360200347175853">
                             <conditions>
                                 <condition id="0" name="On collision with another object" sid="524506089318963" type="PlayerSkins">
-                                    <param id="0" name="Object">Sprite</param>
+                                    <param id="0" name="Object">Hazard1_5VFireBubble</param>
                                 </condition>
                                 <condition id="-33" name="Pick by comparison" sid="225993836061806" type="System">
                                     <param id="0" name="Object">PlayerSkins</param>
@@ -4119,24 +4131,10 @@
                                             <param id="2" name="Comparison">0</param>
                                             <param id="3" name="Value">1</param>
                                         </condition>
-                                        <condition id="-15" name="Pick nearest/furthest" sid="965633286208861" type="Engine_CameraZone">
-                                            <param id="0" name="Which">0</param>
-                                            <param id="1" name="X">Object_Teleporter.X</param>
-                                            <param id="2" name="Y">Object_Teleporter.Y</param>
-                                        </condition>
-                                        <condition id="-7" name="Compare instance variable" sid="198727090795170" type="Var_Level">
-                                            <param id="0" name="Instance variable">Level_Game</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">1</param>
-                                        </condition>
                                     </conditions>
                                     <actions>
                                         <action id="-16" name="Wait" sid="692983993869175" type="System">
                                             <param id="0" name="Seconds">1</param>
-                                        </action>
-                                        <action id="-4" name="Set position to another object" sid="893733896943969" type="Engine_Camera">
-                                            <param id="0" name="Object">Engine_CameraZone</param>
-                                            <param id="1" name="Image point (optional)">0</param>
                                         </action>
                                         <action id="-4" name="Set position to another object" sid="196979877840471" type="Engine_Player">
                                             <param id="0" name="Object">Object_Teleporter</param>
@@ -4150,46 +4148,28 @@
                                             <param id="0" name="State">1</param>
                                         </action>
                                     </actions>
-                                </event-block>
-                                <event-block sid="947630335228894">
-                                    <conditions>
-                                        <condition id="4" name="On finished" sid="688003130699237" type="PlayerSkins">
-                                            <param id="0" name="Animation">&quot;TeleportIn&quot;</param>
-                                        </condition>
-                                        <condition id="-33" name="Pick by comparison" sid="446030701004930" type="System">
-                                            <param id="0" name="Object">Object_Teleporter</param>
-                                            <param id="1" name="Expression">Object_Teleporter.ID</param>
-                                            <param id="2" name="Comparison">0</param>
-                                            <param id="3" name="Value">teleport</param>
-                                        </condition>
-                                        <condition id="-33" name="Pick by comparison" sid="414354217833559" type="System">
-                                            <param id="0" name="Object">Object_Teleporter</param>
-                                            <param id="1" name="Expression">Object_Teleporter.AnimationFrame</param>
-                                            <param id="2" name="Comparison">0</param>
-                                            <param id="3" name="Value">1</param>
-                                        </condition>
-                                        <condition id="-7" name="Compare instance variable" sid="860587053770318" type="Var_Level">
-                                            <param id="0" name="Instance variable">Level_Game</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">2</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-16" name="Wait" sid="955122509482299" type="System">
-                                            <param id="0" name="Seconds">1</param>
-                                        </action>
-                                        <action id="-4" name="Set position to another object" sid="289977144969177" type="Engine_Player">
-                                            <param id="0" name="Object">Object_Teleporter</param>
-                                            <param id="1" name="Image point (optional)">0</param>
-                                        </action>
-                                        <action id="4" name="Set animation" sid="940250981695269" type="PlayerSkins">
-                                            <param id="0" name="Animation">&quot;TeleportOut&quot;</param>
-                                            <param id="1" name="From">1</param>
-                                        </action>
-                                        <action id="7" name="Set mirrored" sid="513953994740434" type="PlayerSkins">
-                                            <param id="0" name="State">1</param>
-                                        </action>
-                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="753368508618232">
+                                            <conditions>
+                                                <condition id="-7" name="Compare instance variable" sid="198727090795170" type="Var_Level">
+                                                    <param id="0" name="Instance variable">Level_Game</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">1</param>
+                                                </condition>
+                                                <condition id="-15" name="Pick nearest/furthest" sid="965633286208861" type="Engine_CameraZone">
+                                                    <param id="0" name="Which">0</param>
+                                                    <param id="1" name="X">Object_Teleporter.X</param>
+                                                    <param id="2" name="Y">Object_Teleporter.Y</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-4" name="Set position to another object" sid="893733896943969" type="Engine_Camera">
+                                                    <param id="0" name="Object">Engine_CameraZone</param>
+                                                    <param id="1" name="Image point (optional)">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
                                 </event-block>
                                 <event-block sid="811420213693829">
                                     <conditions>
@@ -4267,8 +4247,8 @@
                                             <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                             <param id="1" name="Parameter {n}">&quot;Teleport&quot;</param>
                                         </action>
-                                        <action id="4" name="Set animation" sid="918583213947474" type="PlayerSkins">
-                                            <param id="0" name="Animation">&quot;Idle&quot;</param>
+                                        <action id="4" name="Set animation" sid="948159247119536" type="PlayerSkins">
+                                            <param id="0" name="Animation">&quot;TeleportIn&quot;</param>
                                             <param id="1" name="From">1</param>
                                         </action>
                                         <action id="0" name="Ease" sid="835773376402151" type="Ease">
@@ -4300,24 +4280,10 @@
                                             <param id="2" name="Comparison">0</param>
                                             <param id="3" name="Value">1</param>
                                         </condition>
-                                        <condition id="-15" name="Pick nearest/furthest" sid="909702582200970" type="Engine_CameraZone">
-                                            <param id="0" name="Which">0</param>
-                                            <param id="1" name="X">Object_Teleporter.X</param>
-                                            <param id="2" name="Y">Object_Teleporter.Y</param>
-                                        </condition>
-                                        <condition id="-7" name="Compare instance variable" sid="789944455382798" type="Var_Level">
-                                            <param id="0" name="Instance variable">Level_Game</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">1</param>
-                                        </condition>
                                     </conditions>
                                     <actions>
                                         <action id="-16" name="Wait" sid="172489522996854" type="System">
                                             <param id="0" name="Seconds">1</param>
-                                        </action>
-                                        <action id="-4" name="Set position to another object" sid="918131719318720" type="Engine_Camera">
-                                            <param id="0" name="Object">Engine_CameraZone</param>
-                                            <param id="1" name="Image point (optional)">0</param>
                                         </action>
                                         <action id="-4" name="Set position to another object" sid="560803778064617" type="Engine_Player">
                                             <param id="0" name="Object">Object_Teleporter</param>
@@ -4335,53 +4301,33 @@
                                         <action id="7" name="Set mirrored" sid="339608117282903" type="PlayerSkins">
                                             <param id="0" name="State">1</param>
                                         </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="883412164560081">
-                                    <conditions>
-                                        <condition id="1" name="On finished" sid="215777402110205" type="Ease">
-                                            <param id="0" name="Ease tag">&quot;TeleportIn&quot;</param>
-                                            <param id="1" name="Ease parameter {n}"></param>
-                                        </condition>
-                                        <condition id="-33" name="Pick by comparison" sid="262199085103970" type="System">
-                                            <param id="0" name="Object">Object_Teleporter</param>
-                                            <param id="1" name="Expression">Object_Teleporter.ID</param>
-                                            <param id="2" name="Comparison">0</param>
-                                            <param id="3" name="Value">teleport</param>
-                                        </condition>
-                                        <condition id="-33" name="Pick by comparison" sid="790461952324002" type="System">
-                                            <param id="0" name="Object">Object_Teleporter</param>
-                                            <param id="1" name="Expression">Object_Teleporter.AnimationFrame</param>
-                                            <param id="2" name="Comparison">0</param>
-                                            <param id="3" name="Value">1</param>
-                                        </condition>
-                                        <condition id="-7" name="Compare instance variable" sid="405713980109556" type="Var_Level">
-                                            <param id="0" name="Instance variable">Level_Game</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">2</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-16" name="Wait" sid="413812249483010" type="System">
-                                            <param id="0" name="Seconds">1</param>
-                                        </action>
-                                        <action id="-4" name="Set position to another object" sid="362303879616411" type="Engine_Player">
-                                            <param id="0" name="Object">Object_Teleporter</param>
-                                            <param id="1" name="Image point (optional)">0</param>
-                                        </action>
-                                        <action id="0" name="Ease" sid="239432583967151" type="Ease">
-                                            <param id="0" name="Ease tag">&quot;TeleportOut&quot;</param>
-                                            <param id="1" name="Start value">0</param>
-                                            <param id="2" name="End value">1</param>
-                                            <param id="3" name="Duration">1</param>
-                                            <param id="4" name="Easing effect">0</param>
-                                            <param id="5" name="Bounce back">0</param>
-                                            <param id="6" name="Ease parameter {n}"></param>
-                                        </action>
-                                        <action id="7" name="Set mirrored" sid="117644361362689" type="PlayerSkins">
-                                            <param id="0" name="State">1</param>
+                                        <action id="4" name="Set animation" sid="191796582447180" type="PlayerSkins">
+                                            <param id="0" name="Animation">&quot;TeleportOut&quot;</param>
+                                            <param id="1" name="From">1</param>
                                         </action>
                                     </actions>
+                                    <sub-events>
+                                        <event-block sid="760759481437305">
+                                            <conditions>
+                                                <condition id="-7" name="Compare instance variable" sid="789944455382798" type="Var_Level">
+                                                    <param id="0" name="Instance variable">Level_Game</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">1</param>
+                                                </condition>
+                                                <condition id="-15" name="Pick nearest/furthest" sid="909702582200970" type="Engine_CameraZone">
+                                                    <param id="0" name="Which">0</param>
+                                                    <param id="1" name="X">Object_Teleporter.X</param>
+                                                    <param id="2" name="Y">Object_Teleporter.Y</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-4" name="Set position to another object" sid="918131719318720" type="Engine_Camera">
+                                                    <param id="0" name="Object">Engine_CameraZone</param>
+                                                    <param id="1" name="Image point (optional)">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
                                 </event-block>
                                 <event-block sid="672252967425613">
                                     <conditions>
@@ -4427,9 +4373,6 @@
                                 <action id="9" name="Set scale" sid="787262087390544" type="PlayerSkins">
                                     <param id="0" name="Scale">Ease.TickedValue</param>
                                 </action>
-                                <action id="5" name="Set frame" sid="829249643235874" type="PlayerSkins">
-                                    <param id="0" name="Frame number">0</param>
-                                </action>
                             </actions>
                         </event-block>
                         <event-block sid="483292452615432">
@@ -4448,9 +4391,6 @@
                             <actions>
                                 <action id="9" name="Set scale" sid="670715451385396" type="PlayerSkins">
                                     <param id="0" name="Scale">Ease.TickedValue</param>
-                                </action>
-                                <action id="5" name="Set frame" sid="120731533536147" type="PlayerSkins">
-                                    <param id="0" name="Frame number">0</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -8965,6 +8905,11 @@
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">&quot;active&quot;</param>
                                         </condition>
+                                        <condition id="-8" name="Compare two values" sid="918029848537513" type="System">
+                                            <param id="0" name="First value">Projectile1_4IP2Boss.Count</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">0</param>
+                                        </condition>
                                     </conditions>
                                     <actions>
                                         <action id="0" name="Spawn another object" sid="782067435876236" type="Boss1_4IP2">
@@ -9167,6 +9112,18 @@
                                             <param id="0" name="Instance variable">FlashTimer</param>
                                             <param id="1" name="Value">-3</param>
                                         </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="374299010334031">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="431732150789366" type="Bosses">
+                                            <param id="0" name="Instance variable">FlashTimer</param>
+                                            <param id="1" name="Comparison">3</param>
+                                            <param id="2" name="Value">-2</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Destroy" sid="209883410008169" type="EnemyProjectiles" />
                                     </actions>
                                 </event-block>
                                 <event-block sid="302283170698956">
