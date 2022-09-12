@@ -3255,6 +3255,79 @@
                                 </action>
                             </actions>
                         </event-block>
+                        <comment></comment>
+                        <event-block sid="194641808386267">
+                            <conditions>
+                                <condition id="-11" name="For Each" sid="712400128126343" type="System">
+                                    <param id="0" name="Object">ObjectE15_3SLMovingPlatform</param>
+                                </condition>
+                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="846960442403921" type="Var_Level">
+                                    <param id="0" name="Instance variable">Pause</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="625287445332168" type="Var_Game">
+                                    <param id="0" name="Instance variable">TimerGlobal</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Value">4</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="306165966405764">
+                                    <conditions>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="766228684212786" type="ObjectE15_3SLMovingPlatform">
+                                            <param id="0" name="Instance variable">direction</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="725784411452991" type="ObjectE15_3SLMovingPlatform">
+                                            <param id="0" name="Y">Self.Y-5</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="266609070470845">
+                                            <conditions>
+                                                <condition id="0" name="On collision with another object" sid="338143971524883" type="ObjectE15_3SLMovingPlatform">
+                                                    <param id="0" name="Object">ObjectE15_3SLMovingPlatformSensor</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-13" name="Set boolean" sid="897612715770848" type="ObjectE15_3SLMovingPlatform">
+                                                    <param id="0" name="Instance variable">direction</param>
+                                                    <param id="1" name="Value">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="393104919535850">
+                                    <conditions>
+                                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="273652210979005" type="ObjectE15_3SLMovingPlatform">
+                                            <param id="0" name="Instance variable">direction</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="463063298270180" type="ObjectE15_3SLMovingPlatform">
+                                            <param id="0" name="Y">Self.Y+5</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="877119897092150">
+                                            <conditions>
+                                                <condition id="0" name="On collision with another object" sid="623353701008916" type="ObjectE15_3SLMovingPlatform">
+                                                    <param id="0" name="Object">ObjectE15_3SLMovingPlatformSensor</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-13" name="Set boolean" sid="863361524328983" type="ObjectE15_3SLMovingPlatform">
+                                                    <param id="0" name="Instance variable">direction</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
                     </sub-events>
                 </event-group>
                 <event-group description="" sid="169556633552369" title="Hazards">
@@ -4112,6 +4185,10 @@
                                             <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                             <param id="1" name="Parameter {n}">&quot;Teleport&quot;</param>
                                         </action>
+                                        <action id="-13" name="Set boolean" sid="167539545970973" type="Var_Level">
+                                            <param id="0" name="Instance variable">TimerLevelActive</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
                                     </actions>
                                 </event-block>
                                 <event-block sid="732600388894637">
@@ -4193,6 +4270,10 @@
                                             <param id="0" name="Variable">teleport</param>
                                             <param id="1" name="Value">0</param>
                                         </action>
+                                        <action id="-13" name="Set boolean" sid="321298606630655" type="Var_Level">
+                                            <param id="0" name="Instance variable">TimerLevelActive</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
                                     </actions>
                                 </event-block>
                             </sub-events>
@@ -4259,6 +4340,10 @@
                                             <param id="4" name="Easing effect">0</param>
                                             <param id="5" name="Bounce back">0</param>
                                             <param id="6" name="Ease parameter {n}"></param>
+                                        </action>
+                                        <action id="-13" name="Set boolean" sid="809763677935120" type="Var_Level">
+                                            <param id="0" name="Instance variable">TimerLevelActive</param>
+                                            <param id="1" name="Value">1</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -4351,6 +4436,10 @@
                                         <action id="-9" name="Set value" sid="193883952672919" type="System">
                                             <param id="0" name="Variable">teleport</param>
                                             <param id="1" name="Value">0</param>
+                                        </action>
+                                        <action id="-13" name="Set boolean" sid="716478952989794" type="Var_Level">
+                                            <param id="0" name="Instance variable">TimerLevelActive</param>
+                                            <param id="1" name="Value">1</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -5372,10 +5461,10 @@
                                 <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="722442597228936" type="Object2_SpecialStageWarp">
                                     <param id="0" name="Instance variable">Used</param>
                                 </condition>
-                                <condition id="-7" name="Compare instance variable" sid="742834767683138" type="Var_Game">
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="178947594825979" type="Var_Game">
                                     <param id="0" name="Instance variable">Gamemode</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;LevelSelect&quot;</param>
+                                    <param id="2" name="Value">&quot;Singleplayer&quot;</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -11848,12 +11937,17 @@
                                 </action>
                             </actions>
                         </event-block>
-                        <event-block sid="550299578306304">
+                        <event-block any="1" sid="550299578306304">
                             <conditions>
                                 <condition id="-7" name="Compare instance variable" sid="784585203346635" type="Var_Game">
                                     <param id="0" name="Instance variable">Gamemode</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">&quot;Singleplayer&quot;</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="113201492712281" type="Var_Game">
+                                    <param id="0" name="Instance variable">Gamemode</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;Marathon&quot;</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -11871,6 +11965,11 @@
                                             <param id="0" name="First value">find(LayoutName,&quot;2_&quot;)</param>
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Second value">-1</param>
+                                        </condition>
+                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="633247219738373" type="Var_Game">
+                                            <param id="0" name="Instance variable">Gamemode</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;Marathon&quot;</param>
                                         </condition>
                                     </conditions>
                                     <actions>

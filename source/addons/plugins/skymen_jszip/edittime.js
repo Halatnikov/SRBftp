@@ -1,16 +1,15 @@
 ﻿function GetPluginSettings()
 {
 	return {
-		"name":			"JSZip",				// as appears in 'insert object' dialog, can be changed as long as "id" stays the same
-		"id":			"eren_jszip",				// this is used to identify this plugin and is saved to the project; never change it
-		"version":		"1.0",					// (float in x.y format) Plugin version - C2 shows compatibility warnings based on this
-		"description":	"Create .zip files using JavaScript ",
-		"author":		"Eren Ertuğrul",
-		"help url":		"https://github.com/erenertugrul",
+		"name":			"jsZip",				// as appears in 'insert object' dialog, can be changed as long as "id" stays the same
+		"id":			"skymen_jszip",				// this is used to identify this plugin and is saved to the project; never change it
+		"version":      "1.4",					// (float in x.y format) Plugin version - C2 shows compatibility warnings based on this
+		"description":	"Allows the manipulation of zip files",
+		"author":		"skymen",
+		"help url":		" ",
 		"category":		"General",				// Prefer to re-use existing categories, but you can set anything here
 		"type":			"object",				// either "world" (appears in layout and is drawn), else "object"
 		"rotatable":	false,					// only used when "type" is "world".  Enables an angle property on the object.
-		"dependency":	"jszip-utils.js;filesaver.js;jszip.js",
 		"flags":		0						// uncomment lines to enable flags...
 						| pf_singleglobal		// exists project-wide, e.g. mouse, keyboard.  "type" must be "object".
 					//	| pf_texture			// object has a single texture (e.g. tiled background)
@@ -25,6 +24,8 @@
 					//	| pf_effects			// allow WebGL shader effects to be added
 					//  | pf_predraw			// set for any plugin which draws and is not a sprite (i.e. does not simply draw
 												// a single non-tiling image the size of the object) - required for effects to work properly
+	,
+	"dependency": "jszip.js;jszip-utils.js;"
 	};
 };
 
@@ -55,26 +56,17 @@
 //				description,		// appears in event wizard dialog when selected
 //				script_name);		// corresponding runtime function name
 				
-
-// Zip Conditions
-AddCondition(0, cf_trigger, "On Created Zip", "Zip", "On Created Zip", "Trigger when create new zip file action", "OnCreatedZip");
-AddCondition(1, cf_trigger, "On Readed Zip", "Zip", "On Readed Zip", "Trigger when read zip file action", "OnReadedZip");
-AddCondition(2, cf_trigger, "On Downloaded Zip", "Zip","On Downloaded Zip", "Trigger when download zip file action", "OnDownloadedZip");
-AddCondition(3, cf_trigger, "On Added file", "Zip", "On Added File","Trigger when any add file.", "OnAddedFile");
-AddCondition(11, cf_trigger, "On Closed Zip", "Zip", "On Closed Zip","Trigger when close zip action", "OnClosedZip");
-AddCondition(12, cf_trigger, "On Added Sprite", "Zip", "On Added Sprite","Trigger when add sprite action", "OnAddedFile");
-// File Conditions
-AddCondition(4, cf_trigger, "On Readed File", "File", "On Readed File", "Trigger when read file action", "OnReadedFile");
-AddCondition(5, cf_trigger, "On Removed File or Directory", "File", "On Removed File or Directory", "Trigger when removed file action", "OnRemovedFile");
-AddCondition(6, cf_trigger, "On Created Directory", "File", "On Created Directory", "Trigger when created directory action", "OnCreatedDir");
-AddCondition(7, cf_looping, "foreach file list", "File", "foreach file list", "foreach file list", "Foreachlist");
-
-//Other Conditions
-AddCondition(8, cf_trigger, "On Errored", "File", "On Errored", "Trigger when any error.", "OnErrorAny");
-
-AddCondition(9, cf_trigger, "On Extract Zip", "Node", "On Extract Zip","Trigger when Extract zip file action", "OnExtractZip");
-AddCondition(10, cf_trigger, "On Write Zip", "Node", "On write Zip","Trigger when write zip file action", "OnWritedFile");
-
+// example				
+AddCondition(0, cf_trigger, "On Zip Loaded", "Setup", "On Zip Loaded", "Triggered when the zip gets loaded from the URL", "OnZipLoaded");
+AddCondition(1, cf_trigger, "On Zip Load Fail", "Setup", "On Zip Load Fail", "Triggered when the zip fails to load from the URL", "OnZipLoadFail");
+AddCondition(2, cf_trigger, "On Unzip", "Unzip", "On Unzip", "Triggered when the zip gets unziped to path", "OnUnzip");
+AddCondition(3, cf_trigger, "On Unzip Fail", "Unzip", "On Unzip Fail", "Triggered when the unzip fails", "OnUnzipFail");
+AddCondition(4, cf_trigger, "On Download", "Unzip", "On Download", "Triggered when the zip gets downloaded to path", "OnDownload");
+AddCondition(5, cf_trigger, "On Download Fail", "Unzip", "On Download Fail", "Triggered when the download fails", "OnDownloadFail");
+AddCondition(6, cf_none, "Is Loading", "Setup", "Is Loading", "True while the loading process is ongoing", "IsLoading");
+AddCondition(7, cf_none, "Is Downloading", "Unzip", "Is Downloading", "True while the downloading process is ongoing", "IsDownloading");
+AddCondition(8, cf_none, "Is Unzipping", "Unzip", "Is Unzipping", "True while the loading process is ongoing", "IsUnzipping");
+AddCondition(9, cf_none, "Has Zip Loaded", "Setup", "Has Zip Loaded", "Wether the plugin currently has a zip file in memory", "HasZipLoaded");
 ////////////////////////////////////////
 // Actions
 
@@ -86,88 +78,21 @@ AddCondition(10, cf_trigger, "On Write Zip", "Node", "On write Zip","Trigger whe
 //			 description,		// appears in event wizard dialog when selected
 //			 script_name);		// corresponding runtime function name
 
-// Zip Actions
-AddAction(0, af_none, "Create new zip file", "Zip", "Created new zip file", "Create a new JSZip instance.", "CreateNewZipFile");
+// example
+AddStringParam("URL", "URL to load zip from");
+AddAction(0, af_none, "Load Zip from URL", "Setup", "Load zip from {0}", "Load zip from URL", "LoadZipFromURL");
 
-AddStringParam("zip file", "zip file");
-AddAction(1, af_none, "Read Zip File", "Zip", "Read to {0} zip", "read zip file", "ReadZipFile");
+AddStringParam("Path", "Path to download zip to (must include the file name)");
+AddAction(1, af_none, "Download zip to path", "Unzip", "Download zip to {0}", "Download zip to a given path", "DownloadZip");
 
-AddStringParam("zip file", "zip file");
-AddComboParamOption("blob");
-AddComboParamOption("binarystring");
-AddComboParamOption("array");
-AddComboParamOption("uint8array");
-AddComboParamOption("arraybuffer");
-AddComboParamOption("base64");
-AddComboParamOption("nodebuffer");
-AddComboParam("Data Format", "zip data format", 0);
-AddComboParamOption("no compression");
-AddComboParamOption("1 (best speed)");
-AddComboParamOption("2");
-AddComboParamOption("3");
-AddComboParamOption("4");
-AddComboParamOption("5");
-AddComboParamOption("6");
-AddComboParamOption("7");
-AddComboParamOption("8");
-AddComboParamOption("9 (best compression)");
-AddComboParam("Compression Level", "compression level", 0);
-AddAction(2, af_none, "Download Zip file", "Zip", "download {0} zip file {1} {2} compression level", "download zip file", "DownloadZipFile");
+AddStringParam("Path", "Path to download zip to (path must be the root folder)");
+AddAction(2, af_none, "Unzip to path", "Unzip", "Unzip to {0}", "Unzip to a given path", "UnzipZip");
 
-AddStringParam("File Name", "File Name");
-AddStringParam("String", "String");
-AddAction(3, af_none, "Add string to zip file", "File", " {0} name {1} file to the zip file.", "Add or update a string to the zip file.", "FileAddString");
+AddAction(3, af_none, "Cancel Load", "Setup", "Cancel Load", "Cancel Load", "CancelLoad");
+AddAction(4, af_none, "Cancel Download", "Unzip", "Cancel Download", "Cancel Download", "CancelDownload");
+AddAction(5, af_none, "Cancel Unzip", "Unzip", "Cancel Unzip", "Cancel Unzip", "CancelUnzip");
+AddAction(6, af_none, "Unload Zip", "Setup", "Unload Zip", "Unload Zip", "UnloadZip");
 
-AddStringParam("File Name", "File Name");
-AddStringParam("Url", "Url");
-AddAction(4, af_none, "Add file remote url", "File", " {0} url {1} file to the zip file.", "File add remote url", "FileAddtoUrl");
-
-AddStringParam("File Name", "File Name");
-AddStringParam("File Data", "File Data");
-AddAction(5, af_none, "Add file with filechooser", "File", " {0} {1} file to the zip file.", "Add or update a string to the zip file.", "FilechooserAdd");
-
-AddObjectParam("Sprite", "A sprite object")
-AddAction(6, af_none, "Add Sprite to zip file", "File", " sprite {0} upload", "Add Sprite to zip file", "SpriteAdd");
-
-AddStringParam("File Name", "File Name");
-AddComboParamOption("string");
-AddComboParamOption("base64");
-AddComboParamOption("array");
-AddComboParamOption("blob");
-AddComboParamOption("binarystring");
-AddComboParamOption("arraybuffer");
-AddComboParamOption("uint8array");
-AddComboParamOption("nodebuffer");
-AddComboParam("Data Format", "zip data format", 0);
-AddAction(7, af_none, "File Read", "File", "  Read {0}  file to {1} format", "File Read", "FileRead");
-
-AddStringParam("Dir Name", "Dir Name");
-AddAction(8, af_none, "Create Empty Directory", "Other", " {0} directory name ", "Create a empty directory", "DirectoryCreate");
-
-AddStringParam("Dir Name", "Dir Name");
-AddAction(9, af_none, "Remove file or directory", "Other", " {0} Remove ", "Remove file or directory", "RemoveFileorDir");
-
-AddStringParam("zip file", "zip file");
-AddStringParam("dir name", "dirname");
-AddAction(10, af_none, "Extract Zip File", "Node", "{0} {1} Extract zip file ", "Only worked node platform. (not browser)", "ExtractZipFile");
-
-
-
-AddStringParam("File Name", "file name");
-AddComboParamOption("no compression");
-AddComboParamOption("1 (best speed)");
-AddComboParamOption("2");
-AddComboParamOption("3");
-AddComboParamOption("4");
-AddComboParamOption("5");
-AddComboParamOption("6");
-AddComboParamOption("7");
-AddComboParamOption("8");
-AddComboParamOption("9 (best compression)");
-AddComboParam("Compression Level", "compression level", 0);
-AddAction(11, af_none, "Write Zip File", "Node", "{0} level {1} Write zip file ", "Only worked node platform. (not browser)", "WriteZipFile");
-
-AddAction(12, af_none, "Close Zip File", "Zip", "Close Zip File ", "Close Zip File", "CloseZipFile");
 
 ////////////////////////////////////////
 // Expressions
@@ -181,10 +106,18 @@ AddAction(12, af_none, "Close Zip File", "Zip", "Close Zip File ", "Close Zip Fi
 //				 description);	// description in expressions panel
 
 // example
-AddExpression(0, ef_return_string, "item_list", "loop", "item_list", "filelist loop");
-AddExpression(1, ef_return_string, "item", "Main", "item", "get item");
-AddExpression(2, ef_return_string, "error", "Main", "error", "return error msg");
-AddExpression(3, ef_return_string, "item_url", "loop", "item_url", "return item urls");
+AddExpression(0, ef_return_number, "LoadProgress", "Setup", "LoadProgress", "The progress from loading the zip from a URL");
+AddExpression(1, ef_return_string, "LoadError", "Setup", "LoadError", "The error that happened during load");
+AddExpression(2, ef_return_number, "DownloadProgress", "Unzip", "DownloadProgress", "The progress from downloading the zip to a path");
+AddExpression(3, ef_return_string, "DownloadError", "Unzip", "DownloadError", "The error that happened during download");
+AddExpression(4, ef_return_number, "UnzipProgress", "Unzip", "UnzipProgress", "The progress from unzipping to a path");
+AddExpression(5, ef_return_string, "UnzipError", "Unzip", "UnzipError", "The error that happened during unzip");
+
+AddExpression(6, ef_return_number, "EntryCount", "Setup", "EntryCount", "The number of entries in the zip file, including folders");
+AddNumberParam("ID", "Entry ID");
+AddExpression(7, ef_return_string, "EntryName", "Setup", "EntryName", "The name of the entry by id");
+AddNumberParam("ID", "Entry ID");
+AddExpression(8, ef_return_number, "EntryIsDir", "Setup", "EntryIsDir", "Returns 1 if the entry is a dir, 0 else");
 ////////////////////////////////////////
 ACESDone();
 
@@ -199,8 +132,7 @@ ACESDone();
 // new cr.Property(ept_link,		name,	link_text,		description, "firstonly")		// has no associated value; simply calls "OnPropertyChanged" on click
 
 var property_list = [
-	
-	];
+];
 	
 // Called by IDE when a new object type is to be created
 function CreateIDEObjectType()

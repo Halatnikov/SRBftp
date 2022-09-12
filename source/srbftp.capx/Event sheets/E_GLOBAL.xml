@@ -19,7 +19,7 @@
                             <actions>
                                 <action id="-9" name="Set value" sid="744021629423734" type="System">
                                     <param id="0" name="Variable">DEBUG</param>
-                                    <param id="1" name="Value">0</param>
+                                    <param id="1" name="Value">1</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1391,6 +1391,22 @@
                             <param id="0" name="Instance variable">SpringTimer</param>
                             <param id="1" name="Value">0</param>
                         </action>
+                        <action id="-10" name="Set value" sid="719087457258708" type="Var_Level">
+                            <param id="0" name="Instance variable">Marathon_Timer</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="200332029119672" type="Var_Level">
+                            <param id="0" name="Instance variable">Marathon_Counter</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="785445703583129" type="Var_Level">
+                            <param id="0" name="Instance variable">Marathon_CounterMax</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="900011965175509" type="Var_Level">
+                            <param id="0" name="Instance variable">Marathon_String</param>
+                            <param id="1" name="Value">&quot;&quot;</param>
+                        </action>
                     </actions>
                 </event-block>
                 <comment></comment>
@@ -2505,5 +2521,178 @@
                 </event-block>
             </sub-events>
         </event-group>
+        <event-block sid="722283299690314">
+            <conditions>
+                <condition id="70" name="Is Empty" sid="190649115069777" type="JSON_LevelPlaylist">
+                    <param id="0" name="Reference point">0</param>
+                    <param id="1" name="Key {n}"></param>
+                </condition>
+                <condition id="-4" name="Trigger once while true" sid="416712604657305" type="System" />
+            </conditions>
+            <actions>
+                <action id="1" name="Request project file" sid="586972287519443" type="AJAX">
+                    <param id="0" name="Tag">&quot;levelslist&quot;</param>
+                    <param id="1" name="File">levelslist.ini</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="666020545546164">
+            <conditions>
+                <condition id="0" name="On completed" sid="123769047512206" type="AJAX">
+                    <param id="0" name="Tag">&quot;levelslist&quot;</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="0" name="Set New Object" sid="715678104825402" type="JSON_LevelPlaylist">
+                    <param id="0" name="Reference point">0</param>
+                    <param id="1" name="Key {n}"></param>
+                </action>
+                <action id="0" name="Call function" sid="388485048873224" type="Function">
+                    <param id="0" name="Name">&quot;INI2JSON&quot;</param>
+                    <param id="1" name="Parameter {n}">AJAX.LastData</param>
+                </action>
+                <action id="60" name="LoadJSON" sid="140540162740817" type="JSON_LevelPlaylist">
+                    <param id="0" name="JSON">Function.ReturnValue</param>
+                    <param id="1" name="Reference point">0</param>
+                    <param id="2" name="Key {n}"></param>
+                </action>
+            </actions>
+            <sub-events>
+                <variable constant="0" name="json" sid="244282703755548" static="0" type="text"></variable>
+                <event-block sid="683144304170841">
+                    <conditions>
+                        <condition id="100" name="For each property" sid="381499546546543" type="JSON_LevelPlaylist">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="148697338660737" type="System">
+                            <param id="0" name="Variable">json</param>
+                            <param id="1" name="Value">replace(JSON_LevelPlaylist.AsJson(0,JSON_LevelPlaylist.CurrentKey),&quot;:true&quot;,&quot;&quot;)</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="903085139766519" type="System">
+                            <param id="0" name="Variable">json</param>
+                            <param id="1" name="Value">replace(json,&quot;{&quot;,&quot;[&quot;)</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="465766300376276" type="System">
+                            <param id="0" name="Variable">json</param>
+                            <param id="1" name="Value">replace(json,&quot;}&quot;,&quot;]&quot;)</param>
+                        </action>
+                        <action id="10" name="Set New Array" sid="737554981642463" type="JSON_LevelPlaylist">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}">Self.CurrentKey</param>
+                        </action>
+                        <action id="60" name="LoadJSON" sid="151428741012719" type="JSON_LevelPlaylist">
+                            <param id="0" name="JSON">json</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}">Self.CurrentKey</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <comment></comment>
+        <event-block sid="958964304381177">
+            <conditions>
+                <condition id="0" name="On function" sid="472691178728448" type="Function">
+                    <param id="0" name="Name">&quot;LevelPlaylist_Start&quot;</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-10" name="Set value" sid="938714697296641" type="Queue_LevelPlaylist">
+                    <param id="0" name="Instance variable">Order</param>
+                    <param id="1" name="Value">&quot;&quot;</param>
+                </action>
+                <action id="-10" name="Set value" sid="192158194460330" type="Queue_LevelPlaylist">
+                    <param id="0" name="Instance variable">CurrentTask</param>
+                    <param id="1" name="Value">Function.Param(0)</param>
+                </action>
+                <action id="2" name="Clear" sid="126523508683763" type="Queue_LevelPlaylist" />
+            </actions>
+            <sub-events>
+                <event-block sid="389865525469511">
+                    <conditions>
+                        <condition id="-12" name="Repeat" sid="992085830436752" type="System">
+                            <param id="0" name="Count">JSON_LevelPlaylist.Size(0,Function.Param(0))</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="502471904838181">
+                            <conditions>
+                                <condition id="1" name="Compare parameter" sid="383893592021813" type="Function">
+                                    <param id="0" name="Index">1</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Enqueue" sid="592936526982785" type="Queue_LevelPlaylist">
+                                    <param id="0" name="Element">JSON_LevelPlaylist.Value(0,Function.Param(0),loopindex)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="939815562913673">
+                            <conditions>
+                                <condition id="1" name="Compare parameter" sid="854822613212945" type="Function">
+                                    <param id="0" name="Index">1</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Set value" sid="605712373943338" type="Queue_LevelPlaylist">
+                                    <param id="0" name="Instance variable">Order</param>
+                                    <param id="1" name="Value">Self.Order&amp;zeropad(loopindex,2)&amp;&quot;,&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="384934863369728">
+            <conditions>
+                <condition id="-7" inverted="1" name="Compare instance variable" sid="590468088514767" type="Queue_LevelPlaylist">
+                    <param id="0" name="Instance variable">Order</param>
+                    <param id="1" name="Comparison">0</param>
+                    <param id="2" name="Value">&quot;&quot;</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <variable constant="0" name="random_level" sid="454585576273627" static="0" type="number">0</variable>
+                <event-block sid="328452808610068">
+                    <conditions />
+                    <actions>
+                        <action id="-9" name="Set value" sid="357019016693508" type="System">
+                            <param id="0" name="Variable">random_level</param>
+                            <param id="1" name="Value">int(random(0,JSON_LevelPlaylist.Size(0,Queue_LevelPlaylist.CurrentTask)))</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="914431899202809">
+                            <conditions>
+                                <condition id="-8" inverted="1" name="Compare two values" sid="607344400905942" type="System">
+                                    <param id="0" name="First value">find(Queue_LevelPlaylist.Order,zeropad(random_level,2)&amp;&quot;,&quot;)</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">-1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Enqueue" sid="247409675936915" type="Queue_LevelPlaylist">
+                                    <param id="0" name="Element">JSON_LevelPlaylist.Value(0,Queue_LevelPlaylist.CurrentTask,random_level)</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="137549958179663" type="Queue_LevelPlaylist">
+                                    <param id="0" name="Instance variable">Order</param>
+                                    <param id="1" name="Value">replace(Self.Order,zeropad(random_level,2)&amp;&quot;,&quot;,&quot;&quot;)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-block>
     </events>
 </c2eventsheet>

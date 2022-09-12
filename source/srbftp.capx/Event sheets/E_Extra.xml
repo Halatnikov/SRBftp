@@ -5,6 +5,7 @@
     <events>
         <event-group description="" sid="503598268134893" title="Extra management">
             <sub-events>
+                <comment></comment>
                 <event-block sid="477939939113196">
                     <conditions>
                         <condition id="-2" name="On start of layout" sid="825972747727390" type="System" />
@@ -94,6 +95,50 @@
                                 <action id="-13" name="Set boolean" sid="973226719349765" type="Var_Game">
                                     <param id="0" name="Instance variable">Cheats_Thok</param>
                                     <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment></comment>
+                <event-block sid="384075871028200">
+                    <conditions>
+                        <condition id="-2" name="On start of layout" sid="767165889416913" type="System" />
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="102317695400985">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="417962391338432" type="Var_Game">
+                                    <param id="0" name="Instance variable">Gamemode</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;Marathon&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-12" name="Set group active" sid="201825049434144" type="System">
+                                    <param id="0" name="Group name">&quot;Marathon mode&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="938595770840234">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="688301830705942" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-12" name="Set group active" sid="151397279665135" type="System">
+                                    <param id="0" name="Group name">&quot;Marathon mode&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="945010857350049" type="HUD_Time2">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="345083308224321" type="HUD_Time3">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="880368390946502" type="HUD_Time4">
+                                    <param id="0" name="Visibility">0</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -523,6 +568,116 @@
                         <action id="4" name="Set animation" sid="419483645857037" type="Effects_RingLoss">
                             <param id="0" name="Animation">&quot;Default_1&quot;</param>
                             <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <comment></comment>
+        <event-block disabled="1" sid="144093672331155">
+            <conditions>
+                <condition id="-2" name="On start of layout" sid="705594048509024" type="System" />
+                <condition id="-11" name="For Each" sid="798766809336563" type="System">
+                    <param id="0" name="Object">LevelTiles</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-8" name="Set angle" sid="239116773861104" type="LevelTiles">
+                    <param id="0" name="Angle">Self.Angle+random(0,180)-random(0,180)</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block disabled="1" sid="998498537029838">
+            <conditions>
+                <condition id="0" name="On key pressed" sid="138922150998530" type="Keyboard">
+                    <param id="0" name="Key">49</param>
+                </condition>
+                <condition id="-11" name="For Each" sid="409728571378860" type="System">
+                    <param id="0" name="Object">LevelTiles</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-8" name="Set angle" sid="258319507798928" type="LevelTiles">
+                    <param id="0" name="Angle">Self.Angle+random(0,180)-random(0,180)</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-group description="" inactive="1" sid="959231211011597" title="Marathon mode">
+            <sub-events>
+                <event-block sid="658305215713256">
+                    <conditions>
+                        <condition id="-2" name="On start of layout" sid="940204146425912" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-11" name="Add to" sid="437775354330839" type="Var_Level">
+                            <param id="0" name="Instance variable">Marathon_Counter</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="861538533079163" type="HUD_Time2">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="693906636751213" type="HUD_Time3">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="550666603026805" type="HUD_Time4">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="0" name="Set text" sid="818085601769348" type="HUD_Time4">
+                            <param id="0" name="Text">Var_Level.Marathon_String</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="513220095692656" type="System">
+                            <param id="0" name="Seconds">0.15</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="237405093737929">
+                            <conditions />
+                            <actions>
+                                <action id="-10" name="Set value" sid="576501843902738" type="Var_Level">
+                                    <param id="0" name="Instance variable">Level_Next</param>
+                                    <param id="1" name="Value">Queue_LevelPlaylist.Peek</param>
+                                </action>
+                                <action id="1" name="Dequeue" sid="970816150127932" type="Queue_LevelPlaylist" />
+                            </actions>
+                        </event-block>
+                        <event-block sid="516693476598615">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="516083896804332" type="Var_Level">
+                                    <param id="0" name="Instance variable">Marathon_Counter</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">Self.Marathon_CounterMax</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Set value" sid="900655844253388" type="Var_Level">
+                                    <param id="0" name="Instance variable">Level_Next</param>
+                                    <param id="1" name="Value">&quot;cutscene_demoend&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="209304227130760">
+                    <conditions>
+                        <condition id="-8" name="Is boolean instance variable set" sid="771948757950911" type="Var_Level">
+                            <param id="0" name="Instance variable">TimerLevelActive</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-11" name="Add to" sid="176087631763847" type="Var_Level">
+                            <param id="0" name="Instance variable">Marathon_Timer</param>
+                            <param id="1" name="Value">dt</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="601540081386992">
+                    <conditions />
+                    <actions>
+                        <action id="0" name="Set text" sid="649628372156267" type="HUD_Time2">
+                            <param id="0" name="Text">floor(Var_Level.Marathon_Timer/3600)&amp;&quot; &quot;&amp;zeropad(floor(Var_Level.Marathon_Timer/60),2)&amp;&quot; &quot;&amp;zeropad(floor(Var_Level.Marathon_Timer)%60,2)&amp;&quot;.&quot;&amp;zeropad(floor(Var_Level.Marathon_Timer*100)%100,2)</param>
+                        </action>
+                        <action id="0" name="Set text" sid="923964859168776" type="HUD_Time3">
+                            <param id="0" name="Text">Var_Level.Marathon_Counter&amp;&quot; / &quot;&amp;Var_Level.Marathon_CounterMax</param>
                         </action>
                     </actions>
                 </event-block>

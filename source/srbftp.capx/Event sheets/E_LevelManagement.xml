@@ -2993,6 +2993,11 @@
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">&quot;LevelSelect&quot;</param>
                         </condition>
+                        <condition id="-7" inverted="1" name="Compare instance variable" sid="394382037624999" type="Var_Game">
+                            <param id="0" name="Instance variable">Gamemode</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;Marathon&quot;</param>
+                        </condition>
                     </conditions>
                     <actions>
                         <action id="-10" name="Set value" sid="393925440635549" type="Var_Level">
@@ -3155,11 +3160,19 @@
                                     <param id="1" name="Duration">1.8</param>
                                     <param id="2" name="Mode">1</param>
                                 </action>
+                                <action id="-13" name="Set boolean" sid="648817140303965" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevelActive</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
                                 <action id="-16" name="Wait" sid="996162052031807" type="System">
                                     <param id="0" name="Seconds">2</param>
                                 </action>
                                 <action id="-13" name="Set boolean" sid="643091675038284" type="Var_Player">
                                     <param id="0" name="Instance variable">CanMove</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-13" name="Set boolean" sid="568107958217061" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevelActive</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
                                 <action id="-3" name="Set position" sid="764340362162082" type="Hazard1_5VRisingLava">
@@ -3700,6 +3713,11 @@
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">&quot;LevelSelect&quot;</param>
                                 </condition>
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="367427475824346" type="Var_Game">
+                                    <param id="0" name="Instance variable">Gamemode</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;Marathon&quot;</param>
+                                </condition>
                             </conditions>
                             <actions>
                                 <action id="-2" name="Set Y" sid="232949195678817" type="Special_Invisible">
@@ -3735,11 +3753,24 @@
                             <param id="0" name="Layer">&quot;HUD&quot;</param>
                             <param id="1" name="Angle">0</param>
                         </action>
-                        <action id="-10" name="Set value" sid="953469380856196" type="Var_Level">
-                            <param id="0" name="Instance variable">Level_Next</param>
-                            <param id="1" name="Value">&quot;cutscene_superfail&quot;</param>
-                        </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="447974639981592">
+                            <conditions>
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="455335815947989" type="Var_Game">
+                                    <param id="0" name="Instance variable">Gamemode</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;Marathon&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Set value" sid="953469380856196" type="Var_Level">
+                                    <param id="0" name="Instance variable">Level_Next</param>
+                                    <param id="1" name="Value">&quot;cutscene_superfail&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block sid="841564777587047">
                     <conditions>
@@ -4221,79 +4252,6 @@
                             <param id="0" name="Visibility">1</param>
                         </action>
                     </actions>
-                </event-block>
-                <comment></comment>
-                <event-block sid="885274183023717">
-                    <conditions>
-                        <condition id="-11" name="For Each" sid="544196471068259" type="System">
-                            <param id="0" name="Object">ObjectE15_3SLMovingPlatform</param>
-                        </condition>
-                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="555744802900063" type="Var_Level">
-                            <param id="0" name="Instance variable">Pause</param>
-                        </condition>
-                        <condition id="-7" name="Compare instance variable" sid="976637695880461" type="Var_Game">
-                            <param id="0" name="Instance variable">TimerGlobal</param>
-                            <param id="1" name="Comparison">5</param>
-                            <param id="2" name="Value">4</param>
-                        </condition>
-                    </conditions>
-                    <actions />
-                    <sub-events>
-                        <event-block sid="824156043001448">
-                            <conditions>
-                                <condition id="-8" name="Is boolean instance variable set" sid="576284485954154" type="ObjectE15_3SLMovingPlatform">
-                                    <param id="0" name="Instance variable">direction</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-2" name="Set Y" sid="666849253669432" type="ObjectE15_3SLMovingPlatform">
-                                    <param id="0" name="Y">Self.Y-5</param>
-                                </action>
-                            </actions>
-                            <sub-events>
-                                <event-block sid="663138526927098">
-                                    <conditions>
-                                        <condition id="0" name="On collision with another object" sid="383886835797557" type="ObjectE15_3SLMovingPlatform">
-                                            <param id="0" name="Object">ObjectE15_3SLMovingPlatformSensor</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-13" name="Set boolean" sid="568656043431577" type="ObjectE15_3SLMovingPlatform">
-                                            <param id="0" name="Instance variable">direction</param>
-                                            <param id="1" name="Value">0</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
-                        </event-block>
-                        <event-block sid="905624625917315">
-                            <conditions>
-                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="269781297624906" type="ObjectE15_3SLMovingPlatform">
-                                    <param id="0" name="Instance variable">direction</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-2" name="Set Y" sid="730424091659195" type="ObjectE15_3SLMovingPlatform">
-                                    <param id="0" name="Y">Self.Y+5</param>
-                                </action>
-                            </actions>
-                            <sub-events>
-                                <event-block sid="483363947866334">
-                                    <conditions>
-                                        <condition id="0" name="On collision with another object" sid="255219815387698" type="ObjectE15_3SLMovingPlatform">
-                                            <param id="0" name="Object">ObjectE15_3SLMovingPlatformSensor</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-13" name="Set boolean" sid="873034512834201" type="ObjectE15_3SLMovingPlatform">
-                                            <param id="0" name="Instance variable">direction</param>
-                                            <param id="1" name="Value">1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
-                        </event-block>
-                    </sub-events>
                 </event-block>
             </sub-events>
         </event-group>

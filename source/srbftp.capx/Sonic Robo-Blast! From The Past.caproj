@@ -2,7 +2,7 @@
 <c2project>
     <name>Sonic Robo-Blast! From The Past</name>
     <description>Original games by Sonikku - Johnathan Wallbank and SSNTails - A.J. Freda</description>
-    <version>0.2.1</version>
+    <version>0.2.2-1</version>
     <author>Halatnikov</author>
     <author-email></author-email>
     <author-website>https://halatnikov.github.io</author-website>
@@ -42,6 +42,7 @@
         <plugin author="Scirra" id="gamepad" version="1">Gamepad</plugin>
         <plugin author="Jcw87" id="jcw_trace" version="0.400000006">Trace</plugin>
         <plugin author="skymen" id="skymen_jszip" version="1.399999976">jsZip</plugin>
+        <plugin author="skymen" id="skymen_queue" version="1.200000048">Queue</plugin>
         <plugin author="Scirra" id="video" version="1">Video</plugin>
     </used-plugins>
     <used-behaviors>
@@ -179,6 +180,16 @@
             <object-type name="LocalStorage" sid="420361013405810">
                 <plugin id="LocalStorage" />
             </object-type>
+            <object-type global="1" name="JSON_LevelPlaylist" sid="960908361044093">
+                <plugin id="JSON" />
+            </object-type>
+            <object-type global="1" name="Queue_LevelPlaylist" sid="666056387321596">
+                <plugin id="skymen_queue" />
+                <instance-variables>
+                    <instance-variable name="Order" sid="543594956327894" type="string" />
+                    <instance-variable name="CurrentTask" sid="887902165017169" type="string" />
+                </instance-variables>
+            </object-type>
         </object-folder>
         <object-folder name=".Variables">
             <object-type global="1" name="Var_Level" sid="368901035900150">
@@ -206,6 +217,10 @@
                     <instance-variable name="Local_LapOfHonour" sid="526079323652340" type="number" />
                     <instance-variable name="Pong_Lives" sid="583908492378675" type="number" />
                     <instance-variable name="ZoneResetTimer" sid="270535598542224" type="number" />
+                    <instance-variable name="Marathon_Timer" sid="289765144694180" type="number" />
+                    <instance-variable name="Marathon_Counter" sid="697410182791459" type="number" />
+                    <instance-variable name="Marathon_CounterMax" sid="217804037805717" type="number" />
+                    <instance-variable name="Marathon_String" sid="145240771015592" type="string" />
                 </instance-variables>
             </object-type>
             <object-type global="1" name="Var_Player" sid="435158768718076">
@@ -5048,33 +5063,93 @@
                     <animation framecount="10" loop="1" name="Jump" pingpong="0" repeatcount="1" repeatto="2" sid="754270896064119" speed="15">
                         <frame duration="1" hotspotX="0.516129" hotspotY="0.320755">
                             <image-point name="Imagepoint 1" x="0.516129" y="0.509434" />
+                            <collision-poly>
+                                <point x="0.0795455" y="0.26072" />
+                                <point x="0.909091" y="0.26072" />
+                                <point x="0.909091" y="0.909091" />
+                                <point x="0.0909091" y="0.909091" />
+                            </collision-poly>
                         </frame>
                         <frame duration="1" hotspotX="0.516129" hotspotY="0.320755">
                             <image-point name="Imagepoint 1" x="0.516129" y="0.509434" />
+                            <collision-poly>
+                                <point x="0.0795455" y="0.26072" />
+                                <point x="0.909091" y="0.26072" />
+                                <point x="0.909091" y="0.909091" />
+                                <point x="0.0909091" y="0.909091" />
+                            </collision-poly>
                         </frame>
                         <frame duration="1" hotspotX="0.5" hotspotY="0.0681818" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\super freaks\jump_-000.png">
                             <image-point name="Imagepoint 1" x="0.522727" y="0.5" />
+                            <collision-poly>
+                                <point x="0.0795455" y="0.0909091" />
+                                <point x="0.903409" y="0.0909091" />
+                                <point x="0.909091" y="0.909091" />
+                                <point x="0.0909091" y="0.909091" />
+                            </collision-poly>
                         </frame>
                         <frame duration="1" hotspotX="0.5" hotspotY="0.0697674" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\super freaks\jump_-001.png">
                             <image-point name="Imagepoint 1" x="0.52381" y="0.511628" />
+                            <collision-poly>
+                                <point x="0.0795455" y="0.0909091" />
+                                <point x="0.909091" y="0.0909091" />
+                                <point x="0.909091" y="0.909091" />
+                                <point x="0.0909091" y="0.909091" />
+                            </collision-poly>
                         </frame>
                         <frame duration="1" hotspotX="0.5" hotspotY="0.0681818" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\super freaks\jump_-003.png">
                             <image-point name="Imagepoint 1" x="0.522727" y="0.5" />
+                            <collision-poly>
+                                <point x="0.0795455" y="0.0909091" />
+                                <point x="0.909091" y="0.0909091" />
+                                <point x="0.909091" y="0.909091" />
+                                <point x="0.0909091" y="0.909091" />
+                            </collision-poly>
                         </frame>
                         <frame duration="1" hotspotX="0.5" hotspotY="0.0697674" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\super freaks\jump_-004.png">
                             <image-point name="Imagepoint 1" x="0.52381" y="0.511628" />
+                            <collision-poly>
+                                <point x="0.0795455" y="0.0909091" />
+                                <point x="0.909091" y="0.0909091" />
+                                <point x="0.909091" y="0.909091" />
+                                <point x="0.0909091" y="0.909091" />
+                            </collision-poly>
                         </frame>
                         <frame duration="1" hotspotX="0.5" hotspotY="0.0681818" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\super freaks\jump_-005.png">
                             <image-point name="Imagepoint 1" x="0.522727" y="0.5" />
+                            <collision-poly>
+                                <point x="0.0795455" y="0.0909091" />
+                                <point x="0.909091" y="0.0909091" />
+                                <point x="0.909091" y="0.909091" />
+                                <point x="0.0909091" y="0.909091" />
+                            </collision-poly>
                         </frame>
                         <frame duration="1" hotspotX="0.5" hotspotY="0.0697674" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\super freaks\jump_-006.png">
                             <image-point name="Imagepoint 1" x="0.52381" y="0.511628" />
+                            <collision-poly>
+                                <point x="0.0795455" y="0.0909091" />
+                                <point x="0.909091" y="0.0909091" />
+                                <point x="0.909091" y="0.909091" />
+                                <point x="0.0909091" y="0.909091" />
+                            </collision-poly>
                         </frame>
                         <frame duration="1" hotspotX="0.5" hotspotY="0.0681818" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\super freaks\jump_-007.png">
                             <image-point name="Imagepoint 1" x="0.522727" y="0.5" />
+                            <collision-poly>
+                                <point x="0.0795455" y="0.0909091" />
+                                <point x="0.909091" y="0.0909091" />
+                                <point x="0.909091" y="0.909091" />
+                                <point x="0.0909091" y="0.909091" />
+                            </collision-poly>
                         </frame>
                         <frame duration="1" hotspotX="0.5" hotspotY="0.0697674" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\super freaks\jump_-008.png">
                             <image-point name="Imagepoint 1" x="0.52381" y="0.511628" />
+                            <collision-poly>
+                                <point x="0.0795455" y="0.0909091" />
+                                <point x="0.909091" y="0.0909091" />
+                                <point x="0.909091" y="0.909091" />
+                                <point x="0.0909091" y="0.909091" />
+                            </collision-poly>
                         </frame>
                     </animation>
                     <animation framecount="1" loop="0" name="Crouch" pingpong="0" repeatcount="1" repeatto="0" sid="426727260686929" speed="5">
@@ -10380,6 +10455,11 @@
                             <frame duration="2" hotspotX="0.0440529" hotspotY="0.5" />
                             <frame duration="1" hotspotX="0.0440529" hotspotY="0.5" />
                         </animation>
+                        <animation framecount="3" loop="1" name="s300" pingpong="0" repeatcount="1" repeatto="0" sid="897504530827783" speed="20">
+                            <frame duration="1" hotspotX="0.0333333" hotspotY="0.5" />
+                            <frame duration="2" hotspotX="0.0333333" hotspotY="0.5" />
+                            <frame duration="1" hotspotX="0.0333333" hotspotY="0.5" />
+                        </animation>
                     </animation-folder>
                 </object-type>
                 <object-type name="Version" sid="411108017708598">
@@ -10661,6 +10741,15 @@
                             <effect id="outline" />
                         </effect-type>
                     </effects>
+                </object-type>
+                <object-type name="Menu_Cursor3" sid="369957082344944">
+                    <plugin id="Sprite" />
+                    <animation-folder>
+                        <animation framecount="2" loop="1" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="282585756927571" speed="3.5">
+                            <frame duration="1" hotspotX="0.04" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\hudmisc\menucursor_1.png" />
+                            <frame duration="1" hotspotX="1" hotspotY="1" />
+                        </animation>
+                    </animation-folder>
                 </object-type>
             </object-folder>
             <object-folder name="SRB1menus">
@@ -11549,6 +11638,15 @@
                 <object-type name="HUD_PauseScoreBG" sid="617840333388560">
                     <plugin id="TiledBg" />
                     <texture />
+                </object-type>
+                <object-type name="HUD_Time2" sid="897219071908128">
+                    <plugin id="Text" />
+                </object-type>
+                <object-type name="HUD_Time3" sid="827718225865727">
+                    <plugin id="Text" />
+                </object-type>
+                <object-type name="HUD_Time4" sid="741228205996409">
+                    <plugin id="Text" />
                 </object-type>
             </object-folder>
         </object-folder>
@@ -13986,5 +14084,6 @@
         <file name="credits.txt" />
         <file name="default_config.ini" />
         <file name="audiolist.ini" />
+        <file name="levelslist.ini" />
     </files-folder>
 </c2project>
