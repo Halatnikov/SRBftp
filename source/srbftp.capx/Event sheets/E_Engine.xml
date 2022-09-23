@@ -47,6 +47,14 @@
                                     <param id="0" name="Instance variable">InitialY</param>
                                     <param id="1" name="Value">Self.Y</param>
                                 </action>
+                                <action id="-10" name="Set value" sid="938633915509455" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevelReal</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="363369649640207" type="Var_Player">
+                                    <param id="0" name="Instance variable">Deaths</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
                             </actions>
                             <sub-events>
                                 <event-block sid="433519987067532">
@@ -93,6 +101,10 @@
                                     <param id="0" name="Magnitude">0</param>
                                     <param id="1" name="Duration">0</param>
                                     <param id="2" name="Mode">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="441457831688248" type="Var_Game">
+                                    <param id="0" name="Instance variable">CurrentMenu</param>
+                                    <param id="1" name="Value">&quot;null&quot;</param>
                                 </action>
                             </actions>
                             <sub-events>
@@ -169,6 +181,9 @@
                                         <action id="-15" name="Set visible" sid="922077042338618" type="EffectsF_PlayerShadow">
                                             <param id="0" name="Visibility">0</param>
                                         </action>
+                                        <action behavior="Timer" id="1" name="Stop timer" sid="467172843099723" type="Engine_Player">
+                                            <param id="0" name="Tag">&quot;QuickRestart&quot;</param>
+                                        </action>
                                     </actions>
                                 </event-block>
                                 <comment>(bosses)</comment>
@@ -209,6 +224,18 @@
                                         </action>
                                     </actions>
                                 </event-block>
+                                <event-block sid="103748643774891">
+                                    <conditions />
+                                    <actions>
+                                        <action id="-9" name="Destroy" sid="689979924221967" type="Effects_BreakableParts" />
+                                        <action id="-9" name="Destroy" sid="905284140542587" type="Common_AirBubble" />
+                                        <action id="-9" name="Destroy" sid="456887506280771" type="EffectsF_SmallBubble" />
+                                        <action id="-9" name="Destroy" sid="906826246466206" type="EffectsF_ProjectileTrail" />
+                                        <action id="-9" name="Destroy" sid="876678467465139" type="EffectsF_HitIndicator" />
+                                        <action id="-9" name="Destroy" sid="172965691936885" type="Effects_RingLoss" />
+                                        <action id="-9" name="Destroy" sid="615880302274488" type="Sprite6" />
+                                    </actions>
+                                </event-block>
                                 <comment>recreate initial objects</comment>
                                 <event-block sid="344999974888816">
                                     <conditions />
@@ -220,7 +247,7 @@
                                         <action id="-9" name="Destroy" sid="789546213450213" type="Enemies" />
                                         <action id="-9" name="Destroy" sid="206326188694774" type="LevelRecreateInitial" />
                                         <action id="-16" name="Wait" sid="447968997134912" type="System">
-                                            <param id="0" name="Seconds">0.05</param>
+                                            <param id="0" name="Seconds">0.01</param>
                                         </action>
                                         <action id="-46" name="Recreate initial objects" sid="768986423880076" type="System">
                                             <param id="0" name="Object">Enemies</param>
@@ -236,17 +263,6 @@
                                             <param id="3" name="To X">99999</param>
                                             <param id="4" name="To Y">99999</param>
                                         </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="103748643774891">
-                                    <conditions />
-                                    <actions>
-                                        <action id="-9" name="Destroy" sid="689979924221967" type="Effects_BreakableParts" />
-                                        <action id="-9" name="Destroy" sid="905284140542587" type="Common_AirBubble" />
-                                        <action id="-9" name="Destroy" sid="456887506280771" type="EffectsF_SmallBubble" />
-                                        <action id="-9" name="Destroy" sid="906826246466206" type="EffectsF_ProjectileTrail" />
-                                        <action id="-9" name="Destroy" sid="876678467465139" type="EffectsF_HitIndicator" />
-                                        <action id="-9" name="Destroy" sid="172965691936885" type="Effects_RingLoss" />
                                     </actions>
                                 </event-block>
                                 <event-block sid="482663593995354">
@@ -1359,7 +1375,7 @@
                                     <sub-events>
                                         <event-block sid="269646631130961">
                                             <conditions>
-                                                <condition id="-7" name="Compare instance variable" sid="374494763248939" type="JSON_Configuration">
+                                                <condition id="-7" name="Compare instance variable" sid="374494763248939" type="Save_Configuration">
                                                     <param id="0" name="Instance variable">GameplayInstantCamera</param>
                                                     <param id="1" name="Comparison">0</param>
                                                     <param id="2" name="Value">0</param>
@@ -1378,7 +1394,7 @@
                                         </event-block>
                                         <event-block sid="648258689928434">
                                             <conditions>
-                                                <condition id="-7" name="Compare instance variable" sid="998260047610142" type="JSON_Configuration">
+                                                <condition id="-7" name="Compare instance variable" sid="998260047610142" type="Save_Configuration">
                                                     <param id="0" name="Instance variable">GameplayInstantCamera</param>
                                                     <param id="1" name="Comparison">0</param>
                                                     <param id="2" name="Value">1</param>
@@ -1422,12 +1438,12 @@
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">1</param>
                                 </condition>
-                                <condition id="-7" name="Compare instance variable" sid="352030468897216" type="JSON_Configuration">
+                                <condition id="-7" name="Compare instance variable" sid="352030468897216" type="Save_Configuration">
                                     <param id="0" name="Instance variable">GameplayInstantCamera</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">0</param>
                                 </condition>
-                                <condition id="-7" name="Compare instance variable" sid="204939721162920" type="JSON_Configuration">
+                                <condition id="-7" name="Compare instance variable" sid="204939721162920" type="Save_Configuration">
                                     <param id="0" name="Instance variable">GameplayCameraPause</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">1</param>
@@ -1762,6 +1778,113 @@
                                 </action>
                             </actions>
                         </event-block>
+                        <comment></comment>
+                        <event-block sid="744324895306285">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="400937623071112" type="Var_Player">
+                                    <param id="0" name="Instance variable">Rings</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Value">100</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="249755638071944" type="System" />
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="331867116551179" type="Var_Player">
+                                    <param id="0" name="Instance variable">Lives</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">-1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-11" name="Add to" sid="406141774407419" type="Var_Player">
+                                    <param id="0" name="Instance variable">Lives</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="580427329548488">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="692310764778658" type="Var_Level">
+                                            <param id="0" name="Instance variable">Level_Game</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="805140425545882" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;1Up&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="462310512187114">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="809266227561921" type="Var_Level">
+                                            <param id="0" name="Instance variable">Level_Game</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">2</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="566987234682554" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;21Up&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="505128161259948">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="160232794807730" type="Var_Player">
+                                    <param id="0" name="Instance variable">Rings</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Value">200</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="439537716634126" type="System" />
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="513956975183233" type="Var_Player">
+                                    <param id="0" name="Instance variable">Lives</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">-1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-11" name="Add to" sid="640928670422607" type="Var_Player">
+                                    <param id="0" name="Instance variable">Lives</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="144196707720456">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="782028731488963" type="Var_Level">
+                                            <param id="0" name="Instance variable">Level_Game</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="206301502113518" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;1Up&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="538756398896298">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="442292137893019" type="Var_Level">
+                                            <param id="0" name="Instance variable">Level_Game</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">2</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="674753102996628" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;21Up&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
                     </sub-events>
                 </event-group>
                 <comment>mechanics</comment>
@@ -1961,6 +2084,23 @@
                                             <param id="0" name="Opacity">Self.Opacity</param>
                                         </action>
                                     </actions>
+                                    <sub-events>
+                                        <event-block sid="473963330137911">
+                                            <conditions>
+                                                <condition id="-7" inverted="1" name="Compare instance variable" sid="721224490568999" type="Var_Player">
+                                                    <param id="0" name="Instance variable">Lives</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">-1</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-12" name="Subtract from" sid="277624630514059" type="Var_Player">
+                                                    <param id="0" name="Instance variable">Lives</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
                                 </event-block>
                                 <comment>srb2</comment>
                                 <comment>bowser has a sheild????7???7777?? (real)</comment>
@@ -2116,6 +2256,23 @@
                                     <param id="0" name="Opacity">Self.Opacity</param>
                                 </action>
                             </actions>
+                            <sub-events>
+                                <event-block sid="657893317292635">
+                                    <conditions>
+                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="798664051796128" type="Var_Player">
+                                            <param id="0" name="Instance variable">Lives</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">-1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Subtract from" sid="681087575868937" type="Var_Player">
+                                            <param id="0" name="Instance variable">Lives</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                         <comment>restart level</comment>
                         <event-block sid="439146670829241">
@@ -2129,19 +2286,76 @@
                                     <param id="0" name="Instance variable">TotalDeaths</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
-                                <action id="0" name="Call function" sid="352070207623419" type="Function">
-                                    <param id="0" name="Name">&quot;Player_Restart&quot;</param>
-                                    <param id="1" name="Parameter {n}"></param>
+                                <action id="-11" name="Add to" sid="753075332729851" type="Var_Player">
+                                    <param id="0" name="Instance variable">Deaths</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="469625095294141" type="System">
+                                    <param id="0" name="Seconds">0.25</param>
                                 </action>
                             </actions>
-                        </event-block>
-                        <event-block sid="871362944013098">
-                            <conditions>
-                                <condition id="5" name="On any finished" sid="629142388867364" type="EffectsF_HitIndicator" />
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Destroy" sid="257579787535062" type="EffectsF_HitIndicator" />
-                            </actions>
+                            <sub-events>
+                                <event-block sid="530392587664174">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="858518348446806" type="Var_Player">
+                                            <param id="0" name="Instance variable">Lives</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">-1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="352070207623419" type="Function">
+                                            <param id="0" name="Name">&quot;Player_Restart&quot;</param>
+                                            <param id="1" name="Parameter {n}"></param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="514505892850979">
+                                    <conditions>
+                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="366650688894640" type="Var_Player">
+                                            <param id="0" name="Instance variable">Lives</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">-1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="118568452580914">
+                                            <conditions>
+                                                <condition id="-7" name="Compare instance variable" sid="792539982146197" type="Var_Player">
+                                                    <param id="0" name="Instance variable">Lives</param>
+                                                    <param id="1" name="Comparison">4</param>
+                                                    <param id="2" name="Value">0</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Call function" sid="829405681174087" type="Function">
+                                                    <param id="0" name="Name">&quot;Player_Restart&quot;</param>
+                                                    <param id="1" name="Parameter {n}"></param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="885837847863697">
+                                            <conditions>
+                                                <condition id="-7" name="Compare instance variable" sid="158839221597917" type="Var_Player">
+                                                    <param id="0" name="Instance variable">Lives</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">0</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-2" name="Go to layout" sid="407989513700312" type="System">
+                                                    <param id="0" name="Layout">Menu_Cutscenes</param>
+                                                </action>
+                                                <action id="-10" name="Set value" sid="317282647972634" type="Var_Game">
+                                                    <param id="0" name="Instance variable">CurrentMenu</param>
+                                                    <param id="1" name="Value">&quot;gameover&quot;</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-group>
@@ -2598,14 +2812,6 @@
                                 </action>
                             </actions>
                         </event-block>
-                        <event-block sid="113634477487410">
-                            <conditions>
-                                <condition id="5" name="On any finished" sid="413188470932958" type="Effects_WaterSplash" />
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Destroy" sid="928528542724315" type="Effects_WaterSplash" />
-                            </actions>
-                        </event-block>
                         <comment>booblas</comment>
                         <event-block sid="398182351649680">
                             <conditions>
@@ -2821,7 +3027,7 @@
                             <conditions>
                                 <condition id="-7" name="Compare instance variable" sid="260281023799579" type="Var_Game">
                                     <param id="0" name="Instance variable">TimerGlobal</param>
-                                    <param id="1" name="Comparison">0</param>
+                                    <param id="1" name="Comparison">5</param>
                                     <param id="2" name="Value">4</param>
                                 </condition>
                                 <condition id="-4" name="Trigger once while true" sid="984806378128803" type="System" />
@@ -2875,6 +3081,58 @@
                 </event-group>
                 <event-group description="" sid="280569386498989" title="Objects common">
                     <sub-events>
+                        <comment></comment>
+                        <event-block sid="617542249676693">
+                            <conditions>
+                                <condition id="-18" name="On created" sid="617781759986980" type="Common_Ring" />
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Set value" sid="913097008879112" type="Common_Ring">
+                                    <param id="0" name="Instance variable">Reskin</param>
+                                    <param id="1" name="Value">int(right(Self.AnimationName,1))</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="631397847240970">
+                            <conditions>
+                                <condition id="-18" name="On created" sid="850091728551588" type="Common2_TV" />
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Set value" sid="655070499358687" type="Common2_TV">
+                                    <param id="0" name="Instance variable">Reskin</param>
+                                    <param id="1" name="Value">int(right(Self.AnimationName,1))</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="919891238590011">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="336792793615700" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Set value" sid="909099960295372" type="Common_FinishSign">
+                                    <param id="0" name="Instance variable">Reskin</param>
+                                    <param id="1" name="Value">int(right(Self.AnimationName,1))</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="485038115354257" type="Object2_Spring">
+                                    <param id="0" name="Instance variable">Reskin</param>
+                                    <param id="1" name="Value">int(right(Self.AnimationName,1))</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="367879809097855">
+                            <conditions>
+                                <condition id="-18" name="On created" sid="831281155006037" type="Effects_RingLoss" />
+                                <condition id="-16" name="Pick random instance" sid="737095531969173" type="System">
+                                    <param id="0" name="Object">Common_Ring</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="638073527764547" type="Effects_RingLoss">
+                                    <param id="0" name="Animation">&quot;Default_&quot;&amp;Common_Ring.Reskin</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
                         <comment>=rings</comment>
                         <event-block sid="452781423340808">
                             <conditions>
@@ -3044,10 +3302,10 @@
                         <comment>=explosion</comment>
                         <event-block sid="430909130631853">
                             <conditions>
-                                <condition id="5" name="On any finished" sid="422130606054957" type="Effects_Explosion" />
+                                <condition id="5" name="On any finished" sid="422130606054957" type="DestroyOnAnimationEnd" />
                             </conditions>
                             <actions>
-                                <action id="-9" name="Destroy" sid="265497364664512" type="Effects_Explosion" />
+                                <action id="-9" name="Destroy" sid="265497364664512" type="DestroyOnAnimationEnd" />
                             </actions>
                         </event-block>
                         <comment>=air bubbles</comment>
@@ -3159,14 +3417,6 @@
                                     </actions>
                                 </event-block>
                             </sub-events>
-                        </event-block>
-                        <event-block sid="696060746455730">
-                            <conditions>
-                                <condition id="5" name="On any finished" sid="356808960296993" type="Common_AirBubble" />
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Destroy" sid="359387156416353" type="Common_AirBubble" />
-                            </actions>
                         </event-block>
                         <event-block sid="468623599427230">
                             <conditions>
@@ -3398,14 +3648,6 @@
                                 <action id="-9" name="Destroy" sid="611462247080788" type="EnemyProjectiles" />
                             </actions>
                         </event-block>
-                        <event-block sid="120216348739625">
-                            <conditions>
-                                <condition id="5" name="On any finished" sid="401703010167929" type="Projectile1_4IP2Boss" />
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Destroy" sid="923910899879371" type="Projectile1_4IP2Boss" />
-                            </actions>
-                        </event-block>
                         <comment>&quot;anti-irritation features&quot; (tm)</comment>
                         <event-block sid="717703540581569">
                             <conditions>
@@ -3488,7 +3730,7 @@
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">2</param>
                                 </condition>
-                                <condition id="-7" name="Compare instance variable" sid="785645260957677" type="JSON_Configuration">
+                                <condition id="-7" name="Compare instance variable" sid="785645260957677" type="Save_Configuration">
                                     <param id="0" name="Instance variable">GameplayProjectileTrails</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">1</param>
@@ -3537,14 +3779,6 @@
                                 <action behavior="Bullet" id="0" name="Set speed" sid="649667578156285" type="Projectile1_2GF1Boss">
                                     <param id="0" name="Speed">-50</param>
                                 </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="403430970891118">
-                            <conditions>
-                                <condition id="5" name="On any finished" sid="615399326954292" type="Projectile1_2GF1Boss" />
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Destroy" sid="560282090503930" type="Projectile1_2GF1Boss" />
                             </actions>
                         </event-block>
                         <event-block sid="408562512384273">
@@ -4560,6 +4794,30 @@
                                         </action>
                                     </actions>
                                 </event-block>
+                                <comment></comment>
+                                <event-block sid="705361771161268">
+                                    <conditions>
+                                        <condition id="3" name="Compare frame" sid="517203387018667" type="ObjectF_1Monitor">
+                                            <param id="0" name="Comparison">0</param>
+                                            <param id="1" name="Number">4</param>
+                                        </condition>
+                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="141332955996164" type="Var_Player">
+                                            <param id="0" name="Instance variable">Lives</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">-1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="224579783494233" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;1Up&quot;</param>
+                                        </action>
+                                        <action id="-11" name="Add to" sid="780030379886867" type="Var_Player">
+                                            <param id="0" name="Instance variable">Lives</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
                                 <comment>*poof*</comment>
                                 <event-block sid="335971948199217">
                                     <conditions />
@@ -4652,6 +4910,29 @@
                                         <action id="-10" name="Set value" sid="668304321621415" type="Var_Player">
                                             <param id="0" name="Instance variable">IncincibilityTimer</param>
                                             <param id="1" name="Value">15</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <comment></comment>
+                                <event-block sid="752398637180456">
+                                    <conditions>
+                                        <condition id="2" name="Is playing" sid="359945695345528" type="Common2_TV">
+                                            <param id="0" name="Animation">&quot;1Up_&quot;&amp;Self.Reskin</param>
+                                        </condition>
+                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="889685684517183" type="Var_Player">
+                                            <param id="0" name="Instance variable">Lives</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">-1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="429497567619096" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;21Up&quot;</param>
+                                        </action>
+                                        <action id="-11" name="Add to" sid="650417323050401" type="Var_Player">
+                                            <param id="0" name="Instance variable">Lives</param>
+                                            <param id="1" name="Value">1</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -5314,6 +5595,33 @@
                             <actions>
                                 <action id="-15" name="Set visible" sid="626298312821324" type="Object2_SpecialStageWarp">
                                     <param id="0" name="Visibility">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="380511961074674">
+                            <conditions>
+                                <condition id="0" name="On function" sid="631812861220648" type="Function">
+                                    <param id="0" name="Name">&quot;Player_Restart&quot;</param>
+                                </condition>
+                                <condition id="-11" name="For Each" sid="860163120139642" type="System">
+                                    <param id="0" name="Object">Object2_SpecialStageWarp</param>
+                                </condition>
+                                <condition id="-8" name="Is boolean instance variable set" sid="492157496400023" type="Object2_SpecialStageWarp">
+                                    <param id="0" name="Instance variable">Used</param>
+                                </condition>
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="433010291973903" type="Var_Game">
+                                    <param id="0" name="Instance variable">Gamemode</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;Singleplayer&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-13" name="Set boolean" sid="569367105013848" type="Object2_SpecialStageWarp">
+                                    <param id="0" name="Instance variable">Used</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="361174428129424" type="Object2_SpecialStageWarp">
+                                    <param id="0" name="Visibility">1</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -6672,7 +6980,7 @@
                                 </event-block>
                                 <event-block sid="255271385851405">
                                     <conditions>
-                                        <condition id="-7" name="Compare instance variable" sid="832029225484309" type="JSON_Configuration">
+                                        <condition id="-7" name="Compare instance variable" sid="832029225484309" type="Save_Configuration">
                                             <param id="0" name="Instance variable">GameplayKillingDead</param>
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">1</param>
@@ -6717,7 +7025,7 @@
                                         <condition id="-7" inverted="1" name="Compare instance variable" sid="189718603671190" type="Enemies">
                                             <param id="0" name="Instance variable">MovementType</param>
                                             <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">&quot;null&quot;</param>
+                                            <param id="2" name="Value">&quot;none&quot;</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -7794,7 +8102,7 @@
                                 </event-block>
                                 <event-block sid="814044684684143">
                                     <conditions>
-                                        <condition id="-7" name="Compare instance variable" sid="772180705874043" type="JSON_Configuration">
+                                        <condition id="-7" name="Compare instance variable" sid="772180705874043" type="Save_Configuration">
                                             <param id="0" name="Instance variable">GameplayKillingDead</param>
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">1</param>
@@ -8377,7 +8685,7 @@
                                 <condition id="-6" name="Every X seconds" sid="485070486710496" type="System">
                                     <param id="0" name="Interval (seconds)">0.05</param>
                                 </condition>
-                                <condition id="-7" name="Compare instance variable" sid="291066037319063" type="JSON_Configuration">
+                                <condition id="-7" name="Compare instance variable" sid="291066037319063" type="Save_Configuration">
                                     <param id="0" name="Instance variable">GameplayProjectileTrails</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">1</param>
@@ -9863,7 +10171,7 @@
                             <conditions>
                                 <condition id="-7" name="Compare instance variable" sid="749720736844487" type="Var_Game">
                                     <param id="0" name="Instance variable">TimerGlobal</param>
-                                    <param id="1" name="Comparison">0</param>
+                                    <param id="1" name="Comparison">5</param>
                                     <param id="2" name="Value">4</param>
                                 </condition>
                                 <condition id="-4" name="Trigger once while true" sid="758885631112814" type="System" />
@@ -10073,6 +10381,143 @@
         <comment>=post-level</comment>
         <event-group description="" sid="888320773182835" title="Level start/finish">
             <sub-events>
+                <comment></comment>
+                <event-block sid="557809902418563">
+                    <conditions>
+                        <condition id="-8" name="Is boolean instance variable set" sid="406099886091184" type="Var_Level">
+                            <param id="0" name="Instance variable">Level_NoTitleCard</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="554911695672336" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Wait" sid="607475695051051" type="System">
+                            <param id="0" name="Seconds">0.1</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="159955372701064" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Value">4</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="670109062808476">
+                    <conditions>
+                        <condition id="0" name="On function" sid="911860229497331" type="Function">
+                            <param id="0" name="Name">&quot;Player_Restart&quot;</param>
+                        </condition>
+                        <condition id="-8" name="Is boolean instance variable set" sid="453324925663175" type="Var_Level">
+                            <param id="0" name="Instance variable">Level_NoTitleCard</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Wait" sid="661765615789152" type="System">
+                            <param id="0" name="Seconds">0.1</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="407666666379693" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Value">4</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>quick restart</comment>
+                <event-block sid="365097610641758">
+                    <conditions>
+                        <condition id="-8" name="Is boolean instance variable set" sid="480468158249066" type="Var_Input">
+                            <param id="0" name="Instance variable">QuickRestart</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="708884645600700" type="System" />
+                        <condition id="-7" name="Compare instance variable" sid="788780211106241" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">4</param>
+                        </condition>
+                        <condition id="-7" name="Compare instance variable" sid="661604234072766" type="Var_Player">
+                            <param id="0" name="Instance variable">Finished</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block any="1" sid="354192451784370">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="212824347039629" type="Var_Player">
+                                    <param id="0" name="Instance variable">Lives</param>
+                                    <param id="1" name="Comparison">4</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="961657924829526" type="Var_Player">
+                                    <param id="0" name="Instance variable">Lives</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">-1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action behavior="Timer" id="0" name="Start timer" sid="556213508616862" type="Engine_Player">
+                                    <param id="0" name="Duration">0.25</param>
+                                    <param id="1" name="Type">0</param>
+                                    <param id="2" name="Tag">&quot;QuickRestart&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="694310894612160">
+                    <conditions>
+                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="784085516378444" type="Var_Input">
+                            <param id="0" name="Instance variable">QuickRestart</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="120002523876766" type="System" />
+                    </conditions>
+                    <actions>
+                        <action behavior="Timer" id="1" name="Stop timer" sid="722584044834989" type="Engine_Player">
+                            <param id="0" name="Tag">&quot;QuickRestart&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="629725826508385">
+                    <conditions>
+                        <condition behavior="Timer" id="0" name="On timer" sid="960073210922667" type="Engine_Player">
+                            <param id="0" name="Tag">&quot;QuickRestart&quot;</param>
+                        </condition>
+                        <condition id="-8" name="Is boolean instance variable set" sid="565357525686438" type="Var_Input">
+                            <param id="0" name="Instance variable">QuickRestart</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Timer" id="1" name="Stop timer" sid="708588633319501" type="Engine_Player">
+                            <param id="0" name="Tag">&quot;QuickRestart&quot;</param>
+                        </action>
+                        <action id="-11" name="Add to" sid="534834628203333" type="Var_Player">
+                            <param id="0" name="Instance variable">TotalDeaths</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-11" name="Add to" sid="168606743924004" type="Var_Player">
+                            <param id="0" name="Instance variable">Deaths</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="0" name="Call function" sid="541312678451168" type="Function">
+                            <param id="0" name="Name">&quot;Player_Restart&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="869691337126774">
+                            <conditions>
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="349964393876552" type="Var_Player">
+                                    <param id="0" name="Instance variable">Lives</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">-1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-12" name="Subtract from" sid="163350967142766" type="Var_Player">
+                                    <param id="0" name="Instance variable">Lives</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
                 <comment>perfect bonus</comment>
                 <event-block sid="822869370809055">
                     <conditions>
@@ -10172,7 +10617,7 @@
                     <conditions>
                         <condition id="-7" name="Compare instance variable" sid="273206438345121" type="Var_Game">
                             <param id="0" name="Instance variable">TimerGlobal</param>
-                            <param id="1" name="Comparison">0</param>
+                            <param id="1" name="Comparison">5</param>
                             <param id="2" name="Value">4</param>
                         </condition>
                         <condition id="-4" name="Trigger once while true" sid="709188598202735" type="System" />
@@ -10755,9 +11200,6 @@
                 <comment>timers yadda yadda</comment>
                 <event-block sid="891827382021981">
                     <conditions>
-                        <condition id="-6" name="Every X seconds" sid="793895767682573" type="System">
-                            <param id="0" name="Interval (seconds)">1.0</param>
-                        </condition>
                         <condition id="-8" name="Is boolean instance variable set" sid="533886518296379" type="Var_Level">
                             <param id="0" name="Instance variable">TimerLevelActive</param>
                         </condition>
@@ -10765,20 +11207,20 @@
                     <actions>
                         <action id="-11" name="Add to" sid="200085014405343" type="Var_Level">
                             <param id="0" name="Instance variable">TimerLevel</param>
-                            <param id="1" name="Value">1</param>
+                            <param id="1" name="Value">dt</param>
+                        </action>
+                        <action id="-11" name="Add to" sid="349029590929860" type="Var_Level">
+                            <param id="0" name="Instance variable">TimerLevelReal</param>
+                            <param id="1" name="Value">dt</param>
                         </action>
                     </actions>
                 </event-block>
                 <event-block sid="909784091527879">
-                    <conditions>
-                        <condition id="-6" name="Every X seconds" sid="354746006650484" type="System">
-                            <param id="0" name="Interval (seconds)">1.0</param>
-                        </condition>
-                    </conditions>
+                    <conditions />
                     <actions>
                         <action id="-11" name="Add to" sid="929108926689421" type="Var_Game">
                             <param id="0" name="Instance variable">TimerGlobal</param>
-                            <param id="1" name="Value">1</param>
+                            <param id="1" name="Value">dt</param>
                         </action>
                     </actions>
                 </event-block>
@@ -10795,10 +11237,10 @@
                     </conditions>
                     <actions>
                         <action id="0" name="Set text" sid="369003162698866" type="HUD_SkinName">
-                            <param id="0" name="Text">PlayerSkins.Name</param>
+                            <param id="0" name="Text">PlayerSkins.DisplayName</param>
                         </action>
                         <action id="0" name="Set text" sid="716737081777611" type="HUD_FinishSkin">
-                            <param id="0" name="Text">PlayerSkins.Name</param>
+                            <param id="0" name="Text">PlayerSkins.DisplayName</param>
                         </action>
                     </actions>
                 </event-block>
@@ -10815,6 +11257,9 @@
                         </action>
                         <action id="0" name="Set text" sid="499402410508271" type="HUD_Score">
                             <param id="0" name="Text">Var_Player.Score</param>
+                        </action>
+                        <action id="0" name="Set text" sid="605612994046678" type="HUD_Lives">
+                            <param id="0" name="Text">Var_Player.Lives</param>
                         </action>
                     </actions>
                 </event-block>
@@ -10851,11 +11296,64 @@
                         </action>
                     </actions>
                 </event-block>
+                <event-block sid="381376739843961">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="271458520769077" type="Var_Player">
+                            <param id="0" name="Instance variable">Lives</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">-1</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="831971268245251" type="System" />
+                        <condition id="0" name="Compare text" sid="807534820387280" type="HUD_TextStatic">
+                            <param id="0" name="Text to compare">&quot;X&quot;</param>
+                            <param id="1" name="Case sensitivity">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-15" name="Set visible" sid="733434076782638" type="HUD_Lives">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-2" name="Set Y" sid="224452693135630" type="HUD_SkinName">
+                            <param id="0" name="Y">459</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="927689649943567" type="HUD_TextStatic">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="334937098481668">
+                    <conditions>
+                        <condition id="-7" inverted="1" name="Compare instance variable" sid="916588562336418" type="Var_Player">
+                            <param id="0" name="Instance variable">Lives</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">-1</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="214978857354068" type="System" />
+                        <condition id="0" name="Compare text" sid="424972602656422" type="HUD_TextStatic">
+                            <param id="0" name="Text to compare">&quot;X&quot;</param>
+                            <param id="1" name="Case sensitivity">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-15" name="Set visible" sid="249295413758844" type="HUD_Lives">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="-2" name="Set Y" sid="559766500318700" type="HUD_SkinName">
+                            <param id="0" name="Y">441</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="326013110661382" type="HUD_TextStatic">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                    </actions>
+                </event-block>
                 <comment>titlecard</comment>
                 <event-block sid="117945033235074">
                     <conditions>
                         <condition id="0" name="On function" sid="686477277082357" type="Function">
                             <param id="0" name="Name">&quot;Player_Restart&quot;</param>
+                        </condition>
+                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="456787852431688" type="Var_Level">
+                            <param id="0" name="Instance variable">Level_NoTitleCard</param>
                         </condition>
                     </conditions>
                     <actions>
@@ -10887,16 +11385,13 @@
                             <param id="0" name="Start Mode">0</param>
                             <param id="1" name="Force use current">0</param>
                         </action>
-                        <action id="0" name="Set text" sid="661349384660028" type="HUD_FinishAct">
-                            <param id="0" name="Text">&quot;COMPLETED ACT &quot;&amp;Var_Level.Level_Act</param>
-                        </action>
                     </actions>
                 </event-block>
                 <event-block sid="484596646735475">
                     <conditions>
                         <condition id="-7" name="Compare instance variable" sid="554174081817328" type="Var_Game">
                             <param id="0" name="Instance variable">TimerGlobal</param>
-                            <param id="1" name="Comparison">0</param>
+                            <param id="1" name="Comparison">5</param>
                             <param id="2" name="Value">4</param>
                         </condition>
                         <condition id="-4" name="Trigger once while true" sid="244182617257891" type="System" />
@@ -10919,17 +11414,33 @@
                 <comment>act number management</comment>
                 <event-block sid="208273771647996">
                     <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="586659028865776" type="Var_Level">
+                        <condition id="-7" inverted="1" name="Compare instance variable" sid="586659028865776" type="Var_Level">
                             <param id="0" name="Instance variable">Level_Act</param>
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">0</param>
                         </condition>
+                        <condition id="-4" name="Trigger once while true" sid="984443450304311" type="System" />
                     </conditions>
                     <actions>
-                        <action id="-15" name="Set visible" sid="767130847463794" type="HUD_TitleCardAct">
+                        <action id="0" name="Set text" sid="429592456621623" type="HUD_FinishAct">
+                            <param id="0" name="Text">&quot;COMPLETED ACT &quot;&amp;Var_Level.Level_Act</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="235425737948931">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="455098732750840" type="Var_Level">
+                            <param id="0" name="Instance variable">Level_Act</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="552772246039228" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-15" name="Set visible" sid="485589115556079" type="HUD_TitleCardAct">
                             <param id="0" name="Visibility">0</param>
                         </action>
-                        <action id="0" name="Set text" sid="663939906525859" type="HUD_FinishAct">
+                        <action id="0" name="Set text" sid="588420392669726" type="HUD_FinishAct">
                             <param id="0" name="Text">&quot;COMPLETED ACT&quot;</param>
                         </action>
                     </actions>
@@ -12136,16 +12647,59 @@
                                         </condition>
                                         <condition id="-4" name="Trigger once while true" sid="828701261466528" type="System" />
                                     </conditions>
-                                    <actions>
-                                        <action id="-11" name="Add to" sid="923422383274838" type="Var_Player">
-                                            <param id="0" name="Instance variable">TotalDeaths</param>
-                                            <param id="1" name="Value">1</param>
-                                        </action>
-                                        <action id="0" name="Call function" sid="557479142808190" type="Function">
-                                            <param id="0" name="Name">&quot;Player_Restart&quot;</param>
-                                            <param id="1" name="Parameter {n}"></param>
-                                        </action>
-                                    </actions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="300397115031522">
+                                            <conditions>
+                                                <condition id="-7" name="Compare instance variable" sid="835488155473754" type="Var_Player">
+                                                    <param id="0" name="Instance variable">Lives</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">-1</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-11" name="Add to" sid="923422383274838" type="Var_Player">
+                                                    <param id="0" name="Instance variable">TotalDeaths</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                                <action id="-11" name="Add to" sid="250516545298462" type="Var_Player">
+                                                    <param id="0" name="Instance variable">Deaths</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="557479142808190" type="Function">
+                                                    <param id="0" name="Name">&quot;Player_Restart&quot;</param>
+                                                    <param id="1" name="Parameter {n}"></param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="698962129451019">
+                                            <conditions>
+                                                <condition id="-7" name="Compare instance variable" sid="632475111071142" type="Var_Player">
+                                                    <param id="0" name="Instance variable">Lives</param>
+                                                    <param id="1" name="Comparison">4</param>
+                                                    <param id="2" name="Value">1</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-11" name="Add to" sid="709775051237801" type="Var_Player">
+                                                    <param id="0" name="Instance variable">TotalDeaths</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                                <action id="-11" name="Add to" sid="846764888028154" type="Var_Player">
+                                                    <param id="0" name="Instance variable">Deaths</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="902131454452560" type="Function">
+                                                    <param id="0" name="Name">&quot;Player_Restart&quot;</param>
+                                                    <param id="1" name="Parameter {n}"></param>
+                                                </action>
+                                                <action id="-12" name="Subtract from" sid="910994498695805" type="Var_Player">
+                                                    <param id="0" name="Instance variable">Lives</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
                                 </event-block>
                             </sub-events>
                         </event-block>
@@ -12172,30 +12726,92 @@
                                         <condition id="-4" name="Trigger once while true" sid="454963383490074" type="System" />
                                     </conditions>
                                     <actions>
-                                        <action id="-10" name="Set value" sid="910565333596288" type="Var_Player">
-                                            <param id="0" name="Instance variable">Checkpoint</param>
-                                            <param id="1" name="Value">0</param>
-                                        </action>
-                                        <action id="4" name="Set animation" sid="816929041305192" type="ObjectF_Checkpoint">
-                                            <param id="0" name="Animation">&quot;Idle&quot;</param>
-                                            <param id="1" name="From">1</param>
-                                        </action>
-                                        <action id="-2" name="Set Y" sid="395514999339065" type="Special_Checkpoint">
-                                            <param id="0" name="Y">Self.InitialY</param>
-                                        </action>
-                                        <action id="-3" name="Set position" sid="592120822680278" type="Special_StartPos">
-                                            <param id="0" name="X">Self.InitialX</param>
-                                            <param id="1" name="Y">Self.InitialY</param>
-                                        </action>
-                                        <action id="-11" name="Add to" sid="779340639607570" type="Var_Player">
-                                            <param id="0" name="Instance variable">TotalDeaths</param>
-                                            <param id="1" name="Value">1</param>
-                                        </action>
-                                        <action id="0" name="Call function" sid="542069075191945" type="Function">
-                                            <param id="0" name="Name">&quot;Player_Restart&quot;</param>
-                                            <param id="1" name="Parameter {n}"></param>
+                                        <action id="-16" name="Wait" sid="784149523501742" type="System">
+                                            <param id="0" name="Seconds">0.05</param>
                                         </action>
                                     </actions>
+                                    <sub-events>
+                                        <event-block sid="377465961680514">
+                                            <conditions>
+                                                <condition id="-7" name="Compare instance variable" sid="343739050332233" type="Var_Player">
+                                                    <param id="0" name="Instance variable">Lives</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">-1</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-10" name="Set value" sid="910565333596288" type="Var_Player">
+                                                    <param id="0" name="Instance variable">Checkpoint</param>
+                                                    <param id="1" name="Value">0</param>
+                                                </action>
+                                                <action id="4" name="Set animation" sid="816929041305192" type="ObjectF_Checkpoint">
+                                                    <param id="0" name="Animation">&quot;Idle&quot;</param>
+                                                    <param id="1" name="From">1</param>
+                                                </action>
+                                                <action id="-2" name="Set Y" sid="395514999339065" type="Special_Checkpoint">
+                                                    <param id="0" name="Y">Self.InitialY</param>
+                                                </action>
+                                                <action id="-3" name="Set position" sid="592120822680278" type="Special_StartPos">
+                                                    <param id="0" name="X">Self.InitialX</param>
+                                                    <param id="1" name="Y">Self.InitialY</param>
+                                                </action>
+                                                <action id="-11" name="Add to" sid="779340639607570" type="Var_Player">
+                                                    <param id="0" name="Instance variable">TotalDeaths</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                                <action id="-11" name="Add to" sid="155592006484762" type="Var_Player">
+                                                    <param id="0" name="Instance variable">Deaths</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="542069075191945" type="Function">
+                                                    <param id="0" name="Name">&quot;Player_Restart&quot;</param>
+                                                    <param id="1" name="Parameter {n}"></param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="203446236284286">
+                                            <conditions>
+                                                <condition id="-7" name="Compare instance variable" sid="160143057847462" type="Var_Player">
+                                                    <param id="0" name="Instance variable">Lives</param>
+                                                    <param id="1" name="Comparison">4</param>
+                                                    <param id="2" name="Value">1</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-10" name="Set value" sid="246479585417089" type="Var_Player">
+                                                    <param id="0" name="Instance variable">Checkpoint</param>
+                                                    <param id="1" name="Value">0</param>
+                                                </action>
+                                                <action id="4" name="Set animation" sid="109612225229349" type="ObjectF_Checkpoint">
+                                                    <param id="0" name="Animation">&quot;Idle&quot;</param>
+                                                    <param id="1" name="From">1</param>
+                                                </action>
+                                                <action id="-2" name="Set Y" sid="308515598123308" type="Special_Checkpoint">
+                                                    <param id="0" name="Y">Self.InitialY</param>
+                                                </action>
+                                                <action id="-3" name="Set position" sid="672456884638707" type="Special_StartPos">
+                                                    <param id="0" name="X">Self.InitialX</param>
+                                                    <param id="1" name="Y">Self.InitialY</param>
+                                                </action>
+                                                <action id="-11" name="Add to" sid="748583071812862" type="Var_Player">
+                                                    <param id="0" name="Instance variable">TotalDeaths</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                                <action id="-11" name="Add to" sid="109464364518854" type="Var_Player">
+                                                    <param id="0" name="Instance variable">Deaths</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="656456682742870" type="Function">
+                                                    <param id="0" name="Name">&quot;Player_Restart&quot;</param>
+                                                    <param id="1" name="Parameter {n}"></param>
+                                                </action>
+                                                <action id="-12" name="Subtract from" sid="880111581507090" type="Var_Player">
+                                                    <param id="0" name="Instance variable">Lives</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
                                 </event-block>
                             </sub-events>
                         </event-block>
@@ -12228,71 +12844,119 @@
                                         </action>
                                     </actions>
                                     <sub-events>
-                                        <event-block sid="653442580037252">
+                                        <event-block sid="422049166865579">
                                             <conditions>
-                                                <condition id="-7" name="Compare instance variable" sid="856416962979369" type="Var_Level">
-                                                    <param id="0" name="Instance variable">Level_Game</param>
+                                                <condition id="-7" inverted="1" name="Compare instance variable" sid="529912131707327" type="Var_Game">
+                                                    <param id="0" name="Instance variable">Gamemode</param>
                                                     <param id="1" name="Comparison">0</param>
-                                                    <param id="2" name="Value">1</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="-2" name="Go to layout" sid="954523161872021" type="System">
-                                                    <param id="0" name="Layout">Menu_SRB1</param>
-                                                </action>
-                                                <action id="-10" name="Set value" sid="119544785458400" type="Var_Game">
-                                                    <param id="0" name="Instance variable">CurrentMenu</param>
-                                                    <param id="1" name="Value">&quot;main&quot;</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                        <event-block sid="158677452351349">
-                                            <conditions>
-                                                <condition id="-7" name="Compare instance variable" sid="908584808800064" type="Var_Level">
-                                                    <param id="0" name="Instance variable">Level_Game</param>
-                                                    <param id="1" name="Comparison">0</param>
-                                                    <param id="2" name="Value">2</param>
+                                                    <param id="2" name="Value">&quot;Marathon&quot;</param>
                                                 </condition>
                                             </conditions>
                                             <actions />
                                             <sub-events>
-                                                <event-block sid="987692866186684">
+                                                <event-block sid="653442580037252">
                                                     <conditions>
-                                                        <condition id="-8" inverted="1" name="Compare two values" sid="104740488993142" type="System">
-                                                            <param id="0" name="First value">find(LayoutName,&quot;E1.5_&quot;)</param>
+                                                        <condition id="-7" name="Compare instance variable" sid="856416962979369" type="Var_Level">
+                                                            <param id="0" name="Instance variable">Level_Game</param>
                                                             <param id="1" name="Comparison">0</param>
-                                                            <param id="2" name="Second value">-1</param>
+                                                            <param id="2" name="Value">1</param>
                                                         </condition>
                                                     </conditions>
                                                     <actions>
-                                                        <action id="-2" name="Go to layout" sid="470957666607039" type="System">
-                                                            <param id="0" name="Layout">Menu_Main</param>
+                                                        <action id="-2" name="Go to layout" sid="954523161872021" type="System">
+                                                            <param id="0" name="Layout">Menu_SRB1</param>
                                                         </action>
-                                                        <action id="-10" name="Set value" sid="454004590856389" type="Var_Game">
-                                                            <param id="0" name="Instance variable">CurrentMenu</param>
-                                                            <param id="1" name="Value">&quot;intro&quot;</param>
-                                                        </action>
-                                                    </actions>
-                                                </event-block>
-                                                <event-block sid="649508432973912">
-                                                    <conditions>
-                                                        <condition id="-8" name="Compare two values" sid="944393575438246" type="System">
-                                                            <param id="0" name="First value">find(LayoutName,&quot;E1.5_&quot;)</param>
-                                                            <param id="1" name="Comparison">0</param>
-                                                            <param id="2" name="Second value">-1</param>
-                                                        </condition>
-                                                    </conditions>
-                                                    <actions>
-                                                        <action id="-2" name="Go to layout" sid="217184808613621" type="System">
-                                                            <param id="0" name="Layout">Menu_SRB2</param>
-                                                        </action>
-                                                        <action id="-10" name="Set value" sid="296965383756194" type="Var_Game">
+                                                        <action id="-10" name="Set value" sid="119544785458400" type="Var_Game">
                                                             <param id="0" name="Instance variable">CurrentMenu</param>
                                                             <param id="1" name="Value">&quot;main&quot;</param>
                                                         </action>
                                                     </actions>
                                                 </event-block>
+                                                <event-block sid="158677452351349">
+                                                    <conditions>
+                                                        <condition id="-7" name="Compare instance variable" sid="908584808800064" type="Var_Level">
+                                                            <param id="0" name="Instance variable">Level_Game</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Value">2</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions />
+                                                    <sub-events>
+                                                        <event-block any="1" sid="987692866186684">
+                                                            <conditions>
+                                                                <condition id="-8" inverted="1" name="Compare two values" sid="104740488993142" type="System">
+                                                                    <param id="0" name="First value">find(LayoutName,&quot;E15_&quot;)</param>
+                                                                    <param id="1" name="Comparison">0</param>
+                                                                    <param id="2" name="Second value">-1</param>
+                                                                </condition>
+                                                                <condition id="-8" inverted="1" name="Compare two values" sid="976581045854419" type="System">
+                                                                    <param id="0" name="First value">find(LayoutName,&quot;E1Sp_&quot;)</param>
+                                                                    <param id="1" name="Comparison">0</param>
+                                                                    <param id="2" name="Second value">-1</param>
+                                                                </condition>
+                                                            </conditions>
+                                                            <actions>
+                                                                <action id="-2" name="Go to layout" sid="470957666607039" type="System">
+                                                                    <param id="0" name="Layout">Menu_Main</param>
+                                                                </action>
+                                                                <action id="-10" name="Set value" sid="454004590856389" type="Var_Game">
+                                                                    <param id="0" name="Instance variable">CurrentMenu</param>
+                                                                    <param id="1" name="Value">&quot;extralevels&quot;</param>
+                                                                </action>
+                                                                <action id="0" name="Call function" sid="834978082390601" type="Function">
+                                                                    <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
+                                                                    <param id="1" name="Parameter {n}">&quot;F_ExtraLevels&quot;{###}&quot;music&quot;{###}1</param>
+                                                                </action>
+                                                            </actions>
+                                                        </event-block>
+                                                        <event-block sid="649508432973912">
+                                                            <conditions>
+                                                                <condition id="-8" name="Compare two values" sid="944393575438246" type="System">
+                                                                    <param id="0" name="First value">find(LayoutName,&quot;E15_&quot;)</param>
+                                                                    <param id="1" name="Comparison">0</param>
+                                                                    <param id="2" name="Second value">-1</param>
+                                                                </condition>
+                                                                <condition id="-8" name="Compare two values" sid="973315296229121" type="System">
+                                                                    <param id="0" name="First value">find(LayoutName,&quot;E1Sp_&quot;)</param>
+                                                                    <param id="1" name="Comparison">0</param>
+                                                                    <param id="2" name="Second value">-1</param>
+                                                                </condition>
+                                                            </conditions>
+                                                            <actions>
+                                                                <action id="-2" name="Go to layout" sid="217184808613621" type="System">
+                                                                    <param id="0" name="Layout">Menu_SRB2</param>
+                                                                </action>
+                                                                <action id="-10" name="Set value" sid="296965383756194" type="Var_Game">
+                                                                    <param id="0" name="Instance variable">CurrentMenu</param>
+                                                                    <param id="1" name="Value">&quot;main&quot;</param>
+                                                                </action>
+                                                            </actions>
+                                                        </event-block>
+                                                    </sub-events>
+                                                </event-block>
                                             </sub-events>
+                                        </event-block>
+                                        <event-block sid="300742362790268">
+                                            <conditions>
+                                                <condition id="-7" name="Compare instance variable" sid="542764035978053" type="Var_Game">
+                                                    <param id="0" name="Instance variable">Gamemode</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">&quot;Marathon&quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-2" name="Go to layout" sid="208357181090042" type="System">
+                                                    <param id="0" name="Layout">Menu_Main</param>
+                                                </action>
+                                                <action id="-10" name="Set value" sid="524779569764584" type="Var_Game">
+                                                    <param id="0" name="Instance variable">CurrentMenu</param>
+                                                    <param id="1" name="Value">&quot;marathon&quot;</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="843395953001994" type="Function">
+                                                    <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;F_BonusModes&quot;{###}&quot;music&quot;{###}1</param>
+                                                </action>
+                                            </actions>
                                         </event-block>
                                     </sub-events>
                                 </event-block>
@@ -12749,25 +13413,7 @@
                         </action>
                     </actions>
                 </event-block>
-                <comment>commit die</comment>
-                <event-block sid="334713009919116">
-                    <conditions>
-                        <condition id="0" name="On key pressed" sid="690213539447340" type="Keyboard">
-                            <param id="0" name="Key">82</param>
-                        </condition>
-                        <condition id="-14" name="Compare variable" sid="221845547611283" type="System">
-                            <param id="0" name="Variable">DEBUG</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">1</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Call function" sid="277317885644674" type="Function">
-                            <param id="0" name="Name">&quot;Player_Restart&quot;</param>
-                            <param id="1" name="Parameter {n}"></param>
-                        </action>
-                    </actions>
-                </event-block>
+                <comment></comment>
                 <event-block sid="157956557686171">
                     <conditions>
                         <condition id="0" name="On key pressed" sid="524569132487397" type="Keyboard">
@@ -12783,6 +13429,7 @@
                         <action id="-26" name="Restart layout" sid="905089191761311" type="System" />
                     </actions>
                 </event-block>
+                <comment></comment>
                 <event-block sid="630200318099916">
                     <conditions>
                         <condition id="0" name="On key pressed" sid="467155184991224" type="Keyboard">

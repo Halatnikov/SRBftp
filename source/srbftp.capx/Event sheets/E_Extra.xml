@@ -67,7 +67,7 @@
                         <event-block sid="731358101271936">
                             <conditions>
                                 <condition id="-8" inverted="1" name="Compare two values" sid="282187112497767" type="System">
-                                    <param id="0" name="First value">find(LayoutName,&quot;E1.5_&quot;)</param>
+                                    <param id="0" name="First value">find(LayoutName,&quot;E15_&quot;)</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Second value">-1</param>
                                 </condition>
@@ -98,6 +98,33 @@
                                 </action>
                             </actions>
                         </event-block>
+                        <comment>srb1 special</comment>
+                        <event-block sid="917514295309967">
+                            <conditions>
+                                <condition id="-8" inverted="1" name="Compare two values" sid="712455775305085" type="System">
+                                    <param id="0" name="First value">find(LayoutName,&quot;E1Sp_&quot;)</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">-1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-12" name="Set group active" sid="513077317810872" type="System">
+                                    <param id="0" name="Group name">&quot;SRB1 Special&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="744014819730429">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="814451852075736" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-12" name="Set group active" sid="958457455277521" type="System">
+                                    <param id="0" name="Group name">&quot;SRB1 Special&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
                     </sub-events>
                 </event-block>
                 <comment></comment>
@@ -120,6 +147,15 @@
                                     <param id="0" name="Group name">&quot;Marathon mode&quot;</param>
                                     <param id="1" name="State">1</param>
                                 </action>
+                                <action id="-15" name="Set visible" sid="523284877546971" type="HUD_MarathonTime">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="974747568715927" type="HUD_MarathonLevels">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="198321392376094" type="HUD_MarathonName">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
                             </actions>
                         </event-block>
                         <event-block sid="938595770840234">
@@ -131,13 +167,13 @@
                                     <param id="0" name="Group name">&quot;Marathon mode&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
-                                <action id="-15" name="Set visible" sid="945010857350049" type="HUD_Time2">
+                                <action id="-15" name="Set visible" sid="945010857350049" type="HUD_MarathonTime">
                                     <param id="0" name="Visibility">0</param>
                                 </action>
-                                <action id="-15" name="Set visible" sid="345083308224321" type="HUD_Time3">
+                                <action id="-15" name="Set visible" sid="345083308224321" type="HUD_MarathonLevels">
                                     <param id="0" name="Visibility">0</param>
                                 </action>
-                                <action id="-15" name="Set visible" sid="880368390946502" type="HUD_Time4">
+                                <action id="-15" name="Set visible" sid="880368390946502" type="HUD_MarathonName">
                                     <param id="0" name="Visibility">0</param>
                                 </action>
                             </actions>
@@ -492,82 +528,370 @@
                         </action>
                     </actions>
                 </event-block>
-                <event-block sid="316645907216479">
+            </sub-events>
+        </event-group>
+        <event-group description="" inactive="1" sid="691591214189980" title="SRB1 Special">
+            <sub-events>
+                <event-block sid="291198302554864">
                     <conditions>
-                        <condition id="2" name="Is playing" sid="784780281352608" type="Common_Ring">
-                            <param id="0" name="Animation">&quot;Default_1&quot;</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="136509879641307" type="System" />
+                        <condition id="-4" name="Trigger once while true" sid="990722340156462" type="System" />
                     </conditions>
                     <actions>
-                        <action id="-10" name="Set value" sid="129710923461497" type="Common_Ring">
-                            <param id="0" name="Instance variable">Reskin</param>
-                            <param id="1" name="Value">1</param>
+                        <action id="-10" name="Set value" sid="328840626575259" type="Engine_Player">
+                            <param id="0" name="Instance variable">InitiallSpeed</param>
+                            <param id="1" name="Value">Self.InitiallSpeed*0.75</param>
+                        </action>
+                        <action behavior="Platform" id="1" name="Set max speed" sid="969505312542950" type="Engine_Player">
+                            <param id="0" name="Max Speed">Self.InitiallSpeed</param>
                         </action>
                     </actions>
                 </event-block>
-                <event-block sid="261090230051347">
+                <comment></comment>
+                <event-block sid="656531531032308">
                     <conditions>
-                        <condition id="-8" name="Compare two values" sid="944736630726745" type="System">
-                            <param id="0" name="First value">right(Common2_TV.AnimationName,1)</param>
+                        <condition id="0" name="On function" sid="906963315538243" type="Function">
+                            <param id="0" name="Name">&quot;Player_Restart&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Wait" sid="701422521152708" type="System">
+                            <param id="0" name="Seconds">0.01</param>
+                        </action>
+                        <action id="-9" name="Destroy" sid="425100243793025" type="Sprite6" />
+                    </actions>
+                </event-block>
+                <event-block sid="572463704956398">
+                    <conditions>
+                        <condition id="-19" name="On destroyed" sid="404450789762952" type="Enemies" />
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Spawn another object" sid="624662408749301" type="Enemies">
+                            <param id="0" name="Object">Sprite6</param>
+                            <param id="1" name="Layer">&quot;Player&quot;</param>
+                            <param id="2" name="Image point">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment></comment>
+                <event-block sid="472492916269793">
+                    <conditions>
+                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="728675464498433" type="Var_Level">
+                            <param id="0" name="Instance variable">Pause</param>
+                        </condition>
+                        <condition id="-7" name="Compare instance variable" sid="363679778099553" type="Var_Player">
+                            <param id="0" name="Instance variable">Finished</param>
                             <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Second value">1</param>
+                            <param id="2" name="Value">0</param>
                         </condition>
-                        <condition id="-4" name="Trigger once while true" sid="848234532921710" type="System" />
+                        <condition id="-7" name="Compare instance variable" sid="368493194478277" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Comparison">4</param>
+                            <param id="2" name="Value">4</param>
+                        </condition>
+                        <condition id="-6" name="Every X seconds" sid="536063133503298" type="System">
+                            <param id="0" name="Interval (seconds)">1.25</param>
+                        </condition>
+                        <condition id="-11" name="For Each" sid="925794633551178" type="System">
+                            <param id="0" name="Object">EnemyE1Sp_GreenCrawla</param>
+                        </condition>
                     </conditions>
                     <actions>
-                        <action id="-10" name="Set value" sid="201034984611782" type="Common2_TV">
-                            <param id="0" name="Instance variable">Reskin</param>
-                            <param id="1" name="Value">1</param>
+                        <action id="0" name="Spawn another object" sid="901515978213781" type="EnemyE1Sp_GreenCrawla">
+                            <param id="0" name="Object">Sprite6</param>
+                            <param id="1" name="Layer">&quot;Player&quot;</param>
+                            <param id="2" name="Image point">1</param>
                         </action>
                     </actions>
-                </event-block>
-                <event-block sid="381849166216015">
-                    <conditions>
-                        <condition id="2" name="Is playing" sid="560117802099460" type="Common_FinishSign">
-                            <param id="0" name="Animation">&quot;Default_1&quot;</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="143652036112815" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="-10" name="Set value" sid="457859109299371" type="Common_FinishSign">
-                            <param id="0" name="Instance variable">Reskin</param>
-                            <param id="1" name="Value">1</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block any="1" sid="705171866051934">
-                    <conditions>
-                        <condition id="2" name="Is playing" sid="301019601550055" type="Object2_Spring">
-                            <param id="0" name="Animation">&quot;Yellow_1&quot;</param>
-                        </condition>
-                        <condition id="2" name="Is playing" sid="303876983760876" type="Object2_Spring">
-                            <param id="0" name="Animation">&quot;Red_1&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions />
                     <sub-events>
-                        <event-block sid="899152124063525">
+                        <event-block sid="609416492452753">
                             <conditions>
-                                <condition id="-4" name="Trigger once while true" sid="601349165375729" type="System" />
+                                <condition id="-5" name="Compare width" sid="338438062257182" type="EnemyE1Sp_GreenCrawla">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Width">45</param>
+                                </condition>
                             </conditions>
                             <actions>
-                                <action id="-10" name="Set value" sid="555281334333906" type="Object2_Spring">
-                                    <param id="0" name="Instance variable">Reskin</param>
-                                    <param id="1" name="Value">1</param>
+                                <action id="0" name="Spawn another object" sid="341069682994295" type="EnemyE1Sp_GreenCrawla">
+                                    <param id="0" name="Object">Sprite7</param>
+                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                    <param id="2" name="Image point">1</param>
+                                </action>
+                                <action behavior="Rotate" id="0" name="Set speed" sid="715160387649629" type="Sprite7">
+                                    <param id="0" name="Speed">180</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="649341539851383">
+                            <conditions>
+                                <condition id="-5" name="Compare width" sid="896090791246289" type="EnemyE1Sp_GreenCrawla">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Width">-45</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Spawn another object" sid="239891032545466" type="EnemyE1Sp_GreenCrawla">
+                                    <param id="0" name="Object">Sprite7</param>
+                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                    <param id="2" name="Image point">1</param>
+                                </action>
+                                <action behavior="Rotate" id="0" name="Set speed" sid="320456254921795" type="Sprite7">
+                                    <param id="0" name="Speed">-180</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="754906467120973">
+                            <conditions>
+                                <condition id="-3" name="Is on-screen" sid="268423649874315" type="EnemyE1Sp_GreenCrawla" />
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Call function" sid="328760909206127" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
                     </sub-events>
                 </event-block>
-                <event-block sid="143262542997157">
+                <event-block sid="106456301041520">
                     <conditions>
-                        <condition id="-18" name="On created" sid="620046418704777" type="Effects_RingLoss" />
+                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="410128604391784" type="Var_Level">
+                            <param id="0" name="Instance variable">Pause</param>
+                        </condition>
+                        <condition id="-11" name="For Each" sid="995049961826179" type="System">
+                            <param id="0" name="Object">Sprite7</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="767529689205471">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="190103398901372" type="System">
+                                    <param id="0" name="First value">Sprite7.Rotate.Speed</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">180</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-1" name="Set X" sid="281213940862823" type="Sprite7">
+                                    <param id="0" name="X">Self.X+4</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="372154170469597">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="689223385554387" type="System">
+                                    <param id="0" name="First value">Sprite7.Rotate.Speed</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">-180</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-1" name="Set X" sid="274965108348764" type="Sprite7">
+                                    <param id="0" name="X">Self.X-4</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="538423741009536">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="314473624370803" type="Sprite7">
+                            <param id="0" name="Object">LevelTiles</param>
+                        </condition>
+                        <condition behavior="Solid" id="0" name="Is enabled" sid="901611773283780" type="LevelTiles" />
                     </conditions>
                     <actions>
-                        <action id="4" name="Set animation" sid="419483645857037" type="Effects_RingLoss">
-                            <param id="0" name="Animation">&quot;Default_1&quot;</param>
-                            <param id="1" name="From">1</param>
+                        <action id="0" name="Spawn another object" sid="764608570102623" type="Sprite7">
+                            <param id="0" name="Object">Sprite6</param>
+                            <param id="1" name="Layer">&quot;Player&quot;</param>
+                            <param id="2" name="Image point">0</param>
+                        </action>
+                        <action id="-9" name="Destroy" sid="765767514502220" type="Sprite7" />
+                    </actions>
+                </event-block>
+                <event-block sid="497836823952816">
+                    <conditions>
+                        <condition id="1" name="Is overlapping another object" sid="131256441002609" type="PlayerSkins">
+                            <param id="0" name="Object">Sprite7</param>
+                        </condition>
+                        <condition id="-33" name="Pick by comparison" sid="566637866896894" type="System">
+                            <param id="0" name="Object">PlayerSkins</param>
+                            <param id="1" name="Expression">PlayerSkins.ID</param>
+                            <param id="2" name="Comparison">0</param>
+                            <param id="3" name="Value">Var_Player.Skin</param>
+                        </condition>
+                        <condition id="-7" name="Compare instance variable" sid="865654051921126" type="Var_Player">
+                            <param id="0" name="Instance variable">Finished</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                        <condition id="-7" inverted="1" name="Compare instance variable" sid="925404519226252" type="Var_Player">
+                            <param id="0" name="Instance variable">State</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;crouch&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Call function" sid="377673301932675" type="Function">
+                            <param id="0" name="Name">&quot;Player_TakeDamage&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment></comment>
+                <event-block sid="806443835209464">
+                    <conditions>
+                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="798746160725731" type="Var_Level">
+                            <param id="0" name="Instance variable">Pause</param>
+                        </condition>
+                        <condition id="-7" name="Compare instance variable" sid="247768387395886" type="Var_Player">
+                            <param id="0" name="Instance variable">Finished</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                        <condition id="-7" name="Compare instance variable" sid="685492348493156" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Comparison">4</param>
+                            <param id="2" name="Value">4</param>
+                        </condition>
+                        <condition id="-11" name="For Each" sid="588570163826607" type="System">
+                            <param id="0" name="Object">Sprite8</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="514240014841876">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="621006452179672" type="Sprite8">
+                                    <param id="0" name="Instance variable">direction</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-1" name="Set X" sid="443081085382789" type="Sprite8">
+                                    <param id="0" name="X">Self.X+1</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="196530815987504">
+                                    <conditions>
+                                        <condition id="0" name="On collision with another object" sid="897196301660714" type="Sprite8">
+                                            <param id="0" name="Object">LevelTiles</param>
+                                        </condition>
+                                        <condition behavior="Solid" id="0" name="Is enabled" sid="449242107155229" type="LevelTiles" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Wait" sid="587127349881986" type="System">
+                                            <param id="0" name="Seconds">0.01</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="920333005748719" type="Sprite8">
+                                            <param id="0" name="Instance variable">direction</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="153473516846744">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="667219953732560" type="Sprite8">
+                                    <param id="0" name="Instance variable">direction</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-1" name="Set X" sid="776926452276101" type="Sprite8">
+                                    <param id="0" name="X">Self.X-1</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="818255133837984">
+                                    <conditions>
+                                        <condition id="0" name="On collision with another object" sid="137456564671841" type="Sprite8">
+                                            <param id="0" name="Object">LevelTiles</param>
+                                        </condition>
+                                        <condition behavior="Solid" id="0" name="Is enabled" sid="637509890043600" type="LevelTiles" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Wait" sid="871739744332518" type="System">
+                                            <param id="0" name="Seconds">0.01</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="666627136545750" type="Sprite8">
+                                            <param id="0" name="Instance variable">direction</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="289128718386588">
+                    <conditions>
+                        <condition id="1" name="Is overlapping another object" sid="959691368695665" type="Engine_Player">
+                            <param id="0" name="Object">Sprite8</param>
+                        </condition>
+                        <condition id="-7" name="Compare instance variable" sid="179314910199793" type="Var_Player">
+                            <param id="0" name="Instance variable">Finished</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                        <condition id="-7" inverted="1" name="Compare instance variable" sid="216223852446580" type="Var_Player">
+                            <param id="0" name="Instance variable">State</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;crouch&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Call function" sid="361118356534944" type="Function">
+                            <param id="0" name="Name">&quot;Player_TakeDamage&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment></comment>
+                <event-block sid="556165589231044">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="727923572561394" type="Engine_Player">
+                            <param id="0" name="Object">TiledSprite</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-3" name="Create object" sid="786497690188337" type="System">
+                            <param id="0" name="Object to create">Effects_WaterSplash</param>
+                            <param id="1" name="Layer">&quot;Objects&quot;</param>
+                            <param id="2" name="X">Engine_Player.X</param>
+                            <param id="3" name="Y">Engine_Player.Y+16</param>
+                        </action>
+                        <action id="0" name="Call function" sid="600848367094961" type="Function">
+                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;F_Submerged&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="308445564192630">
+                    <conditions>
+                        <condition id="1" name="Is overlapping another object" sid="819383467875764" type="Engine_Player">
+                            <param id="0" name="Object">TiledSprite</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Platform" id="1" name="Set max speed" sid="910303087843975" type="Engine_Player">
+                            <param id="0" name="Max Speed">Self.InitiallSpeed/1.75</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="464299485858945">
+                    <conditions>
+                        <condition id="1" inverted="1" name="Is overlapping another object" sid="416255996797219" type="Engine_Player">
+                            <param id="0" name="Object">TiledSprite</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Platform" id="1" name="Set max speed" sid="567191306954859" type="Engine_Player">
+                            <param id="0" name="Max Speed">Self.InitiallSpeed</param>
                         </action>
                     </actions>
                 </event-block>
@@ -613,49 +937,21 @@
                             <param id="0" name="Instance variable">Marathon_Counter</param>
                             <param id="1" name="Value">1</param>
                         </action>
-                        <action id="-15" name="Set visible" sid="861538533079163" type="HUD_Time2">
-                            <param id="0" name="Visibility">1</param>
+                        <action id="0" name="Set text" sid="923964859168776" type="HUD_MarathonLevels">
+                            <param id="0" name="Text">Var_Level.Marathon_Counter&amp;&quot; / &quot;&amp;Var_Level.Marathon_CounterMax</param>
                         </action>
-                        <action id="-15" name="Set visible" sid="693906636751213" type="HUD_Time3">
-                            <param id="0" name="Visibility">1</param>
-                        </action>
-                        <action id="-15" name="Set visible" sid="550666603026805" type="HUD_Time4">
-                            <param id="0" name="Visibility">1</param>
-                        </action>
-                        <action id="0" name="Set text" sid="818085601769348" type="HUD_Time4">
+                        <action id="0" name="Set text" sid="818085601769348" type="HUD_MarathonName">
                             <param id="0" name="Text">Var_Level.Marathon_String</param>
                         </action>
                         <action id="-16" name="Wait" sid="513220095692656" type="System">
                             <param id="0" name="Seconds">0.15</param>
                         </action>
+                        <action id="-10" name="Set value" sid="576501843902738" type="Var_Level">
+                            <param id="0" name="Instance variable">Level_Next</param>
+                            <param id="1" name="Value">Queue_LevelPlaylist.Peek</param>
+                        </action>
+                        <action id="1" name="Dequeue" sid="970816150127932" type="Queue_LevelPlaylist" />
                     </actions>
-                    <sub-events>
-                        <event-block sid="237405093737929">
-                            <conditions />
-                            <actions>
-                                <action id="-10" name="Set value" sid="576501843902738" type="Var_Level">
-                                    <param id="0" name="Instance variable">Level_Next</param>
-                                    <param id="1" name="Value">Queue_LevelPlaylist.Peek</param>
-                                </action>
-                                <action id="1" name="Dequeue" sid="970816150127932" type="Queue_LevelPlaylist" />
-                            </actions>
-                        </event-block>
-                        <event-block sid="516693476598615">
-                            <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="516083896804332" type="Var_Level">
-                                    <param id="0" name="Instance variable">Marathon_Counter</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">Self.Marathon_CounterMax</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-10" name="Set value" sid="900655844253388" type="Var_Level">
-                                    <param id="0" name="Instance variable">Level_Next</param>
-                                    <param id="1" name="Value">&quot;cutscene_demoend&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
                 </event-block>
                 <event-block sid="209304227130760">
                     <conditions>
@@ -673,13 +969,233 @@
                 <event-block sid="601540081386992">
                     <conditions />
                     <actions>
-                        <action id="0" name="Set text" sid="649628372156267" type="HUD_Time2">
+                        <action id="0" name="Set text" sid="649628372156267" type="HUD_MarathonTime">
                             <param id="0" name="Text">floor(Var_Level.Marathon_Timer/3600)&amp;&quot; &quot;&amp;zeropad(floor(Var_Level.Marathon_Timer/60),2)&amp;&quot; &quot;&amp;zeropad(floor(Var_Level.Marathon_Timer)%60,2)&amp;&quot;.&quot;&amp;zeropad(floor(Var_Level.Marathon_Timer*100)%100,2)</param>
                         </action>
-                        <action id="0" name="Set text" sid="923964859168776" type="HUD_Time3">
-                            <param id="0" name="Text">Var_Level.Marathon_Counter&amp;&quot; / &quot;&amp;Var_Level.Marathon_CounterMax</param>
+                    </actions>
+                </event-block>
+                <event-block any="1" sid="135591472719324">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="634154678204117" type="Var_Player">
+                            <param id="0" name="Instance variable">Finished</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                        <condition id="-7" name="Compare instance variable" sid="687310051570581" type="Var_Player">
+                            <param id="0" name="Instance variable">Finished</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">2</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="156205771423184">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="443562468778329" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="20" name="Set Value" sid="369889164326432" type="JSON_SaveTemporary">
+                                    <param id="0" name="Value">Var_Level.Marathon_Counter</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">Var_Level.Marathon_String{###}&quot;Levels&quot;</param>
+                                </action>
+                                <action id="20" name="Set Value" sid="591863467805105" type="JSON_SaveTemporary">
+                                    <param id="0" name="Value">Var_Player.Lives</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">Var_Level.Marathon_String{###}&quot;Lives&quot;</param>
+                                </action>
+                                <action id="20" name="Set Value" sid="731009831993387" type="JSON_SaveTemporary">
+                                    <param id="0" name="Value">Var_Level.Marathon_Timer</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">Var_Level.Marathon_String{###}&quot;Time&quot;</param>
+                                </action>
+                                <action id="20" name="Set Value" sid="561696135093316" type="JSON_SaveTemporary">
+                                    <param id="0" name="Value">Var_Player.TotalScore</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">Var_Level.Marathon_String{###}&quot;Score&quot;</param>
+                                </action>
+                                <action id="20" name="Set Value" sid="569976000685408" type="JSON_SaveTemporary">
+                                    <param id="0" name="Value">Var_Player.TotalDeaths</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">Var_Level.Marathon_String{###}&quot;Deaths&quot;</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="933046706720737">
+                                    <conditions />
+                                    <actions>
+                                        <action id="0" name="Set New Object" sid="719366937545871" type="JSON_SaveTemporary">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}">Var_Level.Marathon_String{###}&quot;LevelStats&quot;{###}Var_Level.Marathon_Counter-1</param>
+                                        </action>
+                                        <action id="20" name="Set Value" sid="606395858762523" type="JSON_SaveTemporary">
+                                            <param id="0" name="Value">Var_Level.Marathon_Counter</param>
+                                            <param id="1" name="Reference point">0</param>
+                                            <param id="2" name="Key {n}">Var_Level.Marathon_String{###}&quot;LevelStats&quot;{###}Var_Level.Marathon_Counter-1{###}&quot;Order&quot;</param>
+                                        </action>
+                                        <action id="20" name="Set Value" sid="868240353630291" type="JSON_SaveTemporary">
+                                            <param id="0" name="Value">LayoutName</param>
+                                            <param id="1" name="Reference point">0</param>
+                                            <param id="2" name="Key {n}">Var_Level.Marathon_String{###}&quot;LevelStats&quot;{###}Var_Level.Marathon_Counter-1{###}&quot;Name&quot;</param>
+                                        </action>
+                                        <action id="20" name="Set Value" sid="520625974057504" type="JSON_SaveTemporary">
+                                            <param id="0" name="Value">Var_Level.TimerLevel</param>
+                                            <param id="1" name="Reference point">0</param>
+                                            <param id="2" name="Key {n}">Var_Level.Marathon_String{###}&quot;LevelStats&quot;{###}Var_Level.Marathon_Counter-1{###}&quot;Time&quot;</param>
+                                        </action>
+                                        <action id="20" name="Set Value" sid="692382085117325" type="JSON_SaveTemporary">
+                                            <param id="0" name="Value">Var_Level.TimerLevelReal</param>
+                                            <param id="1" name="Reference point">0</param>
+                                            <param id="2" name="Key {n}">Var_Level.Marathon_String{###}&quot;LevelStats&quot;{###}Var_Level.Marathon_Counter-1{###}&quot;TimeReal&quot;</param>
+                                        </action>
+                                        <action id="20" name="Set Value" sid="997530411567569" type="JSON_SaveTemporary">
+                                            <param id="0" name="Value">Var_Player.Score</param>
+                                            <param id="1" name="Reference point">0</param>
+                                            <param id="2" name="Key {n}">Var_Level.Marathon_String{###}&quot;LevelStats&quot;{###}Var_Level.Marathon_Counter-1{###}&quot;Score&quot;</param>
+                                        </action>
+                                        <action id="20" name="Set Value" sid="394644066979761" type="JSON_SaveTemporary">
+                                            <param id="0" name="Value">Var_Player.Score</param>
+                                            <param id="1" name="Reference point">0</param>
+                                            <param id="2" name="Key {n}">Var_Level.Marathon_String{###}&quot;LevelStats&quot;{###}Var_Level.Marathon_Counter-1{###}&quot;ScoreFinish&quot;</param>
+                                        </action>
+                                        <action id="20" name="Set Value" sid="165143724111871" type="JSON_SaveTemporary">
+                                            <param id="0" name="Value">Var_Player.Deaths</param>
+                                            <param id="1" name="Reference point">0</param>
+                                            <param id="2" name="Key {n}">Var_Level.Marathon_String{###}&quot;LevelStats&quot;{###}Var_Level.Marathon_Counter-1{###}&quot;Deaths&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="896149647072121">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="636485422600879" type="Var_Level">
+                                            <param id="0" name="Instance variable">Marathon_Counter</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">Self.Marathon_CounterMax</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="20" name="Set Value" sid="671613844290079" type="JSON_SaveTemporary">
+                                            <param id="0" name="Value">Date.UnixTimestamp</param>
+                                            <param id="1" name="Reference point">0</param>
+                                            <param id="2" name="Key {n}">Var_Level.Marathon_String{###}&quot;TimestampEnd&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="997222146570594">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="805768681552674" type="Var_Player">
+                            <param id="0" name="Instance variable">Lives</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="20" name="Set Value" sid="937717077029491" type="JSON_SaveTemporary">
+                            <param id="0" name="Value">Var_Player.Lives</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}">Var_Level.Marathon_String{###}&quot;Lives&quot;</param>
+                        </action>
+                        <action id="20" name="Set Value" sid="283776192465087" type="JSON_SaveTemporary">
+                            <param id="0" name="Value">Var_Player.TotalDeaths</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}">Var_Level.Marathon_String{###}&quot;Deaths&quot;</param>
                         </action>
                     </actions>
+                </event-block>
+                <event-block sid="808952751027346">
+                    <conditions>
+                        <condition id="-7" inverted="1" name="Compare instance variable" sid="191531130935624" type="Var_Player">
+                            <param id="0" name="Instance variable">Lives</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">-1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="357149992274003">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="455917133382075" type="System" />
+                                <condition id="-11" name="For Each" sid="610462376376267" type="System">
+                                    <param id="0" name="Object">ObjectF_Emblem</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="776195554745960">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="511365134913272" type="Var_Level">
+                                            <param id="0" name="Instance variable">Level_Game</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Spawn another object" sid="360396755114711" type="ObjectF_Emblem">
+                                            <param id="0" name="Object">ObjectF_1Monitor</param>
+                                            <param id="1" name="Layer">&quot;Objects&quot;</param>
+                                            <param id="2" name="Image point">0</param>
+                                        </action>
+                                        <action id="5" name="Set frame" sid="367329197599488" type="ObjectF_1Monitor">
+                                            <param id="0" name="Frame number">4</param>
+                                        </action>
+                                        <action id="-9" name="Destroy" sid="866369474281132" type="ObjectF_Emblem" />
+                                    </actions>
+                                </event-block>
+                                <event-block sid="397505666169747">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="805829875944717" type="Var_Level">
+                                            <param id="0" name="Instance variable">Level_Game</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">2</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Spawn another object" sid="567210236619157" type="ObjectF_Emblem">
+                                            <param id="0" name="Object">Common2_TV</param>
+                                            <param id="1" name="Layer">&quot;Objects&quot;</param>
+                                            <param id="2" name="Image point">0</param>
+                                        </action>
+                                        <action id="4" name="Set animation" sid="171029173374106" type="Common2_TV">
+                                            <param id="0" name="Animation">&quot;1Up_&quot;&amp;Self.Reskin</param>
+                                            <param id="1" name="From">1</param>
+                                        </action>
+                                        <action id="-9" name="Destroy" sid="633344299044980" type="ObjectF_Emblem" />
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="962468006027016">
+                            <conditions>
+                                <condition id="-18" name="On created" sid="173553650652535" type="ObjectF_1Monitor" />
+                                <condition id="-8" name="Is boolean instance variable set" sid="165189279368150" type="ObjectF_1Monitor">
+                                    <param id="0" name="Instance variable">ReplaceWith1Up</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="5" name="Set frame" sid="726442632263438" type="ObjectF_1Monitor">
+                                    <param id="0" name="Frame number">4</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="225150214517092">
+                            <conditions>
+                                <condition id="-18" name="On created" sid="756561358644193" type="Common2_TV" />
+                                <condition id="-8" name="Is boolean instance variable set" sid="584572283051658" type="Common2_TV">
+                                    <param id="0" name="Instance variable">ReplaceWith1Up</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="846938295079694" type="Common2_TV">
+                                    <param id="0" name="Animation">&quot;1Up_&quot;&amp;Self.Reskin</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
             </sub-events>
         </event-group>
