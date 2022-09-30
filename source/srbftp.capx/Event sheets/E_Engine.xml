@@ -3066,16 +3066,72 @@
                         <comment>sonic advance level design be like</comment>
                         <event-block sid="497627467926332">
                             <conditions>
-                                <condition id="0" name="On collision with another object" sid="920787294795386" type="Engine_Player">
+                                <condition id="9" name="Is overlapping at offset" sid="920787294795386" type="Engine_Player">
                                     <param id="0" name="Object">Special_Death</param>
+                                    <param id="1" name="Offset X">0</param>
+                                    <param id="2" name="Offset Y">1</param>
                                 </condition>
                             </conditions>
-                            <actions>
-                                <action id="0" name="Call function" sid="918475086300855" type="Function">
-                                    <param id="0" name="Name">&quot;Player_Die&quot;</param>
-                                    <param id="1" name="Parameter {n}"></param>
-                                </action>
-                            </actions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="700327496930312">
+                                    <conditions>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="147873278204234" type="Special_Death">
+                                            <param id="0" name="Instance variable">IgnoreShield</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="918475086300855" type="Function">
+                                            <param id="0" name="Name">&quot;Player_Die&quot;</param>
+                                            <param id="1" name="Parameter {n}"></param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="657291074640431">
+                                    <conditions>
+                                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="157835047064671" type="Special_Death">
+                                            <param id="0" name="Instance variable">IgnoreShield</param>
+                                        </condition>
+                                        <condition id="-33" name="Pick by comparison" sid="936847901628650" type="System">
+                                            <param id="0" name="Object">PlayerSkins</param>
+                                            <param id="1" name="Expression">PlayerSkins.ID</param>
+                                            <param id="2" name="Comparison">0</param>
+                                            <param id="3" name="Value">Var_Player.Skin</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="498202650132093">
+                                            <conditions>
+                                                <condition behavior="Flash" id="0" inverted="1" name="Is flashing" sid="227011049690739" type="PlayerSkins" />
+                                                <condition id="-8" name="Is boolean instance variable set" sid="994964288811660" type="Var_Player">
+                                                    <param id="0" name="Instance variable">Shield</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Call function" sid="234506596319147" type="Function">
+                                                    <param id="0" name="Name">&quot;Player_TakeDamage&quot;</param>
+                                                    <param id="1" name="Parameter {n}"></param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="628340356316540">
+                                            <conditions>
+                                                <condition behavior="Flash" id="0" inverted="1" name="Is flashing" sid="649170570409605" type="PlayerSkins" />
+                                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="586849841104571" type="Var_Player">
+                                                    <param id="0" name="Instance variable">Shield</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Call function" sid="167544030435024" type="Function">
+                                                    <param id="0" name="Name">&quot;Player_Die&quot;</param>
+                                                    <param id="1" name="Parameter {n}"></param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-group>
@@ -3699,6 +3755,11 @@
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">8</param>
                                 </condition>
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="721568686314676" type="EnemyProjectiles">
+                                    <param id="0" name="Instance variable">ID</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">10</param>
+                                </condition>
                             </conditions>
                             <actions>
                                 <action id="-9" name="Destroy" sid="517172358080167" type="EnemyProjectiles" />
@@ -3813,8 +3874,10 @@
                         <comment>you die and you&apos;re dead</comment>
                         <event-block sid="714819211021420">
                             <conditions>
-                                <condition id="0" name="On collision with another object" sid="661534472729606" type="Engine_Player">
+                                <condition id="9" name="Is overlapping at offset" sid="661534472729606" type="Engine_Player">
                                     <param id="0" name="Object">Hazard1_Spikes</param>
+                                    <param id="1" name="Offset X">0</param>
+                                    <param id="2" name="Offset Y">1</param>
                                 </condition>
                                 <condition id="-33" name="Pick by comparison" sid="935009240123342" type="System">
                                     <param id="0" name="Object">PlayerSkins</param>
@@ -3874,8 +3937,10 @@
                         <comment>=srb2 spikes</comment>
                         <event-block sid="607483720188885">
                             <conditions>
-                                <condition id="0" name="On collision with another object" sid="524723379822044" type="PlayerSkins">
+                                <condition id="9" name="Is overlapping at offset" sid="524723379822044" type="PlayerSkins">
                                     <param id="0" name="Object">Hazard2_Spikes</param>
+                                    <param id="1" name="Offset X">0</param>
+                                    <param id="2" name="Offset Y">1</param>
                                 </condition>
                                 <condition id="-33" name="Pick by comparison" sid="626901226423374" type="System">
                                     <param id="0" name="Object">PlayerSkins</param>
@@ -4092,6 +4157,17 @@
                                 <action id="-9" name="Destroy" sid="519488144520883" type="HazardF_ExplosionHarmful" />
                             </actions>
                         </event-block>
+                        <event-block sid="815750250792949">
+                            <conditions>
+                                <condition id="1" name="Is overlapping another object" sid="708525971289391" type="HazardF_ExplosionHarmful">
+                                    <param id="0" name="Object">Special_Invisible</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="627093087595198" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Destroy" sid="555476300828993" type="HazardF_ExplosionHarmful" />
+                            </actions>
+                        </event-block>
                         <event-block sid="705033907219332">
                             <conditions>
                                 <condition id="0" name="On collision with another object" sid="192635371623023" type="PlayerSkins">
@@ -4124,6 +4200,7 @@
                                 <condition id="-11" name="For Each" sid="206748987349380" type="System">
                                     <param id="0" name="Object">Hazard1_5VFireBubbleSpawner</param>
                                 </condition>
+                                <condition behavior="LiteTween" id="0" inverted="1" name="Is active" sid="353804582798859" type="Hazard1_5VRisingLava" />
                             </conditions>
                             <actions>
                                 <action id="0" name="Spawn another object" sid="893076598159281" type="Hazard1_5VFireBubbleSpawner">
@@ -4337,6 +4414,75 @@
                                 <action id="0" name="Call function" sid="337467943308791" type="Function">
                                     <param id="0" name="Name">&quot;Player_TakeDamage&quot;</param>
                                     <param id="1" name="Parameter {n}"></param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment></comment>
+                        <event-block sid="791000891105079">
+                            <conditions>
+                                <condition id="9" name="Is overlapping at offset" sid="811363258077075" type="Engine_Player">
+                                    <param id="0" name="Object">Hazard1_5VRisingLava</param>
+                                    <param id="1" name="Offset X">0</param>
+                                    <param id="2" name="Offset Y">1</param>
+                                </condition>
+                                <condition id="-33" name="Pick by comparison" sid="644331845521029" type="System">
+                                    <param id="0" name="Object">PlayerSkins</param>
+                                    <param id="1" name="Expression">PlayerSkins.ID</param>
+                                    <param id="2" name="Comparison">0</param>
+                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="558818741405914">
+                                    <conditions>
+                                        <condition behavior="Flash" id="0" inverted="1" name="Is flashing" sid="562226486007072" type="PlayerSkins" />
+                                        <condition id="-8" name="Is boolean instance variable set" sid="447663186427284" type="Var_Player">
+                                            <param id="0" name="Instance variable">Shield</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="180585630711567" type="Function">
+                                            <param id="0" name="Name">&quot;Player_TakeDamage&quot;</param>
+                                            <param id="1" name="Parameter {n}"></param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="772145638888919">
+                                    <conditions>
+                                        <condition behavior="Flash" id="0" inverted="1" name="Is flashing" sid="542796744822112" type="PlayerSkins" />
+                                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="647237321181661" type="Var_Player">
+                                            <param id="0" name="Instance variable">Shield</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="510057719512070" type="Function">
+                                            <param id="0" name="Name">&quot;Player_Die&quot;</param>
+                                            <param id="1" name="Parameter {n}"></param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="398452258736662">
+                            <conditions>
+                                <condition id="0" name="On collision with another object" sid="770643493841647" type="Enemies">
+                                    <param id="0" name="Object">Hazard1_5VRisingLava</param>
+                                </condition>
+                                <condition id="1" name="Is overlapping another object" sid="650539182296355" type="Enemies">
+                                    <param id="0" name="Object">Engine_CameraZone</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="350891168932091" type="Engine_CameraZone">
+                                    <param id="0" name="Instance variable">ID</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">Engine_Camera.CurrentZone</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Destroy" sid="212820433565924" type="Enemies" />
+                                <action id="0" name="Call function" sid="567337448034130" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;Explode&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -6513,6 +6659,9 @@
                                             <param id="1" name="Comparison">4</param>
                                             <param id="2" name="Value">4</param>
                                         </condition>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="788025501519700" type="Var_Player">
+                                            <param id="0" name="Instance variable">CanMove</param>
+                                        </condition>
                                     </conditions>
                                     <actions />
                                     <sub-events>
@@ -6654,6 +6803,9 @@
                                             <param id="0" name="Instance variable">TimerGlobal</param>
                                             <param id="1" name="Comparison">4</param>
                                             <param id="2" name="Value">4</param>
+                                        </condition>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="928985608529862" type="Var_Player">
+                                            <param id="0" name="Instance variable">CanMove</param>
                                         </condition>
                                     </conditions>
                                     <actions />
@@ -6814,6 +6966,9 @@
                                         </condition>
                                         <condition id="-11" name="For Each" sid="894030120226810" type="System">
                                             <param id="0" name="Object">Enemies</param>
+                                        </condition>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="181717246057728" type="Var_Player">
+                                            <param id="0" name="Instance variable">CanMove</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -10022,6 +10177,332 @@
                                 <action id="-8" name="Set angle" sid="306567618350543" type="Boss1_5V1Gun">
                                     <param id="0" name="Angle">0</param>
                                 </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-group>
+                <event-group description="" sid="941951162535542" title="V2 Boss">
+                    <sub-events>
+                        <event-block sid="429344999996602">
+                            <conditions>
+                                <condition id="0" name="On function" sid="544799600838363" type="Function">
+                                    <param id="0" name="Name">&quot;Player_Restart&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action behavior="MoveTo" id="0" name="Set enabled" sid="403721219309612" type="Boss1_5V2">
+                                    <param id="0" name="State">0</param>
+                                </action>
+                                <action behavior="Bullet" id="5" name="Set enabled" sid="237304982984301" type="Boss1_5V2">
+                                    <param id="0" name="State">0</param>
+                                </action>
+                                <action behavior="Bullet" id="6" name="Set distance travelled" sid="397133827423979" type="Boss1_5V2">
+                                    <param id="0" name="Distance">0</param>
+                                </action>
+                                <action id="4" name="Set animation" sid="689834833777596" type="Boss1_5V2">
+                                    <param id="0" name="Animation">&quot;Idle1&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="876750407102154">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="463411619653499" type="Boss1_5V2">
+                                    <param id="0" name="Instance variable">HP</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Value">4</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="989169526243892" type="Boss1_5V2">
+                                    <param id="0" name="Instance variable">Active</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="302830621759064">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="509710813969245" type="Var_Game">
+                                            <param id="0" name="Instance variable">TimerGlobal</param>
+                                            <param id="1" name="Comparison">5</param>
+                                            <param id="2" name="Value">4</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="252142766810882">
+                                            <conditions>
+                                                <condition id="-4" name="Trigger once while true" sid="131023792727859" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action behavior="MoveTo" id="0" name="Set enabled" sid="260909238541438" type="Boss1_5V2">
+                                                    <param id="0" name="State">0</param>
+                                                </action>
+                                                <action behavior="Bullet" id="5" name="Set enabled" sid="471733851030736" type="Boss1_5V2">
+                                                    <param id="0" name="State">1</param>
+                                                </action>
+                                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="777589804646991" type="Boss1_5V2">
+                                                    <param id="0" name="Angle">choose(315,225,135,45)</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="807353147640145">
+                                            <conditions>
+                                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="787087321469205" type="Var_Level">
+                                                    <param id="0" name="Instance variable">Pause</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="791550262645659" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action behavior="Bullet" id="5" name="Set enabled" sid="587298111559908" type="Boss1_5V2">
+                                                    <param id="0" name="State">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="387430283850777">
+                                            <conditions>
+                                                <condition id="-8" name="Is boolean instance variable set" sid="127062484097104" type="Var_Level">
+                                                    <param id="0" name="Instance variable">Pause</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="225220199610045" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action behavior="Bullet" id="5" name="Set enabled" sid="108712733206855" type="Boss1_5V2">
+                                                    <param id="0" name="State">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="809523889575467">
+                                    <conditions>
+                                        <condition id="-21" name="Is between values" sid="536582006143811" type="System">
+                                            <param id="0" name="Value">Boss1_5V2.Bullet.AngleOfMotion</param>
+                                            <param id="1" name="Lower bound">177</param>
+                                            <param id="2" name="Upper bound">182</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="993958875599478" type="Boss1_5V2">
+                                            <param id="0" name="Angle">160</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="832092551850354">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="934275585278038" type="Boss1_5V2">
+                                            <param id="0" name="Instance variable">State</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;active&quot;</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="473605305498380" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="4" name="Set animation" sid="740451186227052" type="Boss1_5V2">
+                                            <param id="0" name="Animation">&quot;Idle1&quot;</param>
+                                            <param id="1" name="From">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="254905478315571">
+                                    <conditions>
+                                        <condition id="-6" name="Every X seconds" sid="339040882551516" type="System">
+                                            <param id="0" name="Interval (seconds)">0.5</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block any="1" sid="921816144707314">
+                                            <conditions>
+                                                <condition id="-7" name="Compare instance variable" sid="889123146679525" type="Boss1_5V2">
+                                                    <param id="0" name="Instance variable">State</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">&quot;active&quot;</param>
+                                                </condition>
+                                                <condition id="-7" name="Compare instance variable" sid="259844216550682" type="Boss1_5V2">
+                                                    <param id="0" name="Instance variable">State</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">&quot;flash&quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Spawn another object" sid="459510807971155" type="Boss1_5V2">
+                                                    <param id="0" name="Object">Projectile1_5V2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-8" name="Set angle" sid="558028586360943" type="Projectile1_5V2Boss">
+                                                    <param id="0" name="Angle">90</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="686964557417371" type="Projectile1_5V2Boss">
+                                                    <param id="0" name="Speed">400</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="854751432886560" type="Function">
+                                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="999231744186357">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="715393118764232" type="Boss1_5V2">
+                                    <param id="0" name="Instance variable">HP</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Value">3</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="958750946124009" type="Boss1_5V2">
+                                    <param id="0" name="Instance variable">Active</param>
+                                    <param id="1" name="Comparison">4</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="711001259479725">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="494249575605578" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action behavior="Bullet" id="5" name="Set enabled" sid="821550523592797" type="Boss1_5V2">
+                                            <param id="0" name="State">0</param>
+                                        </action>
+                                        <action behavior="MoveTo" id="0" name="Set enabled" sid="128122661782554" type="Boss1_5V2">
+                                            <param id="0" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="268295233518373">
+                                            <conditions />
+                                            <actions>
+                                                <action id="-3" name="Create object" sid="551822278032048" type="System">
+                                                    <param id="0" name="Object to create">Effects_Explosion</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="X">Boss1_5V2.X-32</param>
+                                                    <param id="3" name="Y">Boss1_5V2.Y</param>
+                                                </action>
+                                                <action id="-3" name="Create object" sid="168578312943999" type="System">
+                                                    <param id="0" name="Object to create">Effects_Explosion</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="X">Boss1_5V2.X</param>
+                                                    <param id="3" name="Y">Boss1_5V2.Y</param>
+                                                </action>
+                                                <action id="-3" name="Create object" sid="876638636642318" type="System">
+                                                    <param id="0" name="Object to create">Effects_Explosion</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="X">Boss1_5V2.X+32</param>
+                                                    <param id="3" name="Y">Boss1_5V2.Y</param>
+                                                </action>
+                                                <action id="-16" name="Wait" sid="551636296642016" type="System">
+                                                    <param id="0" name="Seconds">0.3</param>
+                                                </action>
+                                                <action id="-3" name="Create object" sid="674136655546361" type="System">
+                                                    <param id="0" name="Object to create">Effects_Explosion</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="X">Boss1_5V2.X-32</param>
+                                                    <param id="3" name="Y">Boss1_5V2.Y</param>
+                                                </action>
+                                                <action id="-3" name="Create object" sid="839219999194647" type="System">
+                                                    <param id="0" name="Object to create">Effects_Explosion</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="X">Boss1_5V2.X</param>
+                                                    <param id="3" name="Y">Boss1_5V2.Y</param>
+                                                </action>
+                                                <action id="-3" name="Create object" sid="238126389990329" type="System">
+                                                    <param id="0" name="Object to create">Effects_Explosion</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="X">Boss1_5V2.X+32</param>
+                                                    <param id="3" name="Y">Boss1_5V2.Y</param>
+                                                </action>
+                                                <action id="-16" name="Wait" sid="835188886042552" type="System">
+                                                    <param id="0" name="Seconds">0.3</param>
+                                                </action>
+                                                <action id="-3" name="Create object" sid="265292155979535" type="System">
+                                                    <param id="0" name="Object to create">Effects_Explosion</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="X">Boss1_5V2.X-32</param>
+                                                    <param id="3" name="Y">Boss1_5V2.Y</param>
+                                                </action>
+                                                <action id="-3" name="Create object" sid="215242256413860" type="System">
+                                                    <param id="0" name="Object to create">Effects_Explosion</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="X">Boss1_5V2.X</param>
+                                                    <param id="3" name="Y">Boss1_5V2.Y</param>
+                                                </action>
+                                                <action id="-3" name="Create object" sid="394308321664607" type="System">
+                                                    <param id="0" name="Object to create">Effects_Explosion</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="X">Boss1_5V2.X+32</param>
+                                                    <param id="3" name="Y">Boss1_5V2.Y</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="404144785040682">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="455898134519340" type="Boss1_5V2">
+                                            <param id="0" name="Instance variable">State</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;active&quot;</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="831041967761301" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="4" name="Set animation" sid="313026839560722" type="Boss1_5V2">
+                                            <param id="0" name="Animation">&quot;Idle2&quot;</param>
+                                            <param id="1" name="From">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="216847832484819">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="270453136634231" type="Boss1_5V2">
+                                            <param id="0" name="Instance variable">State</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;active&quot;</param>
+                                        </condition>
+                                        <condition id="-6" name="Every X seconds" sid="440177857843234" type="System">
+                                            <param id="0" name="Interval (seconds)">0.5</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Spawn another object" sid="788496013644157" type="Boss1_5V2">
+                                            <param id="0" name="Object">Projectile1_5V2Boss</param>
+                                            <param id="1" name="Layer">&quot;Player&quot;</param>
+                                            <param id="2" name="Image point">0</param>
+                                        </action>
+                                        <action id="-8" name="Set angle" sid="200272500224408" type="Projectile1_5V2Boss">
+                                            <param id="0" name="Angle">random(15,165)</param>
+                                        </action>
+                                        <action behavior="Bullet" id="0" name="Set speed" sid="415117576163491" type="Projectile1_5V2Boss">
+                                            <param id="0" name="Speed">500</param>
+                                        </action>
+                                        <action id="0" name="Call function" sid="468406280742348" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="144693756817706">
+                            <conditions>
+                                <condition id="0" name="On collision with another object" sid="775510792627506" type="Projectile1_5V2Boss">
+                                    <param id="0" name="Object">LevelTiles</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="456785502526493" type="System">
+                                    <param id="0" name="Object to create">HazardF_ExplosionHarmful</param>
+                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                    <param id="2" name="X">Projectile1_5V2Boss.X</param>
+                                    <param id="3" name="Y">Projectile1_5V2Boss.Y+10</param>
+                                </action>
+                                <action id="-9" name="Destroy" sid="602672932509980" type="Projectile1_5V2Boss" />
                             </actions>
                         </event-block>
                     </sub-events>

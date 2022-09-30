@@ -5,7 +5,7 @@
     <events>
         <include>E_GLOBAL</include>
         <include>E_Engine</include>
-        <include>E_Extra</include>
+        <include>E_GameModes</include>
         <comment>level constants</comment>
         <event-group description="" sid="640644812626280" title="Level management">
             <sub-events>
@@ -73,6 +73,10 @@
                                 </action>
                                 <action id="-12" name="Set group active" sid="133856018146218" type="System">
                                     <param id="0" name="Group name">&quot;V1 Level Specific&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="406528032645991" type="System">
+                                    <param id="0" name="Group name">&quot;V2 Level Specific&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
                                 <action id="-12" name="Set group active" sid="801554021148794" type="System">
@@ -625,13 +629,9 @@
                                     <param id="0" name="Instance variable">Level_Music</param>
                                     <param id="1" name="Value">&quot;1_5Volcano&quot;</param>
                                 </action>
-                                <action disabled="1" id="-10" name="Set value" sid="799688374961358" type="Var_Level">
+                                <action id="-10" name="Set value" sid="799688374961358" type="Var_Level">
                                     <param id="0" name="Instance variable">Level_Next</param>
                                     <param id="1" name="Value">&quot;1_5Volcano2&quot;</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="294774585376218" type="Var_Level">
-                                    <param id="0" name="Instance variable">Level_Next</param>
-                                    <param id="1" name="Value">&quot;cutscene_demoend&quot;</param>
                                 </action>
                                 <action id="-10" name="Set value" sid="212200021339220" type="Var_Level">
                                     <param id="0" name="Instance variable">Level_Game</param>
@@ -690,7 +690,7 @@
                                     <param id="1" name="Value">1</param>
                                 </action>
                                 <action id="-12" name="Set group active" sid="613844209035539" type="System">
-                                    <param id="0" name="Group name">&quot;V1 Level Specific&quot;</param>
+                                    <param id="0" name="Group name">&quot;V2 Level Specific&quot;</param>
                                     <param id="1" name="State">1</param>
                                 </action>
                                 <action id="-10" name="Set value" sid="653749984141956" type="Var_Miscellanious">
@@ -1537,7 +1537,6 @@
                                 </action>
                             </actions>
                         </event-block>
-                        <comment></comment>
                         <event-block sid="317912901912742">
                             <conditions>
                                 <condition id="-8" name="Compare two values" sid="449325891141551" type="System">
@@ -1597,13 +1596,12 @@
                     </conditions>
                     <actions />
                     <sub-events>
-                        <comment>green glenn</comment>
                         <event-block sid="195165430495557">
                             <conditions>
                                 <condition id="-8" name="Compare two values" sid="432187848048213" type="System">
                                     <param id="0" name="First value">LayoutName</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Second value">&quot;EX_Miniboss&quot;</param>
+                                    <param id="2" name="Second value">&quot;X_Miniboss&quot;</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -1638,6 +1636,10 @@
                                 <action id="-10" name="Set value" sid="218256538623388" type="Var_Miscellanious">
                                     <param id="0" name="Instance variable">Discord_CurrentLargeKey</param>
                                     <param id="1" name="Value">&quot;null&quot;</param>
+                                </action>
+                                <action id="-13" name="Set boolean" sid="846124378083526" type="Var_Level">
+                                    <param id="0" name="Instance variable">Level_NoTitleCard</param>
+                                    <param id="1" name="Value">1</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -3173,7 +3175,7 @@
                     <actions>
                         <action id="-10" name="Set value" sid="393925440635549" type="Var_Level">
                             <param id="0" name="Instance variable">ZoneResetTimer</param>
-                            <param id="1" name="Value">300</param>
+                            <param id="1" name="Value">360</param>
                         </action>
                     </actions>
                 </event-block>
@@ -3193,6 +3195,20 @@
                         <action id="-10" name="Set value" sid="172252800811431" type="Var_Game">
                             <param id="0" name="Instance variable">CurrentMenu</param>
                             <param id="1" name="Value">&quot;gameovervolcano&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="138503982464862">
+                    <conditions>
+                        <condition id="-4" name="Trigger once while true" sid="880702236686829" type="System" />
+                    </conditions>
+                    <actions>
+                        <action behavior="LiteTween" id="14" name="Stop" sid="861317276944151" type="Hazard1_5VRisingLava">
+                            <param id="0" name="Stop Mode">1</param>
+                        </action>
+                        <action id="-3" name="Set position" sid="611902531225042" type="Hazard1_5VRisingLava">
+                            <param id="0" name="X">2672</param>
+                            <param id="1" name="Y">1136</param>
                         </action>
                     </actions>
                 </event-block>
@@ -3602,72 +3618,6 @@
                         </event-block>
                     </sub-events>
                 </event-block>
-                <event-block sid="792217656352046">
-                    <conditions>
-                        <condition id="0" name="On collision with another object" sid="248634707947247" type="Engine_Player">
-                            <param id="0" name="Object">Hazard1_5VRisingLava</param>
-                        </condition>
-                        <condition id="-33" name="Pick by comparison" sid="857445750636169" type="System">
-                            <param id="0" name="Object">PlayerSkins</param>
-                            <param id="1" name="Expression">PlayerSkins.ID</param>
-                            <param id="2" name="Comparison">0</param>
-                            <param id="3" name="Value">Var_Player.Skin</param>
-                        </condition>
-                    </conditions>
-                    <actions />
-                    <sub-events>
-                        <event-block sid="850116915985175">
-                            <conditions>
-                                <condition behavior="Flash" id="0" inverted="1" name="Is flashing" sid="195963906195590" type="PlayerSkins" />
-                                <condition id="-8" name="Is boolean instance variable set" sid="639814159432430" type="Var_Player">
-                                    <param id="0" name="Instance variable">Shield</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Call function" sid="122887436223059" type="Function">
-                                    <param id="0" name="Name">&quot;Player_TakeDamage&quot;</param>
-                                    <param id="1" name="Parameter {n}"></param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="616537047083253">
-                            <conditions>
-                                <condition behavior="Flash" id="0" inverted="1" name="Is flashing" sid="548997578267047" type="PlayerSkins" />
-                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="277961310346999" type="Var_Player">
-                                    <param id="0" name="Instance variable">Shield</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Call function" sid="610311360063422" type="Function">
-                                    <param id="0" name="Name">&quot;Player_Die&quot;</param>
-                                    <param id="1" name="Parameter {n}"></param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <event-block sid="151220864656912">
-                    <conditions>
-                        <condition id="0" name="On collision with another object" sid="661058056343704" type="Enemies">
-                            <param id="0" name="Object">Hazard1_5VRisingLava</param>
-                        </condition>
-                        <condition id="1" name="Is overlapping another object" sid="155666412124786" type="Enemies">
-                            <param id="0" name="Object">Engine_CameraZone</param>
-                        </condition>
-                        <condition id="-7" name="Compare instance variable" sid="955802541684223" type="Engine_CameraZone">
-                            <param id="0" name="Instance variable">ID</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">Engine_Camera.CurrentZone</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-9" name="Destroy" sid="914367975061834" type="Enemies" />
-                        <action id="0" name="Call function" sid="449386096134362" type="Function">
-                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
-                            <param id="1" name="Parameter {n}">&quot;Explode&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
                 <event-block sid="613490745137770">
                     <conditions>
                         <condition id="0" name="On function" sid="146025766264427" type="Function">
@@ -3708,8 +3658,613 @@
                 </event-block>
             </sub-events>
         </event-group>
+        <event-group description="" inactive="1" sid="347308211113843" title="V2 Level Specific">
+            <sub-events>
+                <event-block sid="665362930041243">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="856244033093823" type="Var_Level">
+                            <param id="0" name="Instance variable">ZoneResetTimer</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="619249786367300" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Go to layout" sid="447313238036280" type="System">
+                            <param id="0" name="Layout">Menu_Cutscenes</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="668048335515553" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentMenu</param>
+                            <param id="1" name="Value">&quot;gameovervolcano&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="732724674155541">
+                    <conditions>
+                        <condition id="-4" name="Trigger once while true" sid="917850397824885" type="System" />
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="417782839427311">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="133334651647855" type="Hazard1_5VRisingLava">
+                                    <param id="0" name="Unique ID">8200</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action behavior="LiteTween" id="14" name="Stop" sid="508193357887915" type="Hazard1_5VRisingLava">
+                                    <param id="0" name="Stop Mode">1</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="188046440292252" type="Hazard1_5VRisingLava">
+                                    <param id="0" name="X">2032</param>
+                                    <param id="1" name="Y">1760</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="849401838460660">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="891066330047100" type="Hazard1_5VRisingLava">
+                                    <param id="0" name="Unique ID">7999</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action behavior="LiteTween" id="14" name="Stop" sid="324625945466331" type="Hazard1_5VRisingLava">
+                                    <param id="0" name="Stop Mode">1</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="843554153236125" type="Hazard1_5VRisingLava">
+                                    <param id="0" name="X">3952</param>
+                                    <param id="1" name="Y">1088</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="465508048308987">
+                    <conditions />
+                    <actions>
+                        <action id="0" name="Set text" sid="493179922328616" type="HUD_BossHP">
+                            <param id="0" name="Text">Boss1_5V2.HP</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="404945659396453">
+                    <conditions>
+                        <condition id="0" name="On function" sid="713796495737536" type="Function">
+                            <param id="0" name="Name">&quot;Level_Trigger&quot;</param>
+                        </condition>
+                        <condition id="-8" name="Compare two values" sid="230756076769638" type="System">
+                            <param id="0" name="First value">Function.Param(0)</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Second value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="392669249018967" type="System">
+                            <param id="0" name="Variable">lavafollow</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action behavior="LiteTween" id="10" name="Start" sid="892082127047327" type="Object_LiteTween">
+                            <param id="0" name="Start Mode">0</param>
+                            <param id="1" name="Force use current">0</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="632059727453010" type="Boss1_5V2">
+                            <param id="0" name="Instance variable">State</param>
+                            <param id="1" name="Value">&quot;active&quot;</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="373818200688210" type="Boss1_5V2">
+                            <param id="0" name="Instance variable">Active</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="781733481696148">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="503561656933612" type="System">
+                            <param id="0" name="Variable">lavafollow</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="450767156628593">
+                            <conditions>
+                                <condition behavior="LiteTween" id="0" name="Is active" sid="544446339956976" type="Hazard1_5VRisingLava" />
+                                <condition id="-8" name="Is boolean instance variable set" sid="455135891697767" type="Var_Level">
+                                    <param id="0" name="Instance variable">Pause</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="491725567840086" type="System" />
+                            </conditions>
+                            <actions>
+                                <action behavior="LiteTween" id="14" name="Stop" sid="472912612905467" type="Hazard1_5VRisingLava">
+                                    <param id="0" name="Stop Mode">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="119980765857836">
+                            <conditions>
+                                <condition behavior="LiteTween" id="0" inverted="1" name="Is active" sid="379595197531906" type="Hazard1_5VRisingLava" />
+                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="217263886617892" type="Var_Level">
+                                    <param id="0" name="Instance variable">Pause</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="966633050058470" type="System" />
+                            </conditions>
+                            <actions>
+                                <action behavior="LiteTween" id="10" name="Start" sid="675548771366952" type="Hazard1_5VRisingLava">
+                                    <param id="0" name="Start Mode">1</param>
+                                    <param id="1" name="Force use current">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment></comment>
+                <variable constant="0" name="lavafollow" sid="971846241487989" static="1" type="number">0</variable>
+                <event-block sid="155491634821627">
+                    <conditions>
+                        <condition id="0" name="On function" sid="620604513217589" type="Function">
+                            <param id="0" name="Name">&quot;Player_Restart&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="195864213344335">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="696812612154454" type="Special_Invisible">
+                                    <param id="0" name="Unique ID">10200</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Set Y" sid="907735400068208" type="Special_Invisible">
+                                    <param id="0" name="Y">-999</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="560226692646988">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="986160851009953" type="Special_Invisible">
+                                    <param id="0" name="Unique ID">10201</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Set Y" sid="604438268696240" type="Special_Invisible">
+                                    <param id="0" name="Y">-999</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="912662557678445">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="819892036116858" type="Special_Invisible">
+                                    <param id="0" name="Unique ID">10202</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Set Y" sid="235066961267162" type="Special_Invisible">
+                                    <param id="0" name="Y">-999</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="407557711481328">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="338019721649611" type="Special_Invisible">
+                                    <param id="0" name="Unique ID">10203</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Set Y" sid="744419831780292" type="Special_Invisible">
+                                    <param id="0" name="Y">-999</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="513013831729026">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="524381475793797" type="Hazard1_5VRisingLava">
+                                    <param id="0" name="Unique ID">8200</param>
+                                </condition>
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="652776112279929" type="Var_Player">
+                                    <param id="0" name="Instance variable">Checkpoint</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">2</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action behavior="LiteTween" id="14" name="Stop" sid="735968105804355" type="Hazard1_5VRisingLava">
+                                    <param id="0" name="Stop Mode">1</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="738271746037538" type="Hazard1_5VRisingLava">
+                                    <param id="0" name="X">2032</param>
+                                    <param id="1" name="Y">1760</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="133494517274433">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="174433746188493" type="Hazard1_5VRisingLava">
+                                    <param id="0" name="Unique ID">8200</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="808485833058202" type="Var_Player">
+                                    <param id="0" name="Instance variable">Checkpoint</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">2</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action behavior="LiteTween" id="14" name="Stop" sid="372053450797853" type="Hazard1_5VRisingLava">
+                                    <param id="0" name="Stop Mode">1</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="390692747456809" type="Hazard1_5VRisingLava">
+                                    <param id="0" name="X">1920</param>
+                                    <param id="1" name="Y">1184</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="762422784801544">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="537836541182250" type="Hazard1_5VRisingLava">
+                                    <param id="0" name="Unique ID">7999</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action behavior="LiteTween" id="14" name="Stop" sid="681897456841690" type="Hazard1_5VRisingLava">
+                                    <param id="0" name="Stop Mode">1</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="899061956714849" type="Hazard1_5VRisingLava">
+                                    <param id="0" name="X">3952</param>
+                                    <param id="1" name="Y">1088</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block any="1" sid="304337710993785">
+                            <conditions />
+                            <actions>
+                                <action id="-15" name="Set visible" sid="651940062915902" type="BG1_5V1Fade">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="134164492092628" type="System">
+                                    <param id="0" name="Variable">lavafollow</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action behavior="Fade" id="2" name="Set fade-in time" sid="118320143573744" type="BG1_5V1Fade">
+                                    <param id="0" name="Fade-in time">1.25</param>
+                                </action>
+                                <action behavior="Fade" id="4" name="Set fade-out time" sid="508830644756217" type="BG1_5V1Fade">
+                                    <param id="0" name="Fade-out time">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="467819932628868">
+                    <conditions>
+                        <condition id="0" name="On function" sid="768602650704563" type="Function">
+                            <param id="0" name="Name">&quot;Level_Trigger&quot;</param>
+                        </condition>
+                        <condition id="-8" name="Compare two values" sid="493297883090930" type="System">
+                            <param id="0" name="First value">Function.Param(0)</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Second value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="183776239761624">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="506282623248316" type="Special_Invisible">
+                                    <param id="0" name="Unique ID">10200</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Set Y" sid="909222624481691" type="Special_Invisible">
+                                    <param id="0" name="Y">1344</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="406282993820641">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="703553755060541" type="Hazard1_5VRisingLava">
+                                    <param id="0" name="Unique ID">8200</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Call function" sid="788307571257546" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;F_Eruption&quot;</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="442209683602632" type="BG1_5V1Fade">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action behavior="Fade" id="2" name="Set fade-in time" sid="966317424819199" type="BG1_5V1Fade">
+                                    <param id="0" name="Fade-in time">1.25</param>
+                                </action>
+                                <action behavior="Fade" id="4" name="Set fade-out time" sid="500913745774335" type="BG1_5V1Fade">
+                                    <param id="0" name="Fade-out time">0</param>
+                                </action>
+                                <action behavior="Fade" id="0" name="Restart fade" sid="961155191491482" type="BG1_5V1Fade" />
+                                <action id="-13" name="Set boolean" sid="272987692811797" type="Var_Player">
+                                    <param id="0" name="Instance variable">CanMove</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action behavior="ScrollTo" id="0" name="Shake" sid="364775475084937" type="Engine_Camera">
+                                    <param id="0" name="Magnitude">4</param>
+                                    <param id="1" name="Duration">1.8</param>
+                                    <param id="2" name="Mode">1</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="854630738674496" type="System">
+                                    <param id="0" name="Seconds">2</param>
+                                </action>
+                                <action id="-13" name="Set boolean" sid="107920200199552" type="Var_Player">
+                                    <param id="0" name="Instance variable">CanMove</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="351410826369640" type="Hazard1_5VRisingLava">
+                                    <param id="0" name="X">1920</param>
+                                    <param id="1" name="Y">1568</param>
+                                </action>
+                                <action behavior="LiteTween" id="26" name="Create/Initialize tween" sid="824977681720117" type="Hazard1_5VRisingLava">
+                                    <param id="0" name="Tweened property">8</param>
+                                    <param id="1" name="Function">0</param>
+                                    <param id="2" name="Target">&quot;1184&quot;</param>
+                                    <param id="3" name="Duration">8</param>
+                                    <param id="4" name="Enforce mode">0</param>
+                                </action>
+                                <action behavior="LiteTween" id="10" name="Start" sid="854225642971611" type="Hazard1_5VRisingLava">
+                                    <param id="0" name="Start Mode">0</param>
+                                    <param id="1" name="Force use current">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="225558228674249" type="System">
+                                    <param id="0" name="Variable">lavafollow</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="439651014590417">
+                    <conditions>
+                        <condition id="0" name="On function" sid="449188411256699" type="Function">
+                            <param id="0" name="Name">&quot;Level_Trigger&quot;</param>
+                        </condition>
+                        <condition id="-8" name="Compare two values" sid="382832818503432" type="System">
+                            <param id="0" name="First value">Function.Param(0)</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Second value">2</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="973962098364847">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="643413567970781" type="Special_Invisible">
+                                    <param id="0" name="Unique ID">10201</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Set Y" sid="112047478249969" type="Special_Invisible">
+                                    <param id="0" name="Y">1088</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="250898735622677">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="290727759509245" type="Hazard1_5VRisingLava">
+                                    <param id="0" name="Unique ID">8200</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="288785299908432">
+                                    <conditions>
+                                        <condition behavior="LiteTween" id="0" name="Is active" sid="562527977548712" type="Hazard1_5VRisingLava" />
+                                    </conditions>
+                                    <actions>
+                                        <action behavior="LiteTween" id="26" name="Create/Initialize tween" sid="368292561489899" type="Hazard1_5VRisingLava">
+                                            <param id="0" name="Tweened property">8</param>
+                                            <param id="1" name="Function">0</param>
+                                            <param id="2" name="Target">&quot;1184&quot;</param>
+                                            <param id="3" name="Duration">1</param>
+                                            <param id="4" name="Enforce mode">0</param>
+                                        </action>
+                                        <action behavior="LiteTween" id="10" name="Start" sid="804230065553878" type="Hazard1_5VRisingLava">
+                                            <param id="0" name="Start Mode">0</param>
+                                            <param id="1" name="Force use current">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="992229043172752">
+                            <conditions />
+                            <actions>
+                                <action id="-15" name="Set visible" sid="339474123348135" type="BG1_5V1Fade">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action behavior="Fade" id="2" name="Set fade-in time" sid="609003123301439" type="BG1_5V1Fade">
+                                    <param id="0" name="Fade-in time">0</param>
+                                </action>
+                                <action behavior="Fade" id="4" name="Set fade-out time" sid="907975991673555" type="BG1_5V1Fade">
+                                    <param id="0" name="Fade-out time">1.25</param>
+                                </action>
+                                <action behavior="Fade" id="0" name="Restart fade" sid="862806448458425" type="BG1_5V1Fade" />
+                                <action id="-9" name="Set value" sid="434980667480056" type="System">
+                                    <param id="0" name="Variable">lavafollow</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="667172532722335">
+                    <conditions>
+                        <condition id="0" name="On function" sid="261315607403291" type="Function">
+                            <param id="0" name="Name">&quot;Level_Trigger&quot;</param>
+                        </condition>
+                        <condition id="-8" name="Compare two values" sid="917055547352336" type="System">
+                            <param id="0" name="First value">Function.Param(0)</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Second value">3</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="393572738203680">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="588909720534791" type="Special_Invisible">
+                                    <param id="0" name="Unique ID">10202</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Set Y" sid="860550717080925" type="Special_Invisible">
+                                    <param id="0" name="Y">864</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="919021990387135">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="142859688645568" type="Hazard1_5VRisingLava">
+                                    <param id="0" name="Unique ID">7999</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Call function" sid="297243024187124" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;F_Eruption&quot;</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="530505282336658" type="BG1_5V1Fade">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action behavior="Fade" id="2" name="Set fade-in time" sid="781415307556888" type="BG1_5V1Fade">
+                                    <param id="0" name="Fade-in time">1.25</param>
+                                </action>
+                                <action behavior="Fade" id="4" name="Set fade-out time" sid="687513805655386" type="BG1_5V1Fade">
+                                    <param id="0" name="Fade-out time">0</param>
+                                </action>
+                                <action behavior="Fade" id="0" name="Restart fade" sid="546825849044754" type="BG1_5V1Fade" />
+                                <action id="-13" name="Set boolean" sid="344275616435559" type="Var_Player">
+                                    <param id="0" name="Instance variable">CanMove</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action behavior="ScrollTo" id="0" name="Shake" sid="698655823429789" type="Engine_Camera">
+                                    <param id="0" name="Magnitude">4</param>
+                                    <param id="1" name="Duration">1.8</param>
+                                    <param id="2" name="Mode">1</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="150748875539993" type="System">
+                                    <param id="0" name="Seconds">2</param>
+                                </action>
+                                <action id="-13" name="Set boolean" sid="572583926308994" type="Var_Player">
+                                    <param id="0" name="Instance variable">CanMove</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="406731566641586" type="Hazard1_5VRisingLava">
+                                    <param id="0" name="X">3840</param>
+                                    <param id="1" name="Y">1088</param>
+                                </action>
+                                <action behavior="LiteTween" id="26" name="Create/Initialize tween" sid="969886794008572" type="Hazard1_5VRisingLava">
+                                    <param id="0" name="Tweened property">8</param>
+                                    <param id="1" name="Function">0</param>
+                                    <param id="2" name="Target">&quot;704&quot;</param>
+                                    <param id="3" name="Duration">10</param>
+                                    <param id="4" name="Enforce mode">0</param>
+                                </action>
+                                <action behavior="LiteTween" id="10" name="Start" sid="226552138125077" type="Hazard1_5VRisingLava">
+                                    <param id="0" name="Start Mode">0</param>
+                                    <param id="1" name="Force use current">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="251302267193232" type="System">
+                                    <param id="0" name="Variable">lavafollow</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="828122877455404">
+                    <conditions>
+                        <condition id="0" name="On function" sid="299508769144684" type="Function">
+                            <param id="0" name="Name">&quot;Level_Trigger&quot;</param>
+                        </condition>
+                        <condition id="-8" name="Compare two values" sid="326613981507829" type="System">
+                            <param id="0" name="First value">Function.Param(0)</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Second value">4</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="928684320812042">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="217843919094567" type="Special_Invisible">
+                                    <param id="0" name="Unique ID">10203</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Set Y" sid="434053121744340" type="Special_Invisible">
+                                    <param id="0" name="Y">608</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="514365699680925">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="261666721466566" type="Hazard1_5VRisingLava">
+                                    <param id="0" name="Unique ID">7999</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action behavior="LiteTween" id="26" name="Create/Initialize tween" sid="652506386065797" type="Hazard1_5VRisingLava">
+                                    <param id="0" name="Tweened property">8</param>
+                                    <param id="1" name="Function">0</param>
+                                    <param id="2" name="Target">&quot;768&quot;</param>
+                                    <param id="3" name="Duration">1</param>
+                                    <param id="4" name="Enforce mode">0</param>
+                                </action>
+                                <action behavior="LiteTween" id="10" name="Start" sid="490111986341690" type="Hazard1_5VRisingLava">
+                                    <param id="0" name="Start Mode">0</param>
+                                    <param id="1" name="Force use current">0</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="443738440535247" type="System">
+                                    <param id="0" name="Seconds">2</param>
+                                </action>
+                                <action behavior="LiteTween" id="26" name="Create/Initialize tween" sid="164089125752936" type="Hazard1_5VRisingLava">
+                                    <param id="0" name="Tweened property">8</param>
+                                    <param id="1" name="Function">0</param>
+                                    <param id="2" name="Target">&quot;392&quot;</param>
+                                    <param id="3" name="Duration">10</param>
+                                    <param id="4" name="Enforce mode">0</param>
+                                </action>
+                                <action behavior="LiteTween" id="10" name="Start" sid="802245060455629" type="Hazard1_5VRisingLava">
+                                    <param id="0" name="Start Mode">0</param>
+                                    <param id="1" name="Force use current">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
         <event-group description="" inactive="1" sid="889677936232365" title="EP1 Level Specific">
             <sub-events>
+                <event-block sid="585622509760204">
+                    <conditions>
+                        <condition id="-4" name="Trigger once while true" sid="990513283517695" type="System" />
+                        <condition id="-7" inverted="1" name="Compare instance variable" sid="317087515981094" type="Var_Game">
+                            <param id="0" name="Instance variable">Gamemode</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;LevelSelect&quot;</param>
+                        </condition>
+                        <condition id="-7" inverted="1" name="Compare instance variable" sid="784986843488217" type="Var_Game">
+                            <param id="0" name="Instance variable">Gamemode</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;Marathon&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Set value" sid="588285685236503" type="Var_Level">
+                            <param id="0" name="Instance variable">ZoneResetTimer</param>
+                            <param id="1" name="Value">-1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment></comment>
                 <event-block sid="272403535508429">
                     <conditions>
                         <condition id="0" name="On collision with another object" sid="824471685630937" type="Engine_Player">
