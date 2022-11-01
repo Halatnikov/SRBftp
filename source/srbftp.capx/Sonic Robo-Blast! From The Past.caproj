@@ -2,7 +2,7 @@
 <c2project>
     <name>Sonic Robo-Blast! From The Past</name>
     <description>Original games by Sonikku - Johnathan Wallbank and SSNTails - A.J. Freda</description>
-    <version>0.2.2-11</version>
+    <version>0.2.2-14</version>
     <author>Halatnikov</author>
     <author-email></author-email>
     <author-website>https://halatnikov.github.io</author-website>
@@ -67,12 +67,17 @@
         <behavior author="Scirra" id="wrap" version="1">Wrap</behavior>
     </used-behaviors>
     <used-effects>
+        <effect author="Scirra" id="blurhorizontal">Blur Horizontal</effect>
+        <effect author="Scirra" id="blurvertical">Blur Vertical</effect>
         <effect author="Scirra" id="hsladjustmask">Adjust HSL Mask</effect>
         <effect author="Scirra" id="inverse">Inverse</effect>
         <effect author="Scirra" id="multiply">Multiply</effect>
+        <effect author="Scirra" id="noise">Noise</effect>
         <effect author="R0J0hound" id="outline">Outline</effect>
+        <effect author="Scirra" id="scanlines">Scan lines</effect>
         <effect author="Somebody" id="scroll">Scroll</effect>
         <effect author="Scirra" id="subtract">Subtract</effect>
+        <effect author="Joannesalfa and oppenheimer" id="vhs">VHS damage</effect>
     </used-effects>
     <configurations>
         <configuration exporter-descname="HTML5" exporter-id="html5" name="HTML5" />
@@ -371,6 +376,10 @@
                             <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
                         </animation>
                         <animation framecount="2" loop="0" name="GG" pingpong="0" repeatcount="1" repeatto="0" sid="242133312270941" speed="0">
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                        </animation>
+                        <animation framecount="2" loop="0" name="hHP" pingpong="0" repeatcount="1" repeatto="0" sid="207234595664797" speed="0">
                             <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
                             <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
                         </animation>
@@ -8652,6 +8661,16 @@
                     <animation framecount="1" loop="0" name="GG" pingpong="0" repeatcount="1" repeatto="0" sid="529988902535457" speed="5">
                         <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
                     </animation>
+                    <animation framecount="1" loop="0" name="hHP" pingpong="0" repeatcount="1" repeatto="0" sid="603864801320199" speed="5">
+                        <frame duration="1" hotspotX="0.5" hotspotY="0.5">
+                            <collision-poly>
+                                <point x="1" y="1" />
+                                <point x="0" y="1" />
+                                <point x="0" y="0" />
+                                <point x="1" y="0" />
+                            </collision-poly>
+                        </frame>
+                    </animation>
                 </animation-folder>
             </object-type>
             <object-type name="Object_Text" sid="365146566373690">
@@ -9463,11 +9482,46 @@
                 <plugin id="Sprite" />
                 <animation-folder>
                     <animation framecount="5" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="720779660993030" speed="14">
-                        <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb2\assets\hudmisc\explosion_2.png" />
-                        <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb2\assets\hudmisc\explosion_3.png" />
-                        <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb2\assets\hudmisc\explosion_4.png" />
-                        <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb2\assets\hudmisc\explosion_5.png" />
-                        <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb2\assets\hudmisc\explosion_6.png" />
+                        <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb2\assets\hudmisc\explosion_2.png">
+                            <collision-poly>
+                                <point x="0.132813" y="0.128906" />
+                                <point x="0.875" y="0.125" />
+                                <point x="0.882813" y="0.90625" />
+                                <point x="0.136719" y="0.910156" />
+                            </collision-poly>
+                        </frame>
+                        <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb2\assets\hudmisc\explosion_3.png">
+                            <collision-poly>
+                                <point x="0.132813" y="0.128906" />
+                                <point x="0.875" y="0.125" />
+                                <point x="0.882813" y="0.90625" />
+                                <point x="0.136719" y="0.910156" />
+                            </collision-poly>
+                        </frame>
+                        <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb2\assets\hudmisc\explosion_4.png">
+                            <collision-poly>
+                                <point x="0.132813" y="0.128906" />
+                                <point x="0.875" y="0.125" />
+                                <point x="0.882813" y="0.90625" />
+                                <point x="0.136719" y="0.910156" />
+                            </collision-poly>
+                        </frame>
+                        <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb2\assets\hudmisc\explosion_5.png">
+                            <collision-poly>
+                                <point x="0.132813" y="0.128906" />
+                                <point x="0.875" y="0.125" />
+                                <point x="0.882813" y="0.90625" />
+                                <point x="0.136719" y="0.910156" />
+                            </collision-poly>
+                        </frame>
+                        <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb2\assets\hudmisc\explosion_6.png">
+                            <collision-poly>
+                                <point x="0.132813" y="0.128906" />
+                                <point x="0.875" y="0.125" />
+                                <point x="0.882813" y="0.90625" />
+                                <point x="0.136719" y="0.910156" />
+                            </collision-poly>
+                        </frame>
                     </animation>
                 </animation-folder>
             </object-type>
@@ -9625,6 +9679,14 @@
                                 <point x="0.806641" y="0.875" />
                             </collision-poly>
                         </frame>
+                    </animation>
+                </animation-folder>
+            </object-type>
+            <object-type name="Object1_6EPSwimmingEnd" sid="568133599472618">
+                <plugin id="Sprite" />
+                <animation-folder>
+                    <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="236917301919788" speed="5">
+                        <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
                     </animation>
                 </animation-folder>
             </object-type>
@@ -10163,6 +10225,42 @@
                 <object-type name="Tile1_5V3" sid="198336412792089">
                     <plugin id="TiledBg" />
                     <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\5volcano\boss_1.png" />
+                </object-type>
+                <object-type name="BG1H_1WH" sid="894532687163428">
+                    <plugin id="TiledBg" />
+                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\hyper\1_1.png" />
+                </object-type>
+                <object-type name="Tile1H_1WH1" sid="982530618546633">
+                    <plugin id="TiledBg" />
+                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\hyper\1_2.png" />
+                </object-type>
+                <object-type name="Tile1H_1WH2" sid="670318495346999">
+                    <plugin id="TiledBg" />
+                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\hyper\1_3.png" />
+                </object-type>
+                <object-type name="BG1H_2RM1" sid="150673591896220">
+                    <plugin id="TiledBg" />
+                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\hyper\1_1.png" />
+                </object-type>
+                <object-type name="Tile1H_2RM" sid="771215360695543">
+                    <plugin id="TiledBg" />
+                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\hyper\2_1.png" />
+                </object-type>
+                <object-type name="BG1H_2RM2" sid="288748645702922">
+                    <plugin id="TiledBg" />
+                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\hyper\2_2.png" />
+                </object-type>
+                <object-type name="BG1H_3HP1" sid="591967952234633">
+                    <plugin id="TiledBg" />
+                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\hyper\3_2.png" />
+                </object-type>
+                <object-type name="Tile1H_3HP" sid="357408827349428">
+                    <plugin id="TiledBg" />
+                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\hyper\3_1.png" />
+                </object-type>
+                <object-type name="BG1H_3HP2" sid="521709271815711">
+                    <plugin id="TiledBg" />
+                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\hyper\3_3.png" />
                 </object-type>
             </object-folder>
             <object-folder name="SRB2">
@@ -11585,8 +11683,9 @@
                         </behavior-type>
                     </behaviors>
                     <animation-folder>
-                        <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="316302786956408" speed="5">
+                        <animation framecount="2" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="316302786956408" speed="0">
                             <frame duration="1" hotspotX="0.571429" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\hudmisc\fallingthing.png" />
+                            <frame duration="1" hotspotX="0.571429" hotspotY="0.5" />
                         </animation>
                     </animation-folder>
                 </object-type>
@@ -14914,12 +15013,39 @@
             </behaviors>
             <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\6echidnapolis\1boss_conveyor1.png" />
         </object-type>
+        <object-type name="Sprite23" sid="782931571639382">
+            <plugin id="Sprite" />
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="178523769882129" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\metalsonic\hidden.png" />
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="Sprite24" sid="402598011400144">
+            <plugin id="Sprite" />
+            <instance-variables>
+                <instance-variable name="Camera" sid="510350017069163" type="number" />
+                <instance-variable name="EnemyCount" sid="721908486793904" type="number" />
+                <instance-variable name="Enemies" sid="497270504687644" type="number" />
+            </instance-variables>
+            <behaviors>
+                <behavior-type name="Jumpthru" sid="599596576296315">
+                    <behavior id="jumpthru" />
+                </behavior-type>
+                <behavior-type name="LiteTween" sid="342170692683288">
+                    <behavior id="lunarray_LiteTween" />
+                </behavior-type>
+            </behaviors>
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="451159400283573" speed="5">
+                    <frame duration="1" hotspotX="0.504587" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\hyper\1_platform.png" />
+                </animation>
+            </animation-folder>
+        </object-type>
     </object-folder>
     <families>
         <family name="LevelTiles" plugin-id="TiledBg" sid="888312723616125">
             <members>
-                <member>DecoX_MZSmallBrick</member>
-                <member>DecoX_MZSmallBrickDark</member>
                 <member>Special_Invisible</member>
                 <member>Tile1_1KB1</member>
                 <member>Tile1_1KB2</member>
@@ -14952,6 +15078,10 @@
                 <member>Tile1_6EP2</member>
                 <member>Tile1_6EP3</member>
                 <member>Tile1_6EP4</member>
+                <member>Tile1H_1WH1</member>
+                <member>Tile1H_1WH2</member>
+                <member>Tile1H_2RM</member>
+                <member>Tile1H_3HP</member>
                 <member>Tile1S_1A</member>
                 <member>Tile1S_2GU1</member>
                 <member>Tile1S_2GU2</member>
@@ -15177,6 +15307,9 @@
                 <layout>1S_1Athenos.xml</layout>
                 <layout>1S_2GreatUnknown.xml</layout>
                 <layout>1S_3Void.xml</layout>
+                <layout>1H_1WoodlandHill.xml</layout>
+                <layout>1H_2RockyMountain.xml</layout>
+                <layout>1H_3HiddenPalace.xml</layout>
                 <layout>1Pong_1.xml</layout>
                 <layout>1Pong_2.xml</layout>
             </layout-folder>

@@ -1742,8 +1742,8 @@
                                 <condition behavior="Platform" id="3" name="Is jumping" sid="799718419886514" type="Engine_Player" />
                                 <condition id="-8" name="Compare two values" sid="107611331662677" type="System">
                                     <param id="0" name="First value">Engine_Player.Platform.VectorY</param>
-                                    <param id="1" name="Comparison">3</param>
-                                    <param id="2" name="Second value">0</param>
+                                    <param id="1" name="Comparison">2</param>
+                                    <param id="2" name="Second value">-0.05</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -1765,7 +1765,7 @@
                                 <condition id="-14" name="Compare variable" sid="648750498179053" type="System">
                                     <param id="0" name="Variable">vectorY</param>
                                     <param id="1" name="Comparison">2</param>
-                                    <param id="2" name="Value">-1</param>
+                                    <param id="2" name="Value">-0.05</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -1775,6 +1775,27 @@
                                 </action>
                                 <action behavior="Platform" id="9" name="Set vector Y" sid="299602094158846" type="Engine_Player">
                                     <param id="0" name="Vector Y">vectorY</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>a fix (??) for a weird &quot;sliding on floor with -0.02 Y speed&quot; glitch</comment>
+                        <event-block sid="592023340984528">
+                            <conditions>
+                                <condition id="9" name="Is overlapping at offset" sid="384634221809804" type="Engine_Player">
+                                    <param id="0" name="Object">LevelTiles</param>
+                                    <param id="1" name="Offset X">0</param>
+                                    <param id="2" name="Offset Y">34</param>
+                                </condition>
+                                <condition behavior="Solid" id="0" name="Is enabled" sid="608380790296226" type="LevelTiles" />
+                                <condition id="-21" name="Is between values" sid="780829216956463" type="System">
+                                    <param id="0" name="Value">Engine_Player.Platform.VectorY</param>
+                                    <param id="1" name="Lower bound">-0.05</param>
+                                    <param id="2" name="Upper bound">-0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action behavior="Platform" id="9" name="Set vector Y" sid="871140873576284" type="Engine_Player">
+                                    <param id="0" name="Vector Y">0</param>
                                 </action>
                             </actions>
                         </event-block>
