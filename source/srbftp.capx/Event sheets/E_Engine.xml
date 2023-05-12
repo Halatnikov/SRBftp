@@ -1477,11 +1477,6 @@
                                         <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="921447240999828" type="Var_Level">
                                             <param id="0" name="Instance variable">Pause</param>
                                         </condition>
-                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="226282426024580" type="Var_Player">
-                                            <param id="0" name="Instance variable">State</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">&quot;swimming&quot;</param>
-                                        </condition>
                                         <condition id="-7" inverted="1" name="Compare instance variable" sid="130606754907654" type="Var_Player">
                                             <param id="0" name="Instance variable">State</param>
                                             <param id="1" name="Comparison">0</param>
@@ -1498,11 +1493,7 @@
                                             <param id="2" name="Value">1</param>
                                         </condition>
                                     </conditions>
-                                    <actions>
-                                        <action behavior="Platform" id="11" name="Set enabled" sid="605323110120278" type="Engine_Player">
-                                            <param id="0" name="State">1</param>
-                                        </action>
-                                    </actions>
+                                    <actions />
                                     <sub-events>
                                         <event-block sid="292091584893585">
                                             <conditions>
@@ -1521,6 +1512,20 @@
                                                 <action id="-13" name="Set boolean" sid="793626721785595" type="Var_Level">
                                                     <param id="0" name="Instance variable">TimerLevelActive</param>
                                                     <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="195649948014847">
+                                            <conditions>
+                                                <condition id="-7" inverted="1" name="Compare instance variable" sid="226282426024580" type="Var_Player">
+                                                    <param id="0" name="Instance variable">State</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">&quot;swimming&quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action behavior="Platform" id="11" name="Set enabled" sid="605323110120278" type="Engine_Player">
+                                                    <param id="0" name="State">1</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -2123,7 +2128,6 @@
                                         </event-block>
                                     </sub-events>
                                 </event-block>
-                                <comment>srb2</comment>
                                 <comment>bowser has a sheild????7???7777?? (real)</comment>
                                 <event-block sid="161531488936926">
                                     <conditions>
@@ -3485,6 +3489,20 @@
                                         </action>
                                     </actions>
                                 </event-block>
+                                <event-block sid="941890592706482">
+                                    <conditions>
+                                        <condition id="9" name="Is overlapping at offset" sid="853133584261285" type="Common_AirBubble">
+                                            <param id="0" name="Object">LevelTiles</param>
+                                            <param id="1" name="Offset X">0</param>
+                                            <param id="2" name="Offset Y">-1</param>
+                                        </condition>
+                                        <condition behavior="Solid" id="0" name="Is enabled" sid="427574122007089" type="LevelTiles" />
+                                        <condition id="-4" name="Trigger once while true" sid="665247613220231" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Destroy" sid="686360292479275" type="Common_AirBubble" />
+                                    </actions>
+                                </event-block>
                             </sub-events>
                         </event-block>
                         <event-block sid="468623599427230">
@@ -3506,6 +3524,10 @@
                                     <param id="1" name="Expression">PlayerSkins.ID</param>
                                     <param id="2" name="Comparison">0</param>
                                     <param id="3" name="Value">Var_Player.Skin</param>
+                                </condition>
+                                <condition id="12" name="Compare speed" sid="927571188394438" type="Common_AirBubble">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Number">0</param>
                                 </condition>
                             </conditions>
                             <actions>

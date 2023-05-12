@@ -678,6 +678,9 @@
         <event-group description="" inactive="1" sid="600746589106315" title="SRB2 Level select">
             <sub-events>
                 <variable constant="0" name="lock" sid="870861245289874" static="1" type="number">0</variable>
+                <variable constant="0" name="page" sid="996435569826954" static="1" type="number">1</variable>
+                <variable constant="0" name="counter_pages" sid="380164155764430" static="1" type="number">0</variable>
+                <variable constant="0" name="counter_levels" sid="734936405061001" static="1" type="number">0</variable>
                 <event-block sid="970919622201529">
                     <conditions>
                         <condition id="-4" name="Trigger once while true" sid="824762733925203" type="System" />
@@ -695,23 +698,154 @@
                             <param id="0" name="Instance variable">CurrentSelection</param>
                             <param id="1" name="Value">1</param>
                         </action>
+                        <action id="-9" name="Set value" sid="914257108125933" type="System">
+                            <param id="0" name="Variable">page</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
                         <action id="33" name="Stop all" sid="965865592107535" type="BetterAudio" />
                         <action id="0" name="Call function" sid="803978472437038" type="Function">
                             <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
                             <param id="1" name="Parameter {n}">&quot;2__Submenus&quot;{###}&quot;music&quot;{###}1</param>
                         </action>
-                        <action id="-9" name="Set value" sid="611569464763311" type="System">
-                            <param id="0" name="Variable">lock</param>
-                            <param id="1" name="Value">1</param>
-                        </action>
-                        <action id="-16" name="Wait" sid="681783044817638" type="System">
-                            <param id="0" name="Seconds">0.5</param>
-                        </action>
-                        <action id="-9" name="Set value" sid="441877724297915" type="System">
-                            <param id="0" name="Variable">lock</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
+                        <action id="-9" name="Destroy" sid="144657490835927" type="Menu_Options2" />
                     </actions>
+                    <sub-events>
+                        <event-block sid="134407029278302">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="306211685528656" type="Menu_Options">
+                                    <param id="0" name="Unique ID">2057</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="887420105502285" type="System">
+                                    <param id="0" name="Variable">counter_pages</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="548426673936558" type="System">
+                                    <param id="0" name="Variable">counter_levels</param>
+                                    <param id="1" name="Value">-1</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="848933474965864">
+                                    <conditions>
+                                        <condition id="100" name="For each property" sid="754179940313466" type="JSON_LevelPlaylist">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}">&quot;List_SRB2&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Add to" sid="798780557078408" type="System">
+                                            <param id="0" name="Variable">counter_pages</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="213906950532899">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="320715672471539" type="System">
+                                                    <param id="0" name="Variable">counter_pages</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">page</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-10" name="Set value" sid="540758721346942" type="Menu_Options">
+                                                    <param id="0" name="Instance variable">ID</param>
+                                                    <param id="1" name="Value">JSON_LevelPlaylist.CurrentKey</param>
+                                                </action>
+                                                <action id="0" name="Set text" sid="540684978624983" type="Menu_Options">
+                                                    <param id="0" name="Text">uppercase(JSON_LevelPlaylist.Value(0,&quot;List_SRB2&quot;,JSON_LevelPlaylist.CurrentKey))</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="679914989320219">
+                                    <conditions>
+                                        <condition id="100" name="For each property" sid="641678685645677" type="JSON_LevelPlaylist">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}">Menu_Options.ID</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Add to" sid="632270663909565" type="System">
+                                            <param id="0" name="Variable">counter_levels</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-3" name="Create object" sid="196937932128859" type="System">
+                                            <param id="0" name="Object to create">Menu_Options2</param>
+                                            <param id="1" name="Layer">&quot;LevelSelect&quot;</param>
+                                            <param id="2" name="X">808</param>
+                                            <param id="3" name="Y">98+(24*counter_levels)</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="342615892992077" type="Menu_Options2">
+                                            <param id="0" name="Instance variable">TableID</param>
+                                            <param id="1" name="Value">counter_levels</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="289951128013344" type="Menu_Options2">
+                                            <param id="0" name="Instance variable">ID</param>
+                                            <param id="1" name="Value">JSON_LevelPlaylist.CurrentKey</param>
+                                        </action>
+                                        <action id="0" name="Set text" sid="700387590836213" type="Menu_Options2">
+                                            <param id="0" name="Text">uppercase(JSON_LevelProperties.Value(0,Self.ID,&quot;Name&quot;))</param>
+                                        </action>
+                                        <action id="2" name="Set font face" sid="185995071840513" type="Menu_Options2">
+                                            <param id="0" name="Font face">&quot;Arial&quot;</param>
+                                            <param id="1" name="Style">0</param>
+                                        </action>
+                                        <action id="-30" name="Set from JSON" sid="122618097744133" type="Menu_Options2">
+                                            <param id="0" name="JSON">replace(Self.AsJSON,&quot;&quot;&quot;ha&quot;&quot;:0&quot;,&quot;&quot;&quot;ha&quot;&quot;:2&quot;)</param>
+                                        </action>
+                                        <action id="-30" name="Set from JSON" sid="865393831500791" type="Menu_Options2">
+                                            <param id="0" name="JSON">replace(Self.AsJSON,&quot;&quot;&quot;hX&quot;&quot;:0&quot;,&quot;&quot;&quot;hX&quot;&quot;:1&quot;)</param>
+                                        </action>
+                                        <action id="4" name="Set font color" sid="771498109992607" type="Menu_Options2">
+                                            <param id="0" name="Color">rgb(0, 255, 0)</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="550170559199056">
+                                            <conditions>
+                                                <condition id="-8" inverted="1" name="Compare two values" sid="151520497751183" type="System">
+                                                    <param id="0" name="First value">JSON_LevelPlaylist.Value(0,Menu_Options.ID,JSON_LevelPlaylist.CurrentKey)</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Second value">1</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Set text" sid="782324849220405" type="Menu_Options2">
+                                                    <param id="0" name="Text">uppercase(JSON_LevelPlaylist.Value(0,Menu_Options.ID,JSON_LevelPlaylist.CurrentKey))</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="497843597049546">
+                                    <conditions />
+                                    <actions>
+                                        <action id="-24" name="Move to top" sid="440024124491631" type="Menu_CursorColor" />
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="632874881596492">
+                            <conditions />
+                            <actions>
+                                <action id="-9" name="Set value" sid="611569464763311" type="System">
+                                    <param id="0" name="Variable">lock</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="681783044817638" type="System">
+                                    <param id="0" name="Seconds">0.5</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="441877724297915" type="System">
+                                    <param id="0" name="Variable">lock</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block sid="433453263631325">
                     <conditions>
@@ -749,58 +883,63 @@
                         </action>
                     </actions>
                 </event-block>
-                <event-block sid="209454654547390">
+                <event-block sid="910053131670092">
                     <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="372776508658943" type="Var_Game">
+                        <condition id="-7" name="Compare instance variable" sid="522447285747890" type="Var_Game">
                             <param id="0" name="Instance variable">CurrentSelection</param>
                             <param id="1" name="Comparison">5</param>
-                            <param id="2" name="Value">11</param>
+                            <param id="2" name="Value">Menu_Options2.Count+2</param>
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-10" name="Set value" sid="378023424875702" type="Var_Game">
+                        <action id="-10" name="Set value" sid="584155746564152" type="Var_Game">
                             <param id="0" name="Instance variable">CurrentSelection</param>
                             <param id="1" name="Value">1</param>
                         </action>
                     </actions>
                 </event-block>
-                <event-block sid="642739245804923">
+                <event-block sid="536203066298024">
                     <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="340614770549861" type="Var_Game">
+                        <condition id="-7" name="Compare instance variable" sid="309787042288937" type="Var_Game">
                             <param id="0" name="Instance variable">CurrentSelection</param>
                             <param id="1" name="Comparison">3</param>
                             <param id="2" name="Value">0</param>
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-10" name="Set value" sid="552979448436560" type="Var_Game">
+                        <action id="-10" name="Set value" sid="113234006980748" type="Var_Game">
                             <param id="0" name="Instance variable">CurrentSelection</param>
-                            <param id="1" name="Value">10</param>
+                            <param id="1" name="Value">Menu_Options2.Count+1</param>
                         </action>
                     </actions>
                 </event-block>
-                <event-block sid="882595810705829">
+                <event-block sid="396310801604837">
                     <conditions>
-                        <condition id="-8" name="Is boolean instance variable set" sid="647268583083018" type="Var_Input">
+                        <condition id="-8" name="Is boolean instance variable set" sid="334332121920437" type="Var_Input">
                             <param id="0" name="Instance variable">Start</param>
                         </condition>
-                        <condition id="-4" name="Trigger once while true" sid="203656806214000" type="System" />
-                        <condition id="-14" name="Compare variable" sid="925994170260405" type="System">
+                        <condition id="-4" name="Trigger once while true" sid="712722548996334" type="System" />
+                        <condition id="-14" name="Compare variable" sid="390408215703896" type="System">
                             <param id="0" name="Variable">lock</param>
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">0</param>
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-10" name="Set value" sid="603190128846153" type="Var_Game">
+                        <action id="-10" name="Set value" sid="463393813994038" type="Var_Game">
                             <param id="0" name="Instance variable">CurrentMenu</param>
                             <param id="1" name="Value">&quot;main&quot;</param>
                         </action>
+                        <action id="-9" name="Destroy" sid="584784097433105" type="Menu_Options2" />
+                        <action id="-10" name="Set value" sid="952500962561255" type="Var_Game">
+                            <param id="0" name="Instance variable">Gamemode2</param>
+                            <param id="1" name="Value">&quot;Normal&quot;</param>
+                        </action>
                     </actions>
                 </event-block>
-                <event-block sid="778014947577588">
+                <event-block sid="996584883344032">
                     <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="616256245891187" type="Var_Game">
+                        <condition id="-7" name="Compare instance variable" sid="965998227231529" type="Var_Game">
                             <param id="0" name="Instance variable">CurrentSelection</param>
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">1</param>
@@ -808,374 +947,416 @@
                     </conditions>
                     <actions>
                         <action id="-2" name="Set Y" sid="642082226567193" type="Menu_CursorColor">
-                            <param id="0" name="Y">64</param>
+                            <param id="0" name="Y">74</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="653418694583677" type="Menu_CursorArrows">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="5" name="Set frame" sid="221868078739163" type="Menu_LevelSelect">
+                            <param id="0" name="Frame number">0</param>
                         </action>
                     </actions>
                     <sub-events>
-                        <event-block sid="547952864069266">
+                        <event-block sid="684425797466246">
                             <conditions>
-                                <condition id="-8" name="Is boolean instance variable set" sid="156281431301573" type="Var_Input">
+                                <condition id="-8" name="Is boolean instance variable set" sid="202888871231513" type="Var_Input">
                                     <param id="0" name="Instance variable">A</param>
                                 </condition>
-                                <condition id="-4" name="Trigger once while true" sid="474177438438895" type="System" />
-                                <condition id="-14" name="Compare variable" sid="414949952392010" type="System">
+                                <condition id="-4" name="Trigger once while true" sid="833938306734636" type="System" />
+                                <condition id="-14" name="Compare variable" sid="778947708196523" type="System">
                                     <param id="0" name="Variable">lock</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">0</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-10" name="Set value" sid="727696666928633" type="Var_Game">
+                                <action id="-10" name="Set value" sid="681496158482535" type="Var_Game">
                                     <param id="0" name="Instance variable">CurrentMenu</param>
                                     <param id="1" name="Value">&quot;main&quot;</param>
                                 </action>
+                                <action id="-9" name="Destroy" sid="277449273844036" type="Menu_Options2" />
+                                <action id="-10" name="Set value" sid="917656943531540" type="Var_Game">
+                                    <param id="0" name="Instance variable">Gamemode2</param>
+                                    <param id="1" name="Value">&quot;Normal&quot;</param>
+                                </action>
                             </actions>
+                        </event-block>
+                        <event-block any="1" sid="472412368925493">
+                            <conditions>
+                                <condition id="-8" name="Is boolean instance variable set" sid="342283311614575" type="Var_Input">
+                                    <param id="0" name="Instance variable">Left</param>
+                                </condition>
+                                <condition id="-8" name="Is boolean instance variable set" sid="762916105267532" type="Var_Input">
+                                    <param id="0" name="Instance variable">Right</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="971480074540304">
+                                    <conditions>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="548773752058920" type="Var_Input">
+                                            <param id="0" name="Instance variable">Left</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="213221492383337" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-11" name="Subtract from" sid="222777934471826" type="System">
+                                            <param id="0" name="Variable">page</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="274206697097633">
+                                    <conditions>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="245365539650007" type="Var_Input">
+                                            <param id="0" name="Instance variable">Right</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="345514105109348" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Add to" sid="411994808975545" type="System">
+                                            <param id="0" name="Variable">page</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="553314309764843">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="866440317705555" type="System">
+                                            <param id="0" name="Variable">page</param>
+                                            <param id="1" name="Comparison">3</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="779087383214005" type="System">
+                                            <param id="0" name="Variable">page</param>
+                                            <param id="1" name="Value">JSON_LevelPlaylist.Size(0,&quot;List_SRB2&quot;)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="968978466086205">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="873978583960326" type="System">
+                                            <param id="0" name="Variable">page</param>
+                                            <param id="1" name="Comparison">5</param>
+                                            <param id="2" name="Value">JSON_LevelPlaylist.Size(0,&quot;List_SRB2&quot;)+1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="826180023928491" type="System">
+                                            <param id="0" name="Variable">page</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="473080092050475">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="212640532206835" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="506640485271655" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;Menu&quot;</param>
+                                        </action>
+                                        <action id="-9" name="Destroy" sid="155852994601337" type="Menu_Options2" />
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="154646025334803">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="605728795554979" type="Menu_Options">
+                                                    <param id="0" name="Unique ID">2057</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Set value" sid="514603795182239" type="System">
+                                                    <param id="0" name="Variable">counter_pages</param>
+                                                    <param id="1" name="Value">0</param>
+                                                </action>
+                                                <action id="-9" name="Set value" sid="301894492555182" type="System">
+                                                    <param id="0" name="Variable">counter_levels</param>
+                                                    <param id="1" name="Value">-1</param>
+                                                </action>
+                                            </actions>
+                                            <sub-events>
+                                                <event-block sid="943932365189299">
+                                                    <conditions>
+                                                        <condition id="100" name="For each property" sid="162098023483546" type="JSON_LevelPlaylist">
+                                                            <param id="0" name="Reference point">0</param>
+                                                            <param id="1" name="Key {n}">&quot;List_SRB2&quot;</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-10" name="Add to" sid="347830942039534" type="System">
+                                                            <param id="0" name="Variable">counter_pages</param>
+                                                            <param id="1" name="Value">1</param>
+                                                        </action>
+                                                    </actions>
+                                                    <sub-events>
+                                                        <event-block sid="470086667369133">
+                                                            <conditions>
+                                                                <condition id="-14" name="Compare variable" sid="366793076414222" type="System">
+                                                                    <param id="0" name="Variable">counter_pages</param>
+                                                                    <param id="1" name="Comparison">0</param>
+                                                                    <param id="2" name="Value">page</param>
+                                                                </condition>
+                                                            </conditions>
+                                                            <actions>
+                                                                <action id="-10" name="Set value" sid="194894651766297" type="Menu_Options">
+                                                                    <param id="0" name="Instance variable">ID</param>
+                                                                    <param id="1" name="Value">JSON_LevelPlaylist.CurrentKey</param>
+                                                                </action>
+                                                                <action id="0" name="Set text" sid="558541804133171" type="Menu_Options">
+                                                                    <param id="0" name="Text">uppercase(JSON_LevelPlaylist.Value(0,&quot;List_SRB2&quot;,JSON_LevelPlaylist.CurrentKey))</param>
+                                                                </action>
+                                                            </actions>
+                                                        </event-block>
+                                                    </sub-events>
+                                                </event-block>
+                                                <event-block sid="644153094794247">
+                                                    <conditions>
+                                                        <condition id="100" name="For each property" sid="238524913545349" type="JSON_LevelPlaylist">
+                                                            <param id="0" name="Reference point">0</param>
+                                                            <param id="1" name="Key {n}">Menu_Options.ID</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-10" name="Add to" sid="964184065521857" type="System">
+                                                            <param id="0" name="Variable">counter_levels</param>
+                                                            <param id="1" name="Value">1</param>
+                                                        </action>
+                                                        <action id="-3" name="Create object" sid="776718318894155" type="System">
+                                                            <param id="0" name="Object to create">Menu_Options2</param>
+                                                            <param id="1" name="Layer">&quot;LevelSelect&quot;</param>
+                                                            <param id="2" name="X">808</param>
+                                                            <param id="3" name="Y">98+(24*counter_levels)</param>
+                                                        </action>
+                                                        <action id="-10" name="Set value" sid="816070197095521" type="Menu_Options2">
+                                                            <param id="0" name="Instance variable">TableID</param>
+                                                            <param id="1" name="Value">counter_levels</param>
+                                                        </action>
+                                                        <action id="-10" name="Set value" sid="102670449126015" type="Menu_Options2">
+                                                            <param id="0" name="Instance variable">ID</param>
+                                                            <param id="1" name="Value">JSON_LevelPlaylist.CurrentKey</param>
+                                                        </action>
+                                                        <action id="0" name="Set text" sid="248910771039483" type="Menu_Options2">
+                                                            <param id="0" name="Text">uppercase(JSON_LevelProperties.Value(0,Self.ID,&quot;Name&quot;))</param>
+                                                        </action>
+                                                        <action id="2" name="Set font face" sid="937208253914993" type="Menu_Options2">
+                                                            <param id="0" name="Font face">&quot;Arial&quot;</param>
+                                                            <param id="1" name="Style">0</param>
+                                                        </action>
+                                                        <action id="-30" name="Set from JSON" sid="679208586546334" type="Menu_Options2">
+                                                            <param id="0" name="JSON">replace(Self.AsJSON,&quot;&quot;&quot;ha&quot;&quot;:0&quot;,&quot;&quot;&quot;ha&quot;&quot;:2&quot;)</param>
+                                                        </action>
+                                                        <action id="-30" name="Set from JSON" sid="166496447409383" type="Menu_Options2">
+                                                            <param id="0" name="JSON">replace(Self.AsJSON,&quot;&quot;&quot;hX&quot;&quot;:0&quot;,&quot;&quot;&quot;hX&quot;&quot;:1&quot;)</param>
+                                                        </action>
+                                                        <action id="4" name="Set font color" sid="532549077028984" type="Menu_Options2">
+                                                            <param id="0" name="Color">rgb(0, 255, 0)</param>
+                                                        </action>
+                                                    </actions>
+                                                    <sub-events>
+                                                        <event-block sid="713593860560984">
+                                                            <conditions>
+                                                                <condition id="-8" inverted="1" name="Compare two values" sid="344759958371680" type="System">
+                                                                    <param id="0" name="First value">JSON_LevelPlaylist.Value(0,Menu_Options.ID,JSON_LevelPlaylist.CurrentKey)</param>
+                                                                    <param id="1" name="Comparison">0</param>
+                                                                    <param id="2" name="Second value">1</param>
+                                                                </condition>
+                                                            </conditions>
+                                                            <actions>
+                                                                <action id="0" name="Set text" sid="465246990977066" type="Menu_Options2">
+                                                                    <param id="0" name="Text">uppercase(JSON_LevelPlaylist.Value(0,Menu_Options.ID,JSON_LevelPlaylist.CurrentKey))</param>
+                                                                </action>
+                                                            </actions>
+                                                        </event-block>
+                                                    </sub-events>
+                                                </event-block>
+                                                <event-block sid="610682932221563">
+                                                    <conditions />
+                                                    <actions>
+                                                        <action id="-24" name="Move to top" sid="545254039782997" type="Menu_CursorColor" />
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-block>
-                <event-block sid="747779973483913">
+                <event-block sid="142391970550087">
                     <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="411224940715863" type="Var_Game">
+                        <condition id="-7" inverted="1" name="Compare instance variable" sid="531261129573567" type="Var_Game">
                             <param id="0" name="Instance variable">CurrentSelection</param>
                             <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">2</param>
+                            <param id="2" name="Value">1</param>
                         </condition>
                     </conditions>
                     <actions>
                         <action id="-2" name="Set Y" sid="247231516738427" type="Menu_CursorColor">
-                            <param id="0" name="Y">88</param>
+                            <param id="0" name="Y">50+(24*Var_Game.CurrentSelection)</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="786647290903476" type="Menu_CursorArrows">
+                            <param id="0" name="Visibility">0</param>
                         </action>
                     </actions>
                     <sub-events>
-                        <event-block sid="963718283292758">
+                        <event-block sid="674430951717627">
                             <conditions>
-                                <condition id="-8" name="Is boolean instance variable set" sid="527153935738223" type="Var_Input">
-                                    <param id="0" name="Instance variable">A</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="965768903801300" type="System" />
-                                <condition id="-14" name="Compare variable" sid="690054501019617" type="System">
-                                    <param id="0" name="Variable">lock</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">0</param>
+                                <condition id="-14" name="Pick by unique ID" sid="166445427656736" type="Menu_Options">
+                                    <param id="0" name="Unique ID">2057</param>
                                 </condition>
                             </conditions>
-                            <actions>
-                                <action id="-2" name="Go to layout" sid="865752894321193" type="System">
-                                    <param id="0" name="Layout">Menu_Cutscenes</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="998444324381124" type="Var_Game">
-                                    <param id="0" name="Instance variable">CurrentMenu</param>
-                                    <param id="1" name="Value">&quot;2intro&quot;</param>
-                                </action>
-                            </actions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="726190903365164">
+                                    <conditions>
+                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="103148157120974" type="Menu_Options">
+                                            <param id="0" name="Instance variable">ID</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;List_SRB2_Christmas&quot;</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="485185884153759" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Set value" sid="887575287183782" type="Var_Game">
+                                            <param id="0" name="Instance variable">Gamemode2</param>
+                                            <param id="1" name="Value">&quot;Normal&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="124271326598576">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="646580210264025" type="Menu_Options">
+                                            <param id="0" name="Instance variable">ID</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;List_SRB2_Christmas&quot;</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="203457331006001" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Set value" sid="544421406805263" type="Var_Game">
+                                            <param id="0" name="Instance variable">Gamemode2</param>
+                                            <param id="1" name="Value">&quot;Christmas&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
-                    </sub-events>
-                </event-block>
-                <event-block sid="497906892301966">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="970048875847243" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentSelection</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">3</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-2" name="Set Y" sid="565484322779743" type="Menu_CursorColor">
-                            <param id="0" name="Y">112</param>
-                        </action>
-                    </actions>
-                    <sub-events>
-                        <event-block sid="914508208433222">
+                        <event-block sid="458450119168578">
                             <conditions>
-                                <condition id="-8" name="Is boolean instance variable set" sid="821266810781769" type="Var_Input">
-                                    <param id="0" name="Instance variable">A</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="182188157522046" type="System" />
-                                <condition id="-14" name="Compare variable" sid="112005206117683" type="System">
-                                    <param id="0" name="Variable">lock</param>
+                                <condition id="-7" name="Compare instance variable" sid="645253573990851" type="Menu_Options2">
+                                    <param id="0" name="Instance variable">TableID</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">0</param>
+                                    <param id="2" name="Value">Var_Game.CurrentSelection-2</param>
                                 </condition>
                             </conditions>
-                            <actions>
-                                <action id="-2" name="Go to layout" sid="624019325898578" type="System">
-                                    <param id="0" name="Layout">2_1GreenFlower1</param>
-                                </action>
-                            </actions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="781378007031168">
+                                    <conditions>
+                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="347913285287076" type="Menu_Options2">
+                                            <param id="0" name="Instance variable">ID</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;2intro&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="5" name="Set frame" sid="647234250072827" type="Menu_LevelSelect">
+                                            <param id="0" name="Frame number">int(JSON_LevelProperties.Value(0,Menu_Options2.ID,&quot;Icon&quot;))</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="937766018420917">
+                                            <conditions>
+                                                <condition id="-8" name="Is boolean instance variable set" sid="168312062090969" type="Var_Input">
+                                                    <param id="0" name="Instance variable">Right</param>
+                                                </condition>
+                                                <condition id="-8" name="Is boolean instance variable set" sid="485140582376685" type="Var_Input">
+                                                    <param id="0" name="Instance variable">A</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="380889315021729" type="System" />
+                                                <condition id="-14" name="Compare variable" sid="208037680450795" type="System">
+                                                    <param id="0" name="Variable">lock</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">0</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Call function" sid="266171157299491" type="Function">
+                                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;Ring&quot;</param>
+                                                </action>
+                                                <action id="-10" name="Set value" sid="841237006899751" type="Var_Game">
+                                                    <param id="0" name="Instance variable">Gamemode</param>
+                                                    <param id="1" name="Value">&quot;Singleplayer&quot;</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="779181911250203">
+                                            <conditions>
+                                                <condition id="-8" name="Is boolean instance variable set" sid="273398194381112" type="Var_Input">
+                                                    <param id="0" name="Instance variable">A</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="723502928330688" type="System" />
+                                                <condition id="-14" name="Compare variable" sid="864818976012292" type="System">
+                                                    <param id="0" name="Variable">lock</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">0</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-25" name="Go to layout (by name)" sid="339759837439572" type="System">
+                                                    <param id="0" name="Layout">Menu_Options2.ID</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="850483668453911">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="462658527170776" type="Menu_Options2">
+                                            <param id="0" name="Instance variable">ID</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;2intro&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="5" name="Set frame" sid="318131263973953" type="Menu_LevelSelect">
+                                            <param id="0" name="Frame number">1</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="712673498865237">
+                                            <conditions>
+                                                <condition id="-8" name="Is boolean instance variable set" sid="567819654707268" type="Var_Input">
+                                                    <param id="0" name="Instance variable">A</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="227592843436770" type="System" />
+                                                <condition id="-14" name="Compare variable" sid="479426657247337" type="System">
+                                                    <param id="0" name="Variable">lock</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">0</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-2" name="Go to layout" sid="865752894321193" type="System">
+                                                    <param id="0" name="Layout">Menu_Cutscenes</param>
+                                                </action>
+                                                <action id="-10" name="Set value" sid="998444324381124" type="Var_Game">
+                                                    <param id="0" name="Instance variable">CurrentMenu</param>
+                                                    <param id="1" name="Value">&quot;2intro&quot;</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
-                </event-block>
-                <event-block sid="464472793687016">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="486541758615785" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentSelection</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">4</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-2" name="Set Y" sid="486113724389600" type="Menu_CursorColor">
-                            <param id="0" name="Y">135</param>
-                        </action>
-                    </actions>
-                    <sub-events>
-                        <event-block sid="311945321139571">
-                            <conditions>
-                                <condition id="-8" name="Is boolean instance variable set" sid="170513845692519" type="Var_Input">
-                                    <param id="0" name="Instance variable">A</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="115676927954748" type="System" />
-                                <condition id="-14" name="Compare variable" sid="635125352203001" type="System">
-                                    <param id="0" name="Variable">lock</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">0</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-2" name="Go to layout" sid="803522577181527" type="System">
-                                    <param id="0" name="Layout">2_1GreenFlower2</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <event-block sid="561704208599041">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="922503116071836" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentSelection</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">5</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-2" name="Set Y" sid="439958937589135" type="Menu_CursorColor">
-                            <param id="0" name="Y">158</param>
-                        </action>
-                    </actions>
-                    <sub-events>
-                        <event-block sid="778332268362675">
-                            <conditions>
-                                <condition id="-8" name="Is boolean instance variable set" sid="313520629079079" type="Var_Input">
-                                    <param id="0" name="Instance variable">A</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="431577434741653" type="System" />
-                                <condition id="-14" name="Compare variable" sid="407466948140663" type="System">
-                                    <param id="0" name="Variable">lock</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">0</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-2" name="Go to layout" sid="223716148255367" type="System">
-                                    <param id="0" name="Layout">2_1GreenFlower3</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <event-block sid="361848471031588">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="943676009458593" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentSelection</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">6</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-2" name="Set Y" sid="520590780163421" type="Menu_CursorColor">
-                            <param id="0" name="Y">181</param>
-                        </action>
-                    </actions>
-                    <sub-events>
-                        <event-block sid="444147026643337">
-                            <conditions>
-                                <condition id="-8" name="Is boolean instance variable set" sid="620109634628588" type="Var_Input">
-                                    <param id="0" name="Instance variable">A</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="547653867140567" type="System" />
-                                <condition id="-14" name="Compare variable" sid="162047406213964" type="System">
-                                    <param id="0" name="Variable">lock</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">0</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-2" name="Go to layout" sid="473027880716261" type="System">
-                                    <param id="0" name="Layout">2_2TechnoHill1</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <event-block sid="318785488491835">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="816480003129406" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentSelection</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">7</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-2" name="Set Y" sid="736437517539301" type="Menu_CursorColor">
-                            <param id="0" name="Y">204</param>
-                        </action>
-                    </actions>
-                    <sub-events>
-                        <event-block sid="361484312052487">
-                            <conditions>
-                                <condition id="-8" name="Is boolean instance variable set" sid="149209005294813" type="Var_Input">
-                                    <param id="0" name="Instance variable">A</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="394468382039361" type="System" />
-                                <condition id="-14" name="Compare variable" sid="842420136786655" type="System">
-                                    <param id="0" name="Variable">lock</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">0</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-2" name="Go to layout" sid="931181261758580" type="System">
-                                    <param id="0" name="Layout">2_2TechnoHill2</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <event-block sid="119356403472002">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="133856860835236" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentSelection</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">8</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-2" name="Set Y" sid="929905833279288" type="Menu_CursorColor">
-                            <param id="0" name="Y">227</param>
-                        </action>
-                    </actions>
-                    <sub-events>
-                        <event-block sid="549184660270611">
-                            <conditions>
-                                <condition id="-8" name="Is boolean instance variable set" sid="853489798663562" type="Var_Input">
-                                    <param id="0" name="Instance variable">A</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="843219749798644" type="System" />
-                                <condition id="-14" name="Compare variable" sid="592956263513145" type="System">
-                                    <param id="0" name="Variable">lock</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">0</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-2" name="Go to layout" sid="102010012248637" type="System">
-                                    <param id="0" name="Layout">2_2TechnoHill3</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <event-block sid="420062332255237">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="764182068113515" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentSelection</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">9</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-2" name="Set Y" sid="567882275317632" type="Menu_CursorColor">
-                            <param id="0" name="Y">250</param>
-                        </action>
-                    </actions>
-                    <sub-events>
-                        <event-block sid="188531476919383">
-                            <conditions>
-                                <condition id="-8" name="Is boolean instance variable set" sid="248413913249201" type="Var_Input">
-                                    <param id="0" name="Instance variable">A</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="367020992273346" type="System" />
-                                <condition id="-14" name="Compare variable" sid="652256327622811" type="System">
-                                    <param id="0" name="Variable">lock</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">0</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-2" name="Go to layout" sid="621424277028548" type="System">
-                                    <param id="0" name="Layout">2_3DeepSea1</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <event-block sid="166323371296430">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="875245123764657" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentSelection</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">10</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-2" name="Set Y" sid="338944367244677" type="Menu_CursorColor">
-                            <param id="0" name="Y">283</param>
-                        </action>
-                    </actions>
-                    <sub-events>
-                        <event-block sid="342040469284824">
-                            <conditions>
-                                <condition id="-8" name="Is boolean instance variable set" sid="713554591117970" type="Var_Input">
-                                    <param id="0" name="Instance variable">A</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="247242724304543" type="System" />
-                                <condition id="-14" name="Compare variable" sid="953374766250151" type="System">
-                                    <param id="0" name="Variable">lock</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">0</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-2" name="Go to layout" sid="611479758836188" type="System">
-                                    <param id="0" name="Layout">2_3DeepSea2</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <event-block sid="220554628419317">
-                    <conditions />
-                    <actions>
-                        <action id="5" name="Set frame" sid="969648925937014" type="Menu_LevelSelect">
-                            <param id="0" name="Frame number">Var_Game.CurrentSelection-1</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="943585161107653">
-                    <conditions>
-                        <condition id="-8" name="Is boolean instance variable set" sid="499720811881150" type="Var_Input">
-                            <param id="0" name="Instance variable">Right</param>
-                        </condition>
-                        <condition id="-8" name="Is boolean instance variable set" sid="488141403312793" type="Var_Input">
-                            <param id="0" name="Instance variable">A</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="900170975159406" type="System" />
-                        <condition id="-14" name="Compare variable" sid="964187327439115" type="System">
-                            <param id="0" name="Variable">lock</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">0</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Call function" sid="722626198803635" type="Function">
-                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
-                            <param id="1" name="Parameter {n}">&quot;Ring&quot;</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="932907649346565" type="Var_Game">
-                            <param id="0" name="Instance variable">Gamemode</param>
-                            <param id="1" name="Value">&quot;Singleplayer&quot;</param>
-                        </action>
-                    </actions>
                 </event-block>
             </sub-events>
         </event-group>

@@ -4537,17 +4537,130 @@
                         </action>
                     </actions>
                 </event-block>
+                <event-block sid="387308457666323">
+                    <conditions>
+                        <condition id="0" name="On function" sid="413770453463725" type="Function">
+                            <param id="0" name="Name">&quot;Player_Restart&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="627099750055369">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="427028277262075" type="Special_Invisible">
+                                    <param id="0" name="Unique ID">5540</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action behavior="Solid" id="0" name="Set enabled" sid="154034274641119" type="Special_Invisible">
+                                    <param id="0" name="State">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="200865649111372">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="576931378655834" type="Special_Invisible">
+                                    <param id="0" name="Unique ID">8277</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action behavior="Solid" id="0" name="Set enabled" sid="847613798476052" type="Special_Invisible">
+                                    <param id="0" name="State">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="286007389067369">
+                    <conditions>
+                        <condition id="0" name="On function" sid="827527970807177" type="Function">
+                            <param id="0" name="Name">&quot;Level_Trigger&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="285992886835748">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="579525201601418" type="System">
+                                    <param id="0" name="First value">Function.Param(0)</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">1</param>
+                                </condition>
+                                <condition id="-14" name="Pick by unique ID" sid="375065957545528" type="Special_Invisible">
+                                    <param id="0" name="Unique ID">5540</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action behavior="Solid" id="0" name="Set enabled" sid="594214155448496" type="Special_Invisible">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="943830180620594">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="704056558007355" type="System">
+                                    <param id="0" name="First value">Function.Param(0)</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">2</param>
+                                </condition>
+                                <condition id="-14" name="Pick by unique ID" sid="344706940665229" type="Special_Invisible">
+                                    <param id="0" name="Unique ID">8277</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action behavior="Solid" id="0" name="Set enabled" sid="259923844360626" type="Special_Invisible">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
                 <comment></comment>
                 <event-block sid="272403535508429">
                     <conditions>
                         <condition id="0" name="On collision with another object" sid="824471685630937" type="Engine_Player">
                             <param id="0" name="Object">Object1_6EPSwimmingStart</param>
                         </condition>
+                        <condition id="-7" inverted="1" name="Compare instance variable" sid="712104362817322" type="Var_Player">
+                            <param id="0" name="Instance variable">State</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;swimming&quot;</param>
+                        </condition>
                     </conditions>
                     <actions>
                         <action id="-10" name="Set value" sid="233183840346161" type="Var_Player">
                             <param id="0" name="Instance variable">State</param>
                             <param id="1" name="Value">&quot;swimming&quot;</param>
+                        </action>
+                        <action id="0" name="Call function" sid="940071470237371" type="Function">
+                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;F_Submerged&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="653002533536147">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="802526476719700" type="Engine_Player">
+                            <param id="0" name="Object">Object1_6EPSwimmingEnd</param>
+                        </condition>
+                        <condition id="-7" name="Compare instance variable" sid="690521344956762" type="Var_Player">
+                            <param id="0" name="Instance variable">State</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;swimming&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Set value" sid="565323969434007" type="Var_Player">
+                            <param id="0" name="Instance variable">State</param>
+                            <param id="1" name="Value">&quot;idle&quot;</param>
+                        </action>
+                        <action id="-13" name="Set boolean" sid="425772566007811" type="Var_Player">
+                            <param id="0" name="Instance variable">Underwater</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="0" name="Call function" sid="383674311334608" type="Function">
+                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;F_Submerged&quot;</param>
                         </action>
                     </actions>
                 </event-block>
@@ -4557,6 +4670,12 @@
                             <param id="0" name="Instance variable">State</param>
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">&quot;swimming&quot;</param>
+                        </condition>
+                        <condition id="-33" name="Pick by comparison" sid="419072404251001" type="System">
+                            <param id="0" name="Object">PlayerSkins</param>
+                            <param id="1" name="Expression">PlayerSkins.ID</param>
+                            <param id="2" name="Comparison">0</param>
+                            <param id="3" name="Value">Var_Player.Skin</param>
                         </condition>
                     </conditions>
                     <actions />
@@ -4583,6 +4702,19 @@
                         </event-block>
                         <event-block sid="877204798310228">
                             <conditions />
+                            <actions>
+                                <action id="-13" name="Set boolean" sid="639732169279442" type="Var_Player">
+                                    <param id="0" name="Instance variable">Underwater</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="914123482860695">
+                            <conditions>
+                                <condition id="2" name="Is playing" sid="589205141458575" type="PlayerSkins">
+                                    <param id="0" name="Animation">&quot;Idle&quot;</param>
+                                </condition>
+                            </conditions>
                             <actions>
                                 <action id="5" name="Set frame" sid="189703746110885" type="PlayerSkins">
                                     <param id="0" name="Frame number">0</param>
@@ -4667,6 +4799,182 @@
                         </action>
                         <action behavior="Platform" id="11" name="Set enabled" sid="300636039740537" type="Engine_Player">
                             <param id="0" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment></comment>
+                <event-block sid="577023467323844">
+                    <conditions>
+                        <condition id="-18" name="On created" sid="872902844355167" type="Enemy1_6EPPogminz" />
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Set value" sid="237965877898989" type="Enemy1_6EPPogminz">
+                            <param id="0" name="Instance variable">InitialX</param>
+                            <param id="1" name="Value">Self.X</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="900331268191214" type="Enemy1_6EPPogminz">
+                            <param id="0" name="Instance variable">InitialY</param>
+                            <param id="1" name="Value">Self.Y</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="603070098718079" type="Enemy1_6EPPogminz">
+                            <param id="0" name="Instance variable">Direction</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="240245975046283">
+                    <conditions>
+                        <condition behavior="Spline" id="0" name="On reach last point" sid="772728552359298" type="Enemy1_6EPPogminz" />
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="481739064855348" type="Enemy1_6EPPogminz">
+                            <param id="0" name="Y">Self.InitialY</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="322326298884556">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="172699601848127" type="Enemy1_6EPPogminz">
+                                    <param id="0" name="Instance variable">Direction</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Wait" sid="849338459029188" type="System">
+                                    <param id="0" name="Seconds">0.1</param>
+                                </action>
+                                <action id="-1" name="Set X" sid="338538281016727" type="Enemy1_6EPPogminz">
+                                    <param id="0" name="X">Self.InitialX-100</param>
+                                </action>
+                                <action id="7" name="Set mirrored" sid="314472620471167" type="Enemy1_6EPPogminz">
+                                    <param id="0" name="State">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="466752868787792" type="Enemy1_6EPPogminz">
+                                    <param id="0" name="Instance variable">Direction</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="939803541165686">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="813294156836439" type="Enemy1_6EPPogminz">
+                                    <param id="0" name="Instance variable">Direction</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Wait" sid="899911153628522" type="System">
+                                    <param id="0" name="Seconds">0.1</param>
+                                </action>
+                                <action id="-1" name="Set X" sid="149806826194171" type="Enemy1_6EPPogminz">
+                                    <param id="0" name="X">Self.InitialX</param>
+                                </action>
+                                <action id="7" name="Set mirrored" sid="315682690783262" type="Enemy1_6EPPogminz">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="310564505643645" type="Enemy1_6EPPogminz">
+                                    <param id="0" name="Instance variable">Direction</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="313271321383447">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="939545121444178" type="Enemy1_6EPPogminz">
+                            <param id="0" name="Instance variable">Direction</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="596655106594443" type="System" />
+                    </conditions>
+                    <actions>
+                        <action behavior="Spline" id="12" name="Stop" sid="121592243753641" type="Enemy1_6EPPogminz" />
+                        <action behavior="Spline" id="4" name="Clean all points" sid="815313022374493" type="Enemy1_6EPPogminz" />
+                        <action behavior="Spline" id="2" name="Add point" sid="631922484291030" type="Enemy1_6EPPogminz">
+                            <param id="0" name="X">Self.X</param>
+                            <param id="1" name="Y">Self.Y</param>
+                        </action>
+                        <action behavior="Spline" id="2" name="Add point" sid="662452559076908" type="Enemy1_6EPPogminz">
+                            <param id="0" name="X">Self.X</param>
+                            <param id="1" name="Y">Self.Y-40</param>
+                        </action>
+                        <action behavior="Spline" id="2" name="Add point" sid="780767945397010" type="Enemy1_6EPPogminz">
+                            <param id="0" name="X">Self.X-50</param>
+                            <param id="1" name="Y">Self.Y-70</param>
+                        </action>
+                        <action behavior="Spline" id="2" name="Add point" sid="505461499333177" type="Enemy1_6EPPogminz">
+                            <param id="0" name="X">Self.X-100</param>
+                            <param id="1" name="Y">Self.Y-40</param>
+                        </action>
+                        <action behavior="Spline" id="2" name="Add point" sid="903622115576478" type="Enemy1_6EPPogminz">
+                            <param id="0" name="X">Self.X-100</param>
+                            <param id="1" name="Y">Self.Y</param>
+                        </action>
+                        <action behavior="Spline" id="11" name="Start" sid="740986835936521" type="Enemy1_6EPPogminz" />
+                    </actions>
+                </event-block>
+                <event-block sid="759545723421198">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="540153846594177" type="Enemy1_6EPPogminz">
+                            <param id="0" name="Instance variable">Direction</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="541337421729207" type="System" />
+                    </conditions>
+                    <actions>
+                        <action behavior="Spline" id="12" name="Stop" sid="575344246437251" type="Enemy1_6EPPogminz" />
+                        <action behavior="Spline" id="4" name="Clean all points" sid="470160005672676" type="Enemy1_6EPPogminz" />
+                        <action behavior="Spline" id="2" name="Add point" sid="195919469752292" type="Enemy1_6EPPogminz">
+                            <param id="0" name="X">Self.X</param>
+                            <param id="1" name="Y">Self.Y</param>
+                        </action>
+                        <action behavior="Spline" id="2" name="Add point" sid="479128377280032" type="Enemy1_6EPPogminz">
+                            <param id="0" name="X">Self.X</param>
+                            <param id="1" name="Y">Self.Y-40</param>
+                        </action>
+                        <action behavior="Spline" id="2" name="Add point" sid="318826513176951" type="Enemy1_6EPPogminz">
+                            <param id="0" name="X">Self.X+50</param>
+                            <param id="1" name="Y">Self.Y-70</param>
+                        </action>
+                        <action behavior="Spline" id="2" name="Add point" sid="179218010582708" type="Enemy1_6EPPogminz">
+                            <param id="0" name="X">Self.X+100</param>
+                            <param id="1" name="Y">Self.Y-40</param>
+                        </action>
+                        <action behavior="Spline" id="2" name="Add point" sid="650502560053070" type="Enemy1_6EPPogminz">
+                            <param id="0" name="X">Self.X+100</param>
+                            <param id="1" name="Y">Self.Y</param>
+                        </action>
+                        <action behavior="Spline" id="11" name="Start" sid="829309562407852" type="Enemy1_6EPPogminz" />
+                    </actions>
+                </event-block>
+                <event-block sid="412944636348018">
+                    <conditions>
+                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="850148284906493" type="Var_Level">
+                            <param id="0" name="Instance variable">Pause</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="625577182765955" type="System" />
+                    </conditions>
+                    <actions>
+                        <action behavior="Spline" id="0" name="Set enabled" sid="703984231432397" type="Enemy1_6EPPogminz">
+                            <param id="0" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="682888006730468">
+                    <conditions>
+                        <condition id="-8" name="Is boolean instance variable set" sid="392584299354999" type="Var_Level">
+                            <param id="0" name="Instance variable">Pause</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="189139333653395" type="System" />
+                    </conditions>
+                    <actions>
+                        <action behavior="Spline" id="0" name="Set enabled" sid="258794557240335" type="Enemy1_6EPPogminz">
+                            <param id="0" name="State">0</param>
                         </action>
                     </actions>
                 </event-block>
