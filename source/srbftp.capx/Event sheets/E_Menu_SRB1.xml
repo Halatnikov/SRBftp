@@ -187,6 +187,51 @@
                     </actions>
                 </event-block>
                 <comment></comment>
+                <event-block sid="903768987616264">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="688003587728820" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentMenu</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;soundtest&quot;</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="748189963224688" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Set group active" sid="868739329331814" type="System">
+                            <param id="0" name="Group name">&quot;SRB1 Sound Test&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-4" name="Set layer visible" sid="620147124399600" type="System">
+                            <param id="0" name="Layer">&quot;SoundTest&quot;</param>
+                            <param id="1" name="Visibility">1</param>
+                        </action>
+                        <action id="0" name="Call function" sid="947964048501519" type="Function">
+                            <param id="0" name="Name">&quot;Discord_RichPresence&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;&quot;{###}&quot;Sound test (SRB1)&quot;{###}&quot;&quot;{###}&quot;icon_1&quot;{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;{###}Var_Miscellanious.Discord_TimestampInit{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="499494363100095">
+                    <conditions>
+                        <condition id="-7" inverted="1" name="Compare instance variable" sid="945462275890957" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentMenu</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;soundtest&quot;</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="814403148080306" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Set group active" sid="474443962337483" type="System">
+                            <param id="0" name="Group name">&quot;SRB1 Sound Test&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-4" name="Set layer visible" sid="965357507093481" type="System">
+                            <param id="0" name="Layer">&quot;SoundTest&quot;</param>
+                            <param id="1" name="Visibility">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment></comment>
                 <event-block sid="350282947670468">
                     <conditions>
                         <condition id="-7" name="Compare instance variable" sid="801862779818637" type="Var_Game">
@@ -1172,9 +1217,30 @@
                             <param id="0" name="Y">238</param>
                         </action>
                         <action id="0" name="Set text" sid="863647309711653" type="Menu_Description">
-                            <param id="0" name="Text">&quot;- Not implemented yet -&quot;</param>
+                            <param id="0" name="Text">&quot;&quot;</param>
                         </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="829766408180945">
+                            <conditions>
+                                <condition id="-8" name="Is boolean instance variable set" sid="932617772898547" type="Var_Input">
+                                    <param id="0" name="Instance variable">A</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="159318618596302" type="System" />
+                                <condition id="-14" name="Compare variable" sid="220527770301504" type="System">
+                                    <param id="0" name="Variable">lock</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Set value" sid="485778467756752" type="Var_Game">
+                                    <param id="0" name="Instance variable">CurrentMenu</param>
+                                    <param id="1" name="Value">&quot;soundtest&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block sid="957457010053573">
                     <conditions>
@@ -2858,6 +2924,868 @@
                             </actions>
                         </event-block>
                     </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" inactive="1" sid="179087968127905" title="SRB1 Sound Test">
+            <sub-events>
+                <variable constant="0" name="lock" sid="497638789746078" static="1" type="number">0</variable>
+                <variable constant="0" name="page" sid="806381777006127" static="1" type="number">1</variable>
+                <variable constant="0" name="counter_pages" sid="688542470508048" static="1" type="number">0</variable>
+                <variable constant="0" name="counter_levels" sid="697869382864659" static="1" type="number">0</variable>
+                <event-block sid="613064111274160">
+                    <conditions>
+                        <condition id="-4" name="Trigger once while true" sid="881807067371604" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Set value" sid="812492183565637" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentSelection</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="464511567248271" type="System">
+                            <param id="0" name="Variable">page</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="33" name="Stop all" sid="149622396147941" type="BetterAudio" />
+                        <action id="-9" name="Destroy" sid="721270024882947" type="Menu_Options2" />
+                        <action id="-9" name="Set value" sid="890888136580712" type="System">
+                            <param id="0" name="Variable">nowplaying</param>
+                            <param id="1" name="Value">&quot;&quot;</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="883643947798300">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="551852664058215" type="Menu_Options">
+                                    <param id="0" name="Unique ID">12137</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="824013079091684" type="System">
+                                    <param id="0" name="Variable">counter_pages</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="384218470040080" type="System">
+                                    <param id="0" name="Variable">counter_levels</param>
+                                    <param id="1" name="Value">-1</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="576009844542158">
+                                    <conditions>
+                                        <condition id="100" name="For each property" sid="163207390330072" type="JSON_LevelPlaylist">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}">&quot;List_SRB1SoundTest&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Add to" sid="814431838403183" type="System">
+                                            <param id="0" name="Variable">counter_pages</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="155001079728316">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="529467691590426" type="System">
+                                                    <param id="0" name="Variable">counter_pages</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">page</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-10" name="Set value" sid="794668813380183" type="Menu_Options">
+                                                    <param id="0" name="Instance variable">ID</param>
+                                                    <param id="1" name="Value">JSON_LevelPlaylist.CurrentKey</param>
+                                                </action>
+                                                <action id="0" name="Set text" sid="539173146919699" type="Menu_Options">
+                                                    <param id="0" name="Text">uppercase(JSON_LevelPlaylist.Value(0,&quot;List_SRB1SoundTest&quot;,JSON_LevelPlaylist.CurrentKey))</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="330301854598664">
+                                    <conditions>
+                                        <condition id="100" name="For each property" sid="889406950913320" type="JSON_LevelPlaylist">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}">Menu_Options.ID</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Add to" sid="767166422370133" type="System">
+                                            <param id="0" name="Variable">counter_levels</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-3" name="Create object" sid="886281107932662" type="System">
+                                            <param id="0" name="Object to create">Menu_Options2</param>
+                                            <param id="1" name="Layer">&quot;SoundTest&quot;</param>
+                                            <param id="2" name="X">19</param>
+                                            <param id="3" name="Y">28+(24*counter_levels)</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="228004839899787" type="Menu_Options2">
+                                            <param id="0" name="Instance variable">TableID</param>
+                                            <param id="1" name="Value">counter_levels</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="602037257751432" type="Menu_Options2">
+                                            <param id="0" name="Instance variable">ID</param>
+                                            <param id="1" name="Value">JSON_LevelPlaylist.CurrentKey</param>
+                                        </action>
+                                        <action id="4" name="Set font color" sid="698369662735991" type="Menu_Options2">
+                                            <param id="0" name="Color">rgb(0, 255, 0)</param>
+                                        </action>
+                                        <action id="-5" name="Set width" sid="878739053543934" type="Menu_Options2">
+                                            <param id="0" name="Width">408</param>
+                                        </action>
+                                        <action id="0" name="Set text" sid="598385831536273" type="Menu_Options2">
+                                            <param id="0" name="Text">uppercase(JSON_AudioProperties.Value(0,Self.ID,&quot;Name&quot;))</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="520119995451355">
+                            <conditions />
+                            <actions>
+                                <action id="-9" name="Set value" sid="492960542609703" type="System">
+                                    <param id="0" name="Variable">lock</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="316306922834996" type="System">
+                                    <param id="0" name="Seconds">0.5</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="503590858117444" type="System">
+                                    <param id="0" name="Variable">lock</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="708392485847079">
+                    <conditions>
+                        <condition id="-8" name="Is boolean instance variable set" sid="675810766523547" type="Var_Input">
+                            <param id="0" name="Instance variable">Up</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="845824517694196" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Subtract from" sid="712698290389306" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentSelection</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="277000441168919">
+                    <conditions>
+                        <condition id="-8" name="Is boolean instance variable set" sid="823340023704959" type="Var_Input">
+                            <param id="0" name="Instance variable">Down</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="379337162270443" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-11" name="Add to" sid="965719094515893" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentSelection</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="125689551990653">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="179730857391326" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentSelection</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">Menu_Options2.Count+2</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Set value" sid="270023866825121" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentSelection</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="606792937449134">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="218313784534915" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentSelection</param>
+                            <param id="1" name="Comparison">3</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Set value" sid="172394138998982" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentSelection</param>
+                            <param id="1" name="Value">Menu_Options2.Count+1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="926672803137765">
+                    <conditions>
+                        <condition id="-8" name="Is boolean instance variable set" sid="914047514495159" type="Var_Input">
+                            <param id="0" name="Instance variable">Start</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="326852639005081" type="System" />
+                        <condition id="-14" name="Compare variable" sid="814029482207636" type="System">
+                            <param id="0" name="Variable">lock</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="33" name="Stop all" sid="367811643139656" type="BetterAudio" />
+                        <action id="-10" name="Set value" sid="695078138658815" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentMenu</param>
+                            <param id="1" name="Value">&quot;main&quot;</param>
+                        </action>
+                        <action id="-9" name="Destroy" sid="669200909948415" type="Menu_Options2" />
+                        <action id="-9" name="Set value" sid="478722670134379" type="System">
+                            <param id="0" name="Variable">nowplaying</param>
+                            <param id="1" name="Value">&quot;&quot;</param>
+                        </action>
+                        <action id="-9" name="Destroy" sid="720648696685620" type="MusicPlayer_Visualiser" />
+                        <action id="12" name="Remove all effects" sid="579576879331242" type="BetterAudio">
+                            <param id="0" name="Tag">&quot;music&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="583380424365318">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="333612481080687" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentSelection</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-15" name="Set visible" sid="634780219062986" type="Menu_Cursor">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="163226825926167" type="Menu_CursorArrows">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="472151629250764">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="995888171404669" type="Menu_Options">
+                                    <param id="0" name="Instance variable">ID</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;title&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-15" name="Set visible" sid="582907223662108" type="Menu_Options">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="566857251340306">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="116460494124575" type="Menu_Options">
+                                    <param id="0" name="Instance variable">ID</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;description&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-15" name="Set visible" sid="145180957734714" type="Menu_Options">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block any="1" sid="511151731238000">
+                            <conditions>
+                                <condition id="-8" name="Is boolean instance variable set" sid="743916867573793" type="Var_Input">
+                                    <param id="0" name="Instance variable">Left</param>
+                                </condition>
+                                <condition id="-8" name="Is boolean instance variable set" sid="962618246493067" type="Var_Input">
+                                    <param id="0" name="Instance variable">Right</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="654529686804936">
+                                    <conditions>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="633359763039302" type="Var_Input">
+                                            <param id="0" name="Instance variable">Left</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="788090267375838" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-11" name="Subtract from" sid="476531854654350" type="System">
+                                            <param id="0" name="Variable">page</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="662951926224096">
+                                    <conditions>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="841261744809308" type="Var_Input">
+                                            <param id="0" name="Instance variable">Right</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="746701309734274" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Add to" sid="435370027652522" type="System">
+                                            <param id="0" name="Variable">page</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="748026197084189">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="553472256067978" type="System">
+                                            <param id="0" name="Variable">page</param>
+                                            <param id="1" name="Comparison">3</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="991487502792669" type="System">
+                                            <param id="0" name="Variable">page</param>
+                                            <param id="1" name="Value">JSON_LevelPlaylist.Size(0,&quot;List_SRB1SoundTest&quot;)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="618011135115849">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="154758248354689" type="System">
+                                            <param id="0" name="Variable">page</param>
+                                            <param id="1" name="Comparison">5</param>
+                                            <param id="2" name="Value">JSON_LevelPlaylist.Size(0,&quot;List_SRB1SoundTest&quot;)+1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="803998699111722" type="System">
+                                            <param id="0" name="Variable">page</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="102276205474212">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="800884740502438" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Destroy" sid="453098972594743" type="Menu_Options2" />
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="921623179176699">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="555767258482209" type="Menu_Options">
+                                                    <param id="0" name="Unique ID">12137</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Set value" sid="622224385699845" type="System">
+                                                    <param id="0" name="Variable">counter_pages</param>
+                                                    <param id="1" name="Value">0</param>
+                                                </action>
+                                                <action id="-9" name="Set value" sid="964295673790808" type="System">
+                                                    <param id="0" name="Variable">counter_levels</param>
+                                                    <param id="1" name="Value">-1</param>
+                                                </action>
+                                            </actions>
+                                            <sub-events>
+                                                <event-block sid="666057853897875">
+                                                    <conditions>
+                                                        <condition id="100" name="For each property" sid="120039902261236" type="JSON_LevelPlaylist">
+                                                            <param id="0" name="Reference point">0</param>
+                                                            <param id="1" name="Key {n}">&quot;List_SRB1SoundTest&quot;</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-10" name="Add to" sid="484933055834604" type="System">
+                                                            <param id="0" name="Variable">counter_pages</param>
+                                                            <param id="1" name="Value">1</param>
+                                                        </action>
+                                                    </actions>
+                                                    <sub-events>
+                                                        <event-block sid="520837268730131">
+                                                            <conditions>
+                                                                <condition id="-14" name="Compare variable" sid="515379571760770" type="System">
+                                                                    <param id="0" name="Variable">counter_pages</param>
+                                                                    <param id="1" name="Comparison">0</param>
+                                                                    <param id="2" name="Value">page</param>
+                                                                </condition>
+                                                            </conditions>
+                                                            <actions>
+                                                                <action id="-10" name="Set value" sid="467861594042278" type="Menu_Options">
+                                                                    <param id="0" name="Instance variable">ID</param>
+                                                                    <param id="1" name="Value">JSON_LevelPlaylist.CurrentKey</param>
+                                                                </action>
+                                                                <action id="0" name="Set text" sid="242565804893435" type="Menu_Options">
+                                                                    <param id="0" name="Text">uppercase(JSON_LevelPlaylist.Value(0,&quot;List_SRB1SoundTest&quot;,JSON_LevelPlaylist.CurrentKey))</param>
+                                                                </action>
+                                                            </actions>
+                                                        </event-block>
+                                                    </sub-events>
+                                                </event-block>
+                                                <event-block sid="325888820733528">
+                                                    <conditions>
+                                                        <condition id="100" name="For each property" sid="627887832994561" type="JSON_LevelPlaylist">
+                                                            <param id="0" name="Reference point">0</param>
+                                                            <param id="1" name="Key {n}">Menu_Options.ID</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-10" name="Add to" sid="102876550512540" type="System">
+                                                            <param id="0" name="Variable">counter_levels</param>
+                                                            <param id="1" name="Value">1</param>
+                                                        </action>
+                                                        <action id="-3" name="Create object" sid="645588692420016" type="System">
+                                                            <param id="0" name="Object to create">Menu_Options2</param>
+                                                            <param id="1" name="Layer">&quot;SoundTest&quot;</param>
+                                                            <param id="2" name="X">19</param>
+                                                            <param id="3" name="Y">28+(24*counter_levels)</param>
+                                                        </action>
+                                                        <action id="-10" name="Set value" sid="381464571557658" type="Menu_Options2">
+                                                            <param id="0" name="Instance variable">TableID</param>
+                                                            <param id="1" name="Value">counter_levels</param>
+                                                        </action>
+                                                        <action id="-10" name="Set value" sid="805815969167883" type="Menu_Options2">
+                                                            <param id="0" name="Instance variable">ID</param>
+                                                            <param id="1" name="Value">JSON_LevelPlaylist.CurrentKey</param>
+                                                        </action>
+                                                        <action id="4" name="Set font color" sid="371505380518492" type="Menu_Options2">
+                                                            <param id="0" name="Color">rgb(0, 255, 0)</param>
+                                                        </action>
+                                                        <action id="-5" name="Set width" sid="358182717058939" type="Menu_Options2">
+                                                            <param id="0" name="Width">408</param>
+                                                        </action>
+                                                        <action id="0" name="Set text" sid="327400282204658" type="Menu_Options2">
+                                                            <param id="0" name="Text">uppercase(JSON_AudioProperties.Value(0,Self.ID,&quot;Name&quot;))</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="265147560165084">
+                    <conditions>
+                        <condition id="-7" inverted="1" name="Compare instance variable" sid="173764706268379" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentSelection</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-15" name="Set visible" sid="279099141739111" type="Menu_Cursor">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="-2" name="Set Y" sid="825294693214176" type="Menu_Cursor">
+                            <param id="0" name="Y">(-10)+(24*Var_Game.CurrentSelection)</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="347038624015552" type="Menu_CursorArrows">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="528316150348686">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="862107756019873" type="Menu_Options2">
+                                    <param id="0" name="Instance variable">TableID</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">Var_Game.CurrentSelection-2</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="962009081813110">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="352233694630990" type="Menu_Options">
+                                            <param id="0" name="Instance variable">ID</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;title&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-15" name="Set visible" sid="929039247265523" type="Menu_Options">
+                                            <param id="0" name="Visibility">1</param>
+                                        </action>
+                                        <action id="0" name="Set text" sid="698611425239967" type="Menu_Options">
+                                            <param id="0" name="Text">JSON_AudioProperties.Value(0,Menu_Options2.ID,&quot;Name&quot;)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="315637982265818">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="235011065655061" type="Menu_Options">
+                                            <param id="0" name="Instance variable">ID</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;description&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-15" name="Set visible" sid="866521363527627" type="Menu_Options">
+                                            <param id="0" name="Visibility">1</param>
+                                        </action>
+                                        <action id="0" name="Set text" sid="222191039451391" type="Menu_Options">
+                                            <param id="0" name="Text">replace(JSON_AudioProperties.Value(0,Menu_Options2.ID,&quot;Description&quot;),&quot;|&quot;,newline)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="638539104254371">
+                                    <conditions>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="327546325817506" type="Var_Input">
+                                            <param id="0" name="Instance variable">A</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="341727324447941" type="System" />
+                                        <condition id="-14" name="Compare variable" sid="336490138766596" type="System">
+                                            <param id="0" name="Variable">lock</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="179292535251394">
+                                            <conditions>
+                                                <condition id="-7" inverted="1" name="Compare instance variable" sid="815013871193286" type="Menu_Options2">
+                                                    <param id="0" name="Instance variable">ID</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">nowplaying</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-16" name="Wait" sid="687847013198995" type="System">
+                                                    <param id="0" name="Seconds">0.1</param>
+                                                </action>
+                                                <action id="-9" name="Set value" sid="595998692578525" type="System">
+                                                    <param id="0" name="Variable">nowplaying</param>
+                                                    <param id="1" name="Value">Menu_Options2.ID</param>
+                                                </action>
+                                                <action id="33" name="Stop all" sid="510976407192089" type="BetterAudio" />
+                                                <action id="0" name="Call function" sid="869612747348662" type="Function">
+                                                    <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
+                                                    <param id="1" name="Parameter {n}">nowplaying{###}&quot;music&quot;{###}1</param>
+                                                </action>
+                                                <action id="-2" name="Set Y" sid="467570586641679" type="Sprite14">
+                                                    <param id="0" name="Y">Menu_Options2.Y+10</param>
+                                                </action>
+                                                <action id="-10" name="Set value" sid="548235064517407" type="Sprite14">
+                                                    <param id="0" name="Instance variable">InitialY</param>
+                                                    <param id="1" name="Value">Self.Y</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="112813315355105">
+                                            <conditions>
+                                                <condition id="-7" name="Compare instance variable" sid="414568179479195" type="Menu_Options2">
+                                                    <param id="0" name="Instance variable">ID</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">nowplaying</param>
+                                                </condition>
+                                                <condition id="4" name="Is any playing" sid="347770542266921" type="BetterAudio" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-16" name="Wait" sid="469185185167141" type="System">
+                                                    <param id="0" name="Seconds">0.1</param>
+                                                </action>
+                                                <action id="-9" name="Set value" sid="930095707774397" type="System">
+                                                    <param id="0" name="Variable">nowplaying</param>
+                                                    <param id="1" name="Value">&quot;&quot;</param>
+                                                </action>
+                                                <action id="33" name="Stop all" sid="474901005115010" type="BetterAudio" />
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <variable constant="0" name="nowplaying" sid="339107457229324" static="1" type="text"></variable>
+                <variable constant="0" name="BPM" sid="221535320053085" static="1" type="number">0</variable>
+                <event-block sid="668127277351348">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="381653906837028" type="Menu_Options">
+                            <param id="0" name="Instance variable">ID</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;nowplaying&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="643810337991348">
+                            <conditions>
+                                <condition id="4" inverted="1" name="Is any playing" sid="916482109772641" type="BetterAudio" />
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Set text" sid="503135400487167" type="Menu_Options">
+                                    <param id="0" name="Text">&quot;...&quot;</param>
+                                </action>
+                                <action id="-5" name="Set width" sid="442810222910525" type="TiledSprite2">
+                                    <param id="0" name="Width">0</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="213289808007949" type="Sprite14">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                                <action id="-9" name="Destroy" sid="656366338131387" type="MusicPlayer_Visualiser" />
+                                <action id="12" name="Remove all effects" sid="256142561492306" type="BetterAudio">
+                                    <param id="0" name="Tag">&quot;music&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="657398425864878">
+                            <conditions>
+                                <condition id="4" name="Is any playing" sid="976868818773837" type="BetterAudio" />
+                                <condition id="-37" name="Is number NaN" sid="798806684090882" type="System">
+                                    <param id="0" name="Number">BetterAudio.Duration(&quot;music&quot;)</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Set text" sid="528505801649881" type="Menu_Options">
+                                    <param id="0" name="Text">&quot;...&quot;</param>
+                                </action>
+                                <action id="-5" name="Set width" sid="947501510148410" type="TiledSprite2">
+                                    <param id="0" name="Width">0</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="913140785045021" type="Sprite14">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                                <action id="-9" name="Destroy" sid="434898855181888" type="MusicPlayer_Visualiser" />
+                                <action id="12" name="Remove all effects" sid="272119989343968" type="BetterAudio">
+                                    <param id="0" name="Tag">&quot;music&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="306648403179062">
+                            <conditions>
+                                <condition id="4" name="Is any playing" sid="103661956831681" type="BetterAudio" />
+                                <condition id="-37" inverted="1" name="Is number NaN" sid="195482041478876" type="System">
+                                    <param id="0" name="Number">BetterAudio.Duration(&quot;music&quot;)</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Set text" sid="624189848193041" type="Menu_Options">
+                                    <param id="0" name="Text">uppercase(JSON_AudioProperties.Value(0,nowplaying,&quot;Name&quot;))&#x0D;&#x0A;&amp;&quot; - &quot;&amp;&#x0D;&#x0A;floor(BetterAudio.PlaybackTime(&quot;music&quot;)/60)&amp;&quot;:&quot;&amp;zeropad(floor(BetterAudio.PlaybackTime(&quot;music&quot;))%60,2)&amp;&quot;.&quot;&amp;zeropad(floor(BetterAudio.PlaybackTime(&quot;music&quot;)*100)%100,2)&#x0D;&#x0A;&amp;&quot; / &quot;&amp;&#x0D;&#x0A;floor(BetterAudio.Duration(&quot;music&quot;)/60)&amp;&quot;:&quot;&amp;zeropad(floor(BetterAudio.Duration(&quot;music&quot;))%60,2)</param>
+                                </action>
+                                <action id="-5" name="Set width" sid="459398795414431" type="TiledSprite2">
+                                    <param id="0" name="Width">(BetterAudio.PlaybackTime(&quot;music&quot;)/BetterAudio.Duration(&quot;music&quot;))*854</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="147572622122330">
+                                    <conditions>
+                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="339467686556322" type="Menu_Options2">
+                                            <param id="0" name="Instance variable">ID</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">nowplaying</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-15" name="Set visible" sid="701809843104743" type="Sprite14">
+                                            <param id="0" name="Visibility">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="621260128626393">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="179023688633027" type="Menu_Options2">
+                                            <param id="0" name="Instance variable">ID</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">nowplaying</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-15" name="Set visible" sid="868070129101929" type="Sprite14">
+                                            <param id="0" name="Visibility">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="416964454646203">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="174769222606697" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="5" name="Terminate" sid="568448610319100" type="Ease">
+                                            <param id="0" name="Ease tag">&quot;BeatIn&quot;</param>
+                                            <param id="1" name="Ease parameter {n}"></param>
+                                        </action>
+                                        <action id="5" name="Terminate" sid="207482933455221" type="Ease">
+                                            <param id="0" name="Ease tag">&quot;BeatOut&quot;</param>
+                                            <param id="1" name="Ease parameter {n}"></param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="427152391012652" type="System">
+                                            <param id="0" name="Variable">BPM</param>
+                                            <param id="1" name="Value">1/(int(JSON_AudioProperties.Value(0,nowplaying,&quot;BPM&quot;))/60)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="241432337222157">
+                                    <conditions>
+                                        <condition id="-6" name="Every X seconds" sid="609050398928550" type="System">
+                                            <param id="0" name="Interval (seconds)">BPM</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Ease" sid="722984118150236" type="Ease">
+                                            <param id="0" name="Ease tag">&quot;BeatIn&quot;</param>
+                                            <param id="1" name="Start value">0</param>
+                                            <param id="2" name="End value">8</param>
+                                            <param id="3" name="Duration">BPM/2</param>
+                                            <param id="4" name="Easing effect">11</param>
+                                            <param id="5" name="Bounce back">0</param>
+                                            <param id="6" name="Ease parameter {n}"></param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="441568441089153">
+                                    <conditions>
+                                        <condition id="1" name="On finished" sid="884005790493564" type="Ease">
+                                            <param id="0" name="Ease tag">&quot;BeatIn&quot;</param>
+                                            <param id="1" name="Ease parameter {n}"></param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Ease" sid="923586275862014" type="Ease">
+                                            <param id="0" name="Ease tag">&quot;BeatOut&quot;</param>
+                                            <param id="1" name="Start value">8</param>
+                                            <param id="2" name="End value">0</param>
+                                            <param id="3" name="Duration">BPM/2</param>
+                                            <param id="4" name="Easing effect">10</param>
+                                            <param id="5" name="Bounce back">0</param>
+                                            <param id="6" name="Ease parameter {n}"></param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block any="1" sid="703387457587456">
+                                    <conditions>
+                                        <condition id="3" name="On ticked" sid="625312270838561" type="Ease">
+                                            <param id="0" name="Ease tag">&quot;BeatIn&quot;</param>
+                                            <param id="1" name="Ease parameter {n}"></param>
+                                        </condition>
+                                        <condition id="3" name="On ticked" sid="247190885384672" type="Ease">
+                                            <param id="0" name="Ease tag">&quot;BeatOut&quot;</param>
+                                            <param id="1" name="Ease parameter {n}"></param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="313904647480381" type="Sprite14">
+                                            <param id="0" name="Y">Self.InitialY-Ease.TickedValue</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="573414639634782">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="458484698529669" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="20" name="Add analyser effect" sid="632976489669226" type="BetterAudio">
+                                            <param id="0" name="Tag">&quot;music&quot;</param>
+                                            <param id="1" name="FFT size">2^12</param>
+                                            <param id="2" name="Smoothing">0.7</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="867038532375519">
+                                            <conditions>
+                                                <condition id="-12" name="Repeat" sid="100050239542251" type="System">
+                                                    <param id="0" name="Count">30</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-3" name="Create object" sid="827054249455345" type="System">
+                                                    <param id="0" name="Object to create">MusicPlayer_Visualiser</param>
+                                                    <param id="1" name="Layer">&quot;SoundTest&quot;</param>
+                                                    <param id="2" name="X">434+(loopindex*14)</param>
+                                                    <param id="3" name="Y">444</param>
+                                                </action>
+                                                <action id="-10" name="Set value" sid="910670075590146" type="MusicPlayer_Visualiser">
+                                                    <param id="0" name="Instance variable">FreqBin</param>
+                                                    <param id="1" name="Value">loopindex</param>
+                                                </action>
+                                                <action id="-25" name="Move to bottom" sid="421460328367775" type="MusicPlayer_Visualiser" />
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="283133555156326">
+                                    <conditions>
+                                        <condition id="-11" name="For Each" sid="843463721377943" type="System">
+                                            <param id="0" name="Object">MusicPlayer_Visualiser</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="345002878804176">
+                                            <conditions>
+                                                <condition id="-8" name="Compare two values" sid="424189486405821" type="System">
+                                                    <param id="0" name="First value">MusicPlayer_Visualiser.OldFreqBin</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Second value">abs(floor(abs(BetterAudio.AnalyserFreqBinAt(&quot;music&quot;,0,MusicPlayer_Visualiser.FreqBin))/10))</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-6" name="Set height" sid="732258108352658" type="MusicPlayer_Visualiser">
+                                                    <param id="0" name="Height">180+((BetterAudio.AnalyserFreqBinAt(&quot;music&quot;,0,Self.FreqBin)*2.45))</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="860961007124625">
+                                            <conditions />
+                                            <actions>
+                                                <action id="-10" name="Set value" sid="610495077942761" type="MusicPlayer_Visualiser">
+                                                    <param id="0" name="Instance variable">OldFreqBin</param>
+                                                    <param id="1" name="Value">abs(floor(abs(BetterAudio.AnalyserFreqBinAt(&quot;Music&quot;,0,Self.FreqBin))/10))</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="949312505675686">
+                                            <conditions>
+                                                <condition id="-6" name="Compare height" sid="420492782340591" type="MusicPlayer_Visualiser">
+                                                    <param id="0" name="Comparison">4</param>
+                                                    <param id="1" name="Height">128</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-6" name="Set height" sid="529969711910505" type="MusicPlayer_Visualiser">
+                                                    <param id="0" name="Height">128</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="937168852360631">
+                                            <conditions>
+                                                <condition id="-6" name="Compare height" sid="362981832888927" type="MusicPlayer_Visualiser">
+                                                    <param id="0" name="Comparison">2</param>
+                                                    <param id="1" name="Height">2</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-6" name="Set height" sid="502770086435520" type="MusicPlayer_Visualiser">
+                                                    <param id="0" name="Height">2</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="767903870442762">
+                    <conditions>
+                        <condition id="-4" name="Trigger once while true" sid="605300511658726" type="System" />
+                        <condition id="-14" name="Pick by unique ID" sid="337764685397745" type="Text_Static">
+                            <param id="0" name="Unique ID">12141</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Call function" sid="465691610061204" type="Function">
+                            <param id="0" name="Name">&quot;Input_GetKey&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;pause&quot;</param>
+                        </action>
+                        <action id="0" name="Set text" sid="284779180917020" type="Text_Static">
+                            <param id="0" name="Text">&quot;PRESS &quot;&amp;uppercase(Function.ReturnValue)&amp;&quot; TO EXIT&quot;</param>
+                        </action>
+                    </actions>
                 </event-block>
             </sub-events>
         </event-group>
