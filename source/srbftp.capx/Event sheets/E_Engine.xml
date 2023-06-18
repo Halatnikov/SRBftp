@@ -57,6 +57,29 @@
                                 </action>
                             </actions>
                             <sub-events>
+                                <event-block sid="427251978390715">
+                                    <conditions />
+                                    <actions>
+                                        <action id="-9" name="Destroy" sid="776059430010295" type="PlayerSkins" />
+                                        <action id="0" name="Create family object" sid="786217110181277" type="CreateObjectByVal">
+                                            <param id="0" name="Family object">PlayerSkins</param>
+                                            <param id="1" name="Variable ID">0</param>
+                                            <param id="2" name="Comparison">0</param>
+                                            <param id="3" name="Value">Var_Player.Skin</param>
+                                            <param id="4" name="Layer">&quot;Player&quot;</param>
+                                            <param id="5" name="X">0</param>
+                                            <param id="6" name="Y">0</param>
+                                            <param id="7" name="Tag">&quot;&quot;</param>
+                                        </action>
+                                        <action id="9" name="Set scale" sid="249940112367190" type="PlayerSkins">
+                                            <param id="0" name="Scale">1</param>
+                                        </action>
+                                        <action id="-13" name="Set boolean" sid="586355742951155" type="PlayerSkins">
+                                            <param id="0" name="Instance variable">Me</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
                                 <event-block sid="433519987067532">
                                     <conditions />
                                     <actions>
@@ -156,7 +179,11 @@
                                 </event-block>
                                 <comment>(player movement and animation)</comment>
                                 <event-block sid="212731889529867">
-                                    <conditions />
+                                    <conditions>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="932724895698915" type="PlayerSkins">
+                                            <param id="0" name="Instance variable">Me</param>
+                                        </condition>
+                                    </conditions>
                                     <actions>
                                         <action behavior="8Direction" id="8" name="Set enabled" sid="748973171492596" type="Engine_Player">
                                             <param id="0" name="State">0</param>
@@ -340,47 +367,15 @@
                     <sub-events>
                         <comment>reposition skins</comment>
                         <event-block sid="495260480670350">
-                            <conditions />
+                            <conditions>
+                                <condition id="-8" name="Is boolean instance variable set" sid="623540062520090" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
+                                </condition>
+                            </conditions>
                             <actions>
                                 <action id="-4" name="Set position to another object" sid="690386336141098" type="PlayerSkins">
                                     <param id="0" name="Object">Engine_Player</param>
                                     <param id="1" name="Image point (optional)">0</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="329405836412145">
-                            <conditions>
-                                <condition id="-11" name="For Each" sid="379754753596766" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                </condition>
-                                <condition id="-7" name="Compare instance variable" sid="423316400792705" type="PlayerSkins">
-                                    <param id="0" name="Instance variable">ID</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">Var_Player.Skin</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="500995068326758" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="-15" name="Set visible" sid="476720004303274" type="PlayerSkins">
-                                    <param id="0" name="Visibility">1</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="491428540250991">
-                            <conditions>
-                                <condition id="-11" name="For Each" sid="868912031459377" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                </condition>
-                                <condition id="-7" inverted="1" name="Compare instance variable" sid="967493657923758" type="PlayerSkins">
-                                    <param id="0" name="Instance variable">ID</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">Var_Player.Skin</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="158605668116284" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="-15" name="Set visible" sid="426925054670453" type="PlayerSkins">
-                                    <param id="0" name="Visibility">0</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -412,6 +407,9 @@
                                     <param id="0" name="Instance variable">State</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">&quot;teleport&quot;</param>
+                                </condition>
+                                <condition id="-8" name="Is boolean instance variable set" sid="282277284289317" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                             </conditions>
                             <actions />
@@ -656,6 +654,9 @@
                                             <param id="2" name="Value">&quot;teleport&quot;</param>
                                         </condition>
                                         <condition id="-4" name="Trigger once while true" sid="126220870133385" type="System" />
+                                        <condition id="-8" name="Is boolean instance variable set" sid="249689885054865" type="PlayerSkins">
+                                            <param id="0" name="Instance variable">Me</param>
+                                        </condition>
                                     </conditions>
                                     <actions>
                                         <action id="4" name="Set animation" sid="125546092114213" type="PlayerSkins">
@@ -686,6 +687,9 @@
                                             <param id="0" name="Instance variable">State</param>
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">&quot;teleport&quot;</param>
+                                        </condition>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="746731540168092" type="PlayerSkins">
+                                            <param id="0" name="Instance variable">Me</param>
                                         </condition>
                                     </conditions>
                                     <actions />
@@ -783,6 +787,9 @@
                                             <param id="2" name="Value">&quot;teleport&quot;</param>
                                         </condition>
                                         <condition id="-4" name="Trigger once while true" sid="256141268048409" type="System" />
+                                        <condition id="-8" name="Is boolean instance variable set" sid="185252437880674" type="PlayerSkins">
+                                            <param id="0" name="Instance variable">Me</param>
+                                        </condition>
                                     </conditions>
                                     <actions>
                                         <action id="4" name="Set animation" sid="733129871658321" type="PlayerSkins">
@@ -829,6 +836,9 @@
                                             <param id="0" name="Instance variable">CanMove</param>
                                         </condition>
                                         <condition id="-4" name="Trigger once while true" sid="459363862368372" type="System" />
+                                        <condition id="-8" name="Is boolean instance variable set" sid="403940203456010" type="PlayerSkins">
+                                            <param id="0" name="Instance variable">Me</param>
+                                        </condition>
                                     </conditions>
                                     <actions>
                                         <action id="4" name="Set animation" sid="991696895051231" type="PlayerSkins">
@@ -858,6 +868,9 @@
                                             <param id="2" name="Value">&quot;teleport&quot;</param>
                                         </condition>
                                         <condition id="-4" name="Trigger once while true" sid="195984661087424" type="System" />
+                                        <condition id="-8" name="Is boolean instance variable set" sid="174652489078005" type="PlayerSkins">
+                                            <param id="0" name="Instance variable">Me</param>
+                                        </condition>
                                     </conditions>
                                     <actions>
                                         <action id="4" name="Set animation" sid="787951645347937" type="PlayerSkins">
@@ -873,6 +886,9 @@
                                             <param id="0" name="Instance variable">State</param>
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">&quot;crouch&quot;</param>
+                                        </condition>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="264688176034641" type="PlayerSkins">
+                                            <param id="0" name="Instance variable">Me</param>
                                         </condition>
                                     </conditions>
                                     <actions />
@@ -1023,6 +1039,9 @@
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">&quot;roll&quot;</param>
                                         </condition>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="964327973820117" type="PlayerSkins">
+                                            <param id="0" name="Instance variable">Me</param>
+                                        </condition>
                                     </conditions>
                                     <actions />
                                     <sub-events>
@@ -1149,6 +1168,9 @@
                                             <param id="0" name="Instance variable">State</param>
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">&quot;jump&quot;</param>
+                                        </condition>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="236001609329578" type="PlayerSkins">
+                                            <param id="0" name="Instance variable">Me</param>
                                         </condition>
                                     </conditions>
                                     <actions />
@@ -1334,6 +1356,9 @@
                                     <param id="2" name="Value">&quot;win&quot;</param>
                                 </condition>
                                 <condition id="-4" name="Trigger once while true" sid="861465687396123" type="System" />
+                                <condition id="-8" name="Is boolean instance variable set" sid="798692813264133" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
+                                </condition>
                             </conditions>
                             <actions>
                                 <action id="4" name="Set animation" sid="373020135799343" type="PlayerSkins">
@@ -1541,11 +1566,8 @@
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">2</param>
                                 </condition>
-                                <condition id="-33" name="Pick by comparison" sid="582024524225870" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="170310191238698" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                                 <condition id="-8" name="Is boolean instance variable set" sid="518787254834170" type="Engine_Camera">
                                     <param id="0" name="Instance variable">Enabled</param>
@@ -1922,6 +1944,9 @@
                                 <condition id="0" name="On function" sid="291329194386439" type="Function">
                                     <param id="0" name="Name">&quot;Player_TakeDamage&quot;</param>
                                 </condition>
+                                <condition id="-8" name="Is boolean instance variable set" sid="241126521339403" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
+                                </condition>
                             </conditions>
                             <actions />
                             <sub-events>
@@ -1935,12 +1960,6 @@
                                         </condition>
                                         <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="754151715018061" type="Var_Player">
                                             <param id="0" name="Instance variable">Shield</param>
-                                        </condition>
-                                        <condition id="-33" name="Pick by comparison" sid="798322399176642" type="System">
-                                            <param id="0" name="Object">PlayerSkins</param>
-                                            <param id="1" name="Expression">PlayerSkins.ID</param>
-                                            <param id="2" name="Comparison">0</param>
-                                            <param id="3" name="Value">Var_Player.Skin</param>
                                         </condition>
                                         <condition behavior="Flash" id="0" inverted="1" name="Is flashing" sid="300426038550955" type="PlayerSkins" />
                                         <condition id="-8" name="Is boolean instance variable set" sid="234744087675554" type="Var_Player">
@@ -2018,12 +2037,6 @@
                                         </condition>
                                         <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="167011522064808" type="Var_Player">
                                             <param id="0" name="Instance variable">Shield</param>
-                                        </condition>
-                                        <condition id="-33" name="Pick by comparison" sid="845676533359082" type="System">
-                                            <param id="0" name="Object">PlayerSkins</param>
-                                            <param id="1" name="Expression">PlayerSkins.ID</param>
-                                            <param id="2" name="Comparison">0</param>
-                                            <param id="3" name="Value">Var_Player.Skin</param>
                                         </condition>
                                         <condition behavior="Flash" id="0" inverted="1" name="Is flashing" sid="853856888999562" type="PlayerSkins" />
                                         <condition id="-8" name="Is boolean instance variable set" sid="129206796465229" type="Var_Player">
@@ -2134,12 +2147,6 @@
                                         <condition id="-8" name="Is boolean instance variable set" sid="604562626723249" type="Var_Player">
                                             <param id="0" name="Instance variable">Shield</param>
                                         </condition>
-                                        <condition id="-33" name="Pick by comparison" sid="728991101404641" type="System">
-                                            <param id="0" name="Object">PlayerSkins</param>
-                                            <param id="1" name="Expression">PlayerSkins.ID</param>
-                                            <param id="2" name="Comparison">0</param>
-                                            <param id="3" name="Value">Var_Player.Skin</param>
-                                        </condition>
                                         <condition behavior="Flash" id="0" inverted="1" name="Is flashing" sid="531036007284081" type="PlayerSkins" />
                                         <condition id="-8" name="Is boolean instance variable set" sid="578921815763333" type="Var_Player">
                                             <param id="0" name="Instance variable">CanMove</param>
@@ -2190,11 +2197,8 @@
                                 <condition id="0" name="On function" sid="564906082404343" type="Function">
                                     <param id="0" name="Name">&quot;Player_Die&quot;</param>
                                 </condition>
-                                <condition id="-33" name="Pick by comparison" sid="756399239053660" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="711760697055243" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                                 <condition id="-7" inverted="1" name="Compare instance variable" sid="166932451940170" type="Var_Player">
                                     <param id="0" name="Instance variable">IncincibilityTimer</param>
@@ -2305,6 +2309,9 @@
                                 <condition id="4" name="On finished" sid="400175879230210" type="PlayerSkins">
                                     <param id="0" name="Animation">&quot;Death&quot;</param>
                                 </condition>
+                                <condition id="-8" name="Is boolean instance variable set" sid="219801014110953" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
+                                </condition>
                             </conditions>
                             <actions>
                                 <action id="-11" name="Add to" sid="857233430197113" type="Var_Player">
@@ -2389,11 +2396,8 @@
                         <comment>shield</comment>
                         <event-block sid="747075642262047">
                             <conditions>
-                                <condition id="-33" name="Pick by comparison" sid="537911394659848" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="378954021155671" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -2485,11 +2489,8 @@
                         <comment>invulnerability (yes im calling it that on purpose)</comment>
                         <event-block sid="459753582978939">
                             <conditions>
-                                <condition id="-33" name="Pick by comparison" sid="652737476745633" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="643294136060277" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -2846,6 +2847,9 @@
                                 <condition id="-6" name="Every X seconds" sid="916197278158332" type="System">
                                     <param id="0" name="Interval (seconds)">2</param>
                                 </condition>
+                                <condition id="-11" name="For Each" sid="484365500740130" type="System">
+                                    <param id="0" name="Object">PlayerSkins</param>
+                                </condition>
                             </conditions>
                             <actions>
                                 <action id="0" name="Spawn another object" sid="355784700324161" type="PlayerSkins">
@@ -3019,6 +3023,9 @@
                             <sub-events>
                                 <event-block sid="581704294030322">
                                     <conditions>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="292883552317914" type="PlayerSkins">
+                                            <param id="0" name="Instance variable">Me</param>
+                                        </condition>
                                         <condition id="-8" name="Is boolean instance variable set" sid="169150464808223" type="Special_StartPos">
                                             <param id="0" name="Instance variable">TurnAround</param>
                                         </condition>
@@ -3117,11 +3124,8 @@
                                         <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="157835047064671" type="Special_Death">
                                             <param id="0" name="Instance variable">IgnoreShield</param>
                                         </condition>
-                                        <condition id="-33" name="Pick by comparison" sid="936847901628650" type="System">
-                                            <param id="0" name="Object">PlayerSkins</param>
-                                            <param id="1" name="Expression">PlayerSkins.ID</param>
-                                            <param id="2" name="Comparison">0</param>
-                                            <param id="3" name="Value">Var_Player.Skin</param>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="281178708348453" type="PlayerSkins">
+                                            <param id="0" name="Instance variable">Me</param>
                                         </condition>
                                     </conditions>
                                     <actions />
@@ -3220,11 +3224,8 @@
                                 <condition id="0" name="On collision with another object" sid="524659572756450" type="PlayerSkins">
                                     <param id="0" name="Object">Common_Ring</param>
                                 </condition>
-                                <condition id="-33" name="Pick by comparison" sid="544386304271571" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="942115180140580" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                                 <condition id="2" inverted="1" name="Is playing" sid="754562374773480" type="Common_Ring">
                                     <param id="0" name="Animation">&quot;Collected_&quot;&amp;Self.Reskin</param>
@@ -3518,11 +3519,8 @@
                                 <condition id="0" name="On collision with another object" sid="994003470690231" type="PlayerSkins">
                                     <param id="0" name="Object">Common_AirBubble</param>
                                 </condition>
-                                <condition id="-33" name="Pick by comparison" sid="675857089477072" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="115571011596868" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                                 <condition id="12" name="Compare speed" sid="927571188394438" type="Common_AirBubble">
                                     <param id="0" name="Comparison">0</param>
@@ -3547,11 +3545,8 @@
                                 <condition id="0" name="On collision with another object" sid="404062063920596" type="PlayerSkins">
                                     <param id="0" name="Object">ObjectF_Checkpoint</param>
                                 </condition>
-                                <condition id="-33" name="Pick by comparison" sid="745100494689869" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="279049475355552" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                                 <condition id="2" name="Is playing" sid="125173258353357" type="ObjectF_Checkpoint">
                                     <param id="0" name="Animation">&quot;Idle&quot;</param>
@@ -3678,11 +3673,8 @@
                                 <condition id="1" name="Is overlapping another object" sid="926832121849267" type="PlayerSkins">
                                     <param id="0" name="Object">EnemyProjectiles</param>
                                 </condition>
-                                <condition id="-33" name="Pick by comparison" sid="168153049375350" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="700921326091582" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                                 <condition id="-7" inverted="1" name="Compare instance variable" sid="632603900324574" type="Var_Player">
                                     <param id="0" name="Instance variable">State</param>
@@ -3721,11 +3713,8 @@
                                 <condition id="1" name="Is overlapping another object" sid="822143458230801" type="PlayerSkins">
                                     <param id="0" name="Object">EnemyProjectiles</param>
                                 </condition>
-                                <condition id="-33" name="Pick by comparison" sid="914896707379392" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="980789393013670" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                                 <condition id="-7" name="Compare instance variable" sid="219122952425791" type="Var_Player">
                                     <param id="0" name="Instance variable">State</param>
@@ -3913,11 +3902,8 @@
                                     <param id="1" name="Offset X">0</param>
                                     <param id="2" name="Offset Y">1</param>
                                 </condition>
-                                <condition id="-33" name="Pick by comparison" sid="935009240123342" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="405342629414818" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                                 <condition id="-7" name="Compare instance variable" sid="774845523422263" type="Var_Player">
                                     <param id="0" name="Instance variable">Finished</param>
@@ -3976,11 +3962,8 @@
                                     <param id="1" name="Offset X">0</param>
                                     <param id="2" name="Offset Y">1</param>
                                 </condition>
-                                <condition id="-33" name="Pick by comparison" sid="626901226423374" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="848994670505928" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                                 <condition behavior="Flash" id="0" inverted="1" name="Is flashing" sid="535045351716668" type="PlayerSkins" />
                                 <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="168500430468970" type="Var_Level">
@@ -3997,16 +3980,36 @@
                         <comment>=crusher</comment>
                         <comment>funny pancake</comment>
                         <comment>simple</comment>
+                        <event-block sid="356308110061054">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="235658227127898" type="System">
+                                    <param id="0" name="First value">tickcount%2</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">0</param>
+                                </condition>
+                                <condition id="-11" name="For Each" sid="675871590550115" type="System">
+                                    <param id="0" name="Object">Object2_MovingPlatform</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Set value" sid="136428919637188" type="Object2_MovingPlatform">
+                                    <param id="0" name="Instance variable">SineOld</param>
+                                    <param id="1" name="Value">Self.Sine.Value</param>
+                                </action>
+                            </actions>
+                        </event-block>
                         <event-block sid="534754493490018">
                             <conditions>
                                 <condition id="1" name="Is overlapping another object" sid="765192456575083" type="PlayerSkins">
                                     <param id="0" name="Object">Object2_MovingPlatform</param>
                                 </condition>
-                                <condition id="-33" name="Pick by comparison" sid="436966386241705" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="568204493207526" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="668744813828684" type="Object2_MovingPlatform">
+                                    <param id="0" name="Instance variable">SineOld</param>
+                                    <param id="1" name="Comparison">2</param>
+                                    <param id="2" name="Value">Self.Sine.Value</param>
                                 </condition>
                                 <condition id="1" name="Is overlapping another object" sid="498097051442806" type="Engine_Player">
                                     <param id="0" name="Object">Special_CrushZone</param>
@@ -4035,11 +4038,8 @@
                                 <condition id="1" name="Is overlapping another object" sid="685357274825804" type="PlayerSkins">
                                     <param id="0" name="Object">Special_CrushZone2nd</param>
                                 </condition>
-                                <condition id="-33" name="Pick by comparison" sid="324241129441748" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="645511804259505" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                                 <condition id="1" name="Is overlapping another object" sid="572702019173005" type="Engine_Player">
                                     <param id="0" name="Object">Special_CrushZone</param>
@@ -4207,11 +4207,8 @@
                                 <condition id="0" name="On collision with another object" sid="192635371623023" type="PlayerSkins">
                                     <param id="0" name="Object">HazardF_ExplosionHarmful</param>
                                 </condition>
-                                <condition id="-33" name="Pick by comparison" sid="265102489305762" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="467755722632906" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                                 <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="440186315235419" type="Var_Level">
                                     <param id="0" name="Instance variable">Pause</param>
@@ -4437,11 +4434,8 @@
                                 <condition id="0" name="On collision with another object" sid="524506089318963" type="PlayerSkins">
                                     <param id="0" name="Object">Hazard1_5VFireBubble</param>
                                 </condition>
-                                <condition id="-33" name="Pick by comparison" sid="225993836061806" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="745209468850119" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -4459,11 +4453,8 @@
                                     <param id="1" name="Offset X">0</param>
                                     <param id="2" name="Offset Y">1</param>
                                 </condition>
-                                <condition id="-33" name="Pick by comparison" sid="644331845521029" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="113356054303805" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                             </conditions>
                             <actions />
@@ -4530,12 +4521,6 @@
                                 <condition id="0" name="On function" sid="504850380656854" type="Function">
                                     <param id="0" name="Name">&quot;Player_Restart&quot;</param>
                                 </condition>
-                                <condition id="-33" name="Pick by comparison" sid="848115916810733" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
-                                </condition>
                             </conditions>
                             <actions>
                                 <action id="-9" name="Set value" sid="320626238001671" type="System">
@@ -4550,11 +4535,8 @@
                                 <condition id="-8" name="Is boolean instance variable set" sid="211377067602925" type="PlayerSkins">
                                     <param id="0" name="Instance variable">TeleportAnimation</param>
                                 </condition>
-                                <condition id="-33" name="Pick by comparison" sid="381343551246294" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="928583008953511" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                             </conditions>
                             <actions />
@@ -4697,11 +4679,8 @@
                                 <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="414821464830966" type="PlayerSkins">
                                     <param id="0" name="Instance variable">TeleportAnimation</param>
                                 </condition>
-                                <condition id="-33" name="Pick by comparison" sid="178209813347550" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="472526075459481" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                             </conditions>
                             <actions />
@@ -4865,11 +4844,8 @@
                                     <param id="0" name="Ease tag">&quot;TeleportIn&quot;</param>
                                     <param id="1" name="Ease parameter {n}"></param>
                                 </condition>
-                                <condition id="-33" name="Pick by comparison" sid="343456663211713" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="222112570388937" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -4884,11 +4860,8 @@
                                     <param id="0" name="Ease tag">&quot;TeleportOut&quot;</param>
                                     <param id="1" name="Ease parameter {n}"></param>
                                 </condition>
-                                <condition id="-33" name="Pick by comparison" sid="512418918569656" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="591906327647050" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -5012,6 +4985,80 @@
                                             <param id="1" name="Value">100</param>
                                         </action>
                                     </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <comment></comment>
+                        <event-block sid="451276945883603">
+                            <conditions>
+                                <condition id="0" name="On function" sid="645363973675353" type="Function">
+                                    <param id="0" name="Name">&quot;Player_Restart&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action behavior="LiteTween" id="14" name="Stop" sid="469914873764534" type="Object1_Door">
+                                    <param id="0" name="Stop Mode">1</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="658039899088083" type="Object1_Door">
+                                    <param id="0" name="Instance variable">Switches</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="5" name="Set frame" sid="914749096735754" type="Object1_DoorSwitch">
+                                    <param id="0" name="Frame number">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="608118013635371">
+                            <conditions>
+                                <condition id="0" name="On collision with another object" sid="184319173241189" type="PlayerSkins">
+                                    <param id="0" name="Object">Object1_DoorSwitch</param>
+                                </condition>
+                                <condition id="-8" name="Is boolean instance variable set" sid="411361502612666" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
+                                </condition>
+                                <condition id="3" name="Compare frame" sid="928088848146159" type="Object1_DoorSwitch">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Number">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="5" name="Set frame" sid="722184514343474" type="Object1_DoorSwitch">
+                                    <param id="0" name="Frame number">1</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="591118843527413">
+                                    <conditions>
+                                        <condition id="-33" name="Pick by comparison" sid="274688446477097" type="System">
+                                            <param id="0" name="Object">Object1_Door</param>
+                                            <param id="1" name="Expression">Object1_Door.ID</param>
+                                            <param id="2" name="Comparison">0</param>
+                                            <param id="3" name="Value">Object1_DoorSwitch.DoorID</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-11" name="Add to" sid="521828812717745" type="Object1_Door">
+                                            <param id="0" name="Instance variable">Switches</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="998660339718562">
+                                            <conditions>
+                                                <condition id="-7" name="Compare instance variable" sid="866347378345761" type="Object1_Door">
+                                                    <param id="0" name="Instance variable">Switches</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">Self.SwitchesCount</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action behavior="LiteTween" id="10" name="Start" sid="101069108235239" type="Object1_Door">
+                                                    <param id="0" name="Start Mode">0</param>
+                                                    <param id="1" name="Force use current">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
                                 </event-block>
                             </sub-events>
                         </event-block>
@@ -5297,11 +5344,8 @@
                                 <condition id="0" name="On collision with another object" sid="547542560214194" type="PlayerSkins">
                                     <param id="0" name="Object">ObjectF_Emblem</param>
                                 </condition>
-                                <condition id="-33" name="Pick by comparison" sid="601206783802942" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="707944360065642" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                                 <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="215554087694847" type="ObjectF_Emblem">
                                     <param id="0" name="Instance variable">Used</param>
@@ -5348,6 +5392,9 @@
                             <conditions>
                                 <condition id="0" name="On collision with another object" sid="127347123285593" type="Engine_Player">
                                     <param id="0" name="Object">Object2_Spring</param>
+                                </condition>
+                                <condition id="-8" name="Is boolean instance variable set" sid="711765976184934" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -5536,6 +5583,9 @@
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">-1</param>
                                 </condition>
+                                <condition id="-8" name="Is boolean instance variable set" sid="878285214450691" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
+                                </condition>
                             </conditions>
                             <actions />
                             <sub-events>
@@ -5594,11 +5644,8 @@
                                 <condition id="0" name="On collision with another object" sid="463753002958880" type="PlayerSkins">
                                     <param id="0" name="Object">Object2_WaterLevelControl</param>
                                 </condition>
-                                <condition id="-33" name="Pick by comparison" sid="396357443086676" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="923420447357672" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -5622,11 +5669,8 @@
                                 <condition id="0" name="On collision with another object" sid="680715022035974" type="PlayerSkins">
                                     <param id="0" name="Object">Object2_WaterPassage</param>
                                 </condition>
-                                <condition id="-33" name="Pick by comparison" sid="876489322334782" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="516897453603272" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -5695,11 +5739,8 @@
                                 <condition id="0" name="On collision with another object" sid="748611823664303" type="PlayerSkins">
                                     <param id="0" name="Object">Object2_SpringCancel</param>
                                 </condition>
-                                <condition id="-33" name="Pick by comparison" sid="630251425845925" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="247918085916291" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -5940,11 +5981,8 @@
                                 <condition id="0" name="On collision with another object" sid="569320228341406" type="PlayerSkins">
                                     <param id="0" name="Object">Object2_SpecialStageWarp</param>
                                 </condition>
-                                <condition id="-33" name="Pick by comparison" sid="934181241583756" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="945443816031144" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                                 <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="722442597228936" type="Object2_SpecialStageWarp">
                                     <param id="0" name="Instance variable">Used</param>
@@ -5975,11 +6013,8 @@
                                 <condition id="0" name="On collision with another object" sid="985509889863639" type="PlayerSkins">
                                     <param id="0" name="Object">Object2_SpecialStageWarp</param>
                                 </condition>
-                                <condition id="-33" name="Pick by comparison" sid="601891303407678" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="453762065445186" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                                 <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="433702739702117" type="Object2_SpecialStageWarp">
                                     <param id="0" name="Instance variable">Used</param>
@@ -6016,11 +6051,8 @@
                                 <condition id="0" name="On collision with another object" sid="184564879731699" type="PlayerSkins">
                                     <param id="0" name="Object">Object2_SpecialStageWarp</param>
                                 </condition>
-                                <condition id="-33" name="Pick by comparison" sid="658188176889971" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="870350988118063" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                                 <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="409825120469029" type="Object2_SpecialStageWarp">
                                     <param id="0" name="Instance variable">Used</param>
@@ -7056,11 +7088,8 @@
                                 <condition id="1" name="Is overlapping another object" sid="860756615410127" type="PlayerSkins">
                                     <param id="0" name="Object">Enemies</param>
                                 </condition>
-                                <condition id="-33" name="Pick by comparison" sid="508661925694057" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="256408998182855" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                                 <condition id="-7" name="Compare instance variable" sid="369486755347621" type="Var_Player">
                                     <param id="0" name="Instance variable">Finished</param>
@@ -7600,11 +7629,8 @@
                                 <condition id="0" name="On collision with another object" sid="258707938177981" type="Hazard2_2THZHeatSeekingBomb">
                                     <param id="0" name="Object">PlayerSkins</param>
                                 </condition>
-                                <condition id="-33" name="Pick by comparison" sid="753380396026649" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="498430480830252" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                                 <condition id="-7" name="Compare instance variable" sid="147223045204222" type="Effects2_HazardDetonFOV">
                                     <param id="0" name="Instance variable">ID</param>
@@ -8393,11 +8419,8 @@
                                 <condition id="0" name="On collision with another object" sid="503014908254690" type="PlayerSkins">
                                     <param id="0" name="Object">Bosses</param>
                                 </condition>
-                                <condition id="-33" name="Pick by comparison" sid="383611287369570" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="366606650889623" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                                 <condition id="-7" name="Compare instance variable" sid="596439005886431" type="Bosses">
                                     <param id="0" name="Instance variable">State</param>
@@ -8500,11 +8523,8 @@
                                 <condition id="0" name="On collision with another object" sid="621946506015283" type="PlayerSkins">
                                     <param id="0" name="Object">Bosses</param>
                                 </condition>
-                                <condition id="-33" name="Pick by comparison" sid="488937463564625" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="833378344941409" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                                 <condition id="-7" inverted="1" name="Compare instance variable" sid="973447477733286" type="Var_Player">
                                     <param id="0" name="Instance variable">State</param>
@@ -8701,11 +8721,8 @@
                                 <condition id="0" name="On collision with another object" sid="329135570071001" type="PlayerSkins">
                                     <param id="0" name="Object">Projectile1_2GF1Boss</param>
                                 </condition>
-                                <condition id="-33" name="Pick by comparison" sid="179922839131185" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="971010122855408" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                                 <condition behavior="Flash" id="0" name="Is flashing" sid="414052990263335" type="PlayerSkins" />
                             </conditions>
@@ -9069,11 +9086,8 @@
                                 <condition id="1" name="Is overlapping another object" sid="225009987976812" type="PlayerSkins">
                                     <param id="0" name="Object">Boss1_4IP1EnergyBall</param>
                                 </condition>
-                                <condition id="-33" name="Pick by comparison" sid="474905058413319" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="640030056812447" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                                 <condition id="-7" inverted="1" name="Compare instance variable" sid="699498441771501" type="Var_Player">
                                     <param id="0" name="Instance variable">State</param>
@@ -9099,11 +9113,8 @@
                                 <condition id="0" name="On collision with another object" sid="459863217525684" type="PlayerSkins">
                                     <param id="0" name="Object">Boss1_4IP1EnergyBall</param>
                                 </condition>
-                                <condition id="-33" name="Pick by comparison" sid="258617621316884" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="107713217642705" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                                 <condition id="-7" name="Compare instance variable" sid="467041530340999" type="Var_Player">
                                     <param id="0" name="Instance variable">State</param>
@@ -10897,11 +10908,8 @@
                                 <condition id="0" name="On collision with another object" sid="516593107081184" type="Boss2_1GFZ">
                                     <param id="0" name="Object">PlayerSkins</param>
                                 </condition>
-                                <condition id="-33" name="Pick by comparison" sid="497971186613250" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
-                                    <param id="1" name="Expression">PlayerSkins.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Var_Player.Skin</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="178192744898996" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
                                 </condition>
                                 <condition id="-7" name="Compare instance variable" sid="463778992431384" type="Var_Player">
                                     <param id="0" name="Instance variable">State</param>
@@ -11431,11 +11439,8 @@
                         <condition id="0" name="On collision with another object" sid="257509840697308" type="PlayerSkins">
                             <param id="0" name="Object">Common_FinishSign</param>
                         </condition>
-                        <condition id="-33" name="Pick by comparison" sid="358413709058499" type="System">
-                            <param id="0" name="Object">PlayerSkins</param>
-                            <param id="1" name="Expression">PlayerSkins.ID</param>
-                            <param id="2" name="Comparison">0</param>
-                            <param id="3" name="Value">Var_Player.Skin</param>
+                        <condition id="-8" name="Is boolean instance variable set" sid="642059459233077" type="PlayerSkins">
+                            <param id="0" name="Instance variable">Me</param>
                         </condition>
                         <condition id="-8" name="Is boolean instance variable set" sid="364593260248921" type="Common_FinishSign">
                             <param id="0" name="Instance variable">Falling</param>
@@ -11590,11 +11595,8 @@
                         <condition id="0" name="On collision with another object" sid="204015077728162" type="PlayerSkins">
                             <param id="0" name="Object">Common_FinishSign</param>
                         </condition>
-                        <condition id="-33" name="Pick by comparison" sid="978499368372425" type="System">
-                            <param id="0" name="Object">PlayerSkins</param>
-                            <param id="1" name="Expression">PlayerSkins.ID</param>
-                            <param id="2" name="Comparison">0</param>
-                            <param id="3" name="Value">Var_Player.Skin</param>
+                        <condition id="-8" name="Is boolean instance variable set" sid="247758709690614" type="PlayerSkins">
+                            <param id="0" name="Instance variable">Me</param>
                         </condition>
                         <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="211742362274471" type="Common_FinishSign">
                             <param id="0" name="Instance variable">Falling</param>
@@ -11735,6 +11737,9 @@
                             <param id="0" name="Instance variable">Finished</param>
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">1</param>
+                        </condition>
+                        <condition id="-8" name="Is boolean instance variable set" sid="280680568784697" type="PlayerSkins">
+                            <param id="0" name="Instance variable">Me</param>
                         </condition>
                     </conditions>
                     <actions />
@@ -11995,11 +12000,8 @@
                 <comment>skin name</comment>
                 <event-block sid="636573169268795">
                     <conditions>
-                        <condition id="-33" name="Pick by comparison" sid="136629344289260" type="System">
-                            <param id="0" name="Object">PlayerSkins</param>
-                            <param id="1" name="Expression">PlayerSkins.ID</param>
-                            <param id="2" name="Comparison">0</param>
-                            <param id="3" name="Value">Var_Player.Skin</param>
+                        <condition id="-8" name="Is boolean instance variable set" sid="327184137472536" type="PlayerSkins">
+                            <param id="0" name="Instance variable">Me</param>
                         </condition>
                         <condition id="-4" name="Trigger once while true" sid="971426905334370" type="System" />
                     </conditions>
@@ -14150,11 +14152,8 @@
                             <param id="2" name="Value">0</param>
                         </condition>
                         <condition id="-4" name="Trigger once while true" sid="171546098959163" type="System" />
-                        <condition id="-33" name="Pick by comparison" sid="785031332040549" type="System">
-                            <param id="0" name="Object">PlayerSkins</param>
-                            <param id="1" name="Expression">PlayerSkins.ID</param>
-                            <param id="2" name="Comparison">0</param>
-                            <param id="3" name="Value">Var_Player.Skin</param>
+                        <condition id="-8" name="Is boolean instance variable set" sid="377259735334461" type="PlayerSkins">
+                            <param id="0" name="Instance variable">Me</param>
                         </condition>
                     </conditions>
                     <actions>
@@ -14178,11 +14177,8 @@
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">1</param>
                         </condition>
-                        <condition id="-33" name="Pick by comparison" sid="845239107395912" type="System">
-                            <param id="0" name="Object">PlayerSkins</param>
-                            <param id="1" name="Expression">PlayerSkins.ID</param>
-                            <param id="2" name="Comparison">0</param>
-                            <param id="3" name="Value">Var_Player.Skin</param>
+                        <condition id="-8" name="Is boolean instance variable set" sid="971986726073142" type="PlayerSkins">
+                            <param id="0" name="Instance variable">Me</param>
                         </condition>
                     </conditions>
                     <actions>

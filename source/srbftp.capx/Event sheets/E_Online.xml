@@ -3,6 +3,58 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>E_Online</name>
     <events>
+        <event-group description="" sid="558958445449610" title="Photon">
+            <sub-events>
+                <event-block sid="480505158572512">
+                    <conditions>
+                        <condition id="-4" name="Trigger once while true" sid="944141158681869" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="7" name="Set app version" sid="207147199144378" type="Photon">
+                            <param id="0" name="App version">projectversion</param>
+                        </action>
+                        <action id="201" name="Reset" sid="978529698407671" type="Photon" />
+                    </actions>
+                </event-block>
+                <event-block sid="274429544076118">
+                    <conditions>
+                        <condition id="70" inverted="1" name="Is Empty" sid="536987192790130" type="JSON_Indev">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="231104855067152" type="System">
+                            <param id="0" name="Variable">DEBUG</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="157596589129669" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="6" name="Set app id" sid="607846348791531" type="Photon">
+                            <param id="0" name="App id">JSON_Indev.Value(0,&quot;Photon&quot;,&quot;AppID&quot;)</param>
+                        </action>
+                        <action id="201" name="Reset" sid="631259815263356" type="Photon" />
+                    </actions>
+                </event-block>
+                <event-block sid="620544959659637">
+                    <conditions>
+                        <condition id="0" name="On error" sid="459902964579186" type="Photon" />
+                    </conditions>
+                    <actions>
+                        <action id="16" name="Leave room" sid="517801211837926" type="Photon" />
+                        <action id="14" name="Disconnect" sid="733788371385283" type="Photon" />
+                        <action id="33" name="Stop all" sid="183965095213819" type="BetterAudio" />
+                        <action id="-2" name="Go to layout" sid="825562650660145" type="System">
+                            <param id="0" name="Layout">Menu_Main</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="971513056643058" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentMenu</param>
+                            <param id="1" name="Value">&quot;online_error&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
         <event-group description="" sid="552249654301131" title="Discord Rich Presence">
             <sub-events>
                 <event-block sid="696966748404420">

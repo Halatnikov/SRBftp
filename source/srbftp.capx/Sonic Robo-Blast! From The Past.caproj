@@ -2,7 +2,7 @@
 <c2project>
     <name>Sonic Robo-Blast! From The Past</name>
     <description>Original games by Sonikku - Johnathan Wallbank and SSNTails - A.J. Freda</description>
-    <version>0.2.2-27</version>
+    <version>0.2.2-28</version>
     <author>Halatnikov</author>
     <author-email></author-email>
     <author-website>https://halatnikov.github.io</author-website>
@@ -25,6 +25,7 @@
         <plugin author="Scirra" id="Mouse" version="1">Mouse</plugin>
         <plugin author="Scirra" id="NinePatch" version="1">9-patch</plugin>
         <plugin author="Scirra" id="NodeWebkit" version="1">NW.js</plugin>
+        <plugin author="Exit Games" id="Photon" version="1">Photon</plugin>
         <plugin author="Rex.Rainbow" id="Rex_Date" version="1">Date</plugin>
         <plugin author="Rex.Rainbow" id="Rex_EncDecXOR" version="0.100000001">XOR Encryption</plugin>
         <plugin author="Rex.Rainbow" id="Rex_INI" version="0.100000001">INI</plugin>
@@ -200,6 +201,12 @@
                 <plugin id="JSON" />
             </object-type>
             <object-type global="1" name="JSON_AudioProperties" sid="467132376244142">
+                <plugin id="JSON" />
+            </object-type>
+            <object-type name="Photon" sid="743413587091961">
+                <plugin id="Photon" />
+            </object-type>
+            <object-type global="1" name="JSON_Indev" sid="194424962795656">
                 <plugin id="JSON" />
             </object-type>
         </object-folder>
@@ -3888,6 +3895,9 @@
             </object-type>
             <object-type name="Special_CrushZone2nd" sid="391575255845740">
                 <plugin id="TiledBg" />
+                <instance-variables>
+                    <instance-variable name="SineOld" sid="180199280512972" type="number" />
+                </instance-variables>
                 <behaviors>
                     <behavior-type name="Sine" sid="474625160061515">
                         <behavior id="Sin" />
@@ -9263,6 +9273,9 @@
             </object-type>
             <object-type name="Object2_MovingPlatform" sid="858710198141526">
                 <plugin id="Sprite" />
+                <instance-variables>
+                    <instance-variable name="SineOld" sid="102465472454790" type="number" />
+                </instance-variables>
                 <behaviors>
                     <behavior-type name="Jumpthru" sid="578928987033593">
                         <behavior id="jumpthru" />
@@ -9275,7 +9288,7 @@
                     </behavior-type>
                 </behaviors>
                 <animation-folder>
-                    <animation framecount="6" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="112897962762728" speed="0">
+                    <animation framecount="7" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="112897962762728" speed="0">
                         <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb2\assets\tiles\platform.png" />
                         <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb2\assets\tiles\thz2_3.png">
                             <collision-poly>
@@ -9310,6 +9323,7 @@
                                 <point x="1" y="0" />
                             </collision-poly>
                         </frame>
+                        <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\objects\crusher.png" />
                     </animation>
                 </animation-folder>
             </object-type>
@@ -10889,13 +10903,40 @@
                     </behaviors>
                     <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\6echidnapolis\2boss_bg1.png" />
                 </object-type>
-                <object-type name="BG1_6EP2Boss" sid="799829077715591">
+                <object-type name="Deco1_6EP2Boss" sid="799829077715591">
                     <plugin id="Sprite" />
                     <animation-folder>
                         <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="442901105601581" speed="5">
                             <frame duration="1" hotspotX="0.540541" hotspotY="0.529412" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\6echidnapolis\2boss_bg2.png" />
                         </animation>
                     </animation-folder>
+                </object-type>
+                <object-type name="Deco1_6EPWaterSolidTop" sid="332201576380845">
+                    <plugin id="TiledSprite" />
+                    <animation-folder>
+                        <animation framecount="2" loop="1" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="467392952037496" speed="5">
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\6echidnapolis\water_1.png">
+                                <collision-poly>
+                                    <point x="0" y="0" />
+                                    <point x="1" y="0" />
+                                    <point x="1" y="0.9375" />
+                                    <point x="0" y="0.9375" />
+                                </collision-poly>
+                            </frame>
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\6echidnapolis\water_2.png">
+                                <collision-poly>
+                                    <point x="0" y="0" />
+                                    <point x="1" y="0" />
+                                    <point x="1" y="0.9375" />
+                                    <point x="0" y="0.9375" />
+                                </collision-poly>
+                            </frame>
+                        </animation>
+                    </animation-folder>
+                </object-type>
+                <object-type name="Deco1_6EPWaterSolid" sid="572808835836032">
+                    <plugin id="TiledBg" />
+                    <texture />
                 </object-type>
             </object-folder>
             <object-folder name="SRB2">
@@ -12140,9 +12181,45 @@
                         <instance-variable name="ID" sid="295162796967104" type="number" />
                     </instance-variables>
                     <animation-folder>
-                        <animation framecount="2" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="396317568511586" speed="0">
-                            <frame duration="1" hotspotX="0.501424" hotspotY="0.5" />
-                            <frame duration="1" hotspotX="0.501424" hotspotY="0.5" />
+                        <animation framecount="2" loop="0" name="x352" pingpong="0" repeatcount="1" repeatto="0" sid="396317568511586" speed="0">
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5">
+                                <collision-poly>
+                                    <point x="0.00284091" y="0" />
+                                    <point x="1" y="0" />
+                                    <point x="1" y="1" />
+                                    <point x="0.00284091" y="1" />
+                                </collision-poly>
+                            </frame>
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5">
+                                <collision-poly>
+                                    <point x="0.00284091" y="0" />
+                                    <point x="1" y="0" />
+                                    <point x="1" y="1" />
+                                    <point x="0.00284091" y="1" />
+                                </collision-poly>
+                            </frame>
+                        </animation>
+                        <animation framecount="2" loop="0" name="x320" pingpong="0" repeatcount="1" repeatto="0" sid="382830387573387" speed="0">
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5">
+                                <collision-poly>
+                                    <point x="0.003125" y="0" />
+                                    <point x="1" y="0" />
+                                    <point x="1" y="1" />
+                                    <point x="0.003125" y="1" />
+                                </collision-poly>
+                            </frame>
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5">
+                                <collision-poly>
+                                    <point x="0.003125" y="0" />
+                                    <point x="1" y="0" />
+                                    <point x="1" y="1" />
+                                    <point x="0.003125" y="1" />
+                                </collision-poly>
+                            </frame>
+                        </animation>
+                        <animation framecount="2" loop="0" name="x256" pingpong="0" repeatcount="1" repeatto="0" sid="112883221833232" speed="0">
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
                         </animation>
                     </animation-folder>
                 </object-type>
@@ -12269,7 +12346,7 @@
                 <object-type name="Menu_TextBox" sid="759907817614277">
                     <plugin id="TextBox" />
                     <instance-variables>
-                        <instance-variable name="ID" sid="928405797206580" type="number" />
+                        <instance-variable name="ID" sid="928405797206580" type="string" />
                     </instance-variables>
                 </object-type>
                 <object-type name="Menu_CursorArrows" sid="369957082344944">
@@ -15984,6 +16061,8 @@
                 <instance-variable name="Name" sid="896564317742998" type="string" />
                 <instance-variable name="DisplayName" sid="292523993894880" type="string" />
                 <instance-variable name="TeleportAnimation" sid="227236383098235" type="boolean" />
+                <instance-variable name="Me" sid="312822894459438" type="boolean" />
+                <instance-variable name="PlayerID" sid="951318057601562" type="number" />
             </instance-variables>
             <behaviors>
                 <behavior-type name="Flash" sid="559965946524717">
@@ -16293,6 +16372,17 @@
         </global-instance>
         <global-instance type="jsZip" uid="8309" />
         <global-instance type="LocalStorage" uid="8917" />
+        <global-instance type="Photon" uid="12329">
+            <properties>
+                <appid>0</appid>
+                <appversion>0</appversion>
+                <protocol>ws</protocol>
+                <region>us</region>
+                <hosttype>Photon Cloud</hosttype>
+                <selfhostedaddress>localhost:9090</selfhostedaddress>
+                <loglevel>INFO</loglevel>
+            </properties>
+        </global-instance>
     </global-instances>
     <sounds-folder />
     <music-folder />

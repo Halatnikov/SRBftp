@@ -2825,43 +2825,78 @@
                 </event-block>
             </sub-events>
         </event-group>
+        <comment></comment>
         <event-block sid="419915445014291">
             <conditions>
-                <condition id="70" name="Is Empty" sid="740620076210263" type="JSON_AudioProperties">
+                <condition id="70" name="Is Empty" sid="740620076210263" type="JSON_Indev">
                     <param id="0" name="Reference point">0</param>
                     <param id="1" name="Key {n}"></param>
+                </condition>
+                <condition id="-14" name="Compare variable" sid="624322329936406" type="System">
+                    <param id="0" name="Variable">DEBUG</param>
+                    <param id="1" name="Comparison">0</param>
+                    <param id="2" name="Value">1</param>
+                </condition>
+                <condition id="0" name="Path exists" sid="523319082314094" type="NWjs">
+                    <param id="0" name="Path">NWjs.AppFolder&amp;&quot;\SRBftp\indev.ini&quot;</param>
                 </condition>
                 <condition id="-4" name="Trigger once while true" sid="563382162969160" type="System" />
             </conditions>
             <actions>
-                <action id="1" name="Request project file" sid="880403137492756" type="AJAX">
-                    <param id="0" name="Tag">&quot;audioproperties&quot;</param>
-                    <param id="1" name="File">audioproperties.ini</param>
-                </action>
-            </actions>
-        </event-block>
-        <event-block sid="300318091811306">
-            <conditions>
-                <condition id="0" name="On completed" sid="369552889198053" type="AJAX">
-                    <param id="0" name="Tag">&quot;audioproperties&quot;</param>
-                </condition>
-            </conditions>
-            <actions>
-                <action id="0" name="Set New Object" sid="664551986240670" type="JSON_AudioProperties">
+                <action id="0" name="Set New Object" sid="664551986240670" type="JSON_Indev">
                     <param id="0" name="Reference point">0</param>
                     <param id="1" name="Key {n}"></param>
                 </action>
                 <action id="0" name="Call function" sid="219846156608288" type="Function">
                     <param id="0" name="Name">&quot;INI2JSON&quot;</param>
-                    <param id="1" name="Parameter {n}">AJAX.LastData</param>
+                    <param id="1" name="Parameter {n}">NWjs.ReadFile(NWjs.AppFolder&amp;&quot;\SRBftp\indev.ini&quot;)</param>
                 </action>
-                <action id="60" name="LoadJSON" sid="489398065069199" type="JSON_AudioProperties">
+                <action id="60" name="LoadJSON" sid="489398065069199" type="JSON_Indev">
                     <param id="0" name="JSON">Function.ReturnValue</param>
                     <param id="1" name="Reference point">0</param>
                     <param id="2" name="Key {n}"></param>
                 </action>
             </actions>
         </event-block>
+        <comment></comment>
+        <event-block sid="122901515107600">
+            <conditions>
+                <condition id="70" name="Is Empty" sid="489734475916445" type="JSON_AudioProperties">
+                    <param id="0" name="Reference point">0</param>
+                    <param id="1" name="Key {n}"></param>
+                </condition>
+                <condition id="-4" name="Trigger once while true" sid="747027255583644" type="System" />
+            </conditions>
+            <actions>
+                <action id="1" name="Request project file" sid="207363745878159" type="AJAX">
+                    <param id="0" name="Tag">&quot;audioproperties&quot;</param>
+                    <param id="1" name="File">audioproperties.ini</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="489703845885361">
+            <conditions>
+                <condition id="0" name="On completed" sid="424256181024190" type="AJAX">
+                    <param id="0" name="Tag">&quot;audioproperties&quot;</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="0" name="Set New Object" sid="537072490458042" type="JSON_AudioProperties">
+                    <param id="0" name="Reference point">0</param>
+                    <param id="1" name="Key {n}"></param>
+                </action>
+                <action id="0" name="Call function" sid="837434768189857" type="Function">
+                    <param id="0" name="Name">&quot;INI2JSON&quot;</param>
+                    <param id="1" name="Parameter {n}">AJAX.LastData</param>
+                </action>
+                <action id="60" name="LoadJSON" sid="585468518575926" type="JSON_AudioProperties">
+                    <param id="0" name="JSON">Function.ReturnValue</param>
+                    <param id="1" name="Reference point">0</param>
+                    <param id="2" name="Key {n}"></param>
+                </action>
+            </actions>
+        </event-block>
+        <comment></comment>
         <event-block sid="873481601175739">
             <conditions>
                 <condition id="70" name="Is Empty" sid="644180522956674" type="JSON_LevelProperties">
@@ -2899,6 +2934,7 @@
                 </action>
             </actions>
         </event-block>
+        <comment></comment>
         <event-block sid="722283299690314">
             <conditions>
                 <condition id="70" name="Is Empty" sid="190649115069777" type="JSON_LevelPlaylist">
@@ -3521,5 +3557,6 @@
                 </action>
             </actions>
         </event-block>
+        <comment></comment>
     </events>
 </c2eventsheet>
