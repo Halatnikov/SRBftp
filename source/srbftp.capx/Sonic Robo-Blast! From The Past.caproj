@@ -2,7 +2,7 @@
 <c2project>
     <name>Sonic Robo-Blast! From The Past</name>
     <description>Original games by Sonikku - Johnathan Wallbank and SSNTails - A.J. Freda</description>
-    <version>0.2.2-28</version>
+    <version>0.3.0-29</version>
     <author>Halatnikov</author>
     <author-email></author-email>
     <author-website>https://halatnikov.github.io</author-website>
@@ -14,6 +14,7 @@
         <plugin author="AXLL" id="AXLL_EncDecCaesar" version="0.100000001">Caesar Encryption</plugin>
         <plugin author="Scirra (edited by XYZT)" id="BetterAudio" version="1">BetterAudio</plugin>
         <plugin author="Scirra" id="Browser" version="1">Browser</plugin>
+        <plugin author="Scirra" id="Button" version="1">Button</plugin>
         <plugin author="Kyatric@gmail.com - JavaScript implementation of the RSA Data Security, Inc. MD5 Message: Copyright (c) 1998 - 2009, Paul Johnston &amp; Contributors - A JavaScript implementation of the Secure Hash Algorithm, SHA-1, as defined in FIPS 180-1 - Version 2.2 Copyright Paul Johnston 2000 - 2009 &amp; contributors - A JavaScript implementation of the Secure Hash Algorithm, SHA-256, as defined in FIPS 180-2 * Version 2.2 Copyright Angel Marin, Paul Johnston &amp; contributors 2000 - 2009. * Distributed under the BSD License * See http://pajhome.org.uk/crypt/md5 for details. * Also http://anmar.eu.org/projects/jssha2/" id="CBhash" version="1">CB Hash</plugin>
         <plugin author="Francesco Iafulli (aka fiaful)" id="Comment" version="1">Comment</plugin>
         <plugin author="Francesco Iafulli (aka fiaful)" id="CreateObjectByVal" version="1">CreateObjectByVal</plugin>
@@ -209,6 +210,9 @@
             <object-type global="1" name="JSON_Indev" sid="194424962795656">
                 <plugin id="JSON" />
             </object-type>
+            <object-type global="1" name="JSON_Online" sid="778952034216939">
+                <plugin id="JSON" />
+            </object-type>
         </object-folder>
         <object-folder name=".Variables">
             <object-type global="1" name="Var_Level" sid="368901035900150">
@@ -300,6 +304,10 @@
                     <instance-variable name="Cheats_Thok" sid="504365754754966" type="boolean" />
                     <instance-variable name="Cheats_SpinDash" sid="947044738928533" type="boolean" />
                     <instance-variable name="ZoneResetTimer" sid="523941753995350" type="number" />
+                    <instance-variable name="OnlineUsername" sid="246584056818070" type="string" />
+                    <instance-variable name="OnlineHost" sid="274722266506275" type="boolean" />
+                    <instance-variable name="OnlineError" sid="213825312219852" type="string" />
+                    <instance-variable name="OnlineChat" sid="404510199425257" type="string" />
                 </instance-variables>
             </object-type>
             <object-type global="1" name="Var_Miscellanious" sid="861604502276634">
@@ -13184,6 +13192,9 @@
                 </object-type>
                 <object-type name="HUD_SkinIcon" sid="532454804360127">
                     <plugin id="Sprite" />
+                    <instance-variables>
+                        <instance-variable name="PlayerID" sid="509968830552849" type="number" />
+                    </instance-variables>
                     <animation-folder>
                         <animation framecount="11" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="180382716553218" speed="0">
                             <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\hudmisc\hud_lives.png" />
@@ -15956,6 +15967,15 @@
             <plugin id="TiledBg" />
             <texture />
         </object-type>
+        <object-type name="TextBox" sid="614044042915550">
+            <plugin id="TextBox" />
+        </object-type>
+        <object-type name="TextBox2" sid="153131970128524">
+            <plugin id="TextBox" />
+        </object-type>
+        <object-type name="Button" sid="449921516804664">
+            <plugin id="Button" />
+        </object-type>
     </object-folder>
     <families>
         <family name="LevelTiles" plugin-id="TiledBg" sid="888312723616125">
@@ -16379,7 +16399,7 @@
                 <protocol>ws</protocol>
                 <region>us</region>
                 <hosttype>Photon Cloud</hosttype>
-                <selfhostedaddress>localhost:9090</selfhostedaddress>
+                <selfhostedaddress></selfhostedaddress>
                 <loglevel>INFO</loglevel>
             </properties>
         </global-instance>
