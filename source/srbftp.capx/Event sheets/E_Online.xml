@@ -5,7 +5,7 @@
     <events>
         <event-group description="" sid="558958445449610" title="Photon">
             <sub-events>
-                <comment>event codes:&#x0D;&#x0A;1 - actor joined, send data to host&#x0D;&#x0A;2 - sync host&apos;s data with other actors&#x0D;&#x0A;100 - chat message</comment>
+                <comment>event codes:&#x0D;&#x0A;&#x0D;&#x0A;1 - actor joined, send data to host&#x0D;&#x0A;2 - sync host&apos;s data with other actors&#x0D;&#x0A;100 - chat message&#x0D;&#x0A;101 - kicked by host</comment>
                 <event-block sid="480505158572512">
                     <conditions>
                         <condition id="-4" name="Trigger once while true" sid="944141158681869" type="System" />
@@ -139,6 +139,62 @@
                                 <action id="-10" name="Set value" sid="789476958074413" type="Var_Game">
                                     <param id="0" name="Instance variable">OnlineError</param>
                                     <param id="1" name="Value">&quot;RoomClosed&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="872961951483854">
+                    <conditions>
+                        <condition id="3" name="On event" sid="134199621315441" type="Photon">
+                            <param id="0" name="Code">101</param>
+                        </condition>
+                        <condition id="-7" name="Compare instance variable" sid="923107234529940" type="Var_Game">
+                            <param id="0" name="Instance variable">OnlineUsername</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">Photon.EventData</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="933451418825228">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="201731798758628" type="System">
+                                    <param id="0" name="First value">LayoutName</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">&quot;Menu_Main&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Set value" sid="233077009435855" type="Var_Game">
+                                    <param id="0" name="Instance variable">CurrentMenu</param>
+                                    <param id="1" name="Value">&quot;online_error&quot;</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="101041942435852" type="Var_Game">
+                                    <param id="0" name="Instance variable">OnlineError</param>
+                                    <param id="1" name="Value">&quot;Kicked&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="772755592272455">
+                            <conditions>
+                                <condition id="-8" inverted="1" name="Compare two values" sid="939939818571010" type="System">
+                                    <param id="0" name="First value">LayoutName</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">&quot;Menu_Main&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Go to layout" sid="311850382405701" type="System">
+                                    <param id="0" name="Layout">Menu_Main</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="824772422025534" type="Var_Game">
+                                    <param id="0" name="Instance variable">CurrentMenu</param>
+                                    <param id="1" name="Value">&quot;online_error&quot;</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="222222797234317" type="Var_Game">
+                                    <param id="0" name="Instance variable">OnlineError</param>
+                                    <param id="1" name="Value">&quot;Kicked&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -285,15 +341,6 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="17" name="Raise event" sid="250648402350767" type="Photon">
-                                    <param id="0" name="Code">1</param>
-                                    <param id="1" name="Data">Var_Player.Skin</param>
-                                    <param id="2" name="InterestGroup">0</param>
-                                    <param id="3" name="Cache">0</param>
-                                    <param id="4" name="Receivers">2</param>
-                                    <param id="5" name="TargetActors">&quot;&quot;</param>
-                                    <param id="6" name="WebForward">0</param>
-                                </action>
                                 <action id="14" name="Log" sid="554164464187620" type="Browser">
                                     <param id="0" name="Type">0</param>
                                     <param id="1" name="Message">&quot;on join not host&quot;</param>
@@ -301,27 +348,6 @@
                             </actions>
                         </event-block>
                     </sub-events>
-                </event-block>
-                <event-block sid="336882467036601">
-                    <conditions>
-                        <condition id="3" name="On event" sid="417592981517768" type="Photon">
-                            <param id="0" name="Code">1</param>
-                        </condition>
-                        <condition id="-8" name="Is boolean instance variable set" sid="824002686977670" type="Var_Game">
-                            <param id="0" name="Instance variable">OnlineHost</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="20" name="Set Value" sid="459514367954420" type="JSON_Online">
-                            <param id="0" name="Value">Photon.EventData</param>
-                            <param id="1" name="Reference point">0</param>
-                            <param id="2" name="Key {n}">str(Photon.ActorNr){###}&quot;Skin&quot;</param>
-                        </action>
-                        <action id="14" name="Log" sid="156241766362702" type="Browser">
-                            <param id="0" name="Type">0</param>
-                            <param id="1" name="Message">&quot;event 1 host&quot;</param>
-                        </action>
-                    </actions>
                 </event-block>
                 <event-block sid="777376807938532">
                     <conditions>
@@ -379,6 +405,11 @@
                                     <param id="0" name="Value">Photon.ActorNameByNr(Photon.ActorNr)</param>
                                     <param id="1" name="Reference point">0</param>
                                     <param id="2" name="Key {n}">str(Photon.ActorNr){###}&quot;Username&quot;</param>
+                                </action>
+                                <action id="20" name="Set Value" sid="459514367954420" type="JSON_Online">
+                                    <param id="0" name="Value">Photon.PropertyOfActorByNr(Photon.ActorNr, &quot;Skin&quot;)</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">str(Photon.ActorNr){###}&quot;Skin&quot;</param>
                                 </action>
                                 <action id="20" name="Set Value" sid="664528172782865" type="JSON_Online">
                                     <param id="0" name="Value">0</param>
