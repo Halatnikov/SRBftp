@@ -5871,6 +5871,718 @@
                         </action>
                     </actions>
                 </event-block>
+                <comment></comment>
+                <event-block sid="359803746478349">
+                    <conditions>
+                        <condition id="0" name="On function" sid="763920797962481" type="Function">
+                            <param id="0" name="Name">&quot;Player_Restart&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="964105343395722" type="Boss1_6EP2Fuel" />
+                        <action id="-9" name="Destroy" sid="851605534832997" type="Boss1_6EP2FuelEmpty" />
+                    </actions>
+                </event-block>
+                <event-block sid="591443084016757">
+                    <conditions>
+                        <condition id="-4" name="Trigger once while true" sid="949026580854240" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="413784091264490" type="Boss1_6EP2Fuel" />
+                        <action id="-9" name="Destroy" sid="733073727164237" type="Boss1_6EP2FuelEmpty" />
+                    </actions>
+                </event-block>
+                <event-block sid="400193521798724">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="870242338253534" type="Boss1_6EP2">
+                            <param id="0" name="Instance variable">Active</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <variable constant="0" name="fuel" sid="410105510868963" static="1" type="number">0</variable>
+                        <variable constant="0" name="state" sid="826914877703269" static="1" type="number">0</variable>
+                        <variable constant="0" name="timer" sid="813599158370228" static="1" type="number">0</variable>
+                        <event-block sid="913246125533578">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="659266604534216" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Spawn another object" sid="956612678916275" type="Boss1_6EP2">
+                                    <param id="0" name="Object">Boss1_6EP2Fuel</param>
+                                    <param id="1" name="Layer">&quot;Objects&quot;</param>
+                                    <param id="2" name="Image point">0</param>
+                                </action>
+                                <action id="0" name="Spawn another object" sid="612163129626639" type="Boss1_6EP2">
+                                    <param id="0" name="Object">Boss1_6EP2FuelEmpty</param>
+                                    <param id="1" name="Layer">&quot;Objects&quot;</param>
+                                    <param id="2" name="Image point">0</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="827376013397146" type="Boss1_6EP2FuelEmpty">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="403573712914614" type="Boss1_6EP2">
+                                    <param id="0" name="Instance variable">WaypointSet</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="662312454742599" type="System">
+                                    <param id="0" name="Variable">fuel</param>
+                                    <param id="1" name="Value">10</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="561333680750112" type="System">
+                                    <param id="0" name="Variable">state</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="783375875767710" type="System">
+                                    <param id="0" name="Variable">timer</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="919837520787301">
+                            <conditions>
+                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="857297308578973" type="Var_Level">
+                                    <param id="0" name="Instance variable">Pause</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="867803316189676" type="Var_Player">
+                                    <param id="0" name="Instance variable">Finished</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Add to" sid="442038399338873" type="System">
+                                    <param id="0" name="Variable">timer</param>
+                                    <param id="1" name="Value">dt</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="844214174747719">
+                            <conditions />
+                            <actions>
+                                <action id="-3" name="Set position" sid="114765170097951" type="Boss1_6EP2Fuel">
+                                    <param id="0" name="X">Boss1_6EP2.X-32</param>
+                                    <param id="1" name="Y">Boss1_6EP2.Y+21</param>
+                                </action>
+                                <action id="-5" name="Set width" sid="362074048364095" type="Boss1_6EP2Fuel">
+                                    <param id="0" name="Width">(fuel/10)*59</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="409248224169878" type="Boss1_6EP2FuelEmpty">
+                                    <param id="0" name="X">Boss1_6EP2.X-32</param>
+                                    <param id="1" name="Y">Boss1_6EP2.Y+21</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="710237794519912">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="587460346162169" type="System">
+                                    <param id="0" name="Variable">state</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="465537805500506">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="608873544802205" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="403514965053341" type="System">
+                                            <param id="0" name="Variable">fuel</param>
+                                            <param id="1" name="Value">10</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="957947413777647" type="System">
+                                            <param id="0" name="Variable">timer</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                        <action id="-15" name="Set visible" sid="371208564996458" type="Boss1_6EP2FuelEmpty">
+                                            <param id="0" name="Visibility">0</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="907721101783148" type="Boss1_6EP2">
+                                            <param id="0" name="Instance variable">WaypointSet</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="530456281982355" type="Boss1_6EP2">
+                                            <param id="0" name="Instance variable">Active</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-13" name="Set boolean" sid="651144967905092" type="Boss1_6EP2">
+                                            <param id="0" name="Instance variable">Reverse</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                        <action behavior="MoveTo" id="1" name="Set maximum speed" sid="777252598437587" type="Boss1_6EP2">
+                                            <param id="0" name="Max speed">350</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="133275742973405">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="951636160355123" type="System">
+                                            <param id="0" name="Variable">fuel</param>
+                                            <param id="1" name="Comparison">3</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="743458446340913" type="System">
+                                            <param id="0" name="Variable">state</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="992020464186238">
+                                    <conditions>
+                                        <condition disabled="1" id="-7" name="Compare instance variable" sid="482207786739741" type="Boss1_6EP2">
+                                            <param id="0" name="Instance variable">HP</param>
+                                            <param id="1" name="Comparison">4</param>
+                                            <param id="2" name="Value">4</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="406728651854627">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="129926633436282" type="System">
+                                                    <param id="0" name="Variable">timer</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Value">2</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="338303089604495" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Spawn another object" sid="794097470928538" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-22" name="Set angle toward position" sid="567935117787405" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="X">Engine_Player.X</param>
+                                                    <param id="1" name="Y">Engine_Player.Y</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="136536072916231" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">420</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="625943894199221" type="Function">
+                                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                                </action>
+                                                <action id="-11" name="Subtract from" sid="179239341940736" type="System">
+                                                    <param id="0" name="Variable">fuel</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="142391229064335">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="398292105620258" type="System">
+                                                    <param id="0" name="Variable">timer</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Value">2.3</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="810790276873448" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Spawn another object" sid="809963947145564" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-22" name="Set angle toward position" sid="682128288775964" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="X">Engine_Player.X</param>
+                                                    <param id="1" name="Y">Engine_Player.Y</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="946091778607078" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">420</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="510678224005372" type="Function">
+                                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                                </action>
+                                                <action id="-11" name="Subtract from" sid="118977098705562" type="System">
+                                                    <param id="0" name="Variable">fuel</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="650216261271263">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="218457743637714" type="System">
+                                                    <param id="0" name="Variable">timer</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Value">2.6</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="827799790149784" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Spawn another object" sid="469730040126673" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-22" name="Set angle toward position" sid="140267376162196" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="X">Engine_Player.X</param>
+                                                    <param id="1" name="Y">Engine_Player.Y</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="529302127774920" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">420</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="913953794797443" type="Function">
+                                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                                </action>
+                                                <action id="-11" name="Subtract from" sid="357897181270272" type="System">
+                                                    <param id="0" name="Variable">fuel</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="650459085859091">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="933351695550148" type="System">
+                                                    <param id="0" name="Variable">timer</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Value">2.9</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="451593461247577" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Spawn another object" sid="245121280174799" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-22" name="Set angle toward position" sid="349256308504792" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="X">Engine_Player.X</param>
+                                                    <param id="1" name="Y">Engine_Player.Y</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="941847591099578" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">420</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="272023573712508" type="Function">
+                                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                                </action>
+                                                <action id="-11" name="Subtract from" sid="316968711764959" type="System">
+                                                    <param id="0" name="Variable">fuel</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <comment></comment>
+                                        <event-block sid="684832829417422">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="883161800953343" type="System">
+                                                    <param id="0" name="Variable">timer</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Value">3.2</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="829855755674671" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Spawn another object" sid="214880753657502" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-22" name="Set angle toward position" sid="417528644711219" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="X">Engine_Player.X</param>
+                                                    <param id="1" name="Y">Engine_Player.Y</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="337487760736398" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">800</param>
+                                                </action>
+                                                <action id="9" name="Set scale" sid="486907752930530" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Scale">2</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="743248622025097" type="Function">
+                                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;2Title&quot;</param>
+                                                </action>
+                                                <action id="-11" name="Subtract from" sid="444574845146921" type="System">
+                                                    <param id="0" name="Variable">fuel</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <comment></comment>
+                                        <event-block sid="564074603418808">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="240149847122601" type="System">
+                                                    <param id="0" name="Variable">timer</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Value">4.2</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="177943375989741" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Spawn another object" sid="645690270428101" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-8" name="Set angle" sid="271070009622709" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Angle">90</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="665075087629505" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">375</param>
+                                                </action>
+                                                <action id="0" name="Spawn another object" sid="137935153343507" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-8" name="Set angle" sid="947126804854203" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Angle">135</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="555531117771726" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">290</param>
+                                                </action>
+                                                <action id="0" name="Spawn another object" sid="864120510559489" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-8" name="Set angle" sid="412357025321145" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Angle">45</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="908089382066436" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">290</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="606363011055151" type="Function">
+                                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                                </action>
+                                                <action id="-11" name="Subtract from" sid="332231692929187" type="System">
+                                                    <param id="0" name="Variable">fuel</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="884227471223252">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="926109258148338" type="System">
+                                                    <param id="0" name="Variable">timer</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Value">5</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="207129864659053" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Spawn another object" sid="540406203064657" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-8" name="Set angle" sid="634778410910934" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Angle">90</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="760806134767373" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">375</param>
+                                                </action>
+                                                <action id="0" name="Spawn another object" sid="703407323503931" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-8" name="Set angle" sid="722532997070362" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Angle">135</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="330673361978429" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">290</param>
+                                                </action>
+                                                <action id="0" name="Spawn another object" sid="983378069607930" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-8" name="Set angle" sid="227550803054747" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Angle">45</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="655790571486376" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">290</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="131915271604568" type="Function">
+                                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                                </action>
+                                                <action id="-11" name="Subtract from" sid="899647094475024" type="System">
+                                                    <param id="0" name="Variable">fuel</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="873986959998104">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="572847002753239" type="System">
+                                                    <param id="0" name="Variable">timer</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Value">5.8</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="397945423439748" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Spawn another object" sid="143404381849389" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-8" name="Set angle" sid="954089661803208" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Angle">90</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="459107483067691" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">375</param>
+                                                </action>
+                                                <action id="0" name="Spawn another object" sid="652321966476059" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-8" name="Set angle" sid="481311519884606" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Angle">135</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="197347694339681" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">290</param>
+                                                </action>
+                                                <action id="0" name="Spawn another object" sid="777024245854027" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-8" name="Set angle" sid="451202723885347" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Angle">45</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="747618922307702" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">290</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="211809753911433" type="Function">
+                                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                                </action>
+                                                <action id="-11" name="Subtract from" sid="664377053395392" type="System">
+                                                    <param id="0" name="Variable">fuel</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="359952502967331">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="981458577359473" type="System">
+                                                    <param id="0" name="Variable">timer</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Value">6.6</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="668537207215473" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Spawn another object" sid="261091617598052" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-8" name="Set angle" sid="922443549509422" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Angle">90</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="838135193121598" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">375</param>
+                                                </action>
+                                                <action id="0" name="Spawn another object" sid="209222750673497" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-8" name="Set angle" sid="961564897635893" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Angle">135</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="861985978375532" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">290</param>
+                                                </action>
+                                                <action id="0" name="Spawn another object" sid="987781679573364" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-8" name="Set angle" sid="898764834700505" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Angle">45</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="658524363220660" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">290</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="668975720314724" type="Function">
+                                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                                </action>
+                                                <action id="-11" name="Subtract from" sid="948252538886534" type="System">
+                                                    <param id="0" name="Variable">fuel</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <comment></comment>
+                                        <event-block sid="888271222985741">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="822226168313477" type="System">
+                                                    <param id="0" name="Variable">timer</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Value">7</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="921626162843722" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Spawn another object" sid="242356854784771" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-22" name="Set angle toward position" sid="687919570625029" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="X">Engine_Player.X</param>
+                                                    <param id="1" name="Y">Engine_Player.Y</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="928122582127746" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">800</param>
+                                                </action>
+                                                <action id="9" name="Set scale" sid="602318398234609" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Scale">2</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="453237439161660" type="Function">
+                                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;2Title&quot;</param>
+                                                </action>
+                                                <action id="-11" name="Subtract from" sid="927799108316470" type="System">
+                                                    <param id="0" name="Variable">fuel</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="208740348693108">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="407758374976988" type="System">
+                                    <param id="0" name="Variable">state</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="479714679286518">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="525870789223931" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="473650805429070" type="System">
+                                            <param id="0" name="Variable">fuel</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="114208467411639" type="System">
+                                            <param id="0" name="Variable">timer</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                        <action id="-15" name="Set visible" sid="650277023005796" type="Boss1_6EP2FuelEmpty">
+                                            <param id="0" name="Visibility">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="210152763112427">
+                                    <conditions>
+                                        <condition id="-2" name="Compare Y" sid="491943285820936" type="Boss1_6EP2">
+                                            <param id="0" name="Comparison">2</param>
+                                            <param id="1" name="Y co-ordinate">1063</param>
+                                        </condition>
+                                        <condition id="-14" name="Compare variable" sid="980451434751441" type="System">
+                                            <param id="0" name="Variable">timer</param>
+                                            <param id="1" name="Comparison">5</param>
+                                            <param id="2" name="Value">1.5</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="562250195631468" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-13" name="Set boolean" sid="198031634696600" type="Boss1_6EP2">
+                                            <param id="0" name="Instance variable">Reverse</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="635836399976101" type="Boss1_6EP2">
+                                            <param id="0" name="Instance variable">Active</param>
+                                            <param id="1" name="Value">2</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="749634277859067" type="Boss1_6EP2">
+                                            <param id="0" name="Instance variable">WaypointSet</param>
+                                            <param id="1" name="Value">2</param>
+                                        </action>
+                                        <action behavior="MoveTo" id="1" name="Set maximum speed" sid="177004097416850" type="Boss1_6EP2">
+                                            <param id="0" name="Max speed">250</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="424850051264314">
+                                    <conditions>
+                                        <condition id="-2" name="Compare Y" sid="338725321140195" type="Boss1_6EP2">
+                                            <param id="0" name="Comparison">5</param>
+                                            <param id="1" name="Y co-ordinate">1063</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="947225413800194">
+                                            <conditions>
+                                                <condition id="-4" name="Trigger once while true" sid="118723575193545" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action behavior="MoveTo" id="1" name="Set maximum speed" sid="453966236445734" type="Boss1_6EP2">
+                                                    <param id="0" name="Max speed">0.01</param>
+                                                </action>
+                                                <action id="-15" name="Set visible" sid="729252944296369" type="Boss1_6EP2FuelEmpty">
+                                                    <param id="0" name="Visibility">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="593923335804138">
+                                            <conditions>
+                                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="849135967602356" type="Var_Level">
+                                                    <param id="0" name="Instance variable">Pause</param>
+                                                </condition>
+                                                <condition id="-7" name="Compare instance variable" sid="871542973146937" type="Var_Player">
+                                                    <param id="0" name="Instance variable">Finished</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">0</param>
+                                                </condition>
+                                                <condition id="-6" name="Every X seconds" sid="840182199891016" type="System">
+                                                    <param id="0" name="Interval (seconds)">0.33</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-10" name="Add to" sid="196911063507868" type="System">
+                                                    <param id="0" name="Variable">fuel</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="945022718666934">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="624108899815232" type="System">
+                                                    <param id="0" name="Variable">fuel</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Value">10</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Set value" sid="120216467703459" type="System">
+                                                    <param id="0" name="Variable">state</param>
+                                                    <param id="1" name="Value">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
             </sub-events>
         </event-group>
         <event-group description="" inactive="1" sid="500429727069158" title="SL1 Level Specific">
@@ -5909,36 +6621,26 @@
                         </action>
                     </actions>
                 </event-block>
-                <event-block sid="316126221500471">
+                <event-block sid="170884206737389">
                     <conditions>
-                        <condition id="-4" name="Trigger once while true" sid="790213717985890" type="System" />
-                        <condition id="-14" name="Pick by unique ID" sid="555789729430679" type="Object2_MovingPlatform">
+                        <condition id="-33" name="Pick by comparison" sid="915693973953322" type="System">
+                            <param id="0" name="Object">Special_Trigger</param>
+                            <param id="1" name="Expression">Special_Trigger.ID</param>
+                            <param id="2" name="Comparison">0</param>
+                            <param id="3" name="Value">1</param>
+                        </condition>
+                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="812059639818567" type="Special_Trigger">
+                            <param id="0" name="Instance variable">Activated</param>
+                        </condition>
+                        <condition id="-14" name="Pick by unique ID" sid="409830173164111" type="Object2_MovingPlatform">
                             <param id="0" name="Unique ID">12325</param>
                         </condition>
                     </conditions>
                     <actions>
-                        <action behavior="Sine" id="0" name="Set active" sid="651280584749148" type="Object2_MovingPlatform">
+                        <action behavior="Sine" id="0" name="Set active" sid="866976154625225" type="Object2_MovingPlatform">
                             <param id="0" name="State">0</param>
                         </action>
-                        <action id="-2" name="Set Y" sid="898352261688024" type="Object2_MovingPlatform">
-                            <param id="0" name="Y">512</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="297548068515626">
-                    <conditions>
-                        <condition id="0" name="On function" sid="883759626935696" type="Function">
-                            <param id="0" name="Name">&quot;Player_Restart&quot;</param>
-                        </condition>
-                        <condition id="-14" name="Pick by unique ID" sid="167504896486798" type="Object2_MovingPlatform">
-                            <param id="0" name="Unique ID">12325</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action behavior="Sine" id="0" name="Set active" sid="632751864689840" type="Object2_MovingPlatform">
-                            <param id="0" name="State">0</param>
-                        </action>
-                        <action id="-2" name="Set Y" sid="277956464316352" type="Object2_MovingPlatform">
+                        <action id="-2" name="Set Y" sid="293802469564182" type="Object2_MovingPlatform">
                             <param id="0" name="Y">512</param>
                         </action>
                     </actions>
@@ -5958,13 +6660,13 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action behavior="Sine" id="0" name="Set active" sid="708320118907219" type="Object2_MovingPlatform">
-                            <param id="0" name="State">1</param>
-                        </action>
                         <action id="-2" name="Set Y" sid="967240629532398" type="Object2_MovingPlatform">
                             <param id="0" name="Y">480</param>
                         </action>
                         <action behavior="Sine" id="6" name="Update initial state" sid="731848371130495" type="Object2_MovingPlatform" />
+                        <action behavior="Sine" id="0" name="Set active" sid="708320118907219" type="Object2_MovingPlatform">
+                            <param id="0" name="State">1</param>
+                        </action>
                     </actions>
                 </event-block>
                 <comment>boss hp</comment>
