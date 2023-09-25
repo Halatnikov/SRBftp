@@ -3015,6 +3015,10 @@
                                 </condition>
                             </conditions>
                             <actions>
+                                <action id="-13" name="Set boolean" sid="202532585871744" type="Special_Trigger">
+                                    <param id="0" name="Instance variable">Activated</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
                                 <action id="-3" name="Set position" sid="960987075426653" type="Engine_Player">
                                     <param id="0" name="X">Special_StartPos.X</param>
                                     <param id="1" name="Y">Special_StartPos.Y</param>
@@ -3056,6 +3060,10 @@
                                 <action id="-2" name="Set Y" sid="510931679388444" type="Special_Trigger">
                                     <param id="0" name="Y">-999</param>
                                 </action>
+                                <action id="-13" name="Set boolean" sid="119966516582686" type="Special_Trigger">
+                                    <param id="0" name="Instance variable">Activated</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
                             </actions>
                         </event-block>
                         <event-block sid="115938407268131">
@@ -3070,6 +3078,10 @@
                             <actions>
                                 <action id="-2" name="Set Y" sid="933615647579979" type="Special_Trigger">
                                     <param id="0" name="Y">Self.InitialY</param>
+                                </action>
+                                <action id="-13" name="Set boolean" sid="207333058334028" type="Special_Trigger">
+                                    <param id="0" name="Instance variable">Activated</param>
+                                    <param id="1" name="Value">0</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -4513,6 +4525,114 @@
                                     <param id="1" name="Parameter {n}">&quot;Explode&quot;</param>
                                 </action>
                             </actions>
+                        </event-block>
+                        <comment>= SL turret (gunna)</comment>
+                        <event-block sid="456091165770454">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="778934924355499" type="Var_Player">
+                                    <param id="0" name="Instance variable">Finished</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="581298205132587" type="Var_Game">
+                                    <param id="0" name="Instance variable">TimerGlobal</param>
+                                    <param id="1" name="Comparison">4</param>
+                                    <param id="2" name="Value">4</param>
+                                </condition>
+                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="550804813803389" type="Var_Level">
+                                    <param id="0" name="Instance variable">Pause</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="960490291130547" type="Engine_CameraZone">
+                                    <param id="0" name="Instance variable">ID</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">Engine_Camera.CurrentZone</param>
+                                </condition>
+                                <condition id="1" name="Is overlapping another object" sid="146944548939015" type="Hazard1_7SLTurretGunna">
+                                    <param id="0" name="Object">Engine_CameraZone</param>
+                                </condition>
+                                <condition id="-6" name="Every X seconds" sid="731465688309750" type="System">
+                                    <param id="0" name="Interval (seconds)">4</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="642739934054047">
+                                    <conditions>
+                                        <condition id="-11" name="For Each" sid="594019649676156" type="System">
+                                            <param id="0" name="Object">Hazard1_7SLTurretGunna</param>
+                                        </condition>
+                                        <condition id="-8" name="Compare two values" sid="929102324678418" type="System">
+                                            <param id="0" name="First value">Hazard1_7SLTurretGunna.Angle</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">0</param>
+                                        </condition>
+                                        <condition id="-2" name="Compare Y" sid="653986097787989" type="Engine_Player">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Y co-ordinate">Hazard1_7SLTurretGunna.Y</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="3" name="Start" sid="835449157485618" type="Hazard1_7SLTurretGunna">
+                                            <param id="0" name="From">1</param>
+                                        </action>
+                                        <action id="0" name="Spawn another object" sid="313861306370260" type="Hazard1_7SLTurretGunna">
+                                            <param id="0" name="Object">Projectile1_Generic</param>
+                                            <param id="1" name="Layer">&quot;Player&quot;</param>
+                                            <param id="2" name="Image point">0</param>
+                                        </action>
+                                        <action id="9" name="Set scale" sid="823025156461850" type="Projectile1_Generic">
+                                            <param id="0" name="Scale">3</param>
+                                        </action>
+                                        <action behavior="Bullet" id="0" name="Set speed" sid="293221232734230" type="Projectile1_Generic">
+                                            <param id="0" name="Speed">140</param>
+                                        </action>
+                                        <action id="-22" name="Set angle toward position" sid="498940722448593" type="Projectile1_Generic">
+                                            <param id="0" name="X">Engine_Player.X</param>
+                                            <param id="1" name="Y">Engine_Player.Y</param>
+                                        </action>
+                                        <action id="0" name="Call function" sid="642343008550418" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="779830957150803">
+                                    <conditions>
+                                        <condition id="-11" name="For Each" sid="524477672437466" type="System">
+                                            <param id="0" name="Object">Hazard1_7SLTurretGunna</param>
+                                        </condition>
+                                        <condition id="-8" inverted="1" name="Compare two values" sid="181371734752846" type="System">
+                                            <param id="0" name="First value">Hazard1_7SLTurretGunna.Angle</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="3" name="Start" sid="739019578511827" type="Hazard1_7SLTurretGunna">
+                                            <param id="0" name="From">1</param>
+                                        </action>
+                                        <action id="0" name="Spawn another object" sid="581852686674257" type="Hazard1_7SLTurretGunna">
+                                            <param id="0" name="Object">Projectile1_Generic</param>
+                                            <param id="1" name="Layer">&quot;Player&quot;</param>
+                                            <param id="2" name="Image point">0</param>
+                                        </action>
+                                        <action id="9" name="Set scale" sid="658442139026712" type="Projectile1_Generic">
+                                            <param id="0" name="Scale">3</param>
+                                        </action>
+                                        <action behavior="Bullet" id="0" name="Set speed" sid="803573122695762" type="Projectile1_Generic">
+                                            <param id="0" name="Speed">140</param>
+                                        </action>
+                                        <action id="-22" name="Set angle toward position" sid="441347737218564" type="Projectile1_Generic">
+                                            <param id="0" name="X">Engine_Player.X</param>
+                                            <param id="1" name="Y">Engine_Player.Y</param>
+                                        </action>
+                                        <action id="0" name="Call function" sid="527688245548277" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-group>
@@ -7066,23 +7186,6 @@
                                         </event-block>
                                     </sub-events>
                                 </event-block>
-                                <comment></comment>
-                                <event-block sid="396524839702961">
-                                    <conditions>
-                                        <condition id="-19" name="On destroyed" sid="838230206357200" type="Enemies" />
-                                    </conditions>
-                                    <actions>
-                                        <action id="-3" name="Create object" sid="919601302950569" type="System">
-                                            <param id="0" name="Object to create">Effects_Explosion</param>
-                                            <param id="1" name="Layer">&quot;Player&quot;</param>
-                                            <param id="2" name="X">Enemies.X</param>
-                                            <param id="3" name="Y">Enemies.Y</param>
-                                        </action>
-                                        <action id="9" name="Set scale" sid="197220628345847" type="Effects_Explosion">
-                                            <param id="0" name="Scale">1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
                             </sub-events>
                         </event-block>
                         <comment>deal damage</comment>
@@ -7416,6 +7519,97 @@
                             <actions>
                                 <action behavior="Spline" id="0" name="Set enabled" sid="762457455804453" type="Enemy1_6EPPogminz">
                                     <param id="0" name="State">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>= pog-gx2</comment>
+                        <event-block sid="583935723668777">
+                            <conditions>
+                                <condition id="-18" name="On created" sid="933640379300936" type="Enemy1_7SLPogGX2" />
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Set Y" sid="368174878949183" type="Enemy1_7SLPogGX2">
+                                    <param id="0" name="Y">Self.Y-Self.Sine.Magnitude</param>
+                                </action>
+                                <action behavior="Sine" id="6" name="Update initial state" sid="652505339528810" type="Enemy1_7SLPogGX2" />
+                            </actions>
+                        </event-block>
+                        <event-block sid="308203885635532">
+                            <conditions>
+                                <condition id="-11" name="For Each" sid="522020722627984" type="System">
+                                    <param id="0" name="Object">Enemy1_7SLPogGX2</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="165862565348337">
+                                    <conditions>
+                                        <condition id="-1" name="Compare X" sid="986764956417744" type="Engine_Player">
+                                            <param id="0" name="Comparison">3</param>
+                                            <param id="1" name="X co-ordinate">Enemy1_7SLPogGX2.X</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="7" name="Set mirrored" sid="719625685533029" type="Enemy1_7SLPogGX2">
+                                            <param id="0" name="State">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="875167852888014">
+                                    <conditions>
+                                        <condition id="-1" name="Compare X" sid="144905786567132" type="Engine_Player">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="X co-ordinate">Enemy1_7SLPogGX2.X</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="7" name="Set mirrored" sid="621694489586515" type="Enemy1_7SLPogGX2">
+                                            <param id="0" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <comment>= swatbots</comment>
+                        <event-block sid="344684323334959">
+                            <conditions>
+                                <condition id="-19" name="On destroyed" sid="294568470590617" type="Enemy1S_FusionSwatBot" />
+                                <condition id="-7" name="Compare instance variable" sid="512458420641820" type="Var_Game">
+                                    <param id="0" name="Instance variable">TimerGlobal</param>
+                                    <param id="1" name="Comparison">4</param>
+                                    <param id="2" name="Value">4</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="804141048629685" type="System">
+                                    <param id="0" name="Object to create">Effects_Explosion</param>
+                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                    <param id="2" name="X">Enemy1S_FusionSwatBot.X</param>
+                                    <param id="3" name="Y">Enemy1S_FusionSwatBot.Y</param>
+                                </action>
+                                <action id="9" name="Set scale" sid="833349286081291" type="Effects_Explosion">
+                                    <param id="0" name="Scale">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="682064420341429">
+                            <conditions>
+                                <condition id="-19" name="On destroyed" sid="682780373194426" type="Enemy1S_3VFusionSwatBot" />
+                                <condition id="-7" name="Compare instance variable" sid="268589209163689" type="Var_Game">
+                                    <param id="0" name="Instance variable">TimerGlobal</param>
+                                    <param id="1" name="Comparison">4</param>
+                                    <param id="2" name="Value">4</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="838789321112630" type="System">
+                                    <param id="0" name="Object to create">Effects_Explosion</param>
+                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                    <param id="2" name="X">Enemy1S_3VFusionSwatBot.X</param>
+                                    <param id="3" name="Y">Enemy1S_3VFusionSwatBot.Y</param>
+                                </action>
+                                <action id="9" name="Set scale" sid="581217749096357" type="Effects_Explosion">
+                                    <param id="0" name="Scale">1</param>
                                 </action>
                             </actions>
                         </event-block>
