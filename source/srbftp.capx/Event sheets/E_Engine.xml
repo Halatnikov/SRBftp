@@ -2122,6 +2122,11 @@
                                         <action id="-16" name="Set opacity" sid="456484176314444" type="EffectsF_ProjectileTrail">
                                             <param id="0" name="Opacity">Self.Opacity</param>
                                         </action>
+                                        <action id="0" name="Spawn another object" sid="790235097699756" type="PlayerSkins">
+                                            <param id="0" name="Object">EffectsF_HitIndicator</param>
+                                            <param id="1" name="Layer">&quot;Player&quot;</param>
+                                            <param id="2" name="Image point">1</param>
+                                        </action>
                                     </actions>
                                     <sub-events>
                                         <event-block sid="473963330137911">
@@ -2283,6 +2288,11 @@
                                 <action behavior="Fade" id="0" name="Restart fade" sid="714358041060416" type="EffectsF_ProjectileTrail" />
                                 <action id="-16" name="Set opacity" sid="942933124918133" type="EffectsF_ProjectileTrail">
                                     <param id="0" name="Opacity">Self.Opacity</param>
+                                </action>
+                                <action id="0" name="Spawn another object" sid="279784745395066" type="PlayerSkins">
+                                    <param id="0" name="Object">EffectsF_HitIndicator</param>
+                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                    <param id="2" name="Image point">1</param>
                                 </action>
                             </actions>
                             <sub-events>
@@ -3748,6 +3758,11 @@
                                 <condition id="0" name="On collision with another object" sid="203556008129963" type="Engine_Player">
                                     <param id="0" name="Object">Engine_CameraZone</param>
                                 </condition>
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="834528477520586" type="Engine_CameraZone">
+                                    <param id="0" name="Instance variable">ID</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">Engine_Camera.CurrentZone</param>
+                                </condition>
                             </conditions>
                             <actions>
                                 <action id="-9" name="Destroy" sid="103274542640888" type="EnemyProjectiles" />
@@ -4181,7 +4196,7 @@
                                 </action>
                             </actions>
                         </event-block>
-                        <comment></comment>
+                        <comment>= hazardous explosion</comment>
                         <event-block sid="903378742504238">
                             <conditions>
                                 <condition id="4" name="On finished" sid="827258158391976" type="HazardF_ExplosionHarmful">
@@ -4236,7 +4251,7 @@
                                 </action>
                             </actions>
                         </event-block>
-                        <comment></comment>
+                        <comment>= laval bubbles and particles</comment>
                         <event-block sid="818300507818763">
                             <conditions>
                                 <condition id="-6" name="Every X seconds" sid="523589656044802" type="System">
@@ -4460,7 +4475,7 @@
                                 </action>
                             </actions>
                         </event-block>
-                        <comment></comment>
+                        <comment>= rising lava</comment>
                         <event-block sid="791000891105079">
                             <conditions>
                                 <condition id="9" name="Is overlapping at offset" sid="811363258077075" type="Engine_Player">
@@ -4580,6 +4595,10 @@
                                             <param id="1" name="Layer">&quot;Player&quot;</param>
                                             <param id="2" name="Image point">0</param>
                                         </action>
+                                        <action id="-10" name="Set value" sid="476245587768147" type="Projectile1_Generic">
+                                            <param id="0" name="Instance variable">ID</param>
+                                            <param id="1" name="Value">12</param>
+                                        </action>
                                         <action id="9" name="Set scale" sid="823025156461850" type="Projectile1_Generic">
                                             <param id="0" name="Scale">3</param>
                                         </action>
@@ -4615,6 +4634,10 @@
                                             <param id="0" name="Object">Projectile1_Generic</param>
                                             <param id="1" name="Layer">&quot;Player&quot;</param>
                                             <param id="2" name="Image point">0</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="880350290929497" type="Projectile1_Generic">
+                                            <param id="0" name="Instance variable">ID</param>
+                                            <param id="1" name="Value">12</param>
                                         </action>
                                         <action id="9" name="Set scale" sid="658442139026712" type="Projectile1_Generic">
                                             <param id="0" name="Scale">3</param>
@@ -7212,6 +7235,11 @@
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">&quot;jump&quot;</param>
                                         </condition>
+                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="183794365060747" type="EnemyProjectiles">
+                                            <param id="0" name="Instance variable">ID</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">12</param>
+                                        </condition>
                                     </conditions>
                                     <actions>
                                         <action id="-9" name="Destroy" sid="466282465199451" type="Enemies" />
@@ -7264,9 +7292,22 @@
                                             <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                             <param id="1" name="Parameter {n}">&quot;Explode&quot;</param>
                                         </action>
-                                        <action id="-9" name="Destroy" sid="818249895348365" type="EnemyProjectiles" />
-                                        <action id="-9" name="Destroy" sid="540872974413499" type="EffectsF_ProjectileTrail" />
                                     </actions>
+                                    <sub-events>
+                                        <event-block sid="661937489201627">
+                                            <conditions>
+                                                <condition id="-7" inverted="1" name="Compare instance variable" sid="711668240515392" type="EnemyProjectiles">
+                                                    <param id="0" name="Instance variable">ID</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">12</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Destroy" sid="818249895348365" type="EnemyProjectiles" />
+                                                <action id="-9" name="Destroy" sid="540872974413499" type="EffectsF_ProjectileTrail" />
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
                                 </event-block>
                                 <event-block sid="255271385851405">
                                     <conditions>
@@ -10369,7 +10410,7 @@
                     <sub-events>
                         <event-block sid="768309961747702">
                             <conditions>
-                                <condition id="-2" name="On start of layout" sid="951390654480306" type="System" />
+                                <condition id="-4" name="Trigger once while true" sid="951390654480306" type="System" />
                             </conditions>
                             <actions>
                                 <action id="-10" name="Set value" sid="831337523810364" type="Boss1_5V1Gun">
@@ -10379,34 +10420,6 @@
                                 <action id="-10" name="Set value" sid="927170370026551" type="Boss1_5V1Gun">
                                     <param id="0" name="Instance variable">InitialY</param>
                                     <param id="1" name="Value">Self.Y</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="402807862920987">
-                            <conditions>
-                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="502311525255231" type="Boss1_5V1Gun">
-                                    <param id="0" name="Instance variable">Enabled</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="817265409860852" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="14" name="Log" sid="224874259586862" type="Browser">
-                                    <param id="0" name="Type">0</param>
-                                    <param id="1" name="Message">&quot;disabled&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="966362211904154">
-                            <conditions>
-                                <condition id="-8" name="Is boolean instance variable set" sid="602601126391715" type="Boss1_5V1Gun">
-                                    <param id="0" name="Instance variable">Enabled</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="100914889845004" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="14" name="Log" sid="285267022695204" type="Browser">
-                                    <param id="0" name="Type">0</param>
-                                    <param id="1" name="Message">&quot;ENABLED&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -10657,33 +10670,6 @@
                                                     <param id="1" name="Y">Engine_Player.Y</param>
                                                 </action>
                                                 <action id="3" name="Start" sid="721214286439038" type="Boss1_5V1Gun">
-                                                    <param id="0" name="From">1</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                        <event-block sid="220253623783500">
-                                            <conditions>
-                                                <condition id="-2" name="Compare Y" sid="593775622503025" type="Boss1_5V1Gun">
-                                                    <param id="0" name="Comparison">4</param>
-                                                    <param id="1" name="Y co-ordinate">Engine_CameraZone.BBoxTop+(Engine_CameraZone.Height/2)+(Engine_CameraZone.Height/4)</param>
-                                                </condition>
-                                                <condition id="-4" name="Trigger once while true" sid="343534939891408" type="System" />
-                                            </conditions>
-                                            <actions>
-                                                <action id="0" name="Call function" sid="400430715874350" type="Function">
-                                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
-                                                    <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
-                                                </action>
-                                                <action id="0" name="Spawn another object" sid="929040147044144" type="Boss1_5V1Gun">
-                                                    <param id="0" name="Object">Projectile1_Generic</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">1</param>
-                                                </action>
-                                                <action id="-22" name="Set angle toward position" sid="741881692949592" type="Projectile1_Generic">
-                                                    <param id="0" name="X">Engine_Player.X</param>
-                                                    <param id="1" name="Y">Engine_Player.Y</param>
-                                                </action>
-                                                <action id="3" name="Start" sid="253581837320534" type="Boss1_5V1Gun">
                                                     <param id="0" name="From">1</param>
                                                 </action>
                                             </actions>
