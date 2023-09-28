@@ -108,6 +108,10 @@
                                     <param id="0" name="Group name">&quot;V Level Specific&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
+                                <action id="-12" name="Set group active" sid="796145439292771" type="System">
+                                    <param id="0" name="Group name">&quot;WH Level Specific&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
                                 <action id="-12" name="Set group active" sid="963631023067616" type="System">
                                     <param id="0" name="Group name">&quot;RM Level Specific&quot;</param>
                                     <param id="1" name="State">0</param>
@@ -162,6 +166,10 @@
                             <actions>
                                 <action id="-12" name="Set group active" sid="292885636654718" type="System">
                                     <param id="0" name="Group name">&quot;Miniboss&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="150047889989109" type="System">
+                                    <param id="0" name="Group name">&quot;Boss2&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
                             </actions>
@@ -1094,6 +1102,10 @@
                                 <action id="-10" name="Set value" sid="346728147464253" type="Var_Miscellanious">
                                     <param id="0" name="Instance variable">Discord_CurrentLargeKey</param>
                                     <param id="1" name="Value">&quot;1h_1&quot;</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="766998703370564" type="System">
+                                    <param id="0" name="Group name">&quot;WH Level Specific&quot;</param>
+                                    <param id="1" name="State">1</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -2031,6 +2043,53 @@
                                     <param id="1" name="Value">&quot;null&quot;</param>
                                 </action>
                                 <action id="-13" name="Set boolean" sid="846124378083526" type="Var_Level">
+                                    <param id="0" name="Instance variable">Level_NoTitleCard</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="717914290225829">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="453709445624230" type="System">
+                                    <param id="0" name="First value">LayoutName</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">&quot;X_Boss2&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Set value" sid="766763593677966" type="Var_Level">
+                                    <param id="0" name="Instance variable">Level_Subname</param>
+                                    <param id="1" name="Value">&quot;&quot;</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="883594703679924" type="Var_Level">
+                                    <param id="0" name="Instance variable">Level_Name</param>
+                                    <param id="1" name="Value">&quot;???&quot;</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="588332821355212" type="Var_Level">
+                                    <param id="0" name="Instance variable">Level_Act</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="872567537498531" type="Var_Level">
+                                    <param id="0" name="Instance variable">Level_Game</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="504725645251549" type="Var_Level">
+                                    <param id="0" name="Instance variable">Level_Music</param>
+                                    <param id="1" name="Value">&quot;__silence&quot;</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="627479932246863" type="Var_Level">
+                                    <param id="0" name="Instance variable">Level_Next</param>
+                                    <param id="1" name="Value">&quot;X_Boss2&quot;</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="628337301491753" type="System">
+                                    <param id="0" name="Group name">&quot;Boss2&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="214019167348558" type="Var_Miscellanious">
+                                    <param id="0" name="Instance variable">Discord_CurrentLargeKey</param>
+                                    <param id="1" name="Value">&quot;null&quot;</param>
+                                </action>
+                                <action id="-13" name="Set boolean" sid="943163277131091" type="Var_Level">
                                     <param id="0" name="Instance variable">Level_NoTitleCard</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
@@ -4587,7 +4646,7 @@
                                     <param id="0" name="Tweened property">8</param>
                                     <param id="1" name="Function">0</param>
                                     <param id="2" name="Target">&quot;392&quot;</param>
-                                    <param id="3" name="Duration">10</param>
+                                    <param id="3" name="Duration">15</param>
                                     <param id="4" name="Enforce mode">0</param>
                                 </action>
                                 <action behavior="LiteTween" id="10" name="Start" sid="802245060455629" type="Hazard1_5VRisingLava">
@@ -7012,6 +7071,86 @@
             </sub-events>
         </event-group>
         <comment>srb1 hyper levels</comment>
+        <event-group description="" inactive="1" sid="557345665646059" title="WH Level Specific">
+            <sub-events>
+                <event-block sid="425514980389981">
+                    <conditions>
+                        <condition id="0" name="On function" sid="851406211563341" type="Function">
+                            <param id="0" name="Name">&quot;Player_Restart&quot;</param>
+                        </condition>
+                        <condition id="-11" name="For Each" sid="979201339348913" type="System">
+                            <param id="0" name="Object">Object1H_1WHPlatform</param>
+                        </condition>
+                        <condition id="1" name="Is overlapping another object" sid="173515145396583" type="Object1H_1WHPlatform">
+                            <param id="0" name="Object">Engine_CameraZone</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="LiteTween" id="14" name="Stop" sid="242753821623420" type="Object1H_1WHPlatform">
+                            <param id="0" name="Stop Mode">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="178035473679089" type="Object1H_1WHPlatform">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="229664996510696" type="Object1H_1WHPlatform">
+                            <param id="0" name="Instance variable">Camera</param>
+                            <param id="1" name="Value">Engine_CameraZone.ID</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="513773453111614" type="Object1H_1WHPlatform">
+                            <param id="0" name="Instance variable">Enemies</param>
+                            <param id="1" name="Value">Self.EnemyCount</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="668267929349005">
+                    <conditions>
+                        <condition behavior="LiteTween" id="1" name="Compare progress" sid="257835417534150" type="Object1H_1WHPlatform">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Value">0</param>
+                        </condition>
+                        <condition id="-33" name="Pick by comparison" sid="983351932491879" type="System">
+                            <param id="0" name="Object">Object1H_1WHPlatform</param>
+                            <param id="1" name="Expression">Object1H_1WHPlatform.Camera</param>
+                            <param id="2" name="Comparison">0</param>
+                            <param id="3" name="Value">Engine_Camera.CurrentZone</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="714532048466048">
+                            <conditions>
+                                <condition id="-19" name="On destroyed" sid="626641072787616" type="Enemies" />
+                            </conditions>
+                            <actions>
+                                <action id="-12" name="Subtract from" sid="543589647450786" type="Object1H_1WHPlatform">
+                                    <param id="0" name="Instance variable">Enemies</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="716857117197187">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="938578858086090" type="Object1H_1WHPlatform">
+                                    <param id="0" name="Instance variable">Enemies</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="925114064484236" type="System" />
+                            </conditions>
+                            <actions>
+                                <action behavior="LiteTween" id="10" name="Start" sid="843688574480924" type="Object1H_1WHPlatform">
+                                    <param id="0" name="Start Mode">0</param>
+                                    <param id="1" name="Force use current">0</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="716895165375870" type="Object1H_1WHPlatform">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
         <event-group description="" inactive="1" sid="217490199747503" title="RM Level Specific">
             <sub-events>
                 <event-block sid="396738646399031">
@@ -9040,81 +9179,958 @@
                 </event-block>
             </sub-events>
         </event-group>
-        <event-block sid="425514980389981">
-            <conditions>
-                <condition id="0" name="On function" sid="851406211563341" type="Function">
-                    <param id="0" name="Name">&quot;Player_Restart&quot;</param>
-                </condition>
-                <condition id="-11" name="For Each" sid="979201339348913" type="System">
-                    <param id="0" name="Object">Object1H_1WHPlatform</param>
-                </condition>
-                <condition id="1" name="Is overlapping another object" sid="173515145396583" type="Object1H_1WHPlatform">
-                    <param id="0" name="Object">Engine_CameraZone</param>
-                </condition>
-            </conditions>
-            <actions>
-                <action behavior="LiteTween" id="14" name="Stop" sid="242753821623420" type="Object1H_1WHPlatform">
-                    <param id="0" name="Stop Mode">1</param>
-                </action>
-                <action id="-15" name="Set visible" sid="178035473679089" type="Object1H_1WHPlatform">
-                    <param id="0" name="Visibility">0</param>
-                </action>
-                <action id="-10" name="Set value" sid="229664996510696" type="Object1H_1WHPlatform">
-                    <param id="0" name="Instance variable">Camera</param>
-                    <param id="1" name="Value">Engine_CameraZone.ID</param>
-                </action>
-                <action id="-10" name="Set value" sid="513773453111614" type="Object1H_1WHPlatform">
-                    <param id="0" name="Instance variable">Enemies</param>
-                    <param id="1" name="Value">Self.EnemyCount</param>
-                </action>
-            </actions>
-        </event-block>
-        <event-block sid="668267929349005">
-            <conditions>
-                <condition behavior="LiteTween" id="1" name="Compare progress" sid="257835417534150" type="Object1H_1WHPlatform">
-                    <param id="0" name="Comparison">0</param>
-                    <param id="1" name="Value">0</param>
-                </condition>
-                <condition id="-33" name="Pick by comparison" sid="983351932491879" type="System">
-                    <param id="0" name="Object">Object1H_1WHPlatform</param>
-                    <param id="1" name="Expression">Object1H_1WHPlatform.Camera</param>
-                    <param id="2" name="Comparison">0</param>
-                    <param id="3" name="Value">Engine_Camera.CurrentZone</param>
-                </condition>
-            </conditions>
-            <actions />
+        <event-group description="" inactive="1" sid="321870323827441" title="Boss2">
             <sub-events>
-                <event-block sid="714532048466048">
+                <event-block sid="250934647302306">
                     <conditions>
-                        <condition id="-19" name="On destroyed" sid="626641072787616" type="Enemies" />
+                        <condition id="0" name="On function" sid="963407088257661" type="Function">
+                            <param id="0" name="Name">&quot;Level_Trigger&quot;</param>
+                        </condition>
+                        <condition id="-8" name="Compare two values" sid="257948067161647" type="System">
+                            <param id="0" name="First value">Function.Param(0)</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Second value">0</param>
+                        </condition>
                     </conditions>
                     <actions>
-                        <action id="-12" name="Subtract from" sid="543589647450786" type="Object1H_1WHPlatform">
-                            <param id="0" name="Instance variable">Enemies</param>
-                            <param id="1" name="Value">1</param>
+                        <action id="-10" name="Set value" sid="411728056673873" type="BossX_Metal">
+                            <param id="0" name="Instance variable">State</param>
+                            <param id="1" name="Value">&quot;active&quot;</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="227748624189396" type="BossX_Metal">
+                            <param id="0" name="Instance variable">Active</param>
+                            <param id="1" name="Value">0</param>
                         </action>
                     </actions>
                 </event-block>
-                <event-block sid="716857117197187">
+                <event-block sid="395812047797974">
+                    <conditions />
+                    <actions>
+                        <action id="0" name="Set text" sid="499210246855268" type="HUD_BossHP">
+                            <param id="0" name="Text">BossX_Metal.HP</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment></comment>
+                <event-block sid="384888070170181">
                     <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="938578858086090" type="Object1H_1WHPlatform">
-                            <param id="0" name="Instance variable">Enemies</param>
-                            <param id="1" name="Comparison">3</param>
+                        <condition id="0" name="On function" sid="669170159800217" type="Function">
+                            <param id="0" name="Name">&quot;Player_Restart&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="821264457865315" type="BossX_MetalTrail" />
+                        <action id="-9" name="Destroy" sid="852251799523285" type="BossX_MetalForceField" />
+                        <action id="-9" name="Destroy" sid="205710552745540" type="BossX_MetalHead1" />
+                    </actions>
+                </event-block>
+                <event-block sid="546581246470473">
+                    <conditions>
+                        <condition id="-4" name="Trigger once while true" sid="658430740346254" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="455740952496310" type="BossX_MetalTrail" />
+                        <action id="-9" name="Destroy" sid="361838445611471" type="BossX_MetalForceField" />
+                        <action id="-9" name="Destroy" sid="201753633456572" type="BossX_MetalHead1" />
+                    </actions>
+                </event-block>
+                <event-block sid="669312397445149">
+                    <conditions>
+                        <condition id="1" name="Is overlapping another object" sid="619773476885725" type="PlayerSkins">
+                            <param id="0" name="Object">BossX_MetalForceField</param>
+                        </condition>
+                        <condition id="-8" name="Is boolean instance variable set" sid="782490299276966" type="PlayerSkins">
+                            <param id="0" name="Instance variable">Me</param>
+                        </condition>
+                        <condition id="-9" name="Is visible" sid="460993633176423" type="BossX_MetalForceField" />
+                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="407159065954525" type="Var_Level">
+                            <param id="0" name="Instance variable">Pause</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Call function" sid="724905091618121" type="Function">
+                            <param id="0" name="Name">&quot;Player_TakeDamage&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="965983107321822">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="507243695130451" type="ProjectileX_MetalFire">
+                            <param id="0" name="Object">LevelTiles</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-3" name="Create object" sid="824750170585037" type="System">
+                            <param id="0" name="Object to create">BossX_MetalFire</param>
+                            <param id="1" name="Layer">&quot;Player&quot;</param>
+                            <param id="2" name="X">ProjectileX_MetalFire.X-36</param>
+                            <param id="3" name="Y">ProjectileX_MetalFire.Y-10</param>
+                        </action>
+                        <action id="-3" name="Create object" sid="829492353364617" type="System">
+                            <param id="0" name="Object to create">BossX_MetalFire</param>
+                            <param id="1" name="Layer">&quot;Player&quot;</param>
+                            <param id="2" name="X">ProjectileX_MetalFire.X</param>
+                            <param id="3" name="Y">ProjectileX_MetalFire.Y-10</param>
+                        </action>
+                        <action id="-3" name="Create object" sid="929965496958185" type="System">
+                            <param id="0" name="Object to create">BossX_MetalFire</param>
+                            <param id="1" name="Layer">&quot;Player&quot;</param>
+                            <param id="2" name="X">ProjectileX_MetalFire.X+36</param>
+                            <param id="3" name="Y">ProjectileX_MetalFire.Y-10</param>
+                        </action>
+                        <action id="-9" name="Destroy" sid="742453279469044" type="ProjectileX_MetalFire" />
+                    </actions>
+                </event-block>
+                <event-block sid="317548042713212">
+                    <conditions>
+                        <condition id="1" name="Is overlapping another object" sid="848546589671718" type="PlayerSkins">
+                            <param id="0" name="Object">BossX_MetalFire</param>
+                        </condition>
+                        <condition id="-10" name="Compare opacity" sid="391136812486604" type="BossX_MetalFire">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Opacity">100</param>
+                        </condition>
+                        <condition id="-8" name="Is boolean instance variable set" sid="430468944727485" type="PlayerSkins">
+                            <param id="0" name="Instance variable">Me</param>
+                        </condition>
+                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="796855019310347" type="Var_Level">
+                            <param id="0" name="Instance variable">Pause</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Call function" sid="157901313246670" type="Function">
+                            <param id="0" name="Name">&quot;Player_TakeDamage&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="796776843855601">
+                    <conditions>
+                        <condition id="0" name="On function" sid="792594216017823" type="Function">
+                            <param id="0" name="Name">&quot;Player_Restart&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="461410818878341" type="BossX_MetalFire" />
+                    </actions>
+                </event-block>
+                <event-block sid="600882015960395">
+                    <conditions>
+                        <condition id="-18" name="On created" sid="379947465578757" type="BossX_MetalFire" />
+                    </conditions>
+                    <actions>
+                        <action id="5" name="Set frame" sid="133645815844535" type="BossX_MetalFire">
+                            <param id="0" name="Frame number">choose(0,1)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment></comment>
+                <event-block sid="701827547598842">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="773373838347665" type="BossX_Metal">
+                            <param id="0" name="Instance variable">Active</param>
+                            <param id="1" name="Comparison">4</param>
                             <param id="2" name="Value">0</param>
                         </condition>
-                        <condition id="-4" name="Trigger once while true" sid="925114064484236" type="System" />
+                        <condition id="-33" name="Pick by comparison" sid="739039272079846" type="System">
+                            <param id="0" name="Object">Engine_CameraZone</param>
+                            <param id="1" name="Expression">Engine_CameraZone.ID</param>
+                            <param id="2" name="Comparison">0</param>
+                            <param id="3" name="Value">Engine_Camera.CurrentZone</param>
+                        </condition>
                     </conditions>
-                    <actions>
-                        <action behavior="LiteTween" id="10" name="Start" sid="843688574480924" type="Object1H_1WHPlatform">
-                            <param id="0" name="Start Mode">0</param>
-                            <param id="1" name="Force use current">0</param>
-                        </action>
-                        <action id="-15" name="Set visible" sid="716895165375870" type="Object1H_1WHPlatform">
-                            <param id="0" name="Visibility">1</param>
-                        </action>
-                    </actions>
+                    <actions />
+                    <sub-events>
+                        <comment></comment>
+                        <variable constant="0" name="state" sid="842438031208741" static="1" type="text"></variable>
+                        <variable constant="0" name="direction" sid="988805294226191" static="1" type="number">0</variable>
+                        <variable constant="0" name="counter" sid="233269546817620" static="1" type="number">0</variable>
+                        <variable constant="0" name="counter_hits" sid="774521465836435" static="1" type="number">0</variable>
+                        <event-block sid="290907989450893">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="341008844590520" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="6" name="Stop" sid="720186606689058" type="BetterAudio">
+                                    <param id="0" name="Tag">&quot;music&quot;</param>
+                                </action>
+                                <action id="0" name="Call function" sid="247128751012408" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;X&quot;{###}&quot;music&quot;{###}1</param>
+                                </action>
+                                <action id="0" name="Spawn another object" sid="495062254285240" type="BossX_Metal">
+                                    <param id="0" name="Object">BossX_MetalTrail</param>
+                                    <param id="1" name="Layer">&quot;Objects&quot;</param>
+                                    <param id="2" name="Image point">0</param>
+                                </action>
+                                <action behavior="Pin" id="0" name="Pin to object" sid="897158678214191" type="BossX_MetalTrail">
+                                    <param id="0" name="Pin to">BossX_Metal</param>
+                                    <param id="1" name="Mode">0</param>
+                                </action>
+                                <action id="-25" name="Move to bottom" sid="357770016878483" type="BossX_MetalTrail" />
+                                <action id="-15" name="Set visible" sid="963315844150166" type="BossX_MetalTrail">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action id="0" name="Spawn another object" sid="929423061277872" type="BossX_Metal">
+                                    <param id="0" name="Object">BossX_MetalForceField</param>
+                                    <param id="1" name="Layer">&quot;Objects&quot;</param>
+                                    <param id="2" name="Image point">0</param>
+                                </action>
+                                <action id="-24" name="Move to top" sid="724260639389542" type="BossX_MetalForceField" />
+                                <action behavior="Pin" id="0" name="Pin to object" sid="139909202001042" type="BossX_MetalForceField">
+                                    <param id="0" name="Pin to">BossX_Metal</param>
+                                    <param id="1" name="Mode">0</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="381470117130601" type="BossX_MetalForceField">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="113666164256797" type="System">
+                                    <param id="0" name="Variable">state</param>
+                                    <param id="1" name="Value">&quot;start&quot;</param>
+                                </action>
+                                <action id="4" name="Set animation" sid="653774566687088" type="BossX_Metal">
+                                    <param id="0" name="Animation">&quot;Idle1&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                                <action id="-13" name="Set boolean" sid="393655671194104" type="BossX_Metal">
+                                    <param id="0" name="Instance variable">CanBeHit</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action behavior="MoveTo2" id="9" name="Stop" sid="130528926330769" type="BossX_Metal" />
+                            </actions>
+                        </event-block>
+                        <event-block sid="812589317504051">
+                            <conditions>
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="705136663640036" type="BossX_Metal">
+                                    <param id="0" name="Instance variable">FlashTimer</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="897532746674197" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Add to" sid="111989538670056" type="System">
+                                    <param id="0" name="Variable">counter_hits</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="615410022408559">
+                            <conditions>
+                                <condition id="-8" name="Is boolean instance variable set" sid="820451939601842" type="Var_Level">
+                                    <param id="0" name="Instance variable">Pause</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="303381727064790" type="System" />
+                            </conditions>
+                            <actions>
+                                <action behavior="MoveTo2" id="0" name="Set enabled" sid="968343663213059" type="BossX_Metal">
+                                    <param id="0" name="State">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="844706824445239">
+                            <conditions>
+                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="394858893282736" type="Var_Level">
+                                    <param id="0" name="Instance variable">Pause</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="813855711943209" type="System" />
+                            </conditions>
+                            <actions>
+                                <action behavior="MoveTo2" id="0" name="Set enabled" sid="635706852465128" type="BossX_Metal">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment></comment>
+                        <event-block sid="874051109458699">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="614728463733023" type="BossX_Metal">
+                                    <param id="0" name="Instance variable">HP</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Value">Self.InitialHP-2</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="220027087683636">
+                                    <conditions>
+                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="743177195284377" type="BossX_Metal">
+                                            <param id="0" name="Instance variable">FlashTimer</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="868536682158470" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="4" name="Set animation" sid="921342143112135" type="BossX_Metal">
+                                            <param id="0" name="Animation">&quot;Flash1&quot;</param>
+                                            <param id="1" name="From">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="254744516980120">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="179867977543430" type="BossX_Metal">
+                                            <param id="0" name="Instance variable">FlashTimer</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="672056973931696" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="4" name="Set animation" sid="269094460148243" type="BossX_Metal">
+                                            <param id="0" name="Animation">&quot;Idle1&quot;</param>
+                                            <param id="1" name="From">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="631779960963351">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="592144035745857" type="BossX_Metal">
+                                    <param id="0" name="Instance variable">HP</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">Self.InitialHP-3</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="685103694262284" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="704357198258712" type="System">
+                                    <param id="0" name="Variable">state</param>
+                                    <param id="1" name="Value">&quot;start2&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment></comment>
+                        <event-block sid="233679030581963">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="547384292489905" type="System">
+                                    <param id="0" name="Variable">state</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;start&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="200677764837554">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="441769110929390" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action behavior="MoveTo2" id="9" name="Stop" sid="607018003879417" type="BossX_Metal" />
+                                        <action behavior="MoveTo2" id="1" name="Set maximum speed" sid="591975237264054" type="BossX_Metal">
+                                            <param id="0" name="Max speed">4*60</param>
+                                        </action>
+                                        <action behavior="MoveTo2" id="4" name="Move to XY" sid="329011468024312" type="BossX_Metal">
+                                            <param id="0" name="X">Self.X</param>
+                                            <param id="1" name="Y">Special_StartPos.Y</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="390577519716656">
+                                    <conditions>
+                                        <condition behavior="MoveTo2" id="0" name="On hit target position" sid="462070129051905" type="BossX_Metal" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-15" name="Set visible" sid="439839953551861" type="BossX_MetalTrail">
+                                            <param id="0" name="Visibility">0</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="502522125034590" type="System">
+                                            <param id="0" name="Seconds">0.35</param>
+                                        </action>
+                                        <action id="4" name="Set animation" sid="514725232004035" type="BossX_Metal">
+                                            <param id="0" name="Animation">&quot;Attack1&quot;</param>
+                                            <param id="1" name="From">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="406536005447223">
+                                    <conditions>
+                                        <condition id="4" name="On finished" sid="739581183637136" type="BossX_Metal">
+                                            <param id="0" name="Animation">&quot;Attack1&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Wait" sid="631421490140502" type="System">
+                                            <param id="0" name="Seconds">0.12</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="558074067613415" type="System">
+                                            <param id="0" name="Variable">state</param>
+                                            <param id="1" name="Value">&quot;throwfire1&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <comment></comment>
+                        <event-block sid="201862268100754">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="413282956237633" type="System">
+                                    <param id="0" name="Variable">state</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;throwfire1&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="701240762138027">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="313825127140970" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-13" name="Set boolean" sid="777272430004225" type="BossX_Metal">
+                                            <param id="0" name="Instance variable">CanBeHit</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                        <action id="4" name="Set animation" sid="531565053411534" type="BossX_Metal">
+                                            <param id="0" name="Animation">&quot;Idle1&quot;</param>
+                                            <param id="1" name="From">1</param>
+                                        </action>
+                                        <action id="-15" name="Set visible" sid="418081805964797" type="BossX_MetalTrail">
+                                            <param id="0" name="Visibility">1</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="525029535669231" type="System">
+                                            <param id="0" name="Variable">counter</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                        <action behavior="MoveTo2" id="9" name="Stop" sid="370805368316937" type="BossX_Metal" />
+                                        <action behavior="MoveTo2" id="1" name="Set maximum speed" sid="216702749418896" type="BossX_Metal">
+                                            <param id="0" name="Max speed">8*60</param>
+                                        </action>
+                                        <action behavior="MoveTo2" id="4" name="Move to XY" sid="462895777788578" type="BossX_Metal">
+                                            <param id="0" name="X">Engine_CameraZone.X</param>
+                                            <param id="1" name="Y">Engine_CameraZone.Y-(48*2)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="290933016892987">
+                                    <conditions>
+                                        <condition behavior="MoveTo2" id="0" name="On hit target position" sid="502767791672184" type="BossX_Metal" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Wait" sid="514725876110257" type="System">
+                                            <param id="0" name="Seconds">0.25</param>
+                                        </action>
+                                        <action id="4" name="Set animation" sid="418484898423611" type="BossX_Metal">
+                                            <param id="0" name="Animation">&quot;Attack1&quot;</param>
+                                            <param id="1" name="From">1</param>
+                                        </action>
+                                        <action id="0" name="Spawn another object" sid="296425610443106" type="BossX_Metal">
+                                            <param id="0" name="Object">ProjectileX_MetalFire</param>
+                                            <param id="1" name="Layer">&quot;Player&quot;</param>
+                                            <param id="2" name="Image point">1</param>
+                                        </action>
+                                        <action id="-22" name="Set angle toward position" sid="570280067056911" type="ProjectileX_MetalFire">
+                                            <param id="0" name="X">random(Engine_CameraZone.BBoxLeft+64,Engine_CameraZone.BBoxRight-(Engine_CameraZone.Width/2))</param>
+                                            <param id="1" name="Y">Special_StartPos.Y</param>
+                                        </action>
+                                        <action id="0" name="Call function" sid="746617379191087" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;F_FireShot&quot;</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="361014756136993" type="System">
+                                            <param id="0" name="Seconds">0.6</param>
+                                        </action>
+                                        <action id="3" name="Start" sid="319164016297302" type="BossX_Metal">
+                                            <param id="0" name="From">1</param>
+                                        </action>
+                                        <action id="0" name="Spawn another object" sid="756133291957849" type="BossX_Metal">
+                                            <param id="0" name="Object">ProjectileX_MetalFire</param>
+                                            <param id="1" name="Layer">&quot;Player&quot;</param>
+                                            <param id="2" name="Image point">1</param>
+                                        </action>
+                                        <action id="-22" name="Set angle toward position" sid="737679842819823" type="ProjectileX_MetalFire">
+                                            <param id="0" name="X">random(Engine_CameraZone.BBoxLeft+(Engine_CameraZone.Width/2),Engine_CameraZone.BBoxRight-64)</param>
+                                            <param id="1" name="Y">Special_StartPos.Y</param>
+                                        </action>
+                                        <action id="0" name="Call function" sid="207085322406660" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;F_FireShot&quot;</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="220228731472239" type="System">
+                                            <param id="0" name="Seconds">0.7</param>
+                                        </action>
+                                        <action id="3" name="Start" sid="446502131200843" type="BossX_Metal">
+                                            <param id="0" name="From">1</param>
+                                        </action>
+                                        <action id="0" name="Spawn another object" sid="179229750833108" type="BossX_Metal">
+                                            <param id="0" name="Object">ProjectileX_MetalFire</param>
+                                            <param id="1" name="Layer">&quot;Player&quot;</param>
+                                            <param id="2" name="Image point">1</param>
+                                        </action>
+                                        <action id="-22" name="Set angle toward position" sid="762068569030980" type="ProjectileX_MetalFire">
+                                            <param id="0" name="X">Engine_Player.X</param>
+                                            <param id="1" name="Y">Special_StartPos.Y</param>
+                                        </action>
+                                        <action id="0" name="Call function" sid="900930161461100" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;F_FireShot&quot;</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="824350967711490" type="System">
+                                            <param id="0" name="Seconds">0.85</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="529707291290758" type="System">
+                                            <param id="0" name="Variable">state</param>
+                                            <param id="1" name="Value">&quot;forcefield1&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <comment></comment>
+                        <event-block sid="111034437099262">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="968755446628515" type="System">
+                                    <param id="0" name="Variable">state</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;forcefield1&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="848220161736400">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="775918580722709" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-13" name="Set boolean" sid="895491293321622" type="BossX_Metal">
+                                            <param id="0" name="Instance variable">CanBeHit</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                        <action id="4" name="Set animation" sid="577441885543224" type="BossX_Metal">
+                                            <param id="0" name="Animation">&quot;Idle1&quot;</param>
+                                            <param id="1" name="From">1</param>
+                                        </action>
+                                        <action id="-15" name="Set visible" sid="216982142841145" type="BossX_MetalTrail">
+                                            <param id="0" name="Visibility">1</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="382031242916558" type="System">
+                                            <param id="0" name="Variable">direction</param>
+                                            <param id="1" name="Value">-1</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="569229710215778" type="System">
+                                            <param id="0" name="Variable">counter</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="298682486338007" type="System">
+                                            <param id="0" name="Variable">counter_hits</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                        <action behavior="MoveTo2" id="9" name="Stop" sid="880860477569521" type="BossX_Metal" />
+                                        <action behavior="MoveTo2" id="1" name="Set maximum speed" sid="563579454865563" type="BossX_Metal">
+                                            <param id="0" name="Max speed">4*60</param>
+                                        </action>
+                                        <action behavior="MoveTo2" id="4" name="Move to XY" sid="670519646631670" type="BossX_Metal">
+                                            <param id="0" name="X">Self.X</param>
+                                            <param id="1" name="Y">Special_StartPos.Y</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="817744039939531">
+                                    <conditions>
+                                        <condition behavior="MoveTo2" id="0" name="On hit target position" sid="661138866967830" type="BossX_Metal" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-15" name="Set visible" sid="792967650107178" type="BossX_MetalTrail">
+                                            <param id="0" name="Visibility">0</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="642550746992774" type="System">
+                                            <param id="0" name="Seconds">0.1</param>
+                                        </action>
+                                        <action id="4" name="Set animation" sid="661205473280134" type="BossX_Metal">
+                                            <param id="0" name="Animation">&quot;Attack1&quot;</param>
+                                            <param id="1" name="From">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="364336938150403">
+                                    <conditions>
+                                        <condition id="4" name="On finished" sid="165480260592455" type="BossX_Metal">
+                                            <param id="0" name="Animation">&quot;Attack1&quot;</param>
+                                        </condition>
+                                        <condition id="-14" name="Compare variable" sid="594556760131092" type="System">
+                                            <param id="0" name="Variable">direction</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">-1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-15" name="Set visible" sid="614270454102882" type="BossX_MetalTrail">
+                                            <param id="0" name="Visibility">1</param>
+                                        </action>
+                                        <action id="-15" name="Set visible" sid="535080419445894" type="BossX_MetalForceField">
+                                            <param id="0" name="Visibility">1</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="337922648163740">
+                                            <conditions>
+                                                <condition id="-1" name="Compare X" sid="347206575551394" type="Engine_Player">
+                                                    <param id="0" name="Comparison">2</param>
+                                                    <param id="1" name="X co-ordinate">BossX_Metal.X</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Set value" sid="393162104914132" type="System">
+                                                    <param id="0" name="Variable">direction</param>
+                                                    <param id="1" name="Value">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="828501478095515">
+                                            <conditions>
+                                                <condition id="-1" name="Compare X" sid="337830276483042" type="Engine_Player">
+                                                    <param id="0" name="Comparison">5</param>
+                                                    <param id="1" name="X co-ordinate">BossX_Metal.X</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Set value" sid="631299911058681" type="System">
+                                                    <param id="0" name="Variable">direction</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="543880670437262">
+                                    <conditions>
+                                        <condition id="-14" inverted="1" name="Compare variable" sid="274425708991939" type="System">
+                                            <param id="0" name="Variable">direction</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">-1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="779046872921041">
+                                            <conditions>
+                                                <condition id="-1" name="Compare X" sid="903712138902610" type="BossX_Metal">
+                                                    <param id="0" name="Comparison">3</param>
+                                                    <param id="1" name="X co-ordinate">Engine_CameraZone.BBoxLeft+72</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="595132498008302" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Set value" sid="182833698161615" type="System">
+                                                    <param id="0" name="Variable">direction</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                                <action id="-10" name="Add to" sid="952806805154174" type="System">
+                                                    <param id="0" name="Variable">counter</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="307052047586474">
+                                            <conditions>
+                                                <condition id="-1" name="Compare X" sid="766360902659954" type="BossX_Metal">
+                                                    <param id="0" name="Comparison">5</param>
+                                                    <param id="1" name="X co-ordinate">Engine_CameraZone.BBoxRight-72</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="872301621355922" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Set value" sid="521802565691405" type="System">
+                                                    <param id="0" name="Variable">direction</param>
+                                                    <param id="1" name="Value">0</param>
+                                                </action>
+                                                <action id="-10" name="Add to" sid="649840145661913" type="System">
+                                                    <param id="0" name="Variable">counter</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="731041383093963">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="213825978671378" type="System">
+                                                    <param id="0" name="Variable">counter</param>
+                                                    <param id="1" name="Comparison">2</param>
+                                                    <param id="2" name="Value">6</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions />
+                                            <sub-events>
+                                                <event-block sid="319212314906037">
+                                                    <conditions>
+                                                        <condition id="-14" name="Compare variable" sid="484850482496686" type="System">
+                                                            <param id="0" name="Variable">direction</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Value">0</param>
+                                                        </condition>
+                                                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="931597694629311" type="Var_Level">
+                                                            <param id="0" name="Instance variable">Pause</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-1" name="Set X" sid="646273476727981" type="BossX_Metal">
+                                                            <param id="0" name="X">Self.X-(counter&lt;3 ? 9 : 6)</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="632825847897804">
+                                                    <conditions>
+                                                        <condition id="-14" name="Compare variable" sid="578696732340761" type="System">
+                                                            <param id="0" name="Variable">direction</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Value">1</param>
+                                                        </condition>
+                                                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="705033564947172" type="Var_Level">
+                                                            <param id="0" name="Instance variable">Pause</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-1" name="Set X" sid="730650576962672" type="BossX_Metal">
+                                                            <param id="0" name="X">Self.X+(counter&lt;3 ? 9 : 6)</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                        <event-block sid="152116885180416">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="239684923942607" type="System">
+                                                    <param id="0" name="Variable">counter</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">3</param>
+                                                </condition>
+                                                <condition id="-21" name="Is between values" sid="803745090516967" type="System">
+                                                    <param id="0" name="Value">BossX_Metal.X</param>
+                                                    <param id="1" name="Lower bound">Engine_CameraZone.X-4</param>
+                                                    <param id="2" name="Upper bound">Engine_CameraZone.X+4</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="302447441155575" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Spawn another object" sid="721515894298357" type="BossX_Metal">
+                                                    <param id="0" name="Object">Projectile1_1KBBoss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="358340923302837" type="Function">
+                                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                                </action>
+                                            </actions>
+                                            <sub-events>
+                                                <event-block sid="165063516158382">
+                                                    <conditions>
+                                                        <condition id="-1" name="Compare X" sid="689069193877569" type="Engine_Player">
+                                                            <param id="0" name="Comparison">2</param>
+                                                            <param id="1" name="X co-ordinate">BossX_Metal.X</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action behavior="Bullet" id="0" name="Set speed" sid="871509760524978" type="Projectile1_1KBBoss">
+                                                            <param id="0" name="Speed">-360</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="457056902346740">
+                                                    <conditions>
+                                                        <condition id="-1" name="Compare X" sid="241380095165109" type="Engine_Player">
+                                                            <param id="0" name="Comparison">5</param>
+                                                            <param id="1" name="X co-ordinate">BossX_Metal.X</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action behavior="Bullet" id="0" name="Set speed" sid="910826965626467" type="Projectile1_1KBBoss">
+                                                            <param id="0" name="Speed">360</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                        <event-block sid="920299968172782">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="658172384717871" type="System">
+                                                    <param id="0" name="Variable">counter</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Value">4</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="181437333259961" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-15" name="Set visible" sid="909254404251070" type="BossX_MetalForceField">
+                                                    <param id="0" name="Visibility">0</param>
+                                                </action>
+                                                <action id="-13" name="Set boolean" sid="811395362851121" type="BossX_Metal">
+                                                    <param id="0" name="Instance variable">CanBeHit</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="776484441035304">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="265546622292762" type="System">
+                                                    <param id="0" name="Variable">counter_hits</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Value">2</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="954728413573796" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-13" name="Set boolean" sid="456946423545377" type="BossX_Metal">
+                                                    <param id="0" name="Instance variable">CanBeHit</param>
+                                                    <param id="1" name="Value">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="215492914364823">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="272620178731178" type="System">
+                                                    <param id="0" name="Variable">counter</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Value">6</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="521581430055251" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-15" name="Set visible" sid="812443392105239" type="BossX_MetalTrail">
+                                                    <param id="0" name="Visibility">0</param>
+                                                </action>
+                                                <action id="-13" name="Set boolean" sid="337654130576209" type="BossX_Metal">
+                                                    <param id="0" name="Instance variable">CanBeHit</param>
+                                                    <param id="1" name="Value">0</param>
+                                                </action>
+                                                <action id="-16" name="Wait" sid="421322230633347" type="System">
+                                                    <param id="0" name="Seconds">0.12</param>
+                                                </action>
+                                                <action id="4" name="Set animation" sid="688309007473639" type="BossX_Metal">
+                                                    <param id="0" name="Animation">&quot;Attack1&quot;</param>
+                                                    <param id="1" name="From">1</param>
+                                                </action>
+                                                <action behavior="Fade" id="1" name="Start fade" sid="683493648569333" type="BossX_MetalFire" />
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="117274463280903">
+                                            <conditions>
+                                                <condition id="4" name="On finished" sid="318959958578560" type="BossX_Metal">
+                                                    <param id="0" name="Animation">&quot;Flash1&quot;</param>
+                                                </condition>
+                                                <condition id="-14" name="Compare variable" sid="550542710770348" type="System">
+                                                    <param id="0" name="Variable">counter</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Value">6</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="4" name="Set animation" sid="553655420523382" type="BossX_Metal">
+                                                    <param id="0" name="Animation">&quot;Attack1&quot;</param>
+                                                    <param id="1" name="From">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="501450931498116">
+                                            <conditions>
+                                                <condition id="4" name="On finished" sid="968566702519417" type="BossX_Metal">
+                                                    <param id="0" name="Animation">&quot;Attack1&quot;</param>
+                                                </condition>
+                                                <condition id="-14" name="Compare variable" sid="457944881167641" type="System">
+                                                    <param id="0" name="Variable">counter</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Value">6</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-16" name="Wait" sid="890157318606939" type="System">
+                                                    <param id="0" name="Seconds">0.12</param>
+                                                </action>
+                                                <action id="-9" name="Set value" sid="767672368087220" type="System">
+                                                    <param id="0" name="Variable">state</param>
+                                                    <param id="1" name="Value">&quot;throwfire1&quot;</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <comment></comment>
+                        <event-block sid="745828937246187">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="366450565678801" type="System">
+                                    <param id="0" name="Variable">state</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;start2&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="501248058667548">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="974405477071037" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-13" name="Set boolean" sid="329405147854592" type="BossX_Metal">
+                                            <param id="0" name="Instance variable">CanBeHit</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                        <action id="4" name="Set animation" sid="253956959758732" type="BossX_Metal">
+                                            <param id="0" name="Animation">&quot;Idle2&quot;</param>
+                                            <param id="1" name="From">1</param>
+                                        </action>
+                                        <action behavior="MoveTo2" id="9" name="Stop" sid="622602488998513" type="BossX_Metal" />
+                                        <action id="-15" name="Set visible" sid="454684685444857" type="BossX_MetalTrail">
+                                            <param id="0" name="Visibility">0</param>
+                                        </action>
+                                        <action id="-15" name="Set visible" sid="138830254373690" type="BossX_MetalForceField">
+                                            <param id="0" name="Visibility">0</param>
+                                        </action>
+                                        <action behavior="Fade" id="1" name="Start fade" sid="338035191319189" type="BossX_MetalFire" />
+                                        <action id="-3" name="Create object" sid="165789632364964" type="System">
+                                            <param id="0" name="Object to create">BossX_MetalHead1</param>
+                                            <param id="1" name="Layer">&quot;Objects&quot;</param>
+                                            <param id="2" name="X">BossX_Metal.X</param>
+                                            <param id="3" name="Y">BossX_Metal.Y</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="297808098843089">
+                                            <conditions>
+                                                <condition id="-1" name="Compare X" sid="576400411236205" type="Engine_Player">
+                                                    <param id="0" name="Comparison">2</param>
+                                                    <param id="1" name="X co-ordinate">BossX_Metal.X</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action behavior="Platform" id="9" name="Set vector Y" sid="574160247173125" type="BossX_MetalHead1">
+                                                    <param id="0" name="Vector Y">540</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="439612408982460">
+                                            <conditions>
+                                                <condition id="-1" name="Compare X" sid="751589145606045" type="Engine_Player">
+                                                    <param id="0" name="Comparison">5</param>
+                                                    <param id="1" name="X co-ordinate">BossX_Metal.X</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action behavior="Platform" id="9" name="Set vector Y" sid="184471666701193" type="BossX_MetalHead1">
+                                                    <param id="0" name="Vector Y">-540</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="555640802353944">
+                                    <conditions>
+                                        <condition behavior="Platform" id="2" inverted="1" name="Is on floor" sid="526018695491787" type="BossX_MetalHead1" />
+                                    </conditions>
+                                    <actions>
+                                        <action behavior="Platform" id="8" name="Set vector X" sid="540166364343535" type="BossX_MetalHead1">
+                                            <param id="0" name="Vector X">300</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
                 </event-block>
             </sub-events>
-        </event-block>
+        </event-group>
     </events>
 </c2eventsheet>
