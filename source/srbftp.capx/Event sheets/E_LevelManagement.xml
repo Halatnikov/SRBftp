@@ -9221,6 +9221,7 @@
                     <actions>
                         <action id="-9" name="Destroy" sid="821264457865315" type="BossX_MetalTrail" />
                         <action id="-9" name="Destroy" sid="852251799523285" type="BossX_MetalForceField" />
+                        <action id="-9" name="Destroy" sid="461410818878341" type="BossX_MetalFire" />
                         <action id="-9" name="Destroy" sid="205710552745540" type="BossX_MetalHead1" />
                     </actions>
                 </event-block>
@@ -9231,6 +9232,7 @@
                     <actions>
                         <action id="-9" name="Destroy" sid="455740952496310" type="BossX_MetalTrail" />
                         <action id="-9" name="Destroy" sid="361838445611471" type="BossX_MetalForceField" />
+                        <action id="-9" name="Destroy" sid="407633610472734" type="BossX_MetalFire" />
                         <action id="-9" name="Destroy" sid="201753633456572" type="BossX_MetalHead1" />
                     </actions>
                 </event-block>
@@ -9303,16 +9305,6 @@
                             <param id="0" name="Name">&quot;Player_TakeDamage&quot;</param>
                             <param id="1" name="Parameter {n}"></param>
                         </action>
-                    </actions>
-                </event-block>
-                <event-block sid="796776843855601">
-                    <conditions>
-                        <condition id="0" name="On function" sid="792594216017823" type="Function">
-                            <param id="0" name="Name">&quot;Player_Restart&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-9" name="Destroy" sid="461410818878341" type="BossX_MetalFire" />
                     </actions>
                 </event-block>
                 <event-block sid="600882015960395">
@@ -9399,6 +9391,17 @@
                                 </action>
                                 <action behavior="MoveTo2" id="9" name="Stop" sid="130528926330769" type="BossX_Metal" />
                             </actions>
+                            <sub-events>
+                                <event-block sid="199256159021574">
+                                    <conditions />
+                                    <actions>
+                                        <action disabled="1" id="-10" name="Set value" sid="927942532586579" type="BossX_Metal">
+                                            <param id="0" name="Instance variable">HP</param>
+                                            <param id="1" name="Value">10</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                         <event-block sid="812589317504051">
                             <conditions>
@@ -9502,6 +9505,55 @@
                                     <param id="1" name="Value">&quot;start2&quot;</param>
                                 </action>
                             </actions>
+                        </event-block>
+                        <event-block sid="256777327087609">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="534707482634516" type="BossX_Metal">
+                                    <param id="0" name="Instance variable">HP</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Value">Self.InitialHP-6</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="594252806567172" type="BossX_Metal">
+                                    <param id="0" name="Instance variable">HP</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Value">Self.InitialHP-4</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="202451001142269">
+                                    <conditions>
+                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="642659056448391" type="BossX_Metal">
+                                            <param id="0" name="Instance variable">FlashTimer</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="330782457667079" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="4" name="Set animation" sid="351286923702900" type="BossX_Metal">
+                                            <param id="0" name="Animation">&quot;Flash2&quot;</param>
+                                            <param id="1" name="From">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="918302040235201">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="149856541500245" type="BossX_Metal">
+                                            <param id="0" name="Instance variable">FlashTimer</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="569098516129741" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="4" name="Set animation" sid="978786937046826" type="BossX_Metal">
+                                            <param id="0" name="Animation">&quot;Idle2&quot;</param>
+                                            <param id="1" name="From">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                         <comment></comment>
                         <event-block sid="233679030581963">
@@ -9866,7 +9918,7 @@
                                                     </conditions>
                                                     <actions>
                                                         <action id="-1" name="Set X" sid="646273476727981" type="BossX_Metal">
-                                                            <param id="0" name="X">Self.X-(counter&lt;3 ? 9 : 6)</param>
+                                                            <param id="0" name="X">Self.X-(counter&lt;3 ? 9 : 5)</param>
                                                         </action>
                                                     </actions>
                                                 </event-block>
@@ -9883,7 +9935,7 @@
                                                     </conditions>
                                                     <actions>
                                                         <action id="-1" name="Set X" sid="730650576962672" type="BossX_Metal">
-                                                            <param id="0" name="X">Self.X+(counter&lt;3 ? 9 : 6)</param>
+                                                            <param id="0" name="X">Self.X+(counter&lt;3 ? 9 : 5)</param>
                                                         </action>
                                                     </actions>
                                                 </event-block>
@@ -9896,7 +9948,7 @@
                                                     <param id="1" name="Comparison">0</param>
                                                     <param id="2" name="Value">3</param>
                                                 </condition>
-                                                <condition id="-21" name="Is between values" sid="803745090516967" type="System">
+                                                <condition id="-21" name="Is between values" sid="653568014062645" type="System">
                                                     <param id="0" name="Value">BossX_Metal.X</param>
                                                     <param id="1" name="Lower bound">Engine_CameraZone.X-4</param>
                                                     <param id="2" name="Upper bound">Engine_CameraZone.X+4</param>
@@ -10003,42 +10055,10 @@
                                                     <param id="1" name="From">1</param>
                                                 </action>
                                                 <action behavior="Fade" id="1" name="Start fade" sid="683493648569333" type="BossX_MetalFire" />
-                                            </actions>
-                                        </event-block>
-                                        <event-block sid="117274463280903">
-                                            <conditions>
-                                                <condition id="4" name="On finished" sid="318959958578560" type="BossX_Metal">
-                                                    <param id="0" name="Animation">&quot;Flash1&quot;</param>
-                                                </condition>
-                                                <condition id="-14" name="Compare variable" sid="550542710770348" type="System">
-                                                    <param id="0" name="Variable">counter</param>
-                                                    <param id="1" name="Comparison">5</param>
-                                                    <param id="2" name="Value">6</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="4" name="Set animation" sid="553655420523382" type="BossX_Metal">
-                                                    <param id="0" name="Animation">&quot;Attack1&quot;</param>
-                                                    <param id="1" name="From">1</param>
+                                                <action id="-16" name="Wait" sid="685548994600701" type="System">
+                                                    <param id="0" name="Seconds">0.45</param>
                                                 </action>
-                                            </actions>
-                                        </event-block>
-                                        <event-block sid="501450931498116">
-                                            <conditions>
-                                                <condition id="4" name="On finished" sid="968566702519417" type="BossX_Metal">
-                                                    <param id="0" name="Animation">&quot;Attack1&quot;</param>
-                                                </condition>
-                                                <condition id="-14" name="Compare variable" sid="457944881167641" type="System">
-                                                    <param id="0" name="Variable">counter</param>
-                                                    <param id="1" name="Comparison">5</param>
-                                                    <param id="2" name="Value">6</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="-16" name="Wait" sid="890157318606939" type="System">
-                                                    <param id="0" name="Seconds">0.12</param>
-                                                </action>
-                                                <action id="-9" name="Set value" sid="767672368087220" type="System">
+                                                <action id="-9" name="Set value" sid="201235465955432" type="System">
                                                     <param id="0" name="Variable">state</param>
                                                     <param id="1" name="Value">&quot;throwfire1&quot;</param>
                                                 </action>
@@ -10064,6 +10084,10 @@
                                         <condition id="-4" name="Trigger once while true" sid="974405477071037" type="System" />
                                     </conditions>
                                     <actions>
+                                        <action id="-9" name="Set value" sid="150613525500978" type="System">
+                                            <param id="0" name="Variable">direction</param>
+                                            <param id="1" name="Value">-1</param>
+                                        </action>
                                         <action id="-13" name="Set boolean" sid="329405147854592" type="BossX_Metal">
                                             <param id="0" name="Instance variable">CanBeHit</param>
                                             <param id="1" name="Value">0</param>
@@ -10086,6 +10110,12 @@
                                             <param id="2" name="X">BossX_Metal.X</param>
                                             <param id="3" name="Y">BossX_Metal.Y</param>
                                         </action>
+                                        <action behavior="MoveTo2" id="1" name="Set maximum speed" sid="619110842087602" type="BossX_Metal">
+                                            <param id="0" name="Max speed">2.5*60</param>
+                                        </action>
+                                        <action behavior="Platform" id="9" name="Set vector Y" sid="184471666701193" type="BossX_MetalHead1">
+                                            <param id="0" name="Vector Y">-540</param>
+                                        </action>
                                     </actions>
                                     <sub-events>
                                         <event-block sid="297808098843089">
@@ -10096,8 +10126,13 @@
                                                 </condition>
                                             </conditions>
                                             <actions>
-                                                <action behavior="Platform" id="9" name="Set vector Y" sid="574160247173125" type="BossX_MetalHead1">
-                                                    <param id="0" name="Vector Y">540</param>
+                                                <action behavior="MoveTo2" id="4" name="Move to XY" sid="613150544539798" type="BossX_Metal">
+                                                    <param id="0" name="X">Self.X+72</param>
+                                                    <param id="1" name="Y">Self.Y</param>
+                                                </action>
+                                                <action id="-9" name="Set value" sid="679610115341710" type="System">
+                                                    <param id="0" name="Variable">direction</param>
+                                                    <param id="1" name="Value">0</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -10109,8 +10144,13 @@
                                                 </condition>
                                             </conditions>
                                             <actions>
-                                                <action behavior="Platform" id="9" name="Set vector Y" sid="184471666701193" type="BossX_MetalHead1">
-                                                    <param id="0" name="Vector Y">-540</param>
+                                                <action behavior="MoveTo2" id="4" name="Move to XY" sid="749378325563483" type="BossX_Metal">
+                                                    <param id="0" name="X">Self.X-72</param>
+                                                    <param id="1" name="Y">Self.Y</param>
+                                                </action>
+                                                <action id="-9" name="Set value" sid="703502523181485" type="System">
+                                                    <param id="0" name="Variable">direction</param>
+                                                    <param id="1" name="Value">1</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -10120,9 +10160,227 @@
                                     <conditions>
                                         <condition behavior="Platform" id="2" inverted="1" name="Is on floor" sid="526018695491787" type="BossX_MetalHead1" />
                                     </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="621853535217241">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="694234306156419" type="System">
+                                                    <param id="0" name="Variable">direction</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">0</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action behavior="Platform" id="8" name="Set vector X" sid="161260921721504" type="BossX_MetalHead1">
+                                                    <param id="0" name="Vector X">300</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="108548109874226">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="993745306377137" type="System">
+                                                    <param id="0" name="Variable">direction</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">1</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action behavior="Platform" id="8" name="Set vector X" sid="540166364343535" type="BossX_MetalHead1">
+                                                    <param id="0" name="Vector X">-300</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="550976402990024">
+                                    <conditions>
+                                        <condition behavior="MoveTo2" id="3" inverted="1" name="Is moving" sid="975721163543933" type="BossX_Metal" />
+                                        <condition behavior="Platform" id="2" name="Is on floor" sid="787296289197871" type="BossX_MetalHead1" />
+                                        <condition id="-4" name="Trigger once while true" sid="519704832209992" type="System" />
+                                    </conditions>
                                     <actions>
-                                        <action behavior="Platform" id="8" name="Set vector X" sid="540166364343535" type="BossX_MetalHead1">
-                                            <param id="0" name="Vector X">300</param>
+                                        <action id="-16" name="Wait" sid="497594002552509" type="System">
+                                            <param id="0" name="Seconds">0.6</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="136057285852236" type="System">
+                                            <param id="0" name="Variable">state</param>
+                                            <param id="1" name="Value">&quot;raminto2&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <comment></comment>
+                        <event-block sid="169026012947709">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="284825283527037" type="System">
+                                    <param id="0" name="Variable">state</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;raminto2&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="493511293821195">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="225447940808321" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="822607505149638" type="System">
+                                            <param id="0" name="Variable">direction</param>
+                                            <param id="1" name="Value">-1</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="428560436060454" type="System">
+                                            <param id="0" name="Variable">counter</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                        <action id="4" name="Set animation" sid="852276084328820" type="BossX_Metal">
+                                            <param id="0" name="Animation">&quot;Idle2&quot;</param>
+                                            <param id="1" name="From">1</param>
+                                        </action>
+                                        <action id="-13" name="Set boolean" sid="940591027821327" type="BossX_Metal">
+                                            <param id="0" name="Instance variable">CanBeHit</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                        <action id="-15" name="Set visible" sid="283536658558676" type="BossX_MetalTrail">
+                                            <param id="0" name="Visibility">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="903778382468957">
+                                    <conditions>
+                                        <condition id="-21" inverted="1" name="Is between values" sid="483194937223714" type="System">
+                                            <param id="0" name="Value">BossX_Metal.Y</param>
+                                            <param id="1" name="Lower bound">Engine_Player.Y-1</param>
+                                            <param id="2" name="Upper bound">Engine_Player.Y+2</param>
+                                        </condition>
+                                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="918249586406818" type="Var_Level">
+                                            <param id="0" name="Instance variable">Pause</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="201548664460223">
+                                            <conditions>
+                                                <condition id="-2" name="Compare Y" sid="809415181837186" type="Engine_Player">
+                                                    <param id="0" name="Comparison">2</param>
+                                                    <param id="1" name="Y co-ordinate">BossX_Metal.Y</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-2" name="Set Y" sid="886222395148695" type="BossX_Metal">
+                                                    <param id="0" name="Y">Self.Y-2.5</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="903304545145051">
+                                            <conditions>
+                                                <condition id="-2" name="Compare Y" sid="356504571519719" type="Engine_Player">
+                                                    <param id="0" name="Comparison">5</param>
+                                                    <param id="1" name="Y co-ordinate">BossX_Metal.Y</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-2" name="Set Y" sid="931769280293470" type="BossX_Metal">
+                                                    <param id="0" name="Y">Self.Y+2.5</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="395464934658617">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="622053657524207" type="System">
+                                            <param id="0" name="Variable">counter</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="877149783044388">
+                                            <conditions>
+                                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="392556183284681" type="Var_Level">
+                                                    <param id="0" name="Instance variable">Pause</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions />
+                                            <sub-events>
+                                                <event-block sid="743047690158173">
+                                                    <conditions>
+                                                        <condition id="-1" name="Compare X" sid="877609609329106" type="Engine_Player">
+                                                            <param id="0" name="Comparison">2</param>
+                                                            <param id="1" name="X co-ordinate">BossX_Metal.X</param>
+                                                        </condition>
+                                                        <condition id="-1" name="Compare X" sid="398028089675797" type="BossX_Metal">
+                                                            <param id="0" name="Comparison">3</param>
+                                                            <param id="1" name="X co-ordinate">Engine_CameraZone.BBoxRight-24</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-1" name="Set X" sid="354090006749449" type="BossX_Metal">
+                                                            <param id="0" name="X">Self.X+1</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="274661192096740">
+                                                    <conditions>
+                                                        <condition id="-1" name="Compare X" sid="911912949034585" type="Engine_Player">
+                                                            <param id="0" name="Comparison">5</param>
+                                                            <param id="1" name="X co-ordinate">BossX_Metal.X</param>
+                                                        </condition>
+                                                        <condition id="-1" name="Compare X" sid="840631065561177" type="BossX_Metal">
+                                                            <param id="0" name="Comparison">5</param>
+                                                            <param id="1" name="X co-ordinate">Engine_CameraZone.BBoxLeft+24</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-1" name="Set X" sid="204867399500119" type="BossX_Metal">
+                                                            <param id="0" name="X">Self.X-1</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                        <event-block sid="864904674944488">
+                                            <conditions>
+                                                <condition id="-4" name="Trigger once while true" sid="567565966674109" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="4" name="Set animation" sid="554972152802139" type="BossX_Metal">
+                                                    <param id="0" name="Animation">&quot;Attack2&quot;</param>
+                                                    <param id="1" name="From">1</param>
+                                                </action>
+                                                <action id="-16" name="Wait" sid="704343615629301" type="System">
+                                                    <param id="0" name="Seconds">1.5</param>
+                                                </action>
+                                                <action id="4" name="Set animation" sid="719047285994712" type="BossX_Metal">
+                                                    <param id="0" name="Animation">&quot;Idle2&quot;</param>
+                                                    <param id="1" name="From">1</param>
+                                                </action>
+                                                <action id="-9" name="Set value" sid="222664657723322" type="System">
+                                                    <param id="0" name="Variable">counter</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="343020295005419">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="816932627691731" type="System">
+                                            <param id="0" name="Variable">counter</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                        <condition id="-1" name="Compare X" sid="194561025102361" type="BossX_Metal">
+                                            <param id="0" name="Comparison">5</param>
+                                            <param id="1" name="X co-ordinate">Engine_CameraZone.BBoxLeft+24</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-1" name="Set X" sid="733235816152833" type="BossX_Metal">
+                                            <param id="0" name="X">Self.X-18</param>
                                         </action>
                                     </actions>
                                 </event-block>
