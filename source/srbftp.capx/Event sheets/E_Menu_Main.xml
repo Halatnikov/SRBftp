@@ -3324,17 +3324,160 @@
         <event-group description="" inactive="1" sid="890592981691288" title="Skin Select">
             <sub-events>
                 <variable constant="0" name="lock" sid="276726303660144" static="1" type="number">0</variable>
+                <variable constant="0" name="page" sid="939917503087695" static="1" type="number">1</variable>
+                <variable constant="0" name="counter_pages" sid="757966036763020" static="1" type="number">0</variable>
+                <variable constant="0" name="counter_levels" sid="279413105341243" static="1" type="number">0</variable>
                 <event-block sid="586016225667118">
                     <conditions>
                         <condition id="-4" name="Trigger once while true" sid="201914561984761" type="System" />
+                        <condition id="-16" name="Is on layer" sid="916317200737235" type="HUD_SkinIcon">
+                            <param id="0" name="Layer">&quot;SkinSelect&quot;</param>
+                        </condition>
                     </conditions>
                     <actions>
-                        <action id="-10" name="Set value" sid="228709415322163" type="Var_Game">
+                        <action id="-10" name="Set value" sid="967806529904572" type="Var_Game">
                             <param id="0" name="Instance variable">CurrentSelection</param>
                             <param id="1" name="Value">1</param>
                         </action>
+                        <action id="-9" name="Set value" sid="890648536547551" type="System">
+                            <param id="0" name="Variable">page</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-9" name="Destroy" sid="663166901810169" type="Menu_Options2" />
+                        <action id="-9" name="Destroy" sid="320249598018307" type="HUD_SkinIcon" />
+                        <action id="-15" name="Set visible" sid="514950682921959" type="Menu_CursorSelected">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
                     </actions>
                     <sub-events>
+                        <event-block sid="761923557019958">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="421661687893521" type="Menu_Options">
+                                    <param id="0" name="Unique ID">8374</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="807352951705827" type="System">
+                                    <param id="0" name="Variable">counter_pages</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="390381681882452" type="System">
+                                    <param id="0" name="Variable">counter_levels</param>
+                                    <param id="1" name="Value">-1</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="982081203250264">
+                                    <conditions>
+                                        <condition id="100" name="For each property" sid="913592098906042" type="JSON_LevelPlaylist">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}">&quot;List_Skins&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Add to" sid="306598196219319" type="System">
+                                            <param id="0" name="Variable">counter_pages</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="771072387208506">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="325515773378038" type="System">
+                                                    <param id="0" name="Variable">counter_pages</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">page</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-10" name="Set value" sid="775554071507987" type="Menu_Options">
+                                                    <param id="0" name="Instance variable">ID</param>
+                                                    <param id="1" name="Value">JSON_LevelPlaylist.CurrentKey</param>
+                                                </action>
+                                                <action id="0" name="Set text" sid="130159543975196" type="Menu_Options">
+                                                    <param id="0" name="Text">uppercase(JSON_LevelPlaylist.Value(0,&quot;List_Skins&quot;,JSON_LevelPlaylist.CurrentKey))</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="443394610059931">
+                                    <conditions>
+                                        <condition id="100" name="For each property" sid="392375460931925" type="JSON_LevelPlaylist">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}">Menu_Options.ID</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Add to" sid="906760591489576" type="System">
+                                            <param id="0" name="Variable">counter_levels</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-3" name="Create object" sid="572135934839792" type="System">
+                                            <param id="0" name="Object to create">Menu_Options2</param>
+                                            <param id="1" name="Layer">&quot;SkinSelect&quot;</param>
+                                            <param id="2" name="X">83</param>
+                                            <param id="3" name="Y">93+(8+24*counter_levels)</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="488654019316245" type="Menu_Options2">
+                                            <param id="0" name="Instance variable">TableID</param>
+                                            <param id="1" name="Value">counter_levels</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="894022867807591" type="Menu_Options2">
+                                            <param id="0" name="Instance variable">ID</param>
+                                            <param id="1" name="Value">JSON_LevelPlaylist.CurrentKey</param>
+                                        </action>
+                                        <action id="0" name="Set text" sid="835142351975684" type="Menu_Options2">
+                                            <param id="0" name="Text">uppercase(JSON_SkinsProperties.Value(0,Self.ID,&quot;Name&quot;))</param>
+                                        </action>
+                                        <action id="4" name="Set font color" sid="579901292199865" type="Menu_Options2">
+                                            <param id="0" name="Color">rgb(0, 255, 255)</param>
+                                        </action>
+                                        <action id="-3" name="Create object" sid="134673763879013" type="System">
+                                            <param id="0" name="Object to create">HUD_SkinIcon</param>
+                                            <param id="1" name="Layer">&quot;SkinSelect&quot;</param>
+                                            <param id="2" name="X">62</param>
+                                            <param id="3" name="Y">105+(32*counter_levels)</param>
+                                        </action>
+                                        <action id="5" name="Set frame" sid="819041850434732" type="HUD_SkinIcon">
+                                            <param id="0" name="Frame number">int(JSON_SkinsProperties.Value(0,Menu_Options2.ID,&quot;Art&quot;))-1</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="940007290930267">
+                                            <conditions>
+                                                <condition id="3" name="Compare frame" sid="961796337811530" type="HUD_SkinIcon">
+                                                    <param id="0" name="Comparison">0</param>
+                                                    <param id="1" name="Number">Var_Player.Skin</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-15" name="Set visible" sid="808245393043010" type="Menu_CursorSelected">
+                                                    <param id="0" name="Visibility">1</param>
+                                                </action>
+                                                <action id="-2" name="Set Y" sid="102759014186368" type="Menu_CursorSelected">
+                                                    <param id="0" name="Y">Menu_Options2.Y+10</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="642312604200101">
+                                            <conditions>
+                                                <condition id="-8" inverted="1" name="Compare two values" sid="888386941886427" type="System">
+                                                    <param id="0" name="First value">JSON_LevelPlaylist.Value(0,Menu_Options.ID,JSON_LevelPlaylist.CurrentKey)</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Second value">1</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Set text" sid="855624666137823" type="Menu_Options2">
+                                                    <param id="0" name="Text">uppercase(JSON_LevelPlaylist.Value(0,Menu_Options.ID,JSON_LevelPlaylist.CurrentKey))</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
                         <event-block sid="780031359537134">
                             <conditions />
                             <actions>
@@ -3353,72 +3496,6 @@
                         </event-block>
                     </sub-events>
                 </event-block>
-                <event-block sid="211999391674439">
-                    <conditions>
-                        <condition id="-8" name="Is boolean instance variable set" sid="335224235679855" type="Var_Input">
-                            <param id="0" name="Instance variable">Up</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="996019148876684" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="-12" name="Subtract from" sid="782850944104881" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentSelection</param>
-                            <param id="1" name="Value">1</param>
-                        </action>
-                        <action id="0" name="Call function" sid="946798419345793" type="Function">
-                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
-                            <param id="1" name="Parameter {n}">&quot;Menu&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="508229783238319">
-                    <conditions>
-                        <condition id="-8" name="Is boolean instance variable set" sid="990548968763375" type="Var_Input">
-                            <param id="0" name="Instance variable">Down</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="146569941432387" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="-11" name="Add to" sid="855259428895443" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentSelection</param>
-                            <param id="1" name="Value">1</param>
-                        </action>
-                        <action id="0" name="Call function" sid="939571563561651" type="Function">
-                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
-                            <param id="1" name="Parameter {n}">&quot;Menu&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="545191925178595">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="863200977993986" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentSelection</param>
-                            <param id="1" name="Comparison">5</param>
-                            <param id="2" name="Value">16</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-10" name="Set value" sid="187862093327468" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentSelection</param>
-                            <param id="1" name="Value">1</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="626277590650336">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="461115621753996" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentSelection</param>
-                            <param id="1" name="Comparison">3</param>
-                            <param id="2" name="Value">0</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-10" name="Set value" sid="156853338308456" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentSelection</param>
-                            <param id="1" name="Value">14</param>
-                        </action>
-                    </actions>
-                </event-block>
                 <event-block sid="130450916803320">
                     <conditions>
                         <condition id="-8" name="Is boolean instance variable set" sid="868940708841978" type="Var_Input">
@@ -3430,25 +3507,104 @@
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">0</param>
                         </condition>
+                        <condition id="-16" name="Is on layer" sid="371890224344017" type="HUD_SkinIcon">
+                            <param id="0" name="Layer">&quot;SkinSelect&quot;</param>
+                        </condition>
                     </conditions>
                     <actions>
                         <action id="-10" name="Set value" sid="187186528658589" type="Var_Game">
                             <param id="0" name="Instance variable">CurrentMenu</param>
                             <param id="1" name="Value">&quot;intro&quot;</param>
                         </action>
+                        <action id="-9" name="Destroy" sid="921106902378996" type="Menu_Options2" />
+                        <action id="-9" name="Destroy" sid="255690846144287" type="HUD_SkinIcon" />
+                    </actions>
+                </event-block>
+                <event-block sid="643581538892909">
+                    <conditions>
+                        <condition id="-8" name="Is boolean instance variable set" sid="170689276767606" type="Var_Input">
+                            <param id="0" name="Instance variable">Up</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="229752429179756" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Call function" sid="201045511256693" type="Function">
+                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;Menu&quot;</param>
+                        </action>
+                        <action id="-12" name="Subtract from" sid="596331232220003" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentSelection</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="661974322688039">
+                    <conditions>
+                        <condition id="-8" name="Is boolean instance variable set" sid="142361133961647" type="Var_Input">
+                            <param id="0" name="Instance variable">Down</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="588836808004163" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Call function" sid="599244756526863" type="Function">
+                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;Menu&quot;</param>
+                        </action>
+                        <action id="-11" name="Add to" sid="122484114728661" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentSelection</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="278956343170729">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="518063055356188" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentSelection</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">Menu_Options2.Count+2</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Set value" sid="386159578617606" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentSelection</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="984248302735981">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="876812321797527" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentSelection</param>
+                            <param id="1" name="Comparison">3</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Set value" sid="453203219322965" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentSelection</param>
+                            <param id="1" name="Value">Menu_Options2.Count+1</param>
+                        </action>
                     </actions>
                 </event-block>
                 <comment></comment>
-                <event-block sid="938423142679518">
+                <event-block sid="403685796517057">
                     <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="822971325229322" type="Var_Game">
+                        <condition id="-7" name="Compare instance variable" sid="324387659802290" type="Var_Game">
                             <param id="0" name="Instance variable">CurrentSelection</param>
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">1</param>
                         </condition>
-                        <condition id="-4" name="Trigger once while true" sid="486203643525386" type="System" />
                     </conditions>
                     <actions>
+                        <action id="-2" name="Set Y" sid="988446585762272" type="Menu_Cursor">
+                            <param id="0" name="Y">74</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="742792037912449" type="Menu_CursorArrows">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="5" name="Set frame" sid="662122869148791" type="Menu_SkinSelect">
+                            <param id="0" name="Frame number">0</param>
+                        </action>
                         <action id="0" name="Set text" sid="864276293370702" type="MenuGallery_Description1">
                             <param id="0" name="Text">&quot;&quot;</param>
                         </action>
@@ -3456,403 +3612,339 @@
                             <param id="0" name="Text">&quot;&quot;</param>
                         </action>
                     </actions>
-                </event-block>
-                <event-block sid="594587800252347">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="848534408170151" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentSelection</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">2</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="788184028238435" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Set text" sid="730061802460180" type="MenuGallery_Description1">
-                            <param id="0" name="Text">&quot;&quot;&quot;Earless&quot;&quot;&quot;</param>
-                        </action>
-                        <action id="0" name="Set text" sid="843817487086878" type="MenuGallery_Description2">
-                            <param id="0" name="Text">&quot;There he is!&quot;&amp;newline&amp;&quot;The Legend!&quot;&amp;newline&amp;&quot;The Star!&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="420709120322817">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="564204102309636" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentSelection</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">3</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="195998771163678" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Set text" sid="767900937205183" type="MenuGallery_Description1">
-                            <param id="0" name="Text">&quot;&quot;&quot;Plughands&quot;&quot;&quot;</param>
-                        </action>
-                        <action id="0" name="Set text" sid="498030368565047" type="MenuGallery_Description2">
-                            <param id="0" name="Text">&quot;i promise he has a swimming animation&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="850417839271991">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="825056917590103" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentSelection</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">4</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="795056678282568" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Set text" sid="883812196947419" type="MenuGallery_Description1">
-                            <param id="0" name="Text">&quot;&quot;&quot;Srbii&quot;&quot;&quot;</param>
-                        </action>
-                        <action id="0" name="Set text" sid="548688940931770" type="MenuGallery_Description2">
-                            <param id="0" name="Text">&quot;New sprites made by SSNTails for SRB1 Christmas, which is a christmas reskin of what was left of the initial 2D SRB2 version&quot;&amp;newline&amp;&quot;(death animation is from SSNTails&apos; sketches)&quot;&amp;newline&amp;&quot;(victory animation is from SRB1 Matrixx)&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="486517827387696">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="234047631408432" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentSelection</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">5</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="885824028793068" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Set text" sid="387272365741909" type="MenuGallery_Description1">
-                            <param id="0" name="Text">&quot;&quot;&quot;SSNSonic&quot;&quot;&quot;</param>
-                        </action>
-                        <action id="0" name="Set text" sid="433341047351223" type="MenuGallery_Description2">
-                            <param id="0" name="Text">&quot;A mix of sprites from SRB2 (pre 2.2) and Sonic X-Treme, that&apos;s because actual sprites for SRB2 weren&apos;t finished at this time and it was still in Demo phase&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="871019850399976">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="140306442888256" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentSelection</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">6</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="287826249894783" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Set text" sid="101053957973706" type="MenuGallery_Description1">
-                            <param id="0" name="Text">&quot;&quot;</param>
-                        </action>
-                        <action id="0" name="Set text" sid="237182775493366" type="MenuGallery_Description2">
-                            <param id="0" name="Text">&quot;(i honestly REALLY like the designs by Meowtwo even though they&apos;re excessively pillow shaded and kinda short on animations)&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="618934585564091">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="371723384894587" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentSelection</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">7</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="275114279944077" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Set text" sid="249515329360868" type="MenuGallery_Description1">
-                            <param id="0" name="Text">&quot;&quot;&quot;just like in Sonic3K PC&quot;&quot;&quot;</param>
-                        </action>
-                        <action id="0" name="Set text" sid="218523250860906" type="MenuGallery_Description2">
-                            <param id="0" name="Text">&quot;this is the smallest skin in the game&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="267549664305902">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="954854905769768" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentSelection</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">8</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="902085030228940" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Set text" sid="877768831423817" type="MenuGallery_Description1">
-                            <param id="0" name="Text">&quot;&quot;</param>
-                        </action>
-                        <action id="0" name="Set text" sid="608590621648396" type="MenuGallery_Description2">
-                            <param id="0" name="Text">&quot;Unofficial edit of SSNTails&apos; &quot;&quot;Srbii&quot;&quot; sprites, found in SRB1 TGF semi-unused&quot;&amp;newline&amp;&quot;(death animation is from SSNTails&apos; sketches)&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="699022087755401">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="246094195083373" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentSelection</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">9</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="312237494824552" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Set text" sid="162241467190287" type="MenuGallery_Description1">
-                            <param id="0" name="Text">&quot;&quot;</param>
-                        </action>
-                        <action id="0" name="Set text" sid="985132890455633" type="MenuGallery_Description2">
-                            <param id="0" name="Text">&quot;Unofficial edit of SSNTails&apos; &quot;&quot;Srbii&quot;&quot; sprites, found in SRB1 TGF semi-unused, but the first appearance was in SRB1 Matrixx&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="573544074877058">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="409316071269466" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentSelection</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">10</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="701816942913295" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Set text" sid="568152774033397" type="MenuGallery_Description1">
-                            <param id="0" name="Text">&quot;&quot;</param>
-                        </action>
-                        <action id="0" name="Set text" sid="724396947001601" type="MenuGallery_Description2">
-                            <param id="0" name="Text">&quot;...i dunno what to say about this one but it&apos;s ok&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="527544068324568">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="586801795464054" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentSelection</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">11</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="278818815433584" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Set text" sid="893404339911120" type="MenuGallery_Description1">
-                            <param id="0" name="Text">&quot;&quot;&quot;Ugly Knux&quot;&quot;&quot;</param>
-                        </action>
-                        <action id="0" name="Set text" sid="972525736373760" type="MenuGallery_Description2">
-                            <param id="0" name="Text">&quot;These were intended to be placeholder sprites for Knuckles made by JackelZXA (prerendered from a model), from SRB2 Demo 4 until 2.0, so it was quite some time before proper sprites got made&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="939372053645235">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="424928779322331" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentSelection</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">12</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="220300074310439" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Set text" sid="270124512894213" type="MenuGallery_Description1">
-                            <param id="0" name="Text">&quot;Scruffy&quot;</param>
-                        </action>
-                        <action id="0" name="Set text" sid="215489759732787" type="MenuGallery_Description2">
-                            <param id="0" name="Text">&quot;(by SuperFreaksDev)&quot;&amp;newline&amp;&quot;yeah why not&quot;</param>
-                        </action>
-                        <action id="9" name="Set scale" sid="832726869182122" type="Menu_SkinSelect">
-                            <param id="0" name="Scale">1</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="391657748320327">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="563933231284812" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentSelection</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">13</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="339794486918503" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Set text" sid="505996464870829" type="MenuGallery_Description2">
-                            <param id="0" name="Text">&quot;srb1 tails&quot;</param>
-                        </action>
-                        <action id="0" name="Set text" sid="640144052338410" type="MenuGallery_Description1">
-                            <param id="0" name="Text">&quot;&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="225919954445456">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="673488718478301" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentSelection</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">14</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="881998463384890" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Set text" sid="725849129079054" type="MenuGallery_Description2">
-                            <param id="0" name="Text">&quot;srb1 metal sonic&quot;</param>
-                        </action>
-                        <action id="0" name="Set text" sid="732351704868811" type="MenuGallery_Description1">
-                            <param id="0" name="Text">&quot;&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="815533397749399">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="385582311670293" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentSelection</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">15</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="414513479826742" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Set text" sid="282150740258814" type="MenuGallery_Description2">
-                            <param id="0" name="Text">&quot;&quot;</param>
-                        </action>
-                        <action id="0" name="Set text" sid="199534569819230" type="MenuGallery_Description1">
-                            <param id="0" name="Text">&quot;&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="173586763918873">
-                    <conditions>
-                        <condition id="-7" inverted="1" name="Compare instance variable" sid="875886692503168" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentSelection</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">12</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="9" name="Set scale" sid="440481445802950" type="Menu_SkinSelect">
-                            <param id="0" name="Scale">2</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <comment></comment>
-                <event-block sid="177709210528003">
-                    <conditions>
-                        <condition id="-16" name="Is on layer" sid="267949323612660" type="Menu_Options">
-                            <param id="0" name="Layer">&quot;SkinSelect&quot;</param>
-                        </condition>
-                        <condition id="-33" name="Pick by comparison" sid="612819733452259" type="System">
-                            <param id="0" name="Object">Menu_Options</param>
-                            <param id="1" name="Expression">int(Menu_Options.ID)</param>
-                            <param id="2" name="Comparison">0</param>
-                            <param id="3" name="Value">Var_Game.CurrentSelection</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-2" name="Set Y" sid="637462971775635" type="Menu_Cursor">
-                            <param id="0" name="Y">Menu_Options.Y+10</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="820415740649213">
-                    <conditions />
-                    <actions>
-                        <action id="5" name="Set frame" sid="992518170713172" type="Menu_SkinSelect">
-                            <param id="0" name="Frame number">Var_Game.CurrentSelection-1</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="200235523166452">
-                    <conditions>
-                        <condition id="-7" inverted="1" name="Compare instance variable" sid="340838024299479" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentSelection</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">1</param>
-                        </condition>
-                        <condition id="-8" name="Is boolean instance variable set" sid="634984983130151" type="Var_Input">
-                            <param id="0" name="Instance variable">A</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="560196394711511" type="System" />
-                        <condition id="-14" name="Compare variable" sid="748025524208408" type="System">
-                            <param id="0" name="Variable">lock</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">0</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-10" name="Set value" sid="925589828695580" type="Var_Player">
-                            <param id="0" name="Instance variable">Skin</param>
-                            <param id="1" name="Value">Var_Game.CurrentSelection-2</param>
-                        </action>
-                        <action id="0" name="Call function" sid="785216682397881" type="Function">
-                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
-                            <param id="1" name="Parameter {n}">&quot;Explode&quot;</param>
-                        </action>
-                    </actions>
                     <sub-events>
-                        <event-block sid="914024269638076">
+                        <event-block sid="856102971571398">
                             <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="935638387657717" type="Var_Game">
-                                    <param id="0" name="Instance variable">CurrentSelection</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="315644683305877" type="Var_Input">
+                                    <param id="0" name="Instance variable">A</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="368460376901676" type="System" />
+                                <condition id="-14" name="Compare variable" sid="204973005410508" type="System">
+                                    <param id="0" name="Variable">lock</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">15</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                                <condition id="-16" name="Is on layer" sid="613439523490212" type="HUD_SkinIcon">
+                                    <param id="0" name="Layer">&quot;SkinSelect&quot;</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-10" name="Set value" sid="179106848039204" type="Var_Player">
-                                    <param id="0" name="Instance variable">Skin</param>
-                                    <param id="1" name="Value">100</param>
+                                <action id="-10" name="Set value" sid="603612489929764" type="Var_Game">
+                                    <param id="0" name="Instance variable">CurrentMenu</param>
+                                    <param id="1" name="Value">&quot;intro&quot;</param>
                                 </action>
+                                <action id="-9" name="Destroy" sid="109827645575774" type="Menu_Options2" />
+                                <action id="-9" name="Destroy" sid="379197309735685" type="HUD_SkinIcon" />
                             </actions>
+                        </event-block>
+                        <event-block any="1" sid="112483204554577">
+                            <conditions>
+                                <condition id="-8" name="Is boolean instance variable set" sid="997130594091744" type="Var_Input">
+                                    <param id="0" name="Instance variable">Left</param>
+                                </condition>
+                                <condition id="-8" name="Is boolean instance variable set" sid="338125575961116" type="Var_Input">
+                                    <param id="0" name="Instance variable">Right</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="183818707311602">
+                                    <conditions>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="424409414619136" type="Var_Input">
+                                            <param id="0" name="Instance variable">Left</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="465411480285950" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-11" name="Subtract from" sid="748073179809241" type="System">
+                                            <param id="0" name="Variable">page</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="815598884439182">
+                                    <conditions>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="798224884776199" type="Var_Input">
+                                            <param id="0" name="Instance variable">Right</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="922977833161683" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Add to" sid="520704115168105" type="System">
+                                            <param id="0" name="Variable">page</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="941279775957540">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="982474916609181" type="System">
+                                            <param id="0" name="Variable">page</param>
+                                            <param id="1" name="Comparison">3</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="835508016132614" type="System">
+                                            <param id="0" name="Variable">page</param>
+                                            <param id="1" name="Value">JSON_LevelPlaylist.Size(0,&quot;List_Skins&quot;)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="400313821910360">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="788386403487518" type="System">
+                                            <param id="0" name="Variable">page</param>
+                                            <param id="1" name="Comparison">5</param>
+                                            <param id="2" name="Value">JSON_LevelPlaylist.Size(0,&quot;List_Skins&quot;)+1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="609598963793652" type="System">
+                                            <param id="0" name="Variable">page</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="483769433537628">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="691946474242462" type="System" />
+                                        <condition id="-16" name="Is on layer" sid="415029112731662" type="HUD_SkinIcon">
+                                            <param id="0" name="Layer">&quot;SkinSelect&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="905681904347249" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;Menu&quot;</param>
+                                        </action>
+                                        <action id="-9" name="Destroy" sid="326191699911289" type="Menu_Options2" />
+                                        <action id="-9" name="Destroy" sid="246123745740309" type="HUD_SkinIcon" />
+                                        <action id="-15" name="Set visible" sid="591503303327411" type="Menu_CursorSelected">
+                                            <param id="0" name="Visibility">0</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="731127526713606">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="384205849553039" type="Menu_Options">
+                                                    <param id="0" name="Unique ID">8374</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Set value" sid="901239763868647" type="System">
+                                                    <param id="0" name="Variable">counter_pages</param>
+                                                    <param id="1" name="Value">0</param>
+                                                </action>
+                                                <action id="-9" name="Set value" sid="885966547543368" type="System">
+                                                    <param id="0" name="Variable">counter_levels</param>
+                                                    <param id="1" name="Value">-1</param>
+                                                </action>
+                                            </actions>
+                                            <sub-events>
+                                                <event-block sid="281743149671356">
+                                                    <conditions>
+                                                        <condition id="100" name="For each property" sid="383995597930656" type="JSON_LevelPlaylist">
+                                                            <param id="0" name="Reference point">0</param>
+                                                            <param id="1" name="Key {n}">&quot;List_Skins&quot;</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-10" name="Add to" sid="326624601611167" type="System">
+                                                            <param id="0" name="Variable">counter_pages</param>
+                                                            <param id="1" name="Value">1</param>
+                                                        </action>
+                                                    </actions>
+                                                    <sub-events>
+                                                        <event-block sid="579762761069682">
+                                                            <conditions>
+                                                                <condition id="-14" name="Compare variable" sid="661194420009872" type="System">
+                                                                    <param id="0" name="Variable">counter_pages</param>
+                                                                    <param id="1" name="Comparison">0</param>
+                                                                    <param id="2" name="Value">page</param>
+                                                                </condition>
+                                                            </conditions>
+                                                            <actions>
+                                                                <action id="-10" name="Set value" sid="792957263659294" type="Menu_Options">
+                                                                    <param id="0" name="Instance variable">ID</param>
+                                                                    <param id="1" name="Value">JSON_LevelPlaylist.CurrentKey</param>
+                                                                </action>
+                                                                <action id="0" name="Set text" sid="245182640853221" type="Menu_Options">
+                                                                    <param id="0" name="Text">uppercase(JSON_LevelPlaylist.Value(0,&quot;List_Skins&quot;,JSON_LevelPlaylist.CurrentKey))</param>
+                                                                </action>
+                                                            </actions>
+                                                        </event-block>
+                                                    </sub-events>
+                                                </event-block>
+                                                <event-block sid="887452720697838">
+                                                    <conditions>
+                                                        <condition id="100" name="For each property" sid="756759152999240" type="JSON_LevelPlaylist">
+                                                            <param id="0" name="Reference point">0</param>
+                                                            <param id="1" name="Key {n}">Menu_Options.ID</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-10" name="Add to" sid="713612280441541" type="System">
+                                                            <param id="0" name="Variable">counter_levels</param>
+                                                            <param id="1" name="Value">1</param>
+                                                        </action>
+                                                        <action id="-3" name="Create object" sid="726702202337809" type="System">
+                                                            <param id="0" name="Object to create">Menu_Options2</param>
+                                                            <param id="1" name="Layer">&quot;SkinSelect&quot;</param>
+                                                            <param id="2" name="X">83</param>
+                                                            <param id="3" name="Y">93+(8+24*counter_levels)</param>
+                                                        </action>
+                                                        <action id="-10" name="Set value" sid="901624353154982" type="Menu_Options2">
+                                                            <param id="0" name="Instance variable">TableID</param>
+                                                            <param id="1" name="Value">counter_levels</param>
+                                                        </action>
+                                                        <action id="-10" name="Set value" sid="575014423017129" type="Menu_Options2">
+                                                            <param id="0" name="Instance variable">ID</param>
+                                                            <param id="1" name="Value">JSON_LevelPlaylist.CurrentKey</param>
+                                                        </action>
+                                                        <action id="0" name="Set text" sid="902566085630084" type="Menu_Options2">
+                                                            <param id="0" name="Text">uppercase(JSON_SkinsProperties.Value(0,Self.ID,&quot;Name&quot;))</param>
+                                                        </action>
+                                                        <action id="4" name="Set font color" sid="227605063814125" type="Menu_Options2">
+                                                            <param id="0" name="Color">rgb(0, 255, 255)</param>
+                                                        </action>
+                                                        <action id="-3" name="Create object" sid="481199864775590" type="System">
+                                                            <param id="0" name="Object to create">HUD_SkinIcon</param>
+                                                            <param id="1" name="Layer">&quot;SkinSelect&quot;</param>
+                                                            <param id="2" name="X">62</param>
+                                                            <param id="3" name="Y">105+(32*counter_levels)</param>
+                                                        </action>
+                                                        <action id="5" name="Set frame" sid="703698260908415" type="HUD_SkinIcon">
+                                                            <param id="0" name="Frame number">int(JSON_SkinsProperties.Value(0,Menu_Options2.ID,&quot;Art&quot;))-1</param>
+                                                        </action>
+                                                    </actions>
+                                                    <sub-events>
+                                                        <event-block sid="976751106104712">
+                                                            <conditions>
+                                                                <condition id="3" name="Compare frame" sid="369353597273731" type="HUD_SkinIcon">
+                                                                    <param id="0" name="Comparison">0</param>
+                                                                    <param id="1" name="Number">Var_Player.Skin</param>
+                                                                </condition>
+                                                            </conditions>
+                                                            <actions>
+                                                                <action id="-15" name="Set visible" sid="215123438298844" type="Menu_CursorSelected">
+                                                                    <param id="0" name="Visibility">1</param>
+                                                                </action>
+                                                                <action id="-2" name="Set Y" sid="215794645640662" type="Menu_CursorSelected">
+                                                                    <param id="0" name="Y">Menu_Options2.Y+10</param>
+                                                                </action>
+                                                            </actions>
+                                                        </event-block>
+                                                        <event-block sid="504876410041055">
+                                                            <conditions>
+                                                                <condition id="-8" inverted="1" name="Compare two values" sid="807498727400969" type="System">
+                                                                    <param id="0" name="First value">JSON_LevelPlaylist.Value(0,Menu_Options.ID,JSON_LevelPlaylist.CurrentKey)</param>
+                                                                    <param id="1" name="Comparison">0</param>
+                                                                    <param id="2" name="Second value">1</param>
+                                                                </condition>
+                                                            </conditions>
+                                                            <actions>
+                                                                <action id="0" name="Set text" sid="325891206386517" type="Menu_Options2">
+                                                                    <param id="0" name="Text">uppercase(JSON_LevelPlaylist.Value(0,Menu_Options.ID,JSON_LevelPlaylist.CurrentKey))</param>
+                                                                </action>
+                                                            </actions>
+                                                        </event-block>
+                                                    </sub-events>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-block>
-                <event-block sid="372277936189665">
+                <event-block sid="446508270506191">
                     <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="699027020713103" type="Var_Game">
+                        <condition id="-7" inverted="1" name="Compare instance variable" sid="930167452634833" type="Var_Game">
                             <param id="0" name="Instance variable">CurrentSelection</param>
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">1</param>
                         </condition>
-                        <condition id="-8" name="Is boolean instance variable set" sid="948059560044299" type="Var_Input">
-                            <param id="0" name="Instance variable">A</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="233787364946203" type="System" />
-                        <condition id="-14" name="Compare variable" sid="667640820818937" type="System">
-                            <param id="0" name="Variable">lock</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">0</param>
-                        </condition>
                     </conditions>
                     <actions>
-                        <action id="-10" name="Set value" sid="788280884906032" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentMenu</param>
-                            <param id="1" name="Value">&quot;intro&quot;</param>
+                        <action id="-2" name="Set Y" sid="440568124251354" type="Menu_Cursor">
+                            <param id="0" name="Y">50+(24*Var_Game.CurrentSelection)</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="581356697300216" type="Menu_CursorArrows">
+                            <param id="0" name="Visibility">0</param>
                         </action>
                     </actions>
-                </event-block>
-                <event-block sid="601570403143710">
-                    <conditions>
-                        <condition id="-16" name="Is on layer" sid="957060404397669" type="Menu_Options">
-                            <param id="0" name="Layer">&quot;SkinSelect&quot;</param>
-                        </condition>
-                        <condition id="-33" name="Pick by comparison" sid="278842014330195" type="System">
-                            <param id="0" name="Object">Menu_Options</param>
-                            <param id="1" name="Expression">Var_Player.Skin</param>
-                            <param id="2" name="Comparison">0</param>
-                            <param id="3" name="Value">int(Menu_Options.ID)-2</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-2" name="Set Y" sid="597408760097345" type="Menu_CursorSelected">
-                            <param id="0" name="Y">Menu_Options.Y+10</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="686919513555457">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="419690356443363" type="Var_Player">
-                            <param id="0" name="Instance variable">Skin</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">100</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-2" name="Set Y" sid="994050559578127" type="Menu_CursorSelected">
-                            <param id="0" name="Y">-999</param>
-                        </action>
-                    </actions>
+                    <sub-events>
+                        <event-block sid="579175752002104">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="587478407027635" type="Menu_Options2">
+                                    <param id="0" name="Instance variable">TableID</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">Var_Game.CurrentSelection-2</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="9" name="Set scale" sid="284549618415830" type="Menu_SkinSelect">
+                                    <param id="0" name="Scale">2</param>
+                                </action>
+                                <action id="5" name="Set frame" sid="146979634030520" type="Menu_SkinSelect">
+                                    <param id="0" name="Frame number">int(JSON_SkinsProperties.Value(0,Menu_Options2.ID,&quot;Art&quot;))</param>
+                                </action>
+                                <action id="0" name="Set text" sid="327375490795050" type="MenuGallery_Description1">
+                                    <param id="0" name="Text">JSON_SkinsProperties.Value(0,Menu_Options2.ID,&quot;Title&quot;)</param>
+                                </action>
+                                <action id="0" name="Set text" sid="218837741343066" type="MenuGallery_Description2">
+                                    <param id="0" name="Text">replace(JSON_SkinsProperties.Value(0,Menu_Options2.ID,&quot;Description&quot;),&quot;|&quot;,newline)</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="880070457413573">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="726130050613325" type="Menu_Options2">
+                                            <param id="0" name="Instance variable">ID</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;scruffy&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="9" name="Set scale" sid="926595123425046" type="Menu_SkinSelect">
+                                            <param id="0" name="Scale">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="113167934974822">
+                                    <conditions>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="604019518767225" type="Var_Input">
+                                            <param id="0" name="Instance variable">A</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="713478068490654" type="System" />
+                                        <condition id="-14" name="Compare variable" sid="381320162272360" type="System">
+                                            <param id="0" name="Variable">lock</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="224893840218595" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;Explode&quot;</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="536849847167682" type="Var_Player">
+                                            <param id="0" name="Instance variable">Skin</param>
+                                            <param id="1" name="Value">int(JSON_SkinsProperties.Value(0,Menu_Options2.ID,&quot;Art&quot;))-1</param>
+                                        </action>
+                                        <action id="-15" name="Set visible" sid="477271633391067" type="Menu_CursorSelected">
+                                            <param id="0" name="Visibility">1</param>
+                                        </action>
+                                        <action id="-2" name="Set Y" sid="484612351576551" type="Menu_CursorSelected">
+                                            <param id="0" name="Y">Menu_Options2.Y+10</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
                 </event-block>
             </sub-events>
         </event-group>
