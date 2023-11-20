@@ -1563,6 +1563,10 @@
                             <param id="0" name="Instance variable">Level_NoTitleCard</param>
                             <param id="1" name="Value">0</param>
                         </action>
+                        <action id="-10" name="Set value" sid="840756079416086" type="Var_Game">
+                            <param id="0" name="Instance variable">Emeralds</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
                     </actions>
                 </event-block>
                 <comment></comment>
@@ -2915,6 +2919,44 @@
                     <param id="1" name="Parameter {n}">AJAX.LastData</param>
                 </action>
                 <action id="60" name="LoadJSON" sid="585468518575926" type="JSON_AudioProperties">
+                    <param id="0" name="JSON">Function.ReturnValue</param>
+                    <param id="1" name="Reference point">0</param>
+                    <param id="2" name="Key {n}"></param>
+                </action>
+            </actions>
+        </event-block>
+        <comment></comment>
+        <event-block sid="221005033285318">
+            <conditions>
+                <condition id="70" name="Is Empty" sid="206638784992856" type="JSON_SkinsProperties">
+                    <param id="0" name="Reference point">0</param>
+                    <param id="1" name="Key {n}"></param>
+                </condition>
+                <condition id="-4" name="Trigger once while true" sid="777788393266997" type="System" />
+            </conditions>
+            <actions>
+                <action id="1" name="Request project file" sid="575494500318957" type="AJAX">
+                    <param id="0" name="Tag">&quot;skinssproperties&quot;</param>
+                    <param id="1" name="File">skinsproperties.ini</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="709630387852625">
+            <conditions>
+                <condition id="0" name="On completed" sid="571187017844659" type="AJAX">
+                    <param id="0" name="Tag">&quot;skinssproperties&quot;</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="0" name="Set New Object" sid="460092285363473" type="JSON_SkinsProperties">
+                    <param id="0" name="Reference point">0</param>
+                    <param id="1" name="Key {n}"></param>
+                </action>
+                <action id="0" name="Call function" sid="566833760762161" type="Function">
+                    <param id="0" name="Name">&quot;INI2JSON&quot;</param>
+                    <param id="1" name="Parameter {n}">AJAX.LastData</param>
+                </action>
+                <action id="60" name="LoadJSON" sid="301071263740249" type="JSON_SkinsProperties">
                     <param id="0" name="JSON">Function.ReturnValue</param>
                     <param id="1" name="Reference point">0</param>
                     <param id="2" name="Key {n}"></param>

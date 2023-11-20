@@ -199,10 +199,6 @@
                         <condition id="-2" name="On start of layout" sid="949316911953060" type="System" />
                     </conditions>
                     <actions>
-                        <action id="-10" name="Set value" sid="881038120732151" type="Var_Game">
-                            <param id="0" name="Instance variable">Gamemode</param>
-                            <param id="1" name="Value">&quot;SpecialStage&quot;</param>
-                        </action>
                         <action id="-10" name="Set value" sid="830456804377423" type="Var_Player">
                             <param id="0" name="Instance variable">Score</param>
                             <param id="1" name="Value">0</param>
@@ -661,6 +657,10 @@
                         <action id="-16" name="Wait" sid="886637798520257" type="System">
                             <param id="0" name="Seconds">2</param>
                         </action>
+                        <action id="-10" name="Set value" sid="887864931659266" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentMenu</param>
+                            <param id="1" name="Value">&quot;special&quot;</param>
+                        </action>
                         <action id="-2" name="Go to layout" sid="764322514099238" type="System">
                             <param id="0" name="Layout">Menu_StageResults</param>
                         </action>
@@ -736,6 +736,10 @@
                         <action behavior="Fade" id="1" name="Start fade" sid="261365019576386" type="FadeBlack" />
                         <action id="-16" name="Wait" sid="929244808197434" type="System">
                             <param id="0" name="Seconds">2</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="203456694587766" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentMenu</param>
+                            <param id="1" name="Value">&quot;special&quot;</param>
                         </action>
                         <action id="-2" name="Go to layout" sid="539358672343743" type="System">
                             <param id="0" name="Layout">Menu_StageResults</param>
@@ -1648,21 +1652,146 @@
                                     <param id="0" name="Name">&quot;Discord_RichPresence&quot;</param>
                                     <param id="1" name="Parameter {n}">&quot;&quot;{###}Var_Misc.Discord_CurrentState&amp;&quot; (SRB2)&quot;{###}&quot;Special stage &quot;&amp;right(LayoutName,1)&amp;&quot; (PAUSED)&quot;{###}&quot;2_special&quot;&amp;right(LayoutName,1){###}&quot;Rings: &quot;&amp;Var_Player.Rings{###}Var_Misc.Discord_CurrentSmallKey{###}Var_Misc.Discord_CurrentSmallText{###}Var_Misc.Discord_TimestampInit{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;</param>
                                 </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="468795007105000">
-                            <conditions>
-                                <condition id="-8" name="Is boolean instance variable set" sid="577293357058810" type="Var_Input">
-                                    <param id="0" name="Instance variable">A</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="608050493625324" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="-13" name="Set boolean" sid="492202128227262" type="Var_Level">
-                                    <param id="0" name="Instance variable">Pause</param>
-                                    <param id="1" name="Value">0</param>
+                                <action id="-10" name="Set value" sid="209583674963489" type="Var_Game">
+                                    <param id="0" name="Instance variable">CurrentSelection</param>
+                                    <param id="1" name="Value">1</param>
                                 </action>
                             </actions>
+                        </event-block>
+                        <event-block sid="107501959768945">
+                            <conditions>
+                                <condition id="-8" name="Is boolean instance variable set" sid="491044458112602" type="Var_Input">
+                                    <param id="0" name="Instance variable">Up</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="568824069895436" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Call function" sid="787054584188620" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;Menu&quot;</param>
+                                </action>
+                                <action id="-12" name="Subtract from" sid="681850595108453" type="Var_Game">
+                                    <param id="0" name="Instance variable">CurrentSelection</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="216768981723679">
+                            <conditions>
+                                <condition id="-8" name="Is boolean instance variable set" sid="284397635927639" type="Var_Input">
+                                    <param id="0" name="Instance variable">Down</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="266440443889804" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Call function" sid="467680288638336" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;Menu&quot;</param>
+                                </action>
+                                <action id="-11" name="Add to" sid="191738879402611" type="Var_Game">
+                                    <param id="0" name="Instance variable">CurrentSelection</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="178258353758780">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="129898478112989" type="Var_Game">
+                                    <param id="0" name="Instance variable">CurrentSelection</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Value">3</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Set value" sid="347433007624452" type="Var_Game">
+                                    <param id="0" name="Instance variable">CurrentSelection</param>
+                                    <param id="1" name="Value">2</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="408500720971063">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="575375560935795" type="Var_Game">
+                                    <param id="0" name="Instance variable">CurrentSelection</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Set value" sid="747227568596554" type="Var_Game">
+                                    <param id="0" name="Instance variable">CurrentSelection</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>resume</comment>
+                        <event-block sid="106776216985276">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="134126560083047" type="Var_Game">
+                                    <param id="0" name="Instance variable">CurrentSelection</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Set Y" sid="862840154285009" type="Menu_Cursor">
+                                    <param id="0" name="Y">244</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="307119841663787">
+                                    <conditions>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="765570498452166" type="Var_Input">
+                                            <param id="0" name="Instance variable">A</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="198765186931467" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-13" name="Set boolean" sid="314148379310201" type="Var_Level">
+                                            <param id="0" name="Instance variable">Pause</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <comment>exit to main menu</comment>
+                        <event-block sid="557227823926177">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="975291249876411" type="Var_Game">
+                                    <param id="0" name="Instance variable">CurrentSelection</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">2</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Set Y" sid="593657074589591" type="Menu_Cursor">
+                                    <param id="0" name="Y">280</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="248471815289054">
+                                    <conditions>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="531116649267128" type="Var_Input">
+                                            <param id="0" name="Instance variable">A</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="338369088639433" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="541327771418154" type="Function">
+                                            <param id="0" name="Name">&quot;Player_ResetVars&quot;</param>
+                                            <param id="1" name="Parameter {n}"></param>
+                                        </action>
+                                        <action id="-2" name="Go to layout" sid="905834138823368" type="System">
+                                            <param id="0" name="Layout">Menu_SRB2</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="855028254855250" type="Var_Game">
+                                            <param id="0" name="Instance variable">CurrentMenu</param>
+                                            <param id="1" name="Value">&quot;main&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-block>
