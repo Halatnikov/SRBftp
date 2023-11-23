@@ -7158,12 +7158,15 @@
                         </condition>
                         <condition id="-2" name="Compare Y" sid="307865517994980" type="LevelTiles">
                             <param id="0" name="Comparison">3</param>
-                            <param id="1" name="Y co-ordinate">576</param>
+                            <param id="1" name="Y co-ordinate">600</param>
                         </condition>
                     </conditions>
                     <actions>
                         <action id="-2" name="Set Y" sid="307387096879784" type="LevelTiles">
                             <param id="0" name="Y">Self.Y+8</param>
+                        </action>
+                        <action id="-2" name="Set Y" sid="802968233922226" type="Common_FinishSign">
+                            <param id="0" name="Y">Self.Y+7.5</param>
                         </action>
                     </actions>
                 </event-block>
@@ -7174,9 +7177,7 @@
             <sub-events>
                 <event-block sid="425514980389981">
                     <conditions>
-                        <condition id="0" name="On function" sid="851406211563341" type="Function">
-                            <param id="0" name="Name">&quot;Player_Restart&quot;</param>
-                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="392947306113869" type="System" />
                         <condition id="-11" name="For Each" sid="979201339348913" type="System">
                             <param id="0" name="Object">Object1H_1WHPlatform</param>
                         </condition>
@@ -7185,15 +7186,15 @@
                         </condition>
                     </conditions>
                     <actions>
+                        <action id="-10" name="Set value" sid="229664996510696" type="Object1H_1WHPlatform">
+                            <param id="0" name="Instance variable">Camera</param>
+                            <param id="1" name="Value">Engine_CameraZone.ID</param>
+                        </action>
                         <action behavior="LiteTween" id="14" name="Stop" sid="242753821623420" type="Object1H_1WHPlatform">
                             <param id="0" name="Stop Mode">1</param>
                         </action>
                         <action id="-15" name="Set visible" sid="178035473679089" type="Object1H_1WHPlatform">
                             <param id="0" name="Visibility">0</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="229664996510696" type="Object1H_1WHPlatform">
-                            <param id="0" name="Instance variable">Camera</param>
-                            <param id="1" name="Value">Engine_CameraZone.ID</param>
                         </action>
                         <action id="-10" name="Set value" sid="513773453111614" type="Object1H_1WHPlatform">
                             <param id="0" name="Instance variable">Enemies</param>
@@ -7201,24 +7202,72 @@
                         </action>
                     </actions>
                 </event-block>
-                <event-block sid="668267929349005">
+                <event-block sid="218388239336295">
                     <conditions>
-                        <condition behavior="LiteTween" id="1" name="Compare progress" sid="257835417534150" type="Object1H_1WHPlatform">
-                            <param id="0" name="Comparison">0</param>
-                            <param id="1" name="Value">0</param>
+                        <condition id="0" name="On function" sid="258340329360535" type="Function">
+                            <param id="0" name="Name">&quot;Player_Restart&quot;</param>
                         </condition>
-                        <condition id="-33" name="Pick by comparison" sid="983351932491879" type="System">
+                    </conditions>
+                    <actions>
+                        <action behavior="LiteTween" id="14" name="Stop" sid="613544197506303" type="Object1H_1WHPlatform">
+                            <param id="0" name="Stop Mode">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="840603540585066" type="Object1H_1WHPlatform">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="931533852187386" type="Object1H_1WHPlatform">
+                            <param id="0" name="Instance variable">Enemies</param>
+                            <param id="1" name="Value">Self.EnemyCount</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="155731599003307">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="949187668445016" type="Special_Invisible">
+                                    <param id="0" name="Unique ID">10478</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Set Y" sid="914177203537407" type="Special_Invisible">
+                                    <param id="0" name="Y">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="563657232450310">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="875664139988639" type="Special_Invisible">
+                                    <param id="0" name="Unique ID">10479</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Set Y" sid="434383287865433" type="Special_Invisible">
+                                    <param id="0" name="Y">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="714532048466048">
+                    <conditions>
+                        <condition id="-19" name="On destroyed" sid="626641072787616" type="Enemies" />
+                        <condition disabled="1" id="-11" name="For Each" sid="141930526683441" type="System">
                             <param id="0" name="Object">Object1H_1WHPlatform</param>
-                            <param id="1" name="Expression">Object1H_1WHPlatform.Camera</param>
-                            <param id="2" name="Comparison">0</param>
-                            <param id="3" name="Value">Engine_Camera.CurrentZone</param>
+                        </condition>
+                        <condition id="-7" name="Compare instance variable" sid="667689527028231" type="Object1H_1WHPlatform">
+                            <param id="0" name="Instance variable">Camera</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">Engine_Camera.CurrentZone</param>
                         </condition>
                     </conditions>
                     <actions />
                     <sub-events>
-                        <event-block sid="714532048466048">
+                        <event-block sid="766838156137966">
                             <conditions>
-                                <condition id="-19" name="On destroyed" sid="626641072787616" type="Enemies" />
+                                <condition id="-7" name="Compare instance variable" sid="564363320456498" type="Object1H_1WHPlatform">
+                                    <param id="0" name="Instance variable">Enemies</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
                             </conditions>
                             <actions>
                                 <action id="-12" name="Subtract from" sid="543589647450786" type="Object1H_1WHPlatform">
@@ -7234,17 +7283,52 @@
                                     <param id="1" name="Comparison">3</param>
                                     <param id="2" name="Value">0</param>
                                 </condition>
-                                <condition id="-4" name="Trigger once while true" sid="925114064484236" type="System" />
                             </conditions>
                             <actions>
+                                <action id="-15" name="Set visible" sid="716895165375870" type="Object1H_1WHPlatform">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
                                 <action behavior="LiteTween" id="10" name="Start" sid="843688574480924" type="Object1H_1WHPlatform">
                                     <param id="0" name="Start Mode">0</param>
                                     <param id="1" name="Force use current">0</param>
                                 </action>
-                                <action id="-15" name="Set visible" sid="716895165375870" type="Object1H_1WHPlatform">
-                                    <param id="0" name="Visibility">1</param>
-                                </action>
                             </actions>
+                            <sub-events>
+                                <event-block sid="548790644118695">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="694106052927635" type="Object1H_1WHPlatform">
+                                            <param id="0" name="Instance variable">ID</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                        <condition id="-14" name="Pick by unique ID" sid="714127371547473" type="Special_Invisible">
+                                            <param id="0" name="Unique ID">10478</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="473701706088209" type="Special_Invisible">
+                                            <param id="0" name="Y">-99</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="101931509851386">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="173784340491381" type="Object1H_1WHPlatform">
+                                            <param id="0" name="Instance variable">ID</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">2</param>
+                                        </condition>
+                                        <condition id="-14" name="Pick by unique ID" sid="416736878164231" type="Special_Invisible">
+                                            <param id="0" name="Unique ID">10479</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="708227766102148" type="Special_Invisible">
+                                            <param id="0" name="Y">-99</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-block>

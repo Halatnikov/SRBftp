@@ -6,6 +6,23 @@
         <include>E_GLOBAL</include>
         <event-group description="" sid="157200201219600" title="Special stage management">
             <sub-events>
+                <comment>error handler</comment>
+                <event-block sid="726600751043946">
+                    <conditions>
+                        <condition id="-2" name="On start of layout" sid="840346416446774" type="System" />
+                        <condition id="-7" name="Compare instance variable" sid="928012885427919" type="Var_Level">
+                            <param id="0" name="Instance variable">Special_SavedLevel</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;null&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Set value" sid="978468642803269" type="Var_Level">
+                            <param id="0" name="Instance variable">Special_SavedLevel</param>
+                            <param id="1" name="Value">&quot;2_1GreenFlower1&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
                 <comment>music</comment>
                 <event-block sid="619841776568018">
                     <conditions>
@@ -332,6 +349,45 @@
                     </sub-events>
                 </event-block>
                 <comment>hud</comment>
+                <event-block sid="806947012393029">
+                    <conditions>
+                        <condition id="-4" name="Trigger once while true" sid="217758291969635" type="System" />
+                    </conditions>
+                    <actions>
+                        <action behavior="LiteTween" id="10" name="Start" sid="702962986516848" type="SStageHUD_TitleCardBG">
+                            <param id="0" name="Start Mode">0</param>
+                            <param id="1" name="Force use current">0</param>
+                        </action>
+                        <action behavior="LiteTween" id="10" name="Start" sid="335235688745989" type="SStageHUD_TitleCardText">
+                            <param id="0" name="Start Mode">0</param>
+                            <param id="1" name="Force use current">0</param>
+                        </action>
+                        <action id="0" name="Set text" sid="719562717694581" type="SStageHUD_TitleCardText">
+                            <param id="0" name="Text">&quot;SPECIAL STAGE &quot;&amp;right(LayoutName,1)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="961220160688232">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="578823465004039" type="Var_Player">
+                            <param id="0" name="Instance variable">Finished</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="691392188795290" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Wait" sid="487690786427548" type="System">
+                            <param id="0" name="Seconds">1</param>
+                        </action>
+                        <action behavior="LiteTween" id="14" name="Stop" sid="268892644234212" type="SStageHUD_TitleCardBG">
+                            <param id="0" name="Stop Mode">1</param>
+                        </action>
+                        <action behavior="LiteTween" id="14" name="Stop" sid="436535862921946" type="SStageHUD_TitleCardText">
+                            <param id="0" name="Stop Mode">1</param>
+                        </action>
+                    </actions>
+                </event-block>
                 <event-block sid="641990290700823">
                     <conditions />
                     <actions>
@@ -345,7 +401,7 @@
                 </event-block>
                 <event-block sid="442940747466028">
                     <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="578823465004039" type="Var_Player">
+                        <condition id="-7" name="Compare instance variable" sid="669411727751417" type="Var_Player">
                             <param id="0" name="Instance variable">Rings</param>
                             <param id="1" name="Comparison">3</param>
                             <param id="2" name="Value">0</param>
@@ -975,13 +1031,7 @@
                     </actions>
                     <sub-events>
                         <event-block sid="246469898403475">
-                            <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="235320126953113" type="Save_Configuration">
-                                    <param id="0" name="Instance variable">GameplayKillingDead</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">1</param>
-                                </condition>
-                            </conditions>
+                            <conditions />
                             <actions />
                             <sub-events>
                                 <event-block sid="398706182299483">
