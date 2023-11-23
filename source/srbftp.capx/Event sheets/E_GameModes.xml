@@ -974,6 +974,11 @@
                 <event-block sid="658305215713256">
                     <conditions>
                         <condition id="-2" name="On start of layout" sid="940204146425912" type="System" />
+                        <condition id="-14" name="Compare variable" sid="655876477203260" type="System">
+                            <param id="0" name="Variable">Platform</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;NwJs&quot;</param>
+                        </condition>
                     </conditions>
                     <actions>
                         <action id="-11" name="Add to" sid="437775354330839" type="Var_Level">
@@ -994,6 +999,39 @@
                             <param id="1" name="Value">Queue_LevelPlaylist.Peek</param>
                         </action>
                         <action id="1" name="Dequeue" sid="970816150127932" type="Queue_LevelPlaylist" />
+                    </actions>
+                </event-block>
+                <event-block sid="178058245893096">
+                    <conditions>
+                        <condition id="-2" name="On start of layout" sid="680441725766155" type="System" />
+                        <condition id="-14" inverted="1" name="Compare variable" sid="786191065700003" type="System">
+                            <param id="0" name="Variable">Platform</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;NwJs&quot;</param>
+                        </condition>
+                        <condition id="-8" name="Is boolean instance variable set" sid="867383960754489" type="JSON_AudioPreload">
+                            <param id="0" name="Instance variable">LevelPreloaded</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-11" name="Add to" sid="112690610572245" type="Var_Level">
+                            <param id="0" name="Instance variable">Marathon_Counter</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="0" name="Set text" sid="249228376014459" type="HUD_MarathonLevels">
+                            <param id="0" name="Text">Var_Level.Marathon_Counter&amp;&quot; / &quot;&amp;Var_Level.Marathon_CounterMax</param>
+                        </action>
+                        <action id="0" name="Set text" sid="274740079244824" type="HUD_MarathonName">
+                            <param id="0" name="Text">Var_Level.Marathon_String</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="561663126695742" type="System">
+                            <param id="0" name="Seconds">0.15</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="212449984651314" type="Var_Level">
+                            <param id="0" name="Instance variable">Level_Next</param>
+                            <param id="1" name="Value">Queue_LevelPlaylist.Peek</param>
+                        </action>
+                        <action id="1" name="Dequeue" sid="951791828958290" type="Queue_LevelPlaylist" />
                     </actions>
                 </event-block>
                 <event-block sid="209304227130760">
