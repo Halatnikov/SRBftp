@@ -3869,6 +3869,11 @@
                                 <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="737874194716786" type="Var_Level">
                                     <param id="0" name="Instance variable">Pause</param>
                                 </condition>
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="932592284307067" type="EnemyProjectiles">
+                                    <param id="0" name="Instance variable">ID</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">12</param>
+                                </condition>
                             </conditions>
                             <actions>
                                 <action id="0" name="Spawn another object" sid="913009465332853" type="EnemyProjectiles">
@@ -8966,7 +8971,7 @@
                                 </action>
                                 <action id="-11" name="Add to" sid="873615051423930" type="Var_Player">
                                     <param id="0" name="Instance variable">Score</param>
-                                    <param id="1" name="Value">1000</param>
+                                    <param id="1" name="Value">900</param>
                                 </action>
                                 <action id="-15" name="Set visible" sid="137997114084573" type="HUD_BossIcon">
                                     <param id="0" name="Visibility">0</param>
@@ -9032,6 +9037,10 @@
                                                     <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                                     <param id="1" name="Parameter {n}">&quot;Explode&quot;</param>
                                                 </action>
+                                                <action id="-11" name="Add to" sid="869471125211160" type="Var_Player">
+                                                    <param id="0" name="Instance variable">Score</param>
+                                                    <param id="1" name="Value">100</param>
+                                                </action>
                                                 <action behavior="Platform" id="9" name="Set vector Y" sid="594481397948781" type="Engine_Player">
                                                     <param id="0" name="Vector Y">-Self.Platform.JumpStrength</param>
                                                 </action>
@@ -9059,6 +9068,10 @@
                                                 <action id="0" name="Call function" sid="401131564682050" type="Function">
                                                     <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                                     <param id="1" name="Parameter {n}">&quot;Explode&quot;</param>
+                                                </action>
+                                                <action id="-11" name="Add to" sid="339217823771324" type="Var_Player">
+                                                    <param id="0" name="Instance variable">Score</param>
+                                                    <param id="1" name="Value">100</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -11565,24 +11578,30 @@
                 </event-group>
                 <event-group description="" sid="206112185603810" title="THZ Boss">
                     <sub-events>
-                        <variable constant="0" name="direction" sid="715347120946351" static="1" type="number">0</variable>
-                        <variable constant="0" name="attackpick" sid="642992800066215" static="1" type="number">0</variable>
+                        <variable constant="0" name="state" sid="642992800066215" static="1" type="number">0</variable>
+                        <variable constant="0" name="timer" sid="649910577495495" static="1" type="number">0</variable>
                         <comment>reset boss</comment>
-                        <event-block sid="384445295816166">
+                        <event-block sid="359167869994376">
                             <conditions>
-                                <condition id="0" name="On function" sid="991183328258225" type="Function">
+                                <condition id="0" name="On function" sid="352731692217581" type="Function">
                                     <param id="0" name="Name">&quot;Player_Restart&quot;</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-9" name="Set value" sid="834137196632687" type="System">
-                                    <param id="0" name="Variable">attackpick</param>
+                                <action id="4" name="Set animation" sid="725357034318665" type="Boss2_2THZ">
+                                    <param id="0" name="Animation">&quot;Idle&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="603597367972160" type="System">
+                                    <param id="0" name="Variable">state</param>
+                                    <param id="1" name="Value">-1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="572607897689572" type="System">
+                                    <param id="0" name="Variable">timer</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
-                                <action id="-9" name="Set value" sid="406437401421964" type="System">
-                                    <param id="0" name="Variable">direction</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
+                                <action id="-9" name="Destroy" sid="842974421190648" type="Effects2_BossTHZGathering" />
+                                <action id="-9" name="Destroy" sid="187917699285836" type="Hazard2_2THZBossTrail" />
                             </actions>
                         </event-block>
                         <event-block any="1" sid="551235281237072">
@@ -11600,12 +11619,28 @@
                             </conditions>
                             <actions />
                             <sub-events>
-                                <comment>entrance</comment>
+                                <event-block sid="908239321733696">
+                                    <conditions>
+                                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="996941114478132" type="Var_Level">
+                                            <param id="0" name="Instance variable">Pause</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Add to" sid="216402684706310" type="System">
+                                            <param id="0" name="Variable">timer</param>
+                                            <param id="1" name="Value">dt</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <comment>follow player X</comment>
                                 <event-block sid="108195555840643">
                                     <conditions>
                                         <condition id="-2" name="Compare Y" sid="384957501213475" type="Boss2_2THZ">
                                             <param id="0" name="Comparison">2</param>
                                             <param id="1" name="Y co-ordinate">96</param>
+                                        </condition>
+                                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="625049464978160" type="Var_Level">
+                                            <param id="0" name="Instance variable">Pause</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -11623,100 +11658,451 @@
                                     </conditions>
                                     <actions />
                                     <sub-events>
-                                        <comment>first attack pick</comment>
-                                        <event-block sid="609465457378066">
-                                            <conditions>
-                                                <condition id="-14" name="Compare variable" sid="584709637410938" type="System">
-                                                    <param id="0" name="Variable">attackpick</param>
-                                                    <param id="1" name="Comparison">0</param>
-                                                    <param id="2" name="Value">0</param>
-                                                </condition>
-                                                <condition id="-4" name="Trigger once while true" sid="662795789740100" type="System" />
-                                            </conditions>
-                                            <actions>
-                                                <action id="-16" name="Wait" sid="797569893383467" type="System">
-                                                    <param id="0" name="Seconds">2</param>
-                                                </action>
-                                                <action id="-9" name="Set value" sid="842773658257419" type="System">
-                                                    <param id="0" name="Variable">attackpick</param>
-                                                    <param id="1" name="Value">1</param>
-                                                </action>
-                                                <action id="4" name="Set animation" sid="242886187440403" type="Boss2_2THZ">
-                                                    <param id="0" name="Animation">&quot;Charging&quot;</param>
-                                                    <param id="1" name="From">1</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                        <comment>follow player X</comment>
-                                        <event-block sid="431927816413847">
-                                            <conditions>
-                                                <condition id="-1" name="Compare X" sid="351995526795870" type="Engine_Player">
-                                                    <param id="0" name="Comparison">2</param>
-                                                    <param id="1" name="X co-ordinate">Boss2_2THZ.X</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="-9" name="Set value" sid="897383587382493" type="System">
-                                                    <param id="0" name="Variable">direction</param>
-                                                    <param id="1" name="Value">0</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                        <event-block sid="917616217148989">
-                                            <conditions>
-                                                <condition id="-1" name="Compare X" sid="632326992006613" type="Engine_Player">
-                                                    <param id="0" name="Comparison">4</param>
-                                                    <param id="1" name="X co-ordinate">Boss2_2THZ.X</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="-9" name="Set value" sid="791417950507547" type="System">
-                                                    <param id="0" name="Variable">direction</param>
-                                                    <param id="1" name="Value">1</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
                                         <event-block sid="270192728226512">
                                             <conditions>
                                                 <condition id="-21" inverted="1" name="Is between values" sid="538770100639097" type="System">
                                                     <param id="0" name="Value">Boss2_2THZ.X</param>
-                                                    <param id="1" name="Lower bound">Engine_Player.X-1</param>
+                                                    <param id="1" name="Lower bound">Engine_Player.X-2</param>
                                                     <param id="2" name="Upper bound">Engine_Player.X+2</param>
+                                                </condition>
+                                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="174053707025556" type="Var_Level">
+                                                    <param id="0" name="Instance variable">Pause</param>
                                                 </condition>
                                             </conditions>
                                             <actions />
                                             <sub-events>
                                                 <event-block sid="219464734034678">
                                                     <conditions>
-                                                        <condition id="-14" name="Compare variable" sid="888842921873900" type="System">
-                                                            <param id="0" name="Variable">direction</param>
-                                                            <param id="1" name="Comparison">0</param>
-                                                            <param id="2" name="Value">0</param>
+                                                        <condition id="-1" name="Compare X" sid="351995526795870" type="Engine_Player">
+                                                            <param id="0" name="Comparison">2</param>
+                                                            <param id="1" name="X co-ordinate">Boss2_2THZ.X</param>
                                                         </condition>
                                                     </conditions>
                                                     <actions>
                                                         <action id="-1" name="Set X" sid="720080820393937" type="Boss2_2THZ">
-                                                            <param id="0" name="X">Self.X-3.5</param>
+                                                            <param id="0" name="X">Self.X-4.25</param>
                                                         </action>
                                                     </actions>
                                                 </event-block>
                                                 <event-block sid="560369432084436">
                                                     <conditions>
-                                                        <condition id="-14" name="Compare variable" sid="616957730163691" type="System">
-                                                            <param id="0" name="Variable">direction</param>
-                                                            <param id="1" name="Comparison">0</param>
-                                                            <param id="2" name="Value">1</param>
+                                                        <condition id="-1" name="Compare X" sid="632326992006613" type="Engine_Player">
+                                                            <param id="0" name="Comparison">4</param>
+                                                            <param id="1" name="X co-ordinate">Boss2_2THZ.X</param>
                                                         </condition>
                                                     </conditions>
                                                     <actions>
                                                         <action id="-1" name="Set X" sid="112111559126840" type="Boss2_2THZ">
-                                                            <param id="0" name="X">Self.X+3.5</param>
+                                                            <param id="0" name="X">Self.X+4.25</param>
                                                         </action>
                                                     </actions>
                                                 </event-block>
                                             </sub-events>
                                         </event-block>
                                     </sub-events>
+                                </event-block>
+                                <comment>entrance</comment>
+                                <event-block sid="205997971591454">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="309983562446446" type="System">
+                                            <param id="0" name="Variable">state</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">-1</param>
+                                        </condition>
+                                        <condition id="-2" name="Compare Y" sid="524699507756768" type="Boss2_2THZ">
+                                            <param id="0" name="Comparison">5</param>
+                                            <param id="1" name="Y co-ordinate">96</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="304734158218836" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="392569855474413" type="System">
+                                            <param id="0" name="Variable">state</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <comment>random choose</comment>
+                                <event-block sid="609465457378066">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="584709637410938" type="System">
+                                            <param id="0" name="Variable">state</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="662795789740100" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="4" name="Set animation" sid="357682270107607" type="Boss2_2THZ">
+                                            <param id="0" name="Animation">&quot;Idle&quot;</param>
+                                            <param id="1" name="From">1</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="797340058045084" type="System">
+                                            <param id="0" name="Seconds">1.5</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="842773658257419" type="System">
+                                            <param id="0" name="Variable">state</param>
+                                            <param id="1" name="Value">choose(1,1,  2,2,2)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <comment></comment>
+                                <event-block sid="580742736757979">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="906419398278457" type="System">
+                                            <param id="0" name="Variable">state</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="377280015326751">
+                                            <conditions>
+                                                <condition id="-4" name="Trigger once while true" sid="625198614115031" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Set value" sid="138339757385489" type="System">
+                                                    <param id="0" name="Variable">timer</param>
+                                                    <param id="1" name="Value">0</param>
+                                                </action>
+                                                <action id="4" name="Set animation" sid="242886187440403" type="Boss2_2THZ">
+                                                    <param id="0" name="Animation">&quot;Charging&quot;</param>
+                                                    <param id="1" name="From">1</param>
+                                                </action>
+                                                <action id="-9" name="Destroy" sid="315169384130959" type="Effects2_BossTHZGathering" />
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="512717399175910">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="543385355167335" type="System">
+                                                    <param id="0" name="Variable">timer</param>
+                                                    <param id="1" name="Comparison">2</param>
+                                                    <param id="2" name="Value">2</param>
+                                                </condition>
+                                                <condition id="-6" name="Every X seconds" sid="634654622121121" type="System">
+                                                    <param id="0" name="Interval (seconds)">0.33</param>
+                                                </condition>
+                                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="852583308846449" type="Var_Level">
+                                                    <param id="0" name="Instance variable">Pause</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-3" name="Create object" sid="333148064872597" type="System">
+                                                    <param id="0" name="Object to create">Effects2_BossTHZGathering</param>
+                                                    <param id="1" name="Layer">&quot;Objects&quot;</param>
+                                                    <param id="2" name="X">1846</param>
+                                                    <param id="3" name="Y">-8</param>
+                                                </action>
+                                                <action id="-3" name="Create object" sid="346020409330384" type="System">
+                                                    <param id="0" name="Object to create">Effects2_BossTHZGathering</param>
+                                                    <param id="1" name="Layer">&quot;Objects&quot;</param>
+                                                    <param id="2" name="X">1846</param>
+                                                    <param id="3" name="Y">488</param>
+                                                </action>
+                                                <action id="-3" name="Create object" sid="944192859692204" type="System">
+                                                    <param id="0" name="Object to create">Effects2_BossTHZGathering</param>
+                                                    <param id="1" name="Layer">&quot;Objects&quot;</param>
+                                                    <param id="2" name="X">978</param>
+                                                    <param id="3" name="Y">488</param>
+                                                </action>
+                                                <action id="-3" name="Create object" sid="504400037017966" type="System">
+                                                    <param id="0" name="Object to create">Effects2_BossTHZGathering</param>
+                                                    <param id="1" name="Layer">&quot;Objects&quot;</param>
+                                                    <param id="2" name="X">978</param>
+                                                    <param id="3" name="Y">-8</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="486070463129693">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="695397865870578" type="System">
+                                                    <param id="0" name="Variable">timer</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Value">2</param>
+                                                </condition>
+                                                <condition id="-14" name="Compare variable" sid="208114022744086" type="System">
+                                                    <param id="0" name="Variable">timer</param>
+                                                    <param id="1" name="Comparison">2</param>
+                                                    <param id="2" name="Value">4.25</param>
+                                                </condition>
+                                                <condition id="-6" name="Every X seconds" sid="472831671228824" type="System">
+                                                    <param id="0" name="Interval (seconds)">0.04</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Destroy" sid="856439162731965" type="Effects2_BossTHZGathering" />
+                                                <action id="4" name="Set animation" sid="212169152175433" type="Boss2_2THZ">
+                                                    <param id="0" name="Animation">&quot;Idle&quot;</param>
+                                                    <param id="1" name="From">1</param>
+                                                </action>
+                                                <action id="0" name="Spawn another object" sid="398797120588291" type="Boss2_2THZ">
+                                                    <param id="0" name="Object">Projectile2_2THZBossLazer</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-8" name="Set angle" sid="719769480173546" type="Projectile2_2THZBossLazer">
+                                                    <param id="0" name="Angle">90</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="195312390634988" type="Projectile2_2THZBossLazer">
+                                                    <param id="0" name="Speed">1150</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="206898094099699">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="970607629810277" type="System">
+                                                    <param id="0" name="Variable">timer</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Value">4.25</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="505796432066076" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Set value" sid="582398245715378" type="System">
+                                                    <param id="0" name="Variable">state</param>
+                                                    <param id="1" name="Value">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <comment></comment>
+                                <event-block sid="107320394245120">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="528451087919339" type="System">
+                                            <param id="0" name="Variable">state</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">2</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="778359386156189">
+                                            <conditions>
+                                                <condition id="-4" name="Trigger once while true" sid="221889726706929" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Set value" sid="589510289775400" type="System">
+                                                    <param id="0" name="Variable">timer</param>
+                                                    <param id="1" name="Value">0</param>
+                                                </action>
+                                                <action id="4" name="Set animation" sid="983243151554871" type="Boss2_2THZ">
+                                                    <param id="0" name="Animation">&quot;Charging&quot;</param>
+                                                    <param id="1" name="From">1</param>
+                                                </action>
+                                                <action id="-9" name="Destroy" sid="873211221107293" type="Effects2_BossTHZGathering" />
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="134241959171607">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="857275325725205" type="System">
+                                                    <param id="0" name="Variable">timer</param>
+                                                    <param id="1" name="Comparison">2</param>
+                                                    <param id="2" name="Value">3.75</param>
+                                                </condition>
+                                                <condition id="-2" name="Compare Y" sid="436417128621511" type="Boss2_2THZ">
+                                                    <param id="0" name="Comparison">2</param>
+                                                    <param id="1" name="Y co-ordinate">306</param>
+                                                </condition>
+                                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="929719937827678" type="Var_Level">
+                                                    <param id="0" name="Instance variable">Pause</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-2" name="Set Y" sid="296775324934578" type="Boss2_2THZ">
+                                                    <param id="0" name="Y">Self.Y+1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="536434741940845">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="262872182576383" type="System">
+                                                    <param id="0" name="Variable">timer</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Value">0.75</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="217025352193874" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Spawn another object" sid="424825931083800" type="Boss2_2THZ">
+                                                    <param id="0" name="Object">Projectile2_2THZBossBig</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-22" name="Set angle toward position" sid="781934008506817" type="Projectile2_2THZBossBig">
+                                                    <param id="0" name="X">Engine_Player.X</param>
+                                                    <param id="1" name="Y">Engine_Player.Y</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="227644109211190" type="Projectile2_2THZBossBig">
+                                                    <param id="0" name="Speed">275</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="389976774557368">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="171366845251239" type="System">
+                                                    <param id="0" name="Variable">timer</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Value">1.75</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="522199753872651" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Spawn another object" sid="340420801417741" type="Boss2_2THZ">
+                                                    <param id="0" name="Object">Projectile2_2THZBossBig</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-22" name="Set angle toward position" sid="367054048070717" type="Projectile2_2THZBossBig">
+                                                    <param id="0" name="X">Engine_Player.X</param>
+                                                    <param id="1" name="Y">Engine_Player.Y</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="994235385556471" type="Projectile2_2THZBossBig">
+                                                    <param id="0" name="Speed">275</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="381831146788419">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="931284286785332" type="System">
+                                                    <param id="0" name="Variable">timer</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Value">2.75</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="619597506693263" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Spawn another object" sid="629342158406820" type="Boss2_2THZ">
+                                                    <param id="0" name="Object">Projectile2_2THZBossBig</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-22" name="Set angle toward position" sid="857083396932858" type="Projectile2_2THZBossBig">
+                                                    <param id="0" name="X">Engine_Player.X</param>
+                                                    <param id="1" name="Y">Engine_Player.Y</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="888749534651792" type="Projectile2_2THZBossBig">
+                                                    <param id="0" name="Speed">275</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="904351592824992">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="327024318694597" type="System">
+                                                    <param id="0" name="Variable">timer</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Value">4.75</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions />
+                                            <sub-events>
+                                                <event-block sid="752003926591859">
+                                                    <conditions>
+                                                        <condition id="-4" name="Trigger once while true" sid="224420603340436" type="System" />
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-9" name="Destroy" sid="950640698978498" type="Effects2_BossTHZGathering" />
+                                                        <action id="4" name="Set animation" sid="146211741836506" type="Boss2_2THZ">
+                                                            <param id="0" name="Animation">&quot;Idle&quot;</param>
+                                                            <param id="1" name="From">1</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="351426582456861">
+                                                    <conditions>
+                                                        <condition id="-2" name="Compare Y" sid="727961573449638" type="Boss2_2THZ">
+                                                            <param id="0" name="Comparison">5</param>
+                                                            <param id="1" name="Y co-ordinate">96</param>
+                                                        </condition>
+                                                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="664440926576174" type="Var_Level">
+                                                            <param id="0" name="Instance variable">Pause</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-2" name="Set Y" sid="949369635175452" type="Boss2_2THZ">
+                                                            <param id="0" name="Y">Self.Y-2</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="549839262935455">
+                                                    <conditions>
+                                                        <condition id="-2" name="Compare Y" sid="209265162267102" type="Boss2_2THZ">
+                                                            <param id="0" name="Comparison">2</param>
+                                                            <param id="1" name="Y co-ordinate">96</param>
+                                                        </condition>
+                                                        <condition id="-4" name="Trigger once while true" sid="829589328005376" type="System" />
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-9" name="Set value" sid="575233988997424" type="System">
+                                                            <param id="0" name="Variable">state</param>
+                                                            <param id="1" name="Value">0</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <comment></comment>
+                                <event-block sid="675344198204933">
+                                    <conditions>
+                                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="463169641502152" type="Var_Level">
+                                            <param id="0" name="Instance variable">Pause</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-3" name="Set position" sid="865579558533621" type="Effects2_BossTHZGathering">
+                                            <param id="0" name="X">int(lerp(Self.X, Boss2_2THZ.X, 0.33))</param>
+                                            <param id="1" name="Y">int(lerp(Self.Y, Boss2_2THZ.Y+26, 0.33))</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="991208349703242">
+                                    <conditions>
+                                        <condition id="-11" name="For Each" sid="917704083694041" type="System">
+                                            <param id="0" name="Object">Projectile2_2THZBossBig</param>
+                                        </condition>
+                                        <condition id="-6" name="Every X seconds" sid="512243457914348" type="System">
+                                            <param id="0" name="Interval (seconds)">0.35</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Spawn another object" sid="540276373754608" type="Projectile2_2THZBossBig">
+                                            <param id="0" name="Object">Hazard2_2THZBossTrail</param>
+                                            <param id="1" name="Layer">&quot;Level&quot;</param>
+                                            <param id="2" name="Image point">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="894011481521693">
+                                    <conditions>
+                                        <condition id="1" name="Is overlapping another object" sid="979904803403493" type="PlayerSkins">
+                                            <param id="0" name="Object">Hazard2_2THZBossTrail</param>
+                                        </condition>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="708694246782423" type="PlayerSkins">
+                                            <param id="0" name="Instance variable">Me</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="865356347368103" type="Function">
+                                            <param id="0" name="Name">&quot;Player_TakeDamage&quot;</param>
+                                            <param id="1" name="Parameter {n}"></param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="701499068666185">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="403225264915033" type="Boss2_2THZ">
+                                            <param id="0" name="Instance variable">State</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;flash&quot;</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="743334836959879" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Destroy" sid="637632565902335" type="Hazard2_2THZBossTrail" />
+                                    </actions>
                                 </event-block>
                             </sub-events>
                         </event-block>
