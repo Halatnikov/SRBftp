@@ -11733,18 +11733,37 @@
                                         <condition id="-4" name="Trigger once while true" sid="662795789740100" type="System" />
                                     </conditions>
                                     <actions>
-                                        <action id="4" name="Set animation" sid="357682270107607" type="Boss2_2THZ">
-                                            <param id="0" name="Animation">&quot;Idle&quot;</param>
-                                            <param id="1" name="From">1</param>
-                                        </action>
-                                        <action id="-16" name="Wait" sid="797340058045084" type="System">
-                                            <param id="0" name="Seconds">1.5</param>
-                                        </action>
-                                        <action id="-9" name="Set value" sid="842773658257419" type="System">
-                                            <param id="0" name="Variable">state</param>
-                                            <param id="1" name="Value">choose(1,1,  2,2,2)</param>
-                                        </action>
+                                        <action id="-9" name="Destroy" sid="107483682991719" type="Effects2_BossTHZGathering" />
                                     </actions>
+                                    <sub-events>
+                                        <event-block sid="915295578543722">
+                                            <conditions>
+                                                <condition id="-7" inverted="1" name="Compare instance variable" sid="417903169509292" type="Boss2_2THZ">
+                                                    <param id="0" name="Instance variable">State</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">&quot;flash&quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="4" name="Set animation" sid="357682270107607" type="Boss2_2THZ">
+                                                    <param id="0" name="Animation">&quot;Idle&quot;</param>
+                                                    <param id="1" name="From">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="198517106980963">
+                                            <conditions />
+                                            <actions>
+                                                <action id="-16" name="Wait" sid="797340058045084" type="System">
+                                                    <param id="0" name="Seconds">1.5</param>
+                                                </action>
+                                                <action id="-9" name="Set value" sid="842773658257419" type="System">
+                                                    <param id="0" name="Variable">state</param>
+                                                    <param id="1" name="Value">choose(1,1,  2,2,2)</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
                                 </event-block>
                                 <comment></comment>
                                 <event-block sid="580742736757979">
@@ -11812,6 +11831,10 @@
                                                     <param id="2" name="X">978</param>
                                                     <param id="3" name="Y">-8</param>
                                                 </action>
+                                                <action id="0" name="Call function" sid="884026518270612" type="Function">
+                                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;Charging&quot;</param>
+                                                </action>
                                             </actions>
                                         </event-block>
                                         <event-block sid="486070463129693">
@@ -11819,42 +11842,73 @@
                                                 <condition id="-14" name="Compare variable" sid="695397865870578" type="System">
                                                     <param id="0" name="Variable">timer</param>
                                                     <param id="1" name="Comparison">5</param>
-                                                    <param id="2" name="Value">2</param>
+                                                    <param id="2" name="Value">2.5</param>
                                                 </condition>
                                                 <condition id="-14" name="Compare variable" sid="208114022744086" type="System">
                                                     <param id="0" name="Variable">timer</param>
                                                     <param id="1" name="Comparison">2</param>
-                                                    <param id="2" name="Value">4.25</param>
-                                                </condition>
-                                                <condition id="-6" name="Every X seconds" sid="472831671228824" type="System">
-                                                    <param id="0" name="Interval (seconds)">0.04</param>
+                                                    <param id="2" name="Value">4.75</param>
                                                 </condition>
                                             </conditions>
-                                            <actions>
-                                                <action id="-9" name="Destroy" sid="856439162731965" type="Effects2_BossTHZGathering" />
-                                                <action id="4" name="Set animation" sid="212169152175433" type="Boss2_2THZ">
-                                                    <param id="0" name="Animation">&quot;Idle&quot;</param>
-                                                    <param id="1" name="From">1</param>
-                                                </action>
-                                                <action id="0" name="Spawn another object" sid="398797120588291" type="Boss2_2THZ">
-                                                    <param id="0" name="Object">Projectile2_2THZBossLazer</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">1</param>
-                                                </action>
-                                                <action id="-8" name="Set angle" sid="719769480173546" type="Projectile2_2THZBossLazer">
-                                                    <param id="0" name="Angle">90</param>
-                                                </action>
-                                                <action behavior="Bullet" id="0" name="Set speed" sid="195312390634988" type="Projectile2_2THZBossLazer">
-                                                    <param id="0" name="Speed">1150</param>
-                                                </action>
-                                            </actions>
+                                            <actions />
+                                            <sub-events>
+                                                <event-block sid="826207099882121">
+                                                    <conditions>
+                                                        <condition id="-4" name="Trigger once while true" sid="757801557662489" type="System" />
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-9" name="Destroy" sid="856439162731965" type="Effects2_BossTHZGathering" />
+                                                        <action id="0" name="Call function" sid="450122605066310" type="Function">
+                                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                                            <param id="1" name="Parameter {n}">&quot;BigLaser&quot;</param>
+                                                        </action>
+                                                    </actions>
+                                                    <sub-events>
+                                                        <event-block sid="387831298203598">
+                                                            <conditions>
+                                                                <condition id="-7" inverted="1" name="Compare instance variable" sid="549518003016951" type="Boss2_2THZ">
+                                                                    <param id="0" name="Instance variable">State</param>
+                                                                    <param id="1" name="Comparison">0</param>
+                                                                    <param id="2" name="Value">&quot;flash&quot;</param>
+                                                                </condition>
+                                                            </conditions>
+                                                            <actions>
+                                                                <action id="4" name="Set animation" sid="212169152175433" type="Boss2_2THZ">
+                                                                    <param id="0" name="Animation">&quot;Idle&quot;</param>
+                                                                    <param id="1" name="From">1</param>
+                                                                </action>
+                                                            </actions>
+                                                        </event-block>
+                                                    </sub-events>
+                                                </event-block>
+                                                <event-block sid="169123935944289">
+                                                    <conditions>
+                                                        <condition id="-6" name="Every X seconds" sid="472831671228824" type="System">
+                                                            <param id="0" name="Interval (seconds)">0.04</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="0" name="Spawn another object" sid="398797120588291" type="Boss2_2THZ">
+                                                            <param id="0" name="Object">Projectile2_2THZBossLazer</param>
+                                                            <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                            <param id="2" name="Image point">1</param>
+                                                        </action>
+                                                        <action id="-8" name="Set angle" sid="719769480173546" type="Projectile2_2THZBossLazer">
+                                                            <param id="0" name="Angle">90</param>
+                                                        </action>
+                                                        <action behavior="Bullet" id="0" name="Set speed" sid="195312390634988" type="Projectile2_2THZBossLazer">
+                                                            <param id="0" name="Speed">1150</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
                                         </event-block>
                                         <event-block sid="206898094099699">
                                             <conditions>
                                                 <condition id="-14" name="Compare variable" sid="970607629810277" type="System">
                                                     <param id="0" name="Variable">timer</param>
                                                     <param id="1" name="Comparison">5</param>
-                                                    <param id="2" name="Value">4.25</param>
+                                                    <param id="2" name="Value">4.75</param>
                                                 </condition>
                                                 <condition id="-4" name="Trigger once while true" sid="505796432066076" type="System" />
                                             </conditions>
@@ -11891,7 +11945,6 @@
                                                     <param id="0" name="Animation">&quot;Charging&quot;</param>
                                                     <param id="1" name="From">1</param>
                                                 </action>
-                                                <action id="-9" name="Destroy" sid="873211221107293" type="Effects2_BossTHZGathering" />
                                             </actions>
                                         </event-block>
                                         <event-block sid="134241959171607">
@@ -11934,8 +11987,12 @@
                                                     <param id="0" name="X">Engine_Player.X</param>
                                                     <param id="1" name="Y">Engine_Player.Y</param>
                                                 </action>
+                                                <action id="0" name="Call function" sid="265683977610735" type="Function">
+                                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                                </action>
                                                 <action behavior="Bullet" id="0" name="Set speed" sid="227644109211190" type="Projectile2_2THZBossBig">
-                                                    <param id="0" name="Speed">275</param>
+                                                    <param id="0" name="Speed">320</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -11958,8 +12015,12 @@
                                                     <param id="0" name="X">Engine_Player.X</param>
                                                     <param id="1" name="Y">Engine_Player.Y</param>
                                                 </action>
-                                                <action behavior="Bullet" id="0" name="Set speed" sid="994235385556471" type="Projectile2_2THZBossBig">
-                                                    <param id="0" name="Speed">275</param>
+                                                <action id="0" name="Call function" sid="997117799206935" type="Function">
+                                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="132660167262166" type="Projectile2_2THZBossBig">
+                                                    <param id="0" name="Speed">320</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -11982,8 +12043,12 @@
                                                     <param id="0" name="X">Engine_Player.X</param>
                                                     <param id="1" name="Y">Engine_Player.Y</param>
                                                 </action>
-                                                <action behavior="Bullet" id="0" name="Set speed" sid="888749534651792" type="Projectile2_2THZBossBig">
-                                                    <param id="0" name="Speed">275</param>
+                                                <action id="0" name="Call function" sid="848603505797994" type="Function">
+                                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="557581928077580" type="Projectile2_2THZBossBig">
+                                                    <param id="0" name="Speed">320</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -11992,7 +12057,7 @@
                                                 <condition id="-14" name="Compare variable" sid="327024318694597" type="System">
                                                     <param id="0" name="Variable">timer</param>
                                                     <param id="1" name="Comparison">5</param>
-                                                    <param id="2" name="Value">4.75</param>
+                                                    <param id="2" name="Value">4.6</param>
                                                 </condition>
                                             </conditions>
                                             <actions />
@@ -12000,9 +12065,13 @@
                                                 <event-block sid="752003926591859">
                                                     <conditions>
                                                         <condition id="-4" name="Trigger once while true" sid="224420603340436" type="System" />
+                                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="914962351746658" type="Boss2_2THZ">
+                                                            <param id="0" name="Instance variable">State</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Value">&quot;flash&quot;</param>
+                                                        </condition>
                                                     </conditions>
                                                     <actions>
-                                                        <action id="-9" name="Destroy" sid="950640698978498" type="Effects2_BossTHZGathering" />
                                                         <action id="4" name="Set animation" sid="146211741836506" type="Boss2_2THZ">
                                                             <param id="0" name="Animation">&quot;Idle&quot;</param>
                                                             <param id="1" name="From">1</param>
@@ -12064,7 +12133,7 @@
                                             <param id="0" name="Object">Projectile2_2THZBossBig</param>
                                         </condition>
                                         <condition id="-6" name="Every X seconds" sid="512243457914348" type="System">
-                                            <param id="0" name="Interval (seconds)">0.35</param>
+                                            <param id="0" name="Interval (seconds)">0.3</param>
                                         </condition>
                                     </conditions>
                                     <actions>
