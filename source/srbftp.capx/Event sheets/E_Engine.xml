@@ -3085,22 +3085,38 @@
                                 </action>
                             </actions>
                             <sub-events>
-                                <event-block sid="581704294030322">
+                                <event-block sid="420441799270700">
                                     <conditions>
-                                        <condition id="-8" name="Is boolean instance variable set" sid="169150464808223" type="Special_StartPos">
-                                            <param id="0" name="Instance variable">TurnAround</param>
-                                        </condition>
-                                        <condition id="-8" name="Is boolean instance variable set" sid="551171955033330" type="PlayerSkins">
+                                        <condition id="-8" name="Is boolean instance variable set" sid="948854789595579" type="PlayerSkins">
                                             <param id="0" name="Instance variable">Me</param>
+                                        </condition>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="717063724389551" type="Special_StartPos">
+                                            <param id="0" name="Instance variable">TurnAround</param>
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="7" name="Set mirrored" sid="639838213182162" type="PlayerSkins">
+                                        <action id="7" name="Set mirrored" sid="163693895952894" type="PlayerSkins">
                                             <param id="0" name="State">0</param>
                                         </action>
                                     </actions>
                                 </event-block>
                             </sub-events>
+                        </event-block>
+                        <event-block sid="581704294030322">
+                            <conditions>
+                                <condition id="-18" name="On created" sid="464684220371732" type="PlayerSkins" />
+                                <condition id="-8" name="Is boolean instance variable set" sid="551171955033330" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
+                                </condition>
+                                <condition id="-8" name="Is boolean instance variable set" sid="169150464808223" type="Special_StartPos">
+                                    <param id="0" name="Instance variable">TurnAround</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="7" name="Set mirrored" sid="639838213182162" type="PlayerSkins">
+                                    <param id="0" name="State">0</param>
+                                </action>
+                            </actions>
                         </event-block>
                         <comment>trigger for all sorts of things</comment>
                         <event-block sid="620704713683760">
@@ -3995,7 +4011,7 @@
                         <event-block sid="714819211021420">
                             <conditions>
                                 <condition id="9" name="Is overlapping at offset" sid="661534472729606" type="Engine_Player">
-                                    <param id="0" name="Object">Hazard1_Spikes</param>
+                                    <param id="0" name="Object">Common1_Spikes</param>
                                     <param id="1" name="Offset X">0</param>
                                     <param id="2" name="Offset Y">1</param>
                                 </condition>
@@ -4055,7 +4071,7 @@
                         <event-block sid="607483720188885">
                             <conditions>
                                 <condition id="9" name="Is overlapping at offset" sid="524723379822044" type="PlayerSkins">
-                                    <param id="0" name="Object">Hazard2_Spikes</param>
+                                    <param id="0" name="Object">Common2_Spikes</param>
                                     <param id="1" name="Offset X">0</param>
                                     <param id="2" name="Offset Y">1</param>
                                 </condition>
@@ -7667,6 +7683,44 @@
                                         </event-block>
                                     </sub-events>
                                 </event-block>
+                                <event-block sid="715536201188188">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="232043453559075" type="Var_Player">
+                                            <param id="0" name="Instance variable">State</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;swimming&quot;</param>
+                                        </condition>
+                                        <condition id="2" name="Is playing" sid="878898598663165" type="PlayerSkins">
+                                            <param id="0" name="Animation">&quot;Jump&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Destroy" sid="721164778720208" type="Enemies" />
+                                        <action id="-11" name="Add to" sid="840918005574437" type="Var_Player">
+                                            <param id="0" name="Instance variable">Score</param>
+                                            <param id="1" name="Value">100</param>
+                                        </action>
+                                        <action id="0" name="Call function" sid="252290851582049" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;Explode&quot;</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="881211071074973">
+                                            <conditions>
+                                                <condition id="-7" inverted="1" name="Compare instance variable" sid="657667619033141" type="EnemyProjectiles">
+                                                    <param id="0" name="Instance variable">ID</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">12</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Destroy" sid="129400699336916" type="EnemyProjectiles" />
+                                                <action id="-9" name="Destroy" sid="355719807873421" type="EffectsF_ProjectileTrail" />
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
                                 <event-block sid="255271385851405">
                                     <conditions>
                                         <condition id="-8" name="Is boolean instance variable set" sid="563311387335311" type="Var_Game">
@@ -7709,6 +7763,11 @@
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">&quot;crouch&quot;</param>
                                         </condition>
+                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="886497094793885" type="Var_Player">
+                                            <param id="0" name="Instance variable">State</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;swimming&quot;</param>
+                                        </condition>
                                         <condition id="-7" inverted="1" name="Compare instance variable" sid="189718603671190" type="Enemies">
                                             <param id="0" name="Instance variable">MovementType</param>
                                             <param id="1" name="Comparison">0</param>
@@ -7717,6 +7776,24 @@
                                     </conditions>
                                     <actions>
                                         <action id="0" name="Call function" sid="695797583399411" type="Function">
+                                            <param id="0" name="Name">&quot;Player_TakeDamage&quot;</param>
+                                            <param id="1" name="Parameter {n}"></param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="211687242691912">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="967508304811869" type="Var_Player">
+                                            <param id="0" name="Instance variable">State</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;swimming&quot;</param>
+                                        </condition>
+                                        <condition id="2" inverted="1" name="Is playing" sid="889748502738281" type="PlayerSkins">
+                                            <param id="0" name="Animation">&quot;Jump&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="739795945327734" type="Function">
                                             <param id="0" name="Name">&quot;Player_TakeDamage&quot;</param>
                                             <param id="1" name="Parameter {n}"></param>
                                         </action>
