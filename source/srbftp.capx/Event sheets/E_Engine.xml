@@ -4111,6 +4111,66 @@
                                 </action>
                             </actions>
                         </event-block>
+                        <event-block sid="428739623261960">
+                            <conditions>
+                                <condition id="-18" name="On created" sid="582959205778521" type="Object2_MovingPlatform" />
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="390450521617926" type="Object2_MovingPlatform">
+                                    <param id="0" name="Instance variable">SineYInitial</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Set value" sid="422177555241109" type="Object2_MovingPlatform">
+                                    <param id="0" name="Instance variable">SineYNew</param>
+                                    <param id="1" name="Value">Self.Y</param>
+                                </action>
+                                <action id="-2" name="Set Y" sid="914806391324123" type="Object2_MovingPlatform">
+                                    <param id="0" name="Y">Self.SineYInitial</param>
+                                </action>
+                                <action behavior="Sine" id="6" name="Update initial state" sid="870701803827080" type="Object2_MovingPlatform" />
+                            </actions>
+                            <sub-events>
+                                <variable constant="0" name="difference" sid="566275370077468" static="0" type="number">0</variable>
+                                <event-block sid="233580468161256">
+                                    <conditions />
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="389832611535165" type="System">
+                                            <param id="0" name="Variable">difference</param>
+                                            <param id="1" name="Value">abs(Object2_MovingPlatform.SineYInitial - Object2_MovingPlatform.SineYNew)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="853090840070498">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="974788772597047" type="Object2_MovingPlatform">
+                                            <param id="0" name="Instance variable">SineYNew</param>
+                                            <param id="1" name="Comparison">2</param>
+                                            <param id="2" name="Value">Self.SineYInitial</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action behavior="Sine" id="5" name="Set cycle position" sid="894085059572823" type="Object2_MovingPlatform">
+                                            <param id="0" name="Cycle position">(difference/2) / Self.Sine.Magnitude</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="953038646565457">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="824263466418885" type="Object2_MovingPlatform">
+                                            <param id="0" name="Instance variable">SineYNew</param>
+                                            <param id="1" name="Comparison">4</param>
+                                            <param id="2" name="Value">Self.SineYInitial</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action behavior="Sine" id="5" name="Set cycle position" sid="696638124488861" type="Object2_MovingPlatform">
+                                            <param id="0" name="Cycle position">(difference) / Self.Sine.Magnitude</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
                         <event-block sid="534754493490018">
                             <conditions>
                                 <condition id="1" name="Is overlapping another object" sid="765192456575083" type="PlayerSkins">
