@@ -13,7 +13,7 @@
                     <actions>
                         <action disabled="1" id="-10" name="Set value" sid="695910526883674" type="Var_Game">
                             <param id="0" name="Instance variable">CurrentMenu</param>
-                            <param id="1" name="Value">&quot;cutscene&quot;</param>
+                            <param id="1" name="Value">&quot;ending&quot;</param>
                         </action>
                         <action id="-10" name="Set value" sid="918493628324446" type="Var_Game">
                             <param id="0" name="Instance variable">CurrentMenu</param>
@@ -22,6 +22,10 @@
                         <action id="0" name="Call function" sid="932338850568556" type="Function">
                             <param id="0" name="Name">&quot;Player_ResetVars&quot;</param>
                             <param id="1" name="Parameter {n}"></param>
+                        </action>
+                        <action id="0" name="Call function" sid="184964412054494" type="Function">
+                            <param id="0" name="Name">&quot;Discord_RichPresence&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;&quot;{###}&quot;Sonic Boom!&quot;{###}&quot;&quot;{###}&quot;icon_main&quot;{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;{###}Var_Misc.Discord_TimestampInit{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;</param>
                         </action>
                     </actions>
                 </event-block>
@@ -41,7 +45,7 @@
                         </action>
                         <action id="-10" name="Set value" sid="449680422808538" type="Var_Game">
                             <param id="0" name="Instance variable">CurrentMenu</param>
-                            <param id="1" name="Value">&quot;cutscene&quot;</param>
+                            <param id="1" name="Value">&quot;ending&quot;</param>
                         </action>
                     </actions>
                 </event-block>
@@ -87,47 +91,6 @@
                     </actions>
                 </event-block>
                 <comment></comment>
-                <event-block sid="945727491310883">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="392391840446267" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentMenu</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">&quot;gameover&quot;</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="616767284888996" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="-12" name="Set group active" sid="611068993453846" type="System">
-                            <param id="0" name="Group name">&quot;Sonic Boom Game Over&quot;</param>
-                            <param id="1" name="State">1</param>
-                        </action>
-                        <action id="-4" name="Set layer visible" sid="761456209303651" type="System">
-                            <param id="0" name="Layer">&quot;GameOver&quot;</param>
-                            <param id="1" name="Visibility">1</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="497438122853054">
-                    <conditions>
-                        <condition id="-7" inverted="1" name="Compare instance variable" sid="888838028661557" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentMenu</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">&quot;gameover&quot;</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="401491382991627" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="-12" name="Set group active" sid="686244842908967" type="System">
-                            <param id="0" name="Group name">&quot;Sonic Boom Game Over&quot;</param>
-                            <param id="1" name="State">0</param>
-                        </action>
-                        <action id="-4" name="Set layer visible" sid="525448704088006" type="System">
-                            <param id="0" name="Layer">&quot;GameOver&quot;</param>
-                            <param id="1" name="Visibility">0</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <comment></comment>
                 <event-block sid="667495717444579">
                     <conditions>
                         <condition id="-7" name="Compare instance variable" sid="104286563356161" type="Var_Game">
@@ -164,6 +127,47 @@
                         </action>
                         <action id="-4" name="Set layer visible" sid="736596460711091" type="System">
                             <param id="0" name="Layer">&quot;Game&quot;</param>
+                            <param id="1" name="Visibility">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment></comment>
+                <event-block sid="945727491310883">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="392391840446267" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentMenu</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;gameover&quot;</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="616767284888996" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Set group active" sid="611068993453846" type="System">
+                            <param id="0" name="Group name">&quot;Sonic Boom Game Over&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-4" name="Set layer visible" sid="761456209303651" type="System">
+                            <param id="0" name="Layer">&quot;GameOver&quot;</param>
+                            <param id="1" name="Visibility">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="497438122853054">
+                    <conditions>
+                        <condition id="-7" inverted="1" name="Compare instance variable" sid="888838028661557" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentMenu</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;gameover&quot;</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="401491382991627" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Set group active" sid="686244842908967" type="System">
+                            <param id="0" name="Group name">&quot;Sonic Boom Game Over&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-4" name="Set layer visible" sid="525448704088006" type="System">
+                            <param id="0" name="Layer">&quot;GameOver&quot;</param>
                             <param id="1" name="Visibility">0</param>
                         </action>
                     </actions>
@@ -254,6 +258,96 @@
                         </action>
                         <action id="-4" name="Set layer visible" sid="556334904533909" type="System">
                             <param id="0" name="Layer">&quot;Boss&quot;</param>
+                            <param id="1" name="Visibility">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment></comment>
+                <event-block sid="513617242640105">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="997342969362681" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentMenu</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;ending&quot;</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="891126285082008" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Set group active" sid="165748393755443" type="System">
+                            <param id="0" name="Group name">&quot;Sonic Boom Ending&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-4" name="Set layer visible" sid="122963372957299" type="System">
+                            <param id="0" name="Layer">&quot;Ending1&quot;</param>
+                            <param id="1" name="Visibility">1</param>
+                        </action>
+                        <action id="-4" name="Set layer visible" sid="680059803156586" type="System">
+                            <param id="0" name="Layer">&quot;Ending2&quot;</param>
+                            <param id="1" name="Visibility">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="520166889984166">
+                    <conditions>
+                        <condition id="-7" inverted="1" name="Compare instance variable" sid="792232735641696" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentMenu</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;ending&quot;</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="184579131822975" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Set group active" sid="432376482873200" type="System">
+                            <param id="0" name="Group name">&quot;Sonic Boom Ending&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-4" name="Set layer visible" sid="544738513079940" type="System">
+                            <param id="0" name="Layer">&quot;Ending1&quot;</param>
+                            <param id="1" name="Visibility">0</param>
+                        </action>
+                        <action id="-4" name="Set layer visible" sid="509745846427468" type="System">
+                            <param id="0" name="Layer">&quot;Ending2&quot;</param>
+                            <param id="1" name="Visibility">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment></comment>
+                <event-block sid="972795394433329">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="767574195145537" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentMenu</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;credits&quot;</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="570641382443659" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Set group active" sid="376042507344649" type="System">
+                            <param id="0" name="Group name">&quot;Sonic Boom Credits&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-4" name="Set layer visible" sid="212869575346098" type="System">
+                            <param id="0" name="Layer">&quot;Credits&quot;</param>
+                            <param id="1" name="Visibility">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="468504754264841">
+                    <conditions>
+                        <condition id="-7" inverted="1" name="Compare instance variable" sid="664996331317381" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentMenu</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;credits&quot;</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="701848907024089" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Set group active" sid="586074997264628" type="System">
+                            <param id="0" name="Group name">&quot;Sonic Boom Credits&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-4" name="Set layer visible" sid="511660861577765" type="System">
+                            <param id="0" name="Layer">&quot;Credits&quot;</param>
                             <param id="1" name="Visibility">0</param>
                         </action>
                     </actions>
@@ -463,17 +557,13 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action disabled="1" id="-10" name="Set value" sid="842175337830263" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentMenu</param>
-                            <param id="1" name="Value">&quot;gameover&quot;</param>
-                        </action>
                         <action id="33" name="Stop all" sid="189599553171446" type="BetterAudio" />
                         <action id="-2" name="Go to layout" sid="370228559414095" type="System">
                             <param id="0" name="Layout">Menu_Main</param>
                         </action>
                         <action id="-10" name="Set value" sid="929240060980080" type="Var_Game">
                             <param id="0" name="Instance variable">CurrentMenu</param>
-                            <param id="1" name="Value">&quot;intro&quot;</param>
+                            <param id="1" name="Value">&quot;extralevels&quot;</param>
                         </action>
                     </actions>
                 </event-block>
@@ -497,6 +587,12 @@
                         <condition id="-16" name="Is on layer" sid="917372580090427" type="Text_Static">
                             <param id="0" name="Layer">&quot;GameOver&quot;</param>
                         </condition>
+                        <condition id="-16" name="Is on layer" sid="925878564840932" type="Boom_EffectSplatter">
+                            <param id="0" name="Layer">&quot;GameOver&quot;</param>
+                        </condition>
+                        <condition id="-16" name="Is on layer" sid="428227861751344" type="Boom_EffectExplosion">
+                            <param id="0" name="Layer">&quot;GameOver&quot;</param>
+                        </condition>
                     </conditions>
                     <actions>
                         <action id="-15" name="Set visible" sid="458176592623087" type="Boom_TailsHead">
@@ -511,8 +607,12 @@
                         <action id="3" name="Start" sid="517584433964052" type="Boom_Plane">
                             <param id="0" name="From">1</param>
                         </action>
-                        <action id="-9" name="Destroy" sid="196738814341387" type="Boom_EffectSplatter" />
-                        <action id="-9" name="Destroy" sid="127548332074058" type="Boom_EffectExplosion" />
+                        <action id="-15" name="Set visible" sid="196738814341387" type="Boom_EffectSplatter">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="127548332074058" type="Boom_EffectExplosion">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
                         <action id="-15" name="Set visible" sid="150515371809913" type="Text_Static">
                             <param id="0" name="Visibility">0</param>
                         </action>
@@ -521,22 +621,25 @@
                             <param id="1" name="Value">0</param>
                         </action>
                         <action id="33" name="Stop all" sid="779903918652093" type="BetterAudio" />
-                        <action disabled="1" id="0" name="Call function" sid="249255966180555" type="Function">
-                            <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
-                            <param id="1" name="Parameter {n}">&quot;EBoom_TitleScreen&quot;{###}&quot;music&quot;{###}1</param>
-                        </action>
-                        <action id="-9" name="Set value" sid="489263897308473" type="System">
-                            <param id="0" name="Variable">lock</param>
-                            <param id="1" name="Value">1</param>
-                        </action>
-                        <action id="-16" name="Wait" sid="869299680530611" type="System">
-                            <param id="0" name="Seconds">0.5</param>
-                        </action>
-                        <action id="-9" name="Set value" sid="675178881379784" type="System">
-                            <param id="0" name="Variable">lock</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="464882261168013">
+                            <conditions />
+                            <actions>
+                                <action id="-9" name="Set value" sid="489263897308473" type="System">
+                                    <param id="0" name="Variable">lock</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="869299680530611" type="System">
+                                    <param id="0" name="Seconds">0.5</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="675178881379784" type="System">
+                                    <param id="0" name="Variable">lock</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block sid="440226739521805">
                     <conditions>
@@ -594,25 +697,39 @@
                             <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                             <param id="1" name="Parameter {n}">&quot;Boom_GameOver1&quot;</param>
                         </action>
-                        <action id="-3" name="Create object" sid="478171655882044" type="System">
-                            <param id="0" name="Object to create">Boom_EffectSplatter</param>
-                            <param id="1" name="Layer">&quot;GameOver&quot;</param>
-                            <param id="2" name="X">412</param>
-                            <param id="3" name="Y">285</param>
-                        </action>
-                        <action id="-3" name="Create object" sid="125889665409583" type="System">
-                            <param id="0" name="Object to create">Boom_EffectSplatter</param>
-                            <param id="1" name="Layer">&quot;GameOver&quot;</param>
-                            <param id="2" name="X">418</param>
-                            <param id="3" name="Y">315</param>
-                        </action>
-                        <action id="-3" name="Create object" sid="206406289414990" type="System">
-                            <param id="0" name="Object to create">Boom_EffectSplatter</param>
-                            <param id="1" name="Layer">&quot;GameOver&quot;</param>
-                            <param id="2" name="X">434</param>
-                            <param id="3" name="Y">339</param>
-                        </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="391302229559901">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="733917457258429" type="Boom_EffectSplatter">
+                                    <param id="0" name="Unique ID">11901</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-15" name="Set visible" sid="698796564886059" type="Boom_EffectSplatter">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action id="3" name="Start" sid="417171570629938" type="Boom_EffectSplatter">
+                                    <param id="0" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="671747436318680">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="755919909404159" type="Boom_EffectSplatter">
+                                    <param id="0" name="Unique ID">11915</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-15" name="Set visible" sid="622015994545754" type="Boom_EffectSplatter">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action id="3" name="Start" sid="648562932002421" type="Boom_EffectSplatter">
+                                    <param id="0" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block sid="321135648369281">
                     <conditions>
@@ -628,6 +745,12 @@
                         <condition id="-16" name="Is on layer" sid="196943499588996" type="Boom_Sonic">
                             <param id="0" name="Layer">&quot;GameOver&quot;</param>
                         </condition>
+                        <condition id="-14" name="Pick by unique ID" sid="404198860216281" type="Boom_EffectSplatter">
+                            <param id="0" name="Unique ID">13874</param>
+                        </condition>
+                        <condition id="-16" name="Is on layer" sid="704773530911498" type="Boom_EffectExplosion">
+                            <param id="0" name="Layer">&quot;GameOver&quot;</param>
+                        </condition>
                     </conditions>
                     <actions>
                         <action id="-15" name="Set visible" sid="358761143495506" type="Boom_TailsHead">
@@ -638,35 +761,17 @@
                             <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                             <param id="1" name="Parameter {n}">&quot;Boom_GameOver2&quot;</param>
                         </action>
-                        <action id="-3" name="Create object" sid="586814649067447" type="System">
-                            <param id="0" name="Object to create">Boom_EffectSplatter</param>
-                            <param id="1" name="Layer">&quot;GameOver&quot;</param>
-                            <param id="2" name="X">614</param>
-                            <param id="3" name="Y">307</param>
+                        <action id="-15" name="Set visible" sid="693377413587789" type="Boom_EffectSplatter">
+                            <param id="0" name="Visibility">1</param>
                         </action>
-                        <action id="-3" name="Create object" sid="953065249833008" type="System">
-                            <param id="0" name="Object to create">Boom_EffectExplosion</param>
-                            <param id="1" name="Layer">&quot;GameOver&quot;</param>
-                            <param id="2" name="X">614</param>
-                            <param id="3" name="Y">307</param>
+                        <action id="3" name="Start" sid="884120648001330" type="Boom_EffectSplatter">
+                            <param id="0" name="From">1</param>
                         </action>
-                        <action id="-3" name="Create object" sid="973733160993885" type="System">
-                            <param id="0" name="Object to create">Boom_EffectExplosion</param>
-                            <param id="1" name="Layer">&quot;GameOver&quot;</param>
-                            <param id="2" name="X">Boom_Plane.X-1</param>
-                            <param id="3" name="Y">Boom_Plane.Y+39</param>
+                        <action id="-15" name="Set visible" sid="981284844899780" type="Boom_EffectExplosion">
+                            <param id="0" name="Visibility">1</param>
                         </action>
-                        <action id="-3" name="Create object" sid="917138262869217" type="System">
-                            <param id="0" name="Object to create">Boom_EffectExplosion</param>
-                            <param id="1" name="Layer">&quot;GameOver&quot;</param>
-                            <param id="2" name="X">Boom_Plane.X-95</param>
-                            <param id="3" name="Y">Boom_Plane.Y-4</param>
-                        </action>
-                        <action id="-3" name="Create object" sid="740828644972531" type="System">
-                            <param id="0" name="Object to create">Boom_EffectExplosion</param>
-                            <param id="1" name="Layer">&quot;GameOver&quot;</param>
-                            <param id="2" name="X">Boom_Plane.X-44</param>
-                            <param id="3" name="Y">Boom_Plane.Y-3</param>
+                        <action id="3" name="Start" sid="752753912818692" type="Boom_EffectExplosion">
+                            <param id="0" name="From">1</param>
                         </action>
                     </actions>
                 </event-block>
@@ -675,7 +780,7 @@
                         <condition id="-7" name="Compare instance variable" sid="630458475039896" type="Var_Game">
                             <param id="0" name="Instance variable">TimerGlobal</param>
                             <param id="1" name="Comparison">5</param>
-                            <param id="2" name="Value">8</param>
+                            <param id="2" name="Value">6</param>
                         </condition>
                         <condition id="-4" name="Trigger once while true" sid="463887006432251" type="System" />
                         <condition id="-14" name="Pick by unique ID" sid="331988387901377" type="Text_Static">
@@ -711,12 +816,12 @@
                         </action>
                     </actions>
                 </event-block>
-                <event-block disabled="1" sid="255945104993011">
+                <event-block sid="255945104993011">
                     <conditions>
                         <condition id="-7" name="Compare instance variable" sid="877318965323159" type="Var_Game">
                             <param id="0" name="Instance variable">TimerGlobal</param>
                             <param id="1" name="Comparison">5</param>
-                            <param id="2" name="Value">11</param>
+                            <param id="2" name="Value">9</param>
                         </condition>
                         <condition id="-4" name="Trigger once while true" sid="611080046374776" type="System" />
                     </conditions>
@@ -738,9 +843,6 @@
                         <condition id="-16" name="Is on layer" sid="949962892679370" type="Boom_Sonic">
                             <param id="0" name="Layer">&quot;Game&quot;</param>
                         </condition>
-                        <condition id="-16" name="Is on layer" sid="986493302470078" type="Boom_HUDLives">
-                            <param id="0" name="Layer">&quot;Game&quot;</param>
-                        </condition>
                     </conditions>
                     <actions>
                         <action behavior="Flash" id="1" name="Stop flashing" sid="731674448652063" type="Boom_Sonic" />
@@ -750,7 +852,6 @@
                         </action>
                         <action id="-9" name="Destroy" sid="415000819954323" type="Boom_ProjectileApple" />
                         <action id="-9" name="Destroy" sid="798104360447244" type="Boom_EnemyBee" />
-                        <action id="-9" name="Destroy" sid="572290639925676" type="Boom_HUDLives" />
                         <action id="33" name="Stop all" sid="452488150011889" type="BetterAudio" />
                         <action id="0" name="Call function" sid="754306677811195" type="Function">
                             <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
@@ -762,21 +863,6 @@
                         </action>
                     </actions>
                     <sub-events>
-                        <event-block sid="122020229880990">
-                            <conditions>
-                                <condition id="-12" name="Repeat" sid="673765964110395" type="System">
-                                    <param id="0" name="Count">Var_Player.Lives</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-3" name="Create object" sid="910466645959077" type="System">
-                                    <param id="0" name="Object to create">Boom_HUDLives</param>
-                                    <param id="1" name="Layer">&quot;Game&quot;</param>
-                                    <param id="2" name="X">47+(29*loopindex)</param>
-                                    <param id="3" name="Y">394</param>
-                                </action>
-                            </actions>
-                        </event-block>
                         <event-block sid="193761286973372">
                             <conditions />
                             <actions>
@@ -811,6 +897,24 @@
                         </action>
                     </actions>
                 </event-block>
+                <event-block sid="735541599560907">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="512599754672173" type="Keyboard">
+                            <param id="0" name="Key">71</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="532249371145463" type="System">
+                            <param id="0" name="Variable">DEBUG</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Set value" sid="335454731370278" type="Var_Player">
+                            <param id="0" name="Instance variable">Lives</param>
+                            <param id="1" name="Value">10</param>
+                        </action>
+                    </actions>
+                </event-block>
                 <event-block sid="891899554163018">
                     <conditions>
                         <condition id="-1" name="Every tick" sid="255130327216619" type="System" />
@@ -819,6 +923,9 @@
                         <action id="-11" name="Add to" sid="351819107649973" type="Var_Game">
                             <param id="0" name="Instance variable">TimerGlobal</param>
                             <param id="1" name="Value">dt</param>
+                        </action>
+                        <action id="-5" name="Set width" sid="770254303064782" type="Boom_HUDLives">
+                            <param id="0" name="Width">29*Var_Player.Lives</param>
                         </action>
                     </actions>
                 </event-block>
@@ -977,22 +1084,6 @@
                                     <param id="1" name="Parameter {n}">&quot;Boom_Hurt&quot;</param>
                                 </action>
                             </actions>
-                            <sub-events>
-                                <event-block sid="541031413680378">
-                                    <conditions>
-                                        <condition id="-13" name="Pick nth instance" sid="565708115347603" type="System">
-                                            <param id="0" name="Object">Boom_HUDLives</param>
-                                            <param id="1" name="Instance">Var_Player.Lives+1</param>
-                                        </condition>
-                                        <condition id="-16" name="Is on layer" sid="195112198171825" type="Boom_HUDLives">
-                                            <param id="0" name="Layer">&quot;Game&quot;</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-9" name="Destroy" sid="766600329925899" type="Boom_HUDLives" />
-                                    </actions>
-                                </event-block>
-                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-block>
@@ -1049,14 +1140,6 @@
                         <action id="-9" name="Destroy" sid="986521466066850" type="Boom_EnemyBee" />
                     </actions>
                 </event-block>
-                <event-block sid="332854614988554">
-                    <conditions>
-                        <condition id="-4" name="Is outside layout" sid="639048132897906" type="Boom_ProjectileApple" />
-                    </conditions>
-                    <actions>
-                        <action id="-9" name="Destroy" sid="352761905557335" type="Boom_ProjectileApple" />
-                    </actions>
-                </event-block>
                 <event-block sid="665442140655507">
                     <conditions>
                         <condition id="-8" name="Compare two values" sid="486144802794489" type="System">
@@ -1077,27 +1160,6 @@
                             <param id="1" name="Value">1</param>
                         </action>
                     </actions>
-                    <sub-events>
-                        <event-block sid="604982050761435">
-                            <conditions>
-                                <condition id="-13" name="Pick nth instance" sid="266090095516838" type="System">
-                                    <param id="0" name="Object">Boom_HUDLives</param>
-                                    <param id="1" name="Instance">Var_Player.Lives-1</param>
-                                </condition>
-                                <condition id="-16" name="Is on layer" sid="117978309515831" type="Boom_HUDLives">
-                                    <param id="0" name="Layer">&quot;Game&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-3" name="Create object" sid="700633926115211" type="System">
-                                    <param id="0" name="Object to create">Boom_HUDLives</param>
-                                    <param id="1" name="Layer">&quot;Game&quot;</param>
-                                    <param id="2" name="X">Boom_HUDLives.X+29</param>
-                                    <param id="3" name="Y">394</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
                 </event-block>
                 <event-block sid="997300746025481">
                     <conditions>
@@ -1134,327 +1196,6 @@
                         <action id="-10" name="Set value" sid="837019028457837" type="Var_Game">
                             <param id="0" name="Instance variable">CurrentMenu</param>
                             <param id="1" name="Value">&quot;cutscene&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
-            </sub-events>
-        </event-group>
-        <event-group description="" inactive="1" sid="917264776766737" title="Sonic Boom Boss">
-            <sub-events>
-                <variable constant="0" name="lock" sid="529233914799016" static="1" type="number">0</variable>
-                <event-block sid="215112839202849">
-                    <conditions>
-                        <condition id="-4" name="Trigger once while true" sid="122411681841367" type="System" />
-                        <condition id="-16" name="Is on layer" sid="163622933824611" type="Boom_Sonic">
-                            <param id="0" name="Layer">&quot;Boss&quot;</param>
-                        </condition>
-                        <condition id="-16" name="Is on layer" sid="888699295725554" type="Boom_HUDLives">
-                            <param id="0" name="Layer">&quot;Boss&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action behavior="Flash" id="1" name="Stop flashing" sid="314074751699169" type="Boom_Sonic" />
-                        <action id="-3" name="Set position" sid="291622586915931" type="Boom_Sonic">
-                            <param id="0" name="X">36</param>
-                            <param id="1" name="Y">88</param>
-                        </action>
-                        <action id="-9" name="Destroy" sid="764629231979301" type="Boom_ProjectileApple" />
-                        <action id="-9" name="Destroy" sid="650434893021817" type="Boom_HUDLives" />
-                        <action id="33" name="Stop all" sid="978518015112435" type="BetterAudio" />
-                        <action id="0" name="Call function" sid="455364822490629" type="Function">
-                            <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
-                            <param id="1" name="Parameter {n}">&quot;EBoom_Boss&quot;{###}&quot;music&quot;{###}1</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="528227829379035" type="Boom_EnemyRoboSonic">
-                            <param id="0" name="Instance variable">HP</param>
-                            <param id="1" name="Value">30</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="588468849673849" type="Var_Game">
-                            <param id="0" name="Instance variable">TimerGlobal</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                    </actions>
-                    <sub-events>
-                        <event-block sid="313834732681621">
-                            <conditions>
-                                <condition id="-12" name="Repeat" sid="970437026924754" type="System">
-                                    <param id="0" name="Count">Var_Player.Lives</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-3" name="Create object" sid="227856100362095" type="System">
-                                    <param id="0" name="Object to create">Boom_HUDLives</param>
-                                    <param id="1" name="Layer">&quot;Boss&quot;</param>
-                                    <param id="2" name="X">47+(29*loopindex)</param>
-                                    <param id="3" name="Y">52</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="391968737943680">
-                            <conditions />
-                            <actions>
-                                <action id="-9" name="Set value" sid="289929907329855" type="System">
-                                    <param id="0" name="Variable">lock</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                                <action id="-16" name="Wait" sid="895237070966709" type="System">
-                                    <param id="0" name="Seconds">0.5</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="616885157792315" type="System">
-                                    <param id="0" name="Variable">lock</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <event-block sid="463565924851363">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="414029347794635" type="Var_Player">
-                            <param id="0" name="Instance variable">Lives</param>
-                            <param id="1" name="Comparison">3</param>
-                            <param id="2" name="Value">0</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="619460400708988" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="-10" name="Set value" sid="824957361017641" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentMenu</param>
-                            <param id="1" name="Value">&quot;gameover&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="868542388241106">
-                    <conditions>
-                        <condition id="-1" name="Every tick" sid="755635252238637" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="-11" name="Add to" sid="405392765538447" type="Var_Game">
-                            <param id="0" name="Instance variable">TimerGlobal</param>
-                            <param id="1" name="Value">dt</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="481206904493110">
-                    <conditions>
-                        <condition id="-16" name="Is on layer" sid="586370060363905" type="Boom_Sonic">
-                            <param id="0" name="Layer">&quot;Boss&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions />
-                    <sub-events>
-                        <event-block sid="397576498899775">
-                            <conditions>
-                                <condition id="-8" name="Is boolean instance variable set" sid="353199288745009" type="Var_Input">
-                                    <param id="0" name="Instance variable">Up</param>
-                                </condition>
-                                <condition id="-2" name="Compare Y" sid="851157897670371" type="Boom_Sonic">
-                                    <param id="0" name="Comparison">5</param>
-                                    <param id="1" name="Y co-ordinate">-3</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action behavior="8Direction" id="7" name="Simulate control" sid="986058684293051" type="Boom_Sonic">
-                                    <param id="0" name="Control">2</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="632560516435008">
-                            <conditions>
-                                <condition id="-8" name="Is boolean instance variable set" sid="767021551793941" type="Var_Input">
-                                    <param id="0" name="Instance variable">Down</param>
-                                </condition>
-                                <condition id="-2" name="Compare Y" sid="616195650142113" type="Boom_Sonic">
-                                    <param id="0" name="Comparison">3</param>
-                                    <param id="1" name="Y co-ordinate">380</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action behavior="8Direction" id="7" name="Simulate control" sid="345070039313615" type="Boom_Sonic">
-                                    <param id="0" name="Control">3</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="606465643124627">
-                            <conditions>
-                                <condition id="-8" name="Is boolean instance variable set" sid="910311863456316" type="Var_Input">
-                                    <param id="0" name="Instance variable">Left</param>
-                                </condition>
-                                <condition id="-1" name="Compare X" sid="738277669839872" type="Boom_Sonic">
-                                    <param id="0" name="Comparison">5</param>
-                                    <param id="1" name="X co-ordinate">-3</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action behavior="8Direction" id="7" name="Simulate control" sid="923084390747347" type="Boom_Sonic">
-                                    <param id="0" name="Control">0</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="268628547361732">
-                            <conditions>
-                                <condition id="-8" name="Is boolean instance variable set" sid="657473899725686" type="Var_Input">
-                                    <param id="0" name="Instance variable">Right</param>
-                                </condition>
-                                <condition id="-1" name="Compare X" sid="161854302779651" type="Boom_Sonic">
-                                    <param id="0" name="Comparison">3</param>
-                                    <param id="1" name="X co-ordinate">554</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action behavior="8Direction" id="7" name="Simulate control" sid="754005606727009" type="Boom_Sonic">
-                                    <param id="0" name="Control">1</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="656907755739885">
-                            <conditions>
-                                <condition id="-8" name="Is boolean instance variable set" sid="543287603600419" type="Var_Input">
-                                    <param id="0" name="Instance variable">A</param>
-                                </condition>
-                                <condition id="-14" name="Compare variable" sid="819613852902141" type="System">
-                                    <param id="0" name="Variable">lock</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">0</param>
-                                </condition>
-                            </conditions>
-                            <actions />
-                            <sub-events>
-                                <event-block sid="642347863307192">
-                                    <conditions>
-                                        <condition id="-4" name="Trigger once while true" sid="876136909382925" type="System" />
-                                    </conditions>
-                                    <actions>
-                                        <action id="0" name="Spawn another object" sid="184779810824097" type="Boom_Sonic">
-                                            <param id="0" name="Object">Boom_ProjectileApple</param>
-                                            <param id="1" name="Layer">&quot;Boss&quot;</param>
-                                            <param id="2" name="Image point">1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="104270446185764">
-                                    <conditions>
-                                        <condition id="-6" name="Every X seconds" sid="393477633495869" type="System">
-                                            <param id="0" name="Interval (seconds)">0.3</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="0" name="Spawn another object" sid="488024535193403" type="Boom_Sonic">
-                                            <param id="0" name="Object">Boom_ProjectileApple</param>
-                                            <param id="1" name="Layer">&quot;Boss&quot;</param>
-                                            <param id="2" name="Image point">1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
-                        </event-block>
-                        <event-block sid="925925737062482">
-                            <conditions>
-                                <condition id="0" name="On collision with another object" sid="373116917994981" type="Boom_ProjectileBoss">
-                                    <param id="0" name="Object">Boom_Sonic</param>
-                                </condition>
-                                <condition behavior="Flash" id="0" inverted="1" name="Is flashing" sid="894062670713319" type="Boom_Sonic" />
-                            </conditions>
-                            <actions>
-                                <action behavior="Flash" id="0" name="Flash" sid="165303957813619" type="Boom_Sonic">
-                                    <param id="0" name="&apos;On&apos; time">0.12</param>
-                                    <param id="1" name="&apos;Off&apos; time">0.12</param>
-                                    <param id="2" name="Duration">2</param>
-                                </action>
-                                <action id="-12" name="Subtract from" sid="146133485457042" type="Var_Player">
-                                    <param id="0" name="Instance variable">Lives</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                                <action id="0" name="Call function" sid="970283591903224" type="Function">
-                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;Boom_Hurt&quot;</param>
-                                </action>
-                            </actions>
-                            <sub-events>
-                                <event-block sid="489014811866388">
-                                    <conditions>
-                                        <condition id="-13" name="Pick nth instance" sid="724639779546716" type="System">
-                                            <param id="0" name="Object">Boom_HUDLives</param>
-                                            <param id="1" name="Instance">Var_Player.Lives+1</param>
-                                        </condition>
-                                        <condition id="-16" name="Is on layer" sid="631710007244864" type="Boom_HUDLives">
-                                            <param id="0" name="Layer">&quot;Boss&quot;</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-9" name="Destroy" sid="247145940383268" type="Boom_HUDLives" />
-                                    </actions>
-                                </event-block>
-                            </sub-events>
-                        </event-block>
-                        <event-block sid="453179309819346">
-                            <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="788528233229079" type="Var_Game">
-                                    <param id="0" name="Instance variable">TimerGlobal</param>
-                                    <param id="1" name="Comparison">5</param>
-                                    <param id="2" name="Value">2</param>
-                                </condition>
-                                <condition id="-6" name="Every X seconds" sid="129129091620823" type="System">
-                                    <param id="0" name="Interval (seconds)">1.5</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Spawn another object" sid="761815324538341" type="Boom_EnemyRoboSonic">
-                                    <param id="0" name="Object">Boom_ProjectileBoss</param>
-                                    <param id="1" name="Layer">&quot;Boss&quot;</param>
-                                    <param id="2" name="Image point">0</param>
-                                </action>
-                                <action id="-22" name="Set angle toward position" sid="630521719126199" type="Boom_ProjectileBoss">
-                                    <param id="0" name="X">Boom_Sonic.X</param>
-                                    <param id="1" name="Y">Boom_Sonic.Y</param>
-                                </action>
-                                <action id="0" name="Call function" sid="218359208913671" type="Function">
-                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;Boom_BossShoot&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <event-block sid="248413183581640">
-                    <conditions>
-                        <condition id="-4" name="Is outside layout" sid="271448362632527" type="Boom_ProjectileApple" />
-                    </conditions>
-                    <actions>
-                        <action id="-9" name="Destroy" sid="679670925476894" type="Boom_ProjectileApple" />
-                    </actions>
-                </event-block>
-                <event-block sid="817719372426654">
-                    <conditions>
-                        <condition id="-4" name="Is outside layout" sid="346055206803248" type="Boom_ProjectileBoss" />
-                    </conditions>
-                    <actions>
-                        <action id="-9" name="Destroy" sid="150349986341944" type="Boom_ProjectileBoss" />
-                    </actions>
-                </event-block>
-                <event-block sid="987914848968753">
-                    <conditions>
-                        <condition id="0" name="On collision with another object" sid="702572708531317" type="Boom_ProjectileApple">
-                            <param id="0" name="Object">Boom_EnemyRoboSonic</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-9" name="Destroy" sid="205350385720555" type="Boom_ProjectileApple" />
-                        <action id="-12" name="Subtract from" sid="607002442928777" type="Boom_EnemyRoboSonic">
-                            <param id="0" name="Instance variable">HP</param>
-                            <param id="1" name="Value">1</param>
-                        </action>
-                        <action id="0" name="Call function" sid="913361867308530" type="Function">
-                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
-                            <param id="1" name="Parameter {n}">&quot;Boom_BossDamage&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="820450954167507">
-                    <conditions />
-                    <actions>
-                        <action id="-5" name="Set width" sid="318605219354382" type="Boom_HUDBossHP">
-                            <param id="0" name="Width">Boom_EnemyRoboSonic.HP/30*128</param>
                         </action>
                     </actions>
                 </event-block>
@@ -1991,6 +1732,1206 @@
                             </actions>
                         </event-block>
                     </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" inactive="1" sid="917264776766737" title="Sonic Boom Boss">
+            <sub-events>
+                <variable constant="0" name="lock" sid="529233914799016" static="1" type="number">0</variable>
+                <event-block sid="215112839202849">
+                    <conditions>
+                        <condition id="-4" name="Trigger once while true" sid="122411681841367" type="System" />
+                        <condition id="-16" name="Is on layer" sid="163622933824611" type="Boom_Sonic">
+                            <param id="0" name="Layer">&quot;Boss&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Flash" id="1" name="Stop flashing" sid="314074751699169" type="Boom_Sonic" />
+                        <action id="-3" name="Set position" sid="291622586915931" type="Boom_Sonic">
+                            <param id="0" name="X">36</param>
+                            <param id="1" name="Y">88</param>
+                        </action>
+                        <action id="-9" name="Destroy" sid="764629231979301" type="Boom_ProjectileApple" />
+                        <action id="33" name="Stop all" sid="978518015112435" type="BetterAudio" />
+                        <action id="0" name="Call function" sid="455364822490629" type="Function">
+                            <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;EBoom_Boss&quot;{###}&quot;music&quot;{###}1</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="528227829379035" type="Boom_EnemyRoboSonic">
+                            <param id="0" name="Instance variable">HP</param>
+                            <param id="1" name="Value">30</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="588468849673849" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="391968737943680">
+                            <conditions />
+                            <actions>
+                                <action id="-9" name="Set value" sid="289929907329855" type="System">
+                                    <param id="0" name="Variable">lock</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="895237070966709" type="System">
+                                    <param id="0" name="Seconds">0.5</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="616885157792315" type="System">
+                                    <param id="0" name="Variable">lock</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="463565924851363">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="414029347794635" type="Var_Player">
+                            <param id="0" name="Instance variable">Lives</param>
+                            <param id="1" name="Comparison">3</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="619460400708988" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Set value" sid="824957361017641" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentMenu</param>
+                            <param id="1" name="Value">&quot;gameover&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="812030325642137">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="750516455166860" type="Keyboard">
+                            <param id="0" name="Key">71</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="941136697021620" type="System">
+                            <param id="0" name="Variable">DEBUG</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Set value" sid="233229803840307" type="Var_Player">
+                            <param id="0" name="Instance variable">Lives</param>
+                            <param id="1" name="Value">10</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="868542388241106">
+                    <conditions>
+                        <condition id="-1" name="Every tick" sid="755635252238637" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-11" name="Add to" sid="405392765538447" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Value">dt</param>
+                        </action>
+                        <action id="-5" name="Set width" sid="251639843591217" type="Boom_HUDLives">
+                            <param id="0" name="Width">29*Var_Player.Lives</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="481206904493110">
+                    <conditions>
+                        <condition id="-16" name="Is on layer" sid="586370060363905" type="Boom_Sonic">
+                            <param id="0" name="Layer">&quot;Boss&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="397576498899775">
+                            <conditions>
+                                <condition id="-8" name="Is boolean instance variable set" sid="353199288745009" type="Var_Input">
+                                    <param id="0" name="Instance variable">Up</param>
+                                </condition>
+                                <condition id="-2" name="Compare Y" sid="851157897670371" type="Boom_Sonic">
+                                    <param id="0" name="Comparison">5</param>
+                                    <param id="1" name="Y co-ordinate">-3</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action behavior="8Direction" id="7" name="Simulate control" sid="986058684293051" type="Boom_Sonic">
+                                    <param id="0" name="Control">2</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="632560516435008">
+                            <conditions>
+                                <condition id="-8" name="Is boolean instance variable set" sid="767021551793941" type="Var_Input">
+                                    <param id="0" name="Instance variable">Down</param>
+                                </condition>
+                                <condition id="-2" name="Compare Y" sid="616195650142113" type="Boom_Sonic">
+                                    <param id="0" name="Comparison">3</param>
+                                    <param id="1" name="Y co-ordinate">380</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action behavior="8Direction" id="7" name="Simulate control" sid="345070039313615" type="Boom_Sonic">
+                                    <param id="0" name="Control">3</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="606465643124627">
+                            <conditions>
+                                <condition id="-8" name="Is boolean instance variable set" sid="910311863456316" type="Var_Input">
+                                    <param id="0" name="Instance variable">Left</param>
+                                </condition>
+                                <condition id="-1" name="Compare X" sid="738277669839872" type="Boom_Sonic">
+                                    <param id="0" name="Comparison">5</param>
+                                    <param id="1" name="X co-ordinate">-3</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action behavior="8Direction" id="7" name="Simulate control" sid="923084390747347" type="Boom_Sonic">
+                                    <param id="0" name="Control">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="268628547361732">
+                            <conditions>
+                                <condition id="-8" name="Is boolean instance variable set" sid="657473899725686" type="Var_Input">
+                                    <param id="0" name="Instance variable">Right</param>
+                                </condition>
+                                <condition id="-1" name="Compare X" sid="161854302779651" type="Boom_Sonic">
+                                    <param id="0" name="Comparison">3</param>
+                                    <param id="1" name="X co-ordinate">554</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action behavior="8Direction" id="7" name="Simulate control" sid="754005606727009" type="Boom_Sonic">
+                                    <param id="0" name="Control">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="656907755739885">
+                            <conditions>
+                                <condition id="-8" name="Is boolean instance variable set" sid="543287603600419" type="Var_Input">
+                                    <param id="0" name="Instance variable">A</param>
+                                </condition>
+                                <condition id="-14" name="Compare variable" sid="819613852902141" type="System">
+                                    <param id="0" name="Variable">lock</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="642347863307192">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="876136909382925" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Spawn another object" sid="184779810824097" type="Boom_Sonic">
+                                            <param id="0" name="Object">Boom_ProjectileApple</param>
+                                            <param id="1" name="Layer">&quot;Boss&quot;</param>
+                                            <param id="2" name="Image point">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="104270446185764">
+                                    <conditions>
+                                        <condition id="-6" name="Every X seconds" sid="393477633495869" type="System">
+                                            <param id="0" name="Interval (seconds)">0.3</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Spawn another object" sid="488024535193403" type="Boom_Sonic">
+                                            <param id="0" name="Object">Boom_ProjectileApple</param>
+                                            <param id="1" name="Layer">&quot;Boss&quot;</param>
+                                            <param id="2" name="Image point">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="925925737062482">
+                            <conditions>
+                                <condition id="0" name="On collision with another object" sid="373116917994981" type="Boom_ProjectileBoss">
+                                    <param id="0" name="Object">Boom_Sonic</param>
+                                </condition>
+                                <condition behavior="Flash" id="0" inverted="1" name="Is flashing" sid="894062670713319" type="Boom_Sonic" />
+                            </conditions>
+                            <actions>
+                                <action behavior="Flash" id="0" name="Flash" sid="165303957813619" type="Boom_Sonic">
+                                    <param id="0" name="&apos;On&apos; time">0.12</param>
+                                    <param id="1" name="&apos;Off&apos; time">0.12</param>
+                                    <param id="2" name="Duration">2</param>
+                                </action>
+                                <action id="-12" name="Subtract from" sid="146133485457042" type="Var_Player">
+                                    <param id="0" name="Instance variable">Lives</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="0" name="Call function" sid="970283591903224" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;Boom_Hurt&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="453179309819346">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="788528233229079" type="Var_Game">
+                                    <param id="0" name="Instance variable">TimerGlobal</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Value">2</param>
+                                </condition>
+                                <condition id="-6" name="Every X seconds" sid="129129091620823" type="System">
+                                    <param id="0" name="Interval (seconds)">1.5</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Spawn another object" sid="761815324538341" type="Boom_EnemyRoboSonic">
+                                    <param id="0" name="Object">Boom_ProjectileBoss</param>
+                                    <param id="1" name="Layer">&quot;Boss&quot;</param>
+                                    <param id="2" name="Image point">0</param>
+                                </action>
+                                <action id="-22" name="Set angle toward position" sid="630521719126199" type="Boom_ProjectileBoss">
+                                    <param id="0" name="X">Boom_Sonic.X</param>
+                                    <param id="1" name="Y">Boom_Sonic.Y</param>
+                                </action>
+                                <action id="0" name="Call function" sid="218359208913671" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;Boom_BossShoot&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="987914848968753">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="702572708531317" type="Boom_ProjectileApple">
+                            <param id="0" name="Object">Boom_EnemyRoboSonic</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="205350385720555" type="Boom_ProjectileApple" />
+                        <action id="-12" name="Subtract from" sid="607002442928777" type="Boom_EnemyRoboSonic">
+                            <param id="0" name="Instance variable">HP</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="0" name="Call function" sid="913361867308530" type="Function">
+                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;Boom_BossDamage&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="603103338930404">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="321005159273699" type="Boom_EnemyRoboSonic">
+                            <param id="0" name="Instance variable">HP</param>
+                            <param id="1" name="Comparison">3</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="327961075967866" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Set value" sid="652127180515152" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentMenu</param>
+                            <param id="1" name="Value">&quot;ending&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="820450954167507">
+                    <conditions />
+                    <actions>
+                        <action id="-5" name="Set width" sid="318605219354382" type="Boom_HUDBossHP">
+                            <param id="0" name="Width">Boom_EnemyRoboSonic.HP/30*128</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" inactive="1" sid="734031435670385" title="Sonic Boom Ending">
+            <sub-events>
+                <variable constant="0" name="lock" sid="423656160485713" static="1" type="number">0</variable>
+                <event-block sid="827145550678302">
+                    <conditions>
+                        <condition id="-4" name="Trigger once while true" sid="134637349382132" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Set value" sid="632484187047953" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="33" name="Stop all" sid="598484362938431" type="BetterAudio" />
+                        <action id="0" name="Call function" sid="418194652123035" type="Function">
+                            <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;Boom_Ending1&quot;{###}&quot;music&quot;{###}2</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="504129713824830">
+                            <conditions>
+                                <condition id="-16" name="Is on layer" sid="386173649417851" type="Boom_Sonic">
+                                    <param id="0" name="Layer">&quot;Ending1&quot;</param>
+                                </condition>
+                                <condition id="-16" name="Is on layer" sid="878601324599620" type="Boom_TailsHead">
+                                    <param id="0" name="Layer">&quot;Ending1&quot;</param>
+                                </condition>
+                                <condition id="-16" name="Is on layer" sid="328313358524816" type="Boom_Plane">
+                                    <param id="0" name="Layer">&quot;Ending1&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Set position" sid="469200649772840" type="Boom_Sonic">
+                                    <param id="0" name="X">-65</param>
+                                    <param id="1" name="Y">224</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="525652211074640" type="Boom_TailsHead">
+                                    <param id="0" name="X">-148</param>
+                                    <param id="1" name="Y">421</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="167956643536816" type="Boom_Plane">
+                                    <param id="0" name="X">-222</param>
+                                    <param id="1" name="Y">395</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="253223619321152">
+                            <conditions>
+                                <condition id="-16" name="Is on layer" sid="185420730639712" type="Boom_Sonic">
+                                    <param id="0" name="Layer">&quot;Ending2&quot;</param>
+                                </condition>
+                                <condition id="-16" name="Is on layer" sid="392179759786641" type="Boom_TailsHead">
+                                    <param id="0" name="Layer">&quot;Ending2&quot;</param>
+                                </condition>
+                                <condition id="-16" name="Is on layer" sid="647399992175233" type="Boom_Plane">
+                                    <param id="0" name="Layer">&quot;Ending2&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Set position" sid="182238543102060" type="Boom_CutsceneEnd2Egg">
+                                    <param id="0" name="X">300</param>
+                                    <param id="1" name="Y">70</param>
+                                </action>
+                                <action id="4" name="Set animation" sid="566171309453923" type="Boom_CutsceneEnd2Egg">
+                                    <param id="0" name="Animation">&quot;Default&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="963341324372241" type="Boom_Sonic">
+                                    <param id="0" name="X">961</param>
+                                    <param id="1" name="Y">184</param>
+                                </action>
+                                <action id="4" name="Set animation" sid="790329962811047" type="Boom_Sonic">
+                                    <param id="0" name="Animation">&quot;Stand&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="270555231530622" type="Boom_TailsHead">
+                                    <param id="0" name="X">1006</param>
+                                    <param id="1" name="Y">285</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="153082580779778" type="Boom_Plane">
+                                    <param id="0" name="X">1076</param>
+                                    <param id="1" name="Y">261</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="574877258318205">
+                            <conditions />
+                            <actions>
+                                <action id="-9" name="Set value" sid="589059193174936" type="System">
+                                    <param id="0" name="Variable">lock</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="499751928491152" type="System">
+                                    <param id="0" name="Seconds">0.5</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="922448247937690" type="System">
+                                    <param id="0" name="Variable">lock</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="915507332525436">
+                    <conditions>
+                        <condition id="-1" name="Every tick" sid="320572306222010" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-11" name="Add to" sid="738897462816636" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Value">dt</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="368929328008384">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="462667297490093" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">32.3</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="144933631619601" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Set value" sid="606062653578712" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentMenu</param>
+                            <param id="1" name="Value">&quot;credits&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="895825198058407">
+                    <conditions>
+                        <condition id="-8" name="Is boolean instance variable set" sid="108852855365865" type="Var_Input">
+                            <param id="0" name="Instance variable">A</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="666394710372913" type="System" />
+                        <condition id="-14" name="Compare variable" sid="627770896385024" type="System">
+                            <param id="0" name="Variable">lock</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Set value" sid="555651879778445" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentMenu</param>
+                            <param id="1" name="Value">&quot;credits&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="348236780639962">
+                    <conditions>
+                        <condition id="-16" name="Is on layer" sid="975844811814308" type="Boom_DecoCloud">
+                            <param id="0" name="Layer">&quot;Ending1&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-3" name="Set position" sid="688729393195403" type="Boom_DecoCloud">
+                            <param id="0" name="X">Self.X-4</param>
+                            <param id="1" name="Y">Self.Y-4</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="684286520666833">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="795417768177800" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Comparison">3</param>
+                            <param id="2" name="Value">1.15</param>
+                        </condition>
+                        <condition id="-16" name="Is on layer" sid="939854606534222" type="Boom_Sonic">
+                            <param id="0" name="Layer">&quot;Ending1&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-1" name="Set X" sid="503542122985562" type="Boom_Sonic">
+                            <param id="0" name="X">Self.X+4.5</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="662245234143778">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="118130608184967" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">1.15</param>
+                        </condition>
+                        <condition id="-7" name="Compare instance variable" sid="851995561007163" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Comparison">3</param>
+                            <param id="2" name="Value">1.51</param>
+                        </condition>
+                        <condition id="-16" name="Is on layer" sid="961958593372908" type="Boom_Sonic">
+                            <param id="0" name="Layer">&quot;Ending1&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="449186024997002" type="Boom_Sonic">
+                            <param id="0" name="Y">Self.Y+3.5</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="453781279391409">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="662800301957518" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">0.5</param>
+                        </condition>
+                        <condition id="-7" name="Compare instance variable" sid="724917391167823" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Comparison">3</param>
+                            <param id="2" name="Value">1.51</param>
+                        </condition>
+                        <condition id="-16" name="Is on layer" sid="789000721652081" type="Boom_TailsHead">
+                            <param id="0" name="Layer">&quot;Ending1&quot;</param>
+                        </condition>
+                        <condition id="-16" name="Is on layer" sid="822356759357318" type="Boom_Plane">
+                            <param id="0" name="Layer">&quot;Ending1&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-1" name="Set X" sid="744160858368592" type="Boom_TailsHead">
+                            <param id="0" name="X">Self.X+6</param>
+                        </action>
+                        <action id="-1" name="Set X" sid="209618427962227" type="Boom_Plane">
+                            <param id="0" name="X">Self.X+6</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="854191757830059">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="873592893146761" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">1.51</param>
+                        </condition>
+                        <condition id="-16" name="Is on layer" sid="724130071320710" type="Boom_Sonic">
+                            <param id="0" name="Layer">&quot;Ending1&quot;</param>
+                        </condition>
+                        <condition id="-16" name="Is on layer" sid="878645933361716" type="Boom_TailsHead">
+                            <param id="0" name="Layer">&quot;Ending1&quot;</param>
+                        </condition>
+                        <condition id="-16" name="Is on layer" sid="448689588392608" type="Boom_Plane">
+                            <param id="0" name="Layer">&quot;Ending1&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-1" name="Set X" sid="356015746883264" type="Boom_Sonic">
+                            <param id="0" name="X">Self.X+8</param>
+                        </action>
+                        <action id="-2" name="Set Y" sid="882774910179631" type="Boom_Sonic">
+                            <param id="0" name="Y">298</param>
+                        </action>
+                        <action id="-1" name="Set X" sid="993003525927081" type="Boom_TailsHead">
+                            <param id="0" name="X">Self.X+8</param>
+                        </action>
+                        <action id="-1" name="Set X" sid="370545341118327" type="Boom_Plane">
+                            <param id="0" name="X">Self.X+8</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="903085114101297">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="807346869398709" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">3</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="807901878260658" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-4" name="Set layer visible" sid="440808268736279" type="System">
+                            <param id="0" name="Layer">&quot;Ending1&quot;</param>
+                            <param id="1" name="Visibility">0</param>
+                        </action>
+                        <action id="-4" name="Set layer visible" sid="886289852900902" type="System">
+                            <param id="0" name="Layer">&quot;Ending2&quot;</param>
+                            <param id="1" name="Visibility">1</param>
+                        </action>
+                        <action id="33" name="Stop all" sid="913290894081814" type="BetterAudio" />
+                    </actions>
+                </event-block>
+                <event-block sid="808401770352357">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="531612735721490" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">3</param>
+                        </condition>
+                        <condition id="-7" name="Compare instance variable" sid="907032683492267" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Comparison">3</param>
+                            <param id="2" name="Value">4.75</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-3" name="Set position" sid="533836866657440" type="Boom_CutsceneEnd2Egg">
+                            <param id="0" name="X">Self.X+1</param>
+                            <param id="1" name="Y">Self.Y+1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="197614822162384">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="173211509621055" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">4.75</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="975323433368844" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="236872417121083" type="Boom_CutsceneEnd2Egg">
+                            <param id="0" name="Animation">&quot;Explosion&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                        <action id="0" name="Call function" sid="805428559448989" type="Function">
+                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;Boom_GameOver2&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="231140009583439">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="792984476071897" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">6</param>
+                        </condition>
+                        <condition id="-16" name="Is on layer" sid="362425631117089" type="Boom_DecoCloud">
+                            <param id="0" name="Layer">&quot;Ending2&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-1" name="Set X" sid="338947598599940" type="Boom_DecoCloud">
+                            <param id="0" name="X">Self.X+5</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="466818938857801">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="773702705055617" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Call function" sid="316826507263257" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;EBoom_Ending&quot;{###}&quot;music&quot;{###}1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="871134210836320">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="484630487254002" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">6.5</param>
+                        </condition>
+                        <condition id="-7" name="Compare instance variable" sid="864655375206273" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Comparison">3</param>
+                            <param id="2" name="Value">9.52</param>
+                        </condition>
+                        <condition id="-16" name="Is on layer" sid="607367228442875" type="Boom_Sonic">
+                            <param id="0" name="Layer">&quot;Ending2&quot;</param>
+                        </condition>
+                        <condition id="-16" name="Is on layer" sid="918695702299565" type="Boom_TailsHead">
+                            <param id="0" name="Layer">&quot;Ending2&quot;</param>
+                        </condition>
+                        <condition id="-16" name="Is on layer" sid="632792721801330" type="Boom_Plane">
+                            <param id="0" name="Layer">&quot;Ending2&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-1" name="Set X" sid="144874718614424" type="Boom_Sonic">
+                            <param id="0" name="X">Self.X-3</param>
+                        </action>
+                        <action id="-1" name="Set X" sid="227801313126853" type="Boom_TailsHead">
+                            <param id="0" name="X">Self.X-3</param>
+                        </action>
+                        <action id="-1" name="Set X" sid="746598345994722" type="Boom_Plane">
+                            <param id="0" name="X">Self.X-3</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="476028580477979">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="976992891962298" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">18.8</param>
+                        </condition>
+                        <condition id="-7" name="Compare instance variable" sid="467646976646076" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Comparison">3</param>
+                            <param id="2" name="Value">21.48</param>
+                        </condition>
+                        <condition id="-16" name="Is on layer" sid="675680385746048" type="Boom_Sonic">
+                            <param id="0" name="Layer">&quot;Ending2&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-1" name="Set X" sid="882129667686978" type="Boom_Sonic">
+                            <param id="0" name="X">Self.X-2</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="782453413126323">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="837633156295298" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="725617712480000" type="Boom_Sonic">
+                                    <param id="0" name="Animation">&quot;Ending&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" inactive="1" sid="280129204929865" title="Sonic Boom Credits">
+            <sub-events>
+                <variable constant="0" name="lock" sid="955947674588727" static="1" type="number">0</variable>
+                <event-block sid="256680677181923">
+                    <conditions>
+                        <condition id="-4" name="Trigger once while true" sid="581315451248393" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Set value" sid="250414107386978" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="33" name="Stop all" sid="926652179171575" type="BetterAudio" />
+                        <action id="0" name="Call function" sid="624741652972204" type="Function">
+                            <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;EBoom_Credits&quot;{###}&quot;music&quot;{###}1</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="240525187943521">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="960107032064216" type="Text_Static">
+                                    <param id="0" name="Unique ID">13871</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Wait" sid="139817299297270" type="System">
+                                    <param id="0" name="Seconds">0.04</param>
+                                </action>
+                                <action id="0" name="Call function" sid="828511664657932" type="Function">
+                                    <param id="0" name="Name">&quot;Input_GetKey&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;jump&quot;</param>
+                                </action>
+                                <action id="0" name="Set text" sid="242855526442323" type="Text_Static">
+                                    <param id="0" name="Text">&quot;Press &quot;&amp;uppercase(Function.ReturnValue)&amp;&quot; to return&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="620352794188139">
+                            <conditions>
+                                <condition id="-16" name="Is on layer" sid="197316264028060" type="Boom_Sonic">
+                                    <param id="0" name="Layer">&quot;Credits&quot;</param>
+                                </condition>
+                                <condition id="-16" name="Is on layer" sid="198656027180305" type="Boom_Tails">
+                                    <param id="0" name="Layer">&quot;Credits&quot;</param>
+                                </condition>
+                                <condition id="-14" name="Pick by unique ID" sid="484680121031930" type="Boom_Sonic">
+                                    <param id="0" name="Unique ID">13862</param>
+                                </condition>
+                                <condition id="-14" name="Pick by unique ID" sid="580039192297833" type="Boom_Tails">
+                                    <param id="0" name="Unique ID">13863</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Set position" sid="485004638712705" type="Boom_Sonic">
+                                    <param id="0" name="X">-66</param>
+                                    <param id="1" name="Y">19</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="378189282603668" type="Boom_Tails">
+                                    <param id="0" name="X">-164</param>
+                                    <param id="1" name="Y">3</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="819184630807722">
+                            <conditions>
+                                <condition id="-16" name="Is on layer" sid="654846236808885" type="Boom_Sonic">
+                                    <param id="0" name="Layer">&quot;Credits&quot;</param>
+                                </condition>
+                                <condition id="-14" name="Pick by unique ID" sid="953399443227293" type="Boom_Sonic">
+                                    <param id="0" name="Unique ID">13870</param>
+                                </condition>
+                                <condition id="-16" name="Is on layer" sid="613671780271194" type="Boom_TailsHead">
+                                    <param id="0" name="Layer">&quot;Credits&quot;</param>
+                                </condition>
+                                <condition id="-16" name="Is on layer" sid="991300280123115" type="Boom_Plane">
+                                    <param id="0" name="Layer">&quot;Credits&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Set position" sid="406892758111894" type="Boom_Sonic">
+                                    <param id="0" name="X">-112</param>
+                                    <param id="1" name="Y">159</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="388866821508639" type="Boom_TailsHead">
+                                    <param id="0" name="X">-153</param>
+                                    <param id="1" name="Y">260</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="830323655929990" type="Boom_Plane">
+                                    <param id="0" name="X">-223</param>
+                                    <param id="1" name="Y">236</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="978779019252741">
+                            <conditions />
+                            <actions>
+                                <action id="4" name="Set animation" sid="226065889197721" type="Boom_Credits">
+                                    <param id="0" name="Animation">&quot;ScullyMobile1&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="807991003670947" type="Boom_Credits">
+                                    <param id="0" name="X">-93</param>
+                                    <param id="1" name="Y">358</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="784695914004273">
+                            <conditions />
+                            <actions>
+                                <action id="-9" name="Set value" sid="163343323059126" type="System">
+                                    <param id="0" name="Variable">lock</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="376592856749090" type="System">
+                                    <param id="0" name="Seconds">0.5</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="732880546128902" type="System">
+                                    <param id="0" name="Variable">lock</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="569366356060008">
+                    <conditions>
+                        <condition id="-1" name="Every tick" sid="293940047058657" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-11" name="Add to" sid="822303180879498" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Value">dt</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="191609660914881">
+                    <conditions>
+                        <condition id="-8" name="Is boolean instance variable set" sid="144266855731854" type="Var_Input">
+                            <param id="0" name="Instance variable">A</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="983770105281756" type="System" />
+                        <condition id="-14" name="Compare variable" sid="854069401140744" type="System">
+                            <param id="0" name="Variable">lock</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Set value" sid="962196855357373" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentMenu</param>
+                            <param id="1" name="Value">&quot;title&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="483038933446352">
+                    <conditions>
+                        <condition id="-16" name="Is on layer" sid="636434106436403" type="Boom_Sonic">
+                            <param id="0" name="Layer">&quot;Credits&quot;</param>
+                        </condition>
+                        <condition id="-16" name="Is on layer" sid="869051727775425" type="Boom_Tails">
+                            <param id="0" name="Layer">&quot;Credits&quot;</param>
+                        </condition>
+                        <condition id="-14" name="Pick by unique ID" sid="815043544301462" type="Boom_Sonic">
+                            <param id="0" name="Unique ID">13862</param>
+                        </condition>
+                        <condition id="-14" name="Pick by unique ID" sid="728559137647947" type="Boom_Tails">
+                            <param id="0" name="Unique ID">13863</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-3" name="Set position" sid="155312318825656" type="Boom_Sonic">
+                            <param id="0" name="X">Self.X+6</param>
+                            <param id="1" name="Y">19</param>
+                        </action>
+                        <action id="-3" name="Set position" sid="783669646950911" type="Boom_Tails">
+                            <param id="0" name="X">Self.X+6</param>
+                            <param id="1" name="Y">3</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="916363640595319">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="416438219100566" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Call function" sid="113528673568072" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;Boom_Title1&quot;</param>
+                                </action>
+                                <action id="0" name="Call function" sid="606899058345431" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;Boom_Title2&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="208382250326036">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="817870037773496" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">5</param>
+                        </condition>
+                        <condition id="-16" name="Is on layer" sid="315889379579865" type="Boom_Sonic">
+                            <param id="0" name="Layer">&quot;Credits&quot;</param>
+                        </condition>
+                        <condition id="-14" name="Pick by unique ID" sid="948230083478108" type="Boom_Sonic">
+                            <param id="0" name="Unique ID">13870</param>
+                        </condition>
+                        <condition id="-16" name="Is on layer" sid="120593672805096" type="Boom_TailsHead">
+                            <param id="0" name="Layer">&quot;Credits&quot;</param>
+                        </condition>
+                        <condition id="-16" name="Is on layer" sid="375199906791859" type="Boom_Plane">
+                            <param id="0" name="Layer">&quot;Credits&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-3" name="Set position" sid="581092174386305" type="Boom_Sonic">
+                            <param id="0" name="X">Self.X+6</param>
+                            <param id="1" name="Y">159</param>
+                        </action>
+                        <action id="-3" name="Set position" sid="551113826374510" type="Boom_TailsHead">
+                            <param id="0" name="X">Self.X+6</param>
+                            <param id="1" name="Y">260</param>
+                        </action>
+                        <action id="-3" name="Set position" sid="609157787948972" type="Boom_Plane">
+                            <param id="0" name="X">Self.X+6</param>
+                            <param id="1" name="Y">236</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="613490482340465">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="499966074492183" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Call function" sid="719076037868103" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;Boom_Credits0&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="663541482920918">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="905825661905015" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">30</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-1" name="Set X" sid="774413191643424" type="Boom_Credits">
+                            <param id="0" name="X">Self.X+6</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="885404541141237">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="548973905444369" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">30</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="672237237745748" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="363792906163489" type="Boom_Credits">
+                            <param id="0" name="Animation">&quot;ScullyMobile1&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                        <action id="-3" name="Set position" sid="621197138827173" type="Boom_Credits">
+                            <param id="0" name="X">-93</param>
+                            <param id="1" name="Y">358</param>
+                        </action>
+                        <action id="0" name="Call function" sid="635859183399149" type="Function">
+                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;Boom_Credits1&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="713551594491325">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="106636220245175" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">33</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="520491217601635" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="120178988578788" type="Boom_Credits">
+                            <param id="0" name="Animation">&quot;Martin2&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                        <action id="-3" name="Set position" sid="494886978738910" type="Boom_Credits">
+                            <param id="0" name="X">-26</param>
+                            <param id="1" name="Y">390</param>
+                        </action>
+                        <action id="0" name="Call function" sid="834747750176810" type="Function">
+                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;Boom_Credits2&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="840448138624013">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="932967280976565" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">36</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="147098818590203" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="855862874988200" type="Boom_Credits">
+                            <param id="0" name="Animation">&quot;Stick3&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                        <action id="-3" name="Set position" sid="686918072884101" type="Boom_Credits">
+                            <param id="0" name="X">-26</param>
+                            <param id="1" name="Y">390</param>
+                        </action>
+                        <action id="0" name="Call function" sid="786683788627527" type="Function">
+                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;Boom_Shoot&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="360211808949043">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="556403927197683" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">39</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="202308286042616" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="746244849850625" type="Boom_Credits">
+                            <param id="0" name="Animation">&quot;SkateDude4&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                        <action id="-3" name="Set position" sid="739883111978175" type="Boom_Credits">
+                            <param id="0" name="X">-16</param>
+                            <param id="1" name="Y">432</param>
+                        </action>
+                        <action id="0" name="Call function" sid="771267129518018" type="Function">
+                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;Boom_Ouch&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="286818662345880">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="111314748568756" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">42</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="640363636970111" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="504701229799486" type="Boom_Credits">
+                            <param id="0" name="Animation">&quot;RoadHogJames5&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                        <action id="-3" name="Set position" sid="184725136661994" type="Boom_Credits">
+                            <param id="0" name="X">-35</param>
+                            <param id="1" name="Y">396</param>
+                        </action>
+                        <action id="0" name="Call function" sid="878803837706433" type="Function">
+                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;Boom_Credits5&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="814974517196015">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="585798598938127" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">45</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="769310615911122" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="825340023035723" type="Boom_Credits">
+                            <param id="0" name="Animation">&quot;Keefoon6&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                        <action id="-3" name="Set position" sid="697900115802044" type="Boom_Credits">
+                            <param id="0" name="X">-17</param>
+                            <param id="1" name="Y">415</param>
+                        </action>
+                        <action id="0" name="Call function" sid="596984898322898" type="Function">
+                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;Boom_Credits6&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="775367618954391">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="688519198280832" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">48</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="452732301156287" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="286601610295948" type="Boom_Credits">
+                            <param id="0" name="Animation">&quot;BuzzLightyear7&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                        <action id="-3" name="Set position" sid="983531633849478" type="Boom_Credits">
+                            <param id="0" name="X">-84</param>
+                            <param id="1" name="Y">300</param>
+                        </action>
+                        <action id="0" name="Call function" sid="266708537773329" type="Function">
+                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;Boom_Credits7&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="884021525454105">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="854861896808085" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">51</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="845380242159595" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="683648597466712" type="Boom_Credits">
+                            <param id="0" name="Animation">&quot;Sonic8&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                        <action id="-3" name="Set position" sid="811778278707317" type="Boom_Credits">
+                            <param id="0" name="X">-86</param>
+                            <param id="1" name="Y">385</param>
+                        </action>
+                        <action id="0" name="Call function" sid="532423846258435" type="Function">
+                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;Boom_Credits0&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="398725618233398">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="806829089744305" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">54</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="577215403869301" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Call function" sid="118017130034058" type="Function">
+                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;Boom_Title1&quot;</param>
+                        </action>
+                    </actions>
                 </event-block>
             </sub-events>
         </event-group>
