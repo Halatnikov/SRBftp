@@ -6,8 +6,21 @@
         <include>E_Online</include>
         <variable constant="0" name="DEBUG" sid="698008437735178" static="0" type="number">0</variable>
         <variable constant="0" name="PLATFORM" sid="713217760695855" static="0" type="text">NwJs</variable>
-        <event-group description="" sid="951764726633304" title="Constants">
+        <event-group description="" sid="951764726633304" title="Initialize">
             <sub-events>
+                <event-block sid="124259430399450">
+                    <conditions>
+                        <condition id="-18" name="Is in preview" sid="736589188422243" type="System" />
+                        <condition id="-4" name="Trigger once while true" sid="331744358443956" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Set value" sid="582806526027178" type="Var_Misc">
+                            <param id="0" name="Instance variable">ResourceFolder</param>
+                            <param id="1" name="Value">&quot;D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\github\SRBftp\&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment></comment>
                 <event-block sid="411019658514068">
                     <conditions>
                         <condition id="-4" name="Trigger once while true" sid="397231248190161" type="System" />
@@ -19,7 +32,7 @@
                             <actions>
                                 <action id="-9" name="Set value" sid="744021629423734" type="System">
                                     <param id="0" name="Variable">DEBUG</param>
-                                    <param id="1" name="Value">0</param>
+                                    <param id="1" name="Value">1</param>
                                 </action>
                                 <action id="-10" name="Set value" sid="444853535182961" type="Var_Misc">
                                     <param id="0" name="Instance variable">ResourceFolder</param>
@@ -68,10 +81,67 @@
                         </event-block>
                     </sub-events>
                 </event-block>
-            </sub-events>
-        </event-group>
-        <event-group description="" sid="722285720915992" title="Debug">
-            <sub-events>
+                <comment></comment>
+                <event-block sid="877806526250364">
+                    <conditions>
+                        <condition id="-32" name="Is on platform" sid="539684271307393" type="System">
+                            <param id="0" name="Platform">10</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="659159601308574" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="588833297999055" type="System">
+                            <param id="0" name="Variable">PLATFORM</param>
+                            <param id="1" name="Value">&quot;NwJs&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="314128203686987">
+                    <conditions>
+                        <condition id="-32" name="Is on platform" sid="324392719941598" type="System">
+                            <param id="0" name="Platform">0</param>
+                        </condition>
+                        <condition id="-20" inverted="1" name="Is on mobile device" sid="394714486200911" type="System" />
+                        <condition id="-4" name="Trigger once while true" sid="716884387201634" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="179062033110119" type="System">
+                            <param id="0" name="Variable">PLATFORM</param>
+                            <param id="1" name="Value">&quot;Web&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="975333287807444">
+                    <conditions>
+                        <condition id="-32" name="Is on platform" sid="440670186683840" type="System">
+                            <param id="0" name="Platform">0</param>
+                        </condition>
+                        <condition id="-20" name="Is on mobile device" sid="560822088401707" type="System" />
+                        <condition id="-4" name="Trigger once while true" sid="327820529978316" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="102389617406827" type="System">
+                            <param id="0" name="Variable">PLATFORM</param>
+                            <param id="1" name="Value">&quot;WebAndroid&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="920254282252468">
+                    <conditions>
+                        <condition id="-32" inverted="1" name="Is on platform" sid="966475240093872" type="System">
+                            <param id="0" name="Platform">0</param>
+                        </condition>
+                        <condition id="-20" name="Is on mobile device" sid="801466150553005" type="System" />
+                        <condition id="-4" name="Trigger once while true" sid="668132385443459" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="464422741310288" type="System">
+                            <param id="0" name="Variable">PLATFORM</param>
+                            <param id="1" name="Value">&quot;Android&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment></comment>
                 <event-block sid="568561603230544">
                     <conditions>
                         <condition id="0" name="Path exists" sid="460068265929722" type="NWjs">
@@ -101,18 +171,6 @@
                             </actions>
                         </event-block>
                     </sub-events>
-                </event-block>
-                <event-block sid="124259430399450">
-                    <conditions>
-                        <condition id="-18" name="Is in preview" sid="736589188422243" type="System" />
-                        <condition id="-4" name="Trigger once while true" sid="331744358443956" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="-10" name="Set value" sid="582806526027178" type="Var_Misc">
-                            <param id="0" name="Instance variable">ResourceFolder</param>
-                            <param id="1" name="Value">&quot;D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\github\SRBftp\&quot;</param>
-                        </action>
-                    </actions>
                 </event-block>
                 <event-block sid="646503035913642">
                     <conditions>
@@ -169,65 +227,6 @@
             </sub-events>
         </event-group>
         <comment></comment>
-        <event-block sid="877806526250364">
-            <conditions>
-                <condition id="-32" name="Is on platform" sid="539684271307393" type="System">
-                    <param id="0" name="Platform">10</param>
-                </condition>
-                <condition id="-4" name="Trigger once while true" sid="659159601308574" type="System" />
-            </conditions>
-            <actions>
-                <action id="-9" name="Set value" sid="588833297999055" type="System">
-                    <param id="0" name="Variable">PLATFORM</param>
-                    <param id="1" name="Value">&quot;NwJs&quot;</param>
-                </action>
-            </actions>
-        </event-block>
-        <event-block sid="314128203686987">
-            <conditions>
-                <condition id="-32" name="Is on platform" sid="324392719941598" type="System">
-                    <param id="0" name="Platform">0</param>
-                </condition>
-                <condition id="-20" inverted="1" name="Is on mobile device" sid="394714486200911" type="System" />
-                <condition id="-4" name="Trigger once while true" sid="716884387201634" type="System" />
-            </conditions>
-            <actions>
-                <action id="-9" name="Set value" sid="179062033110119" type="System">
-                    <param id="0" name="Variable">PLATFORM</param>
-                    <param id="1" name="Value">&quot;Web&quot;</param>
-                </action>
-            </actions>
-        </event-block>
-        <event-block sid="975333287807444">
-            <conditions>
-                <condition id="-32" name="Is on platform" sid="440670186683840" type="System">
-                    <param id="0" name="Platform">0</param>
-                </condition>
-                <condition id="-20" name="Is on mobile device" sid="560822088401707" type="System" />
-                <condition id="-4" name="Trigger once while true" sid="327820529978316" type="System" />
-            </conditions>
-            <actions>
-                <action id="-9" name="Set value" sid="102389617406827" type="System">
-                    <param id="0" name="Variable">PLATFORM</param>
-                    <param id="1" name="Value">&quot;WebAndroid&quot;</param>
-                </action>
-            </actions>
-        </event-block>
-        <event-block sid="920254282252468">
-            <conditions>
-                <condition id="-32" inverted="1" name="Is on platform" sid="966475240093872" type="System">
-                    <param id="0" name="Platform">0</param>
-                </condition>
-                <condition id="-20" name="Is on mobile device" sid="801466150553005" type="System" />
-                <condition id="-4" name="Trigger once while true" sid="668132385443459" type="System" />
-            </conditions>
-            <actions>
-                <action id="-9" name="Set value" sid="464422741310288" type="System">
-                    <param id="0" name="Variable">PLATFORM</param>
-                    <param id="1" name="Value">&quot;Android&quot;</param>
-                </action>
-            </actions>
-        </event-block>
         <event-group description="" sid="945011878454976" title="Input">
             <sub-events>
                 <event-block sid="724888868200643">
