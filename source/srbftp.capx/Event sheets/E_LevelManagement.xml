@@ -95,6 +95,10 @@
                                     <param id="0" name="Group name">&quot;SL2 Level Specific&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
+                                <action id="-12" name="Set group active" sid="388411560245274" type="System">
+                                    <param id="0" name="Group name">&quot;MM1 Level Specific&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
                             </actions>
                         </event-block>
                         <event-block sid="980795608416149">
@@ -915,6 +919,54 @@
                                 </action>
                                 <action id="-12" name="Set group active" sid="673632337331007" type="System">
                                     <param id="0" name="Group name">&quot;SL2 Level Specific&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>mechanical madness 1</comment>
+                        <event-block sid="763993246974612">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="136740938751010" type="System">
+                                    <param id="0" name="First value">LayoutName</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">&quot;1_8MechanicalMadness1&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Set value" sid="553856326649991" type="Var_Level">
+                                    <param id="0" name="Instance variable">Level_Subname</param>
+                                    <param id="1" name="Value">&quot;SONIC ROBO-BLAST!&quot;</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="986555697830886" type="Var_Level">
+                                    <param id="0" name="Instance variable">Level_Name</param>
+                                    <param id="1" name="Value">&quot;MECHANICAL MADNESS ZONE&quot;</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="762033138827521" type="Var_Level">
+                                    <param id="0" name="Instance variable">Level_Act</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="949938192185783" type="Var_Level">
+                                    <param id="0" name="Instance variable">Level_Music</param>
+                                    <param id="1" name="Value">&quot;1_8MechanicalMadness&quot;</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="704517753753956" type="Var_Level">
+                                    <param id="0" name="Instance variable">Level_Next</param>
+                                    <param id="1" name="Value">&quot;1_8MechanicalMadness1&quot;</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="811266087972084" type="Var_Level">
+                                    <param id="0" name="Instance variable">Level_Game</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-13" name="Set boolean" sid="757303198862587" type="Var_Level">
+                                    <param id="0" name="Instance variable">Level_FinishAfterBoss</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="101087130396891" type="Var_Misc">
+                                    <param id="0" name="Instance variable">Discord_CurrentLargeKey</param>
+                                    <param id="1" name="Value">&quot;null&quot;</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="739128396916090" type="System">
+                                    <param id="0" name="Group name">&quot;MM1 Level Specific&quot;</param>
                                     <param id="1" name="State">1</param>
                                 </action>
                             </actions>
@@ -6956,6 +7008,194 @@
                         <action behavior="LiteTween" id="10" name="Start" sid="111167363957201" type="Object1_Door">
                             <param id="0" name="Start Mode">0</param>
                             <param id="1" name="Force use current">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" inactive="1" sid="955704293488383" title="MM1 Level Specific">
+            <sub-events>
+                <variable constant="0" name="fadeout" sid="730459445887871" static="1" type="number">0</variable>
+                <event-block sid="224698935452810">
+                    <conditions>
+                        <condition id="0" name="On function" sid="661666229628375" type="Function">
+                            <param id="0" name="Name">&quot;Player_Restart&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="5" name="Terminate" sid="511246153983386" type="Ease">
+                            <param id="0" name="Ease tag">&quot;buildings&quot;</param>
+                            <param id="1" name="Ease parameter {n}"></param>
+                        </action>
+                        <action id="-9" name="Set value" sid="725278515207029" type="System">
+                            <param id="0" name="Variable">fadeout</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="578771799743931">
+                    <conditions>
+                        <condition id="0" name="On function" sid="407526713047633" type="Function">
+                            <param id="0" name="Name">&quot;Level_Trigger&quot;</param>
+                        </condition>
+                        <condition id="-8" name="Compare two values" sid="347834481751450" type="System">
+                            <param id="0" name="First value">Function.Param(0)</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Second value">1</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="256723284225126" type="System">
+                            <param id="0" name="Variable">fadeout</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="506767679873321" type="System">
+                            <param id="0" name="Variable">fadeout</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="0" name="Ease" sid="481345213070276" type="Ease">
+                            <param id="0" name="Ease tag">&quot;buildings&quot;</param>
+                            <param id="1" name="Start value">100</param>
+                            <param id="2" name="End value">0</param>
+                            <param id="3" name="Duration">0.5</param>
+                            <param id="4" name="Easing effect">0</param>
+                            <param id="5" name="Bounce back">0</param>
+                            <param id="6" name="Ease parameter {n}"></param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="692377646730845">
+                    <conditions>
+                        <condition id="0" name="On function" sid="940036176711627" type="Function">
+                            <param id="0" name="Name">&quot;Level_Trigger&quot;</param>
+                        </condition>
+                        <condition id="-8" name="Compare two values" sid="713648969557947" type="System">
+                            <param id="0" name="First value">Function.Param(0)</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Second value">-1</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="578410037807106" type="System">
+                            <param id="0" name="Variable">fadeout</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="312771393660943" type="System">
+                            <param id="0" name="Variable">fadeout</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="0" name="Ease" sid="318460917533483" type="Ease">
+                            <param id="0" name="Ease tag">&quot;buildings&quot;</param>
+                            <param id="1" name="Start value">0</param>
+                            <param id="2" name="End value">100</param>
+                            <param id="3" name="Duration">0.5</param>
+                            <param id="4" name="Easing effect">0</param>
+                            <param id="5" name="Bounce back">0</param>
+                            <param id="6" name="Ease parameter {n}"></param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="698584833297135">
+                    <conditions>
+                        <condition id="3" name="On ticked" sid="556149499990781" type="Ease">
+                            <param id="0" name="Ease tag">&quot;buildings&quot;</param>
+                            <param id="1" name="Ease parameter {n}"></param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-18" name="Set layer opacity" sid="140115951537966" type="System">
+                            <param id="0" name="Layer">&quot;Foreground&quot;</param>
+                            <param id="1" name="Opacity">Ease.TickedValue</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment></comment>
+                <event-block sid="694232519172814">
+                    <conditions>
+                        <condition id="-18" name="On created" sid="118453700741488" type="Object1_8MMLift" />
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Set value" sid="811486755494523" type="Object1_8MMLift">
+                            <param id="0" name="Instance variable">InitialY</param>
+                            <param id="1" name="Value">Self.Y</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="608355489373522">
+                    <conditions>
+                        <condition id="9" name="Is overlapping at offset" sid="801253172714909" type="Engine_Player">
+                            <param id="0" name="Object">Object1_8MMLift</param>
+                            <param id="1" name="Offset X">0</param>
+                            <param id="2" name="Offset Y">1</param>
+                        </condition>
+                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="684877724862381" type="Var_Level">
+                            <param id="0" name="Instance variable">Pause</param>
+                        </condition>
+                        <condition id="-8" name="Is boolean instance variable set" sid="817419797945620" type="Var_Player">
+                            <param id="0" name="Instance variable">CanMove</param>
+                        </condition>
+                        <condition id="-2" name="Compare Y" sid="998250648805263" type="Object1_8MMLift">
+                            <param id="0" name="Comparison">4</param>
+                            <param id="1" name="Y co-ordinate">Self.TargetY</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="273309209204144" type="Object1_8MMLift">
+                            <param id="0" name="Y">Self.Y-2</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="650038698893124">
+                    <conditions>
+                        <condition id="9" inverted="1" name="Is overlapping at offset" sid="136236131043430" type="Engine_Player">
+                            <param id="0" name="Object">Object1_8MMLift</param>
+                            <param id="1" name="Offset X">0</param>
+                            <param id="2" name="Offset Y">1</param>
+                        </condition>
+                        <condition id="-2" inverted="1" name="Compare Y" sid="857782966636560" type="Object1_8MMLift">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Y co-ordinate">Self.InitialY</param>
+                        </condition>
+                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="638650166607239" type="Var_Level">
+                            <param id="0" name="Instance variable">Pause</param>
+                        </condition>
+                        <condition id="-8" name="Is boolean instance variable set" sid="660413936616562" type="Var_Player">
+                            <param id="0" name="Instance variable">CanMove</param>
+                        </condition>
+                        <condition id="-6" name="Every X seconds" sid="426015167397725" type="System">
+                            <param id="0" name="Interval (seconds)">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-11" name="Add to" sid="144874350702803" type="Object1_8MMLift">
+                            <param id="0" name="Instance variable">ResetTimer</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="372028188131418">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="167618210324202" type="Object1_8MMLift">
+                            <param id="0" name="Instance variable">ResetTimer</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">4</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="693903660648924" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="978907088451472" type="Object1_8MMLift">
+                            <param id="0" name="Y">Self.InitialY</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="566676209014687" type="Object1_8MMLift">
+                            <param id="0" name="Instance variable">ResetTimer</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action behavior="Flash" id="0" name="Flash" sid="789204974216060" type="Object1_8MMLift">
+                            <param id="0" name="&apos;On&apos; time">0.1</param>
+                            <param id="1" name="&apos;Off&apos; time">0.1</param>
+                            <param id="2" name="Duration">0.5</param>
                         </action>
                     </actions>
                 </event-block>
