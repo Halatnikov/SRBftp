@@ -5980,28 +5980,35 @@
                                         <condition id="-8" name="Is boolean instance variable set" sid="117973229624740" type="Var_Input">
                                             <param id="0" name="Instance variable">A</param>
                                         </condition>
-                                        <condition id="2" name="Is playing" sid="787684069283379" type="PlayerSkins">
-                                            <param id="0" name="Animation">&quot;Idle&quot;</param>
-                                        </condition>
                                         <condition id="-4" name="Trigger once while true" sid="637850000430476" type="System" />
                                     </conditions>
-                                    <actions>
-                                        <action id="0" name="Call function" sid="754679207558761" type="Function">
-                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
-                                            <param id="1" name="Parameter {n}">&quot;Jump&quot;</param>
-                                        </action>
-                                        <action id="4" name="Set animation" sid="157852840175962" type="PlayerSkins">
-                                            <param id="0" name="Animation">&quot;Jump&quot;</param>
-                                            <param id="1" name="From">1</param>
-                                        </action>
-                                        <action id="-16" name="Wait" sid="896803577469682" type="System">
-                                            <param id="0" name="Seconds">0.5</param>
-                                        </action>
-                                        <action id="4" name="Set animation" sid="343901012585511" type="PlayerSkins">
-                                            <param id="0" name="Animation">&quot;Idle&quot;</param>
-                                            <param id="1" name="From">1</param>
-                                        </action>
-                                    </actions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="865175445560549">
+                                            <conditions>
+                                                <condition id="2" name="Is playing" sid="787684069283379" type="PlayerSkins">
+                                                    <param id="0" name="Animation">&quot;Idle&quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Call function" sid="754679207558761" type="Function">
+                                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;Jump&quot;</param>
+                                                </action>
+                                                <action id="4" name="Set animation" sid="157852840175962" type="PlayerSkins">
+                                                    <param id="0" name="Animation">&quot;Jump&quot;</param>
+                                                    <param id="1" name="From">1</param>
+                                                </action>
+                                                <action id="-16" name="Wait" sid="896803577469682" type="System">
+                                                    <param id="0" name="Seconds">0.5</param>
+                                                </action>
+                                                <action id="4" name="Set animation" sid="343901012585511" type="PlayerSkins">
+                                                    <param id="0" name="Animation">&quot;Idle&quot;</param>
+                                                    <param id="1" name="From">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
                                 </event-block>
                             </sub-events>
                         </event-block>
@@ -7015,6 +7022,7 @@
         </event-group>
         <event-group description="" inactive="1" sid="955704293488383" title="MM1 Level Specific">
             <sub-events>
+                <comment>building fadeout</comment>
                 <variable constant="0" name="fadeout" sid="730459445887871" static="1" type="number">0</variable>
                 <event-block sid="224698935452810">
                     <conditions>
@@ -7030,6 +7038,10 @@
                         <action id="-9" name="Set value" sid="725278515207029" type="System">
                             <param id="0" name="Variable">fadeout</param>
                             <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-18" name="Set layer opacity" sid="928536747850368" type="System">
+                            <param id="0" name="Layer">&quot;Foreground&quot;</param>
+                            <param id="1" name="Opacity">100</param>
                         </action>
                     </actions>
                 </event-block>
@@ -7111,10 +7123,216 @@
                         </action>
                     </actions>
                 </event-block>
+                <comment>metal sonic cutscene</comment>
+                <variable constant="0" name="cutscene" sid="717889416157657" static="1" type="number">0</variable>
+                <event-block sid="748573900138110">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="911569088381609" type="Var_Player">
+                            <param id="0" name="Instance variable">Skin</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">12</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="832821246910310" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="189673383837132" type="Cutscene_MetalSonic">
+                            <param id="0" name="Animation">&quot;SuperiorIdle&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="990469893670113">
+                    <conditions>
+                        <condition id="0" name="On function" sid="160010899911547" type="Function">
+                            <param id="0" name="Name">&quot;Level_Trigger&quot;</param>
+                        </condition>
+                        <condition id="-8" name="Compare two values" sid="853860943570069" type="System">
+                            <param id="0" name="First value">Function.Param(0)</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Second value">2</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-15" name="Set visible" sid="130962432090238" type="Cutscene1_8MM1Fire2">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="585634211563334" type="Cutscene_MetalSonic">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-1" name="Set X" sid="571071865569628" type="Cutscene_MetalSonic">
+                            <param id="0" name="X">2544</param>
+                        </action>
+                        <action id="-9" name="Destroy" sid="758744071620860" type="Cutscene1_8MM1Fire1" />
+                        <action id="-9" name="Set value" sid="609039819268416" type="System">
+                            <param id="0" name="Variable">cutscene</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="280686634024939">
+                    <conditions>
+                        <condition id="0" name="On function" sid="431934535002102" type="Function">
+                            <param id="0" name="Name">&quot;Level_Trigger&quot;</param>
+                        </condition>
+                        <condition id="-8" name="Compare two values" sid="424486373755516" type="System">
+                            <param id="0" name="First value">Function.Param(0)</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Second value">3</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="849220041949739" type="System">
+                            <param id="0" name="Variable">cutscene</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="892500386185945" type="Cutscene_MetalSonic">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="358518662845216">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="892939312928299" type="System">
+                            <param id="0" name="Variable">cutscene</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-1" name="Set X" sid="465768519153553" type="Cutscene_MetalSonic">
+                            <param id="0" name="X">Self.X+16</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="213717399675047">
+                            <conditions>
+                                <condition id="-1" name="Compare X" sid="494016591421255" type="Cutscene_MetalSonic">
+                                    <param id="0" name="Comparison">4</param>
+                                    <param id="1" name="X co-ordinate">3070</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="167808051948601" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Call function" sid="552002281832773" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;2Title&quot;</param>
+                                </action>
+                                <action id="0" name="Spawn another object" sid="782372830054469" type="Cutscene_MetalSonic">
+                                    <param id="0" name="Object">Cutscene1_8MM1Fire1</param>
+                                    <param id="1" name="Layer">&quot;Objects&quot;</param>
+                                    <param id="2" name="Image point">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="266790655805577" type="Cutscene1_8MM1Fire1">
+                                    <param id="0" name="Instance variable">OffsetX</param>
+                                    <param id="1" name="Value">9</param>
+                                </action>
+                                <action id="0" name="Spawn another object" sid="339509901713787" type="Cutscene_MetalSonic">
+                                    <param id="0" name="Object">Cutscene1_8MM1Fire1</param>
+                                    <param id="1" name="Layer">&quot;Objects&quot;</param>
+                                    <param id="2" name="Image point">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="124474129055159" type="Cutscene1_8MM1Fire1">
+                                    <param id="0" name="Instance variable">OffsetX</param>
+                                    <param id="1" name="Value">6</param>
+                                </action>
+                                <action id="0" name="Spawn another object" sid="105220229749100" type="Cutscene_MetalSonic">
+                                    <param id="0" name="Object">Cutscene1_8MM1Fire1</param>
+                                    <param id="1" name="Layer">&quot;Objects&quot;</param>
+                                    <param id="2" name="Image point">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="352369777981814" type="Cutscene1_8MM1Fire1">
+                                    <param id="0" name="Instance variable">OffsetX</param>
+                                    <param id="1" name="Value">3</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="268720917499490">
+                            <conditions>
+                                <condition id="-1" name="Compare X" sid="708534320758346" type="Cutscene_MetalSonic">
+                                    <param id="0" name="Comparison">4</param>
+                                    <param id="1" name="X co-ordinate">3448</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="265059405095706" type="System">
+                                    <param id="0" name="Variable">cutscene</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="192809422461472" type="Cutscene_MetalSonic">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="703859793515551">
+                    <conditions />
+                    <actions>
+                        <action id="-3" name="Set position" sid="160974176011069" type="Cutscene1_8MM1Fire1">
+                            <param id="0" name="X">Self.X+Self.OffsetX</param>
+                            <param id="1" name="Y">Self.Y+16</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="231072204661357">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="763902095100831" type="Cutscene1_8MM1Fire1">
+                            <param id="0" name="Object">Tile1_8MM2</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="308297777599755" type="Cutscene1_8MM1Fire1" />
+                        <action id="-15" name="Set visible" sid="674712520078927" type="Cutscene1_8MM1Fire2">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="191999454879303">
+                            <conditions>
+                                <condition id="-3" name="Is on-screen" sid="891811859641259" type="Cutscene1_8MM1Fire1" />
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Call function" sid="691956538857148" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;F_FireShot&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>emblem camera</comment>
+                <event-block sid="139754406091888">
+                    <conditions>
+                        <condition id="0" name="On function" sid="989834867514915" type="Function">
+                            <param id="0" name="Name">&quot;Level_Trigger&quot;</param>
+                        </condition>
+                        <condition id="-8" name="Compare two values" sid="916797582871091" type="System">
+                            <param id="0" name="First value">Function.Param(0)</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Second value">4</param>
+                        </condition>
+                        <condition id="-33" name="Pick by comparison" sid="256400161954663" type="System">
+                            <param id="0" name="Object">Engine_CameraZone</param>
+                            <param id="1" name="Expression">Engine_CameraZone.ID</param>
+                            <param id="2" name="Comparison">0</param>
+                            <param id="3" name="Value">10</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Set value" sid="822054284414437" type="Engine_Camera">
+                            <param id="0" name="Instance variable">CurrentZone</param>
+                            <param id="1" name="Value">10</param>
+                        </action>
+                        <action behavior="MoveTo" id="9" name="Stop" sid="381621433245616" type="Engine_Camera" />
+                        <action behavior="MoveTo" id="6" name="Move to object" sid="469610670104264" type="Engine_Camera">
+                            <param id="0" name="Target">Engine_CameraZone</param>
+                        </action>
+                    </actions>
+                </event-block>
                 <comment></comment>
                 <event-block sid="694232519172814">
                     <conditions>
-                        <condition id="-18" name="On created" sid="118453700741488" type="Object1_8MMLift" />
+                        <condition id="-4" name="Trigger once while true" sid="118453700741488" type="System" />
                     </conditions>
                     <actions>
                         <action id="-10" name="Set value" sid="811486755494523" type="Object1_8MMLift">
@@ -7136,6 +7354,9 @@
                         <condition id="-8" name="Is boolean instance variable set" sid="817419797945620" type="Var_Player">
                             <param id="0" name="Instance variable">CanMove</param>
                         </condition>
+                        <condition id="-8" name="Is boolean instance variable set" sid="724183295120795" type="Var_Level">
+                            <param id="0" name="Instance variable">TimerLevelActive</param>
+                        </condition>
                         <condition id="-2" name="Compare Y" sid="998250648805263" type="Object1_8MMLift">
                             <param id="0" name="Comparison">4</param>
                             <param id="1" name="Y co-ordinate">Self.TargetY</param>
@@ -7144,6 +7365,10 @@
                     <actions>
                         <action id="-2" name="Set Y" sid="273309209204144" type="Object1_8MMLift">
                             <param id="0" name="Y">Self.Y-2</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="629943739427040" type="Object1_8MMLift">
+                            <param id="0" name="Instance variable">ResetTimer</param>
+                            <param id="1" name="Value">0</param>
                         </action>
                     </actions>
                 </event-block>
