@@ -3940,11 +3940,6 @@
                                 <condition id="-6" name="Every X seconds" sid="920889638231410" type="System">
                                     <param id="0" name="Interval (seconds)">0.05</param>
                                 </condition>
-                                <condition id="-7" inverted="1" name="Compare instance variable" sid="132215006918504" type="EnemyProjectiles">
-                                    <param id="0" name="Instance variable">ID</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">2</param>
-                                </condition>
                                 <condition id="-7" name="Compare instance variable" sid="785645260957677" type="Save_Configuration">
                                     <param id="0" name="Instance variable">GameplayProjectileTrails</param>
                                     <param id="1" name="Comparison">0</param>
@@ -3954,10 +3949,20 @@
                                 <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="737874194716786" type="Var_Level">
                                     <param id="0" name="Instance variable">Pause</param>
                                 </condition>
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="132215006918504" type="EnemyProjectiles">
+                                    <param id="0" name="Instance variable">ID</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">2</param>
+                                </condition>
                                 <condition id="-7" inverted="1" name="Compare instance variable" sid="932592284307067" type="EnemyProjectiles">
                                     <param id="0" name="Instance variable">ID</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">12</param>
+                                </condition>
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="189607841851091" type="EnemyProjectiles">
+                                    <param id="0" name="Instance variable">ID</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">15</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -6786,7 +6791,7 @@
                                 <event-block sid="651093841868671">
                                     <conditions>
                                         <condition id="-6" name="Every X seconds" sid="570479619072871" type="System">
-                                            <param id="0" name="Interval (seconds)">Enemies.MoveSpeed</param>
+                                            <param id="0" name="Interval (seconds)">Enemies.MoveInterval</param>
                                         </condition>
                                         <condition id="-7" name="Compare instance variable" sid="295366027993760" type="Enemies">
                                             <param id="0" name="Instance variable">MoveDirection</param>
@@ -6822,7 +6827,7 @@
                                 <event-block sid="581488299702718">
                                     <conditions>
                                         <condition id="-6" name="Every X seconds" sid="243428275711291" type="System">
-                                            <param id="0" name="Interval (seconds)">Enemies.MoveSpeed</param>
+                                            <param id="0" name="Interval (seconds)">Enemies.MoveInterval</param>
                                         </condition>
                                         <condition id="-7" name="Compare instance variable" sid="975323738421911" type="Enemies">
                                             <param id="0" name="Instance variable">MoveDirection</param>
@@ -6910,7 +6915,7 @@
                                 <event-block sid="214296575250607">
                                     <conditions>
                                         <condition id="-6" name="Every X seconds" sid="696026641445508" type="System">
-                                            <param id="0" name="Interval (seconds)">Enemies.MoveSpeed</param>
+                                            <param id="0" name="Interval (seconds)">Enemies.MoveInterval</param>
                                         </condition>
                                         <condition id="-7" name="Compare instance variable" sid="801999888747830" type="Enemies">
                                             <param id="0" name="Instance variable">MoveDirection</param>
@@ -6946,7 +6951,7 @@
                                 <event-block sid="263896342782318">
                                     <conditions>
                                         <condition id="-6" name="Every X seconds" sid="824248546555648" type="System">
-                                            <param id="0" name="Interval (seconds)">Enemies.MoveSpeed</param>
+                                            <param id="0" name="Interval (seconds)">Enemies.MoveInterval</param>
                                         </condition>
                                         <condition id="-7" name="Compare instance variable" sid="586518319009912" type="Enemies">
                                             <param id="0" name="Instance variable">MoveDirection</param>
@@ -7321,6 +7326,9 @@
                                                         <action behavior="Bullet" id="0" name="Set speed" sid="808939704099320" type="EnemyProjectiles">
                                                             <param id="0" name="Speed">-Enemies.AttackSpeed</param>
                                                         </action>
+                                                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="464495140891532" type="EnemyProjectiles">
+                                                            <param id="0" name="Angle">180+random(-Enemies.AttackRandomness, Enemies.AttackRandomness)</param>
+                                                        </action>
                                                     </actions>
                                                 </event-block>
                                                 <event-block sid="838953497772949">
@@ -7332,18 +7340,21 @@
                                                         </condition>
                                                     </conditions>
                                                     <actions>
-                                                        <action id="0" name="Create family object" sid="357805813690869" type="CreateObjectByVal">
+                                                        <action id="0" name="Create family object" sid="432466777870756" type="CreateObjectByVal">
                                                             <param id="0" name="Family object">EnemyProjectiles</param>
                                                             <param id="1" name="Variable ID">0</param>
                                                             <param id="2" name="Comparison">0</param>
                                                             <param id="3" name="Value">Enemies.AttackProjectile</param>
                                                             <param id="4" name="Layer">&quot;Player&quot;</param>
-                                                            <param id="5" name="X">Enemies.ImagePointX(2)</param>
-                                                            <param id="6" name="Y">Enemies.ImagePointY(2)</param>
+                                                            <param id="5" name="X">Enemies.ImagePointX(1)</param>
+                                                            <param id="6" name="Y">Enemies.ImagePointY(1)</param>
                                                             <param id="7" name="Tag">&quot;&quot;</param>
                                                         </action>
                                                         <action behavior="Bullet" id="0" name="Set speed" sid="276746858676317" type="EnemyProjectiles">
                                                             <param id="0" name="Speed">Enemies.AttackSpeed</param>
+                                                        </action>
+                                                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="445971758899488" type="EnemyProjectiles">
+                                                            <param id="0" name="Angle">random(-Enemies.AttackRandomness, Enemies.AttackRandomness)</param>
                                                         </action>
                                                     </actions>
                                                 </event-block>
@@ -7466,7 +7477,7 @@
                                                         <action behavior="Bullet" id="0" name="Set speed" sid="285510590275334" type="EnemyProjectiles">
                                                             <param id="0" name="Speed">Enemies.AttackSpeed</param>
                                                         </action>
-                                                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="480034741307978" type="EnemyProjectiles">
+                                                        <action id="-8" name="Set angle" sid="394632448899378" type="EnemyProjectiles">
                                                             <param id="0" name="Angle">270</param>
                                                         </action>
                                                     </actions>
@@ -7480,20 +7491,20 @@
                                                         </condition>
                                                     </conditions>
                                                     <actions>
-                                                        <action id="0" name="Create family object" sid="296341635352636" type="CreateObjectByVal">
+                                                        <action id="0" name="Create family object" sid="802236040363478" type="CreateObjectByVal">
                                                             <param id="0" name="Family object">EnemyProjectiles</param>
                                                             <param id="1" name="Variable ID">0</param>
                                                             <param id="2" name="Comparison">0</param>
                                                             <param id="3" name="Value">Enemies.AttackProjectile</param>
                                                             <param id="4" name="Layer">&quot;Player&quot;</param>
-                                                            <param id="5" name="X">Enemies.ImagePointX(2)</param>
-                                                            <param id="6" name="Y">Enemies.ImagePointY(2)</param>
+                                                            <param id="5" name="X">Enemies.ImagePointX(1)</param>
+                                                            <param id="6" name="Y">Enemies.ImagePointY(1)</param>
                                                             <param id="7" name="Tag">&quot;&quot;</param>
                                                         </action>
                                                         <action behavior="Bullet" id="0" name="Set speed" sid="604071229062457" type="EnemyProjectiles">
                                                             <param id="0" name="Speed">Enemies.AttackSpeed</param>
                                                         </action>
-                                                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="606751417721764" type="EnemyProjectiles">
+                                                        <action id="-8" name="Set angle" sid="473652850298220" type="EnemyProjectiles">
                                                             <param id="0" name="Angle">90</param>
                                                         </action>
                                                     </actions>
@@ -7550,39 +7561,49 @@
                                         </action>
                                     </actions>
                                     <sub-events>
-                                        <event-block sid="893458194601684">
+                                        <event-block sid="811134857295367">
                                             <conditions>
-                                                <condition id="-1" name="Compare X" sid="143145506112013" type="Engine_Player">
-                                                    <param id="0" name="Comparison">2</param>
-                                                    <param id="1" name="X co-ordinate">Enemies.X</param>
+                                                <condition id="-8" name="Is boolean instance variable set" sid="388450271097546" type="Enemies">
+                                                    <param id="0" name="Instance variable">AttackMirrored</param>
                                                 </condition>
                                             </conditions>
-                                            <actions>
-                                                <action id="7" name="Set mirrored" sid="579398734068374" type="Enemies">
-                                                    <param id="0" name="State">0</param>
-                                                </action>
-                                                <action id="-10" name="Set value" sid="783907725545609" type="Enemies">
-                                                    <param id="0" name="Instance variable">AttackDirection</param>
-                                                    <param id="1" name="Value">0</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                        <event-block sid="545607283635206">
-                                            <conditions>
-                                                <condition id="-1" name="Compare X" sid="384203189559534" type="Engine_Player">
-                                                    <param id="0" name="Comparison">4</param>
-                                                    <param id="1" name="X co-ordinate">Enemies.X</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="7" name="Set mirrored" sid="731027540575308" type="Enemies">
-                                                    <param id="0" name="State">1</param>
-                                                </action>
-                                                <action id="-10" name="Set value" sid="798252780736599" type="Enemies">
-                                                    <param id="0" name="Instance variable">AttackDirection</param>
-                                                    <param id="1" name="Value">1</param>
-                                                </action>
-                                            </actions>
+                                            <actions />
+                                            <sub-events>
+                                                <event-block sid="893458194601684">
+                                                    <conditions>
+                                                        <condition id="-1" name="Compare X" sid="143145506112013" type="Engine_Player">
+                                                            <param id="0" name="Comparison">2</param>
+                                                            <param id="1" name="X co-ordinate">Enemies.X</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="7" name="Set mirrored" sid="579398734068374" type="Enemies">
+                                                            <param id="0" name="State">0</param>
+                                                        </action>
+                                                        <action id="-10" name="Set value" sid="783907725545609" type="Enemies">
+                                                            <param id="0" name="Instance variable">AttackDirection</param>
+                                                            <param id="1" name="Value">0</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="545607283635206">
+                                                    <conditions>
+                                                        <condition id="-1" name="Compare X" sid="384203189559534" type="Engine_Player">
+                                                            <param id="0" name="Comparison">4</param>
+                                                            <param id="1" name="X co-ordinate">Enemies.X</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="7" name="Set mirrored" sid="731027540575308" type="Enemies">
+                                                            <param id="0" name="State">1</param>
+                                                        </action>
+                                                        <action id="-10" name="Set value" sid="798252780736599" type="Enemies">
+                                                            <param id="0" name="Instance variable">AttackDirection</param>
+                                                            <param id="1" name="Value">1</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
                                         </event-block>
                                     </sub-events>
                                 </event-block>
@@ -7635,6 +7656,9 @@
                                                         <action behavior="Bullet" id="0" name="Set speed" sid="705675566689620" type="EnemyProjectiles">
                                                             <param id="0" name="Speed">-Enemies.AttackSpeed</param>
                                                         </action>
+                                                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="650712684171435" type="EnemyProjectiles">
+                                                            <param id="0" name="Angle">180+random(-Enemies.AttackRandomness, Enemies.AttackRandomness)</param>
+                                                        </action>
                                                     </actions>
                                                 </event-block>
                                                 <event-block sid="321168833029399">
@@ -7646,7 +7670,7 @@
                                                         </condition>
                                                     </conditions>
                                                     <actions>
-                                                        <action id="0" name="Create family object" sid="855400077449739" type="CreateObjectByVal">
+                                                        <action id="0" name="Create family object" sid="483893533498013" type="CreateObjectByVal">
                                                             <param id="0" name="Family object">EnemyProjectiles</param>
                                                             <param id="1" name="Variable ID">0</param>
                                                             <param id="2" name="Comparison">0</param>
@@ -7658,6 +7682,188 @@
                                                         </action>
                                                         <action behavior="Bullet" id="0" name="Set speed" sid="432438792220198" type="EnemyProjectiles">
                                                             <param id="0" name="Speed">Enemies.AttackSpeed</param>
+                                                        </action>
+                                                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="846916873580787" type="EnemyProjectiles">
+                                                            <param id="0" name="Angle">random(-Enemies.AttackRandomness, Enemies.AttackRandomness)</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <comment>=swatbot vertical</comment>
+                        <event-block sid="130740187594382">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="394631709549837" type="Enemies">
+                                    <param id="0" name="Instance variable">AttackType</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;swatbotver&quot;</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="533406811483043" type="Var_Game">
+                                    <param id="0" name="Instance variable">TimerGlobal</param>
+                                    <param id="1" name="Comparison">4</param>
+                                    <param id="2" name="Value">4</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="239746720000684">
+                                    <conditions>
+                                        <condition id="-6" name="Every X seconds" sid="493298417535234" type="System">
+                                            <param id="0" name="Interval (seconds)">Enemies.AttackInterval</param>
+                                        </condition>
+                                        <condition id="-7" name="Compare instance variable" sid="332211433985581" type="Engine_CameraZone">
+                                            <param id="0" name="Instance variable">ID</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">Engine_Camera.CurrentZone</param>
+                                        </condition>
+                                        <condition id="1" name="Is overlapping another object" sid="830224208808239" type="Enemies">
+                                            <param id="0" name="Object">Engine_CameraZone</param>
+                                        </condition>
+                                        <condition id="-16" name="Pick random instance" sid="840566997374365" type="System">
+                                            <param id="0" name="Object">Enemies</param>
+                                        </condition>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="575514725877517" type="Var_Player">
+                                            <param id="0" name="Instance variable">CanMove</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action behavior="Sine" id="0" name="Set active" sid="198785009007418" type="Enemies">
+                                            <param id="0" name="State">0</param>
+                                        </action>
+                                        <action id="4" name="Set animation" sid="460298278420470" type="Enemies">
+                                            <param id="0" name="Animation">&quot;Launching&quot;</param>
+                                            <param id="1" name="From">1</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="250702589108674">
+                                            <conditions>
+                                                <condition id="-8" name="Is boolean instance variable set" sid="522008255365479" type="Enemies">
+                                                    <param id="0" name="Instance variable">AttackMirrored</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions />
+                                            <sub-events>
+                                                <event-block sid="556728281011521">
+                                                    <conditions>
+                                                        <condition id="-2" name="Compare Y" sid="445265333930480" type="Engine_Player">
+                                                            <param id="0" name="Comparison">2</param>
+                                                            <param id="1" name="Y co-ordinate">Enemies.Y</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="7" name="Set mirrored" sid="175488879470956" type="Enemies">
+                                                            <param id="0" name="State">0</param>
+                                                        </action>
+                                                        <action id="-10" name="Set value" sid="663727779263252" type="Enemies">
+                                                            <param id="0" name="Instance variable">AttackDirection</param>
+                                                            <param id="1" name="Value">0</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="529285530406638">
+                                                    <conditions>
+                                                        <condition id="-2" name="Compare Y" sid="530184588877680" type="Engine_Player">
+                                                            <param id="0" name="Comparison">4</param>
+                                                            <param id="1" name="Y co-ordinate">Enemies.Y</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="7" name="Set mirrored" sid="420503812706460" type="Enemies">
+                                                            <param id="0" name="State">1</param>
+                                                        </action>
+                                                        <action id="-10" name="Set value" sid="338634010214997" type="Enemies">
+                                                            <param id="0" name="Instance variable">AttackDirection</param>
+                                                            <param id="1" name="Value">1</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="708581715726453">
+                                    <conditions>
+                                        <condition id="4" name="On finished" sid="290832110048520" type="Enemies">
+                                            <param id="0" name="Animation">&quot;Launching&quot;</param>
+                                        </condition>
+                                        <condition id="-11" name="For Each" sid="768293335349265" type="System">
+                                            <param id="0" name="Object">Enemies</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action behavior="Sine" id="0" name="Set active" sid="514143090427242" type="Enemies">
+                                            <param id="0" name="State">1</param>
+                                        </action>
+                                        <action id="4" name="Set animation" sid="253999714938718" type="Enemies">
+                                            <param id="0" name="Animation">&quot;Default&quot;</param>
+                                            <param id="1" name="From">1</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="811350099632888">
+                                            <conditions>
+                                                <condition id="-8" name="Is boolean instance variable set" sid="474489772453513" type="Var_Player">
+                                                    <param id="0" name="Instance variable">CanMove</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions />
+                                            <sub-events>
+                                                <event-block sid="356749481435191">
+                                                    <conditions>
+                                                        <condition id="-7" name="Compare instance variable" sid="214716012033471" type="Enemies">
+                                                            <param id="0" name="Instance variable">AttackDirection</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Value">0</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="0" name="Create family object" sid="326837429418142" type="CreateObjectByVal">
+                                                            <param id="0" name="Family object">EnemyProjectiles</param>
+                                                            <param id="1" name="Variable ID">0</param>
+                                                            <param id="2" name="Comparison">0</param>
+                                                            <param id="3" name="Value">Enemies.AttackProjectile</param>
+                                                            <param id="4" name="Layer">&quot;Player&quot;</param>
+                                                            <param id="5" name="X">Enemies.ImagePointX(1)</param>
+                                                            <param id="6" name="Y">Enemies.ImagePointY(1)</param>
+                                                            <param id="7" name="Tag">&quot;&quot;</param>
+                                                        </action>
+                                                        <action behavior="Bullet" id="0" name="Set speed" sid="748690377856715" type="EnemyProjectiles">
+                                                            <param id="0" name="Speed">Enemies.AttackSpeed</param>
+                                                        </action>
+                                                        <action id="-8" name="Set angle" sid="998993373796933" type="EnemyProjectiles">
+                                                            <param id="0" name="Angle">270</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="224470222709403">
+                                                    <conditions>
+                                                        <condition id="-7" name="Compare instance variable" sid="717130894236090" type="Enemies">
+                                                            <param id="0" name="Instance variable">AttackDirection</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Value">1</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="0" name="Create family object" sid="524666438729920" type="CreateObjectByVal">
+                                                            <param id="0" name="Family object">EnemyProjectiles</param>
+                                                            <param id="1" name="Variable ID">0</param>
+                                                            <param id="2" name="Comparison">0</param>
+                                                            <param id="3" name="Value">Enemies.AttackProjectile</param>
+                                                            <param id="4" name="Layer">&quot;Player&quot;</param>
+                                                            <param id="5" name="X">Enemies.ImagePointX(1)</param>
+                                                            <param id="6" name="Y">Enemies.ImagePointY(1)</param>
+                                                            <param id="7" name="Tag">&quot;&quot;</param>
+                                                        </action>
+                                                        <action behavior="Bullet" id="0" name="Set speed" sid="314445577801358" type="EnemyProjectiles">
+                                                            <param id="0" name="Speed">Enemies.AttackSpeed</param>
+                                                        </action>
+                                                        <action id="-8" name="Set angle" sid="935954942681577" type="EnemyProjectiles">
+                                                            <param id="0" name="Angle">90</param>
                                                         </action>
                                                     </actions>
                                                 </event-block>
