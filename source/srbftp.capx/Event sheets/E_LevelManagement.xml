@@ -7204,6 +7204,23 @@
                             <param id="0" name="Visibility">1</param>
                         </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="877233721247314">
+                            <conditions>
+                                <condition id="-33" name="Pick by comparison" sid="549566552154327" type="System">
+                                    <param id="0" name="Object">Special_Trigger</param>
+                                    <param id="1" name="Expression">Special_Trigger.ID</param>
+                                    <param id="2" name="Comparison">0</param>
+                                    <param id="3" name="Value">2</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Set Y" sid="391663285693996" type="Special_Trigger">
+                                    <param id="0" name="Y">-999</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block sid="358518662845216">
                     <conditions>
@@ -7275,6 +7292,25 @@
                                 </action>
                                 <action id="-15" name="Set visible" sid="192809422461472" type="Cutscene_MetalSonic">
                                     <param id="0" name="Visibility">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="253435046043446">
+                            <conditions>
+                                <condition id="1" name="Is overlapping another object" sid="564009413390386" type="Enemies">
+                                    <param id="0" name="Object">Cutscene1_8MM1Fire2</param>
+                                </condition>
+                                <condition id="-9" name="Is visible" sid="337685081114532" type="Cutscene1_8MM1Fire2" />
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Destroy" sid="127635522433446" type="Enemies" />
+                                <action id="0" name="Call function" sid="831403319101218" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;Explode&quot;</param>
+                                </action>
+                                <action id="0" name="Call function" sid="831713459950599" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;F_LavaFried&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -7436,6 +7472,75 @@
                             <param id="0" name="&apos;On&apos; time">0.1</param>
                             <param id="1" name="&apos;Off&apos; time">0.1</param>
                             <param id="2" name="Duration">0.5</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment></comment>
+                <event-block sid="731915654274295">
+                    <conditions>
+                        <condition id="1" name="Is overlapping another object" sid="225870609444243" type="Sprite">
+                            <param id="0" name="Object">Engine_CameraZone</param>
+                        </condition>
+                        <condition id="-7" name="Compare instance variable" sid="239639527491634" type="Engine_CameraZone">
+                            <param id="0" name="Instance variable">ID</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">Engine_Camera.CurrentZone</param>
+                        </condition>
+                        <condition id="-6" name="Every X seconds" sid="551794957935958" type="System">
+                            <param id="0" name="Interval (seconds)">4</param>
+                        </condition>
+                        <condition id="-11" name="For Each" sid="298000859951260" type="System">
+                            <param id="0" name="Object">Sprite</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Call function" sid="276590648995201" type="Function">
+                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                        </action>
+                        <action id="0" name="Spawn another object" sid="232945888831409" type="Sprite">
+                            <param id="0" name="Object">Projectile1_Generic</param>
+                            <param id="1" name="Layer">&quot;Player&quot;</param>
+                            <param id="2" name="Image point">1</param>
+                        </action>
+                        <action behavior="Bullet" id="0" name="Set speed" sid="764946579821667" type="Projectile1_Generic">
+                            <param id="0" name="Speed">180</param>
+                        </action>
+                        <action id="-8" name="Set angle" sid="725770357808500" type="Projectile1_Generic">
+                            <param id="0" name="Angle">0+Sprite.Angle</param>
+                        </action>
+                        <action id="0" name="Spawn another object" sid="393971598539554" type="Sprite">
+                            <param id="0" name="Object">Projectile1_Generic</param>
+                            <param id="1" name="Layer">&quot;Player&quot;</param>
+                            <param id="2" name="Image point">2</param>
+                        </action>
+                        <action behavior="Bullet" id="0" name="Set speed" sid="328827929687006" type="Projectile1_Generic">
+                            <param id="0" name="Speed">180</param>
+                        </action>
+                        <action id="-8" name="Set angle" sid="814814020157394" type="Projectile1_Generic">
+                            <param id="0" name="Angle">180+Sprite.Angle</param>
+                        </action>
+                        <action id="0" name="Spawn another object" sid="491797017143854" type="Sprite">
+                            <param id="0" name="Object">Projectile1_Generic</param>
+                            <param id="1" name="Layer">&quot;Player&quot;</param>
+                            <param id="2" name="Image point">3</param>
+                        </action>
+                        <action behavior="Bullet" id="0" name="Set speed" sid="729056282832717" type="Projectile1_Generic">
+                            <param id="0" name="Speed">180</param>
+                        </action>
+                        <action id="-8" name="Set angle" sid="416694119727301" type="Projectile1_Generic">
+                            <param id="0" name="Angle">270+Sprite.Angle</param>
+                        </action>
+                        <action id="0" name="Spawn another object" sid="224037156898673" type="Sprite">
+                            <param id="0" name="Object">Projectile1_Generic</param>
+                            <param id="1" name="Layer">&quot;Player&quot;</param>
+                            <param id="2" name="Image point">4</param>
+                        </action>
+                        <action behavior="Bullet" id="0" name="Set speed" sid="652339781442390" type="Projectile1_Generic">
+                            <param id="0" name="Speed">180</param>
+                        </action>
+                        <action id="-8" name="Set angle" sid="796622705457131" type="Projectile1_Generic">
+                            <param id="0" name="Angle">90+Sprite.Angle</param>
                         </action>
                     </actions>
                 </event-block>
