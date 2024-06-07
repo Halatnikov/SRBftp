@@ -273,6 +273,9 @@
                     <instance-variable name="SpringTimer" sid="281117062051879" type="number" />
                     <instance-variable name="Deaths" sid="362545130796489" type="number" />
                     <instance-variable name="Lives" sid="401985263576988" type="number" />
+                    <instance-variable name="SChaseHP" sid="621149327079320" type="number" />
+                    <instance-variable name="SChaseWave" sid="669544292950223" type="number" />
+                    <instance-variable name="SChaseWaveTotal" sid="932896331935093" type="number" />
                 </instance-variables>
             </object-type>
             <object-type global="1" name="Var_Input" sid="342884093290644">
@@ -11839,6 +11842,15 @@
                     </animation>
                 </animation-folder>
             </object-type>
+            <object-type name="Projectile1_SChaseGeneric" sid="475509922657242">
+                <plugin id="Sprite" />
+                <animation-folder>
+                    <animation framecount="2" loop="1" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="289567227702772" speed="8">
+                        <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\spacechase\projectile1__1.png" />
+                        <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\spacechase\projectile1__2.png" />
+                    </animation>
+                </animation-folder>
+            </object-type>
         </object-folder>
         <object-folder name="Objects">
             <object-type name="Common_Ring" sid="610876585251722">
@@ -16590,16 +16602,6 @@
                             <frame duration="1" hotspotX="0.46875" hotspotY="0.5625" />
                             <frame duration="1" hotspotX="1" hotspotY="1" />
                         </animation>
-                        <animation framecount="1" loop="0" name="shh" pingpong="0" repeatcount="1" repeatto="0" sid="372924391016034" speed="0">
-                            <frame duration="1" hotspotX="0.46875" hotspotY="0.5625">
-                                <collision-poly>
-                                    <point x="0" y="0" />
-                                    <point x="0.03125" y="0" />
-                                    <point x="0.03125" y="0.03125" />
-                                    <point x="0" y="0.03125" />
-                                </collision-poly>
-                            </frame>
-                        </animation>
                     </animation-folder>
                 </object-type>
                 <object-type name="HUD_Score" sid="306708226732950">
@@ -19671,6 +19673,96 @@
                 </animation>
             </animation-folder>
         </object-type>
+        <object-type name="Sprite2" sid="968804182517215">
+            <plugin id="Sprite" />
+            <behaviors>
+                <behavior-type name="Flash" sid="826378543753259">
+                    <behavior id="Flash" />
+                </behavior-type>
+                <behavior-type name="8Direction" sid="960150964940153">
+                    <behavior id="EightDir" />
+                </behavior-type>
+            </behaviors>
+            <animation-folder>
+                <animation framecount="2" loop="1" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="497955149273189" speed="20">
+                    <frame duration="1" hotspotX="0.506329" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\spacechase\sonic_1.png">
+                        <image-point name="Imagepoint 1" x="0.582278" y="0.727273" />
+                        <collision-poly>
+                            <point x="0.227848" y="0.25" />
+                            <point x="0.734177" y="0.25" />
+                            <point x="0.734177" y="0.75" />
+                            <point x="0.227848" y="0.75" />
+                        </collision-poly>
+                    </frame>
+                    <frame duration="1" hotspotX="0.506329" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\spacechase\sonic_2.png">
+                        <image-point name="Imagepoint 1" x="0.582278" y="0.727273" />
+                        <collision-poly>
+                            <point x="0.227848" y="0.25" />
+                            <point x="0.734177" y="0.25" />
+                            <point x="0.734177" y="0.75" />
+                            <point x="0.227848" y="0.75" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="TiledBackground" sid="175645944413713">
+            <plugin id="TiledBg" />
+            <texture />
+        </object-type>
+        <object-type name="TiledBackground2" sid="842206900194418">
+            <plugin id="TiledBg" />
+            <texture />
+        </object-type>
+        <object-type name="SChaseHUD_Wave" sid="779463965209230">
+            <plugin id="Text" />
+        </object-type>
+        <object-type name="SChaseHUD_HP" sid="948092494826240">
+            <plugin id="Text" />
+        </object-type>
+        <object-type name="Sprite3" sid="738345875768631">
+            <plugin id="Sprite" />
+            <instance-variables>
+                <instance-variable name="State" sid="521432322200104" type="string" />
+                <instance-variable name="Timer" sid="324334448234987" type="number" />
+                <instance-variable name="TargetX" sid="471285629747247" type="number" />
+            </instance-variables>
+            <behaviors>
+                <behavior-type name="LiteTween" sid="663976769473188">
+                    <behavior id="lunarray_LiteTween" />
+                </behavior-type>
+                <behavior-type name="Timer2" sid="308119458474293">
+                    <behavior id="Timer" />
+                </behavior-type>
+            </behaviors>
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="235566510668954" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\spacechase\badnik1.png">
+                        <image-point name="Imagepoint 1" x="0.5" y="-0.125" />
+                        <collision-poly>
+                            <point x="0.09375" y="0.1875" />
+                            <point x="1" y="0.1875" />
+                            <point x="1" y="0.9375" />
+                            <point x="0.09375" y="0.9375" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="TiledBackground3" sid="816642180247873">
+            <plugin id="TiledBg" />
+            <instance-variables>
+                <instance-variable name="ID" sid="900295117275356" type="number" />
+            </instance-variables>
+            <texture />
+        </object-type>
+        <object-type name="TiledBackground4" sid="647961614511521">
+            <plugin id="TiledBg" />
+            <instance-variables>
+                <instance-variable name="ID" sid="774787958024754" type="number" />
+            </instance-variables>
+            <texture />
+        </object-type>
     </object-folder>
     <families>
         <family name="LevelTiles" plugin-id="TiledBg" sid="888312723616125">
@@ -19902,6 +19994,7 @@
                 <member>Projectile1_6EP2Boss</member>
                 <member>Projectile1_8MMLaser</member>
                 <member>Projectile1_Generic</member>
+                <member>Projectile1_SChaseGeneric</member>
                 <member>Projectile1S_3VFusionBlast</member>
                 <member>Projectile1S_FusionBlast</member>
                 <member>Projectile2_2THZBossBig</member>
@@ -19964,6 +20057,15 @@
                 <member>Projectile1_4IP2Boss</member>
             </members>
         </family>
+        <family name="SChaseEnemies" plugin-id="Sprite" sid="647070968855343">
+            <members>
+                <member>Sprite3</member>
+            </members>
+            <instance-variables>
+                <instance-variable name="HP" sid="658308882938972" type="number" />
+                <instance-variable name="MaxHP" sid="847582235459366" type="number" />
+            </instance-variables>
+        </family>
     </families>
     <layout-folder>
         <layout-folder name="SRB1">
@@ -20001,6 +20103,7 @@
             <layout>1_7SkyLab1.xml</layout>
             <layout>1_7SkyLab2.xml</layout>
             <layout>1_8MechanicalMadness1.xml</layout>
+            <layout>1_11SpaceChase1.xml</layout>
         </layout-folder>
         <layout-folder name="SRB2">
             <layout-folder name="SpecialStages">
@@ -20069,6 +20172,7 @@
             <event-sheet>E_Online.xml</event-sheet>
             <event-sheet>E_1SonicPong.xml</event-sheet>
             <event-sheet>E_ESonicBoom.xml</event-sheet>
+            <event-sheet>E_1SpaceChase.xml</event-sheet>
         </event-folder>
         <event-sheet>E_GLOBAL.xml</event-sheet>
     </event-folder>
