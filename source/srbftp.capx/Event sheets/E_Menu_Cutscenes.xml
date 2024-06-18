@@ -7,7 +7,7 @@
         <event-group description="" sid="455406285644403" title="Cutscenes management">
             <sub-events>
                 <comment>DEBUG</comment>
-                <event-block sid="864420184819399">
+                <event-block disabled="1" sid="864420184819399">
                     <conditions>
                         <condition id="-4" name="Trigger once while true" sid="923718249170661" type="System" />
                         <condition id="-14" name="Compare variable" sid="771968036017694" type="System">
@@ -23,7 +23,7 @@
                         </action>
                     </actions>
                 </event-block>
-                <event-block sid="287458520381916">
+                <event-block disabled="1" sid="287458520381916">
                     <conditions>
                         <condition id="0" name="On key pressed" sid="182251909917316" type="Keyboard">
                             <param id="0" name="Key">32</param>
@@ -10110,6 +10110,9 @@
                             <param id="0" name="Animation">&quot;Default&quot;</param>
                             <param id="1" name="From">1</param>
                         </action>
+                        <action behavior="Sine" id="0" name="Set active" sid="836709695756234" type="Sprite4">
+                            <param id="0" name="State">0</param>
+                        </action>
                     </actions>
                     <sub-events>
                         <event-block sid="279205010983601">
@@ -10125,6 +10128,114 @@
                                 <action id="-9" name="Set value" sid="748807828936129" type="System">
                                     <param id="0" name="Variable">lock</param>
                                     <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="966395361157131">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="715003663733607" type="Var_Game">
+                            <param id="0" name="Instance variable">Gamemode</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;Singleplayer&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="597758173628613">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="390701382619424" type="Var_Game">
+                                    <param id="0" name="Instance variable">TimerGlobal</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Value">64</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="783803864768614" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-13" name="Set boolean" sid="507946408102294" type="JSON_AudioPreload">
+                                    <param id="0" name="Instance variable">LevelPreloaded</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="887408587073349" type="Var_Game">
+                                    <param id="0" name="Instance variable">CurrentMenu</param>
+                                    <param id="1" name="Value">&quot;demoend&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="654450289581178">
+                            <conditions>
+                                <condition id="-8" name="Is boolean instance variable set" sid="480170659433801" type="Var_Input">
+                                    <param id="0" name="Instance variable">A</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="720944031024302" type="System" />
+                                <condition id="-14" name="Compare variable" sid="477319645023855" type="System">
+                                    <param id="0" name="Variable">lock</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-13" name="Set boolean" sid="879740644926187" type="JSON_AudioPreload">
+                                    <param id="0" name="Instance variable">LevelPreloaded</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="179172536604261" type="Var_Game">
+                                    <param id="0" name="Instance variable">CurrentMenu</param>
+                                    <param id="1" name="Value">&quot;demoend&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="764964914368373">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="293611813478252" type="Var_Game">
+                            <param id="0" name="Instance variable">Gamemode</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;Cutscenes&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="863709736432955">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="166068138076645" type="Var_Game">
+                                    <param id="0" name="Instance variable">TimerGlobal</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Value">64</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="862399451052810" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Go to layout" sid="269033874927464" type="System">
+                                    <param id="0" name="Layout">Menu_SRB1</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="135928217789198" type="Var_Game">
+                                    <param id="0" name="Instance variable">CurrentMenu</param>
+                                    <param id="1" name="Value">&quot;cutscenes&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="797906426416291">
+                            <conditions>
+                                <condition id="-8" name="Is boolean instance variable set" sid="587359213380638" type="Var_Input">
+                                    <param id="0" name="Instance variable">A</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="484557625139946" type="System" />
+                                <condition id="-14" name="Compare variable" sid="293619914245138" type="System">
+                                    <param id="0" name="Variable">lock</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Go to layout" sid="316658766492137" type="System">
+                                    <param id="0" name="Layout">Menu_SRB1</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="809194249729754" type="Var_Game">
+                                    <param id="0" name="Instance variable">CurrentMenu</param>
+                                    <param id="1" name="Value">&quot;cutscenes&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -10236,6 +10347,16 @@
                         <action behavior="LiteTween" id="10" name="Start" sid="744988079031400" type="Sprite4">
                             <param id="0" name="Start Mode">0</param>
                             <param id="1" name="Force use current">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="737645996265626">
+                    <conditions>
+                        <condition behavior="LiteTween" id="4" name="On tween end" sid="910914722834253" type="Sprite4" />
+                    </conditions>
+                    <actions>
+                        <action behavior="Sine" id="0" name="Set active" sid="433140078814158" type="Sprite4">
+                            <param id="0" name="State">1</param>
                         </action>
                     </actions>
                 </event-block>
@@ -10355,6 +10476,7 @@
                         </action>
                     </actions>
                 </event-block>
+                <comment></comment>
                 <event-block sid="466240812922110">
                     <conditions>
                         <condition id="-7" name="Compare instance variable" sid="820526088450438" type="Var_Game">
@@ -10362,19 +10484,237 @@
                             <param id="1" name="Comparison">5</param>
                             <param id="2" name="Value">52</param>
                         </condition>
-                        <condition id="-4" name="Trigger once while true" sid="576308681163430" type="System" />
                     </conditions>
-                    <actions>
-                        <action id="33" name="Stop all" sid="687195553680906" type="BetterAudio" />
-                        <action id="-4" name="Set layer visible" sid="361441832355386" type="System">
-                            <param id="0" name="Layer">&quot;9_1&quot;</param>
-                            <param id="1" name="Visibility">0</param>
-                        </action>
-                        <action id="-4" name="Set layer visible" sid="955246373152171" type="System">
-                            <param id="0" name="Layer">&quot;9_2&quot;</param>
-                            <param id="1" name="Visibility">1</param>
-                        </action>
-                    </actions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="249488649082457">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="576308681163430" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="33" name="Stop all" sid="687195553680906" type="BetterAudio" />
+                                <action id="-4" name="Set layer visible" sid="361441832355386" type="System">
+                                    <param id="0" name="Layer">&quot;9_1&quot;</param>
+                                    <param id="1" name="Visibility">0</param>
+                                </action>
+                                <action id="-4" name="Set layer visible" sid="955246373152171" type="System">
+                                    <param id="0" name="Layer">&quot;9_2&quot;</param>
+                                    <param id="1" name="Visibility">1</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="944374087974085" type="Cutscene1_7SkyLab">
+                                    <param id="0" name="X">-74</param>
+                                    <param id="1" name="Y">96</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="546600144846824" type="Cutscene1_7SkyLab">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="986085884998703" type="Cutscene1_7Knux">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="423039078100929">
+                            <conditions>
+                                <condition id="3" name="Compare frame" sid="359124974210664" type="Cutscene1_Trees">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Number">3</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-1" name="Set X" sid="493431388117315" type="Cutscene1_Trees">
+                                    <param id="0" name="X">Self.X-2</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="131174049896709">
+                            <conditions>
+                                <condition id="3" name="Compare frame" sid="623697971604807" type="Cutscene1_Trees">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Number">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-1" name="Set X" sid="618527895037469" type="Cutscene1_Trees">
+                                    <param id="0" name="X">Self.X-4</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="526180371576576">
+                            <conditions>
+                                <condition id="3" name="Compare frame" sid="205442338689864" type="Cutscene1_Trees">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Number">4</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-1" name="Set X" sid="232362739817271" type="Cutscene1_Trees">
+                                    <param id="0" name="X">Self.X-6</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="524930435144273">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="995273979199891" type="Var_Game">
+                                    <param id="0" name="Instance variable">TimerGlobal</param>
+                                    <param id="1" name="Comparison">2</param>
+                                    <param id="2" name="Value">58</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="154441823045299">
+                                    <conditions />
+                                    <actions>
+                                        <action id="-1" name="Set X" sid="546863850538348" type="Cutscene1_7SkyLab">
+                                            <param id="0" name="X">Self.X+1.4</param>
+                                        </action>
+                                        <action id="-2" name="Set Y" sid="850978077265950" type="Cutscene1_7SkyLab">
+                                            <param id="0" name="Y">Self.Y+0.1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="159332472174138">
+                                    <conditions>
+                                        <condition id="-6" name="Every X seconds" sid="547767714283188" type="System">
+                                            <param id="0" name="Interval (seconds)">1</param>
+                                        </condition>
+                                        <condition id="-12" name="Repeat" sid="150728832432543" type="System">
+                                            <param id="0" name="Count">choose(1,1,2)</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="579319439868651" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;Explode&quot;</param>
+                                        </action>
+                                        <action id="-3" name="Create object" sid="661302302124413" type="System">
+                                            <param id="0" name="Object to create">Effects_Explosion</param>
+                                            <param id="1" name="Layer">&quot;9_2&quot;</param>
+                                            <param id="2" name="X">random(Cutscene1_7SkyLab.BBoxLeft, Cutscene1_7SkyLab.BBoxRight)</param>
+                                            <param id="3" name="Y">random(Cutscene1_7SkyLab.BBoxTop, Cutscene1_7SkyLab.BBoxBottom)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="296449110098283">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="642525612020369" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">58</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="620970565941908">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="440143237514473" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="895648543264506" type="System">
+                                    <param id="0" name="Object to create">Sprite5</param>
+                                    <param id="1" name="Layer">&quot;9_2&quot;</param>
+                                    <param id="2" name="X">Cutscene1_7SkyLab.X-59</param>
+                                    <param id="3" name="Y">Cutscene1_7SkyLab.Y</param>
+                                </action>
+                                <action id="5" name="Set frame" sid="100495222429859" type="Sprite5">
+                                    <param id="0" name="Frame number">0</param>
+                                </action>
+                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="799958447138188" type="Sprite5">
+                                    <param id="0" name="Angle">225</param>
+                                </action>
+                                <action id="0" name="Spawn another object" sid="760553534920831" type="Sprite5">
+                                    <param id="0" name="Object">Effects_Explosion</param>
+                                    <param id="1" name="Layer">&quot;9_2&quot;</param>
+                                    <param id="2" name="Image point">0</param>
+                                </action>
+                                <action id="-3" name="Create object" sid="201875136709120" type="System">
+                                    <param id="0" name="Object to create">Sprite5</param>
+                                    <param id="1" name="Layer">&quot;9_2&quot;</param>
+                                    <param id="2" name="X">Cutscene1_7SkyLab.X-31</param>
+                                    <param id="3" name="Y">Cutscene1_7SkyLab.Y</param>
+                                </action>
+                                <action id="5" name="Set frame" sid="221060546900147" type="Sprite5">
+                                    <param id="0" name="Frame number">1</param>
+                                </action>
+                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="750903746586812" type="Sprite5">
+                                    <param id="0" name="Angle">245</param>
+                                </action>
+                                <action id="0" name="Spawn another object" sid="138084038024301" type="Sprite5">
+                                    <param id="0" name="Object">Effects_Explosion</param>
+                                    <param id="1" name="Layer">&quot;9_2&quot;</param>
+                                    <param id="2" name="Image point">0</param>
+                                </action>
+                                <action id="-3" name="Create object" sid="720336633118171" type="System">
+                                    <param id="0" name="Object to create">Sprite5</param>
+                                    <param id="1" name="Layer">&quot;9_2&quot;</param>
+                                    <param id="2" name="X">Cutscene1_7SkyLab.X+3</param>
+                                    <param id="3" name="Y">Cutscene1_7SkyLab.Y</param>
+                                </action>
+                                <action id="5" name="Set frame" sid="705848681416012" type="Sprite5">
+                                    <param id="0" name="Frame number">1</param>
+                                </action>
+                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="899133818313584" type="Sprite5">
+                                    <param id="0" name="Angle">290</param>
+                                </action>
+                                <action id="0" name="Spawn another object" sid="943632243298417" type="Sprite5">
+                                    <param id="0" name="Object">Effects_Explosion</param>
+                                    <param id="1" name="Layer">&quot;9_2&quot;</param>
+                                    <param id="2" name="Image point">0</param>
+                                </action>
+                                <action id="-3" name="Create object" sid="715995127541779" type="System">
+                                    <param id="0" name="Object to create">Sprite5</param>
+                                    <param id="1" name="Layer">&quot;9_2&quot;</param>
+                                    <param id="2" name="X">Cutscene1_7SkyLab.X+42</param>
+                                    <param id="3" name="Y">Cutscene1_7SkyLab.Y</param>
+                                </action>
+                                <action id="5" name="Set frame" sid="597964644374836" type="Sprite5">
+                                    <param id="0" name="Frame number">2</param>
+                                </action>
+                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="166576271336935" type="Sprite5">
+                                    <param id="0" name="Angle">315</param>
+                                </action>
+                                <action id="0" name="Spawn another object" sid="672155476226137" type="Sprite5">
+                                    <param id="0" name="Object">Effects_Explosion</param>
+                                    <param id="1" name="Layer">&quot;9_2&quot;</param>
+                                    <param id="2" name="Image point">0</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="825975790489837" type="Cutscene1_7SkyLab">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="728871210051443" type="Cutscene1_7Knux">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action id="-4" name="Set position to another object" sid="229631148142836" type="Cutscene1_7Knux">
+                                    <param id="0" name="Object">Cutscene1_7SkyLab</param>
+                                    <param id="1" name="Image point (optional)">0</param>
+                                </action>
+                                <action id="-24" name="Move to top" sid="582555042088715" type="Cutscene1_7Knux" />
+                                <action id="0" name="Call function" sid="663289552805592" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;Scream&quot;</param>
+                                </action>
+                                <action id="0" name="Call function" sid="611624030170520" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;Explosion&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="692422405169785">
+                            <conditions />
+                            <actions>
+                                <action id="-1" name="Set X" sid="944771380675960" type="Cutscene1_7Knux">
+                                    <param id="0" name="X">Self.X+0.75</param>
+                                </action>
+                                <action id="-2" name="Set Y" sid="388536364087365" type="Cutscene1_7Knux">
+                                    <param id="0" name="Y">Self.Y+0.15</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
             </sub-events>
         </event-group>
