@@ -208,7 +208,6 @@
                                             <param id="0" name="Animation">&quot;Idle&quot;</param>
                                             <param id="1" name="From">1</param>
                                         </action>
-                                        <action behavior="Flash" disabled="1" id="1" name="Stop flashing" sid="175247833728291" type="PlayerSkins" />
                                         <action id="-15" name="Set visible" sid="922077042338618" type="EffectsF_PlayerShadow">
                                             <param id="0" name="Visibility">0</param>
                                         </action>
@@ -259,12 +258,10 @@
                                     <conditions />
                                     <actions>
                                         <action id="-9" name="Destroy" sid="689979924221967" type="Effects_BreakableParts" />
-                                        <action id="-9" name="Destroy" sid="905284140542587" type="Common_AirBubble" />
                                         <action id="-9" name="Destroy" sid="456887506280771" type="EffectsF_SmallBubble" />
                                         <action id="-9" name="Destroy" sid="906826246466206" type="EffectsF_ProjectileTrail" />
-                                        <action id="-9" name="Destroy" sid="876678467465139" type="EffectsF_HitIndicator" />
                                         <action id="-9" name="Destroy" sid="172965691936885" type="Effects_RingLoss" />
-                                        <action id="-9" name="Destroy" sid="615880302274488" type="EffectsE1Sp_Explosion" />
+                                        <action id="-9" name="Destroy" sid="524939974581428" type="DestroyOnAnimationEnd" />
                                     </actions>
                                 </event-block>
                                 <comment>recreate initial objects</comment>
@@ -584,35 +581,33 @@
                                             <param id="0" name="Instance variable">Down</param>
                                         </condition>
                                         <condition behavior="Platform" id="2" name="Is on floor" sid="433956642065873" type="Engine_Player" />
-                                        <condition behavior="Platform" id="0" inverted="1" name="Is moving" sid="549331616640614" type="Engine_Player" />
                                     </conditions>
-                                    <actions>
-                                        <action id="-10" name="Set value" sid="222801205215032" type="Var_Player">
-                                            <param id="0" name="Instance variable">State</param>
-                                            <param id="1" name="Value">&quot;crouch&quot;</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="525177334488015">
-                                    <conditions>
-                                        <condition id="-7" name="Compare instance variable" sid="709251894672461" type="Var_Level">
-                                            <param id="0" name="Instance variable">Level_Game</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">2</param>
-                                        </condition>
-                                        <condition id="-8" name="Is boolean instance variable set" sid="990449009309497" type="Var_Input">
-                                            <param id="0" name="Instance variable">Down</param>
-                                        </condition>
-                                        <condition id="-4" name="Trigger once while true" sid="359327173405684" type="System" />
-                                        <condition behavior="Platform" id="2" name="Is on floor" sid="582356142878119" type="Engine_Player" />
-                                        <condition behavior="Platform" id="0" name="Is moving" sid="665659306421832" type="Engine_Player" />
-                                    </conditions>
-                                    <actions>
-                                        <action id="-10" name="Set value" sid="972233895311955" type="Var_Player">
-                                            <param id="0" name="Instance variable">State</param>
-                                            <param id="1" name="Value">&quot;roll&quot;</param>
-                                        </action>
-                                    </actions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="804838661462415">
+                                            <conditions>
+                                                <condition behavior="Platform" id="0" inverted="1" name="Is moving" sid="549331616640614" type="Engine_Player" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-10" name="Set value" sid="222801205215032" type="Var_Player">
+                                                    <param id="0" name="Instance variable">State</param>
+                                                    <param id="1" name="Value">&quot;crouch&quot;</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="525177334488015">
+                                            <conditions>
+                                                <condition behavior="Platform" id="0" name="Is moving" sid="665659306421832" type="Engine_Player" />
+                                                <condition id="-4" name="Trigger once while true" sid="359327173405684" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-10" name="Set value" sid="972233895311955" type="Var_Player">
+                                                    <param id="0" name="Instance variable">State</param>
+                                                    <param id="1" name="Value">&quot;roll&quot;</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
                                 </event-block>
                             </sub-events>
                         </event-block>
@@ -1830,7 +1825,7 @@
                                 </action>
                             </actions>
                         </event-block>
-                        <comment></comment>
+                        <comment>i&apos;m too lazy to check if modulos work</comment>
                         <event-block sid="744324895306285">
                             <conditions>
                                 <condition id="-7" name="Compare instance variable" sid="400937623071112" type="Var_Player">
@@ -1951,9 +1946,45 @@
                                 <condition id="-8" name="Is boolean instance variable set" sid="241126521339403" type="PlayerSkins">
                                     <param id="0" name="Instance variable">Me</param>
                                 </condition>
+                                <condition behavior="Flash" id="0" inverted="1" name="Is flashing" sid="300426038550955" type="PlayerSkins" />
+                                <condition id="-8" name="Is boolean instance variable set" sid="234744087675554" type="Var_Player">
+                                    <param id="0" name="Instance variable">CanMove</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="505739886887551" type="Var_Player">
+                                    <param id="0" name="Instance variable">Finished</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="953425310805682" type="Var_Level">
+                                    <param id="0" name="Instance variable">Pause</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="970815854033743" type="Var_Player">
+                                    <param id="0" name="Instance variable">IncincibilityTimer</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                                <condition id="-8" name="Is boolean instance variable set" sid="930152785795052" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevelActive</param>
+                                </condition>
                             </conditions>
                             <actions />
                             <sub-events>
+                                <event-block sid="784846512415537">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="627118357161106" type="Save_Configuration">
+                                            <param id="0" name="Instance variable">GameplayHitMarker</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Spawn another object" sid="933871116670236" type="PlayerSkins">
+                                            <param id="0" name="Object">EffectsF_HitIndicator</param>
+                                            <param id="1" name="Layer">&quot;Player&quot;</param>
+                                            <param id="2" name="Image point">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
                                 <comment>bowser when haves milk</comment>
                                 <event-block sid="761066935604944">
                                     <conditions>
@@ -1964,26 +1995,6 @@
                                         </condition>
                                         <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="754151715018061" type="Var_Player">
                                             <param id="0" name="Instance variable">Shield</param>
-                                        </condition>
-                                        <condition behavior="Flash" id="0" inverted="1" name="Is flashing" sid="300426038550955" type="PlayerSkins" />
-                                        <condition id="-8" name="Is boolean instance variable set" sid="234744087675554" type="Var_Player">
-                                            <param id="0" name="Instance variable">CanMove</param>
-                                        </condition>
-                                        <condition id="-7" name="Compare instance variable" sid="505739886887551" type="Var_Player">
-                                            <param id="0" name="Instance variable">Finished</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">0</param>
-                                        </condition>
-                                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="953425310805682" type="Var_Level">
-                                            <param id="0" name="Instance variable">Pause</param>
-                                        </condition>
-                                        <condition id="-7" name="Compare instance variable" sid="970815854033743" type="Var_Player">
-                                            <param id="0" name="Instance variable">IncincibilityTimer</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">0</param>
-                                        </condition>
-                                        <condition id="-8" name="Is boolean instance variable set" sid="930152785795052" type="Var_Level">
-                                            <param id="0" name="Instance variable">TimerLevelActive</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -2006,22 +2017,6 @@
                                         </action>
                                     </actions>
                                     <sub-events>
-                                        <event-block sid="784846512415537">
-                                            <conditions>
-                                                <condition id="-7" name="Compare instance variable" sid="627118357161106" type="Save_Configuration">
-                                                    <param id="0" name="Instance variable">GameplayHitMarker</param>
-                                                    <param id="1" name="Comparison">0</param>
-                                                    <param id="2" name="Value">1</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="0" name="Spawn another object" sid="933871116670236" type="PlayerSkins">
-                                                    <param id="0" name="Object">EffectsF_HitIndicator</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">1</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
                                         <event-block sid="284032384645763">
                                             <conditions>
                                                 <condition id="-12" name="Repeat" sid="280988024524097" type="System">
@@ -2052,26 +2047,6 @@
                                         </condition>
                                         <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="167011522064808" type="Var_Player">
                                             <param id="0" name="Instance variable">Shield</param>
-                                        </condition>
-                                        <condition behavior="Flash" id="0" inverted="1" name="Is flashing" sid="853856888999562" type="PlayerSkins" />
-                                        <condition id="-8" name="Is boolean instance variable set" sid="129206796465229" type="Var_Player">
-                                            <param id="0" name="Instance variable">CanMove</param>
-                                        </condition>
-                                        <condition id="-7" name="Compare instance variable" sid="904019877573551" type="Var_Player">
-                                            <param id="0" name="Instance variable">Finished</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">0</param>
-                                        </condition>
-                                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="185055735513779" type="Var_Level">
-                                            <param id="0" name="Instance variable">Pause</param>
-                                        </condition>
-                                        <condition id="-7" name="Compare instance variable" sid="423715274311979" type="Var_Player">
-                                            <param id="0" name="Instance variable">IncincibilityTimer</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">0</param>
-                                        </condition>
-                                        <condition id="-8" name="Is boolean instance variable set" sid="908976812295942" type="Var_Level">
-                                            <param id="0" name="Instance variable">TimerLevelActive</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -2139,22 +2114,6 @@
                                         </action>
                                     </actions>
                                     <sub-events>
-                                        <event-block sid="474774214905965">
-                                            <conditions>
-                                                <condition id="-7" name="Compare instance variable" sid="344943931657222" type="Save_Configuration">
-                                                    <param id="0" name="Instance variable">GameplayHitMarker</param>
-                                                    <param id="1" name="Comparison">0</param>
-                                                    <param id="2" name="Value">1</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="0" name="Spawn another object" sid="291861850635743" type="PlayerSkins">
-                                                    <param id="0" name="Object">EffectsF_HitIndicator</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">1</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
                                         <event-block sid="473963330137911">
                                             <conditions>
                                                 <condition id="-7" inverted="1" name="Compare instance variable" sid="721224490568999" type="Var_Player">
@@ -2178,60 +2137,22 @@
                                         <condition id="-8" name="Is boolean instance variable set" sid="604562626723249" type="Var_Player">
                                             <param id="0" name="Instance variable">Shield</param>
                                         </condition>
-                                        <condition behavior="Flash" id="0" inverted="1" name="Is flashing" sid="531036007284081" type="PlayerSkins" />
-                                        <condition id="-8" name="Is boolean instance variable set" sid="578921815763333" type="Var_Player">
-                                            <param id="0" name="Instance variable">CanMove</param>
-                                        </condition>
-                                        <condition id="-7" name="Compare instance variable" sid="854239498565616" type="Var_Player">
-                                            <param id="0" name="Instance variable">Finished</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">0</param>
-                                        </condition>
-                                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="813967019658040" type="Var_Level">
-                                            <param id="0" name="Instance variable">Pause</param>
-                                        </condition>
-                                        <condition id="-7" name="Compare instance variable" sid="868095289694141" type="Var_Player">
-                                            <param id="0" name="Instance variable">IncincibilityTimer</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">0</param>
-                                        </condition>
-                                        <condition id="-8" name="Is boolean instance variable set" sid="448688405064838" type="Var_Level">
-                                            <param id="0" name="Instance variable">TimerLevelActive</param>
-                                        </condition>
                                     </conditions>
                                     <actions>
-                                        <action behavior="Flash" id="0" name="Flash" sid="459425816441089" type="PlayerSkins">
-                                            <param id="0" name="&apos;On&apos; time">0.05</param>
-                                            <param id="1" name="&apos;Off&apos; time">0.05</param>
-                                            <param id="2" name="Duration">3</param>
+                                        <action id="-13" name="Set boolean" sid="202286753619538" type="Var_Player">
+                                            <param id="0" name="Instance variable">Shield</param>
+                                            <param id="1" name="Value">0</param>
                                         </action>
                                         <action id="0" name="Call function" sid="631074950028875" type="Function">
                                             <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                             <param id="1" name="Parameter {n}">&quot;Death&quot;</param>
                                         </action>
-                                        <action id="-13" name="Set boolean" sid="202286753619538" type="Var_Player">
-                                            <param id="0" name="Instance variable">Shield</param>
-                                            <param id="1" name="Value">0</param>
+                                        <action behavior="Flash" id="0" name="Flash" sid="459425816441089" type="PlayerSkins">
+                                            <param id="0" name="&apos;On&apos; time">0.05</param>
+                                            <param id="1" name="&apos;Off&apos; time">0.05</param>
+                                            <param id="2" name="Duration">3</param>
                                         </action>
                                     </actions>
-                                    <sub-events>
-                                        <event-block sid="398144992118193">
-                                            <conditions>
-                                                <condition id="-7" name="Compare instance variable" sid="111423490343907" type="Save_Configuration">
-                                                    <param id="0" name="Instance variable">GameplayHitMarker</param>
-                                                    <param id="1" name="Comparison">0</param>
-                                                    <param id="2" name="Value">1</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="0" name="Spawn another object" sid="503927795412907" type="PlayerSkins">
-                                                    <param id="0" name="Object">EffectsF_HitIndicator</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">1</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                    </sub-events>
                                 </event-block>
                             </sub-events>
                         </event-block>
@@ -2244,10 +2165,8 @@
                                 <condition id="-8" name="Is boolean instance variable set" sid="711760697055243" type="PlayerSkins">
                                     <param id="0" name="Instance variable">Me</param>
                                 </condition>
-                                <condition id="-7" inverted="1" name="Compare instance variable" sid="166932451940170" type="Var_Player">
-                                    <param id="0" name="Instance variable">IncincibilityTimer</param>
-                                    <param id="1" name="Comparison">4</param>
-                                    <param id="2" name="Value">1335</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="419794183844296" type="Var_Player">
+                                    <param id="0" name="Instance variable">CanMove</param>
                                 </condition>
                                 <condition id="-7" name="Compare instance variable" sid="671966318682359" type="Var_Player">
                                     <param id="0" name="Instance variable">Finished</param>
@@ -2257,8 +2176,10 @@
                                 <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="867325055489466" type="Var_Level">
                                     <param id="0" name="Instance variable">Pause</param>
                                 </condition>
-                                <condition id="-8" name="Is boolean instance variable set" sid="419794183844296" type="Var_Player">
-                                    <param id="0" name="Instance variable">CanMove</param>
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="166932451940170" type="Var_Player">
+                                    <param id="0" name="Instance variable">IncincibilityTimer</param>
+                                    <param id="1" name="Comparison">4</param>
+                                    <param id="2" name="Value">1335</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -2328,6 +2249,7 @@
                                 <action id="-16" name="Set opacity" sid="942933124918133" type="EffectsF_ProjectileTrail">
                                     <param id="0" name="Opacity">Self.Opacity</param>
                                 </action>
+                                <action behavior="Flash" id="1" name="Stop flashing" sid="591399510323867" type="PlayerSkins" />
                             </actions>
                             <sub-events>
                                 <event-block sid="333591110228269">
@@ -3934,6 +3856,16 @@
                                 <action id="-9" name="Destroy" sid="277388123535983" type="EnemyProjectiles" />
                             </actions>
                         </event-block>
+                        <event-block sid="305120549078951">
+                            <conditions>
+                                <condition id="0" name="On collision with another object" sid="753938970498876" type="EnemyProjectiles">
+                                    <param id="0" name="Object">Object1_Door</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Destroy" sid="515278822991531" type="EnemyProjectiles" />
+                            </actions>
+                        </event-block>
                         <comment>projectile trail</comment>
                         <event-block sid="835707567475778">
                             <conditions>
@@ -4704,6 +4636,19 @@
                             </actions>
                         </event-block>
                         <comment></comment>
+                        <event-block sid="784965676191477">
+                            <conditions>
+                                <condition id="0" name="On function" sid="184373248844271" type="Function">
+                                    <param id="0" name="Name">&quot;Player_Restart&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-13" name="Set boolean" sid="841351685689322" type="Hazard1_5VSpikedBlockTrigger">
+                                    <param id="0" name="Instance variable">Active</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
                         <event-block sid="424073198996228">
                             <conditions>
                                 <condition id="0" name="On collision with another object" sid="337358991589819" type="Engine_Player">
@@ -5397,7 +5342,7 @@
                                         </action>
                                     </actions>
                                 </event-block>
-                                <comment></comment>
+                                <comment>extra live (if enabled)</comment>
                                 <event-block sid="705361771161268">
                                     <conditions>
                                         <condition id="3" name="Compare frame" sid="517203387018667" type="ObjectF_1Monitor">
@@ -5738,7 +5683,7 @@
                                         </action>
                                     </actions>
                                 </event-block>
-                                <comment></comment>
+                                <comment>extra life (if enabled)</comment>
                                 <event-block sid="752398637180456">
                                     <conditions>
                                         <condition id="2" name="Is playing" sid="359945695345528" type="Common2_TV">
