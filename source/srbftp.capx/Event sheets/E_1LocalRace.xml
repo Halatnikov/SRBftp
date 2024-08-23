@@ -170,7 +170,7 @@
                             <actions>
                                 <action id="0" name="Call function" sid="505504043436589" type="Function">
                                     <param id="0" name="Name">&quot;Discord_RichPresence&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;&quot;{###}&quot;Local race (SRB1)&quot;{###}Var_Misc.Discord_CurrentDetail{###}&quot;misc_1local&quot;{###}&quot;P1: &quot;&amp;Var_Level.Local_P1Score&amp;&quot; | P2: &quot;&amp;Var_Level.Local_P2Score{###}Var_Level.Local_P2Score &gt; Var_Level.Local_P1Score ? &quot;small_skin_plughands&quot; : &quot;small_skin_earless&quot;{###}Var_Level.Local_P2Score &gt; Var_Level.Local_P1Score ? &quot;P2 has the most score so far!&quot; : &quot;P1 has the most score so far!&quot;{###}Var_Misc.Discord_TimestampCurrent{###}&quot;&quot;{###}&quot;&quot;{###}&quot;2&quot;{###}&quot;2&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;&quot;{###}&quot;Local race (SRB1)&quot;{###}Var_Misc.Discord_CurrentDetail{###}&quot;misc_1local&quot;{###}&quot;P1: &quot;&amp;Var_Level.Local_P1Score&amp;&quot; | P2: &quot;&amp;Var_Level.Local_P2Score{###}Var_Level.Local_P2Score &gt; Var_Level.Local_P1Score ? &quot;small_skin_plughands&quot; : &quot;small_skin_earless&quot;{###}Var_Level.Local_P2Score &gt; Var_Level.Local_P1Score ? &quot;P2&quot; : &quot;P1&quot; &amp; &quot; has the most score so far!&quot;{###}Var_Misc.Discord_TimestampCurrent{###}&quot;&quot;{###}&quot;&quot;{###}&quot;2&quot;{###}&quot;2&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -719,6 +719,82 @@
                         </action>
                     </actions>
                 </event-block>
+                <comment>barrier</comment>
+                <event-block sid="903971646181009">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="578471052884415" type="PlayerSkins">
+                            <param id="0" name="Object">Local_BarrierSwitch</param>
+                        </condition>
+                        <condition id="3" name="Compare frame" sid="507455936617935" type="Local_BarrierSwitch">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Number">0</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="758479278366418">
+                            <conditions>
+                                <condition id="-33" name="Pick by comparison" sid="783495138019077" type="System">
+                                    <param id="0" name="Object">Local_Barrier</param>
+                                    <param id="1" name="Expression">Local_Barrier.ID</param>
+                                    <param id="2" name="Comparison">0</param>
+                                    <param id="3" name="Value">Local_BarrierSwitch.ID</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Wait" sid="936247360642120" type="System">
+                                    <param id="0" name="Seconds">0.1</param>
+                                </action>
+                                <action id="5" name="Set frame" sid="832901507718374" type="Local_BarrierSwitch">
+                                    <param id="0" name="Frame number">1</param>
+                                </action>
+                                <action behavior="LiteTween" id="10" name="Start" sid="808322326756141" type="Local_Barrier">
+                                    <param id="0" name="Start Mode">0</param>
+                                    <param id="1" name="Force use current">0</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="917988983701966" type="System">
+                                    <param id="0" name="Seconds">2</param>
+                                </action>
+                                <action behavior="LiteTween" id="11" name="Reverse" sid="786985345101029" type="Local_Barrier">
+                                    <param id="0" name="Reverse mode">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>damage</comment>
+                <event-block sid="977481073348834">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="409202410078473" type="Engine_Player">
+                            <param id="0" name="Object">Local_Damage</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="143633207819014">
+                            <conditions>
+                                <condition id="-33" name="Pick by comparison" sid="154062689600968" type="System">
+                                    <param id="0" name="Object">Special_StartPos</param>
+                                    <param id="1" name="Expression">Special_StartPos.MultiplayerID</param>
+                                    <param id="2" name="Comparison">0</param>
+                                    <param id="3" name="Value">Engine_Player.LocalMultiplayerID</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-4" name="Set position to another object" sid="245358355645294" type="Engine_Player">
+                                    <param id="0" name="Object">Special_StartPos</param>
+                                    <param id="1" name="Image point (optional)">0</param>
+                                </action>
+                                <action behavior="Platform" id="8" name="Set vector X" sid="294727211075671" type="Engine_Player">
+                                    <param id="0" name="Vector X">0</param>
+                                </action>
+                                <action behavior="Platform" id="9" name="Set vector Y" sid="415231238072076" type="Engine_Player">
+                                    <param id="0" name="Vector Y">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
                 <comment>player 1 finish</comment>
                 <event-block sid="541137850737710">
                     <conditions>
@@ -995,85 +1071,43 @@
                         </action>
                     </actions>
                 </event-block>
-            </sub-events>
-        </event-group>
-        <event-group description="" sid="701400636542216" title="Multiplayer objects">
-            <sub-events>
-                <comment>barrier</comment>
-                <event-block sid="903971646181009">
-                    <conditions>
-                        <condition id="0" name="On collision with another object" sid="578471052884415" type="PlayerSkins">
-                            <param id="0" name="Object">Local_BarrierSwitch</param>
-                        </condition>
-                        <condition id="3" name="Compare frame" sid="507455936617935" type="Local_BarrierSwitch">
-                            <param id="0" name="Comparison">0</param>
-                            <param id="1" name="Number">0</param>
-                        </condition>
-                    </conditions>
-                    <actions />
-                    <sub-events>
-                        <event-block sid="758479278366418">
-                            <conditions>
-                                <condition id="-33" name="Pick by comparison" sid="783495138019077" type="System">
-                                    <param id="0" name="Object">Local_Barrier</param>
-                                    <param id="1" name="Expression">Local_Barrier.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Local_BarrierSwitch.ID</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-16" name="Wait" sid="936247360642120" type="System">
-                                    <param id="0" name="Seconds">0.1</param>
-                                </action>
-                                <action id="5" name="Set frame" sid="832901507718374" type="Local_BarrierSwitch">
-                                    <param id="0" name="Frame number">1</param>
-                                </action>
-                                <action behavior="LiteTween" id="10" name="Start" sid="808322326756141" type="Local_Barrier">
-                                    <param id="0" name="Start Mode">0</param>
-                                    <param id="1" name="Force use current">0</param>
-                                </action>
-                                <action id="-16" name="Wait" sid="917988983701966" type="System">
-                                    <param id="0" name="Seconds">2</param>
-                                </action>
-                                <action behavior="LiteTween" id="11" name="Reverse" sid="786985345101029" type="Local_Barrier">
-                                    <param id="0" name="Reverse mode">1</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <comment>damage</comment>
-                <event-block sid="977481073348834">
-                    <conditions>
-                        <condition id="0" name="On collision with another object" sid="409202410078473" type="Engine_Player">
-                            <param id="0" name="Object">Local_Damage</param>
-                        </condition>
-                    </conditions>
-                    <actions />
-                    <sub-events>
-                        <event-block sid="143633207819014">
-                            <conditions>
-                                <condition id="-33" name="Pick by comparison" sid="154062689600968" type="System">
-                                    <param id="0" name="Object">Special_StartPos</param>
-                                    <param id="1" name="Expression">Special_StartPos.MultiplayerID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Engine_Player.LocalMultiplayerID</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-4" name="Set position to another object" sid="245358355645294" type="Engine_Player">
-                                    <param id="0" name="Object">Special_StartPos</param>
-                                    <param id="1" name="Image point (optional)">0</param>
-                                </action>
-                                <action behavior="Platform" id="8" name="Set vector X" sid="294727211075671" type="Engine_Player">
-                                    <param id="0" name="Vector X">0</param>
-                                </action>
-                                <action behavior="Platform" id="9" name="Set vector Y" sid="415231238072076" type="Engine_Player">
-                                    <param id="0" name="Vector Y">0</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
+                <comment>that&apos;s right, i did a splitscreen system for a whole 1 (one) level</comment>
+                <comment>i&apos;ve no idea why it works, but it does</comment>
+                <comment>code by valdarko</comment>
+                <event-block sid="660691606464941">
+                    <conditions />
+                    <actions>
+                        <action id="7" name="Clear Canvas" sid="210296423690736" type="LocalSplitscreenP1" />
+                        <action id="-3" name="Set position" sid="604647437853779" type="LocalSplitscreenP1">
+                            <param id="0" name="X">clamp(Skin1_Earless.X,self.Width/2,layoutwidth-self.Width/2)</param>
+                            <param id="1" name="Y">116</param>
+                        </action>
+                        <action id="21" name="Paste Layer" sid="653745290072394" type="LocalSplitscreenP1">
+                            <param id="0" name="Layer">0</param>
+                        </action>
+                        <action id="21" name="Paste Layer" sid="965474193207196" type="LocalSplitscreenP1">
+                            <param id="0" name="Layer">2</param>
+                        </action>
+                        <action id="-3" name="Set position" sid="843347587443410" type="LocalSplitscreenP1">
+                            <param id="0" name="X">427</param>
+                            <param id="1" name="Y">116</param>
+                        </action>
+                        <action id="7" name="Clear Canvas" sid="270592721446407" type="LocalSplitscreenP2" />
+                        <action id="-3" name="Set position" sid="473850916959143" type="LocalSplitscreenP2">
+                            <param id="0" name="X">clamp(Skin1_PlughandsKnux.X,self.Width/2,layoutwidth-self.Width/2)</param>
+                            <param id="1" name="Y">364</param>
+                        </action>
+                        <action id="21" name="Paste Layer" sid="214984412258140" type="LocalSplitscreenP2">
+                            <param id="0" name="Layer">0</param>
+                        </action>
+                        <action id="21" name="Paste Layer" sid="342826189977542" type="LocalSplitscreenP2">
+                            <param id="0" name="Layer">2</param>
+                        </action>
+                        <action id="-3" name="Set position" sid="304863631068089" type="LocalSplitscreenP2">
+                            <param id="0" name="X">427</param>
+                            <param id="1" name="Y">364</param>
+                        </action>
+                    </actions>
                 </event-block>
             </sub-events>
         </event-group>
@@ -1143,7 +1177,7 @@
                             <actions>
                                 <action id="0" name="Call function" sid="405356879239842" type="Function">
                                     <param id="0" name="Name">&quot;Discord_RichPresence&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;&quot;{###}&quot;Local race (SRB1)&quot;{###}Var_Misc.Discord_CurrentDetail{###}&quot;misc_1local&quot;{###}&quot;P1: &quot;&amp;Var_Level.Local_P1Score&amp;&quot; | P2: &quot;&amp;Var_Level.Local_P2Score{###}Var_Level.Local_P2Score &gt; Var_Level.Local_P1Score ? &quot;small_skin_plughands&quot; : &quot;small_skin_earless&quot;{###}Var_Level.Local_P2Score &gt; Var_Level.Local_P1Score ? &quot;P2 has the most score so far!&quot; : &quot;P1 has the most score so far!&quot;{###}Var_Misc.Discord_TimestampCurrent{###}&quot;&quot;{###}&quot;&quot;{###}&quot;2&quot;{###}&quot;2&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;&quot;{###}&quot;Local race (SRB1)&quot;{###}Var_Misc.Discord_CurrentDetail{###}&quot;misc_1local&quot;{###}&quot;P1: &quot;&amp;Var_Level.Local_P1Score&amp;&quot; | P2: &quot;&amp;Var_Level.Local_P2Score{###}Var_Level.Local_P2Score &gt; Var_Level.Local_P1Score ? &quot;small_skin_plughands&quot; : &quot;small_skin_earless&quot;{###}Var_Level.Local_P2Score &gt; Var_Level.Local_P1Score ? &quot;P2&quot; : &quot;P1&quot; &amp; &quot; has the most score so far!&quot;{###}Var_Misc.Discord_TimestampCurrent{###}&quot;&quot;{###}&quot;&quot;{###}&quot;2&quot;{###}&quot;2&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1206,7 +1240,7 @@
                             <actions>
                                 <action id="0" name="Call function" sid="649993710173735" type="Function">
                                     <param id="0" name="Name">&quot;Discord_RichPresence&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;&quot;{###}&quot;Local race (SRB1)&quot;{###}Var_Misc.Discord_CurrentDetail&amp;&quot; (PAUSED)&quot;{###}&quot;misc_1local&quot;{###}&quot;P1: &quot;&amp;Var_Level.Local_P1Score&amp;&quot; | P2: &quot;&amp;Var_Level.Local_P2Score{###}Var_Level.Local_P2Score &gt; Var_Level.Local_P1Score ? &quot;small_skin_plughands&quot; : &quot;small_skin_earless&quot;{###}Var_Level.Local_P2Score &gt; Var_Level.Local_P1Score ? &quot;P2 has the most score so far!&quot; : &quot;P1 has the most score so far!&quot;{###}Var_Misc.Discord_TimestampCurrent{###}&quot;&quot;{###}&quot;&quot;{###}&quot;2&quot;{###}&quot;2&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;&quot;{###}&quot;Local race (SRB1)&quot;{###}Var_Misc.Discord_CurrentDetail&amp;&quot; (PAUSED)&quot;{###}&quot;misc_1local&quot;{###}&quot;P1: &quot;&amp;Var_Level.Local_P1Score&amp;&quot; | P2: &quot;&amp;Var_Level.Local_P2Score{###}Var_Level.Local_P2Score &gt; Var_Level.Local_P1Score ? &quot;small_skin_plughands&quot; : &quot;small_skin_earless&quot;{###}Var_Level.Local_P2Score &gt; Var_Level.Local_P1Score ? &quot;P2&quot; : &quot;P1&quot; &amp; &quot; has the most score so far!&quot;{###}Var_Misc.Discord_TimestampCurrent{###}&quot;&quot;{###}&quot;&quot;{###}&quot;2&quot;{###}&quot;2&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1666,83 +1700,6 @@
                                         </action>
                                         <action id="-2" name="Go to layout" sid="155212289708688" type="System">
                                             <param id="0" name="Layout">Menu_SRB1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-            </sub-events>
-        </event-group>
-        <event-group description="" sid="184484401350827" title="Multiplayer splitscreen">
-            <sub-events>
-                <comment>that&apos;s right, i did a splitscreen system for a whole 1 (one) level</comment>
-                <comment>i&apos;ve no idea why it works, but it does</comment>
-                <comment>code by valdarko</comment>
-                <comment>p1</comment>
-                <event-block sid="660691606464941">
-                    <conditions />
-                    <actions>
-                        <action id="7" name="Clear Canvas" sid="210296423690736" type="LocalSplitscreenP1" />
-                    </actions>
-                    <sub-events>
-                        <event-block sid="396183322326923">
-                            <conditions />
-                            <actions>
-                                <action id="-3" name="Set position" sid="604647437853779" type="LocalSplitscreenP1">
-                                    <param id="0" name="X">clamp(Skin1_Earless.X,self.Width/2,layoutwidth-self.Width/2)</param>
-                                    <param id="1" name="Y">116</param>
-                                </action>
-                                <action id="21" name="Paste Layer" sid="653745290072394" type="LocalSplitscreenP1">
-                                    <param id="0" name="Layer">0</param>
-                                </action>
-                                <action id="21" name="Paste Layer" sid="965474193207196" type="LocalSplitscreenP1">
-                                    <param id="0" name="Layer">2</param>
-                                </action>
-                            </actions>
-                            <sub-events>
-                                <event-block sid="840540296326858">
-                                    <conditions />
-                                    <actions>
-                                        <action id="-3" name="Set position" sid="843347587443410" type="LocalSplitscreenP1">
-                                            <param id="0" name="X">427</param>
-                                            <param id="1" name="Y">116</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <comment>p2</comment>
-                <event-block sid="882873655130617">
-                    <conditions />
-                    <actions>
-                        <action id="7" name="Clear Canvas" sid="270592721446407" type="LocalSplitscreenP2" />
-                    </actions>
-                    <sub-events>
-                        <event-block sid="588774757994459">
-                            <conditions />
-                            <actions>
-                                <action id="-3" name="Set position" sid="473850916959143" type="LocalSplitscreenP2">
-                                    <param id="0" name="X">clamp(Skin1_PlughandsKnux.X,self.Width/2,layoutwidth-self.Width/2)</param>
-                                    <param id="1" name="Y">364</param>
-                                </action>
-                                <action id="21" name="Paste Layer" sid="214984412258140" type="LocalSplitscreenP2">
-                                    <param id="0" name="Layer">0</param>
-                                </action>
-                                <action id="21" name="Paste Layer" sid="342826189977542" type="LocalSplitscreenP2">
-                                    <param id="0" name="Layer">2</param>
-                                </action>
-                            </actions>
-                            <sub-events>
-                                <event-block sid="632910524967587">
-                                    <conditions />
-                                    <actions>
-                                        <action id="-3" name="Set position" sid="304863631068089" type="LocalSplitscreenP2">
-                                            <param id="0" name="X">427</param>
-                                            <param id="1" name="Y">364</param>
                                         </action>
                                     </actions>
                                 </event-block>

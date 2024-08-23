@@ -2595,7 +2595,6 @@
                                         </action>
                                     </actions>
                                 </event-block>
-                                <comment>warning sfx</comment>
                                 <event-block sid="125073514014116">
                                     <conditions>
                                         <condition id="-7" name="Compare instance variable" sid="740013874041825" type="Var_Player">
@@ -2768,11 +2767,11 @@
                                 <condition id="-8" name="Is boolean instance variable set" sid="554832219328102" type="Var_Player">
                                     <param id="0" name="Instance variable">Underwater</param>
                                 </condition>
+                                <condition id="-8" name="Is boolean instance variable set" sid="137536540732484" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
+                                </condition>
                                 <condition id="-6" name="Every X seconds" sid="916197278158332" type="System">
                                     <param id="0" name="Interval (seconds)">2</param>
-                                </condition>
-                                <condition id="-11" name="For Each" sid="484365500740130" type="System">
-                                    <param id="0" name="Object">PlayerSkins</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -2810,6 +2809,225 @@
                             </conditions>
                             <actions>
                                 <action id="-9" name="Destroy" sid="461413808413977" type="EffectsF_SmallBubble" />
+                            </actions>
+                        </event-block>
+                        <comment>echidnapolis 8 direction swimming</comment>
+                        <event-block sid="412837653738664">
+                            <conditions>
+                                <condition id="0" name="On collision with another object" sid="353441261546092" type="Engine_Player">
+                                    <param id="0" name="Object">Object1_6EPSwimmingStart</param>
+                                </condition>
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="790122649127375" type="Var_Player">
+                                    <param id="0" name="Instance variable">State</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;swimming&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Set value" sid="871740079387362" type="Var_Player">
+                                    <param id="0" name="Instance variable">State</param>
+                                    <param id="1" name="Value">&quot;swimming&quot;</param>
+                                </action>
+                                <action id="0" name="Call function" sid="423291511894968" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;F_Submerged&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="634804438122091">
+                            <conditions>
+                                <condition id="0" name="On collision with another object" sid="902813863081206" type="Engine_Player">
+                                    <param id="0" name="Object">Object1_6EPSwimmingEnd</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="516978182026952" type="Var_Player">
+                                    <param id="0" name="Instance variable">State</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;swimming&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Set value" sid="683477694601782" type="Var_Player">
+                                    <param id="0" name="Instance variable">State</param>
+                                    <param id="1" name="Value">&quot;idle&quot;</param>
+                                </action>
+                                <action id="-13" name="Set boolean" sid="938449417331473" type="Var_Player">
+                                    <param id="0" name="Instance variable">Underwater</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="0" name="Call function" sid="604039462303177" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;F_Submerged&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="550987217163503">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="555114262215682" type="Var_Player">
+                                    <param id="0" name="Instance variable">State</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;swimming&quot;</param>
+                                </condition>
+                                <condition id="-8" name="Is boolean instance variable set" sid="664697671092499" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="805073529025103">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="359782315189108" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action behavior="Platform" id="11" name="Set enabled" sid="411024619825925" type="Engine_Player">
+                                            <param id="0" name="State">0</param>
+                                        </action>
+                                        <action behavior="8Direction" id="8" name="Set enabled" sid="508482455470135" type="Engine_Player">
+                                            <param id="0" name="State">1</param>
+                                        </action>
+                                        <action id="4" name="Set animation" sid="678442664530545" type="PlayerSkins">
+                                            <param id="0" name="Animation">&quot;Idle&quot;</param>
+                                            <param id="1" name="From">1</param>
+                                        </action>
+                                        <action behavior="8Direction" id="4" name="Set max speed" sid="555110599927813" type="Engine_Player">
+                                            <param id="0" name="Max Speed">Self.InitialSpeed/1.5</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="995352137961884">
+                                    <conditions />
+                                    <actions>
+                                        <action id="-13" name="Set boolean" sid="990539670428952" type="Var_Player">
+                                            <param id="0" name="Instance variable">Underwater</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="795343078682050">
+                                    <conditions>
+                                        <condition id="2" name="Is playing" sid="972961259315676" type="PlayerSkins">
+                                            <param id="0" name="Animation">&quot;Idle&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="5" name="Set frame" sid="228931183680739" type="PlayerSkins">
+                                            <param id="0" name="Frame number">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="995604405459342">
+                                    <conditions>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="259968950975771" type="Var_Player">
+                                            <param id="0" name="Instance variable">CanMove</param>
+                                        </condition>
+                                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="149850927019010" type="Var_Level">
+                                            <param id="0" name="Instance variable">Pause</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="308957922740640">
+                                            <conditions>
+                                                <condition id="-8" name="Is boolean instance variable set" sid="305058927664986" type="Var_Input">
+                                                    <param id="0" name="Instance variable">Left</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action behavior="8Direction" id="7" name="Simulate control" sid="759847382731285" type="Engine_Player">
+                                                    <param id="0" name="Control">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="419858890077147">
+                                            <conditions>
+                                                <condition id="-8" name="Is boolean instance variable set" sid="166578811316766" type="Var_Input">
+                                                    <param id="0" name="Instance variable">Right</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action behavior="8Direction" id="7" name="Simulate control" sid="591703465220773" type="Engine_Player">
+                                                    <param id="0" name="Control">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="865754751838468">
+                                            <conditions>
+                                                <condition id="-8" name="Is boolean instance variable set" sid="365776782630229" type="Var_Input">
+                                                    <param id="0" name="Instance variable">Up</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action behavior="8Direction" id="7" name="Simulate control" sid="423089418329658" type="Engine_Player">
+                                                    <param id="0" name="Control">2</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="713119853426129">
+                                            <conditions>
+                                                <condition id="-8" name="Is boolean instance variable set" sid="107272516553221" type="Var_Input">
+                                                    <param id="0" name="Instance variable">Down</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action behavior="8Direction" id="7" name="Simulate control" sid="999045073272917" type="Engine_Player">
+                                                    <param id="0" name="Control">3</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="362765311673512">
+                                            <conditions>
+                                                <condition id="-8" name="Is boolean instance variable set" sid="761570901168534" type="Var_Input">
+                                                    <param id="0" name="Instance variable">A</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="458652932973033" type="System" />
+                                            </conditions>
+                                            <actions />
+                                            <sub-events>
+                                                <event-block sid="924557252115958">
+                                                    <conditions>
+                                                        <condition id="2" name="Is playing" sid="720352189789702" type="PlayerSkins">
+                                                            <param id="0" name="Animation">&quot;Idle&quot;</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="0" name="Call function" sid="322334315100256" type="Function">
+                                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                                            <param id="1" name="Parameter {n}">&quot;Jump&quot;</param>
+                                                        </action>
+                                                        <action id="4" name="Set animation" sid="408829847267210" type="PlayerSkins">
+                                                            <param id="0" name="Animation">&quot;Jump&quot;</param>
+                                                            <param id="1" name="From">1</param>
+                                                        </action>
+                                                        <action id="-16" name="Wait" sid="127997233867318" type="System">
+                                                            <param id="0" name="Seconds">0.5</param>
+                                                        </action>
+                                                        <action id="4" name="Set animation" sid="219940619608307" type="PlayerSkins">
+                                                            <param id="0" name="Animation">&quot;Idle&quot;</param>
+                                                            <param id="1" name="From">1</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="510980281773761">
+                            <conditions>
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="106164538199501" type="Var_Player">
+                                    <param id="0" name="Instance variable">State</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;swimming&quot;</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="522616550382886" type="System" />
+                            </conditions>
+                            <actions>
+                                <action behavior="8Direction" id="8" name="Set enabled" sid="257986700658874" type="Engine_Player">
+                                    <param id="0" name="State">0</param>
+                                </action>
+                                <action behavior="Platform" id="11" name="Set enabled" sid="813500562740420" type="Engine_Player">
+                                    <param id="0" name="State">1</param>
+                                </action>
                             </actions>
                         </event-block>
                         <comment>srb2 water level</comment>
@@ -3564,79 +3782,6 @@
                                     <param id="1" name="Value">Self.Y</param>
                                 </action>
                             </actions>
-                        </event-block>
-                        <comment></comment>
-                        <event-block sid="194641808386267">
-                            <conditions>
-                                <condition id="-11" name="For Each" sid="712400128126343" type="System">
-                                    <param id="0" name="Object">ObjectE15_3SLMovingPlatform</param>
-                                </condition>
-                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="846960442403921" type="Var_Level">
-                                    <param id="0" name="Instance variable">Pause</param>
-                                </condition>
-                                <condition id="-7" name="Compare instance variable" sid="625287445332168" type="Var_Game">
-                                    <param id="0" name="Instance variable">TimerGlobal</param>
-                                    <param id="1" name="Comparison">5</param>
-                                    <param id="2" name="Value">4</param>
-                                </condition>
-                            </conditions>
-                            <actions />
-                            <sub-events>
-                                <event-block sid="306165966405764">
-                                    <conditions>
-                                        <condition id="-8" name="Is boolean instance variable set" sid="766228684212786" type="ObjectE15_3SLMovingPlatform">
-                                            <param id="0" name="Instance variable">direction</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-2" name="Set Y" sid="725784411452991" type="ObjectE15_3SLMovingPlatform">
-                                            <param id="0" name="Y">Self.Y-5</param>
-                                        </action>
-                                    </actions>
-                                    <sub-events>
-                                        <event-block sid="266609070470845">
-                                            <conditions>
-                                                <condition id="0" name="On collision with another object" sid="338143971524883" type="ObjectE15_3SLMovingPlatform">
-                                                    <param id="0" name="Object">ObjectE15_3SLMovingPlatformSensor</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="-13" name="Set boolean" sid="897612715770848" type="ObjectE15_3SLMovingPlatform">
-                                                    <param id="0" name="Instance variable">direction</param>
-                                                    <param id="1" name="Value">0</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                    </sub-events>
-                                </event-block>
-                                <event-block sid="393104919535850">
-                                    <conditions>
-                                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="273652210979005" type="ObjectE15_3SLMovingPlatform">
-                                            <param id="0" name="Instance variable">direction</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-2" name="Set Y" sid="463063298270180" type="ObjectE15_3SLMovingPlatform">
-                                            <param id="0" name="Y">Self.Y+5</param>
-                                        </action>
-                                    </actions>
-                                    <sub-events>
-                                        <event-block sid="877119897092150">
-                                            <conditions>
-                                                <condition id="0" name="On collision with another object" sid="623353701008916" type="ObjectE15_3SLMovingPlatform">
-                                                    <param id="0" name="Object">ObjectE15_3SLMovingPlatformSensor</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="-13" name="Set boolean" sid="863361524328983" type="ObjectE15_3SLMovingPlatform">
-                                                    <param id="0" name="Instance variable">direction</param>
-                                                    <param id="1" name="Value">1</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                    </sub-events>
-                                </event-block>
-                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-group>
@@ -4824,6 +4969,78 @@
                                 </event-block>
                             </sub-events>
                         </event-block>
+                        <comment></comment>
+                        <event-block sid="817713105948458">
+                            <conditions>
+                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="362121711304146" type="Var_Level">
+                                    <param id="0" name="Instance variable">Pause</param>
+                                </condition>
+                                <condition id="1" name="Is overlapping another object" sid="908216194625547" type="Hazard1_8MMTurret">
+                                    <param id="0" name="Object">Engine_CameraZone</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="491641312303202" type="Engine_CameraZone">
+                                    <param id="0" name="Instance variable">ID</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">Engine_Camera.CurrentZone</param>
+                                </condition>
+                                <condition id="-6" name="Every X seconds" sid="742024350947822" type="System">
+                                    <param id="0" name="Interval (seconds)">4</param>
+                                </condition>
+                                <condition id="-11" name="For Each" sid="907751559798021" type="System">
+                                    <param id="0" name="Object">Hazard1_8MMTurret</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Call function" sid="169763131018971" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                </action>
+                                <action id="0" name="Spawn another object" sid="449220112750318" type="Hazard1_8MMTurret">
+                                    <param id="0" name="Object">Projectile1_Generic</param>
+                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                    <param id="2" name="Image point">1</param>
+                                </action>
+                                <action behavior="Bullet" id="0" name="Set speed" sid="534456019682041" type="Projectile1_Generic">
+                                    <param id="0" name="Speed">180</param>
+                                </action>
+                                <action id="-8" name="Set angle" sid="190280568694086" type="Projectile1_Generic">
+                                    <param id="0" name="Angle">0+Hazard1_8MMTurret.Angle</param>
+                                </action>
+                                <action id="0" name="Spawn another object" sid="576431659467937" type="Hazard1_8MMTurret">
+                                    <param id="0" name="Object">Projectile1_Generic</param>
+                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                    <param id="2" name="Image point">2</param>
+                                </action>
+                                <action behavior="Bullet" id="0" name="Set speed" sid="536796478695169" type="Projectile1_Generic">
+                                    <param id="0" name="Speed">180</param>
+                                </action>
+                                <action id="-8" name="Set angle" sid="861083048668779" type="Projectile1_Generic">
+                                    <param id="0" name="Angle">180+Hazard1_8MMTurret.Angle</param>
+                                </action>
+                                <action id="0" name="Spawn another object" sid="573820048455861" type="Hazard1_8MMTurret">
+                                    <param id="0" name="Object">Projectile1_Generic</param>
+                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                    <param id="2" name="Image point">3</param>
+                                </action>
+                                <action behavior="Bullet" id="0" name="Set speed" sid="876995178057512" type="Projectile1_Generic">
+                                    <param id="0" name="Speed">180</param>
+                                </action>
+                                <action id="-8" name="Set angle" sid="546646937055365" type="Projectile1_Generic">
+                                    <param id="0" name="Angle">270+Hazard1_8MMTurret.Angle</param>
+                                </action>
+                                <action id="0" name="Spawn another object" sid="138433262936173" type="Hazard1_8MMTurret">
+                                    <param id="0" name="Object">Projectile1_Generic</param>
+                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                    <param id="2" name="Image point">4</param>
+                                </action>
+                                <action behavior="Bullet" id="0" name="Set speed" sid="934830334378472" type="Projectile1_Generic">
+                                    <param id="0" name="Speed">180</param>
+                                </action>
+                                <action id="-8" name="Set angle" sid="793462209333808" type="Projectile1_Generic">
+                                    <param id="0" name="Angle">90+Hazard1_8MMTurret.Angle</param>
+                                </action>
+                            </actions>
+                        </event-block>
                     </sub-events>
                 </event-group>
                 <event-group description="" sid="660927821494223" title="SRB1 Objects">
@@ -5523,6 +5740,101 @@
                                 </event-block>
                             </sub-events>
                         </event-block>
+                        <comment></comment>
+                        <event-block sid="795063838148182">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="372535197243529" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Set value" sid="174804446238624" type="Object1_8MMLift">
+                                    <param id="0" name="Instance variable">InitialY</param>
+                                    <param id="1" name="Value">Self.Y</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="360569174483125">
+                            <conditions>
+                                <condition id="9" name="Is overlapping at offset" sid="520395227177083" type="Engine_Player">
+                                    <param id="0" name="Object">Object1_8MMLift</param>
+                                    <param id="1" name="Offset X">0</param>
+                                    <param id="2" name="Offset Y">1</param>
+                                </condition>
+                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="547775861810302" type="Var_Level">
+                                    <param id="0" name="Instance variable">Pause</param>
+                                </condition>
+                                <condition id="-8" name="Is boolean instance variable set" sid="232422299916501" type="Var_Player">
+                                    <param id="0" name="Instance variable">CanMove</param>
+                                </condition>
+                                <condition id="-8" name="Is boolean instance variable set" sid="507674900764921" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevelActive</param>
+                                </condition>
+                                <condition id="-2" name="Compare Y" sid="253994708687992" type="Object1_8MMLift">
+                                    <param id="0" name="Comparison">4</param>
+                                    <param id="1" name="Y co-ordinate">Self.TargetY</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Set Y" sid="451095326130240" type="Object1_8MMLift">
+                                    <param id="0" name="Y">Self.Y-2</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="867960249729774" type="Object1_8MMLift">
+                                    <param id="0" name="Instance variable">ResetTimer</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="309769206667889">
+                            <conditions>
+                                <condition id="9" inverted="1" name="Is overlapping at offset" sid="276661377062980" type="Engine_Player">
+                                    <param id="0" name="Object">Object1_8MMLift</param>
+                                    <param id="1" name="Offset X">0</param>
+                                    <param id="2" name="Offset Y">1</param>
+                                </condition>
+                                <condition id="-2" inverted="1" name="Compare Y" sid="230460045509946" type="Object1_8MMLift">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Y co-ordinate">Self.InitialY</param>
+                                </condition>
+                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="758600022804105" type="Var_Level">
+                                    <param id="0" name="Instance variable">Pause</param>
+                                </condition>
+                                <condition id="-8" name="Is boolean instance variable set" sid="186618844996644" type="Var_Player">
+                                    <param id="0" name="Instance variable">CanMove</param>
+                                </condition>
+                                <condition id="-6" name="Every X seconds" sid="361660989587787" type="System">
+                                    <param id="0" name="Interval (seconds)">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-11" name="Add to" sid="915640436549666" type="Object1_8MMLift">
+                                    <param id="0" name="Instance variable">ResetTimer</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="365799478074769">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="626677928100865" type="Object1_8MMLift">
+                                    <param id="0" name="Instance variable">ResetTimer</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Value">4</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="514479875880485" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Set Y" sid="654426637114818" type="Object1_8MMLift">
+                                    <param id="0" name="Y">Self.InitialY</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="567482582811399" type="Object1_8MMLift">
+                                    <param id="0" name="Instance variable">ResetTimer</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action behavior="Flash" id="0" name="Flash" sid="966013333116753" type="Object1_8MMLift">
+                                    <param id="0" name="&apos;On&apos; time">0.1</param>
+                                    <param id="1" name="&apos;Off&apos; time">0.1</param>
+                                    <param id="2" name="Duration">0.5</param>
+                                </action>
+                            </actions>
+                        </event-block>
                     </sub-events>
                 </event-group>
                 <event-group description="" sid="941291964255053" title="SRB2 Objects">
@@ -5752,27 +6064,10 @@
                                 </action>
                             </actions>
                         </event-block>
-                        <event-block sid="809830615522480">
-                            <conditions>
-                                <condition id="1" name="Is overlapping another object" sid="166832384813201" type="Engine_Player">
-                                    <param id="0" name="Object">ObjectE15_Water</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="967533048138136" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="-13" name="Set boolean" sid="842671181195520" type="Var_Player">
-                                    <param id="0" name="Instance variable">Underwater</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                            </actions>
-                        </event-block>
                         <event-block sid="178576415844361">
                             <conditions>
                                 <condition id="1" inverted="1" name="Is overlapping another object" sid="382997885506556" type="Engine_Player">
                                     <param id="0" name="Object">Object2_Water</param>
-                                </condition>
-                                <condition id="1" inverted="1" name="Is overlapping another object" sid="471675544373776" type="Engine_Player">
-                                    <param id="0" name="Object">ObjectE15_Water</param>
                                 </condition>
                                 <condition id="-4" name="Trigger once while true" sid="494329205929949" type="System" />
                             </conditions>
@@ -6628,6 +6923,435 @@
                                     </actions>
                                 </event-block>
                             </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-group>
+                <event-group description="" sid="735957724159054" title="Extra Objects">
+                    <sub-events>
+                        <comment>=== srb1.5</comment>
+                        <event-block sid="471727844955841">
+                            <conditions>
+                                <condition id="1" name="Is overlapping another object" sid="513779973409863" type="Engine_Player">
+                                    <param id="0" name="Object">ObjectE15_Water</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="979247773676350" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-13" name="Set boolean" sid="187534455213442" type="Var_Player">
+                                    <param id="0" name="Instance variable">Underwater</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="282489481057986">
+                            <conditions>
+                                <condition id="1" inverted="1" name="Is overlapping another object" sid="854656086157281" type="Engine_Player">
+                                    <param id="0" name="Object">ObjectE15_Water</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="742052890880985" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-13" name="Set boolean" sid="858954126264946" type="Var_Player">
+                                    <param id="0" name="Instance variable">Underwater</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment></comment>
+                        <event-block sid="194641808386267">
+                            <conditions>
+                                <condition id="-11" name="For Each" sid="712400128126343" type="System">
+                                    <param id="0" name="Object">ObjectE15_3SLMovingPlatform</param>
+                                </condition>
+                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="846960442403921" type="Var_Level">
+                                    <param id="0" name="Instance variable">Pause</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="625287445332168" type="Var_Game">
+                                    <param id="0" name="Instance variable">TimerGlobal</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Value">4</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="306165966405764">
+                                    <conditions>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="766228684212786" type="ObjectE15_3SLMovingPlatform">
+                                            <param id="0" name="Instance variable">direction</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="725784411452991" type="ObjectE15_3SLMovingPlatform">
+                                            <param id="0" name="Y">Self.Y-5</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="266609070470845">
+                                            <conditions>
+                                                <condition id="0" name="On collision with another object" sid="338143971524883" type="ObjectE15_3SLMovingPlatform">
+                                                    <param id="0" name="Object">ObjectE15_3SLMovingPlatformSensor</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-13" name="Set boolean" sid="897612715770848" type="ObjectE15_3SLMovingPlatform">
+                                                    <param id="0" name="Instance variable">direction</param>
+                                                    <param id="1" name="Value">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="393104919535850">
+                                    <conditions>
+                                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="273652210979005" type="ObjectE15_3SLMovingPlatform">
+                                            <param id="0" name="Instance variable">direction</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="463063298270180" type="ObjectE15_3SLMovingPlatform">
+                                            <param id="0" name="Y">Self.Y+5</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="877119897092150">
+                                            <conditions>
+                                                <condition id="0" name="On collision with another object" sid="623353701008916" type="ObjectE15_3SLMovingPlatform">
+                                                    <param id="0" name="Object">ObjectE15_3SLMovingPlatformSensor</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-13" name="Set boolean" sid="863361524328983" type="ObjectE15_3SLMovingPlatform">
+                                                    <param id="0" name="Instance variable">direction</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <comment>=== srb1 special</comment>
+                        <comment></comment>
+                        <event-block sid="865787894113606">
+                            <conditions>
+                                <condition id="0" name="On collision with another object" sid="338774156879906" type="Engine_Player">
+                                    <param id="0" name="Object">DecoE1Sp_1GGWater</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="851862822395648" type="System">
+                                    <param id="0" name="Object to create">Effects_WaterSplash</param>
+                                    <param id="1" name="Layer">&quot;Objects&quot;</param>
+                                    <param id="2" name="X">Engine_Player.X</param>
+                                    <param id="3" name="Y">Engine_Player.Y+16</param>
+                                </action>
+                                <action id="0" name="Call function" sid="522521435949073" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;F_Submerged&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="823234924445264">
+                            <conditions>
+                                <condition id="-8" inverted="1" name="Compare two values" sid="339324555720930" type="System">
+                                    <param id="0" name="First value">DecoE1Sp_1GGWater.Count</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="229823702308521">
+                                    <conditions>
+                                        <condition id="1" name="Is overlapping another object" sid="873666107882897" type="Engine_Player">
+                                            <param id="0" name="Object">DecoE1Sp_1GGWater</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action behavior="Platform" id="1" name="Set max speed" sid="180305609435957" type="Engine_Player">
+                                            <param id="0" name="Max Speed">Self.InitialSpeed/1.75</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="192967202740617">
+                                    <conditions>
+                                        <condition id="1" inverted="1" name="Is overlapping another object" sid="579458864596065" type="Engine_Player">
+                                            <param id="0" name="Object">DecoE1Sp_1GGWater</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action behavior="Platform" id="1" name="Set max speed" sid="597743019865825" type="Engine_Player">
+                                            <param id="0" name="Max Speed">Self.InitialSpeed</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <comment></comment>
+                        <event-block sid="941822294224924">
+                            <conditions>
+                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="493120513886080" type="Var_Level">
+                                    <param id="0" name="Instance variable">Pause</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="795589136364097" type="Var_Player">
+                                    <param id="0" name="Instance variable">Finished</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="951640032451567" type="Var_Game">
+                                    <param id="0" name="Instance variable">TimerGlobal</param>
+                                    <param id="1" name="Comparison">4</param>
+                                    <param id="2" name="Value">4</param>
+                                </condition>
+                                <condition id="-6" name="Every X seconds" sid="404021191772379" type="System">
+                                    <param id="0" name="Interval (seconds)">1.25</param>
+                                </condition>
+                                <condition id="-11" name="For Each" sid="544199316341751" type="System">
+                                    <param id="0" name="Object">EnemyE1Sp_GreenCrawla</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Spawn another object" sid="733606229256274" type="EnemyE1Sp_GreenCrawla">
+                                    <param id="0" name="Object">EffectsE1Sp_Explosion</param>
+                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                    <param id="2" name="Image point">1</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="170446265432402">
+                                    <conditions>
+                                        <condition id="-5" name="Compare width" sid="977125068978558" type="EnemyE1Sp_GreenCrawla">
+                                            <param id="0" name="Comparison">0</param>
+                                            <param id="1" name="Width">45</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Spawn another object" sid="835896752776370" type="EnemyE1Sp_GreenCrawla">
+                                            <param id="0" name="Object">HazardE1Sp_GreenCrawlaProjectile</param>
+                                            <param id="1" name="Layer">&quot;Player&quot;</param>
+                                            <param id="2" name="Image point">1</param>
+                                        </action>
+                                        <action behavior="Rotate" id="0" name="Set speed" sid="499739384449106" type="HazardE1Sp_GreenCrawlaProjectile">
+                                            <param id="0" name="Speed">180</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="957629640005637">
+                                    <conditions>
+                                        <condition id="-5" name="Compare width" sid="656036582996373" type="EnemyE1Sp_GreenCrawla">
+                                            <param id="0" name="Comparison">0</param>
+                                            <param id="1" name="Width">-45</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Spawn another object" sid="767779091206589" type="EnemyE1Sp_GreenCrawla">
+                                            <param id="0" name="Object">HazardE1Sp_GreenCrawlaProjectile</param>
+                                            <param id="1" name="Layer">&quot;Player&quot;</param>
+                                            <param id="2" name="Image point">1</param>
+                                        </action>
+                                        <action behavior="Rotate" id="0" name="Set speed" sid="240660052319091" type="HazardE1Sp_GreenCrawlaProjectile">
+                                            <param id="0" name="Speed">-180</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="663731757334476">
+                                    <conditions>
+                                        <condition id="-3" name="Is on-screen" sid="197036465137558" type="EnemyE1Sp_GreenCrawla" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="604437507706309" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="150002281220581">
+                            <conditions>
+                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="759996309789292" type="Var_Level">
+                                    <param id="0" name="Instance variable">Pause</param>
+                                </condition>
+                                <condition id="-11" name="For Each" sid="713174297379335" type="System">
+                                    <param id="0" name="Object">HazardE1Sp_GreenCrawlaProjectile</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="681722659017997">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="637605553656935" type="System">
+                                            <param id="0" name="First value">HazardE1Sp_GreenCrawlaProjectile.Rotate.Speed</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">180</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-1" name="Set X" sid="447055853395552" type="HazardE1Sp_GreenCrawlaProjectile">
+                                            <param id="0" name="X">Self.X+4</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="691104185151451">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="763326807795626" type="System">
+                                            <param id="0" name="First value">HazardE1Sp_GreenCrawlaProjectile.Rotate.Speed</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">-180</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-1" name="Set X" sid="788294443999704" type="HazardE1Sp_GreenCrawlaProjectile">
+                                            <param id="0" name="X">Self.X-4</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="190622526430391">
+                            <conditions>
+                                <condition id="0" name="On collision with another object" sid="541736239244200" type="HazardE1Sp_GreenCrawlaProjectile">
+                                    <param id="0" name="Object">LevelTiles</param>
+                                </condition>
+                                <condition behavior="Solid" id="0" name="Is enabled" sid="533059549776455" type="LevelTiles" />
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Spawn another object" sid="131555879952017" type="HazardE1Sp_GreenCrawlaProjectile">
+                                    <param id="0" name="Object">EffectsE1Sp_Explosion</param>
+                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                    <param id="2" name="Image point">0</param>
+                                </action>
+                                <action id="-9" name="Destroy" sid="206679302865484" type="HazardE1Sp_GreenCrawlaProjectile" />
+                            </actions>
+                        </event-block>
+                        <event-block sid="581587843166025">
+                            <conditions>
+                                <condition id="1" name="Is overlapping another object" sid="848145994363232" type="PlayerSkins">
+                                    <param id="0" name="Object">HazardE1Sp_GreenCrawlaProjectile</param>
+                                </condition>
+                                <condition id="-8" name="Is boolean instance variable set" sid="303906047086835" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
+                                </condition>
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="967764776730223" type="Var_Player">
+                                    <param id="0" name="Instance variable">State</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;crouch&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Call function" sid="711256640756347" type="Function">
+                                    <param id="0" name="Name">&quot;Player_Hurt&quot;</param>
+                                    <param id="1" name="Parameter {n}"></param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment></comment>
+                        <event-block sid="762348178717964">
+                            <conditions>
+                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="893903805039817" type="Var_Level">
+                                    <param id="0" name="Instance variable">Pause</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="416533673591386" type="Var_Player">
+                                    <param id="0" name="Instance variable">Finished</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="916184163502194" type="Var_Game">
+                                    <param id="0" name="Instance variable">TimerGlobal</param>
+                                    <param id="1" name="Comparison">4</param>
+                                    <param id="2" name="Value">4</param>
+                                </condition>
+                                <condition id="-11" name="For Each" sid="390091552537441" type="System">
+                                    <param id="0" name="Object">HazardE1Sp_FloatingSpikeball</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="640881894240716">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="760936259198725" type="HazardE1Sp_FloatingSpikeball">
+                                            <param id="0" name="Instance variable">direction</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-1" name="Set X" sid="420491559514887" type="HazardE1Sp_FloatingSpikeball">
+                                            <param id="0" name="X">Self.X+1</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="213676797090110">
+                                            <conditions>
+                                                <condition id="0" name="On collision with another object" sid="877107061353421" type="HazardE1Sp_FloatingSpikeball">
+                                                    <param id="0" name="Object">LevelTiles</param>
+                                                </condition>
+                                                <condition behavior="Solid" id="0" name="Is enabled" sid="975484281447493" type="LevelTiles" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-16" name="Wait" sid="543816401114179" type="System">
+                                                    <param id="0" name="Seconds">0.01</param>
+                                                </action>
+                                                <action id="-10" name="Set value" sid="707075072498959" type="HazardE1Sp_FloatingSpikeball">
+                                                    <param id="0" name="Instance variable">direction</param>
+                                                    <param id="1" name="Value">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="877781378452458">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="613040566827535" type="HazardE1Sp_FloatingSpikeball">
+                                            <param id="0" name="Instance variable">direction</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-1" name="Set X" sid="446837035262090" type="HazardE1Sp_FloatingSpikeball">
+                                            <param id="0" name="X">Self.X-1</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="360843263575769">
+                                            <conditions>
+                                                <condition id="0" name="On collision with another object" sid="557996155525015" type="HazardE1Sp_FloatingSpikeball">
+                                                    <param id="0" name="Object">LevelTiles</param>
+                                                </condition>
+                                                <condition behavior="Solid" id="0" name="Is enabled" sid="907687089149505" type="LevelTiles" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-16" name="Wait" sid="300489368955989" type="System">
+                                                    <param id="0" name="Seconds">0.01</param>
+                                                </action>
+                                                <action id="-10" name="Set value" sid="702094248887745" type="HazardE1Sp_FloatingSpikeball">
+                                                    <param id="0" name="Instance variable">direction</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="189939657344097">
+                            <conditions>
+                                <condition id="1" name="Is overlapping another object" sid="474449948957430" type="Engine_Player">
+                                    <param id="0" name="Object">HazardE1Sp_FloatingSpikeball</param>
+                                </condition>
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="302071302324715" type="Var_Player">
+                                    <param id="0" name="Instance variable">State</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;crouch&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Call function" sid="500374059303517" type="Function">
+                                    <param id="0" name="Name">&quot;Player_Hurt&quot;</param>
+                                    <param id="1" name="Parameter {n}"></param>
+                                </action>
+                            </actions>
                         </event-block>
                     </sub-events>
                 </event-group>
@@ -8244,6 +8968,22 @@
                                 </action>
                             </actions>
                         </event-block>
+                        <comment></comment>
+                        <event-block sid="411356937201887">
+                            <conditions>
+                                <condition id="-19" name="On destroyed" sid="272496994228540" type="Projectile1_8MMLaser" />
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Spawn another object" sid="684302023811691" type="Projectile1_8MMLaser">
+                                    <param id="0" name="Object">Effects1_8MMLaser</param>
+                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                    <param id="2" name="Image point">0</param>
+                                </action>
+                                <action id="-8" name="Set angle" sid="620324759768190" type="Effects1_8MMLaser">
+                                    <param id="0" name="Angle">Projectile1_8MMLaser.Angle</param>
+                                </action>
+                            </actions>
+                        </event-block>
                     </sub-events>
                 </event-group>
                 <event-group description="" sid="659484576220536" title="SRB2 Enemies">
@@ -9697,9 +10437,6 @@
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">&quot;active&quot;</param>
                                 </condition>
-                                <condition id="-6" name="Every X seconds" sid="111384843650974" type="System">
-                                    <param id="0" name="Interval (seconds)">1.75</param>
-                                </condition>
                                 <condition id="-7" name="Compare instance variable" sid="214052563686613" type="Boss1_2GF2">
                                     <param id="0" name="Instance variable">Active</param>
                                     <param id="1" name="Comparison">4</param>
@@ -9709,6 +10446,9 @@
                                     <param id="0" name="First value">Projectile1_2GF2Boss.Count</param>
                                     <param id="1" name="Comparison">2</param>
                                     <param id="2" name="Second value">3</param>
+                                </condition>
+                                <condition id="-6" name="Every X seconds" sid="111384843650974" type="System">
+                                    <param id="0" name="Interval (seconds)">1.75</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -11660,6 +12400,1440 @@
                                 </action>
                                 <action id="-9" name="Destroy" sid="602672932509980" type="Projectile1_5V2Boss" />
                             </actions>
+                        </event-block>
+                    </sub-events>
+                </event-group>
+                <event-group description="" sid="484075270245218" title="EP1 Mini-boss">
+                    <sub-events>
+                        <event-block sid="186920185573590">
+                            <conditions>
+                                <condition id="0" name="On function" sid="912076898680712" type="Function">
+                                    <param id="0" name="Name">&quot;Player_Restart&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Set value" sid="827964530273038" type="Object1_6EP1BossConveyor">
+                                    <param id="0" name="Instance variable">speed</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="344247414991220" type="Object1_6EP1BossConveyor">
+                                    <param id="0" name="Instance variable">scrollspeed</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-9" name="Destroy" sid="285044846068333" type="Boss1_6EP1Pogminz" />
+                                <action id="5" name="Terminate" sid="968773685933317" type="Ease">
+                                    <param id="0" name="Ease tag">&quot;EP1BossIn&quot;</param>
+                                    <param id="1" name="Ease parameter {n}"></param>
+                                </action>
+                                <action id="5" name="Terminate" sid="905435243902542" type="Ease">
+                                    <param id="0" name="Ease tag">&quot;EP1BossOut&quot;</param>
+                                    <param id="1" name="Ease parameter {n}"></param>
+                                </action>
+                                <action id="-9" name="Destroy" sid="569598901251499" type="Boss1_6EP1EnergyBall" />
+                            </actions>
+                        </event-block>
+                        <event-block sid="185191281193268">
+                            <conditions />
+                            <actions>
+                                <action id="-28" name="Set effect parameter" sid="890584810905512" type="Object1_6EP1BossConveyor">
+                                    <param id="0" name="Effect">&quot;Scroll&quot;</param>
+                                    <param id="1" name="Parameter index">0</param>
+                                    <param id="2" name="Value">Self.scrollspeed</param>
+                                </action>
+                                <action id="-28" name="Set effect parameter" sid="923387301102183" type="Object1_6EP1BossScrolling">
+                                    <param id="0" name="Effect">&quot;Scroll&quot;</param>
+                                    <param id="1" name="Parameter index">0</param>
+                                    <param id="2" name="Value">Object1_6EP1BossConveyor.scrollspeed</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block any="1" sid="463792912760527">
+                            <conditions>
+                                <condition id="0" name="On collision with another object" sid="946479074948627" type="Boss1_6EP1EnergyBall">
+                                    <param id="0" name="Object">LevelTiles</param>
+                                </condition>
+                                <condition id="0" name="On collision with another object" sid="535763644737170" type="Boss1_6EP1EnergyBall">
+                                    <param id="0" name="Object">Object1_6EP1BossConveyor</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Destroy" sid="792171855848313" type="Boss1_6EP1EnergyBall" />
+                            </actions>
+                        </event-block>
+                        <event-block sid="237365523480381">
+                            <conditions>
+                                <condition id="-6" name="Every X seconds" sid="985668217826373" type="System">
+                                    <param id="0" name="Interval (seconds)">0.05</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="607857316272939" type="Save_Configuration">
+                                    <param id="0" name="Instance variable">GameplayProjectileTrails</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Spawn another object" sid="609913586013354" type="Boss1_6EP1EnergyBall">
+                                    <param id="0" name="Object">EffectsF_ProjectileTrail</param>
+                                    <param id="1" name="Layer">&quot;Level&quot;</param>
+                                    <param id="2" name="Image point">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="573282339583201">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="628922127066302" type="Boss1_6EP1">
+                                    <param id="0" name="Instance variable">HP</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="721021852247025" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Set value" sid="475234298055569" type="Object1_6EP1BossConveyor">
+                                    <param id="0" name="Instance variable">speed</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="139041125293096" type="Object1_6EP1BossConveyor">
+                                    <param id="0" name="Instance variable">scrollspeed</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="0" name="Spawn another object" sid="573617592618369" type="Boss1_6EP1Pogminz">
+                                    <param id="0" name="Object">Effects_Explosion</param>
+                                    <param id="1" name="Layer">&quot;Objects&quot;</param>
+                                    <param id="2" name="Image point">0</param>
+                                </action>
+                                <action id="-9" name="Destroy" sid="668148362124284" type="Boss1_6EP1Pogminz" />
+                                <action id="-9" name="Destroy" sid="257121926831758" type="Boss1_6EP1EnergyBall" />
+                                <action id="-16" name="Wait" sid="395774007127962" type="System">
+                                    <param id="0" name="Seconds">0.2</param>
+                                </action>
+                                <action id="-3" name="Create object" sid="456329993417459" type="System">
+                                    <param id="0" name="Object to create">Effects_Explosion</param>
+                                    <param id="1" name="Layer">&quot;Objects&quot;</param>
+                                    <param id="2" name="X">Boss1_6EP1.X</param>
+                                    <param id="3" name="Y">Boss1_6EP1.Y</param>
+                                </action>
+                                <action id="-3" name="Create object" sid="277966841123096" type="System">
+                                    <param id="0" name="Object to create">Effects_Explosion</param>
+                                    <param id="1" name="Layer">&quot;Objects&quot;</param>
+                                    <param id="2" name="X">Boss1_6EP1.X</param>
+                                    <param id="3" name="Y">Boss1_6EP1.Y+24</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="429442468222250" type="System">
+                                    <param id="0" name="Seconds">0.2</param>
+                                </action>
+                                <action id="-3" name="Create object" sid="318047401687221" type="System">
+                                    <param id="0" name="Object to create">Effects_Explosion</param>
+                                    <param id="1" name="Layer">&quot;Objects&quot;</param>
+                                    <param id="2" name="X">Boss1_6EP1.X-24</param>
+                                    <param id="3" name="Y">Boss1_6EP1.Y</param>
+                                </action>
+                                <action id="-3" name="Create object" sid="346666290362758" type="System">
+                                    <param id="0" name="Object to create">Effects_Explosion</param>
+                                    <param id="1" name="Layer">&quot;Objects&quot;</param>
+                                    <param id="2" name="X">Boss1_6EP1.X</param>
+                                    <param id="3" name="Y">Boss1_6EP1.Y-24</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="967100457643359" type="System">
+                                    <param id="0" name="Seconds">0.2</param>
+                                </action>
+                                <action id="-3" name="Create object" sid="556539640272407" type="System">
+                                    <param id="0" name="Object to create">Effects_Explosion</param>
+                                    <param id="1" name="Layer">&quot;Objects&quot;</param>
+                                    <param id="2" name="X">Boss1_6EP1.X+24</param>
+                                    <param id="3" name="Y">Boss1_6EP1.Y</param>
+                                </action>
+                                <action id="-3" name="Create object" sid="960131395015231" type="System">
+                                    <param id="0" name="Object to create">Effects_Explosion</param>
+                                    <param id="1" name="Layer">&quot;Objects&quot;</param>
+                                    <param id="2" name="X">Boss1_6EP1.X</param>
+                                    <param id="3" name="Y">Boss1_6EP1.Y</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="140393660628809" type="System">
+                                    <param id="0" name="Seconds">0.2</param>
+                                </action>
+                                <action id="-3" name="Create object" sid="311832472624529" type="System">
+                                    <param id="0" name="Object to create">Effects_Explosion</param>
+                                    <param id="1" name="Layer">&quot;Objects&quot;</param>
+                                    <param id="2" name="X">Boss1_6EP1.X</param>
+                                    <param id="3" name="Y">Boss1_6EP1.Y</param>
+                                </action>
+                                <action id="-3" name="Create object" sid="952319271019333" type="System">
+                                    <param id="0" name="Object to create">Effects_Explosion</param>
+                                    <param id="1" name="Layer">&quot;Objects&quot;</param>
+                                    <param id="2" name="X">Boss1_6EP1.X</param>
+                                    <param id="3" name="Y">Boss1_6EP1.Y+24</param>
+                                </action>
+                                <action id="-3" name="Create object" sid="337246078797488" type="System">
+                                    <param id="0" name="Object to create">Effects_Explosion</param>
+                                    <param id="1" name="Layer">&quot;Objects&quot;</param>
+                                    <param id="2" name="X">Boss1_6EP1.X-24</param>
+                                    <param id="3" name="Y">Boss1_6EP1.Y</param>
+                                </action>
+                                <action id="-3" name="Create object" sid="398957446168301" type="System">
+                                    <param id="0" name="Object to create">Effects_Explosion</param>
+                                    <param id="1" name="Layer">&quot;Objects&quot;</param>
+                                    <param id="2" name="X">Boss1_6EP1.X</param>
+                                    <param id="3" name="Y">Boss1_6EP1.Y-24</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="111523383549857" type="System">
+                                    <param id="0" name="Seconds">0.2</param>
+                                </action>
+                                <action id="-3" name="Create object" sid="549274704208291" type="System">
+                                    <param id="0" name="Object to create">Effects_Explosion</param>
+                                    <param id="1" name="Layer">&quot;Objects&quot;</param>
+                                    <param id="2" name="X">Boss1_6EP1.X</param>
+                                    <param id="3" name="Y">Boss1_6EP1.Y</param>
+                                </action>
+                                <action id="9" name="Set scale" sid="533545769892165" type="Effects_Explosion">
+                                    <param id="0" name="Scale">6</param>
+                                </action>
+                                <action id="6" name="Set speed" sid="929692622049373" type="Effects_Explosion">
+                                    <param id="0" name="Speed">12</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="144730306035830">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="641833804451614" type="Var_Player">
+                                    <param id="0" name="Instance variable">Finished</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">-1</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="481582507382433" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="5" name="Terminate" sid="691966164492358" type="Ease">
+                                    <param id="0" name="Ease tag">&quot;EP1BossIn&quot;</param>
+                                    <param id="1" name="Ease parameter {n}"></param>
+                                </action>
+                                <action id="5" name="Terminate" sid="189777896329203" type="Ease">
+                                    <param id="0" name="Ease tag">&quot;EP1BossOut&quot;</param>
+                                    <param id="1" name="Ease parameter {n}"></param>
+                                </action>
+                                <action behavior="Bullet" id="0" name="Set speed" sid="988774190581303" type="Boss1_6EP1EnergyBall">
+                                    <param id="0" name="Speed">0</param>
+                                </action>
+                                <action behavior="Bullet" id="5" name="Set enabled" sid="893623664024496" type="Boss1_6EP1EnergyBall">
+                                    <param id="0" name="State">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment></comment>
+                        <event-block sid="592913428596480">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="791557681081541" type="Boss1_6EP1">
+                                    <param id="0" name="Instance variable">Active</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <variable constant="0" name="timer" sid="504993619802992" static="1" type="number">0</variable>
+                                <event-block sid="390558030458551">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="862586318008511" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="903975069112300" type="System">
+                                            <param id="0" name="Variable">timer</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="632794505279428">
+                                            <conditions>
+                                                <condition id="-7" name="Compare instance variable" sid="355224012631296" type="Save_Configuration">
+                                                    <param id="0" name="Instance variable">GameplayInstantCamera</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">0</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-27" name="Set effect enabled" sid="742955259975191" type="Object1_6EP1BossConveyor">
+                                                    <param id="0" name="Mode">0</param>
+                                                    <param id="1" name="Effect">&quot;Scroll&quot;</param>
+                                                </action>
+                                                <action id="-16" name="Wait" sid="824484502217975" type="System">
+                                                    <param id="0" name="Seconds">0.75</param>
+                                                </action>
+                                                <action id="-27" name="Set effect enabled" sid="607219628887372" type="Object1_6EP1BossConveyor">
+                                                    <param id="0" name="Mode">1</param>
+                                                    <param id="1" name="Effect">&quot;Scroll&quot;</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="648879954742904">
+                                            <conditions>
+                                                <condition id="-22" name="Else" sid="745070656445231" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-27" name="Set effect enabled" sid="962862330773368" type="Object1_6EP1BossConveyor">
+                                                    <param id="0" name="Mode">1</param>
+                                                    <param id="1" name="Effect">&quot;Scroll&quot;</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="198935862548650">
+                                    <conditions>
+                                        <condition id="-6" name="Every X seconds" sid="241267327419386" type="System">
+                                            <param id="0" name="Interval (seconds)">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Add to" sid="229057466611904" type="System">
+                                            <param id="0" name="Variable">timer</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="618420664482046">
+                                    <conditions>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="784369836519504" type="Var_Level">
+                                            <param id="0" name="Instance variable">Pause</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="3" name="Pause" sid="137533344984722" type="Ease">
+                                            <param id="0" name="Ease tag">&quot;EP1BossIn&quot;</param>
+                                            <param id="1" name="Ease parameter {n}"></param>
+                                        </action>
+                                        <action id="3" name="Pause" sid="886322930314374" type="Ease">
+                                            <param id="0" name="Ease tag">&quot;EP1BossOut&quot;</param>
+                                            <param id="1" name="Ease parameter {n}"></param>
+                                        </action>
+                                        <action behavior="Bullet" id="5" name="Set enabled" sid="782635009691484" type="Boss1_6EP1EnergyBall">
+                                            <param id="0" name="State">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="981587807296753">
+                                    <conditions>
+                                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="844758643020890" type="Var_Level">
+                                            <param id="0" name="Instance variable">Pause</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="4" name="Resume" sid="473365510098375" type="Ease">
+                                            <param id="0" name="Ease tag">&quot;EP1BossIn&quot;</param>
+                                            <param id="1" name="Ease parameter {n}"></param>
+                                        </action>
+                                        <action id="4" name="Resume" sid="836684119341410" type="Ease">
+                                            <param id="0" name="Ease tag">&quot;EP1BossOut&quot;</param>
+                                            <param id="1" name="Ease parameter {n}"></param>
+                                        </action>
+                                        <action behavior="Bullet" id="5" name="Set enabled" sid="632879706193728" type="Boss1_6EP1EnergyBall">
+                                            <param id="0" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <comment></comment>
+                                <event-block sid="840323427544076">
+                                    <conditions>
+                                        <condition id="-6" name="Every X seconds" sid="902621134338171" type="System">
+                                            <param id="0" name="Interval (seconds)">choose(2.5,3,3.5)</param>
+                                        </condition>
+                                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="895161479989151" type="Var_Level">
+                                            <param id="0" name="Instance variable">Pause</param>
+                                        </condition>
+                                        <condition id="-7" name="Compare instance variable" sid="733784840492244" type="Var_Player">
+                                            <param id="0" name="Instance variable">Finished</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Spawn another object" sid="195103047557798" type="Boss1_6EP1">
+                                            <param id="0" name="Object">Boss1_6EP1EnergyBall</param>
+                                            <param id="1" name="Layer">&quot;Player&quot;</param>
+                                            <param id="2" name="Image point">1</param>
+                                        </action>
+                                        <action id="-22" name="Set angle toward position" sid="898275584742660" type="Boss1_6EP1EnergyBall">
+                                            <param id="0" name="X">Engine_Player.X</param>
+                                            <param id="1" name="Y">Engine_Player.Y</param>
+                                        </action>
+                                        <action behavior="Bullet" id="0" name="Set speed" sid="702512646333890" type="Boss1_6EP1EnergyBall">
+                                            <param id="0" name="Speed">choose(250,300,350)</param>
+                                        </action>
+                                        <action id="0" name="Call function" sid="964289813387163" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="695692644970636">
+                                    <conditions>
+                                        <condition id="0" name="On collision with another object" sid="935719404613512" type="PlayerSkins">
+                                            <param id="0" name="Object">Boss1_6EP1EnergyBall</param>
+                                        </condition>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="511823827756162" type="PlayerSkins">
+                                            <param id="0" name="Instance variable">Me</param>
+                                        </condition>
+                                        <condition id="2" name="Is playing" sid="376712956467143" type="Boss1_6EP1EnergyBall">
+                                            <param id="0" name="Animation">&quot;Default&quot;</param>
+                                        </condition>
+                                        <condition id="-7" name="Compare instance variable" sid="970987167166730" type="Var_Player">
+                                            <param id="0" name="Instance variable">State</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;jump&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="4" name="Set animation" sid="557273555534977" type="Boss1_6EP1EnergyBall">
+                                            <param id="0" name="Animation">&quot;Return&quot;</param>
+                                            <param id="1" name="From">1</param>
+                                        </action>
+                                        <action id="-22" name="Set angle toward position" sid="441328451860815" type="Boss1_6EP1EnergyBall">
+                                            <param id="0" name="X">Boss1_6EP1.X</param>
+                                            <param id="1" name="Y">Boss1_6EP1.Y</param>
+                                        </action>
+                                        <action behavior="Bullet" id="0" name="Set speed" sid="760462567867618" type="Boss1_6EP1EnergyBall">
+                                            <param id="0" name="Speed">700</param>
+                                        </action>
+                                        <action id="0" name="Call function" sid="517706647669991" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;2Title&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="354658222333615">
+                                    <conditions>
+                                        <condition id="1" name="Is overlapping another object" sid="547300599811703" type="PlayerSkins">
+                                            <param id="0" name="Object">Boss1_6EP1EnergyBall</param>
+                                        </condition>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="564870999464461" type="PlayerSkins">
+                                            <param id="0" name="Instance variable">Me</param>
+                                        </condition>
+                                        <condition id="2" name="Is playing" sid="319956476693359" type="Boss1_6EP1EnergyBall">
+                                            <param id="0" name="Animation">&quot;Default&quot;</param>
+                                        </condition>
+                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="114645176536551" type="Var_Player">
+                                            <param id="0" name="Instance variable">State</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;crouch&quot;</param>
+                                        </condition>
+                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="308039312738217" type="Var_Player">
+                                            <param id="0" name="Instance variable">State</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;jump&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="796949024987383" type="Function">
+                                            <param id="0" name="Name">&quot;Player_Hurt&quot;</param>
+                                            <param id="1" name="Parameter {n}"></param>
+                                        </action>
+                                        <action id="-9" name="Destroy" sid="722206819192206" type="Boss1_6EP1EnergyBall" />
+                                    </actions>
+                                </event-block>
+                                <event-block sid="756465094417144">
+                                    <conditions>
+                                        <condition id="0" name="On collision with another object" sid="977000951611080" type="Boss1_6EP1EnergyBall">
+                                            <param id="0" name="Object">Boss1_6EP1</param>
+                                        </condition>
+                                        <condition id="2" name="Is playing" sid="689621373653214" type="Boss1_6EP1EnergyBall">
+                                            <param id="0" name="Animation">&quot;Return&quot;</param>
+                                        </condition>
+                                        <condition id="-7" name="Compare instance variable" sid="366920126086142" type="Boss1_6EP1">
+                                            <param id="0" name="Instance variable">State</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;active&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Set value" sid="604714118350582" type="Boss1_6EP1">
+                                            <param id="0" name="Instance variable">State</param>
+                                            <param id="1" name="Value">&quot;flash&quot;</param>
+                                        </action>
+                                        <action id="-12" name="Subtract from" sid="767123154622834" type="Boss1_6EP1">
+                                            <param id="0" name="Instance variable">HP</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-9" name="Destroy" sid="254008956202087" type="Boss1_6EP1EnergyBall" />
+                                        <action id="0" name="Call function" sid="255847553501661" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;Explode&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <comment></comment>
+                                <event-block sid="590879004573399">
+                                    <conditions>
+                                        <condition id="1" name="Is overlapping another object" sid="898046984242988" type="PlayerSkins">
+                                            <param id="0" name="Object">Boss1_6EP1Pogminz</param>
+                                        </condition>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="591630177599667" type="PlayerSkins">
+                                            <param id="0" name="Instance variable">Me</param>
+                                        </condition>
+                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="330320550010069" type="Var_Player">
+                                            <param id="0" name="Instance variable">State</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;crouch&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="488101051008500" type="Function">
+                                            <param id="0" name="Name">&quot;Player_Hurt&quot;</param>
+                                            <param id="1" name="Parameter {n}"></param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="480176170192069">
+                                    <conditions>
+                                        <condition id="-6" name="Every X seconds" sid="932953920318283" type="System">
+                                            <param id="0" name="Interval (seconds)">1.8</param>
+                                        </condition>
+                                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="262979602963343" type="Var_Level">
+                                            <param id="0" name="Instance variable">Pause</param>
+                                        </condition>
+                                        <condition id="-7" name="Compare instance variable" sid="392871969056354" type="Var_Player">
+                                            <param id="0" name="Instance variable">Finished</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Ease" sid="352112342399849" type="Ease">
+                                            <param id="0" name="Ease tag">&quot;EP1BossIn&quot;</param>
+                                            <param id="1" name="Start value">Object1_6EP1BossConveyor.BBoxTop-16</param>
+                                            <param id="2" name="End value">(Object1_6EP1BossConveyor.BBoxTop-16)-128</param>
+                                            <param id="3" name="Duration">0.6</param>
+                                            <param id="4" name="Easing effect">0</param>
+                                            <param id="5" name="Bounce back">0</param>
+                                            <param id="6" name="Ease parameter {n}"></param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="239486857036591">
+                                    <conditions>
+                                        <condition id="1" name="On finished" sid="579917070815209" type="Ease">
+                                            <param id="0" name="Ease tag">&quot;EP1BossIn&quot;</param>
+                                            <param id="1" name="Ease parameter {n}"></param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Ease" sid="764027625549856" type="Ease">
+                                            <param id="0" name="Ease tag">&quot;EP1BossOut&quot;</param>
+                                            <param id="1" name="Start value">(Object1_6EP1BossConveyor.BBoxTop-16)-128</param>
+                                            <param id="2" name="End value">Object1_6EP1BossConveyor.BBoxTop-16</param>
+                                            <param id="3" name="Duration">0.45</param>
+                                            <param id="4" name="Easing effect">0</param>
+                                            <param id="5" name="Bounce back">0</param>
+                                            <param id="6" name="Ease parameter {n}"></param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block any="1" sid="536882797362586">
+                                    <conditions>
+                                        <condition id="3" name="On ticked" sid="974782317416744" type="Ease">
+                                            <param id="0" name="Ease tag">&quot;EP1BossIn&quot;</param>
+                                            <param id="1" name="Ease parameter {n}"></param>
+                                        </condition>
+                                        <condition id="3" name="On ticked" sid="261044538296632" type="Ease">
+                                            <param id="0" name="Ease tag">&quot;EP1BossOut&quot;</param>
+                                            <param id="1" name="Ease parameter {n}"></param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="672597076550232" type="Boss1_6EP1Pogminz">
+                                            <param id="0" name="Y">Ease.TickedValue</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <comment></comment>
+                                <event-block sid="461302063263077">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="961941612921227" type="Object1_6EP1BossConveyor">
+                                            <param id="0" name="Instance variable">speed</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="317545633063226" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action behavior="Platform" id="1" name="Set max speed" sid="996556297358564" type="Engine_Player">
+                                            <param id="0" name="Max Speed">Self.InitialSpeed</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="185213388903798">
+                                    <conditions>
+                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="580995060053844" type="Object1_6EP1BossConveyor">
+                                            <param id="0" name="Instance variable">speed</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="990636951890133" type="Var_Level">
+                                            <param id="0" name="Instance variable">Pause</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="632794118268827">
+                                            <conditions>
+                                                <condition id="-7" name="Compare instance variable" sid="142122026985473" type="Var_Player">
+                                                    <param id="0" name="Instance variable">Finished</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">0</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-1" name="Set X" sid="150571889655257" type="Boss1_6EP1Pogminz">
+                                                    <param id="0" name="X">Self.X+(Object1_6EP1BossConveyor.speed/2)</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="897384733771441">
+                                            <conditions>
+                                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="348469872339265" type="Var_Input">
+                                                    <param id="0" name="Instance variable">Left</param>
+                                                </condition>
+                                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="380822590275059" type="Var_Input">
+                                                    <param id="0" name="Instance variable">Right</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action behavior="Platform" id="8" name="Set vector X" sid="848758264047412" type="Engine_Player">
+                                                    <param id="0" name="Vector X">Self.InitialSpeed*(Object1_6EP1BossConveyor.speed/8)</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="634558680445673">
+                                            <conditions>
+                                                <condition id="-7" name="Compare instance variable" sid="983073059358274" type="Object1_6EP1BossConveyor">
+                                                    <param id="0" name="Instance variable">speed</param>
+                                                    <param id="1" name="Comparison">4</param>
+                                                    <param id="2" name="Value">0</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions />
+                                            <sub-events>
+                                                <event-block sid="153968480488823">
+                                                    <conditions>
+                                                        <condition id="-14" name="Compare variable" sid="218239390671163" type="System">
+                                                            <param id="0" name="Variable">timer</param>
+                                                            <param id="1" name="Comparison">5</param>
+                                                            <param id="2" name="Value">2</param>
+                                                        </condition>
+                                                        <condition id="-6" name="Every X seconds" sid="590426669585980" type="System">
+                                                            <param id="0" name="Interval (seconds)">3</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-3" name="Create object" sid="210651522552454" type="System">
+                                                            <param id="0" name="Object to create">Boss1_6EP1Pogminz</param>
+                                                            <param id="1" name="Layer">&quot;Objects&quot;</param>
+                                                            <param id="2" name="X">Object1_6EP1BossConveyor.BBoxLeft-12</param>
+                                                            <param id="3" name="Y">Object1_6EP1BossConveyor.BBoxTop-16</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="808284554370970">
+                                                    <conditions>
+                                                        <condition id="-1" name="Compare X" sid="605483595399280" type="Boss1_6EP1Pogminz">
+                                                            <param id="0" name="Comparison">4</param>
+                                                            <param id="1" name="X co-ordinate">Object1_6EP1BossConveyor.BBoxRight+12</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-9" name="Destroy" sid="570623494314703" type="Boss1_6EP1Pogminz" />
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="935438900731722">
+                                                    <conditions>
+                                                        <condition id="-8" name="Is boolean instance variable set" sid="675040741982712" type="Var_Input">
+                                                            <param id="0" name="Instance variable">Left</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action behavior="Platform" id="1" name="Set max speed" sid="663543938523020" type="Engine_Player">
+                                                            <param id="0" name="Max Speed">Self.InitialSpeed-(Self.InitialSpeed*abs(Object1_6EP1BossConveyor.speed/8))</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="775550394995475">
+                                                    <conditions>
+                                                        <condition id="-8" name="Is boolean instance variable set" sid="478454248543394" type="Var_Input">
+                                                            <param id="0" name="Instance variable">Right</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action behavior="Platform" id="1" name="Set max speed" sid="774669501789030" type="Engine_Player">
+                                                            <param id="0" name="Max Speed">Self.InitialSpeed+(Self.InitialSpeed*abs(Object1_6EP1BossConveyor.speed/8))</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                        <event-block sid="162460824139089">
+                                            <conditions>
+                                                <condition id="-7" name="Compare instance variable" sid="768823159910619" type="Object1_6EP1BossConveyor">
+                                                    <param id="0" name="Instance variable">speed</param>
+                                                    <param id="1" name="Comparison">2</param>
+                                                    <param id="2" name="Value">0</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions />
+                                            <sub-events>
+                                                <event-block sid="289460895064644">
+                                                    <conditions>
+                                                        <condition id="-14" name="Compare variable" sid="325837428789619" type="System">
+                                                            <param id="0" name="Variable">timer</param>
+                                                            <param id="1" name="Comparison">5</param>
+                                                            <param id="2" name="Value">2</param>
+                                                        </condition>
+                                                        <condition id="-6" name="Every X seconds" sid="948017238246278" type="System">
+                                                            <param id="0" name="Interval (seconds)">3</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-3" name="Create object" sid="181720975108033" type="System">
+                                                            <param id="0" name="Object to create">Boss1_6EP1Pogminz</param>
+                                                            <param id="1" name="Layer">&quot;Objects&quot;</param>
+                                                            <param id="2" name="X">Object1_6EP1BossConveyor.BBoxRight+12</param>
+                                                            <param id="3" name="Y">Object1_6EP1BossConveyor.BBoxTop-16</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="264054812299204">
+                                                    <conditions>
+                                                        <condition id="-1" name="Compare X" sid="485009567010111" type="Boss1_6EP1Pogminz">
+                                                            <param id="0" name="Comparison">2</param>
+                                                            <param id="1" name="X co-ordinate">Object1_6EP1BossConveyor.BBoxLeft-12</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-9" name="Destroy" sid="414376775179064" type="Boss1_6EP1Pogminz" />
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="530673141989522">
+                                                    <conditions>
+                                                        <condition id="-8" name="Is boolean instance variable set" sid="118746567029317" type="Var_Input">
+                                                            <param id="0" name="Instance variable">Left</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action behavior="Platform" id="1" name="Set max speed" sid="469342104197257" type="Engine_Player">
+                                                            <param id="0" name="Max Speed">Self.InitialSpeed+(Self.InitialSpeed*abs(Object1_6EP1BossConveyor.speed/8))</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="984501932840203">
+                                                    <conditions>
+                                                        <condition id="-8" name="Is boolean instance variable set" sid="963819649523247" type="Var_Input">
+                                                            <param id="0" name="Instance variable">Right</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action behavior="Platform" id="1" name="Set max speed" sid="475886950896214" type="Engine_Player">
+                                                            <param id="0" name="Max Speed">Self.InitialSpeed-(Self.InitialSpeed*abs(Object1_6EP1BossConveyor.speed/8))</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-group>
+                <event-group description="" sid="495736675566036" title="EP2 Boss">
+                    <sub-events>
+                        <event-block sid="205401283060125">
+                            <conditions>
+                                <condition id="0" name="On function" sid="421333669491266" type="Function">
+                                    <param id="0" name="Name">&quot;Player_Restart&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Destroy" sid="284232401446226" type="Boss1_6EP2Fuel" />
+                                <action id="-9" name="Destroy" sid="876112480691944" type="Boss1_6EP2FuelEmpty" />
+                            </actions>
+                        </event-block>
+                        <event-block sid="947080594442287">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="662697525765708" type="Boss1_6EP2">
+                                    <param id="0" name="Instance variable">HP</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="494744758222948" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Destroy" sid="125459126364364" type="Boss1_6EP2Fuel" />
+                                <action id="-9" name="Destroy" sid="811192169107211" type="Boss1_6EP2FuelEmpty" />
+                            </actions>
+                        </event-block>
+                        <event-block sid="193622461108749">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="737357476591161" type="Boss1_6EP2">
+                                    <param id="0" name="Instance variable">Active</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <variable constant="0" name="fuel" sid="535853713117508" static="1" type="number">0</variable>
+                                <variable constant="0" name="state" sid="346646632473682" static="1" type="number">0</variable>
+                                <variable constant="0" name="timer" sid="426686154100950" static="1" type="number">0</variable>
+                                <event-block sid="383522066895011">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="323501501186657" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Spawn another object" sid="516100955841559" type="Boss1_6EP2">
+                                            <param id="0" name="Object">Boss1_6EP2Fuel</param>
+                                            <param id="1" name="Layer">&quot;Objects&quot;</param>
+                                            <param id="2" name="Image point">0</param>
+                                        </action>
+                                        <action id="0" name="Spawn another object" sid="478099967603725" type="Boss1_6EP2">
+                                            <param id="0" name="Object">Boss1_6EP2FuelEmpty</param>
+                                            <param id="1" name="Layer">&quot;Objects&quot;</param>
+                                            <param id="2" name="Image point">0</param>
+                                        </action>
+                                        <action id="-15" name="Set visible" sid="489767068221415" type="Boss1_6EP2FuelEmpty">
+                                            <param id="0" name="Visibility">0</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="513681553795517" type="System">
+                                            <param id="0" name="Variable">state</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="561641738662054">
+                                    <conditions>
+                                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="936316084097210" type="Var_Level">
+                                            <param id="0" name="Instance variable">Pause</param>
+                                        </condition>
+                                        <condition id="-7" name="Compare instance variable" sid="195250963975908" type="Var_Player">
+                                            <param id="0" name="Instance variable">Finished</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Add to" sid="584310251312776" type="System">
+                                            <param id="0" name="Variable">timer</param>
+                                            <param id="1" name="Value">dt</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="805226959321903">
+                                    <conditions />
+                                    <actions>
+                                        <action id="-3" name="Set position" sid="800107561413656" type="Boss1_6EP2Fuel">
+                                            <param id="0" name="X">Boss1_6EP2.X-32</param>
+                                            <param id="1" name="Y">Boss1_6EP2.Y+21</param>
+                                        </action>
+                                        <action id="-5" name="Set width" sid="850251274923877" type="Boss1_6EP2Fuel">
+                                            <param id="0" name="Width">(fuel/10)*59</param>
+                                        </action>
+                                        <action id="-3" name="Set position" sid="184707519653790" type="Boss1_6EP2FuelEmpty">
+                                            <param id="0" name="X">Boss1_6EP2.X-32</param>
+                                            <param id="1" name="Y">Boss1_6EP2.Y+21</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <comment></comment>
+                                <event-block sid="230444237678135">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="621893053064046" type="System">
+                                            <param id="0" name="Variable">state</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="431654988720439">
+                                            <conditions>
+                                                <condition id="-4" name="Trigger once while true" sid="815965713149816" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Set value" sid="991844709837823" type="System">
+                                                    <param id="0" name="Variable">fuel</param>
+                                                    <param id="1" name="Value">10</param>
+                                                </action>
+                                                <action id="-9" name="Set value" sid="806530756435681" type="System">
+                                                    <param id="0" name="Variable">timer</param>
+                                                    <param id="1" name="Value">0</param>
+                                                </action>
+                                                <action id="-15" name="Set visible" sid="787417095918889" type="Boss1_6EP2FuelEmpty">
+                                                    <param id="0" name="Visibility">0</param>
+                                                </action>
+                                                <action id="-10" name="Set value" sid="956707395358935" type="Boss1_6EP2">
+                                                    <param id="0" name="Instance variable">WaypointSet</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                                <action id="-10" name="Set value" sid="470021732271764" type="Boss1_6EP2">
+                                                    <param id="0" name="Instance variable">Active</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                                <action id="-13" name="Set boolean" sid="905590597705938" type="Boss1_6EP2">
+                                                    <param id="0" name="Instance variable">Reverse</param>
+                                                    <param id="1" name="Value">0</param>
+                                                </action>
+                                                <action behavior="MoveTo" id="1" name="Set maximum speed" sid="280992699651836" type="Boss1_6EP2">
+                                                    <param id="0" name="Max speed">350</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="766835619700298">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="400747939606648" type="System">
+                                                    <param id="0" name="Variable">fuel</param>
+                                                    <param id="1" name="Comparison">3</param>
+                                                    <param id="2" name="Value">0</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Set value" sid="423544380976661" type="System">
+                                                    <param id="0" name="Variable">state</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="618905880691597">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="187391138404703" type="System">
+                                                    <param id="0" name="Variable">timer</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Value">2</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="402728379497649" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Spawn another object" sid="300267835640412" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-22" name="Set angle toward position" sid="312090810162183" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="X">Engine_Player.X</param>
+                                                    <param id="1" name="Y">Engine_Player.Y</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="471914463924329" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">420</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="623613344286954" type="Function">
+                                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                                </action>
+                                                <action id="-11" name="Subtract from" sid="531166741256520" type="System">
+                                                    <param id="0" name="Variable">fuel</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="377208738292190">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="781630586804696" type="System">
+                                                    <param id="0" name="Variable">timer</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Value">2.3</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="717402215605780" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Spawn another object" sid="462657441090908" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-22" name="Set angle toward position" sid="506768001716132" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="X">Engine_Player.X</param>
+                                                    <param id="1" name="Y">Engine_Player.Y</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="453659154610275" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">420</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="881806622867129" type="Function">
+                                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                                </action>
+                                                <action id="-11" name="Subtract from" sid="521378134883182" type="System">
+                                                    <param id="0" name="Variable">fuel</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="475445739848283">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="333522292239172" type="System">
+                                                    <param id="0" name="Variable">timer</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Value">2.6</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="817033305592887" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Spawn another object" sid="317843720744038" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-22" name="Set angle toward position" sid="458302349299584" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="X">Engine_Player.X</param>
+                                                    <param id="1" name="Y">Engine_Player.Y</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="926731720648158" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">420</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="570068079758602" type="Function">
+                                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                                </action>
+                                                <action id="-11" name="Subtract from" sid="398442809412649" type="System">
+                                                    <param id="0" name="Variable">fuel</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="864843593267670">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="169587533195149" type="System">
+                                                    <param id="0" name="Variable">timer</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Value">2.9</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="254647600812642" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Spawn another object" sid="848031282999796" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-22" name="Set angle toward position" sid="895156047548994" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="X">Engine_Player.X</param>
+                                                    <param id="1" name="Y">Engine_Player.Y</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="860719385803729" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">420</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="317999215698401" type="Function">
+                                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                                </action>
+                                                <action id="-11" name="Subtract from" sid="926469497412421" type="System">
+                                                    <param id="0" name="Variable">fuel</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <comment></comment>
+                                        <event-block sid="245844061488504">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="129499279970283" type="System">
+                                                    <param id="0" name="Variable">timer</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Value">3.2</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="268021689250189" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Spawn another object" sid="907931570832984" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-22" name="Set angle toward position" sid="196901524382326" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="X">Engine_Player.X</param>
+                                                    <param id="1" name="Y">Engine_Player.Y</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="372689907081273" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">800</param>
+                                                </action>
+                                                <action id="9" name="Set scale" sid="295058431070014" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Scale">2</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="420884932178801" type="Function">
+                                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;2Title&quot;</param>
+                                                </action>
+                                                <action id="-11" name="Subtract from" sid="455306922535181" type="System">
+                                                    <param id="0" name="Variable">fuel</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <comment></comment>
+                                        <event-block sid="825803247232768">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="774925376406653" type="System">
+                                                    <param id="0" name="Variable">timer</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Value">4.2</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="866884638864461" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Spawn another object" sid="735551596301193" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-8" name="Set angle" sid="235109003703380" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Angle">90</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="994197866213632" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">375</param>
+                                                </action>
+                                                <action id="0" name="Spawn another object" sid="622434602285188" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-8" name="Set angle" sid="169050239223285" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Angle">135</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="496299278179779" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">290</param>
+                                                </action>
+                                                <action id="0" name="Spawn another object" sid="734640982513853" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-8" name="Set angle" sid="328392698834356" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Angle">45</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="167590459646980" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">290</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="312034112485574" type="Function">
+                                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                                </action>
+                                                <action id="-11" name="Subtract from" sid="354757380275505" type="System">
+                                                    <param id="0" name="Variable">fuel</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="483012269020949">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="804483490735998" type="System">
+                                                    <param id="0" name="Variable">timer</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Value">5</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="379716343698875" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Spawn another object" sid="835157054715018" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-8" name="Set angle" sid="497157976836834" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Angle">90</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="425955764127205" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">375</param>
+                                                </action>
+                                                <action id="0" name="Spawn another object" sid="897794773987328" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-8" name="Set angle" sid="629981802170820" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Angle">135</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="708262534808260" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">290</param>
+                                                </action>
+                                                <action id="0" name="Spawn another object" sid="653896600258281" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-8" name="Set angle" sid="961441689310865" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Angle">45</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="883990562180801" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">290</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="534448760513737" type="Function">
+                                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                                </action>
+                                                <action id="-11" name="Subtract from" sid="952778074020443" type="System">
+                                                    <param id="0" name="Variable">fuel</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="641315798766207">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="543513045830294" type="System">
+                                                    <param id="0" name="Variable">timer</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Value">5.8</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="869705577725578" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Spawn another object" sid="127600174030969" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-8" name="Set angle" sid="122139975790519" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Angle">90</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="643396288493840" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">375</param>
+                                                </action>
+                                                <action id="0" name="Spawn another object" sid="120542422913356" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-8" name="Set angle" sid="161582335327303" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Angle">135</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="382104404760054" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">290</param>
+                                                </action>
+                                                <action id="0" name="Spawn another object" sid="111094347282793" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-8" name="Set angle" sid="326706059290561" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Angle">45</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="679209860776424" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">290</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="902961003887565" type="Function">
+                                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                                </action>
+                                                <action id="-11" name="Subtract from" sid="294802770018952" type="System">
+                                                    <param id="0" name="Variable">fuel</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="230767501241187">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="101571594473862" type="System">
+                                                    <param id="0" name="Variable">timer</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Value">6.6</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="232017869447367" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Spawn another object" sid="316249619336060" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-8" name="Set angle" sid="841061228080960" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Angle">90</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="858219883269236" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">375</param>
+                                                </action>
+                                                <action id="0" name="Spawn another object" sid="922395082621966" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-8" name="Set angle" sid="541104589481213" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Angle">135</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="359288774205310" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">290</param>
+                                                </action>
+                                                <action id="0" name="Spawn another object" sid="474087815156510" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-8" name="Set angle" sid="191848906041858" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Angle">45</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="799400806272664" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">290</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="659867960460804" type="Function">
+                                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                                </action>
+                                                <action id="-11" name="Subtract from" sid="599026061882420" type="System">
+                                                    <param id="0" name="Variable">fuel</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <comment></comment>
+                                        <event-block sid="646407581360987">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="874012613728787" type="System">
+                                                    <param id="0" name="Variable">timer</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Value">7</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="158880985282026" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Spawn another object" sid="756985864620377" type="Boss1_6EP2">
+                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
+                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="2" name="Image point">1</param>
+                                                </action>
+                                                <action id="-22" name="Set angle toward position" sid="199791459201089" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="X">Engine_Player.X</param>
+                                                    <param id="1" name="Y">Engine_Player.Y</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="159326877365810" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Speed">800</param>
+                                                </action>
+                                                <action id="9" name="Set scale" sid="271296301997889" type="Projectile1_6EP2Boss">
+                                                    <param id="0" name="Scale">2</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="981231143424239" type="Function">
+                                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;2Title&quot;</param>
+                                                </action>
+                                                <action id="-11" name="Subtract from" sid="400214507906962" type="System">
+                                                    <param id="0" name="Variable">fuel</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <comment></comment>
+                                <event-block sid="830365541962768">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="265771835127119" type="System">
+                                            <param id="0" name="Variable">state</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="562604315848622">
+                                            <conditions>
+                                                <condition id="-4" name="Trigger once while true" sid="147708121175217" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Set value" sid="390866325609697" type="System">
+                                                    <param id="0" name="Variable">fuel</param>
+                                                    <param id="1" name="Value">0</param>
+                                                </action>
+                                                <action id="-9" name="Set value" sid="382630223657270" type="System">
+                                                    <param id="0" name="Variable">timer</param>
+                                                    <param id="1" name="Value">0</param>
+                                                </action>
+                                                <action id="-15" name="Set visible" sid="920554067284913" type="Boss1_6EP2FuelEmpty">
+                                                    <param id="0" name="Visibility">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="643920062813008">
+                                            <conditions>
+                                                <condition id="-2" name="Compare Y" sid="854836881395588" type="Boss1_6EP2">
+                                                    <param id="0" name="Comparison">2</param>
+                                                    <param id="1" name="Y co-ordinate">Boss1_6EP2Recharge.Y-48</param>
+                                                </condition>
+                                                <condition id="-14" name="Compare variable" sid="263625889857271" type="System">
+                                                    <param id="0" name="Variable">timer</param>
+                                                    <param id="1" name="Comparison">5</param>
+                                                    <param id="2" name="Value">1.5</param>
+                                                </condition>
+                                                <condition id="-4" name="Trigger once while true" sid="658411027071024" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-13" name="Set boolean" sid="198931672251727" type="Boss1_6EP2">
+                                                    <param id="0" name="Instance variable">Reverse</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                                <action id="-10" name="Set value" sid="417786011711647" type="Boss1_6EP2">
+                                                    <param id="0" name="Instance variable">Active</param>
+                                                    <param id="1" name="Value">2</param>
+                                                </action>
+                                                <action id="-10" name="Set value" sid="608003549087694" type="Boss1_6EP2">
+                                                    <param id="0" name="Instance variable">WaypointSet</param>
+                                                    <param id="1" name="Value">2</param>
+                                                </action>
+                                                <action behavior="MoveTo" id="1" name="Set maximum speed" sid="813102041897083" type="Boss1_6EP2">
+                                                    <param id="0" name="Max speed">250</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="728906143213414">
+                                            <conditions>
+                                                <condition id="-2" name="Compare Y" sid="813906614599192" type="Boss1_6EP2">
+                                                    <param id="0" name="Comparison">5</param>
+                                                    <param id="1" name="Y co-ordinate">Boss1_6EP2Recharge.Y-49</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions />
+                                            <sub-events>
+                                                <event-block sid="275335715749975">
+                                                    <conditions />
+                                                    <actions>
+                                                        <action behavior="MoveTo" id="1" name="Set maximum speed" sid="197454208364385" type="Boss1_6EP2">
+                                                            <param id="0" name="Max speed">0.01</param>
+                                                        </action>
+                                                        <action id="-15" name="Set visible" sid="637890100002239" type="Boss1_6EP2FuelEmpty">
+                                                            <param id="0" name="Visibility">0</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="904638330207603">
+                                                    <conditions>
+                                                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="541999836422458" type="Var_Level">
+                                                            <param id="0" name="Instance variable">Pause</param>
+                                                        </condition>
+                                                        <condition id="-7" name="Compare instance variable" sid="518972441482966" type="Var_Player">
+                                                            <param id="0" name="Instance variable">Finished</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Value">0</param>
+                                                        </condition>
+                                                        <condition id="-6" name="Every X seconds" sid="401849704019352" type="System">
+                                                            <param id="0" name="Interval (seconds)">0.33</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-10" name="Add to" sid="465938885170477" type="System">
+                                                            <param id="0" name="Variable">fuel</param>
+                                                            <param id="1" name="Value">1</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="238128103961221">
+                                                    <conditions>
+                                                        <condition id="-14" name="Compare variable" sid="473194677940382" type="System">
+                                                            <param id="0" name="Variable">fuel</param>
+                                                            <param id="1" name="Comparison">5</param>
+                                                            <param id="2" name="Value">10</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-9" name="Set value" sid="863280917058576" type="System">
+                                                            <param id="0" name="Variable">state</param>
+                                                            <param id="1" name="Value">0</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-group>
