@@ -232,6 +232,49 @@
                 <comment></comment>
                 <variable constant="0" name="TotalScore" sid="524039824770444" static="1" type="number">0</variable>
                 <variable constant="0" name="Active" sid="155059838256801" static="1" type="number">0</variable>
+                <event-block sid="347337449818051">
+                    <conditions />
+                    <actions>
+                        <action id="0" name="Set text" sid="501459338116907" type="Results_Time">
+                            <param id="0" name="Text">TimeBonus</param>
+                        </action>
+                        <action id="0" name="Set text" sid="263964988820614" type="Results_Guard">
+                            <param id="0" name="Text">GuardBonus</param>
+                        </action>
+                        <action id="0" name="Set text" sid="720609337859179" type="Results_LevelScore">
+                            <param id="0" name="Text">LevelScore</param>
+                        </action>
+                        <action id="0" name="Set text" sid="805905046359585" type="Results_Total">
+                            <param id="0" name="Text">TotalScore</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="457368390745382">
+                            <conditions>
+                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="553682537327273" type="Var_Level">
+                                    <param id="0" name="Instance variable">Level_NoPerfectBonus</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Set text" sid="661622309152894" type="Results_Perfect">
+                                    <param id="0" name="Text">PerfectBonus</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="551042177371615">
+                            <conditions>
+                                <condition id="-8" name="Is boolean instance variable set" sid="481872531769081" type="Var_Level">
+                                    <param id="0" name="Instance variable">Level_NoPerfectBonus</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Set text" sid="197269750103526" type="Results_Perfect">
+                                    <param id="0" name="Text">&quot;---&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
                 <event-block sid="322398175978632">
                     <conditions>
                         <condition id="-4" name="Trigger once while true" sid="659809711526400" type="System" />
@@ -251,303 +294,300 @@
                                 </action>
                             </actions>
                         </event-block>
-                        <event-group description="" sid="465682721933627" title="Time bonus">
-                            <sub-events>
-                                <comment>0:30 and less</comment>
-                                <event-block sid="767932830687293">
-                                    <conditions>
-                                        <condition id="-7" name="Compare instance variable" sid="400332563473285" type="Var_Level">
-                                            <param id="0" name="Instance variable">TimerLevel</param>
-                                            <param id="1" name="Comparison">3</param>
-                                            <param id="2" name="Value">30</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-9" name="Set value" sid="279777594658230" type="System">
-                                            <param id="0" name="Variable">TimeBonus</param>
-                                            <param id="1" name="Value">50000</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <comment>0:31 to 1:00</comment>
-                                <event-block sid="296242531019256">
-                                    <conditions>
-                                        <condition id="-7" name="Compare instance variable" sid="248690624154523" type="Var_Level">
-                                            <param id="0" name="Instance variable">TimerLevel</param>
-                                            <param id="1" name="Comparison">5</param>
-                                            <param id="2" name="Value">31</param>
-                                        </condition>
-                                        <condition id="-7" name="Compare instance variable" sid="753285017557194" type="Var_Level">
-                                            <param id="0" name="Instance variable">TimerLevel</param>
-                                            <param id="1" name="Comparison">3</param>
-                                            <param id="2" name="Value">60</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-9" name="Set value" sid="139491422972410" type="System">
-                                            <param id="0" name="Variable">TimeBonus</param>
-                                            <param id="1" name="Value">10000</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <comment>1:01 to 1:30</comment>
-                                <event-block sid="839650303122465">
-                                    <conditions>
-                                        <condition id="-7" name="Compare instance variable" sid="671480759342426" type="Var_Level">
-                                            <param id="0" name="Instance variable">TimerLevel</param>
-                                            <param id="1" name="Comparison">5</param>
-                                            <param id="2" name="Value">61</param>
-                                        </condition>
-                                        <condition id="-7" name="Compare instance variable" sid="782188648073832" type="Var_Level">
-                                            <param id="0" name="Instance variable">TimerLevel</param>
-                                            <param id="1" name="Comparison">3</param>
-                                            <param id="2" name="Value">90</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-9" name="Set value" sid="344365262577574" type="System">
-                                            <param id="0" name="Variable">TimeBonus</param>
-                                            <param id="1" name="Value">7500</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <comment>1:31 to 2:00</comment>
-                                <event-block sid="751646967148906">
-                                    <conditions>
-                                        <condition id="-7" name="Compare instance variable" sid="826555650581298" type="Var_Level">
-                                            <param id="0" name="Instance variable">TimerLevel</param>
-                                            <param id="1" name="Comparison">5</param>
-                                            <param id="2" name="Value">91</param>
-                                        </condition>
-                                        <condition id="-7" name="Compare instance variable" sid="590298117542622" type="Var_Level">
-                                            <param id="0" name="Instance variable">TimerLevel</param>
-                                            <param id="1" name="Comparison">3</param>
-                                            <param id="2" name="Value">120</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-9" name="Set value" sid="655492941313160" type="System">
-                                            <param id="0" name="Variable">TimeBonus</param>
-                                            <param id="1" name="Value">5000</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <comment>2:01 to 2:30</comment>
-                                <event-block sid="554529289830554">
-                                    <conditions>
-                                        <condition id="-7" name="Compare instance variable" sid="235407649536541" type="Var_Level">
-                                            <param id="0" name="Instance variable">TimerLevel</param>
-                                            <param id="1" name="Comparison">5</param>
-                                            <param id="2" name="Value">121</param>
-                                        </condition>
-                                        <condition id="-7" name="Compare instance variable" sid="189922735492850" type="Var_Level">
-                                            <param id="0" name="Instance variable">TimerLevel</param>
-                                            <param id="1" name="Comparison">3</param>
-                                            <param id="2" name="Value">150</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-9" name="Set value" sid="661987508716139" type="System">
-                                            <param id="0" name="Variable">TimeBonus</param>
-                                            <param id="1" name="Value">2500</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <comment>2:31 to 3:00</comment>
-                                <event-block sid="468737478546793">
-                                    <conditions>
-                                        <condition id="-7" name="Compare instance variable" sid="968660443476363" type="Var_Level">
-                                            <param id="0" name="Instance variable">TimerLevel</param>
-                                            <param id="1" name="Comparison">5</param>
-                                            <param id="2" name="Value">151</param>
-                                        </condition>
-                                        <condition id="-7" name="Compare instance variable" sid="219730651183541" type="Var_Level">
-                                            <param id="0" name="Instance variable">TimerLevel</param>
-                                            <param id="1" name="Comparison">3</param>
-                                            <param id="2" name="Value">180</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-9" name="Set value" sid="998523169166418" type="System">
-                                            <param id="0" name="Variable">TimeBonus</param>
-                                            <param id="1" name="Value">1000</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <comment>3:01 to 3:30</comment>
-                                <event-block sid="146548736533534">
-                                    <conditions>
-                                        <condition id="-7" name="Compare instance variable" sid="668835773564528" type="Var_Level">
-                                            <param id="0" name="Instance variable">TimerLevel</param>
-                                            <param id="1" name="Comparison">5</param>
-                                            <param id="2" name="Value">181</param>
-                                        </condition>
-                                        <condition id="-7" name="Compare instance variable" sid="465677594923481" type="Var_Level">
-                                            <param id="0" name="Instance variable">TimerLevel</param>
-                                            <param id="1" name="Comparison">3</param>
-                                            <param id="2" name="Value">210</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-9" name="Set value" sid="886473759411105" type="System">
-                                            <param id="0" name="Variable">TimeBonus</param>
-                                            <param id="1" name="Value">500</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <comment>3:30 to 4:00</comment>
-                                <event-block sid="529220061292488">
-                                    <conditions>
-                                        <condition id="-7" name="Compare instance variable" sid="810617168092909" type="Var_Level">
-                                            <param id="0" name="Instance variable">TimerLevel</param>
-                                            <param id="1" name="Comparison">5</param>
-                                            <param id="2" name="Value">211</param>
-                                        </condition>
-                                        <condition id="-7" name="Compare instance variable" sid="990909957955515" type="Var_Level">
-                                            <param id="0" name="Instance variable">TimerLevel</param>
-                                            <param id="1" name="Comparison">3</param>
-                                            <param id="2" name="Value">240</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-9" name="Set value" sid="900859278686968" type="System">
-                                            <param id="0" name="Variable">TimeBonus</param>
-                                            <param id="1" name="Value">100</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <comment>4:00 and more</comment>
-                                <event-block sid="638034111040519">
-                                    <conditions>
-                                        <condition id="-7" name="Compare instance variable" sid="325284822937176" type="Var_Level">
-                                            <param id="0" name="Instance variable">TimerLevel</param>
-                                            <param id="1" name="Comparison">5</param>
-                                            <param id="2" name="Value">241</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-9" name="Set value" sid="932861602909053" type="System">
-                                            <param id="0" name="Variable">TimeBonus</param>
-                                            <param id="1" name="Value">0</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
-                        </event-group>
-                        <event-group description="" sid="119027328288250" title="Guard bonus">
-                            <sub-events>
-                                <comment>0 hits</comment>
-                                <event-block sid="681282424038337">
-                                    <conditions>
-                                        <condition id="-7" name="Compare instance variable" sid="899302683188152" type="Var_Player">
-                                            <param id="0" name="Instance variable">ScoreGuardPenalty</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">0</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-9" name="Set value" sid="354756843208896" type="System">
-                                            <param id="0" name="Variable">GuardBonus</param>
-                                            <param id="1" name="Value">10000</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="471811491231384">
-                                    <conditions>
-                                        <condition id="-7" name="Compare instance variable" sid="608397111644254" type="Var_Player">
-                                            <param id="0" name="Instance variable">ScoreGuardPenalty</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">1</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-9" name="Set value" sid="229625932347558" type="System">
-                                            <param id="0" name="Variable">GuardBonus</param>
-                                            <param id="1" name="Value">5000</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="258290328478461">
-                                    <conditions>
-                                        <condition id="-7" name="Compare instance variable" sid="405974426721603" type="Var_Player">
-                                            <param id="0" name="Instance variable">ScoreGuardPenalty</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">2</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-9" name="Set value" sid="762374834682750" type="System">
-                                            <param id="0" name="Variable">GuardBonus</param>
-                                            <param id="1" name="Value">2500</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="271681185541020">
-                                    <conditions>
-                                        <condition id="-7" name="Compare instance variable" sid="849352455129642" type="Var_Player">
-                                            <param id="0" name="Instance variable">ScoreGuardPenalty</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">3</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-9" name="Set value" sid="332320972575453" type="System">
-                                            <param id="0" name="Variable">GuardBonus</param>
-                                            <param id="1" name="Value">1000</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="548408063877278">
-                                    <conditions>
-                                        <condition id="-7" name="Compare instance variable" sid="475716636579897" type="Var_Player">
-                                            <param id="0" name="Instance variable">ScoreGuardPenalty</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">4</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-9" name="Set value" sid="462033594787985" type="System">
-                                            <param id="0" name="Variable">GuardBonus</param>
-                                            <param id="1" name="Value">500</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="351065784890130">
-                                    <conditions>
-                                        <condition id="-7" name="Compare instance variable" sid="675993470201467" type="Var_Player">
-                                            <param id="0" name="Instance variable">ScoreGuardPenalty</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">5</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-9" name="Set value" sid="425563282334686" type="System">
-                                            <param id="0" name="Variable">GuardBonus</param>
-                                            <param id="1" name="Value">100</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <comment>6 and more hits</comment>
-                                <event-block sid="760703828964937">
-                                    <conditions>
-                                        <condition id="-7" name="Compare instance variable" sid="860054703763758" type="Var_Player">
-                                            <param id="0" name="Instance variable">ScoreGuardPenalty</param>
-                                            <param id="1" name="Comparison">5</param>
-                                            <param id="2" name="Value">6</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-9" name="Set value" sid="940972451648654" type="System">
-                                            <param id="0" name="Variable">GuardBonus</param>
-                                            <param id="1" name="Value">0</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
-                        </event-group>
-                        <comment>perfect rings bonus</comment>
+                        <comment>==TIME BONUS</comment>
+                        <comment>0:30 and less</comment>
+                        <event-block sid="767932830687293">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="400332563473285" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevel</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Value">30</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="279777594658230" type="System">
+                                    <param id="0" name="Variable">TimeBonus</param>
+                                    <param id="1" name="Value">50000</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>0:31 to 1:00</comment>
+                        <event-block sid="296242531019256">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="248690624154523" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevel</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Value">31</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="753285017557194" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevel</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Value">60</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="139491422972410" type="System">
+                                    <param id="0" name="Variable">TimeBonus</param>
+                                    <param id="1" name="Value">10000</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>1:01 to 1:30</comment>
+                        <event-block sid="839650303122465">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="671480759342426" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevel</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Value">61</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="782188648073832" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevel</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Value">90</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="344365262577574" type="System">
+                                    <param id="0" name="Variable">TimeBonus</param>
+                                    <param id="1" name="Value">7500</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>1:31 to 2:00</comment>
+                        <event-block sid="751646967148906">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="826555650581298" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevel</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Value">91</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="590298117542622" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevel</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Value">120</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="655492941313160" type="System">
+                                    <param id="0" name="Variable">TimeBonus</param>
+                                    <param id="1" name="Value">5000</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>2:01 to 2:30</comment>
+                        <event-block sid="554529289830554">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="235407649536541" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevel</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Value">121</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="189922735492850" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevel</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Value">150</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="661987508716139" type="System">
+                                    <param id="0" name="Variable">TimeBonus</param>
+                                    <param id="1" name="Value">2500</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>2:31 to 3:00</comment>
+                        <event-block sid="468737478546793">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="968660443476363" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevel</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Value">151</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="219730651183541" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevel</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Value">180</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="998523169166418" type="System">
+                                    <param id="0" name="Variable">TimeBonus</param>
+                                    <param id="1" name="Value">1000</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>3:01 to 3:30</comment>
+                        <event-block sid="146548736533534">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="668835773564528" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevel</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Value">181</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="465677594923481" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevel</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Value">210</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="886473759411105" type="System">
+                                    <param id="0" name="Variable">TimeBonus</param>
+                                    <param id="1" name="Value">500</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>3:30 to 4:00</comment>
+                        <event-block sid="529220061292488">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="810617168092909" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevel</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Value">211</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="990909957955515" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevel</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Value">240</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="900859278686968" type="System">
+                                    <param id="0" name="Variable">TimeBonus</param>
+                                    <param id="1" name="Value">100</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>4:00 and more</comment>
+                        <event-block sid="638034111040519">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="325284822937176" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevel</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Value">241</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="932861602909053" type="System">
+                                    <param id="0" name="Variable">TimeBonus</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>==GUARD BONUS</comment>
+                        <comment>0 hits</comment>
+                        <event-block sid="681282424038337">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="899302683188152" type="Var_Player">
+                                    <param id="0" name="Instance variable">ScoreGuardPenalty</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="354756843208896" type="System">
+                                    <param id="0" name="Variable">GuardBonus</param>
+                                    <param id="1" name="Value">10000</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="471811491231384">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="608397111644254" type="Var_Player">
+                                    <param id="0" name="Instance variable">ScoreGuardPenalty</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="229625932347558" type="System">
+                                    <param id="0" name="Variable">GuardBonus</param>
+                                    <param id="1" name="Value">5000</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="258290328478461">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="405974426721603" type="Var_Player">
+                                    <param id="0" name="Instance variable">ScoreGuardPenalty</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">2</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="762374834682750" type="System">
+                                    <param id="0" name="Variable">GuardBonus</param>
+                                    <param id="1" name="Value">2500</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="271681185541020">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="849352455129642" type="Var_Player">
+                                    <param id="0" name="Instance variable">ScoreGuardPenalty</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">3</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="332320972575453" type="System">
+                                    <param id="0" name="Variable">GuardBonus</param>
+                                    <param id="1" name="Value">1000</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="548408063877278">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="475716636579897" type="Var_Player">
+                                    <param id="0" name="Instance variable">ScoreGuardPenalty</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">4</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="462033594787985" type="System">
+                                    <param id="0" name="Variable">GuardBonus</param>
+                                    <param id="1" name="Value">500</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="351065784890130">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="675993470201467" type="Var_Player">
+                                    <param id="0" name="Instance variable">ScoreGuardPenalty</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">5</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="425563282334686" type="System">
+                                    <param id="0" name="Variable">GuardBonus</param>
+                                    <param id="1" name="Value">100</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>6 and more hits</comment>
+                        <event-block sid="760703828964937">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="860054703763758" type="Var_Player">
+                                    <param id="0" name="Instance variable">ScoreGuardPenalty</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Value">6</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="940972451648654" type="System">
+                                    <param id="0" name="Variable">GuardBonus</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>==PERFECT RINGS BONUS</comment>
                         <event-block sid="517108683535494">
                             <conditions>
+                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="748834382326573" type="Var_Level">
+                                    <param id="0" name="Instance variable">Level_NoPerfectBonus</param>
+                                </condition>
                                 <condition id="-7" name="Compare instance variable" sid="660620896334856" type="Var_Player">
                                     <param id="0" name="Instance variable">ScorePerfect</param>
                                     <param id="1" name="Comparison">3</param>
@@ -561,7 +601,7 @@
                                 </action>
                             </actions>
                         </event-block>
-                        <comment>level score</comment>
+                        <comment>==LEVEL SCORE</comment>
                         <event-block sid="124388710506105">
                             <conditions />
                             <actions>
@@ -841,26 +881,6 @@
                         </event-block>
                     </sub-events>
                 </event-group>
-                <event-block sid="347337449818051">
-                    <conditions />
-                    <actions>
-                        <action id="0" name="Set text" sid="501459338116907" type="Results_Time">
-                            <param id="0" name="Text">TimeBonus</param>
-                        </action>
-                        <action id="0" name="Set text" sid="263964988820614" type="Results_Guard">
-                            <param id="0" name="Text">GuardBonus</param>
-                        </action>
-                        <action id="0" name="Set text" sid="661622309152894" type="Results_Perfect">
-                            <param id="0" name="Text">PerfectBonus</param>
-                        </action>
-                        <action id="0" name="Set text" sid="720609337859179" type="Results_LevelScore">
-                            <param id="0" name="Text">LevelScore</param>
-                        </action>
-                        <action id="0" name="Set text" sid="805905046359585" type="Results_Total">
-                            <param id="0" name="Text">TotalScore</param>
-                        </action>
-                    </actions>
-                </event-block>
                 <comment>finish</comment>
                 <event-block sid="381117662879702">
                     <conditions>
@@ -1262,6 +1282,15 @@
                         <action id="-1" name="Set X" sid="874481346632165" type="ResultsSpecial_Flashing">
                             <param id="0" name="X">291-40+(40*Var_Game.Emeralds)</param>
                         </action>
+                        <action id="0" name="Set text" sid="189541810968267" type="Results_Time">
+                            <param id="0" name="Text">TimeBonus</param>
+                        </action>
+                        <action id="0" name="Set text" sid="783495841459958" type="Results_Guard">
+                            <param id="0" name="Text">EnemyScore</param>
+                        </action>
+                        <action id="0" name="Set text" sid="143556575620436" type="Results_LevelScore">
+                            <param id="0" name="Text">LevelScore</param>
+                        </action>
                     </actions>
                 </event-block>
                 <comment></comment>
@@ -1389,17 +1418,33 @@
                         </action>
                     </actions>
                 </event-block>
-                <event-block sid="338984760244594">
-                    <conditions />
+                <event-block sid="520744040489404">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="754043020081490" type="System">
+                            <param id="0" name="Variable">EnemyScore</param>
+                            <param id="1" name="Comparison">3</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
                     <actions>
-                        <action id="0" name="Set text" sid="189541810968267" type="Results_Time">
-                            <param id="0" name="Text">TimeBonus</param>
+                        <action id="-9" name="Set value" sid="232260714576308" type="System">
+                            <param id="0" name="Variable">EnemyScore</param>
+                            <param id="1" name="Value">0</param>
                         </action>
-                        <action id="0" name="Set text" sid="783495841459958" type="Results_Guard">
-                            <param id="0" name="Text">EnemyScore</param>
-                        </action>
-                        <action id="0" name="Set text" sid="143556575620436" type="Results_LevelScore">
-                            <param id="0" name="Text">LevelScore</param>
+                    </actions>
+                </event-block>
+                <event-block sid="878667235358020">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="663613260174278" type="System">
+                            <param id="0" name="Variable">TimeBonus</param>
+                            <param id="1" name="Comparison">3</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="681363243733620" type="System">
+                            <param id="0" name="Variable">TimeBonus</param>
+                            <param id="1" name="Value">0</param>
                         </action>
                     </actions>
                 </event-block>
@@ -1460,36 +1505,6 @@
                             </actions>
                         </event-block>
                     </sub-events>
-                </event-block>
-                <event-block sid="520744040489404">
-                    <conditions>
-                        <condition id="-14" name="Compare variable" sid="754043020081490" type="System">
-                            <param id="0" name="Variable">EnemyScore</param>
-                            <param id="1" name="Comparison">3</param>
-                            <param id="2" name="Value">0</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-9" name="Set value" sid="232260714576308" type="System">
-                            <param id="0" name="Variable">EnemyScore</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="878667235358020">
-                    <conditions>
-                        <condition id="-14" name="Compare variable" sid="663613260174278" type="System">
-                            <param id="0" name="Variable">TimeBonus</param>
-                            <param id="1" name="Comparison">3</param>
-                            <param id="2" name="Value">0</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-9" name="Set value" sid="681363243733620" type="System">
-                            <param id="0" name="Variable">TimeBonus</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                    </actions>
                 </event-block>
                 <event-block sid="695462203114675">
                     <conditions>
@@ -2054,6 +2069,7 @@
                                             <param id="2" name="X">164</param>
                                             <param id="3" name="Y">238+(20*loopindex)</param>
                                         </action>
+                                        <action id="-25" name="Move to bottom" sid="902410091497979" type="Menu_Options2" />
                                         <action id="-10" name="Set value" sid="653738876296235" type="Menu_Options2">
                                             <param id="0" name="Instance variable">TableID</param>
                                             <param id="1" name="Value">loopindex+1</param>

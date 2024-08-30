@@ -8,17 +8,6 @@
         <variable constant="0" name="PLATFORM" sid="713217760695855" static="0" type="text">NwJs</variable>
         <event-group description="" sid="951764726633304" title="Initialize">
             <sub-events>
-                <event-block sid="771905255850914">
-                    <conditions>
-                        <condition id="-2" name="On start of layout" sid="361832843359738" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="16" name="Set title" sid="868353514090760" type="NWjs">
-                            <param id="0" name="Title">projectname&amp;&quot; &quot;&amp;projectversion</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <comment></comment>
                 <event-block sid="411019658514068">
                     <conditions>
                         <condition id="-4" name="Trigger once while true" sid="397231248190161" type="System" />
@@ -147,23 +136,10 @@
                             <param id="0" name="Variable">DEBUG</param>
                             <param id="1" name="Value">1</param>
                         </action>
+                        <action id="16" name="Set title" sid="655968779946376" type="NWjs">
+                            <param id="0" name="Title">projectname&amp;&quot; &quot;&amp;projectversion&amp;(DEBUG = 1 ? &quot; (Debug mode)&quot; : &quot;&quot;)</param>
+                        </action>
                     </actions>
-                    <sub-events>
-                        <event-block sid="918234928800266">
-                            <conditions>
-                                <condition id="-8" name="Compare two values" sid="392064926785611" type="System">
-                                    <param id="0" name="First value">LayoutName</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Second value">&quot;Menu_Main&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Alert" sid="764306991231892" type="Browser">
-                                    <param id="0" name="Message">&quot;NOTICE!&quot;&amp;newline&amp;&quot;Debug mode is enabled&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
                 </event-block>
                 <event-block sid="646503035913642">
                     <conditions>
@@ -1139,43 +1115,6 @@
                     </sub-events>
                 </event-block>
                 <comment></comment>
-                <event-block sid="982178768199464">
-                    <conditions>
-                        <condition id="70" name="Is Empty" sid="491572360182779" type="JSON_AudioPreload">
-                            <param id="0" name="Reference point">0</param>
-                            <param id="1" name="Key {n}"></param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="968357350201782" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="1" name="Request project file" sid="777712404812953" type="AJAX">
-                            <param id="0" name="Tag">&quot;audiolist&quot;</param>
-                            <param id="1" name="File">audiolist.ini</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="730028274321830">
-                    <conditions>
-                        <condition id="0" name="On completed" sid="117849734469516" type="AJAX">
-                            <param id="0" name="Tag">&quot;audiolist&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Set New Object" sid="780022489664897" type="JSON_AutoUpdater">
-                            <param id="0" name="Reference point">0</param>
-                            <param id="1" name="Key {n}"></param>
-                        </action>
-                        <action id="0" name="Call function" sid="498686264154846" type="Function">
-                            <param id="0" name="Name">&quot;INI2JSON&quot;</param>
-                            <param id="1" name="Parameter {n}">AJAX.LastData</param>
-                        </action>
-                        <action id="60" name="LoadJSON" sid="707096559663921" type="JSON_AudioPreload">
-                            <param id="0" name="JSON">Function.ReturnValue</param>
-                            <param id="1" name="Reference point">0</param>
-                            <param id="2" name="Key {n}"></param>
-                        </action>
-                    </actions>
-                </event-block>
                 <event-block sid="338316560511645">
                     <conditions>
                         <condition id="0" name="On function" sid="963797753369440" type="Function">
@@ -1189,6 +1128,8 @@
                     </conditions>
                     <actions />
                     <sub-events>
+                        <comment>0 - load a list</comment>
+                        <comment>1 - load a single track from IndividualTracks</comment>
                         <event-block sid="730498958379184">
                             <conditions>
                                 <condition id="-8" name="Compare two values" sid="835520664490548" type="System">
@@ -1299,6 +1240,16 @@
         </event-group>
         <event-group description="" sid="693787369828304" title="Misc">
             <sub-events>
+                <event-block sid="607442416688816">
+                    <conditions>
+                        <condition id="-4" name="Trigger once while true" sid="519983719393111" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="16" name="Set title" sid="989945538583150" type="NWjs">
+                            <param id="0" name="Title">projectname&amp;&quot; &quot;&amp;projectversion&amp;(DEBUG = 1 ? &quot; (Debug mode)&quot; : &quot;&quot;)</param>
+                        </action>
+                    </actions>
+                </event-block>
                 <event-block sid="932836346054117">
                     <conditions>
                         <condition id="-4" name="Trigger once while true" sid="127513408773661" type="System" />
@@ -1545,208 +1496,6 @@
                         </action>
                     </actions>
                 </event-block>
-                <comment>reset player variables</comment>
-                <event-block sid="886299191515315">
-                    <conditions>
-                        <condition id="0" name="On function" sid="348365842331588" type="Function">
-                            <param id="0" name="Name">&quot;Player_ResetVars&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-13" name="Set boolean" sid="779399677310436" type="Var_Player">
-                            <param id="0" name="Instance variable">Underwater</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-13" name="Set boolean" sid="543864179033067" type="Var_Level">
-                            <param id="0" name="Instance variable">Pause</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="757550538074844" type="Var_Player">
-                            <param id="0" name="Instance variable">Checkpoint</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="913720753623604" type="Var_Player">
-                            <param id="0" name="Instance variable">TotalDeaths</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="749958683359111" type="Var_Player">
-                            <param id="0" name="Instance variable">TotalScore</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="382485057385807" type="Var_Game">
-                            <param id="0" name="Instance variable">TimerGlobal</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-13" name="Set boolean" sid="449957196574981" type="Var_Player">
-                            <param id="0" name="Instance variable">CanMove</param>
-                            <param id="1" name="Value">1</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="530509895887078" type="Var_Player">
-                            <param id="0" name="Instance variable">State</param>
-                            <param id="1" name="Value">&quot;none&quot;</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="174190112246381" type="Var_Player">
-                            <param id="0" name="Instance variable">Finished</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-13" name="Set boolean" sid="711975626314979" type="Var_Player">
-                            <param id="0" name="Instance variable">Shield</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="259266674444600" type="Var_Player">
-                            <param id="0" name="Instance variable">SpeedUpTimer</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="241075685235143" type="Var_Player">
-                            <param id="0" name="Instance variable">IncincibilityTimer</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="306209524863967" type="Var_Player">
-                            <param id="0" name="Instance variable">DrowningCounter</param>
-                            <param id="1" name="Value">20</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="297644155800424" type="Var_Level">
-                            <param id="0" name="Instance variable">TimerLevel</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="499862409989335" type="Var_Player">
-                            <param id="0" name="Instance variable">Rings</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="387183200186505" type="Var_Player">
-                            <param id="0" name="Instance variable">Score</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="392334334537344" type="Var_Player">
-                            <param id="0" name="Instance variable">ScorePerfect</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="632468906757384" type="Var_Player">
-                            <param id="0" name="Instance variable">ScoreGuardPenalty</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="438414478948410" type="Var_Player">
-                            <param id="0" name="Instance variable">IncincibilityTimer</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="463848069404762" type="Var_Player">
-                            <param id="0" name="Instance variable">TotalDeaths</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="862475182290261" type="Var_Player">
-                            <param id="0" name="Instance variable">TotalScore</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="706782905175288" type="Var_Level">
-                            <param id="0" name="Instance variable">Local_P1Score</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="810808977805189" type="Var_Level">
-                            <param id="0" name="Instance variable">Local_P2Score</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="651237978651066" type="Var_Level">
-                            <param id="0" name="Instance variable">Local_LapOfHonour</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="542406181190419" type="Var_Player">
-                            <param id="0" name="Instance variable">SpringTimer</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="996337512154269" type="Var_Level">
-                            <param id="0" name="Instance variable">Pong_Lives</param>
-                            <param id="1" name="Value">5</param>
-                        </action>
-                        <action id="-13" name="Set boolean" sid="545971862826976" type="JSON_AudioPreload">
-                            <param id="0" name="Instance variable">LevelPreloaded</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="710970130293502" type="Var_Level">
-                            <param id="0" name="Instance variable">ZoneResetTimer</param>
-                            <param id="1" name="Value">-1</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="873483493272599" type="Var_Level">
-                            <param id="0" name="Instance variable">Special_SavedLevel</param>
-                            <param id="1" name="Value">&quot;null&quot;</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="354358865245631" type="Var_Level">
-                            <param id="0" name="Instance variable">Special_SavedX</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="648847735816900" type="Var_Level">
-                            <param id="0" name="Instance variable">Special_SavedY</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="430611955776858" type="Var_Level">
-                            <param id="0" name="Instance variable">Special_SavedScore</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="119845596831901" type="Var_Level">
-                            <param id="0" name="Instance variable">Special_SavedTime</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="107540181196032" type="Var_Level">
-                            <param id="0" name="Instance variable">Special_SavedRings</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="992297465120550" type="Var_Player">
-                            <param id="0" name="Instance variable">SpringTimer</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="719087457258708" type="Var_Level">
-                            <param id="0" name="Instance variable">Marathon_Timer</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action disabled="1" id="-10" name="Set value" sid="200332029119672" type="Var_Level">
-                            <param id="0" name="Instance variable">Marathon_Counter</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="785445703583129" type="Var_Level">
-                            <param id="0" name="Instance variable">Marathon_CounterMax</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="900011965175509" type="Var_Level">
-                            <param id="0" name="Instance variable">Marathon_String</param>
-                            <param id="1" name="Value">&quot;&quot;</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="777937003846935" type="Var_Level">
-                            <param id="0" name="Instance variable">TimerLevel</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-13" name="Set boolean" sid="201608614082941" type="Var_Level">
-                            <param id="0" name="Instance variable">TimerLevelActive</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="444116681526840" type="Var_Level">
-                            <param id="0" name="Instance variable">TimerLevelReal</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="748412505135509" type="Var_Player">
-                            <param id="0" name="Instance variable">Deaths</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="137402053835863" type="Var_Player">
-                            <param id="0" name="Instance variable">Lives</param>
-                            <param id="1" name="Value">-1</param>
-                        </action>
-                        <action id="-13" name="Set boolean" sid="365391322725047" type="Var_Level">
-                            <param id="0" name="Instance variable">Level_NoTitleCard</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="840756079416086" type="Var_Game">
-                            <param id="0" name="Instance variable">Emeralds</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="575952819379834" type="Var_Game">
-                            <param id="0" name="Instance variable">UsedSpecialTokens</param>
-                            <param id="1" name="Value">&quot;&quot;</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="957922583412839" type="Var_Player">
-                            <param id="0" name="Instance variable">SChaseWave</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                    </actions>
-                </event-block>
                 <comment></comment>
                 <event-block sid="427888919394754">
                     <conditions>
@@ -1868,6 +1617,402 @@
         </event-group>
         <event-group description="" sid="840403875393779" title="Utilities">
             <sub-events>
+                <comment></comment>
+                <event-block sid="287902010826587">
+                    <conditions>
+                        <condition id="0" name="On function" sid="277370481804083" type="Function">
+                            <param id="0" name="Name">&quot;Input_GetKey&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="699810049626925">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="781816271416735" type="Var_Input">
+                                    <param id="0" name="Instance variable">InputMode</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;Keyboard&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="791976533266413">
+                                    <conditions>
+                                        <condition id="1" name="Compare parameter" sid="816946591854218" type="Function">
+                                            <param id="0" name="Index">0</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;up&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="1" name="Set return value" sid="216034404626842" type="Function">
+                                            <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Configuration.Input1KeyUp)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="540436702276492">
+                                    <conditions>
+                                        <condition id="1" name="Compare parameter" sid="436648622490830" type="Function">
+                                            <param id="0" name="Index">0</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;down&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="1" name="Set return value" sid="876280732396280" type="Function">
+                                            <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Configuration.Input1KeyDown)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="306867520151989">
+                                    <conditions>
+                                        <condition id="1" name="Compare parameter" sid="347929172332496" type="Function">
+                                            <param id="0" name="Index">0</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;left&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="1" name="Set return value" sid="502271158331056" type="Function">
+                                            <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Configuration.Input1KeyLeft)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="241277890940670">
+                                    <conditions>
+                                        <condition id="1" name="Compare parameter" sid="651045839244246" type="Function">
+                                            <param id="0" name="Index">0</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;right&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="1" name="Set return value" sid="482282577913875" type="Function">
+                                            <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Configuration.Input1KeyRight)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="921247700601991">
+                                    <conditions>
+                                        <condition id="1" name="Compare parameter" sid="757180006247492" type="Function">
+                                            <param id="0" name="Index">0</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;jump&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="1" name="Set return value" sid="940294085918871" type="Function">
+                                            <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Configuration.Input1KeyA)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="663831724938496">
+                                    <conditions>
+                                        <condition id="1" name="Compare parameter" sid="644541655502059" type="Function">
+                                            <param id="0" name="Index">0</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;pause&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="1" name="Set return value" sid="159281677669829" type="Function">
+                                            <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Configuration.Input1KeyStart)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="793947477468818">
+                                    <conditions>
+                                        <condition id="1" name="Compare parameter" sid="541921384452335" type="Function">
+                                            <param id="0" name="Index">0</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;restart&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="1" name="Set return value" sid="368134253285526" type="Function">
+                                            <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Configuration.Input1KeyRestart)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="264325980541774">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="855513503540610" type="Var_Input">
+                                    <param id="0" name="Instance variable">InputMode</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;Gamepad&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block any="1" sid="182986364189798">
+                                    <conditions>
+                                        <condition id="1" name="Compare parameter" sid="730243770299337" type="Function">
+                                            <param id="0" name="Index">0</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;up&quot;</param>
+                                        </condition>
+                                        <condition id="1" name="Compare parameter" sid="874652881137242" type="Function">
+                                            <param id="0" name="Index">0</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;down&quot;</param>
+                                        </condition>
+                                        <condition id="1" name="Compare parameter" sid="683941702243876" type="Function">
+                                            <param id="0" name="Index">0</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;left&quot;</param>
+                                        </condition>
+                                        <condition id="1" name="Compare parameter" sid="670814571019316" type="Function">
+                                            <param id="0" name="Index">0</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;right&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="1" name="Set return value" sid="212316920277363" type="Function">
+                                            <param id="0" name="Value">uppercase(left(Function.Param(0),1))&amp;right(Function.Param(0),(len(Function.Param(0))-1))</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="659458047414055">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="317261134206933" type="Var_Input">
+                                            <param id="0" name="Instance variable">GamepadType</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;Numbers&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="285394952102024">
+                                            <conditions>
+                                                <condition id="1" name="Compare parameter" sid="502936987920993" type="Function">
+                                                    <param id="0" name="Index">0</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">&quot;jump&quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="1" name="Set return value" sid="517503146919430" type="Function">
+                                                    <param id="0" name="Value">&quot;Button &quot;&amp;Save_Configuration.Input1PadA</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="568217943229164">
+                                            <conditions>
+                                                <condition id="1" name="Compare parameter" sid="248814019836591" type="Function">
+                                                    <param id="0" name="Index">0</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">&quot;pause&quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="1" name="Set return value" sid="833564648114098" type="Function">
+                                                    <param id="0" name="Value">&quot;Button &quot;&amp;Save_Configuration.Input1PadStart</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="788641547139978">
+                                            <conditions>
+                                                <condition id="1" name="Compare parameter" sid="841468829900022" type="Function">
+                                                    <param id="0" name="Index">0</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">&quot;restart&quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="1" name="Set return value" sid="364889364697187" type="Function">
+                                                    <param id="0" name="Value">&quot;Button &quot;&amp;Save_Configuration.Input1PadRestart</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block any="1" sid="374745263433184">
+                                    <conditions>
+                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="878622491958174" type="Var_Input">
+                                            <param id="0" name="Instance variable">GamepadType</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;Numbers&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="208105238078967">
+                                            <conditions>
+                                                <condition id="1" name="Compare parameter" sid="524105761711394" type="Function">
+                                                    <param id="0" name="Index">0</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">&quot;jump&quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="1" name="Set return value" sid="122880899268195" type="Function">
+                                                    <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Gamepad_&quot;&amp;Var_Input.GamepadType,Save_Configuration.Input1PadA)</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="323836104847871">
+                                            <conditions>
+                                                <condition id="1" name="Compare parameter" sid="201572444381563" type="Function">
+                                                    <param id="0" name="Index">0</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">&quot;pause&quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="1" name="Set return value" sid="159342325215396" type="Function">
+                                                    <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Gamepad_&quot;&amp;Var_Input.GamepadType,Save_Configuration.Input1PadStart)</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="859464642793074">
+                                            <conditions>
+                                                <condition id="1" name="Compare parameter" sid="216854739390843" type="Function">
+                                                    <param id="0" name="Index">0</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">&quot;restart&quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="1" name="Set return value" sid="536979639604739" type="Function">
+                                                    <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Gamepad_&quot;&amp;Var_Input.GamepadType,Save_Configuration.Input1PadRestart)</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="817329549460513">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="599145436841833" type="Var_Input">
+                                    <param id="0" name="Instance variable">InputMode</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;Android&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block any="1" sid="444524497222511">
+                                    <conditions>
+                                        <condition id="1" name="Compare parameter" sid="562889022742424" type="Function">
+                                            <param id="0" name="Index">0</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;up&quot;</param>
+                                        </condition>
+                                        <condition id="1" name="Compare parameter" sid="887245672757238" type="Function">
+                                            <param id="0" name="Index">0</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;down&quot;</param>
+                                        </condition>
+                                        <condition id="1" name="Compare parameter" sid="205114666786317" type="Function">
+                                            <param id="0" name="Index">0</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;left&quot;</param>
+                                        </condition>
+                                        <condition id="1" name="Compare parameter" sid="200286233480990" type="Function">
+                                            <param id="0" name="Index">0</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;right&quot;</param>
+                                        </condition>
+                                        <condition id="1" name="Compare parameter" sid="268149094859207" type="Function">
+                                            <param id="0" name="Index">0</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;jump&quot;</param>
+                                        </condition>
+                                        <condition id="1" name="Compare parameter" sid="902799902189666" type="Function">
+                                            <param id="0" name="Index">0</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;pause&quot;</param>
+                                        </condition>
+                                        <condition id="1" name="Compare parameter" sid="495391316636483" type="Function">
+                                            <param id="0" name="Index">0</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;restart&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="1" name="Set return value" sid="757532758137999" type="Function">
+                                            <param id="0" name="Value">uppercase(left(Function.Param(0),1))&amp;right(Function.Param(0),(len(Function.Param(0))-1))</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="481169517307574">
+                            <conditions>
+                                <condition id="1" name="Compare parameter" sid="239755895171571" type="Function">
+                                    <param id="0" name="Index">0</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;2up&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="1" name="Set return value" sid="436537118405836" type="Function">
+                                    <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Configuration.Input2KeyUp)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="946383933694830">
+                            <conditions>
+                                <condition id="1" name="Compare parameter" sid="356336437190499" type="Function">
+                                    <param id="0" name="Index">0</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;2down&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="1" name="Set return value" sid="255651462305551" type="Function">
+                                    <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Configuration.Input2KeyDown)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="633267740956755">
+                            <conditions>
+                                <condition id="1" name="Compare parameter" sid="725755265927491" type="Function">
+                                    <param id="0" name="Index">0</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;2left&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="1" name="Set return value" sid="303958848123266" type="Function">
+                                    <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Configuration.Input2KeyLeft)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="310347628420276">
+                            <conditions>
+                                <condition id="1" name="Compare parameter" sid="891819765226517" type="Function">
+                                    <param id="0" name="Index">0</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;2right&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="1" name="Set return value" sid="724771661952114" type="Function">
+                                    <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Configuration.Input2KeyRight)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="334487870828556">
+                            <conditions>
+                                <condition id="1" name="Compare parameter" sid="738386703096721" type="Function">
+                                    <param id="0" name="Index">0</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;2jump&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="1" name="Set return value" sid="869188105802302" type="Function">
+                                    <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Configuration.Input2KeyA)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
                 <comment>INI</comment>
                 <event-block sid="357511900240878">
                     <conditions>
@@ -1949,6 +2094,485 @@
                     <actions>
                         <action id="1" name="Set return value" sid="200189091204297" type="Function">
                             <param id="0" name="Value">Browser.ExecJS(&quot;JSON.stringify(&quot;&amp;Function.Param(0)&amp;&quot;)&quot;)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>reset player variables</comment>
+                <event-block sid="886299191515315">
+                    <conditions>
+                        <condition id="0" name="On function" sid="348365842331588" type="Function">
+                            <param id="0" name="Name">&quot;Player_ResetVars&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="796377597551923">
+                            <conditions />
+                            <actions>
+                                <action id="-13" name="Set boolean" sid="779399677310436" type="Var_Player">
+                                    <param id="0" name="Instance variable">Underwater</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-13" name="Set boolean" sid="543864179033067" type="Var_Level">
+                                    <param id="0" name="Instance variable">Pause</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="757550538074844" type="Var_Player">
+                                    <param id="0" name="Instance variable">Checkpoint</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="913720753623604" type="Var_Player">
+                                    <param id="0" name="Instance variable">TotalDeaths</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="749958683359111" type="Var_Player">
+                                    <param id="0" name="Instance variable">TotalScore</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="382485057385807" type="Var_Game">
+                                    <param id="0" name="Instance variable">TimerGlobal</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-13" name="Set boolean" sid="449957196574981" type="Var_Player">
+                                    <param id="0" name="Instance variable">CanMove</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="530509895887078" type="Var_Player">
+                                    <param id="0" name="Instance variable">State</param>
+                                    <param id="1" name="Value">&quot;none&quot;</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="174190112246381" type="Var_Player">
+                                    <param id="0" name="Instance variable">Finished</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-13" name="Set boolean" sid="711975626314979" type="Var_Player">
+                                    <param id="0" name="Instance variable">Shield</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="259266674444600" type="Var_Player">
+                                    <param id="0" name="Instance variable">SpeedUpTimer</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="241075685235143" type="Var_Player">
+                                    <param id="0" name="Instance variable">IncincibilityTimer</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="306209524863967" type="Var_Player">
+                                    <param id="0" name="Instance variable">DrowningCounter</param>
+                                    <param id="1" name="Value">20</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="297644155800424" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevel</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="499862409989335" type="Var_Player">
+                                    <param id="0" name="Instance variable">Rings</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="387183200186505" type="Var_Player">
+                                    <param id="0" name="Instance variable">Score</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="392334334537344" type="Var_Player">
+                                    <param id="0" name="Instance variable">ScorePerfect</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="632468906757384" type="Var_Player">
+                                    <param id="0" name="Instance variable">ScoreGuardPenalty</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="438414478948410" type="Var_Player">
+                                    <param id="0" name="Instance variable">IncincibilityTimer</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="463848069404762" type="Var_Player">
+                                    <param id="0" name="Instance variable">TotalDeaths</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="862475182290261" type="Var_Player">
+                                    <param id="0" name="Instance variable">TotalScore</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="706782905175288" type="Var_Level">
+                                    <param id="0" name="Instance variable">Local_P1Score</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="810808977805189" type="Var_Level">
+                                    <param id="0" name="Instance variable">Local_P2Score</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="651237978651066" type="Var_Level">
+                                    <param id="0" name="Instance variable">Local_LapOfHonour</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="542406181190419" type="Var_Player">
+                                    <param id="0" name="Instance variable">SpringTimer</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="996337512154269" type="Var_Level">
+                                    <param id="0" name="Instance variable">Pong_Lives</param>
+                                    <param id="1" name="Value">5</param>
+                                </action>
+                                <action id="-13" name="Set boolean" sid="545971862826976" type="JSON_AudioPreload">
+                                    <param id="0" name="Instance variable">LevelPreloaded</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="710970130293502" type="Var_Level">
+                                    <param id="0" name="Instance variable">ZoneResetTimer</param>
+                                    <param id="1" name="Value">-1</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="873483493272599" type="Var_Level">
+                                    <param id="0" name="Instance variable">Special_SavedLevel</param>
+                                    <param id="1" name="Value">&quot;null&quot;</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="354358865245631" type="Var_Level">
+                                    <param id="0" name="Instance variable">Special_SavedX</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="648847735816900" type="Var_Level">
+                                    <param id="0" name="Instance variable">Special_SavedY</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="430611955776858" type="Var_Level">
+                                    <param id="0" name="Instance variable">Special_SavedScore</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="119845596831901" type="Var_Level">
+                                    <param id="0" name="Instance variable">Special_SavedTime</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="107540181196032" type="Var_Level">
+                                    <param id="0" name="Instance variable">Special_SavedRings</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="992297465120550" type="Var_Player">
+                                    <param id="0" name="Instance variable">SpringTimer</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="719087457258708" type="Var_Level">
+                                    <param id="0" name="Instance variable">Marathon_Timer</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action disabled="1" id="-10" name="Set value" sid="200332029119672" type="Var_Level">
+                                    <param id="0" name="Instance variable">Marathon_Counter</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="785445703583129" type="Var_Level">
+                                    <param id="0" name="Instance variable">Marathon_CounterMax</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="900011965175509" type="Var_Level">
+                                    <param id="0" name="Instance variable">Marathon_String</param>
+                                    <param id="1" name="Value">&quot;&quot;</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="777937003846935" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevel</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-13" name="Set boolean" sid="201608614082941" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevelActive</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="444116681526840" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevelReal</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="748412505135509" type="Var_Player">
+                                    <param id="0" name="Instance variable">Deaths</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="137402053835863" type="Var_Player">
+                                    <param id="0" name="Instance variable">Lives</param>
+                                    <param id="1" name="Value">-1</param>
+                                </action>
+                                <action id="-13" name="Set boolean" sid="365391322725047" type="Var_Level">
+                                    <param id="0" name="Instance variable">Level_NoTitleCard</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="840756079416086" type="Var_Game">
+                                    <param id="0" name="Instance variable">Emeralds</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="575952819379834" type="Var_Game">
+                                    <param id="0" name="Instance variable">UsedSpecialTokens</param>
+                                    <param id="1" name="Value">&quot;&quot;</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="957922583412839" type="Var_Player">
+                                    <param id="0" name="Instance variable">SChaseWave</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="963834884412106" title="External files">
+            <sub-events>
+                <comment></comment>
+                <event-block sid="722283299690314">
+                    <conditions>
+                        <condition id="70" name="Is Empty" sid="190649115069777" type="JSON_LevelPlaylist">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="416712604657305" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="1" name="Request project file" sid="586972287519443" type="AJAX">
+                            <param id="0" name="Tag">&quot;levelslist&quot;</param>
+                            <param id="1" name="File">levelslist.ini</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="666020545546164">
+                    <conditions>
+                        <condition id="0" name="On completed" sid="123769047512206" type="AJAX">
+                            <param id="0" name="Tag">&quot;levelslist&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set New Object" sid="715678104825402" type="JSON_LevelPlaylist">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </action>
+                        <action id="0" name="Call function" sid="388485048873224" type="Function">
+                            <param id="0" name="Name">&quot;INI2JSON&quot;</param>
+                            <param id="1" name="Parameter {n}">AJAX.LastData</param>
+                        </action>
+                        <action id="60" name="LoadJSON" sid="140540162740817" type="JSON_LevelPlaylist">
+                            <param id="0" name="JSON">Function.ReturnValue</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}"></param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <variable constant="0" name="json" sid="244282703755548" static="0" type="text"></variable>
+                        <event-block sid="683144304170841">
+                            <conditions>
+                                <condition id="100" name="For each property" sid="381499546546543" type="JSON_LevelPlaylist">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}"></param>
+                                </condition>
+                                <condition id="-8" name="Compare two values" sid="269905732591533" type="System">
+                                    <param id="0" name="First value">find(JSON_LevelPlaylist.CurrentKey,&quot;List&quot;)</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">-1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="148697338660737" type="System">
+                                    <param id="0" name="Variable">json</param>
+                                    <param id="1" name="Value">replace(JSON_LevelPlaylist.AsJson(0,JSON_LevelPlaylist.CurrentKey),&quot;:true&quot;,&quot;&quot;)</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="903085139766519" type="System">
+                                    <param id="0" name="Variable">json</param>
+                                    <param id="1" name="Value">replace(json,&quot;{&quot;,&quot;[&quot;)</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="465766300376276" type="System">
+                                    <param id="0" name="Variable">json</param>
+                                    <param id="1" name="Value">replace(json,&quot;}&quot;,&quot;]&quot;)</param>
+                                </action>
+                                <action id="10" name="Set New Array" sid="737554981642463" type="JSON_LevelPlaylist">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}">Self.CurrentKey</param>
+                                </action>
+                                <action id="60" name="LoadJSON" sid="151428741012719" type="JSON_LevelPlaylist">
+                                    <param id="0" name="JSON">json</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">Self.CurrentKey</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment></comment>
+                <event-block sid="873481601175739">
+                    <conditions>
+                        <condition id="70" name="Is Empty" sid="644180522956674" type="JSON_LevelProperties">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="461487496269318" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="1" name="Request project file" sid="579154648539404" type="AJAX">
+                            <param id="0" name="Tag">&quot;levelsproperties&quot;</param>
+                            <param id="1" name="File">levelsproperties.ini</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="735327961230084">
+                    <conditions>
+                        <condition id="0" name="On completed" sid="161537500053850" type="AJAX">
+                            <param id="0" name="Tag">&quot;levelsproperties&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set New Object" sid="907994913575730" type="JSON_LevelProperties">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </action>
+                        <action id="0" name="Call function" sid="678286917107449" type="Function">
+                            <param id="0" name="Name">&quot;INI2JSON&quot;</param>
+                            <param id="1" name="Parameter {n}">AJAX.LastData</param>
+                        </action>
+                        <action id="60" name="LoadJSON" sid="416529203802945" type="JSON_LevelProperties">
+                            <param id="0" name="JSON">Function.ReturnValue</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}"></param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment></comment>
+                <event-block sid="812674581044302">
+                    <conditions>
+                        <condition id="70" name="Is Empty" sid="862648342071424" type="JSON_InputKeycodes">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="581087198309640" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="1" name="Request project file" sid="522713947354922" type="AJAX">
+                            <param id="0" name="Tag">&quot;keycodes&quot;</param>
+                            <param id="1" name="File">keycodes.ini</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="704353488214618">
+                    <conditions>
+                        <condition id="0" name="On completed" sid="306486745686037" type="AJAX">
+                            <param id="0" name="Tag">&quot;keycodes&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set New Object" sid="375413380140358" type="JSON_InputKeycodes">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </action>
+                        <action id="0" name="Call function" sid="439233085868299" type="Function">
+                            <param id="0" name="Name">&quot;INI2JSON&quot;</param>
+                            <param id="1" name="Parameter {n}">AJAX.LastData</param>
+                        </action>
+                        <action id="60" name="LoadJSON" sid="563935465293579" type="JSON_InputKeycodes">
+                            <param id="0" name="JSON">Function.ReturnValue</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}"></param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment></comment>
+                <event-block sid="221005033285318">
+                    <conditions>
+                        <condition id="70" name="Is Empty" sid="206638784992856" type="JSON_SkinsProperties">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="777788393266997" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="1" name="Request project file" sid="575494500318957" type="AJAX">
+                            <param id="0" name="Tag">&quot;skinssproperties&quot;</param>
+                            <param id="1" name="File">skinsproperties.ini</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="709630387852625">
+                    <conditions>
+                        <condition id="0" name="On completed" sid="571187017844659" type="AJAX">
+                            <param id="0" name="Tag">&quot;skinssproperties&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set New Object" sid="460092285363473" type="JSON_SkinsProperties">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </action>
+                        <action id="0" name="Call function" sid="566833760762161" type="Function">
+                            <param id="0" name="Name">&quot;INI2JSON&quot;</param>
+                            <param id="1" name="Parameter {n}">AJAX.LastData</param>
+                        </action>
+                        <action id="60" name="LoadJSON" sid="301071263740249" type="JSON_SkinsProperties">
+                            <param id="0" name="JSON">Function.ReturnValue</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}"></param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment></comment>
+                <event-block sid="797036280493914">
+                    <conditions>
+                        <condition id="70" name="Is Empty" sid="778818451822964" type="JSON_AudioPreload">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="408932890289917" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="1" name="Request project file" sid="596545688720134" type="AJAX">
+                            <param id="0" name="Tag">&quot;audiolist&quot;</param>
+                            <param id="1" name="File">audiolist.ini</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="623284608760105">
+                    <conditions>
+                        <condition id="0" name="On completed" sid="664384547862015" type="AJAX">
+                            <param id="0" name="Tag">&quot;audiolist&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set New Object" sid="343261306229287" type="JSON_AutoUpdater">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </action>
+                        <action id="0" name="Call function" sid="590036655705947" type="Function">
+                            <param id="0" name="Name">&quot;INI2JSON&quot;</param>
+                            <param id="1" name="Parameter {n}">AJAX.LastData</param>
+                        </action>
+                        <action id="60" name="LoadJSON" sid="185310249961443" type="JSON_AudioPreload">
+                            <param id="0" name="JSON">Function.ReturnValue</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}"></param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment></comment>
+                <event-block sid="122901515107600">
+                    <conditions>
+                        <condition id="70" name="Is Empty" sid="489734475916445" type="JSON_AudioProperties">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="747027255583644" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="1" name="Request project file" sid="207363745878159" type="AJAX">
+                            <param id="0" name="Tag">&quot;audioproperties&quot;</param>
+                            <param id="1" name="File">audioproperties.ini</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="489703845885361">
+                    <conditions>
+                        <condition id="0" name="On completed" sid="424256181024190" type="AJAX">
+                            <param id="0" name="Tag">&quot;audioproperties&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set New Object" sid="537072490458042" type="JSON_AudioProperties">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </action>
+                        <action id="0" name="Call function" sid="837434768189857" type="Function">
+                            <param id="0" name="Name">&quot;INI2JSON&quot;</param>
+                            <param id="1" name="Parameter {n}">AJAX.LastData</param>
+                        </action>
+                        <action id="60" name="LoadJSON" sid="585468518575926" type="JSON_AudioProperties">
+                            <param id="0" name="JSON">Function.ReturnValue</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}"></param>
                         </action>
                     </actions>
                 </event-block>
@@ -2079,11 +2703,6 @@
                                     <param id="1" name="Reference point">0</param>
                                     <param id="2" name="Key {n}">&quot;SRBftp_Config&quot;{###}&quot;Input1PadRestart&quot;</param>
                                 </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="942914005088269">
-                            <conditions />
-                            <actions>
                                 <action id="20" name="Set Value" sid="205020348086764" type="Save_Configuration">
                                     <param id="0" name="Value">Self.Input2KeyUp</param>
                                     <param id="1" name="Reference point">0</param>
@@ -2254,19 +2873,6 @@
                     </conditions>
                     <actions />
                     <sub-events>
-                        <event-block sid="387538527321829">
-                            <conditions>
-                                <condition id="60" name="Is undefined" sid="849646319542534" type="Save_Configuration">
-                                    <param id="0" name="Reference point">0</param>
-                                    <param id="1" name="Key {n}">&quot;SRBftp_Config&quot;{###}Function.Param(0)</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="1" name="Set return value" sid="464711578075971" type="Function">
-                                    <param id="0" name="Value">Function.Param(1)</param>
-                                </action>
-                            </actions>
-                        </event-block>
                         <event-block sid="978814565905998">
                             <conditions>
                                 <condition id="60" inverted="1" name="Is undefined" sid="201907843992991" type="Save_Configuration">
@@ -2277,6 +2883,19 @@
                             <actions>
                                 <action id="1" name="Set return value" sid="434725452719995" type="Function">
                                     <param id="0" name="Value">Save_Configuration.Value(0,&quot;SRBftp_Config&quot;,Function.Param(0))</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="387538527321829">
+                            <conditions>
+                                <condition id="60" name="Is undefined" sid="849646319542534" type="Save_Configuration">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}">&quot;SRBftp_Config&quot;{###}Function.Param(0)</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="1" name="Set return value" sid="464711578075971" type="Function">
+                                    <param id="0" name="Value">Function.Param(1)</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -2357,11 +2976,6 @@
                                     <param id="0" name="Instance variable">GraphicsShowFPS</param>
                                     <param id="1" name="Value">int(Function.Call(&quot;Config_ExistsOrDefault&quot;,    &quot;GraphicsShowFPS&quot;, Self.GraphicsShowFPS))</param>
                                 </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="905709458977216">
-                            <conditions />
-                            <actions>
                                 <action id="-10" name="Set value" sid="753207172306992" type="Save_Configuration">
                                     <param id="0" name="Instance variable">SoundVolume</param>
                                     <param id="1" name="Value">int(Function.Call(&quot;Config_ExistsOrDefault&quot;,    &quot;SoundVolume&quot;, Self.SoundVolume))</param>
@@ -2420,11 +3034,6 @@
                                     <param id="0" name="Instance variable">Input1PadRestart</param>
                                     <param id="1" name="Value">int(Function.Call(&quot;Config_ExistsOrDefault&quot;,    &quot;Input1PadRestart&quot;, Self.Input1PadRestart))</param>
                                 </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="782853171370460">
-                            <conditions />
-                            <actions>
                                 <action id="-10" name="Set value" sid="841275365783832" type="Save_Configuration">
                                     <param id="0" name="Instance variable">Input2KeyUp</param>
                                     <param id="1" name="Value">int(Function.Call(&quot;Config_ExistsOrDefault&quot;,    &quot;Input2KeyUp&quot;, Self.Input2KeyUp))</param>
@@ -2499,7 +3108,6 @@
                     <actions />
                     <sub-events>
                         <comment>window size</comment>
-                        <comment>code by André</comment>
                         <comment>x0,5 x1 x1,5 x2 x2,25</comment>
                         <event-block sid="604474250428689">
                             <conditions>
@@ -2586,6 +3194,7 @@
                                 </action>
                             </actions>
                         </event-block>
+                        <comment>code by André</comment>
                         <event-block sid="679747583303464">
                             <conditions />
                             <actions>
@@ -3048,197 +3657,6 @@
             </sub-events>
         </event-group>
         <comment></comment>
-        <event-block sid="122901515107600">
-            <conditions>
-                <condition id="70" name="Is Empty" sid="489734475916445" type="JSON_AudioProperties">
-                    <param id="0" name="Reference point">0</param>
-                    <param id="1" name="Key {n}"></param>
-                </condition>
-                <condition id="-4" name="Trigger once while true" sid="747027255583644" type="System" />
-            </conditions>
-            <actions>
-                <action id="1" name="Request project file" sid="207363745878159" type="AJAX">
-                    <param id="0" name="Tag">&quot;audioproperties&quot;</param>
-                    <param id="1" name="File">audioproperties.ini</param>
-                </action>
-            </actions>
-        </event-block>
-        <event-block sid="489703845885361">
-            <conditions>
-                <condition id="0" name="On completed" sid="424256181024190" type="AJAX">
-                    <param id="0" name="Tag">&quot;audioproperties&quot;</param>
-                </condition>
-            </conditions>
-            <actions>
-                <action id="0" name="Set New Object" sid="537072490458042" type="JSON_AudioProperties">
-                    <param id="0" name="Reference point">0</param>
-                    <param id="1" name="Key {n}"></param>
-                </action>
-                <action id="0" name="Call function" sid="837434768189857" type="Function">
-                    <param id="0" name="Name">&quot;INI2JSON&quot;</param>
-                    <param id="1" name="Parameter {n}">AJAX.LastData</param>
-                </action>
-                <action id="60" name="LoadJSON" sid="585468518575926" type="JSON_AudioProperties">
-                    <param id="0" name="JSON">Function.ReturnValue</param>
-                    <param id="1" name="Reference point">0</param>
-                    <param id="2" name="Key {n}"></param>
-                </action>
-            </actions>
-        </event-block>
-        <comment></comment>
-        <event-block sid="221005033285318">
-            <conditions>
-                <condition id="70" name="Is Empty" sid="206638784992856" type="JSON_SkinsProperties">
-                    <param id="0" name="Reference point">0</param>
-                    <param id="1" name="Key {n}"></param>
-                </condition>
-                <condition id="-4" name="Trigger once while true" sid="777788393266997" type="System" />
-            </conditions>
-            <actions>
-                <action id="1" name="Request project file" sid="575494500318957" type="AJAX">
-                    <param id="0" name="Tag">&quot;skinssproperties&quot;</param>
-                    <param id="1" name="File">skinsproperties.ini</param>
-                </action>
-            </actions>
-        </event-block>
-        <event-block sid="709630387852625">
-            <conditions>
-                <condition id="0" name="On completed" sid="571187017844659" type="AJAX">
-                    <param id="0" name="Tag">&quot;skinssproperties&quot;</param>
-                </condition>
-            </conditions>
-            <actions>
-                <action id="0" name="Set New Object" sid="460092285363473" type="JSON_SkinsProperties">
-                    <param id="0" name="Reference point">0</param>
-                    <param id="1" name="Key {n}"></param>
-                </action>
-                <action id="0" name="Call function" sid="566833760762161" type="Function">
-                    <param id="0" name="Name">&quot;INI2JSON&quot;</param>
-                    <param id="1" name="Parameter {n}">AJAX.LastData</param>
-                </action>
-                <action id="60" name="LoadJSON" sid="301071263740249" type="JSON_SkinsProperties">
-                    <param id="0" name="JSON">Function.ReturnValue</param>
-                    <param id="1" name="Reference point">0</param>
-                    <param id="2" name="Key {n}"></param>
-                </action>
-            </actions>
-        </event-block>
-        <comment></comment>
-        <event-block sid="873481601175739">
-            <conditions>
-                <condition id="70" name="Is Empty" sid="644180522956674" type="JSON_LevelProperties">
-                    <param id="0" name="Reference point">0</param>
-                    <param id="1" name="Key {n}"></param>
-                </condition>
-                <condition id="-4" name="Trigger once while true" sid="461487496269318" type="System" />
-            </conditions>
-            <actions>
-                <action id="1" name="Request project file" sid="579154648539404" type="AJAX">
-                    <param id="0" name="Tag">&quot;levelsproperties&quot;</param>
-                    <param id="1" name="File">levelsproperties.ini</param>
-                </action>
-            </actions>
-        </event-block>
-        <event-block sid="735327961230084">
-            <conditions>
-                <condition id="0" name="On completed" sid="161537500053850" type="AJAX">
-                    <param id="0" name="Tag">&quot;levelsproperties&quot;</param>
-                </condition>
-            </conditions>
-            <actions>
-                <action id="0" name="Set New Object" sid="907994913575730" type="JSON_LevelProperties">
-                    <param id="0" name="Reference point">0</param>
-                    <param id="1" name="Key {n}"></param>
-                </action>
-                <action id="0" name="Call function" sid="678286917107449" type="Function">
-                    <param id="0" name="Name">&quot;INI2JSON&quot;</param>
-                    <param id="1" name="Parameter {n}">AJAX.LastData</param>
-                </action>
-                <action id="60" name="LoadJSON" sid="416529203802945" type="JSON_LevelProperties">
-                    <param id="0" name="JSON">Function.ReturnValue</param>
-                    <param id="1" name="Reference point">0</param>
-                    <param id="2" name="Key {n}"></param>
-                </action>
-            </actions>
-        </event-block>
-        <comment></comment>
-        <event-block sid="722283299690314">
-            <conditions>
-                <condition id="70" name="Is Empty" sid="190649115069777" type="JSON_LevelPlaylist">
-                    <param id="0" name="Reference point">0</param>
-                    <param id="1" name="Key {n}"></param>
-                </condition>
-                <condition id="-4" name="Trigger once while true" sid="416712604657305" type="System" />
-            </conditions>
-            <actions>
-                <action id="1" name="Request project file" sid="586972287519443" type="AJAX">
-                    <param id="0" name="Tag">&quot;levelslist&quot;</param>
-                    <param id="1" name="File">levelslist.ini</param>
-                </action>
-            </actions>
-        </event-block>
-        <event-block sid="666020545546164">
-            <conditions>
-                <condition id="0" name="On completed" sid="123769047512206" type="AJAX">
-                    <param id="0" name="Tag">&quot;levelslist&quot;</param>
-                </condition>
-            </conditions>
-            <actions>
-                <action id="0" name="Set New Object" sid="715678104825402" type="JSON_LevelPlaylist">
-                    <param id="0" name="Reference point">0</param>
-                    <param id="1" name="Key {n}"></param>
-                </action>
-                <action id="0" name="Call function" sid="388485048873224" type="Function">
-                    <param id="0" name="Name">&quot;INI2JSON&quot;</param>
-                    <param id="1" name="Parameter {n}">AJAX.LastData</param>
-                </action>
-                <action id="60" name="LoadJSON" sid="140540162740817" type="JSON_LevelPlaylist">
-                    <param id="0" name="JSON">Function.ReturnValue</param>
-                    <param id="1" name="Reference point">0</param>
-                    <param id="2" name="Key {n}"></param>
-                </action>
-            </actions>
-            <sub-events>
-                <variable constant="0" name="json" sid="244282703755548" static="0" type="text"></variable>
-                <event-block sid="683144304170841">
-                    <conditions>
-                        <condition id="100" name="For each property" sid="381499546546543" type="JSON_LevelPlaylist">
-                            <param id="0" name="Reference point">0</param>
-                            <param id="1" name="Key {n}"></param>
-                        </condition>
-                        <condition id="-8" name="Compare two values" sid="269905732591533" type="System">
-                            <param id="0" name="First value">find(JSON_LevelPlaylist.CurrentKey,&quot;List&quot;)</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Second value">-1</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-9" name="Set value" sid="148697338660737" type="System">
-                            <param id="0" name="Variable">json</param>
-                            <param id="1" name="Value">replace(JSON_LevelPlaylist.AsJson(0,JSON_LevelPlaylist.CurrentKey),&quot;:true&quot;,&quot;&quot;)</param>
-                        </action>
-                        <action id="-9" name="Set value" sid="903085139766519" type="System">
-                            <param id="0" name="Variable">json</param>
-                            <param id="1" name="Value">replace(json,&quot;{&quot;,&quot;[&quot;)</param>
-                        </action>
-                        <action id="-9" name="Set value" sid="465766300376276" type="System">
-                            <param id="0" name="Variable">json</param>
-                            <param id="1" name="Value">replace(json,&quot;}&quot;,&quot;]&quot;)</param>
-                        </action>
-                        <action id="10" name="Set New Array" sid="737554981642463" type="JSON_LevelPlaylist">
-                            <param id="0" name="Reference point">0</param>
-                            <param id="1" name="Key {n}">Self.CurrentKey</param>
-                        </action>
-                        <action id="60" name="LoadJSON" sid="151428741012719" type="JSON_LevelPlaylist">
-                            <param id="0" name="JSON">json</param>
-                            <param id="1" name="Reference point">0</param>
-                            <param id="2" name="Key {n}">Self.CurrentKey</param>
-                        </action>
-                    </actions>
-                </event-block>
-            </sub-events>
-        </event-block>
-        <comment></comment>
         <event-block sid="958964304381177">
             <conditions>
                 <condition id="0" name="On function" sid="472691178728448" type="Function">
@@ -3340,439 +3758,5 @@
                 </event-block>
             </sub-events>
         </event-block>
-        <comment></comment>
-        <event-block sid="812674581044302">
-            <conditions>
-                <condition id="70" name="Is Empty" sid="862648342071424" type="JSON_InputKeycodes">
-                    <param id="0" name="Reference point">0</param>
-                    <param id="1" name="Key {n}"></param>
-                </condition>
-                <condition id="-4" name="Trigger once while true" sid="581087198309640" type="System" />
-            </conditions>
-            <actions>
-                <action id="1" name="Request project file" sid="522713947354922" type="AJAX">
-                    <param id="0" name="Tag">&quot;keycodes&quot;</param>
-                    <param id="1" name="File">keycodes.ini</param>
-                </action>
-            </actions>
-        </event-block>
-        <event-block sid="704353488214618">
-            <conditions>
-                <condition id="0" name="On completed" sid="306486745686037" type="AJAX">
-                    <param id="0" name="Tag">&quot;keycodes&quot;</param>
-                </condition>
-            </conditions>
-            <actions>
-                <action id="0" name="Set New Object" sid="375413380140358" type="JSON_InputKeycodes">
-                    <param id="0" name="Reference point">0</param>
-                    <param id="1" name="Key {n}"></param>
-                </action>
-                <action id="0" name="Call function" sid="439233085868299" type="Function">
-                    <param id="0" name="Name">&quot;INI2JSON&quot;</param>
-                    <param id="1" name="Parameter {n}">AJAX.LastData</param>
-                </action>
-                <action id="60" name="LoadJSON" sid="563935465293579" type="JSON_InputKeycodes">
-                    <param id="0" name="JSON">Function.ReturnValue</param>
-                    <param id="1" name="Reference point">0</param>
-                    <param id="2" name="Key {n}"></param>
-                </action>
-            </actions>
-        </event-block>
-        <event-block sid="287902010826587">
-            <conditions>
-                <condition id="0" name="On function" sid="277370481804083" type="Function">
-                    <param id="0" name="Name">&quot;Input_GetKey&quot;</param>
-                </condition>
-            </conditions>
-            <actions />
-            <sub-events>
-                <event-block sid="699810049626925">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="781816271416735" type="Var_Input">
-                            <param id="0" name="Instance variable">InputMode</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">&quot;Keyboard&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions />
-                    <sub-events>
-                        <event-block sid="791976533266413">
-                            <conditions>
-                                <condition id="1" name="Compare parameter" sid="816946591854218" type="Function">
-                                    <param id="0" name="Index">0</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;up&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="1" name="Set return value" sid="216034404626842" type="Function">
-                                    <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Configuration.Input1KeyUp)</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="540436702276492">
-                            <conditions>
-                                <condition id="1" name="Compare parameter" sid="436648622490830" type="Function">
-                                    <param id="0" name="Index">0</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;down&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="1" name="Set return value" sid="876280732396280" type="Function">
-                                    <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Configuration.Input1KeyDown)</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="306867520151989">
-                            <conditions>
-                                <condition id="1" name="Compare parameter" sid="347929172332496" type="Function">
-                                    <param id="0" name="Index">0</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;left&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="1" name="Set return value" sid="502271158331056" type="Function">
-                                    <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Configuration.Input1KeyLeft)</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="241277890940670">
-                            <conditions>
-                                <condition id="1" name="Compare parameter" sid="651045839244246" type="Function">
-                                    <param id="0" name="Index">0</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;right&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="1" name="Set return value" sid="482282577913875" type="Function">
-                                    <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Configuration.Input1KeyRight)</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="921247700601991">
-                            <conditions>
-                                <condition id="1" name="Compare parameter" sid="757180006247492" type="Function">
-                                    <param id="0" name="Index">0</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;jump&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="1" name="Set return value" sid="940294085918871" type="Function">
-                                    <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Configuration.Input1KeyA)</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="663831724938496">
-                            <conditions>
-                                <condition id="1" name="Compare parameter" sid="644541655502059" type="Function">
-                                    <param id="0" name="Index">0</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;pause&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="1" name="Set return value" sid="159281677669829" type="Function">
-                                    <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Configuration.Input1KeyStart)</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="793947477468818">
-                            <conditions>
-                                <condition id="1" name="Compare parameter" sid="541921384452335" type="Function">
-                                    <param id="0" name="Index">0</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;restart&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="1" name="Set return value" sid="368134253285526" type="Function">
-                                    <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Configuration.Input1KeyRestart)</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <event-block sid="264325980541774">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="855513503540610" type="Var_Input">
-                            <param id="0" name="Instance variable">InputMode</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">&quot;Gamepad&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions />
-                    <sub-events>
-                        <event-block any="1" sid="182986364189798">
-                            <conditions>
-                                <condition id="1" name="Compare parameter" sid="730243770299337" type="Function">
-                                    <param id="0" name="Index">0</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;up&quot;</param>
-                                </condition>
-                                <condition id="1" name="Compare parameter" sid="874652881137242" type="Function">
-                                    <param id="0" name="Index">0</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;down&quot;</param>
-                                </condition>
-                                <condition id="1" name="Compare parameter" sid="683941702243876" type="Function">
-                                    <param id="0" name="Index">0</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;left&quot;</param>
-                                </condition>
-                                <condition id="1" name="Compare parameter" sid="670814571019316" type="Function">
-                                    <param id="0" name="Index">0</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;right&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="1" name="Set return value" sid="212316920277363" type="Function">
-                                    <param id="0" name="Value">uppercase(left(Function.Param(0),1))&amp;right(Function.Param(0),(len(Function.Param(0))-1))</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="659458047414055">
-                            <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="317261134206933" type="Var_Input">
-                                    <param id="0" name="Instance variable">GamepadType</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;Numbers&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions />
-                            <sub-events>
-                                <event-block sid="285394952102024">
-                                    <conditions>
-                                        <condition id="1" name="Compare parameter" sid="502936987920993" type="Function">
-                                            <param id="0" name="Index">0</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">&quot;jump&quot;</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="1" name="Set return value" sid="517503146919430" type="Function">
-                                            <param id="0" name="Value">&quot;Button &quot;&amp;Save_Configuration.Input1PadA</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="568217943229164">
-                                    <conditions>
-                                        <condition id="1" name="Compare parameter" sid="248814019836591" type="Function">
-                                            <param id="0" name="Index">0</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">&quot;pause&quot;</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="1" name="Set return value" sid="833564648114098" type="Function">
-                                            <param id="0" name="Value">&quot;Button &quot;&amp;Save_Configuration.Input1PadStart</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="788641547139978">
-                                    <conditions>
-                                        <condition id="1" name="Compare parameter" sid="841468829900022" type="Function">
-                                            <param id="0" name="Index">0</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">&quot;restart&quot;</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="1" name="Set return value" sid="364889364697187" type="Function">
-                                            <param id="0" name="Value">&quot;Button &quot;&amp;Save_Configuration.Input1PadRestart</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
-                        </event-block>
-                        <event-block any="1" sid="374745263433184">
-                            <conditions>
-                                <condition id="-7" inverted="1" name="Compare instance variable" sid="878622491958174" type="Var_Input">
-                                    <param id="0" name="Instance variable">GamepadType</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;Numbers&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions />
-                            <sub-events>
-                                <event-block sid="208105238078967">
-                                    <conditions>
-                                        <condition id="1" name="Compare parameter" sid="524105761711394" type="Function">
-                                            <param id="0" name="Index">0</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">&quot;jump&quot;</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="1" name="Set return value" sid="122880899268195" type="Function">
-                                            <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Gamepad_&quot;&amp;Var_Input.GamepadType,Save_Configuration.Input1PadA)</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="323836104847871">
-                                    <conditions>
-                                        <condition id="1" name="Compare parameter" sid="201572444381563" type="Function">
-                                            <param id="0" name="Index">0</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">&quot;pause&quot;</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="1" name="Set return value" sid="159342325215396" type="Function">
-                                            <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Gamepad_&quot;&amp;Var_Input.GamepadType,Save_Configuration.Input1PadStart)</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="859464642793074">
-                                    <conditions>
-                                        <condition id="1" name="Compare parameter" sid="216854739390843" type="Function">
-                                            <param id="0" name="Index">0</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">&quot;restart&quot;</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="1" name="Set return value" sid="536979639604739" type="Function">
-                                            <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Gamepad_&quot;&amp;Var_Input.GamepadType,Save_Configuration.Input1PadRestart)</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <event-block sid="817329549460513">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="599145436841833" type="Var_Input">
-                            <param id="0" name="Instance variable">InputMode</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">&quot;Android&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions />
-                    <sub-events>
-                        <event-block any="1" sid="444524497222511">
-                            <conditions>
-                                <condition id="1" name="Compare parameter" sid="562889022742424" type="Function">
-                                    <param id="0" name="Index">0</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;up&quot;</param>
-                                </condition>
-                                <condition id="1" name="Compare parameter" sid="887245672757238" type="Function">
-                                    <param id="0" name="Index">0</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;down&quot;</param>
-                                </condition>
-                                <condition id="1" name="Compare parameter" sid="205114666786317" type="Function">
-                                    <param id="0" name="Index">0</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;left&quot;</param>
-                                </condition>
-                                <condition id="1" name="Compare parameter" sid="200286233480990" type="Function">
-                                    <param id="0" name="Index">0</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;right&quot;</param>
-                                </condition>
-                                <condition id="1" name="Compare parameter" sid="268149094859207" type="Function">
-                                    <param id="0" name="Index">0</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;jump&quot;</param>
-                                </condition>
-                                <condition id="1" name="Compare parameter" sid="902799902189666" type="Function">
-                                    <param id="0" name="Index">0</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;pause&quot;</param>
-                                </condition>
-                                <condition id="1" name="Compare parameter" sid="495391316636483" type="Function">
-                                    <param id="0" name="Index">0</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;restart&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="1" name="Set return value" sid="757532758137999" type="Function">
-                                    <param id="0" name="Value">uppercase(left(Function.Param(0),1))&amp;right(Function.Param(0),(len(Function.Param(0))-1))</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <event-block sid="481169517307574">
-                    <conditions>
-                        <condition id="1" name="Compare parameter" sid="239755895171571" type="Function">
-                            <param id="0" name="Index">0</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">&quot;2up&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="1" name="Set return value" sid="436537118405836" type="Function">
-                            <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Configuration.Input2KeyUp)</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="946383933694830">
-                    <conditions>
-                        <condition id="1" name="Compare parameter" sid="356336437190499" type="Function">
-                            <param id="0" name="Index">0</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">&quot;2down&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="1" name="Set return value" sid="255651462305551" type="Function">
-                            <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Configuration.Input2KeyDown)</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="633267740956755">
-                    <conditions>
-                        <condition id="1" name="Compare parameter" sid="725755265927491" type="Function">
-                            <param id="0" name="Index">0</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">&quot;2left&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="1" name="Set return value" sid="303958848123266" type="Function">
-                            <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Configuration.Input2KeyLeft)</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="310347628420276">
-                    <conditions>
-                        <condition id="1" name="Compare parameter" sid="891819765226517" type="Function">
-                            <param id="0" name="Index">0</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">&quot;2right&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="1" name="Set return value" sid="724771661952114" type="Function">
-                            <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Configuration.Input2KeyRight)</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="334487870828556">
-                    <conditions>
-                        <condition id="1" name="Compare parameter" sid="738386703096721" type="Function">
-                            <param id="0" name="Index">0</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">&quot;2jump&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="1" name="Set return value" sid="869188105802302" type="Function">
-                            <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Configuration.Input2KeyA)</param>
-                        </action>
-                    </actions>
-                </event-block>
-            </sub-events>
-        </event-block>
-        <comment></comment>
     </events>
 </c2eventsheet>
