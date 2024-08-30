@@ -2,7 +2,7 @@
 <c2project>
     <name>Sonic Robo-Blast! From The Past</name>
     <description>Original games by Sonikku - Johnathan Wallbank and SSNTails - A.J. Freda</description>
-    <version>0.3.1-9</version>
+    <version>0.3.1-10</version>
     <author>Halatnikov</author>
     <author-email></author-email>
     <author-website>https://halatnikov.github.io</author-website>
@@ -219,8 +219,8 @@
                 <plugin id="Globals" />
                 <instance-variables>
                     <instance-variable name="TimerLevel" sid="792243062839243" type="number" />
-                    <instance-variable name="TimerLevelActive" sid="260590474402437" type="boolean" />
                     <instance-variable name="TimerLevelReal" sid="542885006087094" type="number" />
+                    <instance-variable name="TimerLevelActive" sid="260590474402437" type="boolean" />
                     <instance-variable name="Pause" sid="429745224739633" type="boolean" />
                     <instance-variable name="Level_Game" sid="851545987425046" type="number" />
                     <instance-variable name="Level_Subname" sid="463378381283661" type="string" />
@@ -231,6 +231,7 @@
                     <instance-variable name="Level_FinishAfterBoss" sid="325545359230551" type="boolean" />
                     <instance-variable name="Level_GUIOutline" sid="674753233995257" type="number" />
                     <instance-variable name="Level_NoTitleCard" sid="690538201186874" type="boolean" />
+                    <instance-variable name="Level_NoPerfectBonus" sid="573895092833643" type="boolean" />
                     <instance-variable name="Special_SavedLevel" sid="902966220088024" type="string" />
                     <instance-variable name="Special_SavedX" sid="660560719921554" type="number" />
                     <instance-variable name="Special_SavedY" sid="449241527343496" type="number" />
@@ -308,7 +309,6 @@
                     <instance-variable name="Cheats_Thok" sid="504365754754966" type="boolean" />
                     <instance-variable name="Cheats_SpinDash" sid="947044738928533" type="boolean" />
                     <instance-variable name="Cheats_KillingDead" sid="268483462790231" type="boolean" />
-                    <instance-variable name="ZoneResetTimer" sid="523941753995350" type="number" />
                 </instance-variables>
             </object-type>
             <object-type global="1" name="Var_Misc" sid="861604502276634">
@@ -14238,6 +14238,48 @@
                     <plugin id="TiledBg" />
                     <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb2\assets\tiles\mm1.png" />
                 </object-type>
+                <object-type name="BG2C_ChristmasSnow" sid="187191786794446">
+                    <plugin id="Sprite" />
+                    <animation-folder>
+                        <animation framecount="3" loop="1" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="440741212367740" speed="1.1">
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\snow_2.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\snow_1.png" />
+                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\snow_3.png" />
+                        </animation>
+                    </animation-folder>
+                </object-type>
+                <object-type name="Tile2C_1GFZ1" sid="495884173026394">
+                    <plugin id="TiledBg" />
+                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\gfz1.png" />
+                </object-type>
+                <object-type name="Tile2C_1GFZ2" sid="731584041547225">
+                    <plugin id="TiledBg" />
+                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\gfz2.png" />
+                </object-type>
+                <object-type name="Tile2C_1GFZBridge" sid="266433569747622">
+                    <plugin id="TiledBg" />
+                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\gfz3.png" />
+                </object-type>
+                <object-type name="Tile2C_2THZ1_1" sid="297634707621883">
+                    <plugin id="TiledBg" />
+                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\thz1.png" />
+                </object-type>
+                <object-type name="Tile2C_2THZ1_Bridge" sid="490402257874658">
+                    <plugin id="TiledBg" />
+                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\thz6.png" />
+                </object-type>
+                <object-type name="Tile2C_2THZ2_1" sid="232296846478430">
+                    <plugin id="TiledBg" />
+                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\thz3.png" />
+                </object-type>
+                <object-type name="Tile2C_2THZ2_2" sid="870461216965916">
+                    <plugin id="TiledBg" />
+                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\thz4.png" />
+                </object-type>
+                <object-type name="Tile2C_2THZ2_Platform" sid="900056204458524">
+                    <plugin id="TiledBg" />
+                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\thz5.png" />
+                </object-type>
             </object-folder>
             <object-folder name="ExtraSRB1.5">
                 <object-type name="BGE15_1EMGradient" sid="816290673664268">
@@ -14890,50 +14932,6 @@
                             </frame>
                         </animation>
                     </animation-folder>
-                </object-type>
-            </object-folder>
-            <object-folder name="SRB2Christmas">
-                <object-type name="BG2C_ChristmasSnow" sid="187191786794446">
-                    <plugin id="Sprite" />
-                    <animation-folder>
-                        <animation framecount="3" loop="1" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="440741212367740" speed="1.1">
-                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\snow_2.png" />
-                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\snow_1.png" />
-                            <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\snow_3.png" />
-                        </animation>
-                    </animation-folder>
-                </object-type>
-                <object-type name="Tile2C_1GFZ1" sid="495884173026394">
-                    <plugin id="TiledBg" />
-                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\gfz1.png" />
-                </object-type>
-                <object-type name="Tile2C_1GFZ2" sid="731584041547225">
-                    <plugin id="TiledBg" />
-                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\gfz2.png" />
-                </object-type>
-                <object-type name="Tile2C_1GFZBridge" sid="266433569747622">
-                    <plugin id="TiledBg" />
-                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\gfz3.png" />
-                </object-type>
-                <object-type name="Tile2C_2THZ1_1" sid="297634707621883">
-                    <plugin id="TiledBg" />
-                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\thz1.png" />
-                </object-type>
-                <object-type name="Tile2C_2THZ1_Bridge" sid="490402257874658">
-                    <plugin id="TiledBg" />
-                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\thz6.png" />
-                </object-type>
-                <object-type name="Tile2C_2THZ2_Platform" sid="900056204458524">
-                    <plugin id="TiledBg" />
-                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\thz5.png" />
-                </object-type>
-                <object-type name="Tile2C_2THZ2_1" sid="232296846478430">
-                    <plugin id="TiledBg" />
-                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\thz3.png" />
-                </object-type>
-                <object-type name="Tile2C_2THZ2_2" sid="870461216965916">
-                    <plugin id="TiledBg" />
-                    <texture original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\extra\christmas\thz4.png" />
                 </object-type>
             </object-folder>
             <object-folder name="ExtraOriginal">
@@ -20111,8 +20109,6 @@
                 <member>Tile2_3DSZ2</member>
                 <member>Tile2_4MMZ1</member>
                 <member>Tile2_4MMZ2</member>
-                <member>Tile2_4MMZ3</member>
-                <member>Tile2С_4MMZ2</member>
                 <member>TileE15_1EM</member>
                 <member>TileE15_1EMBridge</member>
                 <member>TileE15_2AF1</member>
