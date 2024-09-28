@@ -30,38 +30,17 @@
                         <event-block sid="522975812547917">
                             <conditions />
                             <actions>
-                                <action id="-10" name="Set value" sid="846941708804345" type="Var_Misc">
-                                    <param id="0" name="Instance variable">Discord_ClientKey</param>
-                                    <param id="1" name="Value">&quot;995317934085906443&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="704586921155787">
-                            <conditions />
-                            <actions>
                                 <action id="-10" name="Set value" sid="566693911433346" type="Var_Misc">
                                     <param id="0" name="Instance variable">GameJoltGameID</param>
-                                    <param id="1" name="Value">&quot;&quot;</param>
+                                    <param id="1" name="Value">&quot;658544&quot;</param>
                                 </action>
-                                <action id="-10" name="Set value" sid="187643226544751" type="Var_Misc">
-                                    <param id="0" name="Instance variable">GameJoltAPIKey</param>
+                                <action id="-10" name="Set value" sid="846941708804345" type="Var_Misc">
+                                    <param id="0" name="Instance variable">DiscordAppID</param>
                                     <param id="1" name="Value">&quot;&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
                     </sub-events>
-                </event-block>
-                <event-block sid="124259430399450">
-                    <conditions>
-                        <condition id="-18" name="Is in preview" sid="736589188422243" type="System" />
-                        <condition id="-4" name="Trigger once while true" sid="331744358443956" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="-10" name="Set value" sid="582806526027178" type="Var_Misc">
-                            <param id="0" name="Instance variable">ResourceFolder</param>
-                            <param id="1" name="Value">&quot;D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\github\SRBftp\&quot;</param>
-                        </action>
-                    </actions>
                 </event-block>
                 <comment></comment>
                 <event-block sid="877806526250364">
@@ -124,6 +103,50 @@
                     </actions>
                 </event-block>
                 <comment></comment>
+                <event-block sid="668393181104072">
+                    <conditions>
+                        <condition id="70" name="Is Empty" sid="112607050350332" type="JSON_Indev">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </condition>
+                        <condition id="0" name="Path exists" sid="695110623410744" type="NWjs">
+                            <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\indev.ini&quot;</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="906107590218081" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set New Object" sid="427250414420454" type="JSON_Indev">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </action>
+                        <action id="0" name="Call function" sid="960628471804863" type="Function">
+                            <param id="0" name="Name">&quot;INI2JSON&quot;</param>
+                            <param id="1" name="Parameter {n}">NWjs.ReadFile(Var_Misc.ResourceFolder&amp;&quot;\SRBftp\indev.ini&quot;)</param>
+                        </action>
+                        <action id="60" name="LoadJSON" sid="471625227841409" type="JSON_Indev">
+                            <param id="0" name="JSON">Function.ReturnValue</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}"></param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="124259430399450">
+                    <conditions>
+                        <condition id="-18" name="Is in preview" sid="448677199344113" type="System" />
+                        <condition id="70" inverted="1" name="Is Empty" sid="154122162326086" type="JSON_Indev">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="331744358443956" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Set value" sid="582806526027178" type="Var_Misc">
+                            <param id="0" name="Instance variable">ResourceFolder</param>
+                            <param id="1" name="Value">JSON_Indev.Value(0,&quot;ResourceFolder&quot;)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment></comment>
                 <event-block sid="568561603230544">
                     <conditions>
                         <condition id="0" name="Path exists" sid="460068265929722" type="NWjs">
@@ -151,33 +174,6 @@
                     </conditions>
                     <actions />
                     <sub-events>
-                        <event-block sid="668393181104072">
-                            <conditions>
-                                <condition id="70" name="Is Empty" sid="112607050350332" type="JSON_Indev">
-                                    <param id="0" name="Reference point">0</param>
-                                    <param id="1" name="Key {n}"></param>
-                                </condition>
-                                <condition id="0" name="Path exists" sid="695110623410744" type="NWjs">
-                                    <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\indev.ini&quot;</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="906107590218081" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Set New Object" sid="427250414420454" type="JSON_Indev">
-                                    <param id="0" name="Reference point">0</param>
-                                    <param id="1" name="Key {n}"></param>
-                                </action>
-                                <action id="0" name="Call function" sid="960628471804863" type="Function">
-                                    <param id="0" name="Name">&quot;INI2JSON&quot;</param>
-                                    <param id="1" name="Parameter {n}">NWjs.ReadFile(Var_Misc.ResourceFolder&amp;&quot;\SRBftp\indev.ini&quot;)</param>
-                                </action>
-                                <action id="60" name="LoadJSON" sid="471625227841409" type="JSON_Indev">
-                                    <param id="0" name="JSON">Function.ReturnValue</param>
-                                    <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}"></param>
-                                </action>
-                            </actions>
-                        </event-block>
                         <event-block sid="537868889947992">
                             <conditions>
                                 <condition id="0" name="On key pressed" sid="566635650888881" type="Keyboard">
