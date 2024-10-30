@@ -105,12 +105,8 @@
                 <comment></comment>
                 <event-block sid="668393181104072">
                     <conditions>
-                        <condition id="70" name="Is Empty" sid="112607050350332" type="JSON_Indev">
-                            <param id="0" name="Reference point">0</param>
-                            <param id="1" name="Key {n}"></param>
-                        </condition>
-                        <condition id="0" name="Path exists" sid="695110623410744" type="NWjs">
-                            <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\indev.ini&quot;</param>
+                        <condition id="0" name="Path exists" sid="425963373191662" type="NWjs">
+                            <param id="0" name="Path">NWjs.AppFolder&amp;&quot;\srbftp_indev.ini&quot;</param>
                         </condition>
                         <condition id="-4" name="Trigger once while true" sid="906107590218081" type="System" />
                     </conditions>
@@ -121,7 +117,7 @@
                         </action>
                         <action id="0" name="Call function" sid="960628471804863" type="Function">
                             <param id="0" name="Name">&quot;INI2JSON&quot;</param>
-                            <param id="1" name="Parameter {n}">NWjs.ReadFile(Var_Misc.ResourceFolder&amp;&quot;\SRBftp\indev.ini&quot;)</param>
+                            <param id="1" name="Parameter {n}">NWjs.ReadFile(NWjs.AppFolder&amp;&quot;\srbftp_indev.ini&quot;)</param>
                         </action>
                         <action id="60" name="LoadJSON" sid="471625227841409" type="JSON_Indev">
                             <param id="0" name="JSON">Function.ReturnValue</param>
@@ -130,23 +126,6 @@
                         </action>
                     </actions>
                 </event-block>
-                <event-block sid="124259430399450">
-                    <conditions>
-                        <condition id="-18" name="Is in preview" sid="448677199344113" type="System" />
-                        <condition id="70" inverted="1" name="Is Empty" sid="154122162326086" type="JSON_Indev">
-                            <param id="0" name="Reference point">0</param>
-                            <param id="1" name="Key {n}"></param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="331744358443956" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="-10" name="Set value" sid="582806526027178" type="Var_Misc">
-                            <param id="0" name="Instance variable">ResourceFolder</param>
-                            <param id="1" name="Value">JSON_Indev.Value(0,&quot;ResourceFolder&quot;)</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <comment></comment>
                 <event-block sid="568561603230544">
                     <conditions>
                         <condition id="0" name="Path exists" sid="460068265929722" type="NWjs">
@@ -161,6 +140,26 @@
                         </action>
                         <action id="16" name="Set title" sid="655968779946376" type="NWjs">
                             <param id="0" name="Title">projectname&amp;&quot; &quot;&amp;projectversion&amp;(DEBUG = 1 ? &quot; (Debug mode)&quot; : &quot;&quot;)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment></comment>
+                <event-block sid="124259430399450">
+                    <conditions>
+                        <condition id="70" inverted="1" name="Is Empty" sid="154122162326086" type="JSON_Indev">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </condition>
+                        <condition id="60" inverted="1" name="Is undefined" sid="958079473859914" type="JSON_Indev">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}">&quot;ResourceFolder&quot;</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="331744358443956" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Set value" sid="582806526027178" type="Var_Misc">
+                            <param id="0" name="Instance variable">ResourceFolder</param>
+                            <param id="1" name="Value">JSON_Indev.Value(0,&quot;ResourceFolder&quot;)</param>
                         </action>
                     </actions>
                 </event-block>
