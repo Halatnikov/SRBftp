@@ -42,21 +42,37 @@
                                 <condition id="3" name="On event" sid="936261445662989" type="Photon">
                                     <param id="0" name="Code">1</param>
                                 </condition>
-                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="345222146848447" type="Var_Online">
-                                    <param id="0" name="Instance variable">Host</param>
-                                </condition>
                             </conditions>
-                            <actions>
-                                <action id="14" name="Log" sid="298937565997315" type="Browser">
-                                    <param id="0" name="Type">0</param>
-                                    <param id="1" name="Message">&quot;receive room data from host&quot;</param>
-                                </action>
-                                <action id="60" name="LoadJSON" sid="947376208438955" type="JSON_OnlineRoom">
-                                    <param id="0" name="JSON">Photon.EventData</param>
-                                    <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}"></param>
-                                </action>
-                            </actions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="155624056683225">
+                                    <conditions>
+                                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="345222146848447" type="Var_Online">
+                                            <param id="0" name="Instance variable">Host</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="14" name="Log" sid="298937565997315" type="Browser">
+                                            <param id="0" name="Type">0</param>
+                                            <param id="1" name="Message">&quot;receive room data from host&quot;</param>
+                                        </action>
+                                        <action id="60" name="LoadJSON" sid="947376208438955" type="JSON_OnlineRoom">
+                                            <param id="0" name="JSON">Photon.EventData</param>
+                                            <param id="1" name="Reference point">0</param>
+                                            <param id="2" name="Key {n}"></param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="358172009237747">
+                                    <conditions />
+                                    <actions>
+                                        <action id="0" name="Call function" sid="834145957691363" type="Function">
+                                            <param id="0" name="Name">&quot;Online_OnSyncRoom&quot;</param>
+                                            <param id="1" name="Parameter {n}"></param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                         <event-block sid="328358782793285">
                             <conditions>
@@ -77,7 +93,7 @@
                                     <param id="1" name="Data">Function.Call(&quot;String_CompressJSON&quot;,JSON_OnlineRoom.AsJson(0))</param>
                                     <param id="2" name="InterestGroup">0</param>
                                     <param id="3" name="Cache">0</param>
-                                    <param id="4" name="Receivers">0</param>
+                                    <param id="4" name="Receivers">1</param>
                                     <param id="5" name="TargetActors">&quot;&quot;</param>
                                     <param id="6" name="WebForward">0</param>
                                 </action>
@@ -381,6 +397,7 @@
                         </action>
                     </actions>
                     <sub-events>
+                        <comment>register player data</comment>
                         <event-block sid="425045293231519">
                             <conditions>
                                 <condition id="-8" name="Is boolean instance variable set" sid="467676096961149" type="Var_Online">
@@ -396,6 +413,11 @@
                                     <param id="0" name="Value">Photon.PropertyOfActorByNr(Photon.ActorNr, &quot;Username&quot;)</param>
                                     <param id="1" name="Reference point">0</param>
                                     <param id="2" name="Key {n}">&quot;Players&quot;{###}Photon.ActorNr{###}&quot;Username&quot;</param>
+                                </action>
+                                <action id="20" name="Set Value" sid="668044165329843" type="JSON_OnlineRoom">
+                                    <param id="0" name="Value">Photon.ActorNr = Photon.MasterActorNr ? 1 : 0</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;Players&quot;{###}Photon.ActorNr{###}&quot;Host&quot;</param>
                                 </action>
                                 <action id="20" name="Set Value" sid="566386598320566" type="JSON_OnlineRoom">
                                     <param id="0" name="Value">Photon.PropertyOfActorByNr(Photon.ActorNr, &quot;Skin&quot;)</param>
@@ -433,6 +455,7 @@
                         </action>
                     </actions>
                     <sub-events>
+                        <comment>remove player data</comment>
                         <event-block sid="883732188103249">
                             <conditions>
                                 <condition id="-8" name="Is boolean instance variable set" sid="214984202840291" type="Var_Online">
