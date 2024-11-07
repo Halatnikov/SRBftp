@@ -57,8 +57,8 @@ function GetPluginSettings()
 //				display_str,		// as appears in event sheet - use {0}, {1} for parameters and also <b></b>, <i></i>
 //				description,		// appears in event wizard dialog when selected
 //				script_name);		// corresponding runtime function name
-				
-// example				
+
+// example
 
 
 
@@ -202,6 +202,21 @@ AddComboParamOption("JSON");
 AddComboParam("ParametersType", "Parameters type.");
 AddAction(19, af_none, "Call WebRpc", "Lobby & Room", "Call remote procedure (WebRPC) <b>{0}</b> with <b>{1}</b> as <b>{2}</b>", "Call remote procedure (WebRPC).", "webRpc");
 
+AddComboParamOption("No");
+AddComboParamOption("Yes");
+AddComboParam("MatchMyRoom", "Use my room MaxPlayer and custom properties for matchmaking.");
+AddComboParamOption("FillRoom", "Default. Fills up rooms (oldest first) to get players together as fast as possible.");
+AddComboParamOption("SerialMatching", "Distributes players across available rooms sequentially but takes filter into account. Without filter, rooms get players evenly distributed.");
+AddComboParamOption("RandomMatching", "Joins a (fully) random room. Expected properties must match but aside from this, any available room might be selected.");
+AddComboParam("MatchmakingMode", "Matchmaking mode");
+AddStringParam("LobbyName", "Lobby name.");
+AddComboParamOption("Default", "This lobby is used unless another is defined by game or JoinRandom. Room-lists will be sent and JoinRandomRoom can filter by matching properties.");
+AddComboParamOption("SqlLobby", "This lobby type lists rooms like Default but JoinRandom has a parameter for SQL-like 'where' clauses for filtering. This allows bigger, less, or and and combinations.");
+AddComboParam("LobbyType", "Lobby type.");
+AddStringParam("SqlLobbyFilter", "SqlLobby filter.");
+AddStringParam("Room", "Room name.");
+AddAction(20, af_none, "Join random or create room", "Lobby", "Join random room by <b>{1}</b> matching my room: <b>{0}</b> in lobby <b>{2}</b>/<b>{3}</b> with filter <b>{4}</b> or create room <b>{5}</b>", "Join random or create room.", "joinRandomOrCreateRoom");
+
 AddStringParam("Friends", "Comma-separated list of friends user id's");
 AddAction(31, af_none, "Find friends", "Lobby", "Request status of friends <b>{0}</b> (FindFriends)", "Request Master server for friends online status and joined rooms (FindFriends).", "findFriends");
 AddAction(41, af_none, "Request lobby stats", "Lobby", "Request lobbies statistics", "Request Master server for lobbies statistics.", "requestLobbyStats");
@@ -260,6 +275,9 @@ AddComboParamOption("No");
 AddComboParamOption("Yes");
 AddComboParam("Unique", "New property value.", 0);
 AddAction(110, af_deprecated, "Set unique userid check", "Room", "Set user id check to to <b>{0}</b>", "Activates user id checks on joining if set to true.", "setUniqueUserId");
+
+AddStringParam("Plugins", "Comma-separated list of expected server plugins.");
+AddAction(111, af_none, "Set expected server plugins", "Room", "Set expected server plugins to <b>{0}</b>", "Set expected server plugins.", "setPlugins");
 
 AddAction(201, af_none, "Reset", "Common", "Reset", "Disconnects and creates new client instance.", "reset");
 
@@ -362,7 +380,7 @@ var property_list = [
 	new cr.Property(ept_text, 	"SelfHostedAddress",	"localhost:9090",	"Self Hosted server address."),
 	new cr.Property(ept_combo, 	"LogLevel",				"INFO",				"Logging level.", "DEBUG|INFO|WARN|ERROR|OFF")
 	];
-	
+
 // Called by IDE when a new object type is to be created
 function CreateIDEObjectType()
 {
@@ -385,17 +403,17 @@ IDEObjectType.prototype.CreateInstance = function(instance)
 function IDEInstance(instance, type)
 {
 	assert2(this instanceof arguments.callee, "Constructor called as a function");
-	
+
 	// Save the constructor parameters
 	this.instance = instance;
 	this.type = type;
-	
+
 	// Set the default property values from the property table
 	this.properties = {};
-	
+
 	for (var i = 0; i < property_list.length; i++)
 		this.properties[property_list[i].name] = property_list[i].initial_value;
-		
+
 	// Plugin-specific variables
 	// this.myValue = 0...
 };

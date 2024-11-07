@@ -23,7 +23,7 @@ cr.plugins_.Photon = function(runtime)
 	// *** CHANGE THE PLUGIN ID HERE *** - must match the "id" property in edittime.js
 	//                            vvvvvvvv
 	var pluginProto = cr.plugins_.Photon.prototype;
-		
+
 	/////////////////////////////////////
 	// Object type class
 	pluginProto.Type = function(plugin)
@@ -45,14 +45,14 @@ cr.plugins_.Photon = function(runtime)
 	{
 		this.type = type;
 		this.runtime = type.runtime;
-		
+
 		// any other properties you need, e.g...
 		// this.myValue = 0;
 	};
-	
+
 	var instanceProto = pluginProto.Instance.prototype;
-	
-	instanceProto.createLBC = function() 
+
+	instanceProto.createLBC = function()
 	{
 		Photon["LoadBalancing"]["LoadBalancingClient"].prototype["roomFactory"] = function(name) {
 			var r = new Photon["LoadBalancing"]["Room"](name);
@@ -82,21 +82,21 @@ cr.plugins_.Photon = function(runtime)
 			self.runtime.trigger(cr.plugins_.Photon.prototype.cnds.onError, self);
 			return false;
 		});
-		
+
 		this.lbc = new Photon["LoadBalancing"]["LoadBalancingClient"](this.Protocol, this.AppId, this.AppVersion);
 		var self = this;
-		
+
 		this.lbc["setLogLevel"](this.LogLevel);
-		
+
 		this.lbc["onError"] = function(errorCode, errorMsg) {
 			self.errorCode = errorCode;
 			self.errorMsg = errorMsg;
 			self.runtime.trigger(cr.plugins_.Photon.prototype.cnds.onError, self);
 		};
-		
+
 		this.lbc["onStateChange"] = function(state) {
 			self.runtime.trigger(cr.plugins_.Photon.prototype.cnds.onStateChange, self);
-			
+
 			var LBC = Photon["LoadBalancing"]["LoadBalancingClient"];
 			switch (state) {
 //				case LBC["State"]["ConnectedToNameServer"]:
@@ -113,7 +113,7 @@ cr.plugins_.Photon = function(runtime)
 					break;
 			}
 		};
-		
+
 		this.lbc["onOperationResponse"] = function (errorCode, errorMsg, code, content) {
 			if (errorCode) {
 				switch (code) {
@@ -135,7 +135,7 @@ cr.plugins_.Photon = function(runtime)
 				}
 			}
 		};
-		
+
 		this.lbc["onEvent"] = function (code, data, actorNr) {
 			self.eventCode = code;
 			self.eventData = data;
@@ -143,29 +143,29 @@ cr.plugins_.Photon = function(runtime)
 			self.runtime.trigger(cr.plugins_.Photon.prototype.cnds.onEvent, self);
 			self.runtime.trigger(cr.plugins_.Photon.prototype.cnds.onAnyEvent, self);
         };
-		
-		this.lbc["onRoomList"] = function (rooms){ 
+
+		this.lbc["onRoomList"] = function (rooms){
 			self.runtime.trigger(cr.plugins_.Photon.prototype.cnds.onRoomList, self);
 		};
 
-        this.lbc["onRoomListUpdate"] = function (rooms, roomsUpdated, roomsAdded, roomsRemoved) { 
+        this.lbc["onRoomListUpdate"] = function (rooms, roomsUpdated, roomsAdded, roomsRemoved) {
 			// TODO:
 			self.runtime.trigger(cr.plugins_.Photon.prototype.cnds.onRoomListUpdate, self);
 		};
-		
-        this.lbc["onMyRoomPropertiesChange"] = function () { 
+
+        this.lbc["onMyRoomPropertiesChange"] = function () {
 			self.runtime.trigger(cr.plugins_.Photon.prototype.cnds.onMyRoomPropertiesChange, self);
 		};
 
-        this.lbc["onActorPropertiesChange"] = function (actor) { 
+        this.lbc["onActorPropertiesChange"] = function (actor) {
 			self.actorNr = actor["actorNr"];
 			self.runtime.trigger(cr.plugins_.Photon.prototype.cnds.onActorPropertiesChange, self);
 		};
-		
+
 		this.lbc["onJoinRoom"] = function (createdByMe) {
 			self.runtime.trigger(cr.plugins_.Photon.prototype.cnds.onJoinRoom, self);
 		};
-		
+
 		this.lbc["onActorJoin"] = function (actor) {
 			self.actorNr = actor["actorNr"];
 			self.runtime.trigger(cr.plugins_.Photon.prototype.cnds.onActorJoin, self);
@@ -220,17 +220,17 @@ cr.plugins_.Photon = function(runtime)
 		this.SelfHosted = this.properties[4] == 1;
 		this.SelfHostedAddress = this.properties[5];
 		this.LogLevel = this.properties[6] + Exitgames["Common"]["Logger"]["Level"]["DEBUG"]; // list starts from DEBUG = 1
-		
+
 		this.createLBC();
 	}
-	
+
 	// called whenever an instance is destroyed
 	// note the runtime may keep the object after this call for recycling; be sure
 	// to release/recycle/reset any references to other objects in this function.
 	instanceProto.onDestroy = function ()
 	{
 	};
-	
+
 	// called when saving the full state of the game
 	instanceProto.saveToJSON = function ()
 	{
@@ -242,7 +242,7 @@ cr.plugins_.Photon = function(runtime)
 			//"myValue": this.myValue
 		};
 	};
-	
+
 	// called when loading the full state of the game
 	instanceProto.loadFromJSON = function (o)
 	{
@@ -252,19 +252,19 @@ cr.plugins_.Photon = function(runtime)
 		// note you MUST use double-quote syntax (e.g. o["property"]) to prevent
 		// Closure Compiler renaming and breaking the save format
 	};
-	
+
 	// only called if a layout object - draw to a canvas 2D context
 	instanceProto.draw = function(ctx)
 	{
 	};
-	
+
 	// only called if a layout object in WebGL mode - draw to the WebGL context
 	// 'glw' is not a WebGL context, it's a wrapper - you can find its methods in GLWrap.js in the install
 	// directory or just copy what other plugins do.
 	instanceProto.drawGL = function (glw)
 	{
 	};
-	
+
 	// The comments around these functions ensure they are removed when exporting, since the
 	// debugger code is no longer relevant after publishing.
 	/**BEGIN-PREVIEWONLY**/
@@ -283,13 +283,13 @@ cr.plugins_.Photon = function(runtime)
 				// "html" (optional, default false): set to true to interpret the name and value
 				//									 as HTML strings rather than simple plain text
 				// "readonly" (optional, default false): set to true to disable editing the property
-				
+
 				// Example:
 				// {"name": "My property", "value": this.myValue}
 			]
 		});
 	};
-	
+
 	instanceProto.onDebugValueEdited = function (header, name, value)
 	{
 		// Called when a non-readonly property has been edited in the debugger. Usually you only
@@ -321,11 +321,11 @@ cr.plugins_.Photon = function(runtime)
 	Cnds.prototype.onFindFriendsResult 		= function() { return true; };
 	Cnds.prototype.onLobbyStats 			= function() { return true; };
 	Cnds.prototype.onAppStats 				= function() { return true; };
-		
+
 	Cnds.prototype.onJoinedLobby 	 = function() { return true; };
 	Cnds.prototype.onJoinRandomRoomNoMatchFound  = function() { return true; };
 	Cnds.prototype.onDisconnected  = function() { return true; };
-	
+
 	Cnds.prototype.isConnectedToNameServer = function ()
 	{
 		return this.lbc["isConnectedToNameServer"]();
@@ -342,12 +342,12 @@ cr.plugins_.Photon = function(runtime)
 	{
 		return this.lbc["isJoinedToRoom"]();
 	};
-	
-	
+
+
 	// ... other conditions here ...
-	
+
 	pluginProto.cnds = new Cnds();
-	
+
 	//////////////////////////////////////
 	// Actions
 	function Acts() {}
@@ -356,7 +356,7 @@ cr.plugins_.Photon = function(runtime)
 	{
 		this.lbc["setUserId"](userId);
 	};
-	
+
 	Acts.prototype.setCustomAuthentication = function (authParameters, authType)
 	{
 		this.lbc["setCustomAuthentication"](authParameters, authType);
@@ -368,10 +368,10 @@ cr.plugins_.Photon = function(runtime)
 	};
 
 	Acts.prototype.setSelfHostedAddress = function (address)
-	{		
+	{
 		this.SelfHostedAddress = address;
 	};
-	
+
 	Acts.prototype.setRegion = function (region)
 	{
 		this.Region = region;
@@ -380,13 +380,19 @@ cr.plugins_.Photon = function(runtime)
 	Acts.prototype.setAppId = function (appId)
 	{
 		this.AppId = appId;
+		if (this.lbc) {
+			this.lbc.setAppId(appId);
+		}
 	};
 
-	Acts.prototype.setAppVersion = function (version)
+	Acts.prototype.setAppVersion = function (appVersion)
 	{
-		this.AppVersion = version;
+		this.AppVersion = appVersion;
+		if (this.lbc) {
+			this.lbc.setAppVersion(appVersion);
+		}
 	};
-	
+
 	Acts.prototype.connect = function ()
 	{
 		if (this.SelfHosted) {
@@ -406,7 +412,7 @@ cr.plugins_.Photon = function(runtime)
 		if (lobbyType == 1)  {
 			lobbyType = Photon["LoadBalancing"]["Constants"]["LobbyType"]["SqlLobby"]; // 2
 		}
-		var options = {			
+		var options = {
 			"lobbyName": lobbyName,
 			"lobbyType": lobbyType
 		};
@@ -421,10 +427,9 @@ cr.plugins_.Photon = function(runtime)
 		var joinOptions = {
 			"rejoin": rejoin && true,
 			"createIfNotExists": createIfNotExists && true,
-			"lobbyName": lobbyName,
-			"lobbyType": lobbyType
+//			"expectedUsers": ?,
 		};
-		var createOptions = {			
+		var createOptions = {
 			"lobbyName": lobbyName,
 			"lobbyType": lobbyType
 		};
@@ -432,13 +437,13 @@ cr.plugins_.Photon = function(runtime)
 		this.lbc["joinRoom"](name, joinOptions, createOptions);
 	};
 
-	Acts.prototype.joinRandomRoom = function (matchMyRoom, matchmakingMode, lobbyName, lobbyType, sqlLobbyFilter)
+	Acts.prototype.joinRandomRoom = function (matchMyRoom, matchingType, lobbyName, lobbyType, sqlLobbyFilter)
 	{
 		if (lobbyType == 1)  {
 			lobbyType = Photon["LoadBalancing"]["Constants"]["LobbyType"]["SqlLobby"]; // 2
 		}
-		var options = {						
-			"matchmakingMode": matchmakingMode,
+		var options = {
+			"matchingType": matchingType,
 			"lobbyName": lobbyName,
 			"lobbyType": lobbyType,
 			"sqlLobbyFilter": sqlLobbyFilter
@@ -449,22 +454,41 @@ cr.plugins_.Photon = function(runtime)
 		}
 		this.lbc["joinRandomRoom"](options);
 	};
-	
+
+	Acts.prototype.joinRandomOrCreateRoom = function (matchMyRoom, matchingType, lobbyName, lobbyType, sqlLobbyFilter, roomName)
+	{
+		if (lobbyType == 1)  {
+			lobbyType = Photon["LoadBalancing"]["Constants"]["LobbyType"]["SqlLobby"]; // 2
+		}
+		var options = {
+			"matchingType": matchingType,
+			"lobbyName": lobbyName,
+			"lobbyType": lobbyType,
+			"sqlLobbyFilter": sqlLobbyFilter
+		};
+		if (matchMyRoom) {
+			options.expectedCustomRoomProperties = this.lbc["myRoom"]()["_customProperties"];
+			options.expectedMaxPlayers = this.lbc["myRoom"]()["maxPlayers"];
+		}
+		var createOptions = this.lbc["copyCreateOptionsFromMyRoom"]({});
+		this.lbc["joinRandomOrCreateRoom"](options, roomName, createOptions);
+	};
+
 	Acts.prototype.disconnect = function ()
 	{
 		this.lbc["disconnect"]();
 	};
-	
+
 	Acts.prototype.suspendRoom = function ()
 	{
 		this.lbc["suspendRoom"]();
 	};
-	
+
 	Acts.prototype.leaveRoom = function ()
 	{
 		this.lbc["leaveRoom"]();
 	};
-	
+
 	Acts.prototype.raiseEvent = function (eventCode, data, interestGroup, cache, receivers, targetActors, webForward)
 	{
 		var opt = {
@@ -489,7 +513,7 @@ cr.plugins_.Photon = function(runtime)
 			case 1: // Add all current
 				this.lbc["changeGroups"](null ,[]);
 				break;
-			case 2: // Remove				
+			case 2: // Remove
 				this.lbc["changeGroups"]([group], null);
 				break;
 			case 3: // Remove all
@@ -502,12 +526,12 @@ cr.plugins_.Photon = function(runtime)
 	{
 		this.lbc["webRpc"](uriPath, parametersType ? JSON.parse(parameters) : parameters);
 	};
-	
+
 	Acts.prototype.findFriends = function (friends)
 	{
 		this.lbc["findFriends"](friends.split(","));
 	};
-	
+
 	Acts.prototype.requestLobbyStats = function ()
 	{
 		this.lbc["requestLobbyStats"]();
@@ -553,17 +577,21 @@ cr.plugins_.Photon = function(runtime)
 	{
 		this.lbc.logger.error("'Set unique userid check' action is deprecated. Please remove it from project. Rooms always created with 'unique userid check' set to true.");
 	};
+	Acts.prototype.setPlugins = function (plugins)
+	{
+		this.lbc["myRoom"]()["setPlugins"](plugins.split(","));
+	};
 	Acts.prototype.reset = function ()
 	{
 		this.lbc["disconnect"]();
 		this.createLBC();
 		this.lbc["logger"]["info"]("Photon client reset.");
 	};
-	
+
 	// ... other actions here ...
-	
+
 	pluginProto.acts = new Acts();
-	
+
 	//////////////////////////////////////
 	// Expressions
 	function Exps() {}
@@ -572,12 +600,12 @@ cr.plugins_.Photon = function(runtime)
 	{
 		ret.set_int(this.errorCode || 0);
 	};
-	
+
 	Exps.prototype.ErrorMessage = function (ret)
 	{
 		ret.set_string(this.errorMsg || "");
 	};
-	
+
 	Exps.prototype.State = function (ret)
 	{
 		ret.set_int(this.lbc["state"]);
@@ -585,7 +613,7 @@ cr.plugins_.Photon = function(runtime)
 		// ret.set_string("Hello");		// for ef_return_string
 		// ret.set_any("woo");			// for ef_return_any, accepts either a number or string
 	};
-	
+
 	Exps.prototype.StateString = function (ret)
 	{
 		ret.set_string(Photon["LoadBalancing"]["LoadBalancingClient"]["StateToName"](this.lbc["state"]));
@@ -605,22 +633,22 @@ cr.plugins_.Photon = function(runtime)
 	{
 		ret.set_int(this.actorNr || 0);
 	};
-	
+
 	Exps.prototype.MyRoomName = function (ret)
 	{
 		ret.set_string(this.lbc["myRoom"]()["name"] || "");
 	};
-	
+
 	Exps.prototype.EventCode = function (ret)
 	{
 		ret.set_int(this.eventCode || 0);
 	};
-	
+
 	Exps.prototype.EventData = function (ret)
 	{
 		ret.set_any(this.eventData);
 	};
-	
+
 	Exps.prototype.RoomCount = function (ret)
 	{
 		ret.set_int(this.lbc["availableRooms"]().length);
@@ -642,11 +670,11 @@ cr.plugins_.Photon = function(runtime)
 		var r = this.lbc["roomInfosDict"][name];
 		ret.set_int(r && r["isOpen"] ? 1 : 0);
 	};
-	
+
 	Exps.prototype.RoomPlayerCount = function (ret, name)
 	{
 		var r = this.lbc["roomInfosDict"][name];
-		ret.set_int(r && r["playerCount"]);
+		ret.set_int(r && r["playerCount"] || 0);
 	};
 
 	Exps.prototype.RoomProperty = function (ret, name, propName)
@@ -654,13 +682,13 @@ cr.plugins_.Photon = function(runtime)
 		var r = this.lbc["roomInfosDict"][name];
 		ret.set_any(r && r["getCustomProperty"](propName));
 	};
-	
+
 	Exps.prototype.PropertyOfMyRoom = function (ret, propName)
 	{
 		var r = this.lbc["myRoom"]();
 		ret.set_any(r && r["getCustomProperty"](propName));
 	};
-	
+
 	Exps.prototype.ActorCount = function (ret)
 	{
 		ret.set_int(this.lbc["myRoomActorsArray"]().length);
@@ -675,7 +703,11 @@ cr.plugins_.Photon = function(runtime)
 	Exps.prototype.ActorNameByNr = function (ret, nr)
 	{
 		var a = this.lbc["myRoomActors"]()[nr];
-		ret.set_string(a && a["name"] || "-- not found acorNr " + nr);
+		var name = a && a["name"];
+		if (name === void 0) {
+			name = "[-- not found acorNr " + nr + " --]";
+		}
+		ret.set_string(name);
 	};
 
 	Exps.prototype.PropertyOfActorByNr = function (ret, nr, propName)
@@ -698,12 +730,12 @@ cr.plugins_.Photon = function(runtime)
 	{
 		ret.set_int(this.lbc["myRoomMasterActorNr"]());
 	};
-	
+
 	Exps.prototype.WebRpcUriPath = function (ret)
 	{
 		ret.set_string(this.webRpcUriPath || "");
 	};
-	
+
 	Exps.prototype.WebRpcResultCode = function (ret)
 	{
 		ret.set_int(this.webRpcResultCode || 0);
@@ -713,12 +745,12 @@ cr.plugins_.Photon = function(runtime)
 	{
 		ret.set_any(this.webRpcData);
 	};
-	
+
 	Exps.prototype.FriendOnline = function (ret, name)
 	{
 		ret.set_int(this.friends && this.friends[name] && this.friends[name]["online"] ? 1 : 0);
 	};
-	
+
 	Exps.prototype.FriendRoom = function (ret, name)
 	{
 		ret.set_string(this.friends && this.friends[name] ? this.friends[name]["roomId"] : "");
@@ -728,12 +760,12 @@ cr.plugins_.Photon = function(runtime)
 	{
 		ret.set_int(this.lobbyStats ? this.lobbyStats.length : 0);
 	};
-	
+
 	Exps.prototype.LobbyStatsNameAt = function (ret, i)
 	{
 		ret.set_string(this.lobbyStats && this.lobbyStats[i] ? this.lobbyStats[i]["lobbyName"] : "");
 	};
-	
+
 	Exps.prototype.LobbyStatsTypeAt = function (ret, i)
 	{
 		ret.set_int(this.lobbyStats && this.lobbyStats[i] ? this.lobbyStats[i]["lobbyType"] : 0);
@@ -743,7 +775,7 @@ cr.plugins_.Photon = function(runtime)
 	{
 		ret.set_int(this.lobbyStats && this.lobbyStats[i] ? this.lobbyStats[i]["peerCount"] : 0);
 	};
-	
+
 	Exps.prototype.LobbyStatsGameCountAt = function (ret, i)
 	{
 		ret.set_int(this.lobbyStats && this.lobbyStats[i] ? this.lobbyStats[i]["gameCount"] : 0);
@@ -763,9 +795,9 @@ cr.plugins_.Photon = function(runtime)
 	{
 		ret.set_int(this.appStats ? this.appStats["gameCount"] : 0);
 	};
-	
+
 	// ... other expressions here ...
-	
+
 	pluginProto.exps = new Exps();
 
 }());

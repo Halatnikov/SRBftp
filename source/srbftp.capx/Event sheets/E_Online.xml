@@ -34,6 +34,27 @@
                         </action>
                     </actions>
                 </event-block>
+                <comment></comment>
+                <event-block sid="645352077029934">
+                    <conditions />
+                    <actions>
+                        <action id="-13" name="Set boolean" sid="922600171533436" type="Var_Online">
+                            <param id="0" name="Instance variable">Connected</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="105860875786679">
+                    <conditions>
+                        <condition id="34" name="Is joined to a room" sid="526933072055726" type="Photon" />
+                    </conditions>
+                    <actions>
+                        <action id="-13" name="Set boolean" sid="614252907362748" type="Var_Online">
+                            <param id="0" name="Instance variable">Connected</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
                 <event-group description="" sid="838407850946241" title="Events">
                     <sub-events>
                         <variable constant="1" name="EVENT_SYNCROOM" sid="215550732901698" static="0" type="number">1</variable>
@@ -253,23 +274,30 @@
                                             <param id="1" name="Comparison">4</param>
                                             <param id="2" name="Second value">1</param>
                                         </condition>
-                                        <condition id="1" name="Compare parameter" sid="763842837367064" type="Function">
-                                            <param id="0" name="Index">1</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">&quot;others&quot;</param>
-                                        </condition>
                                     </conditions>
-                                    <actions>
-                                        <action id="17" name="Raise event" sid="618222315311595" type="Photon">
-                                            <param id="0" name="Code">EVENT_CHAT</param>
-                                            <param id="1" name="Data">Function.Param(0)</param>
-                                            <param id="2" name="InterestGroup">0</param>
-                                            <param id="3" name="Cache">0</param>
-                                            <param id="4" name="Receivers">0</param>
-                                            <param id="5" name="TargetActors">&quot;&quot;</param>
-                                            <param id="6" name="WebForward">0</param>
-                                        </action>
-                                    </actions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="377056065229801">
+                                            <conditions>
+                                                <condition id="1" name="Compare parameter" sid="763842837367064" type="Function">
+                                                    <param id="0" name="Index">1</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">&quot;others&quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="17" name="Raise event" sid="618222315311595" type="Photon">
+                                                    <param id="0" name="Code">EVENT_CHAT</param>
+                                                    <param id="1" name="Data">Function.Param(0)</param>
+                                                    <param id="2" name="InterestGroup">0</param>
+                                                    <param id="3" name="Cache">0</param>
+                                                    <param id="4" name="Receivers">0</param>
+                                                    <param id="5" name="TargetActors">&quot;&quot;</param>
+                                                    <param id="6" name="WebForward">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
                                 </event-block>
                             </sub-events>
                         </event-block>
@@ -278,11 +306,6 @@
                             <conditions>
                                 <condition id="3" name="On event" sid="134199621315441" type="Photon">
                                     <param id="0" name="Code">EVENT_KICKPLAYER</param>
-                                </condition>
-                                <condition id="-8" name="Compare two values" sid="764763412150655" type="System">
-                                    <param id="0" name="First value">JSON_OnlineMe.Value(0, &quot;UserID&quot;)</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Second value">Photon.EventData</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -304,35 +327,18 @@
                             <actions>
                                 <action id="17" name="Raise event" sid="276575979562391" type="Photon">
                                     <param id="0" name="Code">EVENT_KICKPLAYER</param>
-                                    <param id="1" name="Data">Function.Param(0)</param>
+                                    <param id="1" name="Data">&quot;&quot;</param>
                                     <param id="2" name="InterestGroup">0</param>
                                     <param id="3" name="Cache">0</param>
                                     <param id="4" name="Receivers">0</param>
-                                    <param id="5" name="TargetActors">&quot;&quot;</param>
+                                    <param id="5" name="TargetActors">str(Function.Param(0))</param>
                                     <param id="6" name="WebForward">0</param>
                                 </action>
+                                <action id="0" name="Call function" sid="803049225259751" type="Function">
+                                    <param id="0" name="Name">&quot;Online_Chat&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;- &quot;&amp;JSON_OnlineRoom.Value(0,&quot;Players&quot;,Function.Param(0),&quot;Username&quot;)&amp;&quot; was kicked!&quot;</param>
+                                </action>
                             </actions>
-                            <sub-events>
-                                <event-block sid="795405877574990">
-                                    <conditions>
-                                        <condition id="100" name="For each property" sid="278134672627139" type="JSON_OnlineRoom">
-                                            <param id="0" name="Reference point">0</param>
-                                            <param id="1" name="Key {n}">&quot;Players&quot;</param>
-                                        </condition>
-                                        <condition id="-8" name="Compare two values" sid="360463556721497" type="System">
-                                            <param id="0" name="First value">JSON_OnlineRoom.Value(0,&quot;Players&quot;,JSON_OnlineRoom.CurrentKey,&quot;UserID&quot;)</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Second value">Function.Param(0)</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="0" name="Call function" sid="803049225259751" type="Function">
-                                            <param id="0" name="Name">&quot;Online_Chat&quot;</param>
-                                            <param id="1" name="Parameter {n}">&quot;- &quot;&amp;JSON_OnlineRoom.Value(0,&quot;Players&quot;,JSON_OnlineRoom.CurrentKey,&quot;Username&quot;)&amp;&quot; was kicked!&quot;</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-group>
@@ -389,7 +395,9 @@
                 <comment>host left your room</comment>
                 <event-block sid="976184692775463">
                     <conditions>
-                        <condition id="34" name="Is joined to a room" sid="963354865335273" type="Photon" />
+                        <condition id="-8" name="Is boolean instance variable set" sid="258962900292900" type="Var_Online">
+                            <param id="0" name="Instance variable">Connected</param>
+                        </condition>
                         <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="634256272627992" type="Var_Online">
                             <param id="0" name="Instance variable">Host</param>
                         </condition>
@@ -484,16 +492,37 @@
                         </action>
                     </actions>
                     <sub-events>
-                        <event-block sid="263821011685487">
+                        <event-block sid="611741106314133">
                             <conditions>
-                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="277369022992781" type="Var_Online">
-                                    <param id="0" name="Instance variable">Host</param>
+                                <condition id="-8" name="Compare two values" sid="375286939808602" type="System">
+                                    <param id="0" name="First value">Photon.MyActorNr</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">Photon.MasterActorNr</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="14" name="Log" sid="554164464187620" type="Browser">
+                                <action id="14" name="Log" sid="967734216789815" type="Browser">
                                     <param id="0" name="Type">0</param>
-                                    <param id="1" name="Message">&quot;you&apos;re not host&quot;</param>
+                                    <param id="1" name="Message">&quot;host&quot;</param>
+                                </action>
+                                <action id="-13" name="Set boolean" sid="442748128825132" type="Var_Online">
+                                    <param id="0" name="Instance variable">Host</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="263821011685487">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="346957418589760" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="14" name="Log" sid="347814145623495" type="Browser">
+                                    <param id="0" name="Type">0</param>
+                                    <param id="1" name="Message">&quot;peer&quot;</param>
+                                </action>
+                                <action id="-13" name="Set boolean" sid="966160103102976" type="Var_Online">
+                                    <param id="0" name="Instance variable">Host</param>
+                                    <param id="1" name="Value">0</param>
                                 </action>
                                 <action id="0" name="Call function" sid="149901329584870" type="Function">
                                     <param id="0" name="Name">&quot;Online_Chat&quot;</param>
@@ -549,7 +578,9 @@
                 <event-block sid="708841369244920">
                     <conditions>
                         <condition id="16" name="On actor leave" sid="448902702408985" type="Photon" />
-                        <condition id="34" name="Is joined to a room" sid="935797576534915" type="Photon" />
+                        <condition id="-8" name="Is boolean instance variable set" sid="889711288563145" type="Var_Online">
+                            <param id="0" name="Instance variable">Connected</param>
+                        </condition>
                     </conditions>
                     <actions>
                         <action id="14" name="Log" sid="223841758548482" type="Browser">
@@ -635,17 +666,22 @@
                         </event-block>
                         <event-block sid="935884635860357">
                             <conditions>
-                                <condition id="-8" name="Compare two values" sid="811626904946853" type="System">
-                                    <param id="0" name="First value">JSON_OnlineRoom.Value(0, &quot;AllowJoins&quot;)</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Second value">0</param>
-                                </condition>
+                                <condition id="-22" name="Else" sid="794358700627330" type="System" />
                             </conditions>
                             <actions>
                                 <action id="20" name="Set Value" sid="642857368907097" type="JSON_OnlineRoom">
                                     <param id="0" name="Value">&quot;Locked&quot;</param>
                                     <param id="1" name="Reference point">0</param>
                                     <param id="2" name="Key {n}">&quot;RoomStatus&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="210276657651774">
+                            <conditions />
+                            <actions>
+                                <action id="0" name="Call function" sid="557412617498231" type="Function">
+                                    <param id="0" name="Name">&quot;Online_SyncRoom&quot;</param>
+                                    <param id="1" name="Parameter {n}"></param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1219,11 +1255,6 @@
                                     <param id="0" name="Instance variable">Discord_TimestampInit</param>
                                     <param id="1" name="Value">Function.ReturnValue</param>
                                 </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="343525013453754">
-                            <conditions />
-                            <actions>
                                 <action id="0" name="Call function" sid="734708861149942" type="Function">
                                     <param id="0" name="Name">&quot;String_GenerateRandom&quot;</param>
                                     <param id="1" name="Parameter {n}">8</param>
@@ -1232,11 +1263,6 @@
                                     <param id="0" name="Instance variable">Discord_FakePartyID</param>
                                     <param id="1" name="Value">Function.ReturnValue</param>
                                 </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="730136606575085">
-                            <conditions />
-                            <actions>
                                 <action id="-16" name="Wait" sid="987521093944197" type="System">
                                     <param id="0" name="Seconds">0.1</param>
                                 </action>
