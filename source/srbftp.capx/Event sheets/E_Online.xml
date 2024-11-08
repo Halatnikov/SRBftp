@@ -971,6 +971,7 @@
                         </action>
                     </actions>
                 </event-block>
+                <comment></comment>
                 <event-block sid="382008459434438">
                     <conditions>
                         <condition id="-7" name="Compare instance variable" sid="324354949908802" type="Var_Game">
@@ -1035,6 +1036,7 @@
                         </action>
                     </actions>
                 </event-block>
+                <comment></comment>
                 <event-block sid="999051160559248">
                     <conditions>
                         <condition id="-8" inverted="1" name="Compare two values" sid="621597906403498" type="System">
@@ -1142,7 +1144,7 @@
                 <event-block sid="800111248497823">
                     <conditions>
                         <condition id="-8" inverted="1" name="Compare two values" sid="262545590832098" type="System">
-                            <param id="0" name="First value">find(LayoutName,&quot;EX_&quot;)</param>
+                            <param id="0" name="First value">find(LayoutName,&quot;X_&quot;)</param>
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Second value">-1</param>
                         </condition>
@@ -1159,32 +1161,9 @@
                 <event-block sid="663478463421665">
                     <conditions>
                         <condition id="0" name="On presence" sid="615890934365015" type="DiscordRPC" />
-                        <condition id="-8" name="Is boolean instance variable set" sid="621351975580485" type="Var_Misc">
-                            <param id="0" name="Instance variable">Discord_Enabled</param>
-                        </condition>
-                        <condition id="-14" name="Compare variable" sid="688592768383038" type="System">
-                            <param id="0" name="Variable">PLATFORM</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">&quot;NwJs&quot;</param>
-                        </condition>
                     </conditions>
                     <actions />
                     <sub-events>
-                        <event-block sid="448505319564769">
-                            <conditions>
-                                <condition id="-8" inverted="1" name="Compare two values" sid="591377080590173" type="System">
-                                    <param id="0" name="First value">DiscordRPC.username</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Second value">&quot;null&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-13" name="Set boolean" sid="178757781287317" type="Var_Misc">
-                                    <param id="0" name="Instance variable">Discord_Connected</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                            </actions>
-                        </event-block>
                         <event-block sid="410529551680873">
                             <conditions>
                                 <condition id="-8" name="Compare two values" sid="413546860341218" type="System">
@@ -1194,9 +1173,9 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-13" name="Set boolean" sid="647575580679058" type="Var_Misc">
-                                    <param id="0" name="Instance variable">Discord_Connected</param>
-                                    <param id="1" name="Value">0</param>
+                                <action id="14" name="Log" sid="110645541663963" type="Browser">
+                                    <param id="0" name="Type">0</param>
+                                    <param id="1" name="Message">&quot;rich presence failed?&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1206,15 +1185,17 @@
                 <event-block sid="429813025613435">
                     <conditions>
                         <condition id="0" name="On function" sid="882563460045130" type="Function">
-                            <param id="0" name="Name">&quot;Discord_RPC_Initialize&quot;</param>
-                        </condition>
-                        <condition id="-8" name="Is boolean instance variable set" sid="300949964870167" type="Var_Misc">
-                            <param id="0" name="Instance variable">Discord_Enabled</param>
+                            <param id="0" name="Name">&quot;Discord_Init&quot;</param>
                         </condition>
                         <condition id="-14" name="Compare variable" sid="567151519226072" type="System">
                             <param id="0" name="Variable">PLATFORM</param>
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">&quot;NwJs&quot;</param>
+                        </condition>
+                        <condition id="-8" name="Compare two values" sid="932076044597116" type="System">
+                            <param id="0" name="First value">Save_Config.Value(0,&quot;MiscDiscordRichPresence&quot;)</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Second value">1</param>
                         </condition>
                     </conditions>
                     <actions />
@@ -1280,13 +1261,15 @@
                         <condition id="0" name="On function" sid="648537989573798" type="Function">
                             <param id="0" name="Name">&quot;Discord_RichPresence&quot;</param>
                         </condition>
-                        <condition id="-8" name="Is boolean instance variable set" sid="700596904097967" type="Var_Misc">
-                            <param id="0" name="Instance variable">Discord_Enabled</param>
-                        </condition>
                         <condition id="-14" name="Compare variable" sid="728152032595195" type="System">
                             <param id="0" name="Variable">PLATFORM</param>
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">&quot;NwJs&quot;</param>
+                        </condition>
+                        <condition id="-8" name="Compare two values" sid="920428872959299" type="System">
+                            <param id="0" name="First value">Save_Config.Value(0,&quot;MiscDiscordRichPresence&quot;)</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Second value">1</param>
                         </condition>
                     </conditions>
                     <actions />
@@ -1353,15 +1336,6 @@
                             </actions>
                         </event-block>
                         <comment></comment>
-                        <event-block sid="801846928377710">
-                            <conditions />
-                            <actions>
-                                <action id="-9" name="Set value" sid="349996390218579" type="System">
-                                    <param id="0" name="Variable">partyID</param>
-                                    <param id="1" name="Value">Var_Misc.Discord_FakePartyID</param>
-                                </action>
-                            </actions>
-                        </event-block>
                         <event-block sid="532330648814298">
                             <conditions>
                                 <condition id="-14" name="Compare variable" sid="408944724319580" type="System">
@@ -1419,6 +1393,15 @@
                                 <action id="-9" name="Set value" sid="740117176548732" type="System">
                                     <param id="0" name="Variable">smallImageText</param>
                                     <param id="1" name="Value">&quot;v&quot;&amp;projectversion</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="801846928377710">
+                            <conditions />
+                            <actions>
+                                <action id="-9" name="Set value" sid="349996390218579" type="System">
+                                    <param id="0" name="Variable">partyID</param>
+                                    <param id="1" name="Value">Var_Misc.Discord_FakePartyID</param>
                                 </action>
                             </actions>
                         </event-block>

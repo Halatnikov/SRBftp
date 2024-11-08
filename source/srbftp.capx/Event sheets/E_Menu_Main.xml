@@ -1490,7 +1490,7 @@
                             <param id="0" name="Seconds">0.1</param>
                         </action>
                         <action id="0" name="Call function" sid="376945595362209" type="Function">
-                            <param id="0" name="Name">&quot;Discord_RPC_Initialize&quot;</param>
+                            <param id="0" name="Name">&quot;Discord_Init&quot;</param>
                             <param id="1" name="Parameter {n}"></param>
                         </action>
                         <action id="-10" name="Set value" sid="916682414521464" type="Var_Game">
@@ -2762,6 +2762,9 @@
                         <action id="-15" name="Set visible" sid="275356952488963" type="Logo_SRBftp">
                             <param id="0" name="Visibility">1</param>
                         </action>
+                        <action id="0" name="Set text" sid="818510084669900" type="MenuIntro_Funny">
+                            <param id="0" name="Text">&quot;joke missing&quot;</param>
+                        </action>
                         <action id="1" name="Request project file" sid="631518566840293" type="AJAX">
                             <param id="0" name="Tag">&quot;funny&quot;</param>
                             <param id="1" name="File">funny.txt</param>
@@ -2804,7 +2807,7 @@
                     </conditions>
                     <actions>
                         <action id="0" name="Set text" sid="443024372684045" type="MenuIntro_Funny">
-                            <param id="0" name="Text">tokenat(AJAX.LastData,floor(random(0,tokencount(AJAX.LastData,newline))),newline)</param>
+                            <param id="0" name="Text">tokenat(AJAX.LastData, int(random(0, tokencount(AJAX.LastData, newline))), newline)</param>
                         </action>
                     </actions>
                 </event-block>
@@ -8186,8 +8189,6 @@
                     </actions>
                 </event-block>
                 <variable constant="0" name="page" sid="939917503087695" static="1" type="number">1</variable>
-                <variable constant="0" name="counter_pages" sid="757966036763020" static="1" type="number">0</variable>
-                <variable constant="0" name="counter_levels" sid="279413105341243" static="1" type="number">0</variable>
                 <variable constant="0" name="create_list" sid="104998453849850" static="1" type="number">0</variable>
                 <event-block sid="586016225667118">
                     <conditions>
@@ -8279,7 +8280,81 @@
                         </action>
                     </actions>
                 </event-block>
+                <event-block sid="130450916803320">
+                    <conditions>
+                        <condition id="-8" name="Is boolean instance variable set" sid="868940708841978" type="Var_Input">
+                            <param id="0" name="Instance variable">Start</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="298674222345970" type="System" />
+                        <condition id="-14" name="Compare variable" sid="667954369315117" type="System">
+                            <param id="0" name="Variable">lock</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="921106902378996" type="Menu_Options2" />
+                        <action id="33" name="Stop all" sid="676835822059825" type="BetterAudio" />
+                    </actions>
+                    <sub-events>
+                        <event-block sid="269013246579572">
+                            <conditions>
+                                <condition id="-16" name="Is on layer" sid="371890224344017" type="HUD_SkinIcon">
+                                    <param id="0" name="Layer">&quot;SkinSelect&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Destroy" sid="255690846144287" type="HUD_SkinIcon" />
+                            </actions>
+                        </event-block>
+                        <event-block sid="366332580307397">
+                            <conditions>
+                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="230858469828561" type="Var_Online">
+                                    <param id="0" name="Instance variable">Connected</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Set value" sid="899875986584370" type="Var_Game">
+                                    <param id="0" name="Instance variable">CurrentMenu</param>
+                                    <param id="1" name="Value">&quot;settings&quot;</param>
+                                </action>
+                                <action id="0" name="Call function" sid="907566027240863" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;F_MainMenu&quot;{###}&quot;music&quot;{###}1</param>
+                                </action>
+                                <action id="23" name="Seek to" sid="580397030225382" type="BetterAudio">
+                                    <param id="0" name="Tag">&quot;music&quot;</param>
+                                    <param id="1" name="Position">6.25</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="372215727522153">
+                            <conditions>
+                                <condition id="-8" name="Is boolean instance variable set" sid="784612908085072" type="Var_Online">
+                                    <param id="0" name="Instance variable">Connected</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="20" name="Set Value" sid="498503455887166" type="JSON_OnlineMe">
+                                    <param id="0" name="Value">Var_Player.Skin</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;Skin&quot;</param>
+                                </action>
+                                <action id="0" name="Call function" sid="371052892142132" type="Function">
+                                    <param id="0" name="Name">&quot;Online_SyncMe&quot;</param>
+                                    <param id="1" name="Parameter {n}"></param>
+                                </action>
+                                <action id="-10" name="Set value" sid="913181942049038" type="Var_Game">
+                                    <param id="0" name="Instance variable">CurrentMenu</param>
+                                    <param id="1" name="Value">&quot;online_lobby&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
                 <comment></comment>
+                <variable constant="0" name="counter_pages" sid="757966036763020" static="1" type="number">0</variable>
+                <variable constant="0" name="counter_entries" sid="279413105341243" static="1" type="number">0</variable>
                 <event-block sid="928980837298351">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="197145923523737" type="System">
@@ -8331,7 +8406,7 @@
                                     <param id="1" name="Value">0</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="885966547543368" type="System">
-                                    <param id="0" name="Variable">counter_levels</param>
+                                    <param id="0" name="Variable">counter_entries</param>
                                     <param id="1" name="Value">-1</param>
                                 </action>
                             </actions>
@@ -8379,18 +8454,18 @@
                                     </conditions>
                                     <actions>
                                         <action id="-10" name="Add to" sid="713612280441541" type="System">
-                                            <param id="0" name="Variable">counter_levels</param>
+                                            <param id="0" name="Variable">counter_entries</param>
                                             <param id="1" name="Value">1</param>
                                         </action>
                                         <action id="-3" name="Create object" sid="833568949339159" type="System">
                                             <param id="0" name="Object to create">Menu_Options2</param>
                                             <param id="1" name="Layer">&quot;SkinSelect&quot;</param>
                                             <param id="2" name="X">83</param>
-                                            <param id="3" name="Y">93+((24+8)*counter_levels)</param>
+                                            <param id="3" name="Y">93+((24+8)*counter_entries)</param>
                                         </action>
                                         <action id="-10" name="Set value" sid="901624353154982" type="Menu_Options2">
                                             <param id="0" name="Instance variable">TableID</param>
-                                            <param id="1" name="Value">counter_levels</param>
+                                            <param id="1" name="Value">counter_entries</param>
                                         </action>
                                         <action id="-10" name="Set value" sid="575014423017129" type="Menu_Options2">
                                             <param id="0" name="Instance variable">ID</param>
@@ -8406,7 +8481,7 @@
                                             <param id="0" name="Object to create">HUD_SkinIcon</param>
                                             <param id="1" name="Layer">&quot;SkinSelect&quot;</param>
                                             <param id="2" name="X">62</param>
-                                            <param id="3" name="Y">105+(32*counter_levels)</param>
+                                            <param id="3" name="Y">105+(32*counter_entries)</param>
                                         </action>
                                         <action id="5" name="Set frame" sid="703698260908415" type="HUD_SkinIcon">
                                             <param id="0" name="Frame number">int(JSON_SkinsProperties.Value(0,Menu_Options2.ID,&quot;Art&quot;))-1</param>
@@ -8733,78 +8808,6 @@
                                     </actions>
                                 </event-block>
                             </sub-events>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <event-block sid="130450916803320">
-                    <conditions>
-                        <condition id="-8" name="Is boolean instance variable set" sid="868940708841978" type="Var_Input">
-                            <param id="0" name="Instance variable">Start</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="298674222345970" type="System" />
-                        <condition id="-14" name="Compare variable" sid="667954369315117" type="System">
-                            <param id="0" name="Variable">lock</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">0</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-9" name="Destroy" sid="921106902378996" type="Menu_Options2" />
-                        <action id="33" name="Stop all" sid="676835822059825" type="BetterAudio" />
-                    </actions>
-                    <sub-events>
-                        <event-block sid="269013246579572">
-                            <conditions>
-                                <condition id="-16" name="Is on layer" sid="371890224344017" type="HUD_SkinIcon">
-                                    <param id="0" name="Layer">&quot;SkinSelect&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Destroy" sid="255690846144287" type="HUD_SkinIcon" />
-                            </actions>
-                        </event-block>
-                        <event-block sid="366332580307397">
-                            <conditions>
-                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="230858469828561" type="Var_Online">
-                                    <param id="0" name="Instance variable">Connected</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-10" name="Set value" sid="899875986584370" type="Var_Game">
-                                    <param id="0" name="Instance variable">CurrentMenu</param>
-                                    <param id="1" name="Value">&quot;settings&quot;</param>
-                                </action>
-                                <action id="0" name="Call function" sid="907566027240863" type="Function">
-                                    <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;F_MainMenu&quot;{###}&quot;music&quot;{###}1</param>
-                                </action>
-                                <action id="23" name="Seek to" sid="580397030225382" type="BetterAudio">
-                                    <param id="0" name="Tag">&quot;music&quot;</param>
-                                    <param id="1" name="Position">6.25</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="372215727522153">
-                            <conditions>
-                                <condition id="-8" name="Is boolean instance variable set" sid="784612908085072" type="Var_Online">
-                                    <param id="0" name="Instance variable">Connected</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="20" name="Set Value" sid="498503455887166" type="JSON_OnlineMe">
-                                    <param id="0" name="Value">Var_Player.Skin</param>
-                                    <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;Skin&quot;</param>
-                                </action>
-                                <action id="0" name="Call function" sid="371052892142132" type="Function">
-                                    <param id="0" name="Name">&quot;Online_SyncMe&quot;</param>
-                                    <param id="1" name="Parameter {n}"></param>
-                                </action>
-                                <action id="-10" name="Set value" sid="913181942049038" type="Var_Game">
-                                    <param id="0" name="Instance variable">CurrentMenu</param>
-                                    <param id="1" name="Value">&quot;online_lobby&quot;</param>
-                                </action>
-                            </actions>
                         </event-block>
                     </sub-events>
                 </event-block>
@@ -9170,6 +9173,8 @@
                 <variable constant="0" name="scaling" sid="910649775538280" static="1" type="number">0</variable>
                 <variable constant="0" name="fpss" sid="608089188634273" static="1" type="number">0</variable>
                 <variable constant="0" name="volume" sid="236840228298664" static="1" type="number">0</variable>
+                <variable constant="0" name="volume_music" sid="656568092604214" static="1" type="number">0</variable>
+                <variable constant="0" name="volume_sfx" sid="949121730024152" static="1" type="number">0</variable>
                 <event-block sid="796906326039046">
                     <conditions>
                         <condition id="-4" name="Trigger once while true" sid="921700827794642" type="System" />
@@ -9194,6 +9199,14 @@
                         <action id="-9" name="Set value" sid="757887570176189" type="System">
                             <param id="0" name="Variable">volume</param>
                             <param id="1" name="Value">Save_Config.Value(0,&quot;SoundVolume&quot;)</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="803850575742134" type="System">
+                            <param id="0" name="Variable">volume_music</param>
+                            <param id="1" name="Value">Save_Config.Value(0,&quot;SoundVolumeMusic&quot;)</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="388420645754369" type="System">
+                            <param id="0" name="Variable">volume_sfx</param>
+                            <param id="1" name="Value">Save_Config.Value(0,&quot;SoundVolumeSFX&quot;)</param>
                         </action>
                     </actions>
                     <sub-events>
@@ -9270,7 +9283,7 @@
                         <condition id="-7" name="Compare instance variable" sid="897720682125996" type="Var_Game">
                             <param id="0" name="Instance variable">CurrentSelection</param>
                             <param id="1" name="Comparison">5</param>
-                            <param id="2" name="Value">7</param>
+                            <param id="2" name="Value">9</param>
                         </condition>
                     </conditions>
                     <actions>
@@ -9291,7 +9304,7 @@
                     <actions>
                         <action id="-10" name="Set value" sid="683510936852670" type="Var_Game">
                             <param id="0" name="Instance variable">CurrentSelection</param>
-                            <param id="1" name="Value">6</param>
+                            <param id="1" name="Value">8</param>
                         </action>
                     </actions>
                 </event-block>
@@ -9328,7 +9341,7 @@
                                         <condition id="-7" inverted="1" name="Compare instance variable" sid="361389245832108" type="Var_Game">
                                             <param id="0" name="Instance variable">CurrentSelection</param>
                                             <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">6</param>
+                                            <param id="2" name="Value">8</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -9345,7 +9358,7 @@
                                         <condition id="-7" name="Compare instance variable" sid="157167817973313" type="Var_Game">
                                             <param id="0" name="Instance variable">CurrentSelection</param>
                                             <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">6</param>
+                                            <param id="2" name="Value">8</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -10010,12 +10023,208 @@
                     </sub-events>
                 </event-block>
                 <comment></comment>
+                <event-block sid="459122031156117">
+                    <conditions>
+                        <condition id="-16" name="Is on layer" sid="695982360403885" type="Menu_Options">
+                            <param id="0" name="Layer">&quot;SettingsGraphics&quot;</param>
+                        </condition>
+                        <condition id="-7" name="Compare instance variable" sid="462228113931479" type="Menu_Options">
+                            <param id="0" name="Instance variable">ID</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;volume_music&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set text" sid="343260816515203" type="Menu_Options">
+                            <param id="0" name="Text">volume_music*5&amp;&quot;%&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="721458253952407">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="361818209423191" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentSelection</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">6</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set text" sid="460762190022070" type="Menu_Description">
+                            <param id="0" name="Text">&quot;Set volume of music only&quot;</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="165928799032289">
+                            <conditions>
+                                <condition id="-8" name="Is boolean instance variable set" sid="773099460999690" type="Var_Input">
+                                    <param id="0" name="Instance variable">Left</param>
+                                </condition>
+                                <condition id="-14" name="Compare variable" sid="595042450627395" type="System">
+                                    <param id="0" name="Variable">volume_music</param>
+                                    <param id="1" name="Comparison">4</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="692531162591707" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Call function" sid="336256932950864" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;Menu&quot;</param>
+                                </action>
+                                <action id="-11" name="Subtract from" sid="517148847066479" type="System">
+                                    <param id="0" name="Variable">volume_music</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="20" name="Set Value" sid="924569196574429" type="Save_Config">
+                                    <param id="0" name="Value">volume_music</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;SoundVolumeMusic&quot;</param>
+                                </action>
+                                <action id="0" name="Call function" sid="185539632458754" type="Function">
+                                    <param id="0" name="Name">&quot;ApplyConfig&quot;</param>
+                                    <param id="1" name="Parameter {n}"></param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="249221002880530">
+                            <conditions>
+                                <condition id="-8" name="Is boolean instance variable set" sid="697357723981291" type="Var_Input">
+                                    <param id="0" name="Instance variable">Right</param>
+                                </condition>
+                                <condition id="-14" name="Compare variable" sid="631369557561353" type="System">
+                                    <param id="0" name="Variable">volume_music</param>
+                                    <param id="1" name="Comparison">2</param>
+                                    <param id="2" name="Value">20</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="738367643797502" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Call function" sid="525176108891202" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;Menu&quot;</param>
+                                </action>
+                                <action id="-10" name="Add to" sid="397668829507998" type="System">
+                                    <param id="0" name="Variable">volume_music</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="20" name="Set Value" sid="659779499670618" type="Save_Config">
+                                    <param id="0" name="Value">volume_music</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;SoundVolumeMusic&quot;</param>
+                                </action>
+                                <action id="0" name="Call function" sid="439565650592870" type="Function">
+                                    <param id="0" name="Name">&quot;ApplyConfig&quot;</param>
+                                    <param id="1" name="Parameter {n}"></param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment></comment>
+                <event-block sid="706113198335641">
+                    <conditions>
+                        <condition id="-16" name="Is on layer" sid="537946210914075" type="Menu_Options">
+                            <param id="0" name="Layer">&quot;SettingsGraphics&quot;</param>
+                        </condition>
+                        <condition id="-7" name="Compare instance variable" sid="652301430979611" type="Menu_Options">
+                            <param id="0" name="Instance variable">ID</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;volume_sfx&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set text" sid="847025611342354" type="Menu_Options">
+                            <param id="0" name="Text">volume_sfx*5&amp;&quot;%&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="918213134436144">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="514393135636838" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentSelection</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">7</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set text" sid="981072340419901" type="Menu_Description">
+                            <param id="0" name="Text">&quot;Set volume of sound effects only&quot;</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="226894387757054">
+                            <conditions>
+                                <condition id="-8" name="Is boolean instance variable set" sid="884073779444886" type="Var_Input">
+                                    <param id="0" name="Instance variable">Left</param>
+                                </condition>
+                                <condition id="-14" name="Compare variable" sid="147159193750036" type="System">
+                                    <param id="0" name="Variable">volume_sfx</param>
+                                    <param id="1" name="Comparison">4</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="579888391472046" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Call function" sid="256643489192412" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;Menu&quot;</param>
+                                </action>
+                                <action id="-11" name="Subtract from" sid="516780446850507" type="System">
+                                    <param id="0" name="Variable">volume_sfx</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="20" name="Set Value" sid="650576290802025" type="Save_Config">
+                                    <param id="0" name="Value">volume_sfx</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;SoundVolumeSFX&quot;</param>
+                                </action>
+                                <action id="0" name="Call function" sid="234495210831662" type="Function">
+                                    <param id="0" name="Name">&quot;ApplyConfig&quot;</param>
+                                    <param id="1" name="Parameter {n}"></param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="603182471047777">
+                            <conditions>
+                                <condition id="-8" name="Is boolean instance variable set" sid="746773100426416" type="Var_Input">
+                                    <param id="0" name="Instance variable">Right</param>
+                                </condition>
+                                <condition id="-14" name="Compare variable" sid="539869116726001" type="System">
+                                    <param id="0" name="Variable">volume_sfx</param>
+                                    <param id="1" name="Comparison">2</param>
+                                    <param id="2" name="Value">20</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="688913477392032" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Call function" sid="184100100545768" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;Menu&quot;</param>
+                                </action>
+                                <action id="-10" name="Add to" sid="358201407993855" type="System">
+                                    <param id="0" name="Variable">volume_sfx</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="20" name="Set Value" sid="538438103905746" type="Save_Config">
+                                    <param id="0" name="Value">volume_sfx</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;SoundVolumeSFX&quot;</param>
+                                </action>
+                                <action id="0" name="Call function" sid="705037900340010" type="Function">
+                                    <param id="0" name="Name">&quot;ApplyConfig&quot;</param>
+                                    <param id="1" name="Parameter {n}"></param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment></comment>
                 <event-block sid="465607030444956">
                     <conditions>
                         <condition id="-7" name="Compare instance variable" sid="745465412055671" type="Var_Game">
                             <param id="0" name="Instance variable">CurrentSelection</param>
                             <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">6</param>
+                            <param id="2" name="Value">8</param>
                         </condition>
                     </conditions>
                     <actions>
@@ -10070,6 +10279,16 @@
                                             <param id="0" name="Value">volume</param>
                                             <param id="1" name="Reference point">0</param>
                                             <param id="2" name="Key {n}">&quot;SoundVolume&quot;</param>
+                                        </action>
+                                        <action id="20" name="Set Value" sid="481724022459830" type="Save_Config">
+                                            <param id="0" name="Value">volume_music</param>
+                                            <param id="1" name="Reference point">0</param>
+                                            <param id="2" name="Key {n}">&quot;SoundVolumeMusic&quot;</param>
+                                        </action>
+                                        <action id="20" name="Set Value" sid="237351087478362" type="Save_Config">
+                                            <param id="0" name="Value">volume_sfx</param>
+                                            <param id="1" name="Reference point">0</param>
+                                            <param id="2" name="Key {n}">&quot;SoundVolumeSFX&quot;</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -13484,41 +13703,19 @@
                                     </conditions>
                                     <actions />
                                     <sub-events>
-                                        <event-block sid="754843136942266">
-                                            <conditions>
-                                                <condition id="-14" name="Compare variable" sid="466544939310090" type="System">
-                                                    <param id="0" name="Variable">PLATFORM</param>
-                                                    <param id="1" name="Comparison">0</param>
-                                                    <param id="2" name="Value">&quot;NwJs&quot;</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="2" name="Delete file" sid="244310292005715" type="NWjs">
-                                                    <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\srbftp_config.ini&quot;</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                        <event-block sid="911939835521845">
-                                            <conditions>
-                                                <condition id="-14" inverted="1" name="Compare variable" sid="154542135687308" type="System">
-                                                    <param id="0" name="Variable">PLATFORM</param>
-                                                    <param id="1" name="Comparison">0</param>
-                                                    <param id="2" name="Value">&quot;NwJs&quot;</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="2" name="Remove item" sid="147846540515221" type="LocalStorage">
-                                                    <param id="0" name="Key">&quot;srbftp_config&quot;</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
                                         <event-block sid="210264591331829">
                                             <conditions />
                                             <actions>
+                                                <action id="11" name="Cancel fullscreen" sid="650006691655192" type="Browser" />
+                                                <action id="2" name="Delete file" sid="244310292005715" type="NWjs">
+                                                    <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\srbftp_config.ini&quot;</param>
+                                                </action>
+                                                <action id="2" name="Remove item" sid="147846540515221" type="LocalStorage">
+                                                    <param id="0" name="Key">&quot;srbftp_config&quot;</param>
+                                                </action>
                                                 <action id="-16" name="Wait" sid="788727566619219" type="System">
                                                     <param id="0" name="Seconds">0.1</param>
                                                 </action>
-                                                <action id="11" name="Cancel fullscreen" sid="650006691655192" type="Browser" />
                                                 <action id="55" name="Clear" sid="974933781275290" type="Save_Config">
                                                     <param id="0" name="Reference point">0</param>
                                                     <param id="1" name="Key {n}"></param>
