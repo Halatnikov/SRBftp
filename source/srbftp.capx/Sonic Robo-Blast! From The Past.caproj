@@ -2,11 +2,11 @@
 <c2project>
     <name>Sonic Robo-Blast! From The Past</name>
     <description>Original games by Sonikku - Johnathan Wallbank and SSNTails - A.J. Freda</description>
-    <version>0.3.1-15</version>
+    <version>0.3.1-16</version>
     <author>Halatnikov</author>
     <author-email></author-email>
     <author-website>https://halatnikov.github.io</author-website>
-    <app-id>com.holat.SRBftp</app-id>
+    <app-id>com.halat.SRBftp</app-id>
     <unique-id>lwyh4111ackj</unique-id>
     <saved-with-version>28000</saved-with-version>
     <used-plugins>
@@ -27,6 +27,7 @@
         <plugin author="Scirra" id="NodeWebkit" version="1">NW.js</plugin>
         <plugin author="Exit Games" id="Photon" version="1">Photon</plugin>
         <plugin author="Rex.Rainbow" id="Rex_Date" version="1">Date</plugin>
+        <plugin author="Rex.Rainbow" id="Rex_EncDecXOR" version="0.100000001">XOR Encryption</plugin>
         <plugin author="Rex.Rainbow" id="Rex_INI" version="0.100000001">INI</plugin>
         <plugin author="Rex.Rainbow" id="Rex_Lzstring" version="0.100000001">Lz-string</plugin>
         <plugin author="Scirra" id="Sprite" version="1">Sprite</plugin>
@@ -220,6 +221,9 @@
             <object-type global="1" name="JSON_Audio" sid="750091796897157">
                 <plugin id="JSON" />
             </object-type>
+            <object-type name="EncDecXOR" sid="314883070378678">
+                <plugin id="Rex_EncDecXOR" />
+            </object-type>
         </object-folder>
         <object-folder name=".Variables">
             <object-type global="1" name="Var_Level" sid="368901035900150">
@@ -340,6 +344,7 @@
             <object-type global="1" name="Var_Online" sid="843952593917279">
                 <plugin id="Globals" />
                 <instance-variables>
+                    <instance-variable name="OutdatedVersion" sid="152596416008217" type="boolean" />
                     <instance-variable name="Connected" sid="463213351395128" type="boolean" />
                     <instance-variable name="Username" sid="236296667433467" type="string" />
                     <instance-variable name="Host" sid="721904644777794" type="boolean" />
@@ -16803,6 +16808,9 @@
                     <instance-variable name="Default" sid="525412048453946" type="string" />
                 </instance-variables>
             </object-type>
+            <object-type global="1" name="Save_Online" sid="117592567870819">
+                <plugin id="JSON" />
+            </object-type>
         </object-folder>
         <object-folder name="LocalRace">
             <object-type name="LocalHUD_321GO" sid="877790706765515">
@@ -20491,7 +20499,7 @@
         <global-instance type="CBHash" uid="5905" />
         <global-instance type="LzString" uid="5929">
             <properties>
-                <encoding>UTF16</encoding>
+                <encoding>Base64</encoding>
             </properties>
         </global-instance>
         <global-instance type="DiscordRPC" uid="6679">
@@ -20513,6 +20521,7 @@
                 <loglevel>INFO</loglevel>
             </properties>
         </global-instance>
+        <global-instance type="EncDecXOR" uid="4765" />
     </global-instances>
     <sounds-folder />
     <music-folder />

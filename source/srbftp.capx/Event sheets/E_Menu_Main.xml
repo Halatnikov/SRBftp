@@ -1472,6 +1472,10 @@
                                     <param id="0" name="Name">&quot;Load_Config&quot;</param>
                                     <param id="1" name="Parameter {n}"></param>
                                 </action>
+                                <action id="0" name="Call function" sid="220312261133635" type="Function">
+                                    <param id="0" name="Name">&quot;Load_Online&quot;</param>
+                                    <param id="1" name="Parameter {n}"></param>
+                                </action>
                             </actions>
                         </event-block>
                     </sub-events>
@@ -1587,7 +1591,6 @@
             <sub-events>
                 <variable constant="0" name="state" sid="217069991941418" static="1" type="text"></variable>
                 <variable constant="0" name="github" sid="455819953711795" static="0" type="text">Halatnikov/SRBftp</variable>
-                <variable constant="0" name="gamejolt" sid="518641038402883" static="0" type="text">https://gamejolt.com/games/srb_fromthepast/658544</variable>
                 <event-block sid="940864420177380">
                     <conditions>
                         <condition id="-4" name="Trigger once while true" sid="628808812387751" type="System" />
@@ -1675,9 +1678,7 @@
                             </actions>
                         </event-block>
                         <event-block sid="277610243121076">
-                            <conditions>
-                                <condition id="-1" name="Every tick" sid="222712175272844" type="System" />
-                            </conditions>
+                            <conditions />
                             <actions>
                                 <action id="-11" name="Add to" sid="766472763729388" type="Var_Game">
                                     <param id="0" name="Instance variable">TimerGlobal</param>
@@ -1705,14 +1706,32 @@
                                 </condition>
                                 <condition id="-4" name="Trigger once while true" sid="616332586512243" type="System" />
                             </conditions>
-                            <actions />
+                            <actions>
+                                <action id="0" name="Call function" sid="279402973769895" type="Function">
+                                    <param id="0" name="Name">&quot;Version_GreaterThan&quot;</param>
+                                    <param id="1" name="Parameter {n}">projectversion{###}JSON_AutoUpdater.Value(0,&quot;SRBftp_UpdateCheck&quot;,&quot;NewestVersion&quot;)</param>
+                                </action>
+                            </actions>
                             <sub-events>
-                                <event-block sid="583865329131715">
+                                <event-block sid="921658977140211">
                                     <conditions>
-                                        <condition id="-8" inverted="1" name="Compare two values" sid="947102863719753" type="System">
-                                            <param id="0" name="First value">projectversion</param>
+                                        <condition id="-8" name="Compare two values" sid="682802623250589" type="System">
+                                            <param id="0" name="First value">Function.ReturnValue</param>
                                             <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Second value">JSON_AutoUpdater.Value(0,&quot;SRBftp_UpdateCheck&quot;,&quot;NewestVersion&quot;)</param>
+                                            <param id="2" name="Second value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-13" name="Set boolean" sid="104156192290001" type="Var_Online">
+                                            <param id="0" name="Instance variable">OutdatedVersion</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="513111624535457">
+                                    <conditions>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="205368219875093" type="Var_Online">
+                                            <param id="0" name="Instance variable">OutdatedVersion</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -1726,16 +1745,12 @@
                                         </action>
                                     </actions>
                                 </event-block>
-                                <event-block sid="521321153712939">
+                                <event-block sid="399363388526545">
                                     <conditions>
-                                        <condition id="-8" name="Compare two values" sid="413420613832605" type="System">
-                                            <param id="0" name="First value">projectversion</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Second value">JSON_AutoUpdater.Value(0,&quot;SRBftp_UpdateCheck&quot;,&quot;NewestVersion&quot;)</param>
-                                        </condition>
+                                        <condition id="-22" name="Else" sid="796436332849746" type="System" />
                                     </conditions>
                                     <actions>
-                                        <action id="-9" name="Set value" sid="829793160429608" type="System">
+                                        <action id="-9" name="Set value" sid="432804553710094" type="System">
                                             <param id="0" name="Variable">state</param>
                                             <param id="1" name="Value">&quot;end&quot;</param>
                                         </action>
@@ -1973,7 +1988,7 @@
                                             </conditions>
                                             <actions>
                                                 <action id="29" name="Open browser" sid="881679997944955" type="NWjs">
-                                                    <param id="0" name="URL">gamejolt</param>
+                                                    <param id="0" name="URL">JSON_AutoUpdater.Value(0,&quot;SRBftp_UpdateCheck&quot;,&quot;ManualURL&quot;)</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -1987,7 +2002,7 @@
                                             </conditions>
                                             <actions>
                                                 <action id="7" name="Go to URL" sid="714195204098795" type="Browser">
-                                                    <param id="0" name="URL">gamejolt</param>
+                                                    <param id="0" name="URL">JSON_AutoUpdater.Value(0,&quot;SRBftp_UpdateCheck&quot;,&quot;ManualURL&quot;)</param>
                                                     <param id="1" name="Target">0</param>
                                                 </action>
                                             </actions>
@@ -14287,6 +14302,36 @@
                                 </action>
                                 <action id="6" name="Set focused" sid="158422061401042" type="Menu_TextBox" />
                             </actions>
+                            <sub-events>
+                                <event-block sid="791490675584676">
+                                    <conditions>
+                                        <condition id="60" inverted="1" name="Is undefined" sid="580191552261221" type="Save_Online">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}">&quot;LastUsername&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Set text" sid="599222171549074" type="Menu_TextBox">
+                                            <param id="0" name="Text">Save_Online.Value(0, &quot;LastUsername&quot;)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="520733936554135">
+                            <conditions>
+                                <condition id="70" name="Is Empty" sid="977842740506783" type="JSON_AutoUpdater">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}"></param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="33" name="Stop all" sid="177722487406849" type="BetterAudio" />
+                                <action id="-10" name="Set value" sid="496074051297542" type="Var_Game">
+                                    <param id="0" name="Instance variable">CurrentMenu</param>
+                                    <param id="1" name="Value">&quot;autoupdater&quot;</param>
+                                </action>
+                            </actions>
                         </event-block>
                         <event-block sid="374845079424207">
                             <conditions>
@@ -14294,15 +14339,8 @@
                                     <param id="0" name="Reference point">0</param>
                                     <param id="1" name="Key {n}"></param>
                                 </condition>
-                                <condition id="-8" inverted="1" name="Compare two values" sid="754315225332016" type="System">
-                                    <param id="0" name="First value">projectversion</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Second value">JSON_AutoUpdater.Value(0,&quot;SRBftp_UpdateCheck&quot;,&quot;NewestVersion&quot;)</param>
-                                </condition>
-                                <condition id="-14" name="Compare variable" sid="293074376035556" type="System">
-                                    <param id="0" name="Variable">DEBUG</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">0</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="384643758158140" type="Var_Online">
+                                    <param id="0" name="Instance variable">OutdatedVersion</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -14351,9 +14389,10 @@
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">&quot;OnlineLogin&quot;</param>
                                         </condition>
-                                        <condition id="0" inverted="1" name="Compare text" sid="537514814925891" type="Menu_TextBox">
-                                            <param id="0" name="Text">&quot;&quot;</param>
-                                            <param id="1" name="Case">0</param>
+                                        <condition id="-8" inverted="1" name="Compare two values" sid="135642365413068" type="System">
+                                            <param id="0" name="First value">trim(Menu_TextBox.Text)</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">&quot;&quot;</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -14374,7 +14413,7 @@
                                         </action>
                                         <action id="-10" name="Set value" sid="512139983785228" type="Var_Online">
                                             <param id="0" name="Instance variable">Username</param>
-                                            <param id="1" name="Value">Menu_TextBox.Text</param>
+                                            <param id="1" name="Value">trim(left(Menu_TextBox.Text, 32))</param>
                                         </action>
                                         <action id="0" name="Call function" sid="219865846474211" type="Function">
                                             <param id="0" name="Name">&quot;String_GenerateRandom&quot;</param>
@@ -14388,6 +14427,28 @@
                                         </action>
                                         <action id="10" name="Connect" sid="104648609024225" type="Photon" />
                                     </actions>
+                                    <sub-events>
+                                        <event-block any="1" sid="910652580750612">
+                                            <conditions>
+                                                <condition id="-7" inverted="1" name="Compare instance variable" sid="639776708008732" type="Var_Online">
+                                                    <param id="0" name="Instance variable">Username</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">Save_Online.Value(0, &quot;LastUsername&quot;)</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="20" name="Set Value" sid="948000021251023" type="Save_Online">
+                                                    <param id="0" name="Value">Var_Online.Username</param>
+                                                    <param id="1" name="Reference point">0</param>
+                                                    <param id="2" name="Key {n}">&quot;LastUsername&quot;</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="360140667065429" type="Function">
+                                                    <param id="0" name="Name">&quot;Save_Online&quot;</param>
+                                                    <param id="1" name="Parameter {n}"></param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
                                 </event-block>
                                 <event-block sid="212211210027733">
                                     <conditions>
@@ -14421,9 +14482,10 @@
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">&quot;OnlineLogin&quot;</param>
                                 </condition>
-                                <condition id="0" inverted="1" name="Compare text" sid="193263266772876" type="Menu_TextBox">
-                                    <param id="0" name="Text">&quot;&quot;</param>
-                                    <param id="1" name="Case">0</param>
+                                <condition id="-8" inverted="1" name="Compare two values" sid="489935139500392" type="System">
+                                    <param id="0" name="First value">trim(Menu_TextBox.Text)</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">&quot;&quot;</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -14444,7 +14506,7 @@
                                 </action>
                                 <action id="-10" name="Set value" sid="973406782201345" type="Var_Online">
                                     <param id="0" name="Instance variable">Username</param>
-                                    <param id="1" name="Value">Menu_TextBox.Text</param>
+                                    <param id="1" name="Value">trim(left(Menu_TextBox.Text, 32))</param>
                                 </action>
                                 <action id="0" name="Call function" sid="535109428604999" type="Function">
                                     <param id="0" name="Name">&quot;String_GenerateRandom&quot;</param>
@@ -14458,6 +14520,28 @@
                                 </action>
                                 <action id="10" name="Connect" sid="923982418700843" type="Photon" />
                             </actions>
+                            <sub-events>
+                                <event-block any="1" sid="263376587424144">
+                                    <conditions>
+                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="490876192386359" type="Var_Online">
+                                            <param id="0" name="Instance variable">Username</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">Save_Online.Value(0, &quot;LastUsername&quot;)</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="20" name="Set Value" sid="126808864921369" type="Save_Online">
+                                            <param id="0" name="Value">Var_Online.Username</param>
+                                            <param id="1" name="Reference point">0</param>
+                                            <param id="2" name="Key {n}">&quot;LastUsername&quot;</param>
+                                        </action>
+                                        <action id="0" name="Call function" sid="915977925939711" type="Function">
+                                            <param id="0" name="Name">&quot;Save_Online&quot;</param>
+                                            <param id="1" name="Parameter {n}"></param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-block>
@@ -15636,6 +15720,11 @@
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">&quot;OnlineRoomTitle&quot;</param>
                                 </condition>
+                                <condition id="-8" inverted="1" name="Compare two values" sid="793111793722963" type="System">
+                                    <param id="0" name="First value">trim(Menu_TextBox.Text)</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">&quot;&quot;</param>
+                                </condition>
                             </conditions>
                             <actions>
                                 <action id="-4" name="Set layer visible" sid="509180203615128" type="System">
@@ -15653,7 +15742,7 @@
                                     <param id="0" name="PropNames">&quot;JSON&quot;</param>
                                 </action>
                                 <action id="11" name="Create room" sid="218990869109574" type="Photon">
-                                    <param id="0" name="Room">Menu_TextBox.Text</param>
+                                    <param id="0" name="Room">trim(left(Menu_TextBox.Text, 48))</param>
                                     <param id="1" name="LobbyName">&quot;&quot;</param>
                                     <param id="2" name="LobbyType">0</param>
                                 </action>
@@ -15720,7 +15809,7 @@
                             <param id="2" name="Key {n}">&quot;MaxPlayers&quot;</param>
                         </action>
                         <action id="20" name="Set Value" sid="266092687012682" type="JSON_OnlineRoom">
-                            <param id="0" name="Value">Menu_TextBox.Text</param>
+                            <param id="0" name="Value">trim(left(Menu_TextBox.Text, 16))</param>
                             <param id="1" name="Reference point">0</param>
                             <param id="2" name="Key {n}">&quot;Password&quot;</param>
                         </action>
@@ -15890,9 +15979,10 @@
                                     <sub-events>
                                         <event-block sid="187279066148550">
                                             <conditions>
-                                                <condition id="0" name="Compare text" sid="590811827389235" type="Menu_TextBox">
-                                                    <param id="0" name="Text">JSON__COMMON.Value(0, &quot;Password&quot;)</param>
-                                                    <param id="1" name="Case">0</param>
+                                                <condition id="-8" name="Compare two values" sid="465736088836850" type="System">
+                                                    <param id="0" name="First value">Menu_TextBox.Text</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Second value">JSON__COMMON.Value(0, &quot;Password&quot;)</param>
                                                 </condition>
                                             </conditions>
                                             <actions>
@@ -15984,9 +16074,10 @@
                             <sub-events>
                                 <event-block sid="579313062793354">
                                     <conditions>
-                                        <condition id="0" name="Compare text" sid="496304205144927" type="Menu_TextBox">
-                                            <param id="0" name="Text">JSON__COMMON.Value(0, &quot;Password&quot;)</param>
-                                            <param id="1" name="Case">0</param>
+                                        <condition id="-8" name="Compare two values" sid="917119287249794" type="System">
+                                            <param id="0" name="First value">Menu_TextBox.Text</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">JSON__COMMON.Value(0, &quot;Password&quot;)</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -17816,9 +17907,10 @@
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">&quot;OnlineRoomSettingsPassword&quot;</param>
                                         </condition>
-                                        <condition id="0" inverted="1" name="Compare text" sid="436889264436489" type="Menu_TextBox">
-                                            <param id="0" name="Text">JSON_OnlineRoom.Value(0, &quot;Password&quot;)</param>
-                                            <param id="1" name="Case">1</param>
+                                        <condition id="-8" inverted="1" name="Compare two values" sid="463208036847852" type="System">
+                                            <param id="0" name="First value">Menu_TextBox.Text</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">JSON_OnlineRoom.Value(0, &quot;Password&quot;)</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -17827,7 +17919,7 @@
                                             <param id="1" name="Parameter {n}">&quot;* Room&apos;s password &quot;&amp;(Menu_TextBox.Text = &quot;&quot; ? &quot;removed&quot; : &quot;changed&quot;)</param>
                                         </action>
                                         <action id="20" name="Set Value" sid="254826056873840" type="JSON_OnlineRoom">
-                                            <param id="0" name="Value">Menu_TextBox.Text</param>
+                                            <param id="0" name="Value">trim(left(Menu_TextBox.Text, 16))</param>
                                             <param id="1" name="Reference point">0</param>
                                             <param id="2" name="Key {n}">&quot;Password&quot;</param>
                                         </action>

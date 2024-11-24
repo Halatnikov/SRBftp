@@ -5,6 +5,7 @@
     <events>
         <event-group description="" sid="558958445449610" title="Photon">
             <sub-events>
+                <comment>username is 32 chars, room name is 48, room password is 16, chat message is 128</comment>
                 <comment>init</comment>
                 <event-block sid="480505158572512">
                     <conditions>
@@ -42,6 +43,10 @@
                             <param id="0" name="Instance variable">Connected</param>
                             <param id="1" name="Value">0</param>
                         </action>
+                        <action id="-13" name="Set boolean" sid="615195663489610" type="Var_Online">
+                            <param id="0" name="Instance variable">Host</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
                     </actions>
                 </event-block>
                 <event-block sid="105860875786679">
@@ -54,6 +59,23 @@
                             <param id="1" name="Value">1</param>
                         </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="485988240918337">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="921952325803035" type="System">
+                                    <param id="0" name="First value">Photon.MyActorNr</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">Photon.MasterActorNr</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-13" name="Set boolean" sid="288375476169392" type="Var_Online">
+                                    <param id="0" name="Instance variable">Host</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-group description="" sid="838407850946241" title="Events">
                     <sub-events>
@@ -258,7 +280,7 @@
                                     <actions>
                                         <action id="17" name="Raise event" sid="657912456440080" type="Photon">
                                             <param id="0" name="Code">EVENT_CHAT</param>
-                                            <param id="1" name="Data">Function.Param(0)</param>
+                                            <param id="1" name="Data">trim(left(Function.Param(0),128))</param>
                                             <param id="2" name="InterestGroup">0</param>
                                             <param id="3" name="Cache">0</param>
                                             <param id="4" name="Receivers">1</param>
@@ -288,7 +310,7 @@
                                             <actions>
                                                 <action id="17" name="Raise event" sid="618222315311595" type="Photon">
                                                     <param id="0" name="Code">EVENT_CHAT</param>
-                                                    <param id="1" name="Data">Function.Param(0)</param>
+                                                    <param id="1" name="Data">trim(left(Function.Param(0),128))</param>
                                                     <param id="2" name="InterestGroup">0</param>
                                                     <param id="3" name="Cache">0</param>
                                                     <param id="4" name="Receivers">0</param>
@@ -418,9 +440,10 @@
                 <comment>send chat message</comment>
                 <event-block sid="920601163684336">
                     <conditions>
-                        <condition id="0" inverted="1" name="Compare text" sid="479844726299806" type="Online_ChatField">
-                            <param id="0" name="Text">&quot;&quot;</param>
-                            <param id="1" name="Case">0</param>
+                        <condition id="-8" inverted="1" name="Compare two values" sid="306605764609376" type="System">
+                            <param id="0" name="First value">trim(Online_ChatField.Text)</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Second value">&quot;&quot;</param>
                         </condition>
                         <condition id="-9" inverted="1" name="Layer is visible" sid="750176019165780" type="System">
                             <param id="0" name="Layer">&quot;Loading&quot;</param>
@@ -492,38 +515,15 @@
                         </action>
                     </actions>
                     <sub-events>
-                        <event-block sid="611741106314133">
+                        <event-block sid="263821011685487">
                             <conditions>
-                                <condition id="-8" name="Compare two values" sid="375286939808602" type="System">
+                                <condition id="-8" inverted="1" name="Compare two values" sid="375286939808602" type="System">
                                     <param id="0" name="First value">Photon.MyActorNr</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Second value">Photon.MasterActorNr</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="14" name="Log" sid="967734216789815" type="Browser">
-                                    <param id="0" name="Type">0</param>
-                                    <param id="1" name="Message">&quot;host&quot;</param>
-                                </action>
-                                <action id="-13" name="Set boolean" sid="442748128825132" type="Var_Online">
-                                    <param id="0" name="Instance variable">Host</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="263821011685487">
-                            <conditions>
-                                <condition id="-22" name="Else" sid="346957418589760" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="14" name="Log" sid="347814145623495" type="Browser">
-                                    <param id="0" name="Type">0</param>
-                                    <param id="1" name="Message">&quot;peer&quot;</param>
-                                </action>
-                                <action id="-13" name="Set boolean" sid="966160103102976" type="Var_Online">
-                                    <param id="0" name="Instance variable">Host</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
                                 <action id="0" name="Call function" sid="149901329584870" type="Function">
                                     <param id="0" name="Name">&quot;Online_Chat&quot;</param>
                                     <param id="1" name="Parameter {n}">&quot;+ &quot;&amp;Var_Online.Username&amp;&quot; joined the game!&quot;{###}&quot;others&quot;</param>

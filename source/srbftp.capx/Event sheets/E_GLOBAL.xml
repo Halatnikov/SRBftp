@@ -1176,21 +1176,23 @@
                                     <param id="1" name="dB">Var_Misc.AudioVolumeMusic</param>
                                 </action>
                             </actions>
-                        </event-block>
-                        <event-block sid="796656921487608">
-                            <conditions>
-                                <condition id="1" name="Compare parameter" sid="880702860915130" type="Function">
-                                    <param id="0" name="Index">2</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">2</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="3" name="Set volume" sid="321945781184569" type="BetterAudio">
-                                    <param id="0" name="Tag">Function.Param(1)</param>
-                                    <param id="1" name="dB">Var_Misc.AudioVolumeSFX</param>
-                                </action>
-                            </actions>
+                            <sub-events>
+                                <event-block sid="796656921487608">
+                                    <conditions>
+                                        <condition id="1" name="Compare parameter" sid="880702860915130" type="Function">
+                                            <param id="0" name="Index">2</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">2</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="3" name="Set volume" sid="321945781184569" type="BetterAudio">
+                                            <param id="0" name="Tag">Function.Param(1)</param>
+                                            <param id="1" name="dB">Var_Misc.AudioVolumeSFX</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-block>
@@ -2334,7 +2336,7 @@
                         </event-block>
                     </sub-events>
                 </event-block>
-                <comment>get unix timestamp (shave off milliseconds)</comment>
+                <comment>get unix timestamp (in seconds or milliseconds)</comment>
                 <event-block sid="542592586597439">
                     <conditions>
                         <condition id="0" name="On function" sid="443929002256602" type="Function">
@@ -2343,9 +2345,30 @@
                     </conditions>
                     <actions>
                         <action id="1" name="Set return value" sid="270996019608588" type="Function">
-                            <param id="0" name="Value">int(left(str(Date.UnixTimestamp),len(str(Date.UnixTimestamp))-3))</param>
+                            <param id="0" name="Value">int(Browser.ExecJS(&quot;Date.now()&quot;)/1000)</param>
                         </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="341073709096233">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="104572410082513" type="System">
+                                    <param id="0" name="First value">Function.ParamCount</param>
+                                    <param id="1" name="Comparison">4</param>
+                                    <param id="2" name="Second value">1</param>
+                                </condition>
+                                <condition id="1" name="Compare parameter" sid="234757033218842" type="Function">
+                                    <param id="0" name="Index">1</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;ms&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="1" name="Set return value" sid="768479632320855" type="Function">
+                                    <param id="0" name="Value">Browser.ExecJS(&quot;Date.now()&quot;)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <comment>generate random string</comment>
                 <event-block sid="262283849288638">
@@ -2402,9 +2425,171 @@
                     </conditions>
                     <actions>
                         <action id="1" name="Set return value" sid="885017672011833" type="Function">
-                            <param id="0" name="Value">Browser.ExecJS(&quot;JSON.stringify($.extend(JSON.parse(&apos;&quot;&amp;Function.Param(0)&amp;&quot;&apos;),JSON.parse(&apos;&quot;&amp;Function.Param(1)&amp;&quot;&apos;)))&quot;)</param>
+                            <param id="0" name="Value">Browser.ExecJS(&quot;JSON.stringify($.extend(JSON.parse(&apos;&quot;&amp;Function.Param(0)&amp;&quot;&apos;), JSON.parse(&apos;&quot;&amp;Function.Param(1)&amp;&quot;&apos;)))&quot;)</param>
                         </action>
                     </actions>
+                </event-block>
+                <comment>compare two semver versions</comment>
+                <event-block sid="789943670349233">
+                    <conditions>
+                        <condition id="0" name="On function" sid="229466511788098" type="Function">
+                            <param id="0" name="Name">&quot;Version_GreaterThan&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <variable constant="0" name="from" sid="293449096184663" static="0" type="text"></variable>
+                        <variable constant="0" name="from_x" sid="853775938250790" static="0" type="number">0</variable>
+                        <variable constant="0" name="from_y" sid="386946511261203" static="0" type="number">0</variable>
+                        <variable constant="0" name="from_z" sid="663155367420525" static="0" type="number">0</variable>
+                        <variable constant="0" name="to" sid="691298021135436" static="0" type="text"></variable>
+                        <variable constant="0" name="to_x" sid="114549227889775" static="0" type="number">0</variable>
+                        <variable constant="0" name="to_y" sid="151959491763110" static="0" type="number">0</variable>
+                        <variable constant="0" name="to_z" sid="240106855553240" static="0" type="number">0</variable>
+                        <event-block sid="650903675519191">
+                            <conditions />
+                            <actions>
+                                <action id="-9" name="Set value" sid="653745543403846" type="System">
+                                    <param id="0" name="Variable">from</param>
+                                    <param id="1" name="Value">tokenat(Function.Param(0), 0, &quot;-&quot;)</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="893748190797675" type="System">
+                                    <param id="0" name="Variable">from_x</param>
+                                    <param id="1" name="Value">int(tokenat(from, 0, &quot;.&quot;))</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="622714388721989" type="System">
+                                    <param id="0" name="Variable">from_y</param>
+                                    <param id="1" name="Value">int(tokenat(from, 1, &quot;.&quot;))</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="134820379554987" type="System">
+                                    <param id="0" name="Variable">from_z</param>
+                                    <param id="1" name="Value">int(tokenat(from, 2, &quot;.&quot;))</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="130652918962348" type="System">
+                                    <param id="0" name="Variable">to</param>
+                                    <param id="1" name="Value">tokenat(Function.Param(1), 0, &quot;-&quot;)</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="976671442368301" type="System">
+                                    <param id="0" name="Variable">to_x</param>
+                                    <param id="1" name="Value">int(tokenat(to, 0, &quot;.&quot;))</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="393588973774715" type="System">
+                                    <param id="0" name="Variable">to_y</param>
+                                    <param id="1" name="Value">int(tokenat(to, 1, &quot;.&quot;))</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="670211116829884" type="System">
+                                    <param id="0" name="Variable">to_z</param>
+                                    <param id="1" name="Value">int(tokenat(to, 2, &quot;.&quot;))</param>
+                                </action>
+                                <action id="14" name="Log" sid="669092797394375" type="Browser">
+                                    <param id="0" name="Type">0</param>
+                                    <param id="1" name="Message">&quot;from: &quot;&amp;from&#x0D;&#x0A;&amp;newline&amp;&quot;x :&quot;&amp;from_x&#x0D;&#x0A;&amp;newline&amp;&quot;y :&quot;&amp;from_y&#x0D;&#x0A;&amp;newline&amp;&quot;z :&quot;&amp;from_z&#x0D;&#x0A;&amp;newline&amp;&quot;to: &quot;&amp;to&#x0D;&#x0A;&amp;newline&amp;&quot;x :&quot;&amp;to_x&#x0D;&#x0A;&amp;newline&amp;&quot;y :&quot;&amp;to_y&#x0D;&#x0A;&amp;newline&amp;&quot;z :&quot;&amp;to_z</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <variable constant="0" name="greater" sid="794914425698782" static="0" type="number">1</variable>
+                        <event-block sid="922522634332312">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="560887460204423" type="System">
+                                    <param id="0" name="Variable">from_x</param>
+                                    <param id="1" name="Comparison">2</param>
+                                    <param id="2" name="Value">to_x</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="253477650594836" type="System">
+                                    <param id="0" name="Variable">greater</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="14" name="Log" sid="176004544972111" type="Browser">
+                                    <param id="0" name="Type">0</param>
+                                    <param id="1" name="Message">&quot;from_x &lt; to_x&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="457087888168628">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="324264089114497" type="System">
+                                    <param id="0" name="Variable">from_x</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Value">to_x</param>
+                                </condition>
+                                <condition id="-14" name="Compare variable" sid="339275987695189" type="System">
+                                    <param id="0" name="Variable">from_y</param>
+                                    <param id="1" name="Comparison">2</param>
+                                    <param id="2" name="Value">to_y</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="972330596471472" type="System">
+                                    <param id="0" name="Variable">greater</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="14" name="Log" sid="327112320462309" type="Browser">
+                                    <param id="0" name="Type">0</param>
+                                    <param id="1" name="Message">&quot;from_y &lt; to_y&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="658872778262949">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="834391069151208" type="System">
+                                    <param id="0" name="Variable">from_x</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Value">to_x</param>
+                                </condition>
+                                <condition id="-14" name="Compare variable" sid="524276027039906" type="System">
+                                    <param id="0" name="Variable">from_y</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Value">to_y</param>
+                                </condition>
+                                <condition id="-14" name="Compare variable" sid="737219183417870" type="System">
+                                    <param id="0" name="Variable">from_z</param>
+                                    <param id="1" name="Comparison">2</param>
+                                    <param id="2" name="Value">to_z</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="935993238028927" type="System">
+                                    <param id="0" name="Variable">greater</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="14" name="Log" sid="389475869393029" type="Browser">
+                                    <param id="0" name="Type">0</param>
+                                    <param id="1" name="Message">&quot;from_z &lt; to_z&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>using a pre-release when release is available</comment>
+                        <event-block sid="750580445455529">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="136653100956483" type="System">
+                                    <param id="0" name="First value">from</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">to</param>
+                                </condition>
+                                <condition id="-8" inverted="1" name="Compare two values" sid="606281364726678" type="System">
+                                    <param id="0" name="First value">find(Function.Param(0), &quot;-&quot;)</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">-1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="944994111594913" type="System">
+                                    <param id="0" name="Variable">greater</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="408126318640150">
+                            <conditions />
+                            <actions>
+                                <action id="1" name="Set return value" sid="654072038280496" type="Function">
+                                    <param id="0" name="Value">greater</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
             </sub-events>
         </event-group>
@@ -2648,11 +2833,6 @@
                             <param id="0" name="Reference point">0</param>
                             <param id="1" name="Key {n}"></param>
                         </action>
-                        <action id="20" name="Set Value" sid="897065454029423" type="Save_Config">
-                            <param id="0" name="Value">1</param>
-                            <param id="1" name="Reference point">0</param>
-                            <param id="2" name="Key {n}">&quot;_srbftp_config&quot;</param>
-                        </action>
                     </actions>
                     <sub-events>
                         <comment>graphics and sound</comment>
@@ -2864,6 +3044,16 @@
                                 </action>
                             </actions>
                         </event-block>
+                        <event-block sid="984649805596149">
+                            <conditions />
+                            <actions>
+                                <action id="20" name="Set Value" sid="451583555340111" type="Save_Config">
+                                    <param id="0" name="Value">1</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;_srbftp_config&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
                         <event-block sid="675156410002301">
                             <conditions>
                                 <condition id="-14" name="Compare variable" sid="988199793000679" type="System">
@@ -2922,17 +3112,13 @@
                             <param id="0" name="Name">&quot;Load_Config&quot;</param>
                         </condition>
                     </conditions>
-                    <actions />
+                    <actions>
+                        <action id="55" name="Clear" sid="921391538187535" type="Save_Config">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </action>
+                    </actions>
                     <sub-events>
-                        <event-block sid="460562203845014">
-                            <conditions />
-                            <actions>
-                                <action id="55" name="Clear" sid="921391538187535" type="Save_Config">
-                                    <param id="0" name="Reference point">0</param>
-                                    <param id="1" name="Key {n}"></param>
-                                </action>
-                            </actions>
-                        </event-block>
                         <event-block sid="404900695055115">
                             <conditions>
                                 <condition id="-14" name="Compare variable" sid="607613468395024" type="System">
@@ -3412,6 +3598,164 @@
                             </actions>
                         </event-block>
                     </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="574254411664192" title="Online Save">
+            <sub-events>
+                <comment>LastUsername</comment>
+                <event-block sid="983599982466764">
+                    <conditions>
+                        <condition id="70" name="Is Empty" sid="940714187144053" type="Save_Online">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="671078402134351" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set New Object" sid="710895011408115" type="Save_Online">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>===save</comment>
+                <event-block sid="167823363935198">
+                    <conditions>
+                        <condition id="0" name="On function" sid="849709599760847" type="Function">
+                            <param id="0" name="Name">&quot;Save_Online&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="963296128984932">
+                            <conditions />
+                            <actions>
+                                <action id="20" name="Set Value" sid="759036651400010" type="Save_Online">
+                                    <param id="0" name="Value">1</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;_srbftp_online&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="481467545778558">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="568442563924824" type="System">
+                                    <param id="0" name="Variable">PLATFORM</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;NwJs&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="3" name="Create folder" sid="534843097631611" type="NWjs">
+                                    <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata&quot;</param>
+                                </action>
+                                <action id="0" name="Write file" sid="916502741018351" type="NWjs">
+                                    <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\srbftp_online.ini&quot;</param>
+                                    <param id="1" name="Contents">INI.JSON2INI(Save_Online.AsJson(0))</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="443596988236917">
+                            <conditions>
+                                <condition id="-14" inverted="1" name="Compare variable" sid="179057299639492" type="System">
+                                    <param id="0" name="Variable">PLATFORM</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;NwJs&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Set item" sid="527946175235641" type="LocalStorage">
+                                    <param id="0" name="Key">&quot;srbftp_online&quot;</param>
+                                    <param id="1" name="Value">Save_Online.AsJson(0)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="689106354983488">
+                            <conditions />
+                            <actions>
+                                <action id="-15" name="Set visible" sid="639690804336374" type="Text_Saved">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action behavior="Fade" id="0" name="Restart fade" sid="859254235890927" type="Text_Saved" />
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>===load</comment>
+                <event-block sid="356256174455220">
+                    <conditions>
+                        <condition id="0" name="On function" sid="279038015500305" type="Function">
+                            <param id="0" name="Name">&quot;Load_Online&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="55" name="Clear" sid="129734913906866" type="Save_Online">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="277092724960541">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="292523089733418" type="System">
+                                    <param id="0" name="Variable">PLATFORM</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;NwJs&quot;</param>
+                                </condition>
+                                <condition id="0" name="Path exists" sid="459115605922201" type="NWjs">
+                                    <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\srbftp_online.ini&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="60" name="LoadJSON" sid="140359647634204" type="Save_Online">
+                                    <param id="0" name="JSON">INI.INI2JSON(NWjs.ReadFile(Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\srbftp_online.ini&quot;))</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}"></param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="605830586581639">
+                            <conditions>
+                                <condition id="-14" inverted="1" name="Compare variable" sid="934165220132465" type="System">
+                                    <param id="0" name="Variable">PLATFORM</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;NwJs&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="5" name="Check item exists" sid="660409118600421" type="LocalStorage">
+                                    <param id="0" name="Key">&quot;srbftp_online&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="142483300369887">
+                    <conditions>
+                        <condition id="9" name="On item exists" sid="989953427072553" type="LocalStorage">
+                            <param id="0" name="Key">&quot;srbftp_online&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="1" name="Get item" sid="325144370729570" type="LocalStorage">
+                            <param id="0" name="Key">&quot;srbftp_online&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="795843818432071">
+                    <conditions>
+                        <condition id="1" name="On item get" sid="257203585607658" type="LocalStorage">
+                            <param id="0" name="Key">&quot;srbftp_online&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="60" name="LoadJSON" sid="828279618471816" type="Save_Online">
+                            <param id="0" name="JSON">LocalStorage.ItemValue</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}"></param>
+                        </action>
+                    </actions>
                 </event-block>
             </sub-events>
         </event-group>
