@@ -134,6 +134,32 @@
                     </conditions>
                     <actions />
                     <sub-events>
+                        <event-block sid="820274851401273">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="887851506305845" type="Var_Game">
+                                    <param id="0" name="Instance variable">Gamemode</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;RecordAttack&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-12" name="Set group active" sid="790292513208917" type="System">
+                                    <param id="0" name="Group name">&quot;Record attack&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="600131163795651">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="986248438370464" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-12" name="Set group active" sid="711570404692400" type="System">
+                                    <param id="0" name="Group name">&quot;Record attack&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
                         <event-block sid="102317695400985">
                             <conditions>
                                 <condition id="-7" name="Compare instance variable" sid="417962391338432" type="Var_Game">
@@ -147,15 +173,6 @@
                                     <param id="0" name="Group name">&quot;Marathon mode&quot;</param>
                                     <param id="1" name="State">1</param>
                                 </action>
-                                <action id="-15" name="Set visible" sid="523284877546971" type="HUD_MarathonTime">
-                                    <param id="0" name="Visibility">1</param>
-                                </action>
-                                <action id="-15" name="Set visible" sid="974747568715927" type="HUD_MarathonLevels">
-                                    <param id="0" name="Visibility">1</param>
-                                </action>
-                                <action id="-15" name="Set visible" sid="198321392376094" type="HUD_MarathonName">
-                                    <param id="0" name="Visibility">1</param>
-                                </action>
                             </actions>
                         </event-block>
                         <event-block sid="938595770840234">
@@ -166,15 +183,6 @@
                                 <action id="-12" name="Set group active" sid="151397279665135" type="System">
                                     <param id="0" name="Group name">&quot;Marathon mode&quot;</param>
                                     <param id="1" name="State">0</param>
-                                </action>
-                                <action id="-15" name="Set visible" sid="945010857350049" type="HUD_MarathonTime">
-                                    <param id="0" name="Visibility">0</param>
-                                </action>
-                                <action id="-15" name="Set visible" sid="345083308224321" type="HUD_MarathonLevels">
-                                    <param id="0" name="Visibility">0</param>
-                                </action>
-                                <action id="-15" name="Set visible" sid="880368390946502" type="HUD_MarathonName">
-                                    <param id="0" name="Visibility">0</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -644,6 +652,228 @@
             </sub-events>
         </event-group>
         <comment></comment>
+        <event-group description="" inactive="1" sid="855743318364693" title="Record attack">
+            <sub-events>
+                <comment>skip title card</comment>
+                <event-block sid="701381325167425">
+                    <conditions>
+                        <condition id="-4" name="Trigger once while true" sid="949355361760212" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Wait" sid="471811636771692" type="System">
+                            <param id="0" name="Seconds">0.1</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="520542439177505" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Value">4</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="397422415387584">
+                    <conditions>
+                        <condition id="0" name="On function" sid="764552079109091" type="Function">
+                            <param id="0" name="Name">&quot;Player_Restart&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Wait" sid="916393763832691" type="System">
+                            <param id="0" name="Seconds">0.1</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="191517132860063" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Value">4</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>skip act end screen</comment>
+                <event-block sid="149327670510504">
+                    <conditions>
+                        <condition id="5" name="Is tag playing" sid="445910917527394" type="BetterAudio">
+                            <param id="0" name="Tag">&quot;finish&quot;</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="110664141248706" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Go to layout" sid="840842930420387" type="System">
+                            <param id="0" name="Layout">Menu_StageResults</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>place the finish on the ground</comment>
+                <event-block sid="601604389663789">
+                    <conditions>
+                        <condition id="-4" name="Trigger once while true" sid="187002663536688" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-13" name="Set boolean" sid="668534749287261" type="Common_FinishSign">
+                            <param id="0" name="Instance variable">Falling</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-13" name="Set boolean" sid="429315532801690" type="Common_FinishSign">
+                            <param id="0" name="Instance variable">StandWin</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action behavior="Platform" id="11" name="Set enabled" sid="522939718295470" type="Common_FinishSign">
+                            <param id="0" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="557439163240903">
+                    <conditions>
+                        <condition behavior="Platform" id="9" name="On landed" sid="435225245881272" type="Common_FinishSign" />
+                    </conditions>
+                    <actions>
+                        <action behavior="Platform" id="11" name="Set enabled" sid="430536105678523" type="Common_FinishSign">
+                            <param id="0" name="State">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>hud</comment>
+                <event-block sid="975610026501165">
+                    <conditions />
+                    <actions>
+                        <action id="0" name="Set text" sid="440929439902853" type="HUD_TimeMs">
+                            <param id="0" name="Text">&quot;.&quot;&amp;zeropad(floor(Var_Level.TimerLevel*100)%100, 2)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="537030830024238">
+                    <conditions>
+                        <condition id="-4" name="Trigger once while true" sid="737529542697519" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="55" name="Clear" sid="660817033123894" type="JSON__TEMP">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </action>
+                        <action id="0" name="Set New Object" sid="467244782468001" type="JSON__TEMP">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </action>
+                        <action id="20" name="Set Value" sid="415686916155119" type="JSON__TEMP">
+                            <param id="0" name="Value">1</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}">&quot;_srbftp_record&quot;</param>
+                        </action>
+                        <action id="20" name="Set Value" sid="952421877721583" type="JSON__TEMP">
+                            <param id="0" name="Value">projectversion</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}">&quot;Version&quot;</param>
+                        </action>
+                        <action id="0" name="Call function" sid="659079437946281" type="Function">
+                            <param id="0" name="Name">&quot;String_GenerateRandom&quot;</param>
+                            <param id="1" name="Parameter {n}">8</param>
+                        </action>
+                        <action id="20" name="Set Value" sid="939434202797968" type="JSON__TEMP">
+                            <param id="0" name="Value">Function.ReturnValue</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}">&quot;ID&quot;</param>
+                        </action>
+                        <action id="20" name="Set Value" sid="952825654147514" type="JSON__TEMP">
+                            <param id="0" name="Value">Var_Player.Skin</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}">&quot;Skin&quot;</param>
+                        </action>
+                        <action id="20" name="Set Value" sid="625274350543426" type="JSON__TEMP">
+                            <param id="0" name="Value">LayoutName</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}">&quot;Level&quot;</param>
+                        </action>
+                        <action id="0" name="Call function" sid="238092067020286" type="Function">
+                            <param id="0" name="Name">&quot;Time_CurrentTimestamp&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;ms&quot;</param>
+                        </action>
+                        <action id="20" name="Set Value" sid="882467559570775" type="JSON__TEMP">
+                            <param id="0" name="Value">Function.ReturnValue</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}">&quot;TimestampStart&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="125820406645525">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="256024081088853" type="Var_Player">
+                            <param id="0" name="Instance variable">Finished</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="357081867815410" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Call function" sid="814249544398539" type="Function">
+                            <param id="0" name="Name">&quot;Time_CurrentTimestamp&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;ms&quot;</param>
+                        </action>
+                        <action id="20" name="Set Value" sid="653483865126007" type="JSON__TEMP">
+                            <param id="0" name="Value">Function.ReturnValue</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}">&quot;TimestampEnd&quot;</param>
+                        </action>
+                        <action id="20" name="Set Value" sid="733970411749237" type="JSON__TEMP">
+                            <param id="0" name="Value">0</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}">&quot;Clock&quot;</param>
+                        </action>
+                        <action id="20" name="Set Value" sid="875389235260707" type="JSON__TEMP">
+                            <param id="0" name="Value">Var_Level.TimerLevel</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}">&quot;Time&quot;</param>
+                        </action>
+                        <action id="20" name="Set Value" sid="146279640273390" type="JSON__TEMP">
+                            <param id="0" name="Value">Var_Level.TimerLevelReal</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}">&quot;TimeReal&quot;</param>
+                        </action>
+                        <action id="20" name="Set Value" sid="693440464329925" type="JSON__TEMP">
+                            <param id="0" name="Value">Var_Player.Score</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}">&quot;ScoreLevel&quot;</param>
+                        </action>
+                        <action id="20" name="Set Value" sid="906907564340958" type="JSON__TEMP">
+                            <param id="0" name="Value">Var_Player.Score</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}">&quot;Score&quot;</param>
+                        </action>
+                        <action id="20" name="Set Value" sid="607585622040276" type="JSON__TEMP">
+                            <param id="0" name="Value">Var_Player.Deaths</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}">&quot;Deaths&quot;</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <comment>move this to result screen</comment>
+                        <event-block sid="184442781327409">
+                            <conditions />
+                            <actions>
+                                <action id="0" name="Call function" sid="865430322023392" type="Function">
+                                    <param id="0" name="Name">&quot;Time_CurrentTimestamp&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;ms&quot;</param>
+                                </action>
+                                <action id="20" name="Set Value" sid="401290979488408" type="JSON__TEMP">
+                                    <param id="0" name="Value">(Function.ReturnValue - JSON__TEMP.Value(0,&quot;TimestampStart&quot;))/1000</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;Clock&quot;</param>
+                                </action>
+                                <action id="20" name="Set Value" sid="757512152080641" type="JSON__TEMP">
+                                    <param id="0" name="Value">URLEncode(LzString.Compress(CBHash.SHA256(JSON__TEMP.AsJson(0)&amp;Function.ReturnValue&amp;JSON__TEMP.Value(0, &quot;ID&quot;))))</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;Signature&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="851229119499595">
+                            <conditions />
+                            <actions>
+                                <action id="14" name="Log" sid="875275578614730" type="Browser">
+                                    <param id="0" name="Type">0</param>
+                                    <param id="1" name="Message">INI.JSON2INI(JSON__TEMP.AsJson(0))</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
         <event-group description="" inactive="1" sid="959231211011597" title="Marathon mode">
             <sub-events>
                 <event-block sid="658305215713256">
@@ -837,8 +1067,12 @@
                                         </condition>
                                     </conditions>
                                     <actions>
+                                        <action id="0" name="Call function" sid="992713024991576" type="Function">
+                                            <param id="0" name="Name">&quot;Time_CurrentTimestamp&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;ms&quot;</param>
+                                        </action>
                                         <action id="20" name="Set Value" sid="671613844290079" type="JSON__TEMP">
-                                            <param id="0" name="Value">Date.UnixTimestamp</param>
+                                            <param id="0" name="Value">Function.ReturnValue</param>
                                             <param id="1" name="Reference point">0</param>
                                             <param id="2" name="Key {n}">Var_Level.Marathon_String{###}&quot;TimestampEnd&quot;</param>
                                         </action>
@@ -869,6 +1103,7 @@
                         </action>
                     </actions>
                 </event-block>
+                <comment></comment>
                 <event-block sid="808952751027346">
                     <conditions>
                         <condition id="-7" inverted="1" name="Compare instance variable" sid="191531130935624" type="Var_Player">

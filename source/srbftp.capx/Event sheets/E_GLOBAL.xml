@@ -118,6 +118,21 @@
                         </action>
                     </actions>
                 </event-block>
+                <event-block sid="124259430399450">
+                    <conditions>
+                        <condition id="70" name="Is Empty" sid="154122162326086" type="JSON_Indev">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="331744358443956" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set New Object" sid="489997773295882" type="JSON_Indev">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </action>
+                    </actions>
+                </event-block>
                 <event-block sid="568561603230544">
                     <conditions>
                         <condition id="0" name="Path exists" sid="460068265929722" type="NWjs">
@@ -136,20 +151,16 @@
                     </actions>
                 </event-block>
                 <comment></comment>
-                <event-block sid="124259430399450">
+                <event-block sid="779085577990387">
                     <conditions>
-                        <condition id="70" inverted="1" name="Is Empty" sid="154122162326086" type="JSON_Indev">
-                            <param id="0" name="Reference point">0</param>
-                            <param id="1" name="Key {n}"></param>
-                        </condition>
-                        <condition id="60" inverted="1" name="Is undefined" sid="958079473859914" type="JSON_Indev">
+                        <condition id="60" inverted="1" name="Is undefined" sid="710394011967945" type="JSON_Indev">
                             <param id="0" name="Reference point">0</param>
                             <param id="1" name="Key {n}">&quot;ResourceFolder&quot;</param>
                         </condition>
-                        <condition id="-4" name="Trigger once while true" sid="331744358443956" type="System" />
+                        <condition id="-4" name="Trigger once while true" sid="712765218858448" type="System" />
                     </conditions>
                     <actions>
-                        <action id="-10" name="Set value" sid="582806526027178" type="Var_Misc">
+                        <action id="-10" name="Set value" sid="313350213258120" type="Var_Misc">
                             <param id="0" name="Instance variable">ResourceFolder</param>
                             <param id="1" name="Value">JSON_Indev.Value(0,&quot;ResourceFolder&quot;)</param>
                         </action>
@@ -2353,11 +2364,11 @@
                             <conditions>
                                 <condition id="-8" name="Compare two values" sid="104572410082513" type="System">
                                     <param id="0" name="First value">Function.ParamCount</param>
-                                    <param id="1" name="Comparison">4</param>
+                                    <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Second value">1</param>
                                 </condition>
                                 <condition id="1" name="Compare parameter" sid="234757033218842" type="Function">
-                                    <param id="0" name="Index">1</param>
+                                    <param id="0" name="Index">0</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">&quot;ms&quot;</param>
                                 </condition>
@@ -2586,6 +2597,10 @@
                             <actions>
                                 <action id="1" name="Set return value" sid="654072038280496" type="Function">
                                     <param id="0" name="Value">greater</param>
+                                </action>
+                                <action id="14" name="Log" sid="399528946255427" type="Browser">
+                                    <param id="0" name="Type">0</param>
+                                    <param id="1" name="Message">greater</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -2819,7 +2834,8 @@
         <comment>Savedata</comment>
         <event-group description="" sid="274034774321393" title="Configuration">
             <sub-events>
-                <comment>default config</comment>
+                <variable constant="1" name="NAME" sid="355989972609930" static="0" type="text">srbftp_config</variable>
+                <comment>defaults</comment>
                 <event-block sid="305565267246468">
                     <conditions>
                         <condition id="70" name="Is Empty" sid="537494847515943" type="Save_Config">
@@ -3050,7 +3066,7 @@
                                 <action id="20" name="Set Value" sid="451583555340111" type="Save_Config">
                                     <param id="0" name="Value">1</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;_srbftp_config&quot;</param>
+                                    <param id="2" name="Key {n}">&quot;_&quot;&amp;NAME</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -3067,7 +3083,7 @@
                                     <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata&quot;</param>
                                 </action>
                                 <action id="0" name="Write file" sid="444102717269338" type="NWjs">
-                                    <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\srbftp_config.ini&quot;</param>
+                                    <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\&quot;&amp;NAME&amp;&quot;.ini&quot;</param>
                                     <param id="1" name="Contents">INI.JSON2INI(Save_Config.AsJson(0))</param>
                                 </action>
                             </actions>
@@ -3082,7 +3098,7 @@
                             </conditions>
                             <actions>
                                 <action id="0" name="Set item" sid="934884655442718" type="LocalStorage">
-                                    <param id="0" name="Key">&quot;srbftp_config&quot;</param>
+                                    <param id="0" name="Key">NAME</param>
                                     <param id="1" name="Value">Save_Config.AsJson(0)</param>
                                 </action>
                             </actions>
@@ -3132,7 +3148,7 @@
                                 <event-block sid="343849197136640">
                                     <conditions>
                                         <condition id="0" name="Path exists" sid="307503709307223" type="NWjs">
-                                            <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\srbftp_config.ini&quot;</param>
+                                            <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\&quot;&amp;NAME&amp;&quot;.ini&quot;</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -3143,7 +3159,7 @@
                                             <param id="3" name="Y">0</param>
                                         </action>
                                         <action id="60" name="LoadJSON" sid="596179019094282" type="JSON__COMMON">
-                                            <param id="0" name="JSON">INI.INI2JSON(NWjs.ReadFile(Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\srbftp_config.ini&quot;))</param>
+                                            <param id="0" name="JSON">INI.INI2JSON(NWjs.ReadFile(Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\&quot;&amp;NAME&amp;&quot;.ini&quot;))</param>
                                             <param id="1" name="Reference point">0</param>
                                             <param id="2" name="Key {n}"></param>
                                         </action>
@@ -3205,7 +3221,7 @@
                             </conditions>
                             <actions>
                                 <action id="5" name="Check item exists" sid="534523694501232" type="LocalStorage">
-                                    <param id="0" name="Key">&quot;srbftp_config&quot;</param>
+                                    <param id="0" name="Key">NAME</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -3214,19 +3230,19 @@
                 <event-block sid="587474506386305">
                     <conditions>
                         <condition id="9" name="On item exists" sid="172046907069131" type="LocalStorage">
-                            <param id="0" name="Key">&quot;srbftp_config&quot;</param>
+                            <param id="0" name="Key">NAME</param>
                         </condition>
                     </conditions>
                     <actions>
                         <action id="1" name="Get item" sid="462026173971131" type="LocalStorage">
-                            <param id="0" name="Key">&quot;srbftp_config&quot;</param>
+                            <param id="0" name="Key">NAME</param>
                         </action>
                     </actions>
                 </event-block>
                 <event-block sid="188408717608188">
                     <conditions>
                         <condition id="10" name="On item missing" sid="210595328014107" type="LocalStorage">
-                            <param id="0" name="Key">&quot;srbftp_config&quot;</param>
+                            <param id="0" name="Key">NAME</param>
                         </condition>
                     </conditions>
                     <actions>
@@ -3239,7 +3255,7 @@
                 <event-block sid="712938208264020">
                     <conditions>
                         <condition id="1" name="On item get" sid="973703254030073" type="LocalStorage">
-                            <param id="0" name="Key">&quot;srbftp_config&quot;</param>
+                            <param id="0" name="Key">NAME</param>
                         </condition>
                     </conditions>
                     <actions>
@@ -3601,8 +3617,287 @@
                 </event-block>
             </sub-events>
         </event-group>
+        <event-group description="" sid="643272290847915" title="General Save">
+            <sub-events>
+                <variable constant="1" name="NAME" sid="944980792473416" static="0" type="text">srbftp_save_general</variable>
+                <comment>defaults</comment>
+                <event-block sid="609891827260865">
+                    <conditions>
+                        <condition id="70" name="Is Empty" sid="624363854871190" type="Save_General">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="808950311598939" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set New Object" sid="620523110764052" type="Save_General">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="893251313914434">
+                            <conditions />
+                            <actions>
+                                <action id="0" name="Call function" sid="489579534486596" type="Function">
+                                    <param id="0" name="Name">&quot;Time_CurrentTimestamp&quot;</param>
+                                    <param id="1" name="Parameter {n}"></param>
+                                </action>
+                                <action id="20" name="Set Value" sid="987631258480183" type="Save_General">
+                                    <param id="0" name="Value">Function.ReturnValue</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;TimestampStart&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="769859903094710">
+                            <conditions />
+                            <actions>
+                                <action id="-10" name="Set value" sid="828901618173217" type="Save_General">
+                                    <param id="0" name="Instance variable">Default</param>
+                                    <param id="1" name="Value">Self.AsJson(0)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>===save</comment>
+                <event-block sid="976374842923541">
+                    <conditions>
+                        <condition id="0" name="On function" sid="537971623507768" type="Function">
+                            <param id="0" name="Name">&quot;Save_General&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="243788572972669">
+                            <conditions>
+                                <condition id="70" name="Is Empty" sid="597594340127553" type="Save_General">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}"></param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="60" name="LoadJSON" sid="830833587402861" type="Save_General">
+                                    <param id="0" name="JSON">Self.Default</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}"></param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="417658656878991">
+                            <conditions />
+                            <actions>
+                                <action id="20" name="Set Value" sid="600704763277566" type="Save_General">
+                                    <param id="0" name="Value">1</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;_&quot;&amp;NAME</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="486380093098958">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="700468270267486" type="System">
+                                    <param id="0" name="Variable">PLATFORM</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;NwJs&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="3" name="Create folder" sid="360363381250907" type="NWjs">
+                                    <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata&quot;</param>
+                                </action>
+                                <action id="0" name="Write file" sid="817941011437399" type="NWjs">
+                                    <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\&quot;&amp;NAME&amp;&quot;.ini&quot;</param>
+                                    <param id="1" name="Contents">INI.JSON2INI(Save_General.AsJson(0))</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="125130900715866">
+                            <conditions>
+                                <condition id="-14" inverted="1" name="Compare variable" sid="912338843429698" type="System">
+                                    <param id="0" name="Variable">PLATFORM</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;NwJs&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Set item" sid="693836512755675" type="LocalStorage">
+                                    <param id="0" name="Key">NAME</param>
+                                    <param id="1" name="Value">Save_General.AsJson(0)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="920930277829631">
+                            <conditions />
+                            <actions>
+                                <action id="-15" name="Set visible" sid="573173919712548" type="Text_Saved">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action behavior="Fade" id="0" name="Restart fade" sid="578220317737739" type="Text_Saved" />
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>===load</comment>
+                <event-block sid="876797937468083">
+                    <conditions>
+                        <condition id="0" name="On function" sid="877343731235211" type="Function">
+                            <param id="0" name="Name">&quot;Load_General&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="55" name="Clear" sid="618562070611818" type="Save_General">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="669093030296750">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="162211009706994" type="System">
+                                    <param id="0" name="Variable">PLATFORM</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;NwJs&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="423905441741990">
+                                    <conditions>
+                                        <condition id="0" name="Path exists" sid="863541400063554" type="NWjs">
+                                            <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\&quot;&amp;NAME&amp;&quot;.ini&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-3" name="Create object" sid="937992135512953" type="System">
+                                            <param id="0" name="Object to create">JSON__COMMON</param>
+                                            <param id="1" name="Layer">0</param>
+                                            <param id="2" name="X">0</param>
+                                            <param id="3" name="Y">0</param>
+                                        </action>
+                                        <action id="60" name="LoadJSON" sid="572665414022881" type="JSON__COMMON">
+                                            <param id="0" name="JSON">INI.INI2JSON(NWjs.ReadFile(Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\&quot;&amp;NAME&amp;&quot;.ini&quot;))</param>
+                                            <param id="1" name="Reference point">0</param>
+                                            <param id="2" name="Key {n}"></param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <comment>convert values to numbers</comment>
+                                        <event-block sid="441577204992032">
+                                            <conditions>
+                                                <condition id="100" name="For each property" sid="846460093598273" type="JSON__COMMON">
+                                                    <param id="0" name="Reference point">0</param>
+                                                    <param id="1" name="Key {n}"></param>
+                                                </condition>
+                                                <condition id="-8" name="Compare two values" sid="451842031732388" type="System">
+                                                    <param id="0" name="First value">str(int(JSON__COMMON.Value(1)))</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Second value">JSON__COMMON.Value(1)</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="20" name="Set Value" sid="607199753959279" type="JSON__COMMON">
+                                                    <param id="0" name="Value">int(Self.Value(1))</param>
+                                                    <param id="1" name="Reference point">1</param>
+                                                    <param id="2" name="Key {n}"></param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="205899942786365">
+                                            <conditions />
+                                            <actions>
+                                                <action id="0" name="Call function" sid="507362298529467" type="Function">
+                                                    <param id="0" name="Name">&quot;String_MergeJSON&quot;</param>
+                                                    <param id="1" name="Parameter {n}">Save_General.Default{###}JSON__COMMON.AsJson(0)</param>
+                                                </action>
+                                                <action id="60" name="LoadJSON" sid="388700026948567" type="Save_General">
+                                                    <param id="0" name="JSON">Function.ReturnValue</param>
+                                                    <param id="1" name="Reference point">0</param>
+                                                    <param id="2" name="Key {n}"></param>
+                                                </action>
+                                                <action id="-9" name="Destroy" sid="100657065487807" type="JSON__COMMON" />
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="516531774722480">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="593611500290856" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="991168703018581" type="Function">
+                                            <param id="0" name="Name">&quot;Save_General&quot;</param>
+                                            <param id="1" name="Parameter {n}"></param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="716142665864375">
+                            <conditions>
+                                <condition id="-14" inverted="1" name="Compare variable" sid="370981147281716" type="System">
+                                    <param id="0" name="Variable">PLATFORM</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;NwJs&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="5" name="Check item exists" sid="740621124292186" type="LocalStorage">
+                                    <param id="0" name="Key">NAME</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="105841018801259">
+                    <conditions>
+                        <condition id="9" name="On item exists" sid="314781580428603" type="LocalStorage">
+                            <param id="0" name="Key">NAME</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="1" name="Get item" sid="438076150058622" type="LocalStorage">
+                            <param id="0" name="Key">NAME</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="429270079536236">
+                    <conditions>
+                        <condition id="10" name="On item missing" sid="536687266764246" type="LocalStorage">
+                            <param id="0" name="Key">NAME</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Call function" sid="364257922123967" type="Function">
+                            <param id="0" name="Name">&quot;Save_General&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="906419051354261">
+                    <conditions>
+                        <condition id="1" name="On item get" sid="415819905625066" type="LocalStorage">
+                            <param id="0" name="Key">NAME</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Call function" sid="670861122258323" type="Function">
+                            <param id="0" name="Name">&quot;String_MergeJSON&quot;</param>
+                            <param id="1" name="Parameter {n}">Save_General.Default{###}LocalStorage.ItemValue</param>
+                        </action>
+                        <action id="60" name="LoadJSON" sid="252254930561860" type="Save_General">
+                            <param id="0" name="JSON">Function.ReturnValue</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}"></param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
         <event-group description="" sid="574254411664192" title="Online Save">
             <sub-events>
+                <variable constant="1" name="NAME" sid="657430010429535" static="0" type="text">srbftp_online</variable>
                 <comment>LastUsername</comment>
                 <event-block sid="983599982466764">
                     <conditions>
@@ -3634,7 +3929,7 @@
                                 <action id="20" name="Set Value" sid="759036651400010" type="Save_Online">
                                     <param id="0" name="Value">1</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;_srbftp_online&quot;</param>
+                                    <param id="2" name="Key {n}">&quot;_&quot;&amp;NAME</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -3651,7 +3946,7 @@
                                     <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata&quot;</param>
                                 </action>
                                 <action id="0" name="Write file" sid="916502741018351" type="NWjs">
-                                    <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\srbftp_online.ini&quot;</param>
+                                    <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\&quot;&amp;NAME&amp;&quot;.ini&quot;</param>
                                     <param id="1" name="Contents">INI.JSON2INI(Save_Online.AsJson(0))</param>
                                 </action>
                             </actions>
@@ -3666,7 +3961,7 @@
                             </conditions>
                             <actions>
                                 <action id="0" name="Set item" sid="527946175235641" type="LocalStorage">
-                                    <param id="0" name="Key">&quot;srbftp_online&quot;</param>
+                                    <param id="0" name="Key">NAME</param>
                                     <param id="1" name="Value">Save_Online.AsJson(0)</param>
                                 </action>
                             </actions>
@@ -3704,12 +3999,12 @@
                                     <param id="2" name="Value">&quot;NwJs&quot;</param>
                                 </condition>
                                 <condition id="0" name="Path exists" sid="459115605922201" type="NWjs">
-                                    <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\srbftp_online.ini&quot;</param>
+                                    <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\&quot;&amp;NAME&amp;&quot;.ini&quot;</param>
                                 </condition>
                             </conditions>
                             <actions>
                                 <action id="60" name="LoadJSON" sid="140359647634204" type="Save_Online">
-                                    <param id="0" name="JSON">INI.INI2JSON(NWjs.ReadFile(Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\srbftp_online.ini&quot;))</param>
+                                    <param id="0" name="JSON">INI.INI2JSON(NWjs.ReadFile(Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\&quot;&amp;NAME&amp;&quot;.ini&quot;))</param>
                                     <param id="1" name="Reference point">0</param>
                                     <param id="2" name="Key {n}"></param>
                                 </action>
@@ -3725,7 +4020,7 @@
                             </conditions>
                             <actions>
                                 <action id="5" name="Check item exists" sid="660409118600421" type="LocalStorage">
-                                    <param id="0" name="Key">&quot;srbftp_online&quot;</param>
+                                    <param id="0" name="Key">NAME</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -3734,19 +4029,19 @@
                 <event-block sid="142483300369887">
                     <conditions>
                         <condition id="9" name="On item exists" sid="989953427072553" type="LocalStorage">
-                            <param id="0" name="Key">&quot;srbftp_online&quot;</param>
+                            <param id="0" name="Key">NAME</param>
                         </condition>
                     </conditions>
                     <actions>
                         <action id="1" name="Get item" sid="325144370729570" type="LocalStorage">
-                            <param id="0" name="Key">&quot;srbftp_online&quot;</param>
+                            <param id="0" name="Key">NAME</param>
                         </action>
                     </actions>
                 </event-block>
                 <event-block sid="795843818432071">
                     <conditions>
                         <condition id="1" name="On item get" sid="257203585607658" type="LocalStorage">
-                            <param id="0" name="Key">&quot;srbftp_online&quot;</param>
+                            <param id="0" name="Key">NAME</param>
                         </condition>
                     </conditions>
                     <actions>
