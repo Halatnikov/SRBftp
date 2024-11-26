@@ -702,6 +702,9 @@
                 <comment>place the finish on the ground</comment>
                 <event-block sid="601604389663789">
                     <conditions>
+                        <condition id="-8" name="Is boolean instance variable set" sid="577525450044463" type="Common_FinishSign">
+                            <param id="0" name="Instance variable">Falling</param>
+                        </condition>
                         <condition id="-4" name="Trigger once while true" sid="187002663536688" type="System" />
                     </conditions>
                     <actions>
@@ -740,6 +743,9 @@
                 <event-block sid="537030830024238">
                     <conditions>
                         <condition id="-4" name="Trigger once while true" sid="737529542697519" type="System" />
+                        <condition id="-8" name="Is boolean instance variable set" sid="314241249508110" type="PlayerSkins">
+                            <param id="0" name="Instance variable">Me</param>
+                        </condition>
                     </conditions>
                     <actions>
                         <action id="55" name="Clear" sid="660817033123894" type="JSON__TEMP">
@@ -761,7 +767,7 @@
                             <param id="2" name="Key {n}">&quot;Version&quot;</param>
                         </action>
                         <action id="0" name="Call function" sid="659079437946281" type="Function">
-                            <param id="0" name="Name">&quot;String_GenerateRandom&quot;</param>
+                            <param id="0" name="Name">&quot;String_Random&quot;</param>
                             <param id="1" name="Parameter {n}">8</param>
                         </action>
                         <action id="20" name="Set Value" sid="939434202797968" type="JSON__TEMP">
@@ -770,7 +776,7 @@
                             <param id="2" name="Key {n}">&quot;ID&quot;</param>
                         </action>
                         <action id="20" name="Set Value" sid="952825654147514" type="JSON__TEMP">
-                            <param id="0" name="Value">Var_Player.Skin</param>
+                            <param id="0" name="Value">PlayerSkins.Name</param>
                             <param id="1" name="Reference point">0</param>
                             <param id="2" name="Key {n}">&quot;Skin&quot;</param>
                         </action>
@@ -824,15 +830,15 @@
                             <param id="1" name="Reference point">0</param>
                             <param id="2" name="Key {n}">&quot;TimeReal&quot;</param>
                         </action>
+                        <action id="20" name="Set Value" sid="180912383695021" type="JSON__TEMP">
+                            <param id="0" name="Value">0</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}">&quot;Score&quot;</param>
+                        </action>
                         <action id="20" name="Set Value" sid="693440464329925" type="JSON__TEMP">
                             <param id="0" name="Value">Var_Player.Score</param>
                             <param id="1" name="Reference point">0</param>
                             <param id="2" name="Key {n}">&quot;ScoreLevel&quot;</param>
-                        </action>
-                        <action id="20" name="Set Value" sid="906907564340958" type="JSON__TEMP">
-                            <param id="0" name="Value">Var_Player.Score</param>
-                            <param id="1" name="Reference point">0</param>
-                            <param id="2" name="Key {n}">&quot;Score&quot;</param>
                         </action>
                         <action id="20" name="Set Value" sid="607585622040276" type="JSON__TEMP">
                             <param id="0" name="Value">Var_Player.Deaths</param>
@@ -840,37 +846,6 @@
                             <param id="2" name="Key {n}">&quot;Deaths&quot;</param>
                         </action>
                     </actions>
-                    <sub-events>
-                        <comment>move this to result screen</comment>
-                        <event-block sid="184442781327409">
-                            <conditions />
-                            <actions>
-                                <action id="0" name="Call function" sid="865430322023392" type="Function">
-                                    <param id="0" name="Name">&quot;Time_CurrentTimestamp&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;ms&quot;</param>
-                                </action>
-                                <action id="20" name="Set Value" sid="401290979488408" type="JSON__TEMP">
-                                    <param id="0" name="Value">(Function.ReturnValue - JSON__TEMP.Value(0,&quot;TimestampStart&quot;))/1000</param>
-                                    <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;Clock&quot;</param>
-                                </action>
-                                <action id="20" name="Set Value" sid="757512152080641" type="JSON__TEMP">
-                                    <param id="0" name="Value">URLEncode(LzString.Compress(CBHash.SHA256(JSON__TEMP.AsJson(0)&amp;Function.ReturnValue&amp;JSON__TEMP.Value(0, &quot;ID&quot;))))</param>
-                                    <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;Signature&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="851229119499595">
-                            <conditions />
-                            <actions>
-                                <action id="14" name="Log" sid="875275578614730" type="Browser">
-                                    <param id="0" name="Type">0</param>
-                                    <param id="1" name="Message">INI.JSON2INI(JSON__TEMP.AsJson(0))</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
                 </event-block>
             </sub-events>
         </event-group>

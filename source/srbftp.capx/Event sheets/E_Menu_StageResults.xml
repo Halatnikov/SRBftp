@@ -44,6 +44,11 @@
                                 <condition id="-7" name="Compare instance variable" sid="506801535622419" type="Var_Game">
                                     <param id="0" name="Instance variable">Gamemode</param>
                                     <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;RecordAttack&quot;</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="949379019026524" type="Var_Game">
+                                    <param id="0" name="Instance variable">Gamemode</param>
+                                    <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">&quot;Marathon&quot;</param>
                                 </condition>
                             </conditions>
@@ -69,6 +74,11 @@
                                     <param id="0" name="Instance variable">Gamemode</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">&quot;LevelSelect&quot;</param>
+                                </condition>
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="715778948662863" type="Var_Game">
+                                    <param id="0" name="Instance variable">Gamemode</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;RecordAttack&quot;</param>
                                 </condition>
                                 <condition id="-7" inverted="1" name="Compare instance variable" sid="165591747638627" type="Var_Game">
                                     <param id="0" name="Instance variable">Gamemode</param>
@@ -229,9 +239,7 @@
                 <variable constant="0" name="GuardBonus" sid="803038615534313" static="1" type="number">0</variable>
                 <variable constant="0" name="PerfectBonus" sid="301801775452397" static="1" type="number">0</variable>
                 <variable constant="0" name="LevelScore" sid="101072993515933" static="1" type="number">0</variable>
-                <comment></comment>
                 <variable constant="0" name="TotalScore" sid="524039824770444" static="1" type="number">0</variable>
-                <variable constant="0" name="Active" sid="155059838256801" static="1" type="number">0</variable>
                 <event-block sid="347337449818051">
                     <conditions />
                     <actions>
@@ -241,14 +249,14 @@
                         <action id="0" name="Set text" sid="263964988820614" type="Results_Guard">
                             <param id="0" name="Text">GuardBonus</param>
                         </action>
+                        <action id="0" name="Set text" sid="661622309152894" type="Results_Perfect">
+                            <param id="0" name="Text">PerfectBonus</param>
+                        </action>
                         <action id="0" name="Set text" sid="720609337859179" type="Results_LevelScore">
                             <param id="0" name="Text">LevelScore</param>
                         </action>
                         <action id="0" name="Set text" sid="805905046359585" type="Results_Total">
                             <param id="0" name="Text">TotalScore</param>
-                        </action>
-                        <action id="0" name="Set text" sid="661622309152894" type="Results_Perfect">
-                            <param id="0" name="Text">PerfectBonus</param>
                         </action>
                     </actions>
                 </event-block>
@@ -264,26 +272,56 @@
                         </action>
                     </actions>
                 </event-block>
+                <variable constant="0" name="Active" sid="155059838256801" static="1" type="number">0</variable>
                 <comment></comment>
+                <event-block sid="337817851081741">
+                    <conditions>
+                        <condition id="-4" name="Trigger once while true" sid="308676843512739" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="969293362522688" type="System">
+                            <param id="0" name="Variable">TotalScore</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="478666227906467" type="System">
+                            <param id="0" name="Variable">Active</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="0" name="Call function" sid="650459778708684" type="Function">
+                            <param id="0" name="Name">&quot;Time_CurrentTimestamp&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
+                        </action>
+                        <action id="-10" name="Set value" sid="924397025789537" type="Var_Misc">
+                            <param id="0" name="Instance variable">Discord_TimestampCurrent</param>
+                            <param id="1" name="Value">Function.ReturnValue</param>
+                        </action>
+                        <action id="0" name="Call function" sid="412447098849681" type="Function">
+                            <param id="0" name="Name">&quot;Discord_RichPresence&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;&quot;{###}&quot;Finished a stage (&quot;&amp;Var_Misc.Discord_CurrentDetail&amp;&quot;)&quot;{###}replace(Var_Level.Level_Name,&quot;ZONE&quot;,&quot;&quot;)&amp;&quot; &quot;&amp; ( Var_Level.Level_Act = 0 ? &quot;&quot; : Var_Level.Level_Act ){###}&quot;misc_finished&quot;{###}&quot;Rings: &quot;&amp;Var_Player.Rings&amp;&quot; | Score: &quot;&amp;Var_Player.Score&amp;&quot; | TOTAL: &quot;&amp;(TimeBonus+GuardBonus+PerfectBonus+LevelScore){###}Var_Misc.Discord_CurrentSmallKey{###}Var_Misc.Discord_CurrentSmallText{###}Var_Misc.Discord_TimestampCurrent{###}Var_Misc.Discord_TimestampCurrent+Var_Level.TimerLevel{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="151318743202724">
+                            <conditions />
+                            <actions>
+                                <action id="-16" name="Wait" sid="543404535646766" type="System">
+                                    <param id="0" name="Seconds">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="371303719049943" type="System">
+                                    <param id="0" name="Variable">Active</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>calculate bonuses</comment>
                 <event-block sid="322398175978632">
                     <conditions>
                         <condition id="-4" name="Trigger once while true" sid="659809711526400" type="System" />
                     </conditions>
                     <actions />
                     <sub-events>
-                        <event-block sid="264212910253195">
-                            <conditions />
-                            <actions>
-                                <action id="-9" name="Set value" sid="969293362522688" type="System">
-                                    <param id="0" name="Variable">TotalScore</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="478666227906467" type="System">
-                                    <param id="0" name="Variable">Active</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                            </actions>
-                        </event-block>
                         <comment>==TIME BONUS</comment>
                         <comment>0:30 and less</comment>
                         <event-block sid="767932830687293">
@@ -601,278 +639,244 @@
                                 </action>
                             </actions>
                         </event-block>
-                        <event-block sid="872777936616825">
-                            <conditions />
+                    </sub-events>
+                </event-block>
+                <comment>scoring itself</comment>
+                <comment>limits</comment>
+                <event-block sid="362129342809876">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="867717561999032" type="System">
+                            <param id="0" name="Variable">TimeBonus</param>
+                            <param id="1" name="Comparison">3</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="944579025434121" type="System">
+                            <param id="0" name="Variable">TimeBonus</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="650479612387216">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="455304963337066" type="System">
+                            <param id="0" name="Variable">GuardBonus</param>
+                            <param id="1" name="Comparison">3</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="528975226907456" type="System">
+                            <param id="0" name="Variable">GuardBonus</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="996397209815005">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="956758342783815" type="System">
+                            <param id="0" name="Variable">PerfectBonus</param>
+                            <param id="1" name="Comparison">3</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="140910520304229" type="System">
+                            <param id="0" name="Variable">PerfectBonus</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="646476927651098">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="966010358724221" type="System">
+                            <param id="0" name="Variable">LevelScore</param>
+                            <param id="1" name="Comparison">3</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="106280976469279" type="System">
+                            <param id="0" name="Variable">LevelScore</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>beeeeeeep</comment>
+                <event-block sid="862436294523571">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="152989555054304" type="System">
+                            <param id="0" name="Variable">Active</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                        <condition id="-6" name="Every X seconds" sid="640677205060323" type="System">
+                            <param id="0" name="Interval (seconds)">0.001</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Call function" sid="132712479106957" type="Function">
+                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;Menu&quot;</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="333748020150264">
+                            <conditions>
+                                <condition id="-14" inverted="1" name="Compare variable" sid="967543819552573" type="System">
+                                    <param id="0" name="Variable">TimeBonus</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Value">100</param>
+                                </condition>
+                            </conditions>
                             <actions>
-                                <action id="0" name="Call function" sid="650459778708684" type="Function">
-                                    <param id="0" name="Name">&quot;Time_CurrentTimestamp&quot;</param>
-                                    <param id="1" name="Parameter {n}"></param>
+                                <action id="-11" name="Subtract from" sid="567505151350806" type="System">
+                                    <param id="0" name="Variable">TimeBonus</param>
+                                    <param id="1" name="Value">100</param>
                                 </action>
-                                <action id="-10" name="Set value" sid="924397025789537" type="Var_Misc">
-                                    <param id="0" name="Instance variable">Discord_TimestampCurrent</param>
-                                    <param id="1" name="Value">Function.ReturnValue</param>
-                                </action>
-                                <action id="0" name="Call function" sid="412447098849681" type="Function">
-                                    <param id="0" name="Name">&quot;Discord_RichPresence&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;&quot;{###}&quot;Finished a stage (&quot;&amp;Var_Misc.Discord_CurrentDetail&amp;&quot;)&quot;{###}replace(Var_Level.Level_Name,&quot;ZONE&quot;,&quot;&quot;)&amp;&quot; &quot;&amp; ( Var_Level.Level_Act = 0 ? &quot;&quot; : Var_Level.Level_Act ){###}&quot;misc_finished&quot;{###}&quot;Rings: &quot;&amp;Var_Player.Rings&amp;&quot; | Score: &quot;&amp;Var_Player.Score&amp;&quot; | TOTAL: &quot;&amp;(TimeBonus+GuardBonus+PerfectBonus+LevelScore){###}Var_Misc.Discord_CurrentSmallKey{###}Var_Misc.Discord_CurrentSmallText{###}Var_Misc.Discord_TimestampCurrent{###}Var_Misc.Discord_TimestampCurrent+Var_Level.TimerLevel{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;</param>
+                                <action id="-10" name="Add to" sid="234739804092843" type="System">
+                                    <param id="0" name="Variable">TotalScore</param>
+                                    <param id="1" name="Value">100</param>
                                 </action>
                             </actions>
                         </event-block>
-                        <comment>wait a bit</comment>
-                        <event-block sid="254016275793359">
-                            <conditions />
+                        <event-block sid="864807070714850">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="789688116719972" type="System">
+                                    <param id="0" name="Variable">TimeBonus</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Value">100</param>
+                                </condition>
+                            </conditions>
                             <actions>
-                                <action id="-16" name="Wait" sid="543404535646766" type="System">
-                                    <param id="0" name="Seconds">1</param>
+                                <action id="-10" name="Add to" sid="890261654253065" type="System">
+                                    <param id="0" name="Variable">TotalScore</param>
+                                    <param id="1" name="Value">TimeBonus</param>
                                 </action>
-                                <action id="-9" name="Set value" sid="371303719049943" type="System">
-                                    <param id="0" name="Variable">Active</param>
-                                    <param id="1" name="Value">1</param>
+                                <action id="-11" name="Subtract from" sid="623869257111036" type="System">
+                                    <param id="0" name="Variable">TimeBonus</param>
+                                    <param id="1" name="Value">TimeBonus</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="657963113016460">
+                            <conditions>
+                                <condition id="-14" inverted="1" name="Compare variable" sid="376140936815573" type="System">
+                                    <param id="0" name="Variable">GuardBonus</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Value">100</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-11" name="Subtract from" sid="644779273658456" type="System">
+                                    <param id="0" name="Variable">GuardBonus</param>
+                                    <param id="1" name="Value">100</param>
+                                </action>
+                                <action id="-10" name="Add to" sid="235990165025261" type="System">
+                                    <param id="0" name="Variable">TotalScore</param>
+                                    <param id="1" name="Value">100</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="294290007632342">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="783652840774557" type="System">
+                                    <param id="0" name="Variable">GuardBonus</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Value">100</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Add to" sid="698277897164182" type="System">
+                                    <param id="0" name="Variable">TotalScore</param>
+                                    <param id="1" name="Value">GuardBonus</param>
+                                </action>
+                                <action id="-11" name="Subtract from" sid="780619911793269" type="System">
+                                    <param id="0" name="Variable">GuardBonus</param>
+                                    <param id="1" name="Value">GuardBonus</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="894672823294982">
+                            <conditions>
+                                <condition id="-14" inverted="1" name="Compare variable" sid="269353141858557" type="System">
+                                    <param id="0" name="Variable">PerfectBonus</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Value">100</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-11" name="Subtract from" sid="636702625410490" type="System">
+                                    <param id="0" name="Variable">PerfectBonus</param>
+                                    <param id="1" name="Value">100</param>
+                                </action>
+                                <action id="-10" name="Add to" sid="380047771799037" type="System">
+                                    <param id="0" name="Variable">TotalScore</param>
+                                    <param id="1" name="Value">100</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="610030434868441">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="680974601830322" type="System">
+                                    <param id="0" name="Variable">PerfectBonus</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Value">100</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Add to" sid="922063426019735" type="System">
+                                    <param id="0" name="Variable">TotalScore</param>
+                                    <param id="1" name="Value">PerfectBonus</param>
+                                </action>
+                                <action id="-11" name="Subtract from" sid="513415514970195" type="System">
+                                    <param id="0" name="Variable">PerfectBonus</param>
+                                    <param id="1" name="Value">PerfectBonus</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="868585358798254">
+                            <conditions>
+                                <condition id="-14" inverted="1" name="Compare variable" sid="281668864051370" type="System">
+                                    <param id="0" name="Variable">LevelScore</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Value">100</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-11" name="Subtract from" sid="949000961622859" type="System">
+                                    <param id="0" name="Variable">LevelScore</param>
+                                    <param id="1" name="Value">100</param>
+                                </action>
+                                <action id="-10" name="Add to" sid="883005331621535" type="System">
+                                    <param id="0" name="Variable">TotalScore</param>
+                                    <param id="1" name="Value">100</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="435283254037770">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="471367922657863" type="System">
+                                    <param id="0" name="Variable">LevelScore</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Value">100</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Add to" sid="777452334925220" type="System">
+                                    <param id="0" name="Variable">TotalScore</param>
+                                    <param id="1" name="Value">LevelScore</param>
+                                </action>
+                                <action id="-11" name="Subtract from" sid="390513056947159" type="System">
+                                    <param id="0" name="Variable">LevelScore</param>
+                                    <param id="1" name="Value">LevelScore</param>
                                 </action>
                             </actions>
                         </event-block>
                     </sub-events>
                 </event-block>
-                <comment></comment>
-                <event-group description="" sid="473712736247814" title="Scoring">
-                    <sub-events>
-                        <comment>limits</comment>
-                        <event-block sid="362129342809876">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="867717561999032" type="System">
-                                    <param id="0" name="Variable">TimeBonus</param>
-                                    <param id="1" name="Comparison">3</param>
-                                    <param id="2" name="Value">0</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="944579025434121" type="System">
-                                    <param id="0" name="Variable">TimeBonus</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="650479612387216">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="455304963337066" type="System">
-                                    <param id="0" name="Variable">GuardBonus</param>
-                                    <param id="1" name="Comparison">3</param>
-                                    <param id="2" name="Value">0</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="528975226907456" type="System">
-                                    <param id="0" name="Variable">GuardBonus</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="996397209815005">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="956758342783815" type="System">
-                                    <param id="0" name="Variable">PerfectBonus</param>
-                                    <param id="1" name="Comparison">3</param>
-                                    <param id="2" name="Value">0</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="140910520304229" type="System">
-                                    <param id="0" name="Variable">PerfectBonus</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="646476927651098">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="966010358724221" type="System">
-                                    <param id="0" name="Variable">LevelScore</param>
-                                    <param id="1" name="Comparison">3</param>
-                                    <param id="2" name="Value">0</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="106280976469279" type="System">
-                                    <param id="0" name="Variable">LevelScore</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <comment>beeeeeeep</comment>
-                        <event-block sid="862436294523571">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="152989555054304" type="System">
-                                    <param id="0" name="Variable">Active</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">1</param>
-                                </condition>
-                                <condition id="-6" name="Every X seconds" sid="640677205060323" type="System">
-                                    <param id="0" name="Interval (seconds)">0.001</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Call function" sid="132712479106957" type="Function">
-                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;Menu&quot;</param>
-                                </action>
-                            </actions>
-                            <sub-events>
-                                <event-block sid="333748020150264">
-                                    <conditions>
-                                        <condition id="-14" inverted="1" name="Compare variable" sid="967543819552573" type="System">
-                                            <param id="0" name="Variable">TimeBonus</param>
-                                            <param id="1" name="Comparison">3</param>
-                                            <param id="2" name="Value">100</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-11" name="Subtract from" sid="567505151350806" type="System">
-                                            <param id="0" name="Variable">TimeBonus</param>
-                                            <param id="1" name="Value">100</param>
-                                        </action>
-                                        <action id="-10" name="Add to" sid="234739804092843" type="System">
-                                            <param id="0" name="Variable">TotalScore</param>
-                                            <param id="1" name="Value">100</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="864807070714850">
-                                    <conditions>
-                                        <condition id="-14" name="Compare variable" sid="789688116719972" type="System">
-                                            <param id="0" name="Variable">TimeBonus</param>
-                                            <param id="1" name="Comparison">3</param>
-                                            <param id="2" name="Value">100</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-10" name="Add to" sid="890261654253065" type="System">
-                                            <param id="0" name="Variable">TotalScore</param>
-                                            <param id="1" name="Value">TimeBonus</param>
-                                        </action>
-                                        <action id="-11" name="Subtract from" sid="623869257111036" type="System">
-                                            <param id="0" name="Variable">TimeBonus</param>
-                                            <param id="1" name="Value">TimeBonus</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="657963113016460">
-                                    <conditions>
-                                        <condition id="-14" inverted="1" name="Compare variable" sid="376140936815573" type="System">
-                                            <param id="0" name="Variable">GuardBonus</param>
-                                            <param id="1" name="Comparison">3</param>
-                                            <param id="2" name="Value">100</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-11" name="Subtract from" sid="644779273658456" type="System">
-                                            <param id="0" name="Variable">GuardBonus</param>
-                                            <param id="1" name="Value">100</param>
-                                        </action>
-                                        <action id="-10" name="Add to" sid="235990165025261" type="System">
-                                            <param id="0" name="Variable">TotalScore</param>
-                                            <param id="1" name="Value">100</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="294290007632342">
-                                    <conditions>
-                                        <condition id="-14" name="Compare variable" sid="783652840774557" type="System">
-                                            <param id="0" name="Variable">GuardBonus</param>
-                                            <param id="1" name="Comparison">3</param>
-                                            <param id="2" name="Value">100</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-10" name="Add to" sid="698277897164182" type="System">
-                                            <param id="0" name="Variable">TotalScore</param>
-                                            <param id="1" name="Value">GuardBonus</param>
-                                        </action>
-                                        <action id="-11" name="Subtract from" sid="780619911793269" type="System">
-                                            <param id="0" name="Variable">GuardBonus</param>
-                                            <param id="1" name="Value">GuardBonus</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="894672823294982">
-                                    <conditions>
-                                        <condition id="-14" inverted="1" name="Compare variable" sid="269353141858557" type="System">
-                                            <param id="0" name="Variable">PerfectBonus</param>
-                                            <param id="1" name="Comparison">3</param>
-                                            <param id="2" name="Value">100</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-11" name="Subtract from" sid="636702625410490" type="System">
-                                            <param id="0" name="Variable">PerfectBonus</param>
-                                            <param id="1" name="Value">100</param>
-                                        </action>
-                                        <action id="-10" name="Add to" sid="380047771799037" type="System">
-                                            <param id="0" name="Variable">TotalScore</param>
-                                            <param id="1" name="Value">100</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="610030434868441">
-                                    <conditions>
-                                        <condition id="-14" name="Compare variable" sid="680974601830322" type="System">
-                                            <param id="0" name="Variable">PerfectBonus</param>
-                                            <param id="1" name="Comparison">3</param>
-                                            <param id="2" name="Value">100</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-10" name="Add to" sid="922063426019735" type="System">
-                                            <param id="0" name="Variable">TotalScore</param>
-                                            <param id="1" name="Value">PerfectBonus</param>
-                                        </action>
-                                        <action id="-11" name="Subtract from" sid="513415514970195" type="System">
-                                            <param id="0" name="Variable">PerfectBonus</param>
-                                            <param id="1" name="Value">PerfectBonus</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="868585358798254">
-                                    <conditions>
-                                        <condition id="-14" inverted="1" name="Compare variable" sid="281668864051370" type="System">
-                                            <param id="0" name="Variable">LevelScore</param>
-                                            <param id="1" name="Comparison">3</param>
-                                            <param id="2" name="Value">100</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-11" name="Subtract from" sid="949000961622859" type="System">
-                                            <param id="0" name="Variable">LevelScore</param>
-                                            <param id="1" name="Value">100</param>
-                                        </action>
-                                        <action id="-10" name="Add to" sid="883005331621535" type="System">
-                                            <param id="0" name="Variable">TotalScore</param>
-                                            <param id="1" name="Value">100</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="435283254037770">
-                                    <conditions>
-                                        <condition id="-14" name="Compare variable" sid="471367922657863" type="System">
-                                            <param id="0" name="Variable">LevelScore</param>
-                                            <param id="1" name="Comparison">3</param>
-                                            <param id="2" name="Value">100</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-10" name="Add to" sid="777452334925220" type="System">
-                                            <param id="0" name="Variable">TotalScore</param>
-                                            <param id="1" name="Value">LevelScore</param>
-                                        </action>
-                                        <action id="-11" name="Subtract from" sid="390513056947159" type="System">
-                                            <param id="0" name="Variable">LevelScore</param>
-                                            <param id="1" name="Value">LevelScore</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
-                        </event-block>
-                    </sub-events>
-                </event-group>
-                <comment>finish</comment>
+                <comment>wait or skip</comment>
                 <event-block sid="381117662879702">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="665879627924847" type="System">
@@ -903,10 +907,6 @@
                         <condition id="-4" name="Trigger once while true" sid="101684068074754" type="System" />
                     </conditions>
                     <actions>
-                        <action id="-11" name="Add to" sid="397134791157508" type="Var_Player">
-                            <param id="0" name="Instance variable">TotalScore</param>
-                            <param id="1" name="Value">TotalScore</param>
-                        </action>
                         <action id="-9" name="Set value" sid="272573316556023" type="System">
                             <param id="0" name="Variable">Active</param>
                             <param id="1" name="Value">2</param>
@@ -915,6 +915,11 @@
                 </event-block>
                 <event-block sid="201885481300764">
                     <conditions>
+                        <condition id="-14" name="Compare variable" sid="721738192625497" type="System">
+                            <param id="0" name="Variable">Active</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
                         <condition id="-8" name="Is boolean instance variable set" sid="660277586156423" type="Var_Input">
                             <param id="0" name="Instance variable">A</param>
                         </condition>
@@ -924,11 +929,23 @@
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">0</param>
                         </condition>
-                        <condition id="-14" name="Compare variable" sid="721738192625497" type="System">
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="488766338881121" type="System">
+                            <param id="0" name="Variable">Active</param>
+                            <param id="1" name="Value">2</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>finish</comment>
+                <event-block sid="942535091408156">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="308919714626163" type="System">
                             <param id="0" name="Variable">Active</param>
                             <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">1</param>
+                            <param id="2" name="Value">2</param>
                         </condition>
+                        <condition id="-4" name="Trigger once while true" sid="237602587179380" type="System" />
                     </conditions>
                     <actions>
                         <action id="-10" name="Add to" sid="687615295943825" type="System">
@@ -967,78 +984,9 @@
                             <param id="0" name="Instance variable">TotalScore</param>
                             <param id="1" name="Value">TotalScore</param>
                         </action>
-                        <action id="-9" name="Set value" sid="488766338881121" type="System">
-                            <param id="0" name="Variable">Active</param>
-                            <param id="1" name="Value">2</param>
-                        </action>
                     </actions>
-                </event-block>
-                <comment></comment>
-                <event-block sid="942535091408156">
-                    <conditions>
-                        <condition id="-14" name="Compare variable" sid="308919714626163" type="System">
-                            <param id="0" name="Variable">Active</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">2</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="237602587179380" type="System" />
-                    </conditions>
-                    <actions />
                     <sub-events>
-                        <event-block sid="317981490401816">
-                            <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="701016833366607" type="Var_Game">
-                                    <param id="0" name="Instance variable">Gamemode</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;Marathon&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="20" name="Set Value" sid="648617326293229" type="JSON__TEMP">
-                                    <param id="0" name="Value">Var_Player.TotalScore</param>
-                                    <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">Var_Level.Marathon_String{###}&quot;Score&quot;</param>
-                                </action>
-                                <action id="20" name="Set Value" sid="236449215372304" type="JSON__TEMP">
-                                    <param id="0" name="Value">TotalScore</param>
-                                    <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">Var_Level.Marathon_String{###}&quot;LevelStats&quot;{###}Var_Level.Marathon_Counter-1{###}&quot;ScoreFinish&quot;</param>
-                                </action>
-                            </actions>
-                            <sub-events>
-                                <event-block sid="483179254814492">
-                                    <conditions>
-                                        <condition id="-7" name="Compare instance variable" sid="253217193687982" type="Var_Level">
-                                            <param id="0" name="Instance variable">Marathon_Counter</param>
-                                            <param id="1" name="Comparison">5</param>
-                                            <param id="2" name="Value">Self.Marathon_CounterMax</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="0" name="Call function" sid="753714486714095" type="Function">
-                                            <param id="0" name="Name">&quot;String_CompressJSON&quot;</param>
-                                            <param id="1" name="Parameter {n}">JSON__TEMP.AsJson(0,Var_Level.Marathon_String)</param>
-                                        </action>
-                                        <action id="20" name="Set Value" sid="321218245061572" type="JSON__TEMP">
-                                            <param id="0" name="Value">LzString.Compress(CBHash.SHA256(Function.ReturnValue))</param>
-                                            <param id="1" name="Reference point">0</param>
-                                            <param id="2" name="Key {n}">Var_Level.Marathon_String{###}&quot;Signature&quot;</param>
-                                        </action>
-                                        <action id="-10" name="Set value" sid="961445104665454" type="Var_Level">
-                                            <param id="0" name="Instance variable">Level_Next</param>
-                                            <param id="1" name="Value">&quot;Menu_StageResults&quot;</param>
-                                        </action>
-                                        <action id="-16" name="Wait" sid="846529031236927" type="System">
-                                            <param id="0" name="Seconds">3</param>
-                                        </action>
-                                        <action id="-10" name="Set value" sid="317426307874477" type="Var_Game">
-                                            <param id="0" name="Instance variable">CurrentMenu</param>
-                                            <param id="1" name="Value">&quot;marathon&quot;</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
-                        </event-block>
+                        <comment></comment>
                         <event-block any="1" sid="200070707422096">
                             <conditions>
                                 <condition id="-7" name="Compare instance variable" sid="922589332017269" type="Var_Game">
@@ -1102,6 +1050,7 @@
                                 </event-block>
                             </sub-events>
                         </event-block>
+                        <comment></comment>
                         <event-block sid="973766684135844">
                             <conditions>
                                 <condition id="-7" name="Compare instance variable" sid="126265198017826" type="Var_Game">
@@ -1204,6 +1153,110 @@
                                             </actions>
                                         </event-block>
                                     </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <comment></comment>
+                        <event-block sid="923211718947407">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="575152929010363" type="Var_Game">
+                                    <param id="0" name="Instance variable">Gamemode</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;RecordAttack&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="20" name="Set Value" sid="584964917409741" type="JSON__TEMP">
+                                    <param id="0" name="Value">TotalScore</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;Score&quot;</param>
+                                </action>
+                                <action id="0" name="Call function" sid="230029384804693" type="Function">
+                                    <param id="0" name="Name">&quot;Time_CurrentTimestamp&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;ms&quot;</param>
+                                </action>
+                                <action id="20" name="Set Value" sid="600542568745033" type="JSON__TEMP">
+                                    <param id="0" name="Value">(Function.ReturnValue - JSON__TEMP.Value(0,&quot;TimestampStart&quot;))/1000</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;Clock&quot;</param>
+                                </action>
+                                <action id="20" name="Set Value" sid="770430525504540" type="JSON__TEMP">
+                                    <param id="0" name="Value">LzString.Compress(CBHash.SHA256(JSON__TEMP.AsJson(0)&amp;Function.ReturnValue&amp;JSON__TEMP.Value(0,&quot;ID&quot;)))</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;Signature&quot;</param>
+                                </action>
+                                <action id="14" name="Log" sid="633566780085938" type="Browser">
+                                    <param id="0" name="Type">0</param>
+                                    <param id="1" name="Message">INI.JSON2INI(JSON__TEMP.AsJson(0))</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="559845934991190">
+                                    <conditions />
+                                    <actions>
+                                        <action id="-16" name="Wait" sid="927384788921639" type="System">
+                                            <param id="0" name="Seconds">3</param>
+                                        </action>
+                                        <action id="0" name="Call function" sid="385928872215392" type="Function">
+                                            <param id="0" name="Name">&quot;Player_ResetVars&quot;</param>
+                                            <param id="1" name="Parameter {n}"></param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <comment></comment>
+                        <event-block sid="317981490401816">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="701016833366607" type="Var_Game">
+                                    <param id="0" name="Instance variable">Gamemode</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;Marathon&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="20" name="Set Value" sid="648617326293229" type="JSON__TEMP">
+                                    <param id="0" name="Value">Var_Player.TotalScore</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">Var_Level.Marathon_String{###}&quot;Score&quot;</param>
+                                </action>
+                                <action id="20" name="Set Value" sid="236449215372304" type="JSON__TEMP">
+                                    <param id="0" name="Value">TotalScore</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">Var_Level.Marathon_String{###}&quot;LevelStats&quot;{###}Var_Level.Marathon_Counter-1{###}&quot;ScoreFinish&quot;</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="483179254814492">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="253217193687982" type="Var_Level">
+                                            <param id="0" name="Instance variable">Marathon_Counter</param>
+                                            <param id="1" name="Comparison">5</param>
+                                            <param id="2" name="Value">Self.Marathon_CounterMax</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="20" name="Set Value" sid="321218245061572" type="JSON__TEMP">
+                                            <param id="0" name="Value">LzString.Compress(CBHash.SHA256(JSON__TEMP.AsJson(0,Var_Level.Marathon_String)))</param>
+                                            <param id="1" name="Reference point">0</param>
+                                            <param id="2" name="Key {n}">Var_Level.Marathon_String{###}&quot;Signature&quot;</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="961445104665454" type="Var_Level">
+                                            <param id="0" name="Instance variable">Level_Next</param>
+                                            <param id="1" name="Value">&quot;Menu_StageResults&quot;</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="846529031236927" type="System">
+                                            <param id="0" name="Seconds">3</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="317426307874477" type="Var_Game">
+                                            <param id="0" name="Instance variable">CurrentMenu</param>
+                                            <param id="1" name="Value">&quot;marathon&quot;</param>
+                                        </action>
+                                        <action id="0" name="Call function" sid="292716080328979" type="Function">
+                                            <param id="0" name="Name">&quot;Player_ResetVars&quot;</param>
+                                            <param id="1" name="Parameter {n}"></param>
+                                        </action>
+                                    </actions>
                                 </event-block>
                             </sub-events>
                         </event-block>

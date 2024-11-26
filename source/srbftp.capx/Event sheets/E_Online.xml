@@ -143,7 +143,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="0" name="Call function" sid="551904606493006" type="Function">
-                                            <param id="0" name="Name">&quot;String_MergeJSON&quot;</param>
+                                            <param id="0" name="Name">&quot;JSON_Merge&quot;</param>
                                             <param id="1" name="Parameter {n}">JSON_OnlineRoom.AsJson(0,&quot;Players&quot;,JSON_OnlineRoom.CurrentKey){###}Photon.PropertyOfActorByNr(JSON_OnlineRoom.CurrentKey, &quot;JSON&quot;)</param>
                                         </action>
                                         <action id="60" name="LoadJSON" sid="692195313821027" type="JSON_OnlineRoom">
@@ -157,7 +157,7 @@
                                     <conditions />
                                     <actions>
                                         <action id="0" name="Call function" sid="392215546154695" type="Function">
-                                            <param id="0" name="Name">&quot;String_CompressJSON&quot;</param>
+                                            <param id="0" name="Name">&quot;JSON_Minify&quot;</param>
                                             <param id="1" name="Parameter {n}">JSON_OnlineRoom.AsJson(0)</param>
                                         </action>
                                         <action id="103" name="Set property of my room" sid="948151241373782" type="Photon">
@@ -213,7 +213,7 @@
                                     <param id="1" name="Message">&quot;sync your player data&quot;</param>
                                 </action>
                                 <action id="0" name="Call function" sid="968085024947862" type="Function">
-                                    <param id="0" name="Name">&quot;String_CompressJSON&quot;</param>
+                                    <param id="0" name="Name">&quot;JSON_Minify&quot;</param>
                                     <param id="1" name="Parameter {n}">JSON_OnlineMe.AsJson(0)</param>
                                 </action>
                                 <action id="102" name="Set property of actor by nr." sid="266044661342745" type="Photon">
@@ -1016,6 +1016,22 @@
                         </action>
                     </actions>
                 </event-block>
+                <event-block sid="471025775944261">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="757499508055317" type="Var_Game">
+                            <param id="0" name="Instance variable">Gamemode</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;RecordAttack&quot;</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="741116501540949" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Set value" sid="116786365893827" type="Var_Misc">
+                            <param id="0" name="Instance variable">Discord_CurrentState</param>
+                            <param id="1" name="Value">&quot;Record attack&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
                 <event-block sid="381418445775949">
                     <conditions>
                         <condition id="-7" name="Compare instance variable" sid="726541889344078" type="Var_Game">
@@ -1033,46 +1049,6 @@
                     </actions>
                 </event-block>
                 <comment></comment>
-                <event-block sid="999051160559248">
-                    <conditions>
-                        <condition id="-8" inverted="1" name="Compare two values" sid="621597906403498" type="System">
-                            <param id="0" name="First value">find(LayoutName,&quot;1S_&quot;)</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Second value">-1</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="155030578723936" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="-10" name="Set value" sid="847788007771108" type="Var_Misc">
-                            <param id="0" name="Instance variable">Discord_CurrentDetail</param>
-                            <param id="1" name="Value">&quot;SRB1&quot;</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="783592351893104" type="Var_Misc">
-                            <param id="0" name="Instance variable">Discord_CurrentState</param>
-                            <param id="1" name="Value">&quot;Super Levels&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="388810840204349">
-                    <conditions>
-                        <condition id="-8" inverted="1" name="Compare two values" sid="872014129200590" type="System">
-                            <param id="0" name="First value">find(LayoutName,&quot;1H_&quot;)</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Second value">-1</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="415122517614878" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="-10" name="Set value" sid="209523131436766" type="Var_Misc">
-                            <param id="0" name="Instance variable">Discord_CurrentDetail</param>
-                            <param id="1" name="Value">&quot;SRB1&quot;</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="402644972543579" type="Var_Misc">
-                            <param id="0" name="Instance variable">Discord_CurrentState</param>
-                            <param id="1" name="Value">&quot;Hyper Levels&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
                 <event-block sid="540537022712091">
                     <conditions>
                         <condition id="-8" inverted="1" name="Compare two values" sid="386544543416112" type="System">
@@ -1088,6 +1064,72 @@
                             <param id="1" name="Value">&quot;SRB1&quot;</param>
                         </action>
                     </actions>
+                </event-block>
+                <event-block sid="999051160559248">
+                    <conditions>
+                        <condition id="-8" inverted="1" name="Compare two values" sid="621597906403498" type="System">
+                            <param id="0" name="First value">find(LayoutName,&quot;1S_&quot;)</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Second value">-1</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="155030578723936" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Set value" sid="847788007771108" type="Var_Misc">
+                            <param id="0" name="Instance variable">Discord_CurrentDetail</param>
+                            <param id="1" name="Value">&quot;SRB1&quot;</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="850181264762543">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="703360158240298" type="Var_Game">
+                                    <param id="0" name="Instance variable">Gamemode</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;Singleplayer&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Set value" sid="783592351893104" type="Var_Misc">
+                                    <param id="0" name="Instance variable">Discord_CurrentState</param>
+                                    <param id="1" name="Value">&quot;Super Levels&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="388810840204349">
+                    <conditions>
+                        <condition id="-8" inverted="1" name="Compare two values" sid="872014129200590" type="System">
+                            <param id="0" name="First value">find(LayoutName,&quot;1H_&quot;)</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Second value">-1</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="415122517614878" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Set value" sid="209523131436766" type="Var_Misc">
+                            <param id="0" name="Instance variable">Discord_CurrentDetail</param>
+                            <param id="1" name="Value">&quot;SRB1&quot;</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="169681629043990">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="943986678647346" type="Var_Game">
+                                    <param id="0" name="Instance variable">Gamemode</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;Singleplayer&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Set value" sid="402644972543579" type="Var_Misc">
+                                    <param id="0" name="Instance variable">Discord_CurrentState</param>
+                                    <param id="1" name="Value">&quot;Hyper Levels&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block sid="527226933296797">
                     <conditions>
@@ -1229,7 +1271,7 @@
                                     <param id="1" name="Value">Function.ReturnValue</param>
                                 </action>
                                 <action id="0" name="Call function" sid="734708861149942" type="Function">
-                                    <param id="0" name="Name">&quot;String_GenerateRandom&quot;</param>
+                                    <param id="0" name="Name">&quot;String_Random&quot;</param>
                                     <param id="1" name="Parameter {n}">8</param>
                                 </action>
                                 <action id="-10" name="Set value" sid="349119675081704" type="Var_Misc">

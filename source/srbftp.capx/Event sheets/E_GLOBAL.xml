@@ -2385,7 +2385,7 @@
                 <event-block sid="262283849288638">
                     <conditions>
                         <condition id="0" name="On function" sid="110089752735088" type="Function">
-                            <param id="0" name="Name">&quot;String_GenerateRandom&quot;</param>
+                            <param id="0" name="Name">&quot;String_Random&quot;</param>
                         </condition>
                     </conditions>
                     <actions />
@@ -2418,7 +2418,7 @@
                 <event-block sid="563394163420609">
                     <conditions>
                         <condition id="0" name="On function" sid="659162558539154" type="Function">
-                            <param id="0" name="Name">&quot;String_CompressJSON&quot;</param>
+                            <param id="0" name="Name">&quot;JSON_Minify&quot;</param>
                         </condition>
                     </conditions>
                     <actions>
@@ -2431,12 +2431,25 @@
                 <event-block sid="275079016777799">
                     <conditions>
                         <condition id="0" name="On function" sid="763695921601350" type="Function">
-                            <param id="0" name="Name">&quot;String_MergeJSON&quot;</param>
+                            <param id="0" name="Name">&quot;JSON_Merge&quot;</param>
                         </condition>
                     </conditions>
                     <actions>
                         <action id="1" name="Set return value" sid="885017672011833" type="Function">
                             <param id="0" name="Value">Browser.ExecJS(&quot;JSON.stringify($.extend(JSON.parse(&apos;&quot;&amp;Function.Param(0)&amp;&quot;&apos;), JSON.parse(&apos;&quot;&amp;Function.Param(1)&amp;&quot;&apos;)))&quot;)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>shuffle a JSON array</comment>
+                <event-block sid="205241768867331">
+                    <conditions>
+                        <condition id="0" name="On function" sid="698935990584130" type="Function">
+                            <param id="0" name="Name">&quot;JSON_ShuffleArray&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="1" name="Set return value" sid="272664257374356" type="Function">
+                            <param id="0" name="Value">Browser.ExecJS(&quot;&#x0D;&#x0A;function func() {&#x0D;&#x0A;    let array = JSON.parse(&apos;&quot;&amp;Function.Param(0)&amp;&quot;&apos;);&#x0D;&#x0A;    for (let i = array.length - 1; i &gt;= 0; i--) {&#x0D;&#x0A;        const j = Math.floor(Math.random() * (i + 1));&#x0D;&#x0A;        [array[i], array[j]] = [array[j], array[i]];&#x0D;&#x0A;    }&#x0D;&#x0A;    return JSON.stringify(array);&#x0D;&#x0A;}&#x0D;&#x0A;func()&#x0D;&#x0A;&quot;)</param>
                         </action>
                     </actions>
                 </event-block>
@@ -3288,7 +3301,7 @@
                                     <param id="1" name="Key {n}"></param>
                                 </action>
                                 <action id="0" name="Call function" sid="470020013232579" type="Function">
-                                    <param id="0" name="Name">&quot;String_MergeJSON&quot;</param>
+                                    <param id="0" name="Name">&quot;JSON_Merge&quot;</param>
                                     <param id="1" name="Parameter {n}">Save_Config.Default{###}Function.Param(0)</param>
                                 </action>
                                 <action id="60" name="LoadJSON" sid="308780391425036" type="Save_Config">
@@ -3808,7 +3821,7 @@
                                             <conditions />
                                             <actions>
                                                 <action id="0" name="Call function" sid="507362298529467" type="Function">
-                                                    <param id="0" name="Name">&quot;String_MergeJSON&quot;</param>
+                                                    <param id="0" name="Name">&quot;JSON_Merge&quot;</param>
                                                     <param id="1" name="Parameter {n}">Save_General.Default{###}JSON__COMMON.AsJson(0)</param>
                                                 </action>
                                                 <action id="60" name="LoadJSON" sid="388700026948567" type="Save_General">
@@ -3883,7 +3896,7 @@
                     </conditions>
                     <actions>
                         <action id="0" name="Call function" sid="670861122258323" type="Function">
-                            <param id="0" name="Name">&quot;String_MergeJSON&quot;</param>
+                            <param id="0" name="Name">&quot;JSON_Merge&quot;</param>
                             <param id="1" name="Parameter {n}">Save_General.Default{###}LocalStorage.ItemValue</param>
                         </action>
                         <action id="60" name="LoadJSON" sid="252254930561860" type="Save_General">
@@ -4062,99 +4075,64 @@
                 </condition>
             </conditions>
             <actions>
-                <action id="-10" name="Set value" sid="938714697296641" type="Queue_LevelPlaylist">
-                    <param id="0" name="Instance variable">Order</param>
-                    <param id="1" name="Value">&quot;&quot;</param>
-                </action>
-                <action id="-10" name="Set value" sid="192158194460330" type="Queue_LevelPlaylist">
-                    <param id="0" name="Instance variable">CurrentTask</param>
-                    <param id="1" name="Value">Function.Param(0)</param>
-                </action>
                 <action id="2" name="Clear" sid="126523508683763" type="Queue_LevelPlaylist" />
+                <action id="-3" name="Create object" sid="111107119753649" type="System">
+                    <param id="0" name="Object to create">JSON__COMMON</param>
+                    <param id="1" name="Layer">0</param>
+                    <param id="2" name="X">0</param>
+                    <param id="3" name="Y">0</param>
+                </action>
+                <action id="60" name="LoadJSON" sid="292511537493245" type="JSON__COMMON">
+                    <param id="0" name="JSON">JSON_LevelPlaylist.AsJson(0, Function.Param(0))</param>
+                    <param id="1" name="Reference point">0</param>
+                    <param id="2" name="Key {n}"></param>
+                </action>
             </actions>
             <sub-events>
-                <event-block sid="389865525469511">
+                <comment>0 - normal</comment>
+                <comment>1 - random</comment>
+                <event-block sid="939815562913673">
                     <conditions>
-                        <condition id="-12" name="Repeat" sid="992085830436752" type="System">
-                            <param id="0" name="Count">JSON_LevelPlaylist.Size(0,Function.Param(0))</param>
+                        <condition id="1" name="Compare parameter" sid="854822613212945" type="Function">
+                            <param id="0" name="Index">1</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
                         </condition>
                     </conditions>
-                    <actions />
-                    <sub-events>
-                        <comment>0 - normal</comment>
-                        <comment>1 - random</comment>
-                        <event-block sid="502471904838181">
-                            <conditions>
-                                <condition id="1" name="Compare parameter" sid="383893592021813" type="Function">
-                                    <param id="0" name="Index">1</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">0</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Enqueue" sid="592936526982785" type="Queue_LevelPlaylist">
-                                    <param id="0" name="Element">JSON_LevelPlaylist.Value(0,Function.Param(0),loopindex)</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="939815562913673">
-                            <conditions>
-                                <condition id="1" name="Compare parameter" sid="854822613212945" type="Function">
-                                    <param id="0" name="Index">1</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">1</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-10" name="Set value" sid="605712373943338" type="Queue_LevelPlaylist">
-                                    <param id="0" name="Instance variable">Order</param>
-                                    <param id="1" name="Value">Self.Order&amp;zeropad(loopindex,2)&amp;&quot;,&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-            </sub-events>
-        </event-block>
-        <event-block sid="384934863369728">
-            <conditions>
-                <condition id="-7" inverted="1" name="Compare instance variable" sid="590468088514767" type="Queue_LevelPlaylist">
-                    <param id="0" name="Instance variable">Order</param>
-                    <param id="1" name="Comparison">0</param>
-                    <param id="2" name="Value">&quot;&quot;</param>
-                </condition>
-            </conditions>
-            <actions />
-            <sub-events>
-                <variable constant="0" name="random_level" sid="454585576273627" static="0" type="number">0</variable>
-                <event-block sid="328452808610068">
-                    <conditions />
                     <actions>
-                        <action id="-9" name="Set value" sid="357019016693508" type="System">
-                            <param id="0" name="Variable">random_level</param>
-                            <param id="1" name="Value">int(random(0,JSON_LevelPlaylist.Size(0,Queue_LevelPlaylist.CurrentTask)))</param>
+                        <action id="0" name="Call function" sid="916044858211637" type="Function">
+                            <param id="0" name="Name">&quot;JSON_ShuffleArray&quot;</param>
+                            <param id="1" name="Parameter {n}">JSON__COMMON.AsJson(0)</param>
+                        </action>
+                        <action id="60" name="LoadJSON" sid="471717848123323" type="JSON__COMMON">
+                            <param id="0" name="JSON">Function.ReturnValue</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}"></param>
                         </action>
                     </actions>
-                    <sub-events>
-                        <event-block sid="914431899202809">
-                            <conditions>
-                                <condition id="-8" inverted="1" name="Compare two values" sid="607344400905942" type="System">
-                                    <param id="0" name="First value">find(Queue_LevelPlaylist.Order,zeropad(random_level,2)&amp;&quot;,&quot;)</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Second value">-1</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Enqueue" sid="247409675936915" type="Queue_LevelPlaylist">
-                                    <param id="0" name="Element">JSON_LevelPlaylist.Value(0,Queue_LevelPlaylist.CurrentTask,random_level)</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="137549958179663" type="Queue_LevelPlaylist">
-                                    <param id="0" name="Instance variable">Order</param>
-                                    <param id="1" name="Value">replace(Self.Order,zeropad(random_level,2)&amp;&quot;,&quot;,&quot;&quot;)</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
+                </event-block>
+                <event-block sid="389865525469511">
+                    <conditions>
+                        <condition id="100" name="For each property" sid="695349509623159" type="JSON__COMMON">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Enqueue" sid="592936526982785" type="Queue_LevelPlaylist">
+                            <param id="0" name="Element">JSON__COMMON.CurrentValue</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="790981680995209">
+                    <conditions />
+                    <actions>
+                        <action id="-9" name="Destroy" sid="434904770918242" type="JSON__COMMON" />
+                        <action id="14" name="Log" sid="266997981534910" type="Browser">
+                            <param id="0" name="Type">0</param>
+                            <param id="1" name="Message">Queue_LevelPlaylist.ToJSON</param>
+                        </action>
+                    </actions>
                 </event-block>
             </sub-events>
         </event-block>
