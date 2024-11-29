@@ -2291,22 +2291,6 @@
                                     <param id="0" name="Instance variable">SpringTimer</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
-                                <action id="-10" name="Set value" sid="719087457258708" type="Var_Level">
-                                    <param id="0" name="Instance variable">Marathon_Timer</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action disabled="1" id="-10" name="Set value" sid="200332029119672" type="Var_Level">
-                                    <param id="0" name="Instance variable">Marathon_Counter</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="785445703583129" type="Var_Level">
-                                    <param id="0" name="Instance variable">Marathon_CounterMax</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="900011965175509" type="Var_Level">
-                                    <param id="0" name="Instance variable">Marathon_String</param>
-                                    <param id="1" name="Value">&quot;&quot;</param>
-                                </action>
                                 <action id="-10" name="Set value" sid="777937003846935" type="Var_Level">
                                     <param id="0" name="Instance variable">TimerLevel</param>
                                     <param id="1" name="Value">0</param>
@@ -2343,115 +2327,21 @@
                                     <param id="0" name="Instance variable">SChaseWave</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <comment>get unix timestamp (in seconds or milliseconds)</comment>
-                <event-block sid="542592586597439">
-                    <conditions>
-                        <condition id="0" name="On function" sid="443929002256602" type="Function">
-                            <param id="0" name="Name">&quot;Time_CurrentTimestamp&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="1" name="Set return value" sid="270996019608588" type="Function">
-                            <param id="0" name="Value">int(Browser.ExecJS(&quot;Date.now()&quot;)/1000)</param>
-                        </action>
-                    </actions>
-                    <sub-events>
-                        <event-block sid="341073709096233">
-                            <conditions>
-                                <condition id="-8" name="Compare two values" sid="104572410082513" type="System">
-                                    <param id="0" name="First value">Function.ParamCount</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Second value">1</param>
-                                </condition>
-                                <condition id="1" name="Compare parameter" sid="234757033218842" type="Function">
-                                    <param id="0" name="Index">0</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;ms&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="1" name="Set return value" sid="768479632320855" type="Function">
-                                    <param id="0" name="Value">Browser.ExecJS(&quot;Date.now()&quot;)</param>
+                                <action disabled="1" id="55" name="Clear" sid="208385204299732" type="JSON__TEMP">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}"></param>
+                                </action>
+                                <action disabled="1" id="0" name="Set New Object" sid="823754440988134" type="JSON__TEMP">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}"></param>
+                                </action>
+                                <action id="-10" name="Set value" sid="770010705533681" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevelTicks</param>
+                                    <param id="1" name="Value">0</param>
                                 </action>
                             </actions>
                         </event-block>
                     </sub-events>
-                </event-block>
-                <comment>generate random string</comment>
-                <event-block sid="262283849288638">
-                    <conditions>
-                        <condition id="0" name="On function" sid="110089752735088" type="Function">
-                            <param id="0" name="Name">&quot;String_Random&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions />
-                    <sub-events>
-                        <variable constant="0" name="return" sid="169714551861914" static="0" type="text"></variable>
-                        <event-block sid="315147407362092">
-                            <conditions>
-                                <condition id="-12" name="Repeat" sid="483146154941530" type="System">
-                                    <param id="0" name="Count">Function.Param(0)</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="826353942358263" type="System">
-                                    <param id="0" name="Variable">return</param>
-                                    <param id="1" name="Value">return&amp;mid(&quot;0123456789abcdefghijklmnopqrstuvwxyz0123456789&quot;,int(random(0,45)),1) </param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="204652736181468">
-                            <conditions />
-                            <actions>
-                                <action id="1" name="Set return value" sid="779158627836417" type="Function">
-                                    <param id="0" name="Value">return</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <comment>minify JSON</comment>
-                <event-block sid="563394163420609">
-                    <conditions>
-                        <condition id="0" name="On function" sid="659162558539154" type="Function">
-                            <param id="0" name="Name">&quot;JSON_Minify&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="1" name="Set return value" sid="200189091204297" type="Function">
-                            <param id="0" name="Value">Browser.ExecJS(&quot;JSON.stringify(&quot;&amp;Function.Param(0)&amp;&quot;)&quot;)</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <comment>merge 2 JSONs</comment>
-                <event-block sid="275079016777799">
-                    <conditions>
-                        <condition id="0" name="On function" sid="763695921601350" type="Function">
-                            <param id="0" name="Name">&quot;JSON_Merge&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="1" name="Set return value" sid="885017672011833" type="Function">
-                            <param id="0" name="Value">Browser.ExecJS(&quot;JSON.stringify($.extend(JSON.parse(&apos;&quot;&amp;Function.Param(0)&amp;&quot;&apos;), JSON.parse(&apos;&quot;&amp;Function.Param(1)&amp;&quot;&apos;)))&quot;)</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <comment>shuffle a JSON array</comment>
-                <event-block sid="205241768867331">
-                    <conditions>
-                        <condition id="0" name="On function" sid="698935990584130" type="Function">
-                            <param id="0" name="Name">&quot;JSON_ShuffleArray&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="1" name="Set return value" sid="272664257374356" type="Function">
-                            <param id="0" name="Value">Browser.ExecJS(&quot;&#x0D;&#x0A;function func() {&#x0D;&#x0A;    let array = JSON.parse(&apos;&quot;&amp;Function.Param(0)&amp;&quot;&apos;);&#x0D;&#x0A;    for (let i = array.length - 1; i &gt;= 0; i--) {&#x0D;&#x0A;        const j = Math.floor(Math.random() * (i + 1));&#x0D;&#x0A;        [array[i], array[j]] = [array[j], array[i]];&#x0D;&#x0A;    }&#x0D;&#x0A;    return JSON.stringify(array);&#x0D;&#x0A;}&#x0D;&#x0A;func()&#x0D;&#x0A;&quot;)</param>
-                        </action>
-                    </actions>
                 </event-block>
                 <comment>compare two semver versions</comment>
                 <event-block sid="789943670349233">
@@ -2619,6 +2509,112 @@
                         </event-block>
                     </sub-events>
                 </event-block>
+                <comment>get unix timestamp (in seconds or milliseconds)</comment>
+                <event-block sid="542592586597439">
+                    <conditions>
+                        <condition id="0" name="On function" sid="443929002256602" type="Function">
+                            <param id="0" name="Name">&quot;Time_CurrentTimestamp&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="1" name="Set return value" sid="270996019608588" type="Function">
+                            <param id="0" name="Value">int(Browser.ExecJS(&quot;Date.now()&quot;)/1000)</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="341073709096233">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="104572410082513" type="System">
+                                    <param id="0" name="First value">Function.ParamCount</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">1</param>
+                                </condition>
+                                <condition id="1" name="Compare parameter" sid="234757033218842" type="Function">
+                                    <param id="0" name="Index">0</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;ms&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="1" name="Set return value" sid="768479632320855" type="Function">
+                                    <param id="0" name="Value">Browser.ExecJS(&quot;Date.now()&quot;)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>generate random string</comment>
+                <event-block sid="262283849288638">
+                    <conditions>
+                        <condition id="0" name="On function" sid="110089752735088" type="Function">
+                            <param id="0" name="Name">&quot;String_Random&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <variable constant="0" name="return" sid="169714551861914" static="0" type="text"></variable>
+                        <event-block sid="315147407362092">
+                            <conditions>
+                                <condition id="-12" name="Repeat" sid="483146154941530" type="System">
+                                    <param id="0" name="Count">Function.Param(0)</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="826353942358263" type="System">
+                                    <param id="0" name="Variable">return</param>
+                                    <param id="1" name="Value">return&amp;mid(&quot;0123456789abcdefghijklmnopqrstuvwxyz0123456789&quot;,int(random(0,45)),1) </param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="204652736181468">
+                            <conditions />
+                            <actions>
+                                <action id="1" name="Set return value" sid="779158627836417" type="Function">
+                                    <param id="0" name="Value">return</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>minify JSON</comment>
+                <event-block sid="563394163420609">
+                    <conditions>
+                        <condition id="0" name="On function" sid="659162558539154" type="Function">
+                            <param id="0" name="Name">&quot;JSON_Minify&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="1" name="Set return value" sid="200189091204297" type="Function">
+                            <param id="0" name="Value">Browser.ExecJS(&quot;JSON.stringify(&quot;&amp;Function.Param(0)&amp;&quot;)&quot;)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>merge 2 JSONs</comment>
+                <event-block sid="275079016777799">
+                    <conditions>
+                        <condition id="0" name="On function" sid="763695921601350" type="Function">
+                            <param id="0" name="Name">&quot;JSON_Merge&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="1" name="Set return value" sid="885017672011833" type="Function">
+                            <param id="0" name="Value">Browser.ExecJS(&quot;JSON.stringify($.extend(JSON.parse(&apos;&quot;&amp;Function.Param(0)&amp;&quot;&apos;), JSON.parse(&apos;&quot;&amp;Function.Param(1)&amp;&quot;&apos;)))&quot;)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>shuffle a JSON array</comment>
+                <event-block sid="205241768867331">
+                    <conditions>
+                        <condition id="0" name="On function" sid="698935990584130" type="Function">
+                            <param id="0" name="Name">&quot;JSON_ShuffleArray&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="1" name="Set return value" sid="272664257374356" type="Function">
+                            <param id="0" name="Value">Browser.ExecJS(&quot;&#x0D;&#x0A;function func() {&#x0D;&#x0A;    let array = JSON.parse(&apos;&quot;&amp;Function.Param(0)&amp;&quot;&apos;);&#x0D;&#x0A;    for (let i = array.length - 1; i &gt;= 0; i--) {&#x0D;&#x0A;        const j = Math.floor(Math.random() * (i + 1));&#x0D;&#x0A;        [array[i], array[j]] = [array[j], array[i]];&#x0D;&#x0A;    }&#x0D;&#x0A;    return JSON.stringify(array);&#x0D;&#x0A;}&#x0D;&#x0A;func()&#x0D;&#x0A;&quot;)</param>
+                        </action>
+                    </actions>
+                </event-block>
             </sub-events>
         </event-group>
         <event-group description="" sid="963834884412106" title="External files">
@@ -2626,7 +2622,7 @@
                 <comment></comment>
                 <event-block sid="722283299690314">
                     <conditions>
-                        <condition id="70" name="Is Empty" sid="190649115069777" type="JSON_LevelPlaylist">
+                        <condition id="70" name="Is Empty" sid="190649115069777" type="JSON_Lists">
                             <param id="0" name="Reference point">0</param>
                             <param id="1" name="Key {n}"></param>
                         </condition>
@@ -2634,63 +2630,24 @@
                     </conditions>
                     <actions>
                         <action id="1" name="Request project file" sid="586972287519443" type="AJAX">
-                            <param id="0" name="Tag">&quot;levelslist&quot;</param>
-                            <param id="1" name="File">levelslist.ini</param>
+                            <param id="0" name="Tag">&quot;lists&quot;</param>
+                            <param id="1" name="File">lists.ini</param>
                         </action>
                     </actions>
                 </event-block>
                 <event-block sid="666020545546164">
                     <conditions>
                         <condition id="0" name="On completed" sid="123769047512206" type="AJAX">
-                            <param id="0" name="Tag">&quot;levelslist&quot;</param>
+                            <param id="0" name="Tag">&quot;lists&quot;</param>
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="60" name="LoadJSON" sid="140540162740817" type="JSON_LevelPlaylist">
+                        <action id="60" name="LoadJSON" sid="140540162740817" type="JSON_Lists">
                             <param id="0" name="JSON">INI.INI2JSON(AJAX.LastData)</param>
                             <param id="1" name="Reference point">0</param>
                             <param id="2" name="Key {n}"></param>
                         </action>
                     </actions>
-                    <sub-events>
-                        <variable constant="0" name="json" sid="244282703755548" static="0" type="text"></variable>
-                        <event-block sid="683144304170841">
-                            <conditions>
-                                <condition id="100" name="For each property" sid="381499546546543" type="JSON_LevelPlaylist">
-                                    <param id="0" name="Reference point">0</param>
-                                    <param id="1" name="Key {n}"></param>
-                                </condition>
-                                <condition id="-8" name="Compare two values" sid="269905732591533" type="System">
-                                    <param id="0" name="First value">find(JSON_LevelPlaylist.CurrentKey,&quot;List&quot;)</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Second value">-1</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="148697338660737" type="System">
-                                    <param id="0" name="Variable">json</param>
-                                    <param id="1" name="Value">replace(JSON_LevelPlaylist.AsJson(0,JSON_LevelPlaylist.CurrentKey),&quot;:true&quot;,&quot;&quot;)</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="903085139766519" type="System">
-                                    <param id="0" name="Variable">json</param>
-                                    <param id="1" name="Value">replace(json,&quot;{&quot;,&quot;[&quot;)</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="465766300376276" type="System">
-                                    <param id="0" name="Variable">json</param>
-                                    <param id="1" name="Value">replace(json,&quot;}&quot;,&quot;]&quot;)</param>
-                                </action>
-                                <action id="10" name="Set New Array" sid="737554981642463" type="JSON_LevelPlaylist">
-                                    <param id="0" name="Reference point">0</param>
-                                    <param id="1" name="Key {n}">Self.CurrentKey</param>
-                                </action>
-                                <action id="60" name="LoadJSON" sid="151428741012719" type="JSON_LevelPlaylist">
-                                    <param id="0" name="JSON">json</param>
-                                    <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">Self.CurrentKey</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
                 </event-block>
                 <comment></comment>
                 <event-block sid="873481601175739">
@@ -3202,11 +3159,20 @@
                                         <event-block sid="787473826429384">
                                             <conditions />
                                             <actions>
-                                                <action id="0" name="Call function" sid="319438779144311" type="Function">
-                                                    <param id="0" name="Name">&quot;ApplyConfig&quot;</param>
-                                                    <param id="1" name="Parameter {n}">JSON__COMMON.AsJson(0)</param>
+                                                <action id="0" name="Call function" sid="470020013232579" type="Function">
+                                                    <param id="0" name="Name">&quot;JSON_Merge&quot;</param>
+                                                    <param id="1" name="Parameter {n}">Save_Config.Default{###}JSON__COMMON.AsJson(0)</param>
+                                                </action>
+                                                <action id="60" name="LoadJSON" sid="308780391425036" type="Save_Config">
+                                                    <param id="0" name="JSON">Function.ReturnValue</param>
+                                                    <param id="1" name="Reference point">0</param>
+                                                    <param id="2" name="Key {n}"></param>
                                                 </action>
                                                 <action id="-9" name="Destroy" sid="919800462194965" type="JSON__COMMON" />
+                                                <action id="0" name="Call function" sid="319438779144311" type="Function">
+                                                    <param id="0" name="Name">&quot;ApplyConfig&quot;</param>
+                                                    <param id="1" name="Parameter {n}"></param>
+                                                </action>
                                             </actions>
                                         </event-block>
                                     </sub-events>
@@ -3272,9 +3238,18 @@
                         </condition>
                     </conditions>
                     <actions>
+                        <action id="0" name="Call function" sid="977622016253238" type="Function">
+                            <param id="0" name="Name">&quot;JSON_Merge&quot;</param>
+                            <param id="1" name="Parameter {n}">Save_Config.Default{###}LocalStorage.ItemValue</param>
+                        </action>
+                        <action id="60" name="LoadJSON" sid="741046444733568" type="Save_Config">
+                            <param id="0" name="JSON">Function.ReturnValue</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}"></param>
+                        </action>
                         <action id="0" name="Call function" sid="569360739213116" type="Function">
                             <param id="0" name="Name">&quot;ApplyConfig&quot;</param>
-                            <param id="1" name="Parameter {n}">LocalStorage.ItemValue</param>
+                            <param id="1" name="Parameter {n}"></param>
                         </action>
                     </actions>
                 </event-block>
@@ -3287,51 +3262,25 @@
                     </conditions>
                     <actions />
                     <sub-events>
-                        <event-block sid="547983808729535">
+                        <comment>backwards compatibility</comment>
+                        <comment>(0.3.0 and lower)</comment>
+                        <event-block sid="212935765459079">
                             <conditions>
-                                <condition id="-8" inverted="1" name="Compare two values" sid="207796951587847" type="System">
-                                    <param id="0" name="First value">Function.ParamCount</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Second value">0</param>
+                                <condition id="60" inverted="1" name="Is undefined" sid="340563387032664" type="Save_Config">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}">&quot;SRBftp_Config&quot;</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="55" name="Clear" sid="351526217455085" type="Save_Config">
+                                <action id="50" name="Delete" sid="521421864158868" type="Save_Config">
                                     <param id="0" name="Reference point">0</param>
-                                    <param id="1" name="Key {n}"></param>
+                                    <param id="1" name="Key {n}">&quot;SRBftp_Config&quot;</param>
                                 </action>
-                                <action id="0" name="Call function" sid="470020013232579" type="Function">
-                                    <param id="0" name="Name">&quot;JSON_Merge&quot;</param>
-                                    <param id="1" name="Parameter {n}">Save_Config.Default{###}Function.Param(0)</param>
-                                </action>
-                                <action id="60" name="LoadJSON" sid="308780391425036" type="Save_Config">
-                                    <param id="0" name="JSON">Function.ReturnValue</param>
-                                    <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}"></param>
+                                <action id="0" name="Call function" sid="820173539847982" type="Function">
+                                    <param id="0" name="Name">&quot;Save_Config&quot;</param>
+                                    <param id="1" name="Parameter {n}"></param>
                                 </action>
                             </actions>
-                            <sub-events>
-                                <comment>backwards compatibility</comment>
-                                <comment>(0.3.0 and lower)</comment>
-                                <event-block sid="212935765459079">
-                                    <conditions>
-                                        <condition id="60" inverted="1" name="Is undefined" sid="340563387032664" type="Save_Config">
-                                            <param id="0" name="Reference point">0</param>
-                                            <param id="1" name="Key {n}">&quot;SRBftp_Config&quot;</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="50" name="Delete" sid="521421864158868" type="Save_Config">
-                                            <param id="0" name="Reference point">0</param>
-                                            <param id="1" name="Key {n}">&quot;SRBftp_Config&quot;</param>
-                                        </action>
-                                        <action id="0" name="Call function" sid="820173539847982" type="Function">
-                                            <param id="0" name="Name">&quot;Save_Config&quot;</param>
-                                            <param id="1" name="Parameter {n}"></param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
                         </event-block>
                         <comment>window size</comment>
                         <comment>0.5 - 1 - 1.5 - 2 - 2.25</comment>
@@ -3632,7 +3581,7 @@
         </event-group>
         <event-group description="" sid="643272290847915" title="General Save">
             <sub-events>
-                <variable constant="1" name="NAME" sid="944980792473416" static="0" type="text">srbftp_save_general</variable>
+                <variable constant="1" name="NAME" sid="944980792473416" static="0" type="text">srbftp_general</variable>
                 <comment>defaults</comment>
                 <event-block sid="609891827260865">
                     <conditions>
@@ -3660,6 +3609,16 @@
                                     <param id="0" name="Value">Function.ReturnValue</param>
                                     <param id="1" name="Reference point">0</param>
                                     <param id="2" name="Key {n}">&quot;TimestampStart&quot;</param>
+                                </action>
+                                <action id="20" name="Set Value" sid="356235220314762" type="Save_General">
+                                    <param id="0" name="Value">0</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;TimestampLast&quot;</param>
+                                </action>
+                                <action id="20" name="Set Value" sid="856995008894462" type="Save_General">
+                                    <param id="0" name="Value">0</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;TimestampRecord&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -3695,6 +3654,20 @@
                                     <param id="0" name="JSON">Self.Default</param>
                                     <param id="1" name="Reference point">0</param>
                                     <param id="2" name="Key {n}"></param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="219205387715469">
+                            <conditions />
+                            <actions>
+                                <action id="0" name="Call function" sid="365371957658759" type="Function">
+                                    <param id="0" name="Name">&quot;Time_CurrentTimestamp&quot;</param>
+                                    <param id="1" name="Parameter {n}"></param>
+                                </action>
+                                <action id="20" name="Set Value" sid="722130392918746" type="Save_General">
+                                    <param id="0" name="Value">Function.ReturnValue</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;TimestampLast&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -4071,28 +4044,48 @@
         <event-block sid="958964304381177">
             <conditions>
                 <condition id="0" name="On function" sid="472691178728448" type="Function">
-                    <param id="0" name="Name">&quot;LevelPlaylist_Start&quot;</param>
+                    <param id="0" name="Name">&quot;LevelList_Init&quot;</param>
                 </condition>
             </conditions>
             <actions>
-                <action id="2" name="Clear" sid="126523508683763" type="Queue_LevelPlaylist" />
+                <action id="2" name="Clear" sid="126523508683763" type="Queue_LevelList" />
                 <action id="-3" name="Create object" sid="111107119753649" type="System">
                     <param id="0" name="Object to create">JSON__COMMON</param>
                     <param id="1" name="Layer">0</param>
                     <param id="2" name="X">0</param>
                     <param id="3" name="Y">0</param>
                 </action>
-                <action id="60" name="LoadJSON" sid="292511537493245" type="JSON__COMMON">
-                    <param id="0" name="JSON">JSON_LevelPlaylist.AsJson(0, Function.Param(0))</param>
-                    <param id="1" name="Reference point">0</param>
-                    <param id="2" name="Key {n}"></param>
+                <action id="10" name="Set New Array" sid="327792489680518" type="JSON__COMMON">
+                    <param id="0" name="Reference point">0</param>
+                    <param id="1" name="Key {n}"></param>
                 </action>
             </actions>
             <sub-events>
+                <comment>convert to array</comment>
+                <event-block sid="579167478437711">
+                    <conditions>
+                        <condition id="100" name="For each property" sid="492453265695954" type="JSON_Lists">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}">Function.Param(0)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="20" name="Set Value" sid="487666313261742" type="JSON__COMMON">
+                            <param id="0" name="Value">JSON_Lists.CurrentKey</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}">JSON__COMMON.Size(0)</param>
+                        </action>
+                    </actions>
+                </event-block>
                 <comment>0 - normal</comment>
-                <comment>1 - random</comment>
+                <comment>1 - randomized</comment>
                 <event-block sid="939815562913673">
                     <conditions>
+                        <condition id="-8" name="Compare two values" sid="752519021120038" type="System">
+                            <param id="0" name="First value">Function.ParamCount</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Second value">2</param>
+                        </condition>
                         <condition id="1" name="Compare parameter" sid="854822613212945" type="Function">
                             <param id="0" name="Index">1</param>
                             <param id="1" name="Comparison">0</param>
@@ -4119,7 +4112,7 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="0" name="Enqueue" sid="592936526982785" type="Queue_LevelPlaylist">
+                        <action id="0" name="Enqueue" sid="592936526982785" type="Queue_LevelList">
                             <param id="0" name="Element">JSON__COMMON.CurrentValue</param>
                         </action>
                     </actions>
@@ -4130,8 +4123,176 @@
                         <action id="-9" name="Destroy" sid="434904770918242" type="JSON__COMMON" />
                         <action id="14" name="Log" sid="266997981534910" type="Browser">
                             <param id="0" name="Type">0</param>
-                            <param id="1" name="Message">Queue_LevelPlaylist.ToJSON</param>
+                            <param id="1" name="Message">Queue_LevelList.ToJSON</param>
                         </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <comment></comment>
+        <event-block sid="797689213652068">
+            <conditions>
+                <condition id="0" name="On function" sid="330398228753432" type="Function">
+                    <param id="0" name="Name">&quot;Marathon_Start&quot;</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <variable constant="0" name="name" sid="494009449400539" static="0" type="text"></variable>
+                <variable constant="0" name="mode" sid="104011906937400" static="0" type="number">0</variable>
+                <variable constant="0" name="lives" sid="756203741423234" static="0" type="number">0</variable>
+                <event-block sid="350595746872718">
+                    <conditions />
+                    <actions>
+                        <action id="-9" name="Set value" sid="973507158968750" type="System">
+                            <param id="0" name="Variable">name</param>
+                            <param id="1" name="Value">Function.Param(0)</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="907395611799366" type="System">
+                            <param id="0" name="Variable">mode</param>
+                            <param id="1" name="Value">Function.Param(1)</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="575852331829802" type="System">
+                            <param id="0" name="Variable">lives</param>
+                            <param id="1" name="Value">Function.Param(2)</param>
+                        </action>
+                        <action id="0" name="Call function" sid="955760765940061" type="Function">
+                            <param id="0" name="Name">&quot;LevelList_Init&quot;</param>
+                            <param id="1" name="Parameter {n}">name{###}mode</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="471136963885864">
+                    <conditions />
+                    <actions>
+                        <action id="55" name="Clear" sid="914189044275946" type="JSON__TEMP">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </action>
+                        <action id="0" name="Set New Object" sid="828665272591581" type="JSON__TEMP">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </action>
+                        <action id="20" name="Set Value" sid="933256313112886" type="JSON__TEMP">
+                            <param id="0" name="Value">1</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}">&quot;_srbftp_marathon&quot;</param>
+                        </action>
+                        <action id="20" name="Set Value" sid="592306343306104" type="JSON__TEMP">
+                            <param id="0" name="Value">projectversion</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}">&quot;Version&quot;</param>
+                        </action>
+                        <action id="0" name="Call function" sid="396021776009403" type="Function">
+                            <param id="0" name="Name">&quot;String_Random&quot;</param>
+                            <param id="1" name="Parameter {n}">8</param>
+                        </action>
+                        <action id="20" name="Set Value" sid="922421152318171" type="JSON__TEMP">
+                            <param id="0" name="Value">Function.ReturnValue</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}">&quot;ID&quot;</param>
+                        </action>
+                        <action id="20" name="Set Value" sid="913812011888306" type="JSON__TEMP">
+                            <param id="0" name="Value">&quot;&quot;</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}">&quot;Skin&quot;</param>
+                        </action>
+                        <action id="20" name="Set Value" sid="517098488692858" type="JSON__TEMP">
+                            <param id="0" name="Value">name</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}">&quot;Name&quot;</param>
+                        </action>
+                        <action id="20" name="Set Value" sid="704297118589800" type="JSON__TEMP">
+                            <param id="0" name="Value">mode</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}">&quot;Mode&quot;</param>
+                        </action>
+                        <action id="20" name="Set Value" sid="534557664228975" type="JSON__TEMP">
+                            <param id="0" name="Value">0</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}">&quot;Clock&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="828852483507927">
+                    <conditions>
+                        <condition id="-14" inverted="1" name="Compare variable" sid="182266624215793" type="System">
+                            <param id="0" name="Variable">lives</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="20" name="Set Value" sid="627952909050139" type="JSON__TEMP">
+                            <param id="0" name="Value">lives</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}">&quot;LivesStart&quot;</param>
+                        </action>
+                        <action id="20" name="Set Value" sid="225698417700325" type="JSON__TEMP">
+                            <param id="0" name="Value">lives</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}">&quot;Lives&quot;</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="333608500490010" type="Var_Player">
+                            <param id="0" name="Instance variable">Lives</param>
+                            <param id="1" name="Value">lives</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="454992568271230">
+                    <conditions />
+                    <actions>
+                        <action id="10" name="Set New Array" sid="712647893791343" type="JSON__TEMP">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}">&quot;Levels&quot;</param>
+                        </action>
+                        <action id="-3" name="Create object" sid="375281468721014" type="System">
+                            <param id="0" name="Object to create">JSON__COMMON</param>
+                            <param id="1" name="Layer">0</param>
+                            <param id="2" name="X">0</param>
+                            <param id="3" name="Y">0</param>
+                        </action>
+                        <action id="60" name="LoadJSON" sid="878483081998827" type="JSON__COMMON">
+                            <param id="0" name="JSON">Queue_LevelList.ToJSON</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}"></param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="115309627611754">
+                            <conditions>
+                                <condition id="100" name="For each property" sid="253403375141253" type="JSON__COMMON">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}">&quot;data&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Set New Object" sid="475646786743166" type="JSON__TEMP">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}">&quot;Levels&quot;{###}Self.Size(0, &quot;Levels&quot;)</param>
+                                </action>
+                                <action id="20" name="Set Value" sid="989347827436148" type="JSON__TEMP">
+                                    <param id="0" name="Value">JSON__COMMON.CurrentValue</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;Levels&quot;{###}Self.Size(0, &quot;Levels&quot;) - 1{###}&quot;Name&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="223235953097696">
+                            <conditions />
+                            <actions>
+                                <action id="-9" name="Destroy" sid="558361835734639" type="JSON__COMMON" />
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="952066891887703">
+                    <conditions />
+                    <actions>
+                        <action id="-25" name="Go to layout (by name)" sid="621640767657368" type="System">
+                            <param id="0" name="Layout">Queue_LevelList.Peek</param>
+                        </action>
+                        <action id="1" name="Dequeue" sid="427688928504394" type="Queue_LevelList" />
                     </actions>
                 </event-block>
             </sub-events>

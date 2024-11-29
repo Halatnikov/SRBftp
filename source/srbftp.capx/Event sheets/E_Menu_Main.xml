@@ -5140,9 +5140,9 @@
                             <sub-events>
                                 <event-block sid="847293710077573">
                                     <conditions>
-                                        <condition id="100" name="For each property" sid="403415501020354" type="JSON_LevelPlaylist">
+                                        <condition id="100" name="For each property" sid="403415501020354" type="JSON_Lists">
                                             <param id="0" name="Reference point">0</param>
-                                            <param id="1" name="Key {n}">&quot;List_Extra&quot;</param>
+                                            <param id="1" name="Key {n}">&quot;LevelSelect_Extra&quot;</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -5163,10 +5163,10 @@
                                             <actions>
                                                 <action id="-10" name="Set value" sid="877177138560634" type="Menu_Options">
                                                     <param id="0" name="Instance variable">ID</param>
-                                                    <param id="1" name="Value">JSON_LevelPlaylist.CurrentKey</param>
+                                                    <param id="1" name="Value">JSON_Lists.CurrentKey</param>
                                                 </action>
                                                 <action id="0" name="Set text" sid="102519825758656" type="Menu_Options">
-                                                    <param id="0" name="Text">uppercase(JSON_LevelPlaylist.Value(0,&quot;List_Extra&quot;,JSON_LevelPlaylist.CurrentKey))</param>
+                                                    <param id="0" name="Text">uppercase(JSON_Lists.Value(1))</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -5174,7 +5174,7 @@
                                 </event-block>
                                 <event-block sid="119089988360335">
                                     <conditions>
-                                        <condition id="100" name="For each property" sid="656562560104510" type="JSON_LevelPlaylist">
+                                        <condition id="100" name="For each property" sid="656562560104510" type="JSON_Lists">
                                             <param id="0" name="Reference point">0</param>
                                             <param id="1" name="Key {n}">Menu_Options.ID</param>
                                         </condition>
@@ -5196,9 +5196,9 @@
                                         </action>
                                         <action id="-10" name="Set value" sid="853239576557705" type="Menu_Options2">
                                             <param id="0" name="Instance variable">ID</param>
-                                            <param id="1" name="Value">JSON_LevelPlaylist.CurrentKey</param>
+                                            <param id="1" name="Value">JSON_Lists.CurrentKey</param>
                                         </action>
-                                        <action id="0" name="Set text" sid="151030088202776" type="Menu_Options2">
+                                        <action id="0" name="Set text" sid="256095052255553" type="Menu_Options2">
                                             <param id="0" name="Text">uppercase(JSON_LevelProperties.Value(0,Self.ID,&quot;Name&quot;))</param>
                                         </action>
                                         <action id="4" name="Set font color" sid="766490728467527" type="Menu_Options2">
@@ -5209,14 +5209,14 @@
                                         <event-block sid="137788968602532">
                                             <conditions>
                                                 <condition id="-8" inverted="1" name="Compare two values" sid="954354241833175" type="System">
-                                                    <param id="0" name="First value">JSON_LevelPlaylist.Value(0,Menu_Options.ID,JSON_LevelPlaylist.CurrentKey)</param>
+                                                    <param id="0" name="First value">JSON_Lists.Value(1)</param>
                                                     <param id="1" name="Comparison">0</param>
                                                     <param id="2" name="Second value">1</param>
                                                 </condition>
                                             </conditions>
                                             <actions>
                                                 <action id="0" name="Set text" sid="858357182338806" type="Menu_Options2">
-                                                    <param id="0" name="Text">uppercase(JSON_LevelPlaylist.Value(0,Menu_Options.ID,JSON_LevelPlaylist.CurrentKey))</param>
+                                                    <param id="0" name="Text">uppercase(JSON_Lists.Value(1))</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -5322,7 +5322,7 @@
                                     <actions>
                                         <action id="-9" name="Set value" sid="745083696055733" type="System">
                                             <param id="0" name="Variable">page</param>
-                                            <param id="1" name="Value">JSON_LevelPlaylist.Size(0,&quot;List_Extra&quot;)</param>
+                                            <param id="1" name="Value">JSON_Lists.Size(0,&quot;LevelSelect_Extra&quot;)</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -5331,7 +5331,7 @@
                                         <condition id="-14" name="Compare variable" sid="375815949696641" type="System">
                                             <param id="0" name="Variable">page</param>
                                             <param id="1" name="Comparison">5</param>
-                                            <param id="2" name="Value">JSON_LevelPlaylist.Size(0,&quot;List_Extra&quot;)+1</param>
+                                            <param id="2" name="Value">JSON_Lists.Size(0,&quot;LevelSelect_Extra&quot;)+1</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -5854,16 +5854,6 @@
                         <condition id="-4" name="Trigger once while true" sid="152476347563513" type="System" />
                     </conditions>
                     <actions>
-                        <action id="0" name="Create family object" sid="336280754785462" type="CreateObjectByVal">
-                            <param id="0" name="Family object">PlayerSkins</param>
-                            <param id="1" name="Variable ID">0</param>
-                            <param id="2" name="Comparison">0</param>
-                            <param id="3" name="Value">Var_Player.Skin</param>
-                            <param id="4" name="Layer">&quot;BG&quot;</param>
-                            <param id="5" name="X">-999</param>
-                            <param id="6" name="Y">-999</param>
-                            <param id="7" name="Tag">&quot;&quot;</param>
-                        </action>
                         <action id="-10" name="Set value" sid="148532033501957" type="Var_Game">
                             <param id="0" name="Instance variable">Gamemode</param>
                             <param id="1" name="Value">&quot;Marathon&quot;</param>
@@ -5975,7 +5965,6 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-9" name="Destroy" sid="439245258378585" type="PlayerSkins" />
                         <action id="-10" name="Set value" sid="659530164088412" type="Var_Game">
                             <param id="0" name="Instance variable">CurrentMenu</param>
                             <param id="1" name="Value">&quot;bonusmodes&quot;</param>
@@ -6002,7 +5991,17 @@
                             <param id="0" name="Layer">&quot;Marathon&quot;</param>
                         </condition>
                     </conditions>
-                    <actions />
+                    <actions>
+                        <action id="-15" name="Set visible" sid="773392486485560" type="Menu_Cursor">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="168154131252168" type="Menu_CursorWide">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="207927514848475" type="Menu_CursorArrows">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                    </actions>
                     <sub-events>
                         <event-block any="1" sid="315242463485492">
                             <conditions>
@@ -6033,6 +6032,25 @@
                                 </action>
                             </actions>
                         </event-block>
+                        <event-block sid="112897057332539">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="245362212286539" type="Var_Game">
+                                    <param id="0" name="Instance variable">CurrentSelection</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Value">3</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Set position" sid="244438044370423" type="Menu_CursorWide">
+                                    <param id="0" name="X">Menu_Options.X+37</param>
+                                    <param id="1" name="Y">Menu_Options.Y+10</param>
+                                </action>
+                                <action id="4" name="Set animation" sid="451420040645124" type="Menu_CursorWide">
+                                    <param id="0" name="Animation">&quot;Default&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
                         <event-block any="1" sid="952480437410248">
                             <conditions>
                                 <condition id="-7" name="Compare instance variable" sid="107344422133732" type="Var_Game">
@@ -6042,9 +6060,6 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-15" name="Set visible" sid="773392486485560" type="Menu_Cursor">
-                                    <param id="0" name="Visibility">0</param>
-                                </action>
                                 <action id="-3" name="Set position" sid="672832932783200" type="Menu_CursorWide">
                                     <param id="0" name="X">Menu_Options.X+10</param>
                                     <param id="1" name="Y">Menu_Options.Y+10</param>
@@ -6052,45 +6067,6 @@
                                 <action id="4" name="Set animation" sid="608306483631193" type="Menu_CursorWide">
                                     <param id="0" name="Animation">&quot;s300&quot;</param>
                                     <param id="1" name="From">1</param>
-                                </action>
-                                <action id="-15" name="Set visible" sid="168154131252168" type="Menu_CursorWide">
-                                    <param id="0" name="Visibility">1</param>
-                                </action>
-                                <action id="-15" name="Set visible" sid="207927514848475" type="Menu_CursorArrows">
-                                    <param id="0" name="Visibility">0</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="112897057332539">
-                            <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="245362212286539" type="Var_Game">
-                                    <param id="0" name="Instance variable">CurrentSelection</param>
-                                    <param id="1" name="Comparison">5</param>
-                                    <param id="2" name="Value">3</param>
-                                </condition>
-                                <condition id="-7" inverted="1" name="Compare instance variable" sid="500760741968903" type="Var_Game">
-                                    <param id="0" name="Instance variable">CurrentSelection</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">9</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-15" name="Set visible" sid="729587641036868" type="Menu_Cursor">
-                                    <param id="0" name="Visibility">0</param>
-                                </action>
-                                <action id="-3" name="Set position" sid="244438044370423" type="Menu_CursorWide">
-                                    <param id="0" name="X">Menu_Options.X+37</param>
-                                    <param id="1" name="Y">Menu_Options.Y+10</param>
-                                </action>
-                                <action id="4" name="Set animation" sid="451420040645124" type="Menu_CursorWide">
-                                    <param id="0" name="Animation">&quot;Default&quot;</param>
-                                    <param id="1" name="From">1</param>
-                                </action>
-                                <action id="-15" name="Set visible" sid="563270764394439" type="Menu_CursorWide">
-                                    <param id="0" name="Visibility">1</param>
-                                </action>
-                                <action id="-15" name="Set visible" sid="562280276086942" type="Menu_CursorArrows">
-                                    <param id="0" name="Visibility">0</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -6373,16 +6349,8 @@
                             </conditions>
                             <actions>
                                 <action id="0" name="Call function" sid="840703835277029" type="Function">
-                                    <param id="0" name="Name">&quot;LevelPlaylist_Start&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;SRB1&quot;{###}mode</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="344148641155634" type="Var_Level">
-                                    <param id="0" name="Instance variable">Marathon_String</param>
-                                    <param id="1" name="Value">&quot;SRB1&quot;</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="793598291067467" type="Var_Level">
-                                    <param id="0" name="Instance variable">Marathon_CounterMax</param>
-                                    <param id="1" name="Value">JSON_LevelPlaylist.Size(0,&quot;SRB1&quot;)</param>
+                                    <param id="0" name="Name">&quot;Marathon_Start&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;Marathon_SRB1&quot;{###}mode{###}lives</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -6395,17 +6363,9 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="0" name="Call function" sid="719627317891626" type="Function">
-                                    <param id="0" name="Name">&quot;LevelPlaylist_Start&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;SRB1_Bonus&quot;{###}mode</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="298848566291130" type="Var_Level">
-                                    <param id="0" name="Instance variable">Marathon_String</param>
-                                    <param id="1" name="Value">&quot;SRB1 BONUS&quot;</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="199523926218095" type="Var_Level">
-                                    <param id="0" name="Instance variable">Marathon_CounterMax</param>
-                                    <param id="1" name="Value">JSON_LevelPlaylist.Size(0,&quot;SRB1_Bonus&quot;)</param>
+                                <action id="0" name="Call function" sid="354737807848790" type="Function">
+                                    <param id="0" name="Name">&quot;Marathon_Start&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;Marathon_SRB1Bonus&quot;{###}mode{###}lives</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -6418,17 +6378,9 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="0" name="Call function" sid="122760542418400" type="Function">
-                                    <param id="0" name="Name">&quot;LevelPlaylist_Start&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;SRB2&quot;{###}mode</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="712374407238119" type="Var_Level">
-                                    <param id="0" name="Instance variable">Marathon_String</param>
-                                    <param id="1" name="Value">&quot;SRB2&quot;</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="380953065625927" type="Var_Level">
-                                    <param id="0" name="Instance variable">Marathon_CounterMax</param>
-                                    <param id="1" name="Value">JSON_LevelPlaylist.Size(0,&quot;SRB2&quot;)</param>
+                                <action id="0" name="Call function" sid="179891187169504" type="Function">
+                                    <param id="0" name="Name">&quot;Marathon_Start&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;Marathon_SRB2&quot;{###}mode{###}lives</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -6441,17 +6393,9 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="0" name="Call function" sid="200589615521652" type="Function">
-                                    <param id="0" name="Name">&quot;LevelPlaylist_Start&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;SRB15&quot;{###}mode</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="756739126415906" type="Var_Level">
-                                    <param id="0" name="Instance variable">Marathon_String</param>
-                                    <param id="1" name="Value">&quot;SRB1.5&quot;</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="964501074570540" type="Var_Level">
-                                    <param id="0" name="Instance variable">Marathon_CounterMax</param>
-                                    <param id="1" name="Value">JSON_LevelPlaylist.Size(0,&quot;SRB15&quot;)</param>
+                                <action id="0" name="Call function" sid="749306084854140" type="Function">
+                                    <param id="0" name="Name">&quot;Marathon_Start&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;Marathon_ExtraSRB15&quot;{###}mode{###}lives</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -6474,17 +6418,9 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="0" name="Call function" sid="472042241471910" type="Function">
-                                    <param id="0" name="Name">&quot;LevelPlaylist_Start&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;Everything_Main&quot;{###}mode</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="970289432095591" type="Var_Level">
-                                    <param id="0" name="Instance variable">Marathon_String</param>
-                                    <param id="1" name="Value">&quot;SRB1 AND SRB2&quot;</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="972986908380401" type="Var_Level">
-                                    <param id="0" name="Instance variable">Marathon_CounterMax</param>
-                                    <param id="1" name="Value">JSON_LevelPlaylist.Size(0,&quot;Everything_Main&quot;)</param>
+                                <action id="0" name="Call function" sid="341376101085907" type="Function">
+                                    <param id="0" name="Name">&quot;Marathon_Start&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;Marathon_EverythingMain&quot;{###}mode{###}lives</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -6497,17 +6433,9 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="0" name="Call function" sid="505879580538061" type="Function">
-                                    <param id="0" name="Name">&quot;LevelPlaylist_Start&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;Everything&quot;{###}mode</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="829477969553042" type="Var_Level">
-                                    <param id="0" name="Instance variable">Marathon_String</param>
-                                    <param id="1" name="Value">&quot;EVERYTHING AT ONCE&quot;</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="835366082538300" type="Var_Level">
-                                    <param id="0" name="Instance variable">Marathon_CounterMax</param>
-                                    <param id="1" name="Value">JSON_LevelPlaylist.Size(0,&quot;Everything&quot;)</param>
+                                <action id="0" name="Call function" sid="153294327278624" type="Function">
+                                    <param id="0" name="Name">&quot;Marathon_Start&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;Marathon_Everything&quot;{###}mode{###}lives</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -6524,179 +6452,7 @@
                                     <param id="0" name="Instance variable">CurrentMenu</param>
                                     <param id="1" name="Value">&quot;bonusmodes&quot;</param>
                                 </action>
-                                <action id="-9" name="Destroy" sid="697230840486730" type="PlayerSkins" />
                             </actions>
-                        </event-block>
-                        <event-block sid="299524663256540">
-                            <conditions>
-                                <condition id="-7" inverted="1" name="Compare instance variable" sid="706843136314703" type="Var_Game">
-                                    <param id="0" name="Instance variable">CurrentSelection</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">10</param>
-                                </condition>
-                                <condition id="-7" name="Compare instance variable" sid="336083813341350" type="Var_Game">
-                                    <param id="0" name="Instance variable">CurrentSelection</param>
-                                    <param id="1" name="Comparison">5</param>
-                                    <param id="2" name="Value">3</param>
-                                </condition>
-                                <condition id="-7" inverted="1" name="Compare instance variable" sid="143903526727720" type="Var_Game">
-                                    <param id="0" name="Instance variable">CurrentSelection</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">7</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="360071339913148" type="System">
-                                    <param id="0" name="Variable">lock</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                                <action id="33" name="Stop all" sid="330872642162546" type="BetterAudio" />
-                                <action id="-10" name="Set value" sid="301881139676381" type="Var_Level">
-                                    <param id="0" name="Instance variable">Marathon_Timer</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="713399843512296" type="Var_Level">
-                                    <param id="0" name="Instance variable">Marathon_Counter</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="-9" name="Destroy" sid="712078224225410" type="PlayerSkins" />
-                            </actions>
-                            <sub-events>
-                                <event-block sid="733443899206477">
-                                    <conditions>
-                                        <condition id="-14" inverted="1" name="Compare variable" sid="639102487114981" type="System">
-                                            <param id="0" name="Variable">lives</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">0</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-10" name="Set value" sid="881698945222584" type="Var_Player">
-                                            <param id="0" name="Instance variable">Lives</param>
-                                            <param id="1" name="Value">lives</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="855111191020512">
-                                    <conditions />
-                                    <actions>
-                                        <action id="55" name="Clear" sid="183723680335747" type="JSON__TEMP">
-                                            <param id="0" name="Reference point">0</param>
-                                            <param id="1" name="Key {n}"></param>
-                                        </action>
-                                        <action id="0" name="Set New Object" sid="582293569434138" type="JSON__TEMP">
-                                            <param id="0" name="Reference point">0</param>
-                                            <param id="1" name="Key {n}"></param>
-                                        </action>
-                                        <action id="0" name="Set New Object" sid="848316219175716" type="JSON__TEMP">
-                                            <param id="0" name="Reference point">0</param>
-                                            <param id="1" name="Key {n}">Var_Level.Marathon_String</param>
-                                        </action>
-                                        <action id="20" name="Set Value" sid="767783072066060" type="JSON__TEMP">
-                                            <param id="0" name="Value">1</param>
-                                            <param id="1" name="Reference point">0</param>
-                                            <param id="2" name="Key {n}">Var_Level.Marathon_String{###}&quot;_srbftp_marathon&quot;</param>
-                                        </action>
-                                        <action id="20" name="Set Value" sid="944688718288937" type="JSON__TEMP">
-                                            <param id="0" name="Value">projectversion</param>
-                                            <param id="1" name="Reference point">0</param>
-                                            <param id="2" name="Key {n}">Var_Level.Marathon_String{###}&quot;Version&quot;</param>
-                                        </action>
-                                        <action id="20" name="Set Value" sid="471482427257018" type="JSON__TEMP">
-                                            <param id="0" name="Value">0</param>
-                                            <param id="1" name="Reference point">0</param>
-                                            <param id="2" name="Key {n}">Var_Level.Marathon_String{###}&quot;Levels&quot;</param>
-                                        </action>
-                                        <action id="20" name="Set Value" sid="938853706513269" type="JSON__TEMP">
-                                            <param id="0" name="Value">Var_Level.Marathon_CounterMax</param>
-                                            <param id="1" name="Reference point">0</param>
-                                            <param id="2" name="Key {n}">Var_Level.Marathon_String{###}&quot;LevelsMax&quot;</param>
-                                        </action>
-                                        <action id="20" name="Set Value" sid="407192272675901" type="JSON__TEMP">
-                                            <param id="0" name="Value">mode</param>
-                                            <param id="1" name="Reference point">0</param>
-                                            <param id="2" name="Key {n}">Var_Level.Marathon_String{###}&quot;Mode&quot;</param>
-                                        </action>
-                                        <action id="20" name="Set Value" sid="717089724878488" type="JSON__TEMP">
-                                            <param id="0" name="Value">lives</param>
-                                            <param id="1" name="Reference point">0</param>
-                                            <param id="2" name="Key {n}">Var_Level.Marathon_String{###}&quot;Lives&quot;</param>
-                                        </action>
-                                        <action id="20" name="Set Value" sid="703460625907570" type="JSON__TEMP">
-                                            <param id="0" name="Value">lives</param>
-                                            <param id="1" name="Reference point">0</param>
-                                            <param id="2" name="Key {n}">Var_Level.Marathon_String{###}&quot;LivesMax&quot;</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="453002410250497">
-                                    <conditions>
-                                        <condition id="-33" name="Pick by comparison" sid="805899429931685" type="System">
-                                            <param id="0" name="Object">PlayerSkins</param>
-                                            <param id="1" name="Expression">PlayerSkins.ID</param>
-                                            <param id="2" name="Comparison">0</param>
-                                            <param id="3" name="Value">Var_Player.Skin</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="20" name="Set Value" sid="890916306557132" type="JSON__TEMP">
-                                            <param id="0" name="Value">PlayerSkins.Name</param>
-                                            <param id="1" name="Reference point">0</param>
-                                            <param id="2" name="Key {n}">Var_Level.Marathon_String{###}&quot;Skin&quot;</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="258396560568281">
-                                    <conditions />
-                                    <actions>
-                                        <action id="0" name="Call function" sid="448826250135176" type="Function">
-                                            <param id="0" name="Name">&quot;Time_CurrentTimestamp&quot;</param>
-                                            <param id="1" name="Parameter {n}">&quot;ms&quot;</param>
-                                        </action>
-                                        <action id="20" name="Set Value" sid="896713680739821" type="JSON__TEMP">
-                                            <param id="0" name="Value">Function.ReturnValue</param>
-                                            <param id="1" name="Reference point">0</param>
-                                            <param id="2" name="Key {n}">Var_Level.Marathon_String{###}&quot;TimestampStart&quot;</param>
-                                        </action>
-                                        <action id="20" name="Set Value" sid="555088110942511" type="JSON__TEMP">
-                                            <param id="0" name="Value">&quot;null&quot;</param>
-                                            <param id="1" name="Reference point">0</param>
-                                            <param id="2" name="Key {n}">Var_Level.Marathon_String{###}&quot;TimestampEnd&quot;</param>
-                                        </action>
-                                        <action id="20" name="Set Value" sid="388621878895547" type="JSON__TEMP">
-                                            <param id="0" name="Value">0</param>
-                                            <param id="1" name="Reference point">0</param>
-                                            <param id="2" name="Key {n}">Var_Level.Marathon_String{###}&quot;Score&quot;</param>
-                                        </action>
-                                        <action id="20" name="Set Value" sid="289797142904907" type="JSON__TEMP">
-                                            <param id="0" name="Value">0</param>
-                                            <param id="1" name="Reference point">0</param>
-                                            <param id="2" name="Key {n}">Var_Level.Marathon_String{###}&quot;Deaths&quot;</param>
-                                        </action>
-                                        <action id="20" name="Set Value" sid="986444702219320" type="JSON__TEMP">
-                                            <param id="0" name="Value">0</param>
-                                            <param id="1" name="Reference point">0</param>
-                                            <param id="2" name="Key {n}">Var_Level.Marathon_String{###}&quot;Time&quot;</param>
-                                        </action>
-                                        <action id="10" name="Set New Array" sid="553977245713871" type="JSON__TEMP">
-                                            <param id="0" name="Reference point">0</param>
-                                            <param id="1" name="Key {n}">Var_Level.Marathon_String{###}&quot;LevelStats&quot;</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="253198826895560">
-                                    <conditions />
-                                    <actions>
-                                        <action id="-16" name="Wait" sid="295628829245149" type="System">
-                                            <param id="0" name="Seconds">0.2</param>
-                                        </action>
-                                        <action id="-25" name="Go to layout (by name)" sid="746778472553162" type="System">
-                                            <param id="0" name="Layout">Queue_LevelPlaylist.Peek</param>
-                                        </action>
-                                        <action id="1" name="Dequeue" sid="587925995052202" type="Queue_LevelPlaylist" />
-                                    </actions>
-                                </event-block>
-                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-block>
@@ -8398,9 +8154,9 @@
                             <sub-events>
                                 <event-block sid="281743149671356">
                                     <conditions>
-                                        <condition id="100" name="For each property" sid="383995597930656" type="JSON_LevelPlaylist">
+                                        <condition id="100" name="For each property" sid="383995597930656" type="JSON_Lists">
                                             <param id="0" name="Reference point">0</param>
-                                            <param id="1" name="Key {n}">&quot;List_Skins&quot;</param>
+                                            <param id="1" name="Key {n}">&quot;Skins&quot;</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -8421,10 +8177,10 @@
                                             <actions>
                                                 <action id="-10" name="Set value" sid="792957263659294" type="Menu_Options">
                                                     <param id="0" name="Instance variable">ID</param>
-                                                    <param id="1" name="Value">JSON_LevelPlaylist.CurrentKey</param>
+                                                    <param id="1" name="Value">JSON_Lists.CurrentKey</param>
                                                 </action>
                                                 <action id="0" name="Set text" sid="245182640853221" type="Menu_Options">
-                                                    <param id="0" name="Text">uppercase(JSON_LevelPlaylist.Value(0,&quot;List_Skins&quot;,JSON_LevelPlaylist.CurrentKey))</param>
+                                                    <param id="0" name="Text">uppercase(JSON_Lists.Value(1))</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -8432,7 +8188,7 @@
                                 </event-block>
                                 <event-block sid="887452720697838">
                                     <conditions>
-                                        <condition id="100" name="For each property" sid="756759152999240" type="JSON_LevelPlaylist">
+                                        <condition id="100" name="For each property" sid="756759152999240" type="JSON_Lists">
                                             <param id="0" name="Reference point">0</param>
                                             <param id="1" name="Key {n}">Menu_Options.ID</param>
                                         </condition>
@@ -8454,7 +8210,7 @@
                                         </action>
                                         <action id="-10" name="Set value" sid="575014423017129" type="Menu_Options2">
                                             <param id="0" name="Instance variable">ID</param>
-                                            <param id="1" name="Value">JSON_LevelPlaylist.CurrentKey</param>
+                                            <param id="1" name="Value">JSON_Lists.CurrentKey</param>
                                         </action>
                                         <action id="0" name="Set text" sid="902566085630084" type="Menu_Options2">
                                             <param id="0" name="Text">uppercase(JSON_SkinsProperties.Value(0,Self.ID,&quot;Name&quot;))</param>
@@ -8587,7 +8343,7 @@
                                     <actions>
                                         <action id="-9" name="Set value" sid="835508016132614" type="System">
                                             <param id="0" name="Variable">page</param>
-                                            <param id="1" name="Value">JSON_LevelPlaylist.Size(0,&quot;List_Skins&quot;)</param>
+                                            <param id="1" name="Value">JSON_Lists.Size(0,&quot;Skins&quot;)</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -8596,7 +8352,7 @@
                                         <condition id="-14" name="Compare variable" sid="788386403487518" type="System">
                                             <param id="0" name="Variable">page</param>
                                             <param id="1" name="Comparison">5</param>
-                                            <param id="2" name="Value">JSON_LevelPlaylist.Size(0,&quot;List_Skins&quot;)+1</param>
+                                            <param id="2" name="Value">JSON_Lists.Size(0,&quot;Skins&quot;)+1</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -17202,7 +16958,7 @@
                 <variable constant="0" name="maxplayers" sid="830603866180703" static="1" type="number">16</variable>
                 <variable constant="0" name="allowjoins" sid="163189632324752" static="1" type="number">1</variable>
                 <variable constant="0" name="kickplayers" sid="477269466389964" static="1" type="number">1</variable>
-                <variable constant="0" name="kickplayers_count" sid="743967382737124" static="1" type="number">0</variable>
+                <variable constant="0" name="kickplayers_counter" sid="743967382737124" static="1" type="number">0</variable>
                 <variable constant="0" name="kickplayers_selected" sid="816526600420630" static="1" type="number">0</variable>
                 <event-block sid="437745882951802">
                     <conditions>
@@ -17245,7 +17001,7 @@
                                     <param id="1" name="Value">1</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="111440063971700" type="System">
-                                    <param id="0" name="Variable">kickplayers_count</param>
+                                    <param id="0" name="Variable">kickplayers_counter</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="663879508723457" type="System">
@@ -17658,7 +17414,7 @@
                             </conditions>
                             <actions>
                                 <action id="-10" name="Add to" sid="105764593496334" type="System">
-                                    <param id="0" name="Variable">kickplayers_count</param>
+                                    <param id="0" name="Variable">kickplayers_counter</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
                             </actions>
@@ -17666,7 +17422,7 @@
                                 <event-block sid="440268361748161">
                                     <conditions>
                                         <condition id="-14" name="Compare variable" sid="962766167059993" type="System">
-                                            <param id="0" name="Variable">kickplayers_count</param>
+                                            <param id="0" name="Variable">kickplayers_counter</param>
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">kickplayers</param>
                                         </condition>
@@ -17684,14 +17440,14 @@
                                 <event-block sid="471090357329807">
                                     <conditions>
                                         <condition id="-14" name="Compare variable" sid="536527644351334" type="System">
-                                            <param id="0" name="Variable">kickplayers_count</param>
+                                            <param id="0" name="Variable">kickplayers_counter</param>
                                             <param id="1" name="Comparison">5</param>
                                             <param id="2" name="Value">Photon.ActorCount</param>
                                         </condition>
                                     </conditions>
                                     <actions>
                                         <action id="-9" name="Set value" sid="339138226312185" type="System">
-                                            <param id="0" name="Variable">kickplayers_count</param>
+                                            <param id="0" name="Variable">kickplayers_counter</param>
                                             <param id="1" name="Value">0</param>
                                         </action>
                                     </actions>

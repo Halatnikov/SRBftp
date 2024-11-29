@@ -2,7 +2,7 @@
 <c2project>
     <name>Sonic Robo-Blast! From The Past</name>
     <description>Original games by Sonikku - Johnathan Wallbank and SSNTails - A.J. Freda</description>
-    <version>0.3.1-17</version>
+    <version>0.3.1-18</version>
     <author>Halatnikov</author>
     <author-email></author-email>
     <author-website>https://halatnikov.github.io</author-website>
@@ -172,10 +172,10 @@
             <object-type name="LocalStorage" sid="420361013405810">
                 <plugin id="LocalStorage" />
             </object-type>
-            <object-type global="1" name="JSON_LevelPlaylist" sid="960908361044093">
+            <object-type global="1" name="JSON_Lists" sid="960908361044093">
                 <plugin id="JSON" />
             </object-type>
-            <object-type global="1" name="Queue_LevelPlaylist" sid="666056387321596">
+            <object-type global="1" name="Queue_LevelList" sid="666056387321596">
                 <plugin id="skymen_queue" />
             </object-type>
             <object-type global="1" name="JSON__TEMP" sid="659501821623959">
@@ -220,6 +220,16 @@
             <object-type name="EncDecXOR" sid="314883070378678">
                 <plugin id="Rex_EncDecXOR" />
             </object-type>
+            <object-type global="1" name="JSON__REPLAY" sid="668933974041477">
+                <plugin id="JSON" />
+                <instance-variables>
+                    <instance-variable name="Recording" sid="515205879275147" type="boolean" />
+                    <instance-variable name="OldX" sid="596127302555243" type="number" />
+                    <instance-variable name="OldY" sid="985921847229081" type="number" />
+                    <instance-variable name="OldAnim" sid="135181825955768" type="string" />
+                    <instance-variable name="OldW" sid="504318957152187" type="number" />
+                </instance-variables>
+            </object-type>
         </object-folder>
         <object-folder name=".Variables">
             <object-type global="1" name="Var_Level" sid="368901035900150">
@@ -227,6 +237,7 @@
                 <instance-variables>
                     <instance-variable name="TimerLevel" sid="792243062839243" type="number" />
                     <instance-variable name="TimerLevelReal" sid="542885006087094" type="number" />
+                    <instance-variable name="TimerLevelTicks" sid="776132339139628" type="number" />
                     <instance-variable name="TimerLevelActive" sid="260590474402437" type="boolean" />
                     <instance-variable name="Pause" sid="429745224739633" type="boolean" />
                     <instance-variable name="Level_Game" sid="851545987425046" type="number" />
@@ -250,10 +261,6 @@
                     <instance-variable name="Local_LapOfHonour" sid="526079323652340" type="number" />
                     <instance-variable name="Pong_Lives" sid="583908492378675" type="number" />
                     <instance-variable name="ZoneResetTimer" sid="270535598542224" type="number" />
-                    <instance-variable name="Marathon_Timer" sid="289765144694180" type="number" />
-                    <instance-variable name="Marathon_Counter" sid="697410182791459" type="number" />
-                    <instance-variable name="Marathon_CounterMax" sid="217804037805717" type="number" />
-                    <instance-variable name="Marathon_String" sid="145240771015592" type="string" />
                 </instance-variables>
             </object-type>
             <object-type global="1" name="Var_Player" sid="435158768718076">
@@ -1013,6 +1020,7 @@
                 <instance-variables>
                     <instance-variable name="ID" sid="257938055438161" type="number" />
                     <instance-variable name="SavedScore" sid="288450787274618" type="number" />
+                    <instance-variable name="SavedTime" sid="220198083259824" type="number" />
                     <instance-variable name="InitialY" sid="453355929161440" type="number" />
                 </instance-variables>
                 <animation-folder>
@@ -20169,6 +20177,7 @@
                 <instance-variable name="TeleportAnimation" sid="227236383098235" type="boolean" />
                 <instance-variable name="Me" sid="312822894459438" type="boolean" />
                 <instance-variable name="PlayerID" sid="951318057601562" type="number" />
+                <instance-variable name="Mirrored" sid="951911628608345" type="number" />
             </instance-variables>
             <behaviors>
                 <behavior-type name="Flash" sid="559965946524717">
@@ -20543,7 +20552,7 @@
         <file name="funny.txt" />
         <file name="credits.txt" />
         <file name="audiolist.ini" />
-        <file name="levelslist.ini" />
+        <file name="lists.ini" />
         <file name="keycodes.ini" />
         <file name="levelsproperties.ini" />
         <file name="audioproperties.ini" />

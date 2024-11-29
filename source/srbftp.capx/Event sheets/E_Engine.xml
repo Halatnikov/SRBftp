@@ -35,6 +35,10 @@
                                     <param id="0" name="Instance variable">TimerLevelReal</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
+                                <action id="-10" name="Set value" sid="359075291427997" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevelTicks</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
                                 <action id="-10" name="Set value" sid="363369649640207" type="Var_Player">
                                     <param id="0" name="Instance variable">Deaths</param>
                                     <param id="1" name="Value">0</param>
@@ -340,6 +344,23 @@
                                             <param id="1" name="Value">Special_Checkpoint.SavedScore</param>
                                         </action>
                                     </actions>
+                                    <sub-events>
+                                        <event-block sid="175146403075547">
+                                            <conditions>
+                                                <condition id="-7" name="Compare instance variable" sid="865912835261087" type="Var_Game">
+                                                    <param id="0" name="Instance variable">Gamemode</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">&quot;RecordAttack&quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-10" name="Set value" sid="183275666215714" type="Var_Level">
+                                                    <param id="0" name="Instance variable">TimerLevel</param>
+                                                    <param id="1" name="Value">Special_Checkpoint.SavedTime</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
                                 </event-block>
                             </sub-events>
                         </event-block>
@@ -359,7 +380,24 @@
                                     <param id="0" name="Object">Engine_Player</param>
                                     <param id="1" name="Image point (optional)">0</param>
                                 </action>
+                                <action id="-10" name="Set value" sid="253224490266034" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Mirrored</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
                             </actions>
+                            <sub-events>
+                                <event-block sid="830352807212728">
+                                    <conditions>
+                                        <condition id="7" name="Is mirrored" sid="950646833240403" type="PlayerSkins" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Set value" sid="628721579801556" type="PlayerSkins">
+                                            <param id="0" name="Instance variable">Mirrored</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                         <comment>basic controls</comment>
                         <event-block sid="941048911059232">
@@ -2181,6 +2219,14 @@
                                 <action behavior="Sine" id="0" name="Set active" sid="444901351117305" type="Enemies">
                                     <param id="0" name="State">0</param>
                                 </action>
+                                <action id="-11" name="Add to" sid="857233430197113" type="Var_Player">
+                                    <param id="0" name="Instance variable">TotalDeaths</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-11" name="Add to" sid="753075332729851" type="Var_Player">
+                                    <param id="0" name="Instance variable">Deaths</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
                             </actions>
                             <sub-events>
                                 <event-block sid="333591110228269">
@@ -2227,14 +2273,6 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-11" name="Add to" sid="857233430197113" type="Var_Player">
-                                    <param id="0" name="Instance variable">TotalDeaths</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                                <action id="-11" name="Add to" sid="753075332729851" type="Var_Player">
-                                    <param id="0" name="Instance variable">Deaths</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
                                 <action id="-16" name="Wait" sid="469625095294141" type="System">
                                     <param id="0" name="Seconds">0.5</param>
                                 </action>
@@ -2257,11 +2295,7 @@
                                 </event-block>
                                 <event-block sid="514505892850979">
                                     <conditions>
-                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="366650688894640" type="Var_Player">
-                                            <param id="0" name="Instance variable">Lives</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">-1</param>
-                                        </condition>
+                                        <condition id="-22" name="Else" sid="833604562974460" type="System" />
                                     </conditions>
                                     <actions />
                                     <sub-events>
@@ -2282,11 +2316,7 @@
                                         </event-block>
                                         <event-block sid="885837847863697">
                                             <conditions>
-                                                <condition id="-7" name="Compare instance variable" sid="158839221597917" type="Var_Player">
-                                                    <param id="0" name="Instance variable">Lives</param>
-                                                    <param id="1" name="Comparison">0</param>
-                                                    <param id="2" name="Value">0</param>
-                                                </condition>
+                                                <condition id="-22" name="Else" sid="179868495343492" type="System" />
                                             </conditions>
                                             <actions>
                                                 <action id="-2" name="Go to layout" sid="407989513700312" type="System">
@@ -3294,6 +3324,10 @@
                                 <action id="-10" name="Set value" sid="557241494099903" type="Special_Checkpoint">
                                     <param id="0" name="Instance variable">SavedScore</param>
                                     <param id="1" name="Value">Var_Player.Score</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="915444249517401" type="Special_Checkpoint">
+                                    <param id="0" name="Instance variable">SavedTime</param>
+                                    <param id="1" name="Value">Var_Level.TimerLevel</param>
                                 </action>
                                 <action id="-2" name="Set Y" sid="804841012747215" type="Special_Checkpoint">
                                     <param id="0" name="Y">-999</param>
@@ -15397,6 +15431,9 @@
                                 <condition id="-4" name="Trigger once while true" sid="820207459813713" type="System" />
                             </conditions>
                             <actions>
+                                <action id="-16" name="Wait" sid="335549374269214" type="System">
+                                    <param id="0" name="Seconds">0</param>
+                                </action>
                                 <action id="-10" name="Set value" sid="600376546505599" type="Var_Player">
                                     <param id="0" name="Instance variable">Finished</param>
                                     <param id="1" name="Value">2</param>
@@ -15488,6 +15525,20 @@
                         </action>
                     </actions>
                 </event-block>
+                <event-block sid="618830955381046">
+                    <conditions>
+                        <condition id="-1" name="Every tick" sid="833439097752930" type="System" />
+                        <condition id="-8" name="Is boolean instance variable set" sid="320381339366668" type="Var_Level">
+                            <param id="0" name="Instance variable">TimerLevelActive</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-11" name="Add to" sid="256421109082329" type="Var_Level">
+                            <param id="0" name="Instance variable">TimerLevelTicks</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
                 <event-block sid="909784091527879">
                     <conditions />
                     <actions>
@@ -15522,6 +15573,9 @@
                         <action id="0" name="Set text" sid="107757490474057" type="HUD_Time">
                             <param id="0" name="Text">floor(Var_Level.TimerLevel/60)&amp;&quot;  &quot;&amp;zeropad(floor(Var_Level.TimerLevel)%60, 2)</param>
                         </action>
+                        <action id="0" name="Set text" sid="702985054528888" type="HUD_TimeMs">
+                            <param id="0" name="Text">&quot;.&quot;&amp;zeropad(floor(Var_Level.TimerLevel*100)%100, 2)</param>
+                        </action>
                         <action id="0" name="Set text" sid="738269525932710" type="HUD_Rings">
                             <param id="0" name="Text">Var_Player.Rings</param>
                         </action>
@@ -15539,6 +15593,11 @@
                             <param id="0" name="Instance variable">Gamemode</param>
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">&quot;RecordAttack&quot;</param>
+                        </condition>
+                        <condition id="-7" inverted="1" name="Compare instance variable" sid="928568979969968" type="Var_Game">
+                            <param id="0" name="Instance variable">Gamemode</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;Marathon&quot;</param>
                         </condition>
                         <condition id="-4" name="Trigger once while true" sid="990487876148224" type="System" />
                     </conditions>
@@ -17265,13 +17324,28 @@
                                             </conditions>
                                             <actions />
                                             <sub-events>
+                                                <comment>abandon marathon, but still show results</comment>
+                                                <event-block sid="282943778712861">
+                                                    <conditions>
+                                                        <condition id="-8" name="Compare two values" sid="262127853413348" type="System">
+                                                            <param id="0" name="First value">(JSON__TEMP.Size(0, &quot;Levels&quot;) - Queue_LevelList.Length)</param>
+                                                            <param id="1" name="Comparison">4</param>
+                                                            <param id="2" name="Second value">1</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-2" name="Go to layout" sid="560514924095173" type="System">
+                                                            <param id="0" name="Layout">Menu_Cutscenes</param>
+                                                        </action>
+                                                        <action id="-10" name="Set value" sid="657280788242367" type="Var_Game">
+                                                            <param id="0" name="Instance variable">CurrentMenu</param>
+                                                            <param id="1" name="Value">&quot;gameover&quot;</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
                                                 <event-block sid="394212795455756">
                                                     <conditions>
-                                                        <condition id="-7" name="Compare instance variable" sid="281240436552249" type="Var_Level">
-                                                            <param id="0" name="Instance variable">Marathon_Counter</param>
-                                                            <param id="1" name="Comparison">3</param>
-                                                            <param id="2" name="Value">1</param>
-                                                        </condition>
+                                                        <condition id="-22" name="Else" sid="649875902608608" type="System" />
                                                     </conditions>
                                                     <actions>
                                                         <action id="-2" name="Go to layout" sid="208357181090042" type="System">
@@ -17284,25 +17358,6 @@
                                                         <action id="0" name="Call function" sid="843395953001994" type="Function">
                                                             <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
                                                             <param id="1" name="Parameter {n}">&quot;F_BonusModes&quot;{###}&quot;music&quot;{###}1</param>
-                                                        </action>
-                                                    </actions>
-                                                </event-block>
-                                                <comment>abandon marathon, but still show results</comment>
-                                                <event-block sid="282943778712861">
-                                                    <conditions>
-                                                        <condition id="-7" name="Compare instance variable" sid="830291450189052" type="Var_Level">
-                                                            <param id="0" name="Instance variable">Marathon_Counter</param>
-                                                            <param id="1" name="Comparison">4</param>
-                                                            <param id="2" name="Value">1</param>
-                                                        </condition>
-                                                    </conditions>
-                                                    <actions>
-                                                        <action id="-2" name="Go to layout" sid="560514924095173" type="System">
-                                                            <param id="0" name="Layout">Menu_Cutscenes</param>
-                                                        </action>
-                                                        <action id="-10" name="Set value" sid="657280788242367" type="Var_Game">
-                                                            <param id="0" name="Instance variable">CurrentMenu</param>
-                                                            <param id="1" name="Value">&quot;gameover&quot;</param>
                                                         </action>
                                                     </actions>
                                                 </event-block>
@@ -17339,6 +17394,11 @@
                         <action id="-3" name="Set position" sid="614869321941176" type="Engine_Player">
                             <param id="0" name="X">Mouse.X</param>
                             <param id="1" name="Y">Mouse.Y</param>
+                        </action>
+                        <action id="20" name="Set Value" sid="217450118182725" type="JSON__TEMP">
+                            <param id="0" name="Value">int(random(1,5))</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}">&quot;Clock&quot;</param>
                         </action>
                     </actions>
                 </event-block>
@@ -17739,6 +17799,11 @@
                                     <param id="0" name="Variable">GodMode</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
+                                <action id="20" name="Set Value" sid="864583631376169" type="JSON__TEMP">
+                                    <param id="0" name="Value">int(random(1,5))</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;Clock&quot;</param>
+                                </action>
                             </actions>
                         </event-block>
                         <event-block sid="884057592016032">
@@ -17756,6 +17821,11 @@
                                 <action id="-9" name="Set value" sid="211241558642514" type="System">
                                     <param id="0" name="Variable">GodMode</param>
                                     <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="20" name="Set Value" sid="407198438041120" type="JSON__TEMP">
+                                    <param id="0" name="Value">int(random(1,5))</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;Clock&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -17831,6 +17901,11 @@
                     </conditions>
                     <actions>
                         <action id="-26" name="Restart layout" sid="905089191761311" type="System" />
+                        <action id="20" name="Set Value" sid="183380157636977" type="JSON__TEMP">
+                            <param id="0" name="Value">int(random(1,5))</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}">&quot;Clock&quot;</param>
+                        </action>
                     </actions>
                 </event-block>
                 <comment></comment>
@@ -17848,6 +17923,11 @@
                     <actions>
                         <action id="-2" name="Go to layout" sid="349758989744794" type="System">
                             <param id="0" name="Layout">Menu_StageResults</param>
+                        </action>
+                        <action id="20" name="Set Value" sid="417266448300265" type="JSON__TEMP">
+                            <param id="0" name="Value">int(random(1,5))</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}">&quot;Clock&quot;</param>
                         </action>
                     </actions>
                 </event-block>
