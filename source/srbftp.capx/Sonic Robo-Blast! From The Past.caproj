@@ -2,7 +2,7 @@
 <c2project>
     <name>Sonic Robo-Blast! From The Past</name>
     <description>Original games by Sonikku - Johnathan Wallbank and SSNTails - A.J. Freda</description>
-    <version>0.3.1-18</version>
+    <version>0.3.1-19</version>
     <author>Halatnikov</author>
     <author-email></author-email>
     <author-website>https://halatnikov.github.io</author-website>
@@ -17,11 +17,11 @@
         <plugin author="Kyatric@gmail.com - JavaScript implementation of the RSA Data Security, Inc. MD5 Message: Copyright (c) 1998 - 2009, Paul Johnston &amp; Contributors - A JavaScript implementation of the Secure Hash Algorithm, SHA-1, as defined in FIPS 180-1 - Version 2.2 Copyright Paul Johnston 2000 - 2009 &amp; contributors - A JavaScript implementation of the Secure Hash Algorithm, SHA-256, as defined in FIPS 180-2 * Version 2.2 Copyright Angel Marin, Paul Johnston &amp; contributors 2000 - 2009. * Distributed under the BSD License * See http://pajhome.org.uk/crypt/md5 for details. * Also http://anmar.eu.org/projects/jssha2/" id="CBhash" version="1">CB Hash</plugin>
         <plugin author="Francesco Iafulli (aka fiaful)" id="Comment" version="1">Comment</plugin>
         <plugin author="Francesco Iafulli (aka fiaful)" id="CreateObjectByVal" version="1">CreateObjectByVal</plugin>
+        <plugin author="Miha Petelin" id="ExtraExps" version="1.100000024">Extra Expressions</plugin>
         <plugin author="Scirra" id="Function" version="1">Function</plugin>
         <plugin author="Toby R" id="Globals" version="1">Globals</plugin>
         <plugin author="Yann Granjon" id="JSON" version="1">JSON</plugin>
         <plugin author="Scirra" id="Keyboard" version="1">Keyboard</plugin>
-        <plugin author="Scirra" id="LocalStorage" version="1">Local storage</plugin>
         <plugin author="Scirra" id="Mouse" version="1">Mouse</plugin>
         <plugin author="Scirra" id="NinePatch" version="1">9-patch</plugin>
         <plugin author="Scirra" id="NodeWebkit" version="1">NW.js</plugin>
@@ -37,6 +37,7 @@
         <plugin author="Sir_G" id="TiledSprite" version="2">Tiled Sprite</plugin>
         <plugin author="Scirra" id="Touch" version="1">Touch</plugin>
         <plugin author="Valera Popov" id="ValerypopoffEase" version="1">Valerypopoff Ease</plugin>
+        <plugin author="Valera Popov" id="ValerypopoffJSPlugin" version="1">ValerypopoffJS</plugin>
         <plugin author="R0J0hound" id="c2canvas" version="2">Canvas</plugin>
         <plugin author="Eren Ertuğrul" id="eren_DiscordRPC_edit" version="1">DiscordRPC (edit)</plugin>
         <plugin author="Scirra" id="gamepad" version="1">Gamepad</plugin>
@@ -169,9 +170,6 @@
                     <instance-variable name="LevelLayout" sid="661382165620558" type="string" />
                 </instance-variables>
             </object-type>
-            <object-type name="LocalStorage" sid="420361013405810">
-                <plugin id="LocalStorage" />
-            </object-type>
             <object-type global="1" name="JSON_Lists" sid="960908361044093">
                 <plugin id="JSON" />
             </object-type>
@@ -225,6 +223,7 @@
                 <instance-variables>
                     <instance-variable name="Recording" sid="515205879275147" type="boolean" />
                     <instance-variable name="Ghost" sid="616550354678333" type="boolean" />
+                    <instance-variable name="LastTick" sid="455050612995527" type="number" />
                     <instance-variable name="OldX" sid="596127302555243" type="number" />
                     <instance-variable name="OldY" sid="985921847229081" type="number" />
                     <instance-variable name="OldAnim" sid="135181825955768" type="string" />
@@ -236,6 +235,12 @@
                     <instance-variable name="InputA" sid="664186816685367" type="number" />
                     <instance-variable name="InputRestart" sid="181457046937730" type="number" />
                 </instance-variables>
+            </object-type>
+            <object-type name="ExtraExps" sid="261351055736308">
+                <plugin id="ExtraExps" />
+            </object-type>
+            <object-type name="JS" sid="650717934599299">
+                <plugin id="ValerypopoffJSPlugin" />
             </object-type>
         </object-folder>
         <object-folder name=".Variables">
@@ -15476,7 +15481,7 @@
                         </behavior-type>
                     </behaviors>
                 </object-type>
-                <object-type name="Text_FPS" sid="393582116086893">
+                <object-type name="Text_OverlayInfo" sid="393582116086893">
                     <plugin id="Text" />
                 </object-type>
                 <object-type name="Logo_SRB2Direct" sid="428153158996006">
@@ -16814,6 +16819,18 @@
                 </object-type>
                 <object-type name="HUD_TimeMs" sid="772172255822635">
                     <plugin id="Text" />
+                </object-type>
+                <object-type name="HUD_ReplayProgress" sid="484006027719230">
+                    <plugin id="TiledBg" />
+                    <texture />
+                </object-type>
+                <object-type name="HUD_Replay" sid="771722502134187">
+                    <plugin id="Text" />
+                    <behaviors>
+                        <behavior-type name="Flash" sid="668552486693541">
+                            <behavior id="Flash" />
+                        </behavior-type>
+                    </behaviors>
                 </object-type>
             </object-folder>
         </object-folder>
@@ -20532,7 +20549,6 @@
             </properties>
         </global-instance>
         <global-instance type="jsZip" uid="8309" />
-        <global-instance type="LocalStorage" uid="8917" />
         <global-instance type="Photon" uid="12329">
             <properties>
                 <appid>0</appid>
@@ -20545,6 +20561,12 @@
             </properties>
         </global-instance>
         <global-instance type="EncDecXOR" uid="4765" />
+        <global-instance type="ExtraExps" uid="5910" />
+        <global-instance type="JS" uid="2165">
+            <properties>
+                <script-files>js.storage.min.js;utils.js</script-files>
+            </properties>
+        </global-instance>
     </global-instances>
     <sounds-folder />
     <music-folder />
@@ -20557,13 +20579,19 @@
             <file name="icon-256.png" />
             <file name="loading-logo.png" />
         </file-folder>
+        <file-folder name="js_include">
+            <file name="js.storage.min.js" />
+        </file-folder>
+        <file-folder name="js">
+            <file name="utils.js" />
+        </file-folder>
         <file name="funny.txt" />
         <file name="credits.txt" />
         <file name="audiolist.ini" />
-        <file name="lists.ini" />
         <file name="keycodes.ini" />
         <file name="levelsproperties.ini" />
         <file name="audioproperties.ini" />
         <file name="skinsproperties.ini" />
+        <file name="lists.ini" />
     </files-folder>
 </c2project>

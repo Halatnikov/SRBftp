@@ -909,6 +909,22 @@
                             <param id="1" name="Reference point">0</param>
                             <param id="2" name="Key {n}"></param>
                         </action>
+                        <action id="0" name="Call function" sid="697353514734073" type="Function">
+                            <param id="0" name="Name">&quot;Math_RoundFloat&quot;</param>
+                            <param id="1" name="Parameter {n}">len(JSON__COMMON.AsJson(0))/1024{###}2</param>
+                        </action>
+                        <action id="14" name="Log" sid="940477043216580" type="Browser">
+                            <param id="0" name="Type">0</param>
+                            <param id="1" name="Message">Function.ReturnValue&amp;&quot;kb&quot;</param>
+                        </action>
+                        <action id="0" name="Call function" sid="228560443063927" type="Function">
+                            <param id="0" name="Name">&quot;Math_RoundFloat&quot;</param>
+                            <param id="1" name="Parameter {n}">len(LzString.Compress(JSON__COMMON.AsJson(0)))/1024{###}2</param>
+                        </action>
+                        <action id="14" name="Log" sid="165717911858310" type="Browser">
+                            <param id="0" name="Type">0</param>
+                            <param id="1" name="Message">Function.ReturnValue&amp;&quot;kb&quot;</param>
+                        </action>
                     </actions>
                     <sub-events>
                         <event-block sid="114319184251856">
@@ -927,12 +943,33 @@
                             </actions>
                         </event-block>
                         <comment>compress this with lz-string later</comment>
+                        <variable constant="0" name="result" sid="273539119847157" static="0" type="text"></variable>
                         <event-block sid="401482272865507">
                             <conditions />
                             <actions>
+                                <action id="-9" name="Set value" sid="952991181030173" type="System">
+                                    <param id="0" name="Variable">result</param>
+                                    <param id="1" name="Value">replace(replace(INI.JSON2INI(JSON__COMMON.AsJson(0)),newline,&quot;|&quot;),&quot;,|&quot;,&quot;|&quot;)</param>
+                                </action>
+                                <action id="0" name="Call function" sid="821866945084609" type="Function">
+                                    <param id="0" name="Name">&quot;Math_RoundFloat&quot;</param>
+                                    <param id="1" name="Parameter {n}">len(result)/1024{###}2</param>
+                                </action>
+                                <action id="14" name="Log" sid="239603145658434" type="Browser">
+                                    <param id="0" name="Type">0</param>
+                                    <param id="1" name="Message">Function.ReturnValue&amp;&quot;kb&quot;</param>
+                                </action>
+                                <action id="0" name="Call function" sid="743274656245010" type="Function">
+                                    <param id="0" name="Name">&quot;Math_RoundFloat&quot;</param>
+                                    <param id="1" name="Parameter {n}">len(LzString.Compress(result))/1024{###}2</param>
+                                </action>
+                                <action id="14" name="Log" sid="886926935106910" type="Browser">
+                                    <param id="0" name="Type">0</param>
+                                    <param id="1" name="Message">Function.ReturnValue&amp;&quot;kb&quot;</param>
+                                </action>
                                 <action id="14" name="Log" sid="962245494785158" type="Browser">
                                     <param id="0" name="Type">0</param>
-                                    <param id="1" name="Message">replace(replace(INI.JSON2INI(JSON__COMMON.AsJson(0)),newline,&quot;|&quot;),&quot;,|&quot;,&quot;|&quot;)</param>
+                                    <param id="1" name="Message">result</param>
                                 </action>
                                 <action id="-9" name="Destroy" sid="408875264033614" type="JSON__COMMON" />
                             </actions>
@@ -946,6 +983,9 @@
                         </condition>
                         <condition id="-8" name="Is boolean instance variable set" sid="336467628377719" type="PlayerSkins">
                             <param id="0" name="Instance variable">Me</param>
+                        </condition>
+                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="127756306972732" type="Var_Level">
+                            <param id="0" name="Instance variable">Pause</param>
                         </condition>
                     </conditions>
                     <actions />
@@ -1201,7 +1241,7 @@
                                         <action id="20" name="Set Value" sid="759202533629297" type="JSON__REPLAY">
                                             <param id="0" name="Value">PlayerSkins.AnimationName</param>
                                             <param id="1" name="Reference point">0</param>
-                                            <param id="2" name="Key {n}">str(Var_Level.TimerLevelTicks){###}&quot;anim&quot;</param>
+                                            <param id="2" name="Key {n}">str(Var_Level.TimerLevelTicks){###}&quot;a&quot;</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -1255,6 +1295,17 @@
                                 <action id="50" name="Delete" sid="444280390588742" type="JSON__REPLAY">
                                     <param id="0" name="Reference point">0</param>
                                     <param id="1" name="Key {n}">str(Var_Level.TimerLevelTicks)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="739471167333737">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="592172342199320" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Set value" sid="840302181696433" type="JSON__REPLAY">
+                                    <param id="0" name="Instance variable">LastTick</param>
+                                    <param id="1" name="Value">Var_Level.TimerLevelTicks</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1314,12 +1365,12 @@
                                     <conditions>
                                         <condition id="60" inverted="1" name="Is undefined" sid="454944934214805" type="JSON__REPLAY">
                                             <param id="0" name="Reference point">0</param>
-                                            <param id="1" name="Key {n}">str(Var_Level.TimerLevelTicks){###}&quot;anim&quot;</param>
+                                            <param id="1" name="Key {n}">str(Var_Level.TimerLevelTicks){###}&quot;a&quot;</param>
                                         </condition>
                                     </conditions>
                                     <actions>
                                         <action id="4" name="Set animation" sid="429316869425273" type="PlayerSkins">
-                                            <param id="0" name="Animation">JSON__REPLAY.Value(0, str(Var_Level.TimerLevelTicks), &quot;anim&quot;)</param>
+                                            <param id="0" name="Animation">JSON__REPLAY.Value(0, str(Var_Level.TimerLevelTicks), &quot;a&quot;)</param>
                                             <param id="1" name="From">1</param>
                                         </action>
                                     </actions>
@@ -1373,6 +1424,32 @@
                             </conditions>
                             <actions />
                             <sub-events>
+                                <event-block sid="493660797391707">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="743277945167952" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-15" name="Set visible" sid="616025829263232" type="HUD_Replay">
+                                            <param id="0" name="Visibility">1</param>
+                                        </action>
+                                        <action id="-15" name="Set visible" sid="997556929904105" type="HUD_ReplayProgress">
+                                            <param id="0" name="Visibility">1</param>
+                                        </action>
+                                        <action behavior="Flash" id="0" name="Flash" sid="159920139681217" type="HUD_Replay">
+                                            <param id="0" name="&apos;On&apos; time">0.4</param>
+                                            <param id="1" name="&apos;Off&apos; time">0.4</param>
+                                            <param id="2" name="Duration">9999</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="619382024105166">
+                                    <conditions />
+                                    <actions>
+                                        <action id="-5" name="Set width" sid="512239521612465" type="HUD_ReplayProgress">
+                                            <param id="0" name="Width">(Var_Level.TimerLevelTicks/JSON__REPLAY.LastTick)*854</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
                                 <event-block sid="383982065996282">
                                     <conditions />
                                     <actions>
@@ -1820,6 +1897,15 @@
                                 </condition>
                             </conditions>
                             <actions>
+                                <action id="0" name="Call function" sid="682153910384386" type="Function">
+                                    <param id="0" name="Name">&quot;String_Random&quot;</param>
+                                    <param id="1" name="Parameter {n}">8</param>
+                                </action>
+                                <action id="20" name="Set Value" sid="454219801137110" type="JSON__TEMP">
+                                    <param id="0" name="Value">Function.ReturnValue</param>
+                                    <param id="1" name="Reference point">1</param>
+                                    <param id="2" name="Key {n}">&quot;ID&quot;</param>
+                                </action>
                                 <action id="0" name="Call function" sid="814273111595765" type="Function">
                                     <param id="0" name="Name">&quot;Time_CurrentTimestamp&quot;</param>
                                     <param id="1" name="Parameter {n}">&quot;ms&quot;</param>
