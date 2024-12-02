@@ -942,7 +942,6 @@
                                 </action>
                             </actions>
                         </event-block>
-                        <comment>compress this with lz-string later</comment>
                         <variable constant="0" name="result" sid="273539119847157" static="0" type="text"></variable>
                         <event-block sid="401482272865507">
                             <conditions />
@@ -1810,6 +1809,98 @@
         </event-group>
         <event-group description="" inactive="1" sid="959231211011597" title="Marathon mode">
             <sub-events>
+                <comment>place 1ups in levels</comment>
+                <event-block sid="808952751027346">
+                    <conditions>
+                        <condition id="-7" inverted="1" name="Compare instance variable" sid="191531130935624" type="Var_Player">
+                            <param id="0" name="Instance variable">Lives</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">-1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="357149992274003">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="455917133382075" type="System" />
+                                <condition id="-11" name="For Each" sid="610462376376267" type="System">
+                                    <param id="0" name="Object">ObjectF_Emblem</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="776195554745960">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="511365134913272" type="Var_Level">
+                                            <param id="0" name="Instance variable">Level_Game</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Spawn another object" sid="360396755114711" type="ObjectF_Emblem">
+                                            <param id="0" name="Object">ObjectF_1Monitor</param>
+                                            <param id="1" name="Layer">&quot;Objects&quot;</param>
+                                            <param id="2" name="Image point">0</param>
+                                        </action>
+                                        <action id="5" name="Set frame" sid="367329197599488" type="ObjectF_1Monitor">
+                                            <param id="0" name="Frame number">4</param>
+                                        </action>
+                                        <action id="-9" name="Destroy" sid="866369474281132" type="ObjectF_Emblem" />
+                                    </actions>
+                                </event-block>
+                                <event-block sid="397505666169747">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="805829875944717" type="Var_Level">
+                                            <param id="0" name="Instance variable">Level_Game</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">2</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Spawn another object" sid="567210236619157" type="ObjectF_Emblem">
+                                            <param id="0" name="Object">Common2_TV</param>
+                                            <param id="1" name="Layer">&quot;Objects&quot;</param>
+                                            <param id="2" name="Image point">0</param>
+                                        </action>
+                                        <action id="4" name="Set animation" sid="171029173374106" type="Common2_TV">
+                                            <param id="0" name="Animation">&quot;1Up_&quot;&amp;Self.Reskin</param>
+                                            <param id="1" name="From">1</param>
+                                        </action>
+                                        <action id="-9" name="Destroy" sid="633344299044980" type="ObjectF_Emblem" />
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="962468006027016">
+                            <conditions>
+                                <condition id="-18" name="On created" sid="173553650652535" type="ObjectF_1Monitor" />
+                                <condition id="-8" name="Is boolean instance variable set" sid="165189279368150" type="ObjectF_1Monitor">
+                                    <param id="0" name="Instance variable">ReplaceWith1Up</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="5" name="Set frame" sid="726442632263438" type="ObjectF_1Monitor">
+                                    <param id="0" name="Frame number">4</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="225150214517092">
+                            <conditions>
+                                <condition id="-18" name="On created" sid="756561358644193" type="Common2_TV" />
+                                <condition id="-8" name="Is boolean instance variable set" sid="584572283051658" type="Common2_TV">
+                                    <param id="0" name="Instance variable">ReplaceWith1Up</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="846938295079694" type="Common2_TV">
+                                    <param id="0" name="Animation">&quot;1Up_&quot;&amp;Self.Reskin</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
                 <comment>calculate timer</comment>
                 <variable constant="0" name="timer_offset" sid="436653532759541" static="0" type="number">0</variable>
                 <variable constant="0" name="timer" sid="461165319530956" static="0" type="number">0</variable>
@@ -1883,41 +1974,42 @@
                                 </action>
                             </actions>
                         </event-block>
-                        <comment>level start</comment>
-                        <event-block sid="850885751712620">
-                            <conditions>
-                                <condition id="100" name="For each property" sid="399372833975543" type="JSON__TEMP">
-                                    <param id="0" name="Reference point">0</param>
-                                    <param id="1" name="Key {n}">&quot;Levels&quot;</param>
-                                </condition>
-                                <condition id="-8" name="Compare two values" sid="178293864139458" type="System">
-                                    <param id="0" name="First value">JSON__TEMP.Value(1, &quot;Name&quot;)</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Second value">LayoutName</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Call function" sid="682153910384386" type="Function">
-                                    <param id="0" name="Name">&quot;String_Random&quot;</param>
-                                    <param id="1" name="Parameter {n}">8</param>
-                                </action>
-                                <action id="20" name="Set Value" sid="454219801137110" type="JSON__TEMP">
-                                    <param id="0" name="Value">Function.ReturnValue</param>
-                                    <param id="1" name="Reference point">1</param>
-                                    <param id="2" name="Key {n}">&quot;ID&quot;</param>
-                                </action>
-                                <action id="0" name="Call function" sid="814273111595765" type="Function">
-                                    <param id="0" name="Name">&quot;Time_CurrentTimestamp&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;ms&quot;</param>
-                                </action>
-                                <action id="20" name="Set Value" sid="129382547999667" type="JSON__TEMP">
-                                    <param id="0" name="Value">Function.ReturnValue</param>
-                                    <param id="1" name="Reference point">1</param>
-                                    <param id="2" name="Key {n}">&quot;TimestampStart&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
                     </sub-events>
+                </event-block>
+                <comment>level start</comment>
+                <event-block sid="850885751712620">
+                    <conditions>
+                        <condition id="-4" name="Trigger once while true" sid="920197043955314" type="System" />
+                        <condition id="100" name="For each property" sid="399372833975543" type="JSON__TEMP">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}">&quot;Levels&quot;</param>
+                        </condition>
+                        <condition id="-8" name="Compare two values" sid="178293864139458" type="System">
+                            <param id="0" name="First value">JSON__TEMP.Value(1, &quot;Name&quot;)</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Second value">LayoutName</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Call function" sid="682153910384386" type="Function">
+                            <param id="0" name="Name">&quot;String_Random&quot;</param>
+                            <param id="1" name="Parameter {n}">8</param>
+                        </action>
+                        <action id="20" name="Set Value" sid="454219801137110" type="JSON__TEMP">
+                            <param id="0" name="Value">Function.ReturnValue</param>
+                            <param id="1" name="Reference point">1</param>
+                            <param id="2" name="Key {n}">&quot;ID&quot;</param>
+                        </action>
+                        <action id="0" name="Call function" sid="814273111595765" type="Function">
+                            <param id="0" name="Name">&quot;Time_CurrentTimestamp&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;ms&quot;</param>
+                        </action>
+                        <action id="20" name="Set Value" sid="129382547999667" type="JSON__TEMP">
+                            <param id="0" name="Value">Function.ReturnValue</param>
+                            <param id="1" name="Reference point">1</param>
+                            <param id="2" name="Key {n}">&quot;TimestampStart&quot;</param>
+                        </action>
+                    </actions>
                 </event-block>
                 <comment>level end</comment>
                 <event-block any="1" sid="135591472719324">
@@ -2062,98 +2154,6 @@
                             <param id="2" name="Key {n}">&quot;Lives&quot;</param>
                         </action>
                     </actions>
-                </event-block>
-                <comment>place 1ups in levels</comment>
-                <event-block sid="808952751027346">
-                    <conditions>
-                        <condition id="-7" inverted="1" name="Compare instance variable" sid="191531130935624" type="Var_Player">
-                            <param id="0" name="Instance variable">Lives</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">-1</param>
-                        </condition>
-                    </conditions>
-                    <actions />
-                    <sub-events>
-                        <event-block sid="357149992274003">
-                            <conditions>
-                                <condition id="-4" name="Trigger once while true" sid="455917133382075" type="System" />
-                                <condition id="-11" name="For Each" sid="610462376376267" type="System">
-                                    <param id="0" name="Object">ObjectF_Emblem</param>
-                                </condition>
-                            </conditions>
-                            <actions />
-                            <sub-events>
-                                <event-block sid="776195554745960">
-                                    <conditions>
-                                        <condition id="-7" name="Compare instance variable" sid="511365134913272" type="Var_Level">
-                                            <param id="0" name="Instance variable">Level_Game</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">1</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="0" name="Spawn another object" sid="360396755114711" type="ObjectF_Emblem">
-                                            <param id="0" name="Object">ObjectF_1Monitor</param>
-                                            <param id="1" name="Layer">&quot;Objects&quot;</param>
-                                            <param id="2" name="Image point">0</param>
-                                        </action>
-                                        <action id="5" name="Set frame" sid="367329197599488" type="ObjectF_1Monitor">
-                                            <param id="0" name="Frame number">4</param>
-                                        </action>
-                                        <action id="-9" name="Destroy" sid="866369474281132" type="ObjectF_Emblem" />
-                                    </actions>
-                                </event-block>
-                                <event-block sid="397505666169747">
-                                    <conditions>
-                                        <condition id="-7" name="Compare instance variable" sid="805829875944717" type="Var_Level">
-                                            <param id="0" name="Instance variable">Level_Game</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">2</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="0" name="Spawn another object" sid="567210236619157" type="ObjectF_Emblem">
-                                            <param id="0" name="Object">Common2_TV</param>
-                                            <param id="1" name="Layer">&quot;Objects&quot;</param>
-                                            <param id="2" name="Image point">0</param>
-                                        </action>
-                                        <action id="4" name="Set animation" sid="171029173374106" type="Common2_TV">
-                                            <param id="0" name="Animation">&quot;1Up_&quot;&amp;Self.Reskin</param>
-                                            <param id="1" name="From">1</param>
-                                        </action>
-                                        <action id="-9" name="Destroy" sid="633344299044980" type="ObjectF_Emblem" />
-                                    </actions>
-                                </event-block>
-                            </sub-events>
-                        </event-block>
-                        <event-block sid="962468006027016">
-                            <conditions>
-                                <condition id="-18" name="On created" sid="173553650652535" type="ObjectF_1Monitor" />
-                                <condition id="-8" name="Is boolean instance variable set" sid="165189279368150" type="ObjectF_1Monitor">
-                                    <param id="0" name="Instance variable">ReplaceWith1Up</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="5" name="Set frame" sid="726442632263438" type="ObjectF_1Monitor">
-                                    <param id="0" name="Frame number">4</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="225150214517092">
-                            <conditions>
-                                <condition id="-18" name="On created" sid="756561358644193" type="Common2_TV" />
-                                <condition id="-8" name="Is boolean instance variable set" sid="584572283051658" type="Common2_TV">
-                                    <param id="0" name="Instance variable">ReplaceWith1Up</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="4" name="Set animation" sid="846938295079694" type="Common2_TV">
-                                    <param id="0" name="Animation">&quot;1Up_&quot;&amp;Self.Reskin</param>
-                                    <param id="1" name="From">1</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
                 </event-block>
             </sub-events>
         </event-group>
