@@ -389,6 +389,811 @@
         </event-group>
         <event-group description="" sid="840403875393779" title="Utilities">
             <sub-events>
+                <comment>ini parser</comment>
+                <comment>read</comment>
+                <event-block sid="567493982793190">
+                    <conditions>
+                        <condition id="0" name="On function" sid="452277142100344" type="Function">
+                            <param id="0" name="Name">&quot;INI2JSON&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <variable constant="0" name="ini" sid="679834628146053" static="1" type="text"></variable>
+                        <event-block sid="689959225423558">
+                            <conditions />
+                            <actions>
+                                <action id="-9" name="Set value" sid="139918551083170" type="System">
+                                    <param id="0" name="Variable">ini</param>
+                                    <param id="1" name="Value">Function.Param(0)</param>
+                                </action>
+                                <action id="-3" name="Create object" sid="742011877706195" type="System">
+                                    <param id="0" name="Object to create">JSON__COMMON</param>
+                                    <param id="1" name="Layer">0</param>
+                                    <param id="2" name="X">0</param>
+                                    <param id="3" name="Y">0</param>
+                                </action>
+                                <action id="0" name="Set New Object" sid="198301215543213" type="JSON__COMMON">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}"></param>
+                                </action>
+                                <action id="0" name="Set New Object" sid="744360819583660" type="JSON__COMMON">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}">&quot;global&quot;</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <variable constant="0" name="scope" sid="890911828337446" static="0" type="text">global</variable>
+                                <variable constant="0" name="scope_array_counter" sid="685764711613607" static="0" type="number">-1</variable>
+                                <event-block sid="672079912608626">
+                                    <conditions>
+                                        <condition id="-12" name="Repeat" sid="594385497722967" type="System">
+                                            <param id="0" name="Count">tokencount(ini, newline)</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <variable constant="0" name="line" sid="895296610331607" static="0" type="text"></variable>
+                                        <event-block sid="527236801699207">
+                                            <conditions />
+                                            <actions>
+                                                <action id="-9" name="Set value" sid="963876753433622" type="System">
+                                                    <param id="0" name="Variable">line</param>
+                                                    <param id="1" name="Value">trim(tokenat(ini, loopindex, newline))</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <comment>not emtpy and not a comment</comment>
+                                        <event-block sid="412338958016990">
+                                            <conditions>
+                                                <condition id="-8" inverted="1" name="Compare two values" sid="855990789531663" type="System">
+                                                    <param id="0" name="First value">line</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Second value">&quot;&quot;</param>
+                                                </condition>
+                                                <condition id="-8" name="Compare two values" sid="393894328538990" type="System">
+                                                    <param id="0" name="First value">find(line, &quot;#&quot;)</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Second value">-1</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions />
+                                            <sub-events>
+                                                <comment>=== key=value pair</comment>
+                                                <event-block sid="973675605164365">
+                                                    <conditions>
+                                                        <condition id="-8" inverted="1" name="Compare two values" sid="497909479670375" type="System">
+                                                            <param id="0" name="First value">left(line, 1)</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Second value">&quot;[&quot;</param>
+                                                        </condition>
+                                                        <condition id="-8" inverted="1" name="Compare two values" sid="570220296075795" type="System">
+                                                            <param id="0" name="First value">right(line, len(line)-1)</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Second value">&quot;]&quot;</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions />
+                                                    <sub-events>
+                                                        <variable constant="0" name="key" sid="179466643247374" static="0" type="text"></variable>
+                                                        <variable constant="0" name="value" sid="922681487837305" static="0" type="text"></variable>
+                                                        <event-block sid="814427895946486">
+                                                            <conditions>
+                                                                <condition id="-8" inverted="1" name="Compare two values" sid="964904207265789" type="System">
+                                                                    <param id="0" name="First value">find(line, &quot;=&quot;)</param>
+                                                                    <param id="1" name="Comparison">0</param>
+                                                                    <param id="2" name="Second value">-1</param>
+                                                                </condition>
+                                                            </conditions>
+                                                            <actions>
+                                                                <action id="-9" name="Set value" sid="706690498171279" type="System">
+                                                                    <param id="0" name="Variable">key</param>
+                                                                    <param id="1" name="Value">trim(tokenat(line, 0, &quot;=&quot;))</param>
+                                                                </action>
+                                                                <action id="-9" name="Set value" sid="647157299516106" type="System">
+                                                                    <param id="0" name="Variable">value</param>
+                                                                    <param id="1" name="Value">trim(tokenat(line, 1, &quot;=&quot;))</param>
+                                                                </action>
+                                                            </actions>
+                                                        </event-block>
+                                                        <event-block sid="384527125055785">
+                                                            <conditions>
+                                                                <condition id="-22" name="Else" sid="920916476239562" type="System" />
+                                                            </conditions>
+                                                            <actions>
+                                                                <action id="-9" name="Set value" sid="410362386050145" type="System">
+                                                                    <param id="0" name="Variable">key</param>
+                                                                    <param id="1" name="Value">line</param>
+                                                                </action>
+                                                            </actions>
+                                                        </event-block>
+                                                        <comment>escape = if it&apos;s in a value</comment>
+                                                        <event-block sid="591307488013862">
+                                                            <conditions>
+                                                                <condition id="-8" name="Compare two values" sid="174168738731807" type="System">
+                                                                    <param id="0" name="First value">tokencount(line, &quot;=&quot;)</param>
+                                                                    <param id="1" name="Comparison">4</param>
+                                                                    <param id="2" name="Second value">2</param>
+                                                                </condition>
+                                                                <condition id="-12" name="Repeat" sid="251655478786325" type="System">
+                                                                    <param id="0" name="Count">tokencount(line, &quot;=&quot;) - 2</param>
+                                                                </condition>
+                                                            </conditions>
+                                                            <actions>
+                                                                <action id="-9" name="Set value" sid="148684683651487" type="System">
+                                                                    <param id="0" name="Variable">value</param>
+                                                                    <param id="1" name="Value">value&amp;tokenat(line, 2 + loopindex, &quot;=&quot;)</param>
+                                                                </action>
+                                                            </actions>
+                                                            <sub-events>
+                                                                <event-block sid="136166892536228">
+                                                                    <conditions>
+                                                                        <condition id="-8" name="Compare two values" sid="895059278210349" type="System">
+                                                                            <param id="0" name="First value">tokenat(line, 2 + loopindex, &quot;=&quot;)</param>
+                                                                            <param id="1" name="Comparison">0</param>
+                                                                            <param id="2" name="Second value">&quot;&quot;</param>
+                                                                        </condition>
+                                                                    </conditions>
+                                                                    <actions>
+                                                                        <action id="-9" name="Set value" sid="176221186114608" type="System">
+                                                                            <param id="0" name="Variable">value</param>
+                                                                            <param id="1" name="Value">value&amp;&quot;=&quot;</param>
+                                                                        </action>
+                                                                    </actions>
+                                                                </event-block>
+                                                            </sub-events>
+                                                        </event-block>
+                                                        <comment>== section is not an array</comment>
+                                                        <event-block sid="528826765882210">
+                                                            <conditions>
+                                                                <condition id="-14" inverted="1" name="Compare variable" sid="264075997234045" type="System">
+                                                                    <param id="0" name="Variable">key</param>
+                                                                    <param id="1" name="Comparison">0</param>
+                                                                    <param id="2" name="Value">&quot;&quot;</param>
+                                                                </condition>
+                                                            </conditions>
+                                                            <actions />
+                                                            <sub-events>
+                                                                <comment>= key is an array (key[]=value)</comment>
+                                                                <event-block sid="290322529662987">
+                                                                    <conditions>
+                                                                        <condition id="-8" name="Compare two values" sid="694361644424757" type="System">
+                                                                            <param id="0" name="First value">right(key,2)</param>
+                                                                            <param id="1" name="Comparison">0</param>
+                                                                            <param id="2" name="Second value">&quot;[]&quot;</param>
+                                                                        </condition>
+                                                                    </conditions>
+                                                                    <actions>
+                                                                        <action id="-9" name="Set value" sid="433060458295807" type="System">
+                                                                            <param id="0" name="Variable">key</param>
+                                                                            <param id="1" name="Value">left(key, len(key)-2)</param>
+                                                                        </action>
+                                                                    </actions>
+                                                                    <sub-events>
+                                                                        <event-block sid="923502988873030">
+                                                                            <conditions>
+                                                                                <condition id="60" name="Is undefined" sid="320745476200094" type="JSON__COMMON">
+                                                                                    <param id="0" name="Reference point">0</param>
+                                                                                    <param id="1" name="Key {n}">scope{###}key</param>
+                                                                                </condition>
+                                                                            </conditions>
+                                                                            <actions>
+                                                                                <action id="10" name="Set New Array" sid="579788387556748" type="JSON__COMMON">
+                                                                                    <param id="0" name="Reference point">0</param>
+                                                                                    <param id="1" name="Key {n}">scope{###}key</param>
+                                                                                </action>
+                                                                            </actions>
+                                                                        </event-block>
+                                                                        <comment>value type conversion</comment>
+                                                                        <event-block sid="680523366587553">
+                                                                            <conditions />
+                                                                            <actions>
+                                                                                <action id="20" name="Set Value" sid="423209319321536" type="JSON__COMMON">
+                                                                                    <param id="0" name="Value">value</param>
+                                                                                    <param id="1" name="Reference point">0</param>
+                                                                                    <param id="2" name="Key {n}">scope{###}key{###}Self.Size(0, scope, key)</param>
+                                                                                </action>
+                                                                            </actions>
+                                                                        </event-block>
+                                                                        <event-block sid="892951585960055">
+                                                                            <conditions>
+                                                                                <condition id="-8" name="Compare two values" sid="528599591800799" type="System">
+                                                                                    <param id="0" name="First value">str(int(value))</param>
+                                                                                    <param id="1" name="Comparison">0</param>
+                                                                                    <param id="2" name="Second value">value</param>
+                                                                                </condition>
+                                                                            </conditions>
+                                                                            <actions>
+                                                                                <action id="20" name="Set Value" sid="781997992831835" type="JSON__COMMON">
+                                                                                    <param id="0" name="Value">int(value)</param>
+                                                                                    <param id="1" name="Reference point">0</param>
+                                                                                    <param id="2" name="Key {n}">scope{###}key{###}Self.Size(0, scope, key)</param>
+                                                                                </action>
+                                                                            </actions>
+                                                                        </event-block>
+                                                                        <event-block sid="244306911928896">
+                                                                            <conditions>
+                                                                                <condition id="-8" name="Compare two values" sid="271696841662429" type="System">
+                                                                                    <param id="0" name="First value">str(float(value))</param>
+                                                                                    <param id="1" name="Comparison">0</param>
+                                                                                    <param id="2" name="Second value">value</param>
+                                                                                </condition>
+                                                                            </conditions>
+                                                                            <actions>
+                                                                                <action id="20" name="Set Value" sid="452136766736219" type="JSON__COMMON">
+                                                                                    <param id="0" name="Value">float(value)</param>
+                                                                                    <param id="1" name="Reference point">0</param>
+                                                                                    <param id="2" name="Key {n}">scope{###}key{###}Self.Size(0, scope, key)</param>
+                                                                                </action>
+                                                                            </actions>
+                                                                        </event-block>
+                                                                    </sub-events>
+                                                                </event-block>
+                                                                <comment>= normal pair</comment>
+                                                                <event-block sid="316573878385907">
+                                                                    <conditions>
+                                                                        <condition id="-22" name="Else" sid="755542042513098" type="System" />
+                                                                    </conditions>
+                                                                    <actions>
+                                                                        <action id="20" name="Set Value" sid="963324355236898" type="JSON__COMMON">
+                                                                            <param id="0" name="Value">value</param>
+                                                                            <param id="1" name="Reference point">0</param>
+                                                                            <param id="2" name="Key {n}">scope{###}key</param>
+                                                                        </action>
+                                                                    </actions>
+                                                                    <sub-events>
+                                                                        <comment>value type conversion</comment>
+                                                                        <event-block sid="289606957191969">
+                                                                            <conditions>
+                                                                                <condition id="-8" name="Compare two values" sid="646087441410284" type="System">
+                                                                                    <param id="0" name="First value">str(int(value))</param>
+                                                                                    <param id="1" name="Comparison">0</param>
+                                                                                    <param id="2" name="Second value">value</param>
+                                                                                </condition>
+                                                                            </conditions>
+                                                                            <actions>
+                                                                                <action id="20" name="Set Value" sid="277824833165385" type="JSON__COMMON">
+                                                                                    <param id="0" name="Value">int(value)</param>
+                                                                                    <param id="1" name="Reference point">0</param>
+                                                                                    <param id="2" name="Key {n}">scope{###}key</param>
+                                                                                </action>
+                                                                            </actions>
+                                                                        </event-block>
+                                                                        <event-block sid="234770449914149">
+                                                                            <conditions>
+                                                                                <condition id="-8" name="Compare two values" sid="588379996005580" type="System">
+                                                                                    <param id="0" name="First value">str(float(value))</param>
+                                                                                    <param id="1" name="Comparison">0</param>
+                                                                                    <param id="2" name="Second value">value</param>
+                                                                                </condition>
+                                                                            </conditions>
+                                                                            <actions>
+                                                                                <action id="20" name="Set Value" sid="437704683004400" type="JSON__COMMON">
+                                                                                    <param id="0" name="Value">float(value)</param>
+                                                                                    <param id="1" name="Reference point">0</param>
+                                                                                    <param id="2" name="Key {n}">scope{###}key</param>
+                                                                                </action>
+                                                                            </actions>
+                                                                        </event-block>
+                                                                    </sub-events>
+                                                                </event-block>
+                                                            </sub-events>
+                                                        </event-block>
+                                                        <comment>== section is an array (values with no keys)</comment>
+                                                        <event-block sid="433460503704345">
+                                                            <conditions>
+                                                                <condition id="-22" name="Else" sid="521478642367316" type="System" />
+                                                            </conditions>
+                                                            <actions />
+                                                            <sub-events>
+                                                                <event-block sid="265459796055314">
+                                                                    <conditions>
+                                                                        <condition id="10" inverted="1" name="Is array" sid="461864195271627" type="JSON__COMMON">
+                                                                            <param id="0" name="Reference point">0</param>
+                                                                            <param id="1" name="Key {n}">scope</param>
+                                                                        </condition>
+                                                                    </conditions>
+                                                                    <actions>
+                                                                        <action id="10" name="Set New Array" sid="328367282806728" type="JSON__COMMON">
+                                                                            <param id="0" name="Reference point">0</param>
+                                                                            <param id="1" name="Key {n}">scope</param>
+                                                                        </action>
+                                                                    </actions>
+                                                                </event-block>
+                                                                <comment>value type conversion</comment>
+                                                                <event-block sid="720430378969876">
+                                                                    <conditions />
+                                                                    <actions>
+                                                                        <action id="20" name="Set Value" sid="472383436192952" type="JSON__COMMON">
+                                                                            <param id="0" name="Value">value</param>
+                                                                            <param id="1" name="Reference point">0</param>
+                                                                            <param id="2" name="Key {n}">scope{###}Self.Size(0, scope)</param>
+                                                                        </action>
+                                                                    </actions>
+                                                                </event-block>
+                                                                <event-block sid="366623858269677">
+                                                                    <conditions>
+                                                                        <condition id="-8" name="Compare two values" sid="104362926500515" type="System">
+                                                                            <param id="0" name="First value">str(int(value))</param>
+                                                                            <param id="1" name="Comparison">0</param>
+                                                                            <param id="2" name="Second value">value</param>
+                                                                        </condition>
+                                                                    </conditions>
+                                                                    <actions>
+                                                                        <action id="20" name="Set Value" sid="170602358677958" type="JSON__COMMON">
+                                                                            <param id="0" name="Value">int(value)</param>
+                                                                            <param id="1" name="Reference point">0</param>
+                                                                            <param id="2" name="Key {n}">scope{###}Self.Size(0, scope)</param>
+                                                                        </action>
+                                                                    </actions>
+                                                                </event-block>
+                                                                <event-block sid="260993430359358">
+                                                                    <conditions>
+                                                                        <condition id="-8" name="Compare two values" sid="820500070591516" type="System">
+                                                                            <param id="0" name="First value">str(float(value))</param>
+                                                                            <param id="1" name="Comparison">0</param>
+                                                                            <param id="2" name="Second value">value</param>
+                                                                        </condition>
+                                                                    </conditions>
+                                                                    <actions>
+                                                                        <action id="20" name="Set Value" sid="560257698349450" type="JSON__COMMON">
+                                                                            <param id="0" name="Value">float(value)</param>
+                                                                            <param id="1" name="Reference point">0</param>
+                                                                            <param id="2" name="Key {n}">scope{###}Self.Size(0, scope)</param>
+                                                                        </action>
+                                                                    </actions>
+                                                                </event-block>
+                                                            </sub-events>
+                                                        </event-block>
+                                                    </sub-events>
+                                                </event-block>
+                                                <comment>=== [section] start</comment>
+                                                <event-block sid="152291133461374">
+                                                    <conditions>
+                                                        <condition id="-22" name="Else" sid="695461720369778" type="System" />
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-9" name="Set value" sid="713813106642692" type="System">
+                                                            <param id="0" name="Variable">scope</param>
+                                                            <param id="1" name="Value">mid(line,1,len(line)-2)</param>
+                                                        </action>
+                                                    </actions>
+                                                    <sub-events>
+                                                        <comment>section is an array containing objects</comment>
+                                                        <event-block sid="141614892543980">
+                                                            <conditions>
+                                                                <condition id="-8" inverted="1" name="Compare two values" sid="467657870443030" type="System">
+                                                                    <param id="0" name="First value">find(scope, &quot;[]&quot;)</param>
+                                                                    <param id="1" name="Comparison">0</param>
+                                                                    <param id="2" name="Second value">-1</param>
+                                                                </condition>
+                                                            </conditions>
+                                                            <actions>
+                                                                <action id="-10" name="Add to" sid="291130408180569" type="System">
+                                                                    <param id="0" name="Variable">scope_array_counter</param>
+                                                                    <param id="1" name="Value">1</param>
+                                                                </action>
+                                                                <action id="-9" name="Set value" sid="107300901837814" type="System">
+                                                                    <param id="0" name="Variable">scope</param>
+                                                                    <param id="1" name="Value">scope&amp;scope_array_counter</param>
+                                                                </action>
+                                                            </actions>
+                                                        </event-block>
+                                                        <event-block sid="201780141382927">
+                                                            <conditions>
+                                                                <condition id="-22" name="Else" sid="216721709497964" type="System" />
+                                                            </conditions>
+                                                            <actions>
+                                                                <action id="-9" name="Set value" sid="383124104641637" type="System">
+                                                                    <param id="0" name="Variable">scope_array_counter</param>
+                                                                    <param id="1" name="Value">-1</param>
+                                                                </action>
+                                                            </actions>
+                                                        </event-block>
+                                                        <event-block sid="810645643361242">
+                                                            <conditions />
+                                                            <actions>
+                                                                <action id="0" name="Set New Object" sid="349151121393499" type="JSON__COMMON">
+                                                                    <param id="0" name="Reference point">0</param>
+                                                                    <param id="1" name="Key {n}">scope</param>
+                                                                </action>
+                                                            </actions>
+                                                        </event-block>
+                                                    </sub-events>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <comment>move values from &quot;global&quot; into a global scope</comment>
+                                <event-block sid="189651236245401">
+                                    <conditions>
+                                        <condition id="70" inverted="1" name="Is Empty" sid="948185621059430" type="JSON__COMMON">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}">&quot;global&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="452080559021911" type="Function">
+                                            <param id="0" name="Name">&quot;JSON_Merge&quot;</param>
+                                            <param id="1" name="Parameter {n}">JSON__COMMON.AsJson(0, &quot;global&quot;){###}JSON__COMMON.AsJson(0)</param>
+                                        </action>
+                                        <action id="60" name="LoadJSON" sid="515543163765578" type="JSON__COMMON">
+                                            <param id="0" name="JSON">Function.ReturnValue</param>
+                                            <param id="1" name="Reference point">0</param>
+                                            <param id="2" name="Key {n}"></param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <comment>merge arrays with objects</comment>
+                                <event-block sid="888805989287890">
+                                    <conditions>
+                                        <condition id="100" name="For each property" sid="968026343577233" type="JSON__COMMON">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}"></param>
+                                        </condition>
+                                        <condition id="0" name="Is object" sid="306651452394408" type="JSON__COMMON">
+                                            <param id="0" name="Reference point">1</param>
+                                            <param id="1" name="Key {n}"></param>
+                                        </condition>
+                                        <condition id="-8" inverted="1" name="Compare two values" sid="258833621316583" type="System">
+                                            <param id="0" name="First value">find(JSON__COMMON.CurrentKey, &quot;[]&quot;)</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">-1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <variable constant="0" name="array_name" sid="999897012829491" static="0" type="text"></variable>
+                                        <event-block sid="763441785513358">
+                                            <conditions />
+                                            <actions>
+                                                <action id="-9" name="Set value" sid="563431143357776" type="System">
+                                                    <param id="0" name="Variable">array_name</param>
+                                                    <param id="1" name="Value">left(JSON__COMMON.CurrentKey, find(JSON__COMMON.CurrentKey, &quot;[]&quot;))</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="716889736866733">
+                                            <conditions>
+                                                <condition id="60" name="Is undefined" sid="533224388521117" type="JSON__COMMON">
+                                                    <param id="0" name="Reference point">0</param>
+                                                    <param id="1" name="Key {n}">array_name</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="10" name="Set New Array" sid="151450797282986" type="JSON__COMMON">
+                                                    <param id="0" name="Reference point">0</param>
+                                                    <param id="1" name="Key {n}">array_name</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="256279037766085">
+                                            <conditions />
+                                            <actions>
+                                                <action id="60" name="LoadJSON" sid="255566399274380" type="JSON__COMMON">
+                                                    <param id="0" name="JSON">JSON__COMMON.AsJson(1)</param>
+                                                    <param id="1" name="Reference point">0</param>
+                                                    <param id="2" name="Key {n}">array_name{###}JSON__COMMON.Size(0, array_name)</param>
+                                                </action>
+                                                <action id="50" name="Delete" sid="223859115456794" type="JSON__COMMON">
+                                                    <param id="0" name="Reference point">1</param>
+                                                    <param id="1" name="Key {n}"></param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="831084148201457">
+                                    <conditions />
+                                    <actions>
+                                        <action id="50" name="Delete" sid="963028580632978" type="JSON__COMMON">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}">&quot;global&quot;</param>
+                                        </action>
+                                        <action id="1" name="Set return value" sid="276781259061924" type="Function">
+                                            <param id="0" name="Value">JSON__COMMON.AsJson(0)</param>
+                                        </action>
+                                        <action id="-9" name="Destroy" sid="627581765491046" type="JSON__COMMON" />
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>write</comment>
+                <event-block sid="256253835973224">
+                    <conditions>
+                        <condition id="0" name="On function" sid="437067522257813" type="Function">
+                            <param id="0" name="Name">&quot;JSON2INI&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <variable constant="0" name="ini" sid="539559306496675" static="0" type="text"></variable>
+                        <event-block sid="829647023646580">
+                            <conditions />
+                            <actions>
+                                <action id="-3" name="Create object" sid="608008257903632" type="System">
+                                    <param id="0" name="Object to create">JSON__COMMON</param>
+                                    <param id="1" name="Layer">0</param>
+                                    <param id="2" name="X">0</param>
+                                    <param id="3" name="Y">0</param>
+                                </action>
+                                <action id="60" name="LoadJSON" sid="332226097493777" type="JSON__COMMON">
+                                    <param id="0" name="JSON">Function.Param(0)</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}"></param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <comment>write global scope first, since it&apos;s on top</comment>
+                                <event-block sid="867498122173382">
+                                    <conditions>
+                                        <condition id="100" name="For each property" sid="353506423404749" type="JSON__COMMON">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}"></param>
+                                        </condition>
+                                        <condition id="0" inverted="1" name="Is object" sid="653226106363909" type="JSON__COMMON">
+                                            <param id="0" name="Reference point">1</param>
+                                            <param id="1" name="Key {n}"></param>
+                                        </condition>
+                                        <condition id="10" inverted="1" name="Is array" sid="128874871559859" type="JSON__COMMON">
+                                            <param id="0" name="Reference point">1</param>
+                                            <param id="1" name="Key {n}"></param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="716165039786599" type="System">
+                                            <param id="0" name="Variable">ini</param>
+                                            <param id="1" name="Value">ini&amp;newline&amp;JSON__COMMON.CurrentKey&amp;&quot;=&quot;&amp;JSON__COMMON.CurrentValue</param>
+                                        </action>
+                                        <action id="50" name="Delete" sid="783129423820476" type="JSON__COMMON">
+                                            <param id="0" name="Reference point">1</param>
+                                            <param id="1" name="Key {n}"></param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <comment>write everything else</comment>
+                                <event-block sid="418812548858195">
+                                    <conditions>
+                                        <condition id="100" name="For each property" sid="986557355437795" type="JSON__COMMON">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}"></param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <comment>== an object</comment>
+                                        <event-block sid="349926353079301">
+                                            <conditions>
+                                                <condition id="0" name="Is object" sid="754364650349204" type="JSON__COMMON">
+                                                    <param id="0" name="Reference point">1</param>
+                                                    <param id="1" name="Key {n}"></param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Set value" sid="194388232600762" type="System">
+                                                    <param id="0" name="Variable">ini</param>
+                                                    <param id="1" name="Value">ini&amp;newline&amp;newline&amp;&quot;[&quot;&amp;JSON__COMMON.CurrentKey&amp;&quot;]&quot;</param>
+                                                </action>
+                                            </actions>
+                                            <sub-events>
+                                                <event-block sid="324060351333833">
+                                                    <conditions>
+                                                        <condition id="100" name="For each property" sid="883158629350262" type="JSON__COMMON">
+                                                            <param id="0" name="Reference point">1</param>
+                                                            <param id="1" name="Key {n}"></param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions />
+                                                    <sub-events>
+                                                        <comment>array in an object</comment>
+                                                        <event-block sid="610953834738045">
+                                                            <conditions>
+                                                                <condition id="10" name="Is array" sid="623125823072136" type="JSON__COMMON">
+                                                                    <param id="0" name="Reference point">1</param>
+                                                                    <param id="1" name="Key {n}"></param>
+                                                                </condition>
+                                                            </conditions>
+                                                            <actions />
+                                                            <sub-events>
+                                                                <variable constant="0" name="array_name" sid="597239271313298" static="0" type="text"></variable>
+                                                                <event-block sid="758401256265670">
+                                                                    <conditions />
+                                                                    <actions>
+                                                                        <action id="-9" name="Set value" sid="141299953121431" type="System">
+                                                                            <param id="0" name="Variable">array_name</param>
+                                                                            <param id="1" name="Value">JSON__COMMON.CurrentKey</param>
+                                                                        </action>
+                                                                    </actions>
+                                                                </event-block>
+                                                                <event-block sid="685871791603856">
+                                                                    <conditions>
+                                                                        <condition id="100" name="For each property" sid="566790323950948" type="JSON__COMMON">
+                                                                            <param id="0" name="Reference point">1</param>
+                                                                            <param id="1" name="Key {n}"></param>
+                                                                        </condition>
+                                                                    </conditions>
+                                                                    <actions>
+                                                                        <action id="-9" name="Set value" sid="662465264960226" type="System">
+                                                                            <param id="0" name="Variable">ini</param>
+                                                                            <param id="1" name="Value">ini&amp;newline&amp;array_name&amp;&quot;[]=&quot;&amp;JSON__COMMON.CurrentValue</param>
+                                                                        </action>
+                                                                    </actions>
+                                                                </event-block>
+                                                            </sub-events>
+                                                        </event-block>
+                                                        <event-block sid="506542272108899">
+                                                            <conditions>
+                                                                <condition id="-22" name="Else" sid="634658478818298" type="System" />
+                                                            </conditions>
+                                                            <actions>
+                                                                <action id="-9" name="Set value" sid="745916526352180" type="System">
+                                                                    <param id="0" name="Variable">ini</param>
+                                                                    <param id="1" name="Value">ini&amp;newline&amp;JSON__COMMON.CurrentKey&amp;&quot;=&quot;&amp;JSON__COMMON.CurrentValue</param>
+                                                                </action>
+                                                            </actions>
+                                                        </event-block>
+                                                    </sub-events>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                        <comment>== top level regular array</comment>
+                                        <event-block sid="875620005033478">
+                                            <conditions>
+                                                <condition id="10" name="Is array" sid="709259497609518" type="JSON__COMMON">
+                                                    <param id="0" name="Reference point">1</param>
+                                                    <param id="1" name="Key {n}"></param>
+                                                </condition>
+                                                <condition id="0" inverted="1" name="Is object" sid="314280819569097" type="JSON__COMMON">
+                                                    <param id="0" name="Reference point">1</param>
+                                                    <param id="1" name="Key {n}">0</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Set value" sid="117072135812872" type="System">
+                                                    <param id="0" name="Variable">ini</param>
+                                                    <param id="1" name="Value">ini&amp;newline&amp;newline&amp;&quot;[&quot;&amp;JSON__COMMON.CurrentKey&amp;&quot;]&quot;</param>
+                                                </action>
+                                            </actions>
+                                            <sub-events>
+                                                <event-block sid="641773639260331">
+                                                    <conditions>
+                                                        <condition id="100" name="For each property" sid="872184883295992" type="JSON__COMMON">
+                                                            <param id="0" name="Reference point">1</param>
+                                                            <param id="1" name="Key {n}"></param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-9" name="Set value" sid="747052075808219" type="System">
+                                                            <param id="0" name="Variable">ini</param>
+                                                            <param id="1" name="Value">ini&amp;newline&amp;&quot;=&quot;&amp;JSON__COMMON.CurrentValue</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                        <comment>== an array containing objects</comment>
+                                        <event-block sid="276587058811469">
+                                            <conditions>
+                                                <condition id="10" name="Is array" sid="282436290028500" type="JSON__COMMON">
+                                                    <param id="0" name="Reference point">1</param>
+                                                    <param id="1" name="Key {n}"></param>
+                                                </condition>
+                                                <condition id="0" name="Is object" sid="341330315062947" type="JSON__COMMON">
+                                                    <param id="0" name="Reference point">1</param>
+                                                    <param id="1" name="Key {n}">0</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions />
+                                            <sub-events>
+                                                <variable constant="0" name="array_name" sid="546417571669104" static="0" type="text"></variable>
+                                                <event-block sid="828473254434092">
+                                                    <conditions />
+                                                    <actions>
+                                                        <action id="-9" name="Set value" sid="757722754479782" type="System">
+                                                            <param id="0" name="Variable">array_name</param>
+                                                            <param id="1" name="Value">JSON__COMMON.CurrentKey</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <comment>loop through objects in aray</comment>
+                                                <event-block sid="498067123596442">
+                                                    <conditions>
+                                                        <condition id="100" name="For each property" sid="915504753887702" type="JSON__COMMON">
+                                                            <param id="0" name="Reference point">1</param>
+                                                            <param id="1" name="Key {n}"></param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-9" name="Set value" sid="122477186970731" type="System">
+                                                            <param id="0" name="Variable">ini</param>
+                                                            <param id="1" name="Value">ini&amp;newline&amp;newline&amp;&quot;[&quot;&amp;array_name&amp;&quot;[]]&quot;</param>
+                                                        </action>
+                                                    </actions>
+                                                    <sub-events>
+                                                        <event-block sid="352374614968147">
+                                                            <conditions>
+                                                                <condition id="100" name="For each property" sid="279454682773398" type="JSON__COMMON">
+                                                                    <param id="0" name="Reference point">1</param>
+                                                                    <param id="1" name="Key {n}"></param>
+                                                                </condition>
+                                                            </conditions>
+                                                            <actions />
+                                                            <sub-events>
+                                                                <comment>array in an object</comment>
+                                                                <event-block sid="263765261204936">
+                                                                    <conditions>
+                                                                        <condition id="10" name="Is array" sid="265656041638864" type="JSON__COMMON">
+                                                                            <param id="0" name="Reference point">1</param>
+                                                                            <param id="1" name="Key {n}"></param>
+                                                                        </condition>
+                                                                    </conditions>
+                                                                    <actions />
+                                                                    <sub-events>
+                                                                        <variable constant="0" name="inner_array_name" sid="935728922372616" static="0" type="text"></variable>
+                                                                        <event-block sid="235328146128071">
+                                                                            <conditions />
+                                                                            <actions>
+                                                                                <action id="-9" name="Set value" sid="487355649072168" type="System">
+                                                                                    <param id="0" name="Variable">inner_array_name</param>
+                                                                                    <param id="1" name="Value">JSON__COMMON.CurrentKey</param>
+                                                                                </action>
+                                                                            </actions>
+                                                                        </event-block>
+                                                                        <event-block sid="708967384470792">
+                                                                            <conditions>
+                                                                                <condition id="100" name="For each property" sid="434624155292195" type="JSON__COMMON">
+                                                                                    <param id="0" name="Reference point">1</param>
+                                                                                    <param id="1" name="Key {n}"></param>
+                                                                                </condition>
+                                                                            </conditions>
+                                                                            <actions>
+                                                                                <action id="-9" name="Set value" sid="223204194067543" type="System">
+                                                                                    <param id="0" name="Variable">ini</param>
+                                                                                    <param id="1" name="Value">ini&amp;newline&amp;inner_array_name&amp;&quot;[]=&quot;&amp;JSON__COMMON.CurrentValue</param>
+                                                                                </action>
+                                                                            </actions>
+                                                                        </event-block>
+                                                                    </sub-events>
+                                                                </event-block>
+                                                                <event-block sid="857962693894467">
+                                                                    <conditions>
+                                                                        <condition id="-22" name="Else" sid="933534256854228" type="System" />
+                                                                    </conditions>
+                                                                    <actions>
+                                                                        <action id="-9" name="Set value" sid="148537376658907" type="System">
+                                                                            <param id="0" name="Variable">ini</param>
+                                                                            <param id="1" name="Value">ini&amp;newline&amp;JSON__COMMON.CurrentKey&amp;&quot;=&quot;&amp;JSON__COMMON.CurrentValue</param>
+                                                                        </action>
+                                                                    </actions>
+                                                                </event-block>
+                                                            </sub-events>
+                                                        </event-block>
+                                                    </sub-events>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="550625621171263">
+                                    <conditions />
+                                    <actions>
+                                        <action id="-9" name="Destroy" sid="819876039298988" type="JSON__COMMON" />
+                                        <action id="-9" name="Set value" sid="465925747779603" type="System">
+                                            <param id="0" name="Variable">ini</param>
+                                            <param id="1" name="Value">trim(ini)&amp;newline</param>
+                                        </action>
+                                        <action id="1" name="Set return value" sid="984425303701150" type="Function">
+                                            <param id="0" name="Value">ini</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
                 <comment>get input prompt</comment>
                 <event-block sid="287902010826587">
                     <conditions>
@@ -1343,81 +2148,6 @@
                             <param id="0" name="Value">JS.JSCodeValue(&quot;&#x0D;&#x0A;function func() {&#x0D;&#x0A;    let array = JSON.parse(#0);&#x0D;&#x0A;    array.sort(function(a, b) {&#x0D;&#x0A;        return b[#1] - a[#1];&#x0D;&#x0A;    });&#x0D;&#x0A;    return JSON.stringify(array);&#x0D;&#x0A;}&#x0D;&#x0A;func()&#x0D;&#x0A;&quot;, Function.Param(0), Function.Param(1))</param>
                         </action>
                     </actions>
-                </event-block>
-                <comment></comment>
-                <event-block sid="209304663498701">
-                    <conditions>
-                        <condition id="0" name="On function" sid="790834160668162" type="Function">
-                            <param id="0" name="Name">&quot;INI2JSON&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-3" name="Create object" sid="820786231763811" type="System">
-                            <param id="0" name="Object to create">JSON__COMMON</param>
-                            <param id="1" name="Layer">0</param>
-                            <param id="2" name="X">0</param>
-                            <param id="3" name="Y">0</param>
-                        </action>
-                        <action id="60" name="LoadJSON" sid="579311187658299" type="JSON__COMMON">
-                            <param id="0" name="JSON">INI.INI2JSON(Function.Param(0))</param>
-                            <param id="1" name="Reference point">0</param>
-                            <param id="2" name="Key {n}"></param>
-                        </action>
-                    </actions>
-                    <sub-events>
-                        <event-block sid="954430378270013">
-                            <conditions>
-                                <condition id="100" name="For each property" sid="579032148656895" type="JSON__COMMON">
-                                    <param id="0" name="Reference point">0</param>
-                                    <param id="1" name="Key {n}"></param>
-                                </condition>
-                            </conditions>
-                            <actions />
-                            <sub-events>
-                                <event-block sid="829650872854092">
-                                    <conditions>
-                                        <condition id="-8" name="Compare two values" sid="856203720758628" type="System">
-                                            <param id="0" name="First value">str(int(JSON__COMMON.CurrentValue))</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Second value">JSON__COMMON.CurrentValue</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="20" name="Set Value" sid="727159101979333" type="JSON__COMMON">
-                                            <param id="0" name="Value">int(Self.CurrentValue)</param>
-                                            <param id="1" name="Reference point">1</param>
-                                            <param id="2" name="Key {n}"></param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="335096239144489">
-                                    <conditions>
-                                        <condition id="-8" name="Compare two values" sid="538777991807130" type="System">
-                                            <param id="0" name="First value">str(float(JSON__COMMON.CurrentValue))</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Second value">JSON__COMMON.CurrentValue</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="20" name="Set Value" sid="182971102322331" type="JSON__COMMON">
-                                            <param id="0" name="Value">float(Self.CurrentValue)</param>
-                                            <param id="1" name="Reference point">1</param>
-                                            <param id="2" name="Key {n}"></param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
-                        </event-block>
-                        <event-block sid="563599135739447">
-                            <conditions />
-                            <actions>
-                                <action id="1" name="Set return value" sid="404477959274386" type="Function">
-                                    <param id="0" name="Value">JSON__COMMON.AsJson(0)</param>
-                                </action>
-                                <action id="-9" name="Destroy" sid="662014976423052" type="JSON__COMMON" />
-                            </actions>
-                        </event-block>
-                    </sub-events>
                 </event-block>
             </sub-events>
         </event-group>
@@ -4485,7 +5215,7 @@
                         </action>
                         <action id="0" name="Call function" sid="955760765940061" type="Function">
                             <param id="0" name="Name">&quot;LevelList_Init&quot;</param>
-                            <param id="1" name="Parameter {n}">name{###}mode</param>
+                            <param id="1" name="Parameter {n}">&quot;Marathon_&quot;&amp;name{###}mode</param>
                         </action>
                     </actions>
                 </event-block>

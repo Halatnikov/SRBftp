@@ -1956,7 +1956,7 @@
                             <param id="0" name="Text">(JSON__TEMP.Size(0, &quot;Levels&quot;) - Queue_LevelList.Length)&amp;&quot; / &quot;&amp;JSON__TEMP.Size(0, &quot;Levels&quot;)</param>
                         </action>
                         <action id="0" name="Set text" sid="818085601769348" type="HUD_MarathonName">
-                            <param id="0" name="Text">JSON_Lists.Value(0, &quot;Marathon&quot;, JSON__TEMP.Value(0, &quot;Name&quot;))</param>
+                            <param id="0" name="Text">JSON_Lists.Value(0, &quot;Marathon&quot;, &quot;Marathon_&quot;&amp;JSON__TEMP.Value(0, &quot;Name&quot;))</param>
                         </action>
                     </actions>
                     <sub-events>
@@ -2115,6 +2115,22 @@
                     </conditions>
                     <actions />
                     <sub-events>
+                        <event-block sid="975450755604479">
+                            <conditions>
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="948361059809097" type="Var_Player">
+                                    <param id="0" name="Instance variable">Lives</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">-1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="20" name="Set Value" sid="653961772528910" type="JSON__TEMP">
+                                    <param id="0" name="Value">Var_Player.Lives</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;Lives&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
                         <event-block sid="793063719048118">
                             <conditions>
                                 <condition id="100" name="For each property" sid="941108944239589" type="JSON__TEMP">
@@ -2136,24 +2152,6 @@
                             </actions>
                         </event-block>
                     </sub-events>
-                </event-block>
-                <comment>on game over</comment>
-                <event-block sid="997222146570594">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="805768681552674" type="Var_Player">
-                            <param id="0" name="Instance variable">Lives</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">0</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="477495505332869" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="20" name="Set Value" sid="666028878107034" type="JSON__TEMP">
-                            <param id="0" name="Value">0</param>
-                            <param id="1" name="Reference point">0</param>
-                            <param id="2" name="Key {n}">&quot;Lives&quot;</param>
-                        </action>
-                    </actions>
                 </event-block>
             </sub-events>
         </event-group>
