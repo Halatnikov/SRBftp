@@ -1206,7 +1206,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="20" name="Set Value" sid="315670447348532" type="JSON__REPLAY">
-                                            <param id="0" name="Value">int(PlayerSkins.X)</param>
+                                            <param id="0" name="Value">int(PlayerSkins.X) - Self.OldX</param>
                                             <param id="1" name="Reference point">0</param>
                                             <param id="2" name="Key {n}">str(Var_Level.TimerLevelTicks){###}&quot;x&quot;</param>
                                         </action>
@@ -1222,7 +1222,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="20" name="Set Value" sid="497233039271257" type="JSON__REPLAY">
-                                            <param id="0" name="Value">int(PlayerSkins.Y)</param>
+                                            <param id="0" name="Value">int(PlayerSkins.Y) - Self.OldY</param>
                                             <param id="1" name="Reference point">0</param>
                                             <param id="2" name="Key {n}">str(Var_Level.TimerLevelTicks){###}&quot;y&quot;</param>
                                         </action>
@@ -1343,7 +1343,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="-1" name="Set X" sid="927661475807287" type="PlayerSkins">
-                                            <param id="0" name="X">JSON__REPLAY.Value(0, str(Var_Level.TimerLevelTicks), &quot;x&quot;)</param>
+                                            <param id="0" name="X">Self.X + JSON__REPLAY.Value(0, str(Var_Level.TimerLevelTicks), &quot;x&quot;)</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -1356,7 +1356,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="-2" name="Set Y" sid="399939658843344" type="PlayerSkins">
-                                            <param id="0" name="Y">JSON__REPLAY.Value(0, str(Var_Level.TimerLevelTicks), &quot;y&quot;)</param>
+                                            <param id="0" name="Y">Self.Y + JSON__REPLAY.Value(0, str(Var_Level.TimerLevelTicks), &quot;y&quot;)</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -1381,7 +1381,11 @@
                                             <param id="1" name="Key {n}">str(Var_Level.TimerLevelTicks){###}&quot;w&quot;</param>
                                         </condition>
                                     </conditions>
-                                    <actions />
+                                    <actions>
+                                        <action id="7" name="Set mirrored" sid="105388329224801" type="PlayerSkins">
+                                            <param id="0" name="State">1</param>
+                                        </action>
+                                    </actions>
                                     <sub-events>
                                         <event-block sid="945294213957265">
                                             <conditions>
@@ -1394,16 +1398,6 @@
                                             <actions>
                                                 <action id="7" name="Set mirrored" sid="301041492490304" type="PlayerSkins">
                                                     <param id="0" name="State">0</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                        <event-block sid="885470162921403">
-                                            <conditions>
-                                                <condition id="-22" name="Else" sid="947968839649994" type="System" />
-                                            </conditions>
-                                            <actions>
-                                                <action id="7" name="Set mirrored" sid="105388329224801" type="PlayerSkins">
-                                                    <param id="0" name="State">1</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -1574,7 +1568,7 @@
                                             </conditions>
                                             <actions>
                                                 <action id="-1" name="Set X" sid="893623277300302" type="Engine_Player">
-                                                    <param id="0" name="X">JSON__REPLAY.Value(0, str(Var_Level.TimerLevelTicks), &quot;x&quot;)</param>
+                                                    <param id="0" name="X">Self.X + JSON__REPLAY.Value(0, str(Var_Level.TimerLevelTicks), &quot;x&quot;)</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -1587,7 +1581,7 @@
                                             </conditions>
                                             <actions>
                                                 <action id="-2" name="Set Y" sid="300287066575461" type="Engine_Player">
-                                                    <param id="0" name="Y">JSON__REPLAY.Value(0, str(Var_Level.TimerLevelTicks), &quot;y&quot;)</param>
+                                                    <param id="0" name="Y">Self.Y + JSON__REPLAY.Value(0, str(Var_Level.TimerLevelTicks), &quot;y&quot;)</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -1598,7 +1592,11 @@
                                                     <param id="1" name="Key {n}">str(Var_Level.TimerLevelTicks){###}&quot;w&quot;</param>
                                                 </condition>
                                             </conditions>
-                                            <actions />
+                                            <actions>
+                                                <action id="7" name="Set mirrored" sid="371360540444599" type="PlayerSkins">
+                                                    <param id="0" name="State">1</param>
+                                                </action>
+                                            </actions>
                                             <sub-events>
                                                 <event-block sid="873941103949305">
                                                     <conditions>
@@ -1611,16 +1609,6 @@
                                                     <actions>
                                                         <action id="7" name="Set mirrored" sid="856282772331005" type="PlayerSkins">
                                                             <param id="0" name="State">0</param>
-                                                        </action>
-                                                    </actions>
-                                                </event-block>
-                                                <event-block sid="403492703730806">
-                                                    <conditions>
-                                                        <condition id="-22" name="Else" sid="753102525201792" type="System" />
-                                                    </conditions>
-                                                    <actions>
-                                                        <action id="7" name="Set mirrored" sid="371360540444599" type="PlayerSkins">
-                                                            <param id="0" name="State">1</param>
                                                         </action>
                                                     </actions>
                                                 </event-block>
