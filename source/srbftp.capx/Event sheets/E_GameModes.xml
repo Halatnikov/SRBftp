@@ -828,6 +828,27 @@
                                         <action id="-9" name="Destroy" sid="528908723304151" type="PlayerSkins" />
                                     </actions>
                                 </event-block>
+                                <event-block sid="953317742415127">
+                                    <conditions />
+                                    <actions>
+                                        <action id="-10" name="Set value" sid="874723893308284" type="JSON__REPLAY">
+                                            <param id="0" name="Instance variable">OldX</param>
+                                            <param id="1" name="Value">int(PlayerSkins.X)</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="497912503113461" type="JSON__REPLAY">
+                                            <param id="0" name="Instance variable">OldY</param>
+                                            <param id="1" name="Value">int(PlayerSkins.Y)</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="176051077511776" type="JSON__REPLAY">
+                                            <param id="0" name="Instance variable">OldAnim</param>
+                                            <param id="1" name="Value">PlayerSkins.AnimationName</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="854919963482143" type="JSON__REPLAY">
+                                            <param id="0" name="Instance variable">OldW</param>
+                                            <param id="1" name="Value">PlayerSkins.FacingDirection</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
                             </sub-events>
                         </event-block>
                         <event-block sid="795597831926851">
@@ -860,6 +881,27 @@
                                         </action>
                                         <action id="9" name="Set scale" sid="262066472902689" type="PlayerSkins">
                                             <param id="0" name="Scale">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="642501671829953">
+                                    <conditions />
+                                    <actions>
+                                        <action id="-10" name="Set value" sid="216119734296878" type="JSON__REPLAY">
+                                            <param id="0" name="Instance variable">OldX</param>
+                                            <param id="1" name="Value">int(PlayerSkins.X)</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="942430461885655" type="JSON__REPLAY">
+                                            <param id="0" name="Instance variable">OldY</param>
+                                            <param id="1" name="Value">int(PlayerSkins.Y)</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="226022566599342" type="JSON__REPLAY">
+                                            <param id="0" name="Instance variable">OldAnim</param>
+                                            <param id="1" name="Value">PlayerSkins.AnimationName</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="995213623183942" type="JSON__REPLAY">
+                                            <param id="0" name="Instance variable">OldW</param>
+                                            <param id="1" name="Value">PlayerSkins.FacingDirection</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -898,20 +940,9 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-3" name="Create object" sid="235247990619767" type="System">
-                            <param id="0" name="Object to create">JSON__COMMON</param>
-                            <param id="1" name="Layer">0</param>
-                            <param id="2" name="X">0</param>
-                            <param id="3" name="Y">0</param>
-                        </action>
-                        <action id="60" name="LoadJSON" sid="201874837907579" type="JSON__COMMON">
-                            <param id="0" name="JSON">JSON__REPLAY.AsJson(0)</param>
-                            <param id="1" name="Reference point">0</param>
-                            <param id="2" name="Key {n}"></param>
-                        </action>
                         <action id="0" name="Call function" sid="697353514734073" type="Function">
                             <param id="0" name="Name">&quot;Math_RoundFloat&quot;</param>
-                            <param id="1" name="Parameter {n}">len(JSON__COMMON.AsJson(0))/1024{###}2</param>
+                            <param id="1" name="Parameter {n}">len(JSON__REPLAY.AsJson(0))/1024{###}2</param>
                         </action>
                         <action id="14" name="Log" sid="940477043216580" type="Browser">
                             <param id="0" name="Type">0</param>
@@ -919,7 +950,7 @@
                         </action>
                         <action id="0" name="Call function" sid="228560443063927" type="Function">
                             <param id="0" name="Name">&quot;Math_RoundFloat&quot;</param>
-                            <param id="1" name="Parameter {n}">len(LzString.Compress(JSON__COMMON.AsJson(0)))/1024{###}2</param>
+                            <param id="1" name="Parameter {n}">len(LzString.Compress(JSON__REPLAY.AsJson(0)))/1024{###}2</param>
                         </action>
                         <action id="14" name="Log" sid="165717911858310" type="Browser">
                             <param id="0" name="Type">0</param>
@@ -927,28 +958,17 @@
                         </action>
                     </actions>
                     <sub-events>
-                        <event-block sid="114319184251856">
-                            <conditions>
-                                <condition id="100" name="For each property" sid="819817837637001" type="JSON__COMMON">
-                                    <param id="0" name="Reference point">0</param>
-                                    <param id="1" name="Key {n}"></param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="20" name="Set Value" sid="400372720943742" type="JSON__COMMON">
-                                    <param id="0" name="Value">replace(replace(INI.JSON2INI(JSON__COMMON.AsJson(1)),newline,&quot;,&quot;),&quot;=&quot;,&quot;:&quot;)</param>
-                                    <param id="1" name="Reference point">1</param>
-                                    <param id="2" name="Key {n}"></param>
-                                </action>
-                            </actions>
-                        </event-block>
                         <variable constant="0" name="result" sid="273539119847157" static="0" type="text"></variable>
                         <event-block sid="401482272865507">
                             <conditions />
                             <actions>
-                                <action id="-9" name="Set value" sid="952991181030173" type="System">
+                                <action id="0" name="Call function" sid="291632234308465" type="Function">
+                                    <param id="0" name="Name">&quot;JSON2INI&quot;</param>
+                                    <param id="1" name="Parameter {n}">JSON__REPLAY.AsJson(0)</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="585588613007992" type="System">
                                     <param id="0" name="Variable">result</param>
-                                    <param id="1" name="Value">replace(replace(INI.JSON2INI(JSON__COMMON.AsJson(0)),newline,&quot;|&quot;),&quot;,|&quot;,&quot;|&quot;)</param>
+                                    <param id="1" name="Value">Function.ReturnValue</param>
                                 </action>
                                 <action id="0" name="Call function" sid="821866945084609" type="Function">
                                     <param id="0" name="Name">&quot;Math_RoundFloat&quot;</param>
@@ -970,7 +990,6 @@
                                     <param id="0" name="Type">0</param>
                                     <param id="1" name="Message">result</param>
                                 </action>
-                                <action id="-9" name="Destroy" sid="408875264033614" type="JSON__COMMON" />
                             </actions>
                         </event-block>
                     </sub-events>
@@ -1247,14 +1266,14 @@
                                 <event-block sid="329040743309213">
                                     <conditions>
                                         <condition id="-8" inverted="1" name="Compare two values" sid="999163694673041" type="System">
-                                            <param id="0" name="First value">PlayerSkins.Mirrored</param>
+                                            <param id="0" name="First value">PlayerSkins.FacingDirection</param>
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Second value">JSON__REPLAY.OldW</param>
                                         </condition>
                                     </conditions>
                                     <actions>
                                         <action id="20" name="Set Value" sid="632437296861830" type="JSON__REPLAY">
-                                            <param id="0" name="Value">PlayerSkins.Mirrored</param>
+                                            <param id="0" name="Value">PlayerSkins.FacingDirection</param>
                                             <param id="1" name="Reference point">0</param>
                                             <param id="2" name="Key {n}">str(Var_Level.TimerLevelTicks){###}&quot;w&quot;</param>
                                         </action>
@@ -1277,7 +1296,7 @@
                                         </action>
                                         <action id="-10" name="Set value" sid="897743741992178" type="JSON__REPLAY">
                                             <param id="0" name="Instance variable">OldW</param>
-                                            <param id="1" name="Value">PlayerSkins.Mirrored</param>
+                                            <param id="1" name="Value">PlayerSkins.FacingDirection</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -1568,7 +1587,7 @@
                                             </conditions>
                                             <actions>
                                                 <action id="-1" name="Set X" sid="893623277300302" type="Engine_Player">
-                                                    <param id="0" name="X">Self.X + JSON__REPLAY.Value(0, str(Var_Level.TimerLevelTicks), &quot;x&quot;)</param>
+                                                    <param id="0" name="X">JSON__REPLAY.Value(0, str(Var_Level.TimerLevelTicks), &quot;x&quot;) + PlayerSkins.X</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -1581,7 +1600,7 @@
                                             </conditions>
                                             <actions>
                                                 <action id="-2" name="Set Y" sid="300287066575461" type="Engine_Player">
-                                                    <param id="0" name="Y">Self.Y + JSON__REPLAY.Value(0, str(Var_Level.TimerLevelTicks), &quot;y&quot;)</param>
+                                                    <param id="0" name="Y">JSON__REPLAY.Value(0, str(Var_Level.TimerLevelTicks), &quot;y&quot;) + PlayerSkins.Y</param>
                                                 </action>
                                             </actions>
                                         </event-block>

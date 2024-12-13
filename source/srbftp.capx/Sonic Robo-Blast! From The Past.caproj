@@ -2,7 +2,7 @@
 <c2project>
     <name>Sonic Robo-Blast! From The Past</name>
     <description>Original games by Sonikku - Johnathan Wallbank and SSNTails - A.J. Freda</description>
-    <version>0.3.1-21</version>
+    <version>0.3.1-22</version>
     <author>Halatnikov</author>
     <author-email></author-email>
     <author-website>https://halatnikov.github.io</author-website>
@@ -28,7 +28,6 @@
         <plugin author="Exit Games" id="Photon" version="1">Photon</plugin>
         <plugin author="Rex.Rainbow" id="Rex_Date" version="1">Date</plugin>
         <plugin author="Rex.Rainbow" id="Rex_EncDecXOR" version="0.100000001">XOR Encryption</plugin>
-        <plugin author="Rex.Rainbow" id="Rex_INI" version="0.100000001">INI</plugin>
         <plugin author="Rex.Rainbow" id="Rex_Lzstring" version="0.100000001">Lz-string</plugin>
         <plugin author="Scirra" id="Sprite" version="1">Sprite</plugin>
         <plugin author="Scirra" id="Text" version="1">Text</plugin>
@@ -128,9 +127,6 @@
             <object-type name="CreateObjectByVal" sid="298943917823026">
                 <plugin id="CreateObjectByVal" />
             </object-type>
-            <object-type global="1" name="INI" sid="391832741683990">
-                <plugin id="Rex_INI" />
-            </object-type>
             <object-type name="NWjs" sid="830545991658043">
                 <plugin id="NodeWebkit" />
             </object-type>
@@ -158,7 +154,7 @@
             <object-type name="jsZip" sid="902131964309761">
                 <plugin id="skymen_jszip" />
             </object-type>
-            <object-type global="1" name="JSON_AutoUpdater" sid="786951546076076">
+            <object-type global="1" name="JSON_UpdateCheck" sid="786951546076076">
                 <plugin id="JSON" />
             </object-type>
             <object-type global="1" name="JSON_AudioPreload" sid="998840539944831">
@@ -178,9 +174,6 @@
             </object-type>
             <object-type global="1" name="JSON__TEMP" sid="659501821623959">
                 <plugin id="JSON" />
-                <instance-variables>
-                    <instance-variable name="ID" sid="359875653176954" type="string" />
-                </instance-variables>
             </object-type>
             <object-type global="1" name="JSON_InputKeycodes" sid="522838648506389">
                 <plugin id="JSON" />
@@ -251,6 +244,7 @@
                     <instance-variable name="TimerLevelReal" sid="542885006087094" type="number" />
                     <instance-variable name="TimerLevelTicks" sid="776132339139628" type="number" />
                     <instance-variable name="TimerLevelActive" sid="260590474402437" type="boolean" />
+                    <instance-variable name="ZoneResetTimer" sid="270535598542224" type="number" />
                     <instance-variable name="Pause" sid="429745224739633" type="boolean" />
                     <instance-variable name="Level_Game" sid="851545987425046" type="number" />
                     <instance-variable name="Level_Subname" sid="463378381283661" type="string" />
@@ -271,32 +265,30 @@
                     <instance-variable name="Local_P1Score" sid="946135434782136" type="number" />
                     <instance-variable name="Local_P2Score" sid="490336071048552" type="number" />
                     <instance-variable name="Local_LapOfHonour" sid="526079323652340" type="number" />
-                    <instance-variable name="Pong_Lives" sid="583908492378675" type="number" />
-                    <instance-variable name="ZoneResetTimer" sid="270535598542224" type="number" />
                 </instance-variables>
             </object-type>
             <object-type global="1" name="Var_Player" sid="435158768718076">
                 <plugin id="Globals" />
                 <instance-variables>
                     <instance-variable name="Skin" sid="733796287701845" type="number" />
-                    <instance-variable name="Checkpoint" sid="410463134287130" type="number" />
-                    <instance-variable name="Finished" sid="639587381492611" type="number" />
                     <instance-variable name="CanMove" sid="734582804670660" type="boolean" />
                     <instance-variable name="State" sid="586547700337457" type="string" />
-                    <instance-variable name="Underwater" sid="470576316167930" type="boolean" />
-                    <instance-variable name="DrowningCounter" sid="375108938134402" type="number" />
-                    <instance-variable name="Shield" sid="599840635960472" type="boolean" />
-                    <instance-variable name="SpeedUpTimer" sid="801675978357895" type="number" />
-                    <instance-variable name="IncincibilityTimer" sid="540771471644769" type="number" />
+                    <instance-variable name="Checkpoint" sid="410463134287130" type="number" />
+                    <instance-variable name="Finished" sid="639587381492611" type="number" />
                     <instance-variable name="Rings" sid="288380673646240" type="number" />
                     <instance-variable name="Score" sid="597922672116083" type="number" />
                     <instance-variable name="ScoreGuardPenalty" sid="257110915293919" type="number" />
                     <instance-variable name="ScorePerfect" sid="989114378049831" type="number" />
                     <instance-variable name="TotalScore" sid="311489704774587" type="number" />
-                    <instance-variable name="TotalDeaths" sid="944223218783714" type="number" />
-                    <instance-variable name="SpringTimer" sid="281117062051879" type="number" />
-                    <instance-variable name="Deaths" sid="362545130796489" type="number" />
                     <instance-variable name="Lives" sid="401985263576988" type="number" />
+                    <instance-variable name="Deaths" sid="362545130796489" type="number" />
+                    <instance-variable name="TotalDeaths" sid="944223218783714" type="number" />
+                    <instance-variable name="Underwater" sid="470576316167930" type="boolean" />
+                    <instance-variable name="DrowningCounter" sid="375108938134402" type="number" />
+                    <instance-variable name="Shield" sid="599840635960472" type="boolean" />
+                    <instance-variable name="SpeedUpTimer" sid="801675978357895" type="number" />
+                    <instance-variable name="IncincibilityTimer" sid="540771471644769" type="number" />
+                    <instance-variable name="SpringTimer" sid="281117062051879" type="number" />
                     <instance-variable name="SChaseHP" sid="621149327079320" type="number" />
                     <instance-variable name="SChaseWave" sid="669544292950223" type="number" />
                     <instance-variable name="SChaseWaveTotal" sid="932896331935093" type="number" />
@@ -331,6 +323,8 @@
                     <instance-variable name="TimerGlobal" sid="966473394946847" type="number" />
                     <instance-variable name="CurrentMenu" sid="952645823525453" type="string" />
                     <instance-variable name="CurrentSelection" sid="397675130131552" type="number" />
+                    <instance-variable name="RecentLevel" sid="962736209590882" type="string" />
+                    <instance-variable name="RecentCutscene" sid="611232725281765" type="string" />
                     <instance-variable name="Emeralds" sid="944376147907870" type="number" />
                     <instance-variable name="UsedSpecialTokens" sid="890994957150961" type="string" />
                     <instance-variable name="Cheats_Thok" sid="504365754754966" type="boolean" />
@@ -349,13 +343,13 @@
                     <instance-variable name="GameJoltGameID" sid="309513212861541" type="string" />
                     <instance-variable name="DiscordAppID" sid="359398442531661" type="string" />
                     <instance-variable name="Discord_FakePartyID" sid="964176170297471" type="string" />
+                    <instance-variable name="Discord_TimestampBoot" sid="349631815270250" type="number" />
+                    <instance-variable name="Discord_TimestampLast" sid="507499837042846" type="number" />
                     <instance-variable name="Discord_CurrentDetail" sid="141458128579839" type="string" />
                     <instance-variable name="Discord_CurrentState" sid="950884499673636" type="string" />
                     <instance-variable name="Discord_CurrentLargeKey" sid="740685096624791" type="string" />
                     <instance-variable name="Discord_CurrentSmallKey" sid="676562494336726" type="string" />
                     <instance-variable name="Discord_CurrentSmallText" sid="326368258569503" type="string" />
-                    <instance-variable name="Discord_TimestampInit" sid="349631815270250" type="number" />
-                    <instance-variable name="Discord_TimestampCurrent" sid="507499837042846" type="number" />
                 </instance-variables>
             </object-type>
             <object-type global="1" name="Var_Online" sid="843952593917279">
@@ -20206,7 +20200,7 @@
                 <instance-variable name="TeleportAnimation" sid="227236383098235" type="boolean" />
                 <instance-variable name="Me" sid="312822894459438" type="boolean" />
                 <instance-variable name="PlayerID" sid="951318057601562" type="number" />
-                <instance-variable name="Mirrored" sid="951911628608345" type="number" />
+                <instance-variable name="FacingDirection" sid="951911628608345" type="number" />
             </instance-variables>
             <behaviors>
                 <behavior-type name="Flash" sid="559965946524717">
@@ -20587,7 +20581,7 @@
             <file name="js.storage.min.js" />
         </file-folder>
         <file-folder name="js">
-            <file name="utils.js" />
+            <file name="main.js" />
         </file-folder>
         <file name="funny.txt" />
         <file name="credits.txt" />

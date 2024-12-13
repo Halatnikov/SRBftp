@@ -4,7 +4,10 @@
     <name>E_GLOBAL</name>
     <events>
         <include>E_Online</include>
-        <variable constant="0" name="PLATFORM" sid="713217760695855" static="0" type="text">NwJs</variable>
+        <variable constant="0" name="DESKTOP" sid="946910129064923" static="0" type="number">0</variable>
+        <variable constant="0" name="WEB" sid="545213178609611" static="0" type="number">0</variable>
+        <variable constant="0" name="MOBILE" sid="872698463685861" static="0" type="number">0</variable>
+        <comment></comment>
         <variable constant="0" name="DEBUG" sid="698008437735178" static="0" type="number">1</variable>
         <variable constant="0" name="DEBUG_LOCALSTORAGE" sid="662686063322662" static="0" type="number">0</variable>
         <event-group description="" sid="951764726633304" title="Initialize">
@@ -13,17 +16,13 @@
                     <conditions>
                         <condition id="-4" name="Trigger once while true" sid="397231248190161" type="System" />
                     </conditions>
-                    <actions />
+                    <actions>
+                        <action id="-10" name="Set value" sid="444853535182961" type="Var_Misc">
+                            <param id="0" name="Instance variable">ResourceFolder</param>
+                            <param id="1" name="Value">NWjs.AppFolder</param>
+                        </action>
+                    </actions>
                     <sub-events>
-                        <event-block sid="168747602693739">
-                            <conditions />
-                            <actions>
-                                <action id="-10" name="Set value" sid="444853535182961" type="Var_Misc">
-                                    <param id="0" name="Instance variable">ResourceFolder</param>
-                                    <param id="1" name="Value">NWjs.AppFolder</param>
-                                </action>
-                            </actions>
-                        </event-block>
                         <event-block sid="522975812547917">
                             <conditions />
                             <actions>
@@ -40,62 +39,43 @@
                     </sub-events>
                 </event-block>
                 <comment></comment>
-                <event-block sid="877806526250364">
+                <event-block sid="626610345414507">
                     <conditions>
-                        <condition id="-32" name="Is on platform" sid="539684271307393" type="System">
+                        <condition id="-32" name="Is on platform" sid="847564072977243" type="System">
                             <param id="0" name="Platform">10</param>
                         </condition>
-                        <condition id="-4" name="Trigger once while true" sid="659159601308574" type="System" />
+                        <condition id="-4" name="Trigger once while true" sid="483210359357993" type="System" />
                     </conditions>
                     <actions>
-                        <action id="-9" name="Set value" sid="588833297999055" type="System">
-                            <param id="0" name="Variable">PLATFORM</param>
-                            <param id="1" name="Value">&quot;NwJs&quot;</param>
+                        <action id="-9" name="Set value" sid="729602631059684" type="System">
+                            <param id="0" name="Variable">DESKTOP</param>
+                            <param id="1" name="Value">1</param>
                         </action>
                     </actions>
                 </event-block>
-                <event-block sid="314128203686987">
+                <event-block sid="449723226096753">
                     <conditions>
-                        <condition id="-32" name="Is on platform" sid="324392719941598" type="System">
+                        <condition id="-32" name="Is on platform" sid="833024570037736" type="System">
                             <param id="0" name="Platform">0</param>
                         </condition>
-                        <condition id="-20" inverted="1" name="Is on mobile device" sid="394714486200911" type="System" />
-                        <condition id="-4" name="Trigger once while true" sid="716884387201634" type="System" />
+                        <condition id="-4" name="Trigger once while true" sid="974443605664066" type="System" />
                     </conditions>
                     <actions>
-                        <action id="-9" name="Set value" sid="179062033110119" type="System">
-                            <param id="0" name="Variable">PLATFORM</param>
-                            <param id="1" name="Value">&quot;Web&quot;</param>
+                        <action id="-9" name="Set value" sid="890511430692921" type="System">
+                            <param id="0" name="Variable">WEB</param>
+                            <param id="1" name="Value">1</param>
                         </action>
                     </actions>
                 </event-block>
-                <event-block sid="975333287807444">
+                <event-block sid="874550061669006">
                     <conditions>
-                        <condition id="-32" name="Is on platform" sid="440670186683840" type="System">
-                            <param id="0" name="Platform">0</param>
-                        </condition>
-                        <condition id="-20" name="Is on mobile device" sid="560822088401707" type="System" />
-                        <condition id="-4" name="Trigger once while true" sid="327820529978316" type="System" />
+                        <condition id="-20" name="Is on mobile device" sid="559605518596532" type="System" />
+                        <condition id="-4" name="Trigger once while true" sid="160153584123971" type="System" />
                     </conditions>
                     <actions>
-                        <action id="-9" name="Set value" sid="102389617406827" type="System">
-                            <param id="0" name="Variable">PLATFORM</param>
-                            <param id="1" name="Value">&quot;WebAndroid&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="920254282252468">
-                    <conditions>
-                        <condition id="-32" inverted="1" name="Is on platform" sid="966475240093872" type="System">
-                            <param id="0" name="Platform">0</param>
-                        </condition>
-                        <condition id="-20" name="Is on mobile device" sid="801466150553005" type="System" />
-                        <condition id="-4" name="Trigger once while true" sid="668132385443459" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="-9" name="Set value" sid="464422741310288" type="System">
-                            <param id="0" name="Variable">PLATFORM</param>
-                            <param id="1" name="Value">&quot;Android&quot;</param>
+                        <action id="-9" name="Set value" sid="366126320051011" type="System">
+                            <param id="0" name="Variable">MOBILE</param>
+                            <param id="1" name="Value">1</param>
                         </action>
                     </actions>
                 </event-block>
@@ -117,10 +97,10 @@
                 </event-block>
                 <event-block sid="668393181104072">
                     <conditions>
-                        <condition id="-14" name="Compare variable" sid="521589931631794" type="System">
-                            <param id="0" name="Variable">PLATFORM</param>
+                        <condition id="-14" name="Compare variable" sid="855706303748765" type="System">
+                            <param id="0" name="Variable">DESKTOP</param>
                             <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">&quot;NwJs&quot;</param>
+                            <param id="2" name="Value">1</param>
                         </condition>
                     </conditions>
                     <actions />
@@ -147,8 +127,12 @@
                                 <condition id="-4" name="Trigger once while true" sid="906107590218081" type="System" />
                             </conditions>
                             <actions>
+                                <action id="0" name="Call function" sid="663316458740136" type="Function">
+                                    <param id="0" name="Name">&quot;INI2JSON&quot;</param>
+                                    <param id="1" name="Parameter {n}">NWjs.ReadFile(NWjs.AppFolder&amp;&quot;\srbftp_indev.ini&quot;)</param>
+                                </action>
                                 <action id="60" name="LoadJSON" sid="471625227841409" type="JSON_Indev">
-                                    <param id="0" name="JSON">INI.INI2JSON(NWjs.ReadFile(NWjs.AppFolder&amp;&quot;\srbftp_indev.ini&quot;))</param>
+                                    <param id="0" name="JSON">Function.ReturnValue</param>
                                     <param id="1" name="Reference point">0</param>
                                     <param id="2" name="Key {n}"></param>
                                 </action>
@@ -166,7 +150,7 @@
                             <actions>
                                 <action id="-10" name="Set value" sid="313350213258120" type="Var_Misc">
                                     <param id="0" name="Instance variable">ResourceFolder</param>
-                                    <param id="1" name="Value">JSON_Indev.Value(0,&quot;ResourceFolder&quot;)</param>
+                                    <param id="1" name="Value">replace(JSON_Indev.Value(0,&quot;ResourceFolder&quot;), &quot;/&quot;, &quot;\&quot;)</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -260,8 +244,12 @@
                         </condition>
                     </conditions>
                     <actions>
+                        <action id="0" name="Call function" sid="450931586244391" type="Function">
+                            <param id="0" name="Name">&quot;INI2JSON&quot;</param>
+                            <param id="1" name="Parameter {n}">AJAX.LastData</param>
+                        </action>
                         <action id="60" name="LoadJSON" sid="140540162740817" type="JSON_Lists">
-                            <param id="0" name="JSON">INI.INI2JSON(AJAX.LastData)</param>
+                            <param id="0" name="JSON">Function.ReturnValue</param>
                             <param id="1" name="Reference point">0</param>
                             <param id="2" name="Key {n}"></param>
                         </action>
@@ -274,8 +262,12 @@
                         </condition>
                     </conditions>
                     <actions>
+                        <action id="0" name="Call function" sid="943031851380713" type="Function">
+                            <param id="0" name="Name">&quot;INI2JSON&quot;</param>
+                            <param id="1" name="Parameter {n}">AJAX.LastData</param>
+                        </action>
                         <action id="60" name="LoadJSON" sid="416529203802945" type="JSON_LevelProperties">
-                            <param id="0" name="JSON">INI.INI2JSON(AJAX.LastData)</param>
+                            <param id="0" name="JSON">Function.ReturnValue</param>
                             <param id="1" name="Reference point">0</param>
                             <param id="2" name="Key {n}"></param>
                         </action>
@@ -288,8 +280,12 @@
                         </condition>
                     </conditions>
                     <actions>
+                        <action id="0" name="Call function" sid="127679894591349" type="Function">
+                            <param id="0" name="Name">&quot;INI2JSON&quot;</param>
+                            <param id="1" name="Parameter {n}">AJAX.LastData</param>
+                        </action>
                         <action id="60" name="LoadJSON" sid="563935465293579" type="JSON_InputKeycodes">
-                            <param id="0" name="JSON">INI.INI2JSON(AJAX.LastData)</param>
+                            <param id="0" name="JSON">Function.ReturnValue</param>
                             <param id="1" name="Reference point">0</param>
                             <param id="2" name="Key {n}"></param>
                         </action>
@@ -302,8 +298,12 @@
                         </condition>
                     </conditions>
                     <actions>
+                        <action id="0" name="Call function" sid="102509636356693" type="Function">
+                            <param id="0" name="Name">&quot;INI2JSON&quot;</param>
+                            <param id="1" name="Parameter {n}">AJAX.LastData</param>
+                        </action>
                         <action id="60" name="LoadJSON" sid="301071263740249" type="JSON_SkinsProperties">
-                            <param id="0" name="JSON">INI.INI2JSON(AJAX.LastData)</param>
+                            <param id="0" name="JSON">Function.ReturnValue</param>
                             <param id="1" name="Reference point">0</param>
                             <param id="2" name="Key {n}"></param>
                         </action>
@@ -316,8 +316,12 @@
                         </condition>
                     </conditions>
                     <actions>
+                        <action id="0" name="Call function" sid="510169648151993" type="Function">
+                            <param id="0" name="Name">&quot;INI2JSON&quot;</param>
+                            <param id="1" name="Parameter {n}">AJAX.LastData</param>
+                        </action>
                         <action id="60" name="LoadJSON" sid="185310249961443" type="JSON_AudioPreload">
-                            <param id="0" name="JSON">INI.INI2JSON(AJAX.LastData)</param>
+                            <param id="0" name="JSON">Function.ReturnValue</param>
                             <param id="1" name="Reference point">0</param>
                             <param id="2" name="Key {n}"></param>
                         </action>
@@ -330,8 +334,12 @@
                         </condition>
                     </conditions>
                     <actions>
+                        <action id="0" name="Call function" sid="225159450826996" type="Function">
+                            <param id="0" name="Name">&quot;INI2JSON&quot;</param>
+                            <param id="1" name="Parameter {n}">AJAX.LastData</param>
+                        </action>
                         <action id="60" name="LoadJSON" sid="585468518575926" type="JSON_AudioProperties">
-                            <param id="0" name="JSON">INI.INI2JSON(AJAX.LastData)</param>
+                            <param id="0" name="JSON">Function.ReturnValue</param>
                             <param id="1" name="Reference point">0</param>
                             <param id="2" name="Key {n}"></param>
                         </action>
@@ -354,15 +362,15 @@
                             <param id="1" name="Parameter {n}">AJAX.Tag</param>
                         </action>
                         <action id="1" name="Request project file" sid="751362543445155" type="AJAX">
-                            <param id="0" name="Tag">&quot;utils.js&quot;</param>
-                            <param id="1" name="File">utils.js</param>
+                            <param id="0" name="Tag">&quot;main.js&quot;</param>
+                            <param id="1" name="File">main.js</param>
                         </action>
                     </actions>
                 </event-block>
                 <event-block sid="277451180337119">
                     <conditions>
                         <condition id="0" name="On completed" sid="185183424132317" type="AJAX">
-                            <param id="0" name="Tag">&quot;utils.js&quot;</param>
+                            <param id="0" name="Tag">&quot;main.js&quot;</param>
                         </condition>
                     </conditions>
                     <actions>
@@ -374,11 +382,27 @@
                             <param id="0" name="JS code">&quot;let file = document.createElement(&apos;script&apos;);&#x0D;&#x0A;file.setAttribute(&apos;type&apos;,&apos;text/javascript&apos;);&#x0D;&#x0A;file.setAttribute(&apos;src&apos;, #0);&#x0D;&#x0A;file.onerror = function() {&#x0D;&#x0A;&#x09;console.error(&apos;failed including &apos; + #0);&#x0D;&#x0A;};&#x0D;&#x0A;document.getElementsByTagName(&apos;head&apos;)[0].appendChild(file);&quot;</param>
                             <param id="1" name="Parameter {n}">AJAX.Tag</param>
                         </action>
-                        <action id="-13" name="Set boolean" sid="299088836738800" type="Var_Misc">
-                            <param id="0" name="Instance variable">InitializedFiles</param>
-                            <param id="1" name="Value">1</param>
-                        </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="643512159406367">
+                            <conditions />
+                            <actions>
+                                <action id="2" name="Init alias" sid="723364550344469" type="JS">
+                                    <param id="0" name="Alias name">&quot;format&quot;</param>
+                                    <param id="1" name="JS">&quot;String.format&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="941134747986458">
+                            <conditions />
+                            <actions>
+                                <action id="-13" name="Set boolean" sid="299088836738800" type="Var_Misc">
+                                    <param id="0" name="Instance variable">InitializedFiles</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
             </sub-events>
         </event-group>
@@ -1474,7 +1498,7 @@
                                         <condition id="-7" name="Compare instance variable" sid="599145436841833" type="Var_Input">
                                             <param id="0" name="Instance variable">InputMode</param>
                                             <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">&quot;Android&quot;</param>
+                                            <param id="2" name="Value">&quot;Mobile&quot;</param>
                                         </condition>
                                     </conditions>
                                     <actions />
@@ -1608,33 +1632,42 @@
                     </conditions>
                     <actions />
                     <sub-events>
-                        <event-block sid="796377597551923">
+                        <event-block sid="224648714296506">
                             <conditions />
                             <actions>
-                                <action id="-13" name="Set boolean" sid="779399677310436" type="Var_Player">
-                                    <param id="0" name="Instance variable">Underwater</param>
+                                <action disabled="1" id="55" name="Clear" sid="208385204299732" type="JSON__TEMP">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}"></param>
+                                </action>
+                                <action disabled="1" id="0" name="Set New Object" sid="823754440988134" type="JSON__TEMP">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}"></param>
+                                </action>
+                                <action id="-13" name="Set boolean" sid="164634753450020" type="Var_Input">
+                                    <param id="0" name="Instance variable">InputStolen</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
-                                <action id="-13" name="Set boolean" sid="543864179033067" type="Var_Level">
-                                    <param id="0" name="Instance variable">Pause</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="757550538074844" type="Var_Player">
-                                    <param id="0" name="Instance variable">Checkpoint</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="913720753623604" type="Var_Player">
-                                    <param id="0" name="Instance variable">TotalDeaths</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="749958683359111" type="Var_Player">
-                                    <param id="0" name="Instance variable">TotalScore</param>
+                                <action id="-13" name="Set boolean" sid="545971862826976" type="JSON_AudioPreload">
+                                    <param id="0" name="Instance variable">LevelPreloaded</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
                                 <action id="-10" name="Set value" sid="382485057385807" type="Var_Game">
                                     <param id="0" name="Instance variable">TimerGlobal</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
+                                <action id="-10" name="Set value" sid="840756079416086" type="Var_Game">
+                                    <param id="0" name="Instance variable">Emeralds</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="575952819379834" type="Var_Game">
+                                    <param id="0" name="Instance variable">UsedSpecialTokens</param>
+                                    <param id="1" name="Value">&quot;&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="910675819421268">
+                            <conditions />
+                            <actions>
                                 <action id="-13" name="Set boolean" sid="449957196574981" type="Var_Player">
                                     <param id="0" name="Instance variable">CanMove</param>
                                     <param id="1" name="Value">1</param>
@@ -1643,9 +1676,53 @@
                                     <param id="0" name="Instance variable">State</param>
                                     <param id="1" name="Value">&quot;none&quot;</param>
                                 </action>
+                                <action id="-10" name="Set value" sid="757550538074844" type="Var_Player">
+                                    <param id="0" name="Instance variable">Checkpoint</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
                                 <action id="-10" name="Set value" sid="174190112246381" type="Var_Player">
                                     <param id="0" name="Instance variable">Finished</param>
                                     <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="499862409989335" type="Var_Player">
+                                    <param id="0" name="Instance variable">Rings</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="387183200186505" type="Var_Player">
+                                    <param id="0" name="Instance variable">Score</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="632468906757384" type="Var_Player">
+                                    <param id="0" name="Instance variable">ScoreGuardPenalty</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="392334334537344" type="Var_Player">
+                                    <param id="0" name="Instance variable">ScorePerfect</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="862475182290261" type="Var_Player">
+                                    <param id="0" name="Instance variable">TotalScore</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="137402053835863" type="Var_Player">
+                                    <param id="0" name="Instance variable">Lives</param>
+                                    <param id="1" name="Value">-1</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="748412505135509" type="Var_Player">
+                                    <param id="0" name="Instance variable">Deaths</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="463848069404762" type="Var_Player">
+                                    <param id="0" name="Instance variable">TotalDeaths</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-13" name="Set boolean" sid="779399677310436" type="Var_Player">
+                                    <param id="0" name="Instance variable">Underwater</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="306209524863967" type="Var_Player">
+                                    <param id="0" name="Instance variable">DrowningCounter</param>
+                                    <param id="1" name="Value">20</param>
                                 </action>
                                 <action id="-13" name="Set boolean" sid="711975626314979" type="Var_Player">
                                     <param id="0" name="Instance variable">Shield</param>
@@ -1659,40 +1736,41 @@
                                     <param id="0" name="Instance variable">IncincibilityTimer</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
-                                <action id="-10" name="Set value" sid="306209524863967" type="Var_Player">
-                                    <param id="0" name="Instance variable">DrowningCounter</param>
-                                    <param id="1" name="Value">20</param>
+                                <action id="-10" name="Set value" sid="542406181190419" type="Var_Player">
+                                    <param id="0" name="Instance variable">SpringTimer</param>
+                                    <param id="1" name="Value">0</param>
                                 </action>
+                                <action id="-10" name="Set value" sid="957922583412839" type="Var_Player">
+                                    <param id="0" name="Instance variable">SChaseWave</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="796377597551923">
+                            <conditions />
+                            <actions>
                                 <action id="-10" name="Set value" sid="297644155800424" type="Var_Level">
                                     <param id="0" name="Instance variable">TimerLevel</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
-                                <action id="-10" name="Set value" sid="499862409989335" type="Var_Player">
-                                    <param id="0" name="Instance variable">Rings</param>
+                                <action id="-10" name="Set value" sid="444116681526840" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevelReal</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
-                                <action id="-10" name="Set value" sid="387183200186505" type="Var_Player">
-                                    <param id="0" name="Instance variable">Score</param>
+                                <action id="-10" name="Set value" sid="770010705533681" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevelTicks</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
-                                <action id="-10" name="Set value" sid="392334334537344" type="Var_Player">
-                                    <param id="0" name="Instance variable">ScorePerfect</param>
+                                <action id="-13" name="Set boolean" sid="201608614082941" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevelActive</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
-                                <action id="-10" name="Set value" sid="632468906757384" type="Var_Player">
-                                    <param id="0" name="Instance variable">ScoreGuardPenalty</param>
-                                    <param id="1" name="Value">0</param>
+                                <action id="-10" name="Set value" sid="710970130293502" type="Var_Level">
+                                    <param id="0" name="Instance variable">ZoneResetTimer</param>
+                                    <param id="1" name="Value">-1</param>
                                 </action>
-                                <action id="-10" name="Set value" sid="438414478948410" type="Var_Player">
-                                    <param id="0" name="Instance variable">IncincibilityTimer</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="463848069404762" type="Var_Player">
-                                    <param id="0" name="Instance variable">TotalDeaths</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="862475182290261" type="Var_Player">
-                                    <param id="0" name="Instance variable">TotalScore</param>
+                                <action id="-13" name="Set boolean" sid="543864179033067" type="Var_Level">
+                                    <param id="0" name="Instance variable">Pause</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
                                 <action id="-10" name="Set value" sid="706782905175288" type="Var_Level">
@@ -1706,22 +1784,6 @@
                                 <action id="-10" name="Set value" sid="651237978651066" type="Var_Level">
                                     <param id="0" name="Instance variable">Local_LapOfHonour</param>
                                     <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="542406181190419" type="Var_Player">
-                                    <param id="0" name="Instance variable">SpringTimer</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="996337512154269" type="Var_Level">
-                                    <param id="0" name="Instance variable">Pong_Lives</param>
-                                    <param id="1" name="Value">5</param>
-                                </action>
-                                <action id="-13" name="Set boolean" sid="545971862826976" type="JSON_AudioPreload">
-                                    <param id="0" name="Instance variable">LevelPreloaded</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="710970130293502" type="Var_Level">
-                                    <param id="0" name="Instance variable">ZoneResetTimer</param>
-                                    <param id="1" name="Value">-1</param>
                                 </action>
                                 <action id="-10" name="Set value" sid="873483493272599" type="Var_Level">
                                     <param id="0" name="Instance variable">Special_SavedLevel</param>
@@ -1745,62 +1807,6 @@
                                 </action>
                                 <action id="-10" name="Set value" sid="107540181196032" type="Var_Level">
                                     <param id="0" name="Instance variable">Special_SavedRings</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="992297465120550" type="Var_Player">
-                                    <param id="0" name="Instance variable">SpringTimer</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="777937003846935" type="Var_Level">
-                                    <param id="0" name="Instance variable">TimerLevel</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="-13" name="Set boolean" sid="201608614082941" type="Var_Level">
-                                    <param id="0" name="Instance variable">TimerLevelActive</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="444116681526840" type="Var_Level">
-                                    <param id="0" name="Instance variable">TimerLevelReal</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="748412505135509" type="Var_Player">
-                                    <param id="0" name="Instance variable">Deaths</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="137402053835863" type="Var_Player">
-                                    <param id="0" name="Instance variable">Lives</param>
-                                    <param id="1" name="Value">-1</param>
-                                </action>
-                                <action id="-13" name="Set boolean" sid="365391322725047" type="Var_Level">
-                                    <param id="0" name="Instance variable">Level_NoTitleCard</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="840756079416086" type="Var_Game">
-                                    <param id="0" name="Instance variable">Emeralds</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="575952819379834" type="Var_Game">
-                                    <param id="0" name="Instance variable">UsedSpecialTokens</param>
-                                    <param id="1" name="Value">&quot;&quot;</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="957922583412839" type="Var_Player">
-                                    <param id="0" name="Instance variable">SChaseWave</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action disabled="1" id="55" name="Clear" sid="208385204299732" type="JSON__TEMP">
-                                    <param id="0" name="Reference point">0</param>
-                                    <param id="1" name="Key {n}"></param>
-                                </action>
-                                <action disabled="1" id="0" name="Set New Object" sid="823754440988134" type="JSON__TEMP">
-                                    <param id="0" name="Reference point">0</param>
-                                    <param id="1" name="Key {n}"></param>
-                                </action>
-                                <action id="-10" name="Set value" sid="770010705533681" type="Var_Level">
-                                    <param id="0" name="Instance variable">TimerLevelTicks</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="-13" name="Set boolean" sid="164634753450020" type="Var_Input">
-                                    <param id="0" name="Instance variable">InputStolen</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
                             </actions>
@@ -1859,9 +1865,9 @@
                                     <param id="0" name="Variable">to_z</param>
                                     <param id="1" name="Value">int(tokenat(to, 2, &quot;.&quot;))</param>
                                 </action>
-                                <action id="14" name="Log" sid="593446318736319" type="Browser">
+                                <action id="14" name="Log" sid="382744901853584" type="Browser">
                                     <param id="0" name="Type">0</param>
-                                    <param id="1" name="Message">&quot;comparing version &quot;&amp;from_x&amp;&quot;.&quot;&amp;from_y&amp;&quot;.&quot;&amp;from_z&amp;&quot; (&quot;&amp;Function.Param(0)&amp;&quot;) to &quot;&amp;to_x&amp;&quot;.&quot;&amp;to_y&amp;&quot;.&quot;&amp;to_z&amp;&quot; (&quot;&amp;Function.Param(1)&amp;&quot;)&quot;</param>
+                                    <param id="1" name="Message">JS.Value(&quot;format&quot;, &quot;comparing version {x}.{y}.{z} ({string}) to {x}.{y}.{z} ({string})&quot;, from_x, from_y, from_z, Function.Param(0), to_x, to_y, to_z, Function.Param(1))</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1967,7 +1973,7 @@
                                 </action>
                                 <action id="14" name="Log" sid="399528946255427" type="Browser">
                                     <param id="0" name="Type">0</param>
-                                    <param id="1" name="Message">from&amp;&quot; &quot;&amp;(greater = 1 ? &quot;&gt;&quot; : &quot;&lt;&quot;)&amp;&quot; &quot;&amp;to</param>
+                                    <param id="1" name="Message">Function.Param(0)&amp;(greater = 1 ? &quot; &gt; &quot; : &quot; &lt; &quot;)&amp;Function.Param(1)</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -2096,19 +2102,6 @@
                         </event-block>
                     </sub-events>
                 </event-block>
-                <comment>minify JSON</comment>
-                <event-block sid="563394163420609">
-                    <conditions>
-                        <condition id="0" name="On function" sid="659162558539154" type="Function">
-                            <param id="0" name="Name">&quot;JSON_Minify&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="1" name="Set return value" sid="594468605748507" type="Function">
-                            <param id="0" name="Value">JS.JSCodeValue(&quot;JSON.stringify(#0)&quot;, Function.Param(0))</param>
-                        </action>
-                    </actions>
-                </event-block>
                 <comment>merge 2 JSONs</comment>
                 <event-block sid="275079016777799">
                     <conditions>
@@ -2131,7 +2124,7 @@
                     </conditions>
                     <actions>
                         <action id="1" name="Set return value" sid="877836762436353" type="Function">
-                            <param id="0" name="Value">JS.JSCodeValue(&quot;&#x0D;&#x0A;function func() {&#x0D;&#x0A;    let array = JSON.parse(#0);&#x0D;&#x0A;    for (let i = array.length - 1; i &gt;= 0; i--) {&#x0D;&#x0A;        const j = Math.floor(Math.random() * (i + 1));&#x0D;&#x0A;        [array[i], array[j]] = [array[j], array[i]];&#x0D;&#x0A;    }&#x0D;&#x0A;    return JSON.stringify(array);&#x0D;&#x0A;}&#x0D;&#x0A;func()&#x0D;&#x0A;&quot;, Function.Param(0))</param>
+                            <param id="0" name="Value">JS.JSCodeValue(&quot;&#x0D;&#x0A;function func() {&#x0D;&#x0A;    let array = JSON.parse(#0);&#x0D;&#x0A;    for (let i = array.length - 1; i &gt;= 0; i--) {&#x0D;&#x0A;        const j = Math.floor(Math.random() * (i + 1));&#x0D;&#x0A;        [array[i], array[j]] = [array[j], array[i]];&#x0D;&#x0A;    };&#x0D;&#x0A;    return JSON.stringify(array);&#x0D;&#x0A;};&#x0D;&#x0A;func();&#x0D;&#x0A;&quot;, Function.Param(0))</param>
                         </action>
                     </actions>
                 </event-block>
@@ -2144,7 +2137,7 @@
                     </conditions>
                     <actions>
                         <action id="1" name="Set return value" sid="230337450642959" type="Function">
-                            <param id="0" name="Value">JS.JSCodeValue(&quot;&#x0D;&#x0A;function func() {&#x0D;&#x0A;    let array = JSON.parse(#0);&#x0D;&#x0A;    array.sort(function(a, b) {&#x0D;&#x0A;        return b[#1] - a[#1];&#x0D;&#x0A;    });&#x0D;&#x0A;    return JSON.stringify(array);&#x0D;&#x0A;}&#x0D;&#x0A;func()&#x0D;&#x0A;&quot;, Function.Param(0), Function.Param(1))</param>
+                            <param id="0" name="Value">JS.JSCodeValue(&quot;&#x0D;&#x0A;function func() {&#x0D;&#x0A;    let array = JSON.parse(#0);&#x0D;&#x0A;    array.sort(function(a, b) {&#x0D;&#x0A;        return b[#1] - a[#1];&#x0D;&#x0A;    });&#x0D;&#x0A;    return JSON.stringify(array);&#x0D;&#x0A;};&#x0D;&#x0A;func();&#x0D;&#x0A;&quot;, Function.Param(0), Function.Param(1))</param>
                         </action>
                     </actions>
                 </event-block>
@@ -2401,12 +2394,16 @@
                 <event-block sid="362595595915503">
                     <conditions>
                         <condition id="0" name="On any touch start" sid="613949949740526" type="Touch" />
-                        <condition id="-20" name="Is on mobile device" sid="943946928337445" type="System" />
+                        <condition id="-14" name="Compare variable" sid="310508497895611" type="System">
+                            <param id="0" name="Variable">MOBILE</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
                     </conditions>
                     <actions>
                         <action id="-10" name="Set value" sid="662194057563871" type="Var_Input">
                             <param id="0" name="Instance variable">InputMode</param>
-                            <param id="1" name="Value">&quot;Android&quot;</param>
+                            <param id="1" name="Value">&quot;Mobile&quot;</param>
                         </action>
                     </actions>
                 </event-block>
@@ -2691,7 +2688,7 @@
                         <condition id="-7" name="Compare instance variable" sid="319372084176930" type="Var_Input">
                             <param id="0" name="Instance variable">InputMode</param>
                             <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">&quot;Android&quot;</param>
+                            <param id="2" name="Value">&quot;Mobile&quot;</param>
                         </condition>
                     </conditions>
                     <actions />
@@ -2994,10 +2991,10 @@
                     <sub-events>
                         <event-block sid="252631545932406">
                             <conditions>
-                                <condition id="-14" name="Compare variable" sid="502053615632549" type="System">
-                                    <param id="0" name="Variable">PLATFORM</param>
+                                <condition id="-14" name="Compare variable" sid="516116463289039" type="System">
+                                    <param id="0" name="Variable">DESKTOP</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;NwJs&quot;</param>
+                                    <param id="2" name="Value">1</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -3011,11 +3008,7 @@
                         </event-block>
                         <event-block sid="791408047907209">
                             <conditions>
-                                <condition id="-14" inverted="1" name="Compare variable" sid="934807363136513" type="System">
-                                    <param id="0" name="Variable">PLATFORM</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;NwJs&quot;</param>
-                                </condition>
+                                <condition id="-22" name="Else" sid="383179069902424" type="System" />
                             </conditions>
                             <actions>
                                 <action id="7" name="Play (by name)" sid="846387032589830" type="BetterAudio">
@@ -3062,10 +3055,10 @@
                         <comment>2 - play from SFX folder and loop</comment>
                         <event-block sid="638722365884955">
                             <conditions>
-                                <condition id="-14" name="Compare variable" sid="543074733002417" type="System">
-                                    <param id="0" name="Variable">PLATFORM</param>
+                                <condition id="-14" name="Compare variable" sid="898804191743761" type="System">
+                                    <param id="0" name="Variable">DESKTOP</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;NwJs&quot;</param>
+                                    <param id="2" name="Value">1</param>
                                 </condition>
                             </conditions>
                             <actions />
@@ -3125,11 +3118,7 @@
                         </event-block>
                         <event-block sid="289926506523245">
                             <conditions>
-                                <condition id="-14" inverted="1" name="Compare variable" sid="322899481521565" type="System">
-                                    <param id="0" name="Variable">PLATFORM</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;NwJs&quot;</param>
-                                </condition>
+                                <condition id="-22" name="Else" sid="806412876306008" type="System" />
                             </conditions>
                             <actions />
                             <sub-events>
@@ -3221,29 +3210,25 @@
                         </event-block>
                     </sub-events>
                 </event-block>
-                <comment>preload music (for web, android)</comment>
+                <comment>preload audio file (for web, android)</comment>
                 <event-block sid="338316560511645">
                     <conditions>
                         <condition id="0" name="On function" sid="963797753369440" type="Function">
                             <param id="0" name="Name">&quot;Audio_Preload&quot;</param>
                         </condition>
-                        <condition id="-14" inverted="1" name="Compare variable" sid="191537671025582" type="System">
-                            <param id="0" name="Variable">PLATFORM</param>
+                        <condition id="-14" inverted="1" name="Compare variable" sid="790918783553144" type="System">
+                            <param id="0" name="Variable">DESKTOP</param>
                             <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">&quot;NwJs&quot;</param>
+                            <param id="2" name="Value">1</param>
                         </condition>
                     </conditions>
-                    <actions />
+                    <actions>
+                        <action id="-10" name="Set value" sid="242767397552644" type="JSON_AudioPreload">
+                            <param id="0" name="Instance variable">CurrentTask</param>
+                            <param id="1" name="Value">Function.Param(0)</param>
+                        </action>
+                    </actions>
                     <sub-events>
-                        <event-block sid="317967269674370">
-                            <conditions />
-                            <actions>
-                                <action id="-10" name="Set value" sid="242767397552644" type="JSON_AudioPreload">
-                                    <param id="0" name="Instance variable">CurrentTask</param>
-                                    <param id="1" name="Value">Function.Param(0)</param>
-                                </action>
-                            </actions>
-                        </event-block>
                         <comment>0 - load a list</comment>
                         <comment>1 - load a single track from Music</comment>
                         <event-block sid="730498958379184">
@@ -3275,11 +3260,16 @@
                                     <actions>
                                         <action id="-10" name="Set value" sid="280957812336301" type="JSON_AudioPreload">
                                             <param id="0" name="Instance variable">AudioSize</param>
-                                            <param id="1" name="Value">Self.AudioSize + float(Self.CurrentValue)</param>
+                                            <param id="1" name="Value">Self.AudioSize + Self.CurrentValue</param>
                                         </action>
                                         <action id="9" name="Preload (by name)" sid="434156140290763" type="BetterAudio">
                                             <param id="0" name="Folder">1</param>
                                             <param id="1" name="Audio file name">JSON_AudioPreload.CurrentKey</param>
+                                        </action>
+                                        <action id="20" name="Set Value" sid="312294448717474" type="JSON_Audio">
+                                            <param id="0" name="Value">0</param>
+                                            <param id="1" name="Reference point">0</param>
+                                            <param id="2" name="Key {n}">&quot;Preloaded&quot;{###}JSON_AudioPreload.CurrentKey</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -3313,7 +3303,7 @@
                             <actions>
                                 <action id="0" name="Call function" sid="373752427114932" type="Function">
                                     <param id="0" name="Name">&quot;Math_RoundFloat&quot;</param>
-                                    <param id="1" name="Parameter {n}">float(JSON_AudioPreload.Value(0,&quot;Music&quot;,Function.Param(0))){###}2</param>
+                                    <param id="1" name="Parameter {n}">JSON_AudioPreload.Value(0,&quot;Music&quot;,Function.Param(0)){###}2</param>
                                 </action>
                                 <action id="-10" name="Set value" sid="486028963915981" type="JSON_AudioPreload">
                                     <param id="0" name="Instance variable">AudioSize</param>
@@ -3322,6 +3312,11 @@
                                 <action id="9" name="Preload (by name)" sid="913809767463789" type="BetterAudio">
                                     <param id="0" name="Folder">1</param>
                                     <param id="1" name="Audio file name">Function.Param(0)</param>
+                                </action>
+                                <action id="20" name="Set Value" sid="157129599584463" type="JSON_Audio">
+                                    <param id="0" name="Value">0</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;Preloaded&quot;{###}Function.Param(0)</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -3367,14 +3362,13 @@
             <sub-events>
                 <event-block any="1" sid="607442416688816">
                     <conditions>
-                        <condition id="-4" name="Trigger once while true" sid="246386616134433" type="System" />
                         <condition id="-6" name="Every X seconds" sid="661258038426224" type="System">
                             <param id="0" name="Interval (seconds)">0.5</param>
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="16" name="Set title" sid="989945538583150" type="NWjs">
-                            <param id="0" name="Title">projectname&amp;&quot; v&quot;&amp;projectversion&amp;(DEBUG = 1 ? &quot; (Debug mode)&quot; : &quot;&quot;)</param>
+                        <action id="16" name="Set title" sid="153460635458750" type="NWjs">
+                            <param id="0" name="Title">JS.Value(&quot;String.format&quot;, &quot;{title} v{ver} {debug}&quot;, projectname, projectversion, (DEBUG = 1 ? &quot;(Debug mode)&quot; : &quot;&quot;))</param>
                         </action>
                     </actions>
                 </event-block>
@@ -3410,7 +3404,7 @@
                     </conditions>
                     <actions>
                         <action id="0" name="Set text" sid="952749534354664" type="Text_ErrorHandler">
-                            <param id="0" name="Text">&quot;looks like something went wrong&quot;&amp;&#x0D;&#x0A;newline&amp;&#x0D;&#x0A;newline&amp;&quot;current menu: &quot;&amp;Var_Game.CurrentMenu</param>
+                            <param id="0" name="Text">&quot;looks like something went wrong&#x0D;&#x0A;&#x0D;&#x0A;current menu: &quot;&amp;Var_Game.CurrentMenu</param>
                         </action>
                     </actions>
                 </event-block>
@@ -3628,10 +3622,10 @@
                 <comment>platform specific</comment>
                 <event-block sid="756162674837697">
                     <conditions>
-                        <condition id="-14" name="Compare variable" sid="848782966819349" type="System">
-                            <param id="0" name="Variable">PLATFORM</param>
+                        <condition id="-14" name="Compare variable" sid="704950107502590" type="System">
+                            <param id="0" name="Variable">MOBILE</param>
                             <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">&quot;Android&quot;</param>
+                            <param id="2" name="Value">1</param>
                         </condition>
                         <condition id="-4" name="Trigger once while true" sid="757086891182604" type="System" />
                     </conditions>
@@ -3643,7 +3637,11 @@
                 </event-block>
                 <event-block sid="307828170805330">
                     <conditions>
-                        <condition id="-20" inverted="1" name="Is on mobile device" sid="228038648562761" type="System" />
+                        <condition id="-14" inverted="1" name="Compare variable" sid="847934194312510" type="System">
+                            <param id="0" name="Variable">MOBILE</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
                         <condition id="-4" name="Trigger once while true" sid="476719036345013" type="System" />
                     </conditions>
                     <actions>
@@ -3684,7 +3682,11 @@
                 </event-block>
                 <event-block sid="427888919394754">
                     <conditions>
-                        <condition id="-20" inverted="1" name="Is on mobile device" sid="532408850680157" type="System" />
+                        <condition id="-14" inverted="1" name="Compare variable" sid="902196124997422" type="System">
+                            <param id="0" name="Variable">MOBILE</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
                     </conditions>
                     <actions />
                     <sub-events>
@@ -3724,7 +3726,11 @@
                 </event-block>
                 <event-block sid="725984955761497">
                     <conditions>
-                        <condition id="-20" name="Is on mobile device" sid="807600787982145" type="System" />
+                        <condition id="-14" name="Compare variable" sid="577192371347400" type="System">
+                            <param id="0" name="Variable">MOBILE</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
                     </conditions>
                     <actions />
                     <sub-events>
@@ -3821,10 +3827,10 @@
                             <sub-events>
                                 <event-block sid="983378344996791">
                                     <conditions>
-                                        <condition id="-14" inverted="1" name="Compare variable" sid="504426389421839" type="System">
-                                            <param id="0" name="Variable">PLATFORM</param>
+                                        <condition id="-14" inverted="1" name="Compare variable" sid="866113419993492" type="System">
+                                            <param id="0" name="Variable">DESKTOP</param>
                                             <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">&quot;NwJs&quot;</param>
+                                            <param id="2" name="Value">1</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -4017,10 +4023,10 @@
                         </event-block>
                         <event-block sid="675156410002301">
                             <conditions>
-                                <condition id="-14" name="Compare variable" sid="988199793000679" type="System">
-                                    <param id="0" name="Variable">PLATFORM</param>
+                                <condition id="-14" name="Compare variable" sid="297131826163152" type="System">
+                                    <param id="0" name="Variable">DESKTOP</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;NwJs&quot;</param>
+                                    <param id="2" name="Value">1</param>
                                 </condition>
                                 <condition id="-14" inverted="1" name="Compare variable" sid="753573094314134" type="System">
                                     <param id="0" name="Variable">DEBUG_LOCALSTORAGE</param>
@@ -4032,18 +4038,22 @@
                                 <action id="3" name="Create folder" sid="385760593857306" type="NWjs">
                                     <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata&quot;</param>
                                 </action>
+                                <action id="0" name="Call function" sid="141822633969362" type="Function">
+                                    <param id="0" name="Name">&quot;JSON2INI&quot;</param>
+                                    <param id="1" name="Parameter {n}">Save_Config.AsJson(0)</param>
+                                </action>
                                 <action id="0" name="Write file" sid="444102717269338" type="NWjs">
                                     <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\&quot;&amp;NAME&amp;&quot;.ini&quot;</param>
-                                    <param id="1" name="Contents">INI.JSON2INI(Save_Config.AsJson(0))</param>
+                                    <param id="1" name="Contents">Function.ReturnValue</param>
                                 </action>
                             </actions>
                         </event-block>
                         <event-block any="1" sid="564449229325832">
                             <conditions>
-                                <condition id="-14" inverted="1" name="Compare variable" sid="939918760230930" type="System">
-                                    <param id="0" name="Variable">PLATFORM</param>
+                                <condition id="-14" inverted="1" name="Compare variable" sid="878176618522191" type="System">
+                                    <param id="0" name="Variable">DESKTOP</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;NwJs&quot;</param>
+                                    <param id="2" name="Value">1</param>
                                 </condition>
                                 <condition id="-14" name="Compare variable" sid="702688699107355" type="System">
                                     <param id="0" name="Variable">DEBUG_LOCALSTORAGE</param>
@@ -4092,10 +4102,10 @@
                     <sub-events>
                         <event-block sid="404900695055115">
                             <conditions>
-                                <condition id="-14" name="Compare variable" sid="607613468395024" type="System">
-                                    <param id="0" name="Variable">PLATFORM</param>
+                                <condition id="-14" name="Compare variable" sid="302357299228518" type="System">
+                                    <param id="0" name="Variable">DESKTOP</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;NwJs&quot;</param>
+                                    <param id="2" name="Value">1</param>
                                 </condition>
                                 <condition id="-14" inverted="1" name="Compare variable" sid="949145377997822" type="System">
                                     <param id="0" name="Variable">DEBUG_LOCALSTORAGE</param>
@@ -4112,60 +4122,24 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="-3" name="Create object" sid="323076705427775" type="System">
-                                            <param id="0" name="Object to create">JSON__COMMON</param>
-                                            <param id="1" name="Layer">0</param>
-                                            <param id="2" name="X">0</param>
-                                            <param id="3" name="Y">0</param>
+                                        <action id="0" name="Call function" sid="523445396782207" type="Function">
+                                            <param id="0" name="Name">&quot;INI2JSON&quot;</param>
+                                            <param id="1" name="Parameter {n}">NWjs.ReadFile(Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\&quot;&amp;NAME&amp;&quot;.ini&quot;)</param>
                                         </action>
-                                        <action id="60" name="LoadJSON" sid="596179019094282" type="JSON__COMMON">
-                                            <param id="0" name="JSON">INI.INI2JSON(NWjs.ReadFile(Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\&quot;&amp;NAME&amp;&quot;.ini&quot;))</param>
+                                        <action id="0" name="Call function" sid="470020013232579" type="Function">
+                                            <param id="0" name="Name">&quot;JSON_Merge&quot;</param>
+                                            <param id="1" name="Parameter {n}">Save_Config.Default{###}Function.ReturnValue</param>
+                                        </action>
+                                        <action id="60" name="LoadJSON" sid="308780391425036" type="Save_Config">
+                                            <param id="0" name="JSON">Function.ReturnValue</param>
                                             <param id="1" name="Reference point">0</param>
                                             <param id="2" name="Key {n}"></param>
                                         </action>
+                                        <action id="0" name="Call function" sid="319438779144311" type="Function">
+                                            <param id="0" name="Name">&quot;ApplyConfig&quot;</param>
+                                            <param id="1" name="Parameter {n}"></param>
+                                        </action>
                                     </actions>
-                                    <sub-events>
-                                        <comment>convert values to numbers</comment>
-                                        <event-block sid="184904161163015">
-                                            <conditions>
-                                                <condition id="100" name="For each property" sid="835743659676623" type="JSON__COMMON">
-                                                    <param id="0" name="Reference point">0</param>
-                                                    <param id="1" name="Key {n}"></param>
-                                                </condition>
-                                                <condition id="-8" name="Compare two values" sid="118353699094880" type="System">
-                                                    <param id="0" name="First value">str(int(JSON__COMMON.Value(1)))</param>
-                                                    <param id="1" name="Comparison">0</param>
-                                                    <param id="2" name="Second value">JSON__COMMON.Value(1)</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="20" name="Set Value" sid="598048645300763" type="JSON__COMMON">
-                                                    <param id="0" name="Value">int(Self.Value(1))</param>
-                                                    <param id="1" name="Reference point">1</param>
-                                                    <param id="2" name="Key {n}"></param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                        <event-block sid="787473826429384">
-                                            <conditions />
-                                            <actions>
-                                                <action id="0" name="Call function" sid="470020013232579" type="Function">
-                                                    <param id="0" name="Name">&quot;JSON_Merge&quot;</param>
-                                                    <param id="1" name="Parameter {n}">Save_Config.Default{###}JSON__COMMON.AsJson(0)</param>
-                                                </action>
-                                                <action id="60" name="LoadJSON" sid="308780391425036" type="Save_Config">
-                                                    <param id="0" name="JSON">Function.ReturnValue</param>
-                                                    <param id="1" name="Reference point">0</param>
-                                                    <param id="2" name="Key {n}"></param>
-                                                </action>
-                                                <action id="-9" name="Destroy" sid="919800462194965" type="JSON__COMMON" />
-                                                <action id="0" name="Call function" sid="319438779144311" type="Function">
-                                                    <param id="0" name="Name">&quot;ApplyConfig&quot;</param>
-                                                    <param id="1" name="Parameter {n}"></param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                    </sub-events>
                                 </event-block>
                                 <event-block sid="301681214555293">
                                     <conditions>
@@ -4182,10 +4156,10 @@
                         </event-block>
                         <event-block any="1" sid="406493672078873">
                             <conditions>
-                                <condition id="-14" inverted="1" name="Compare variable" sid="157685784838329" type="System">
-                                    <param id="0" name="Variable">PLATFORM</param>
+                                <condition id="-14" inverted="1" name="Compare variable" sid="609531274019390" type="System">
+                                    <param id="0" name="Variable">DESKTOP</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;NwJs&quot;</param>
+                                    <param id="2" name="Value">1</param>
                                 </condition>
                                 <condition id="-14" name="Compare variable" sid="659133435696312" type="System">
                                     <param id="0" name="Variable">DEBUG_LOCALSTORAGE</param>
@@ -4250,10 +4224,10 @@
                     <sub-events>
                         <event-block sid="894842652106267">
                             <conditions>
-                                <condition id="-14" name="Compare variable" sid="902620370240638" type="System">
-                                    <param id="0" name="Variable">PLATFORM</param>
+                                <condition id="-14" name="Compare variable" sid="251326436705112" type="System">
+                                    <param id="0" name="Variable">DESKTOP</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;NwJs&quot;</param>
+                                    <param id="2" name="Value">1</param>
                                 </condition>
                                 <condition id="-14" inverted="1" name="Compare variable" sid="383602875352728" type="System">
                                     <param id="0" name="Variable">DEBUG_LOCALSTORAGE</param>
@@ -4269,10 +4243,10 @@
                         </event-block>
                         <event-block any="1" sid="790222913546274">
                             <conditions>
-                                <condition id="-14" inverted="1" name="Compare variable" sid="879047300823768" type="System">
-                                    <param id="0" name="Variable">PLATFORM</param>
+                                <condition id="-14" inverted="1" name="Compare variable" sid="607501913615037" type="System">
+                                    <param id="0" name="Variable">DESKTOP</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;NwJs&quot;</param>
+                                    <param id="2" name="Value">1</param>
                                 </condition>
                                 <condition id="-14" name="Compare variable" sid="498452590173488" type="System">
                                     <param id="0" name="Variable">DEBUG_LOCALSTORAGE</param>
@@ -4715,10 +4689,10 @@
                         </event-block>
                         <event-block sid="486380093098958">
                             <conditions>
-                                <condition id="-14" name="Compare variable" sid="700468270267486" type="System">
-                                    <param id="0" name="Variable">PLATFORM</param>
+                                <condition id="-14" name="Compare variable" sid="132333985916905" type="System">
+                                    <param id="0" name="Variable">DESKTOP</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;NwJs&quot;</param>
+                                    <param id="2" name="Value">1</param>
                                 </condition>
                                 <condition id="-14" inverted="1" name="Compare variable" sid="101355031530511" type="System">
                                     <param id="0" name="Variable">DEBUG_LOCALSTORAGE</param>
@@ -4730,18 +4704,22 @@
                                 <action id="3" name="Create folder" sid="360363381250907" type="NWjs">
                                     <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata&quot;</param>
                                 </action>
-                                <action id="0" name="Write file" sid="817941011437399" type="NWjs">
+                                <action id="0" name="Call function" sid="860623669094845" type="Function">
+                                    <param id="0" name="Name">&quot;JSON2INI&quot;</param>
+                                    <param id="1" name="Parameter {n}">Save_General.AsJson(0)</param>
+                                </action>
+                                <action id="0" name="Write file" sid="524743340712436" type="NWjs">
                                     <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\&quot;&amp;NAME&amp;&quot;.ini&quot;</param>
-                                    <param id="1" name="Contents">INI.JSON2INI(Save_General.AsJson(0))</param>
+                                    <param id="1" name="Contents">Function.ReturnValue</param>
                                 </action>
                             </actions>
                         </event-block>
                         <event-block any="1" sid="125130900715866">
                             <conditions>
-                                <condition id="-14" inverted="1" name="Compare variable" sid="912338843429698" type="System">
-                                    <param id="0" name="Variable">PLATFORM</param>
+                                <condition id="-14" inverted="1" name="Compare variable" sid="624993424644538" type="System">
+                                    <param id="0" name="Variable">DESKTOP</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;NwJs&quot;</param>
+                                    <param id="2" name="Value">1</param>
                                 </condition>
                                 <condition id="-14" name="Compare variable" sid="375518875549883" type="System">
                                     <param id="0" name="Variable">DEBUG_LOCALSTORAGE</param>
@@ -4783,10 +4761,10 @@
                     <sub-events>
                         <event-block sid="669093030296750">
                             <conditions>
-                                <condition id="-14" name="Compare variable" sid="162211009706994" type="System">
-                                    <param id="0" name="Variable">PLATFORM</param>
+                                <condition id="-14" name="Compare variable" sid="643458401931219" type="System">
+                                    <param id="0" name="Variable">DESKTOP</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;NwJs&quot;</param>
+                                    <param id="2" name="Value">1</param>
                                 </condition>
                                 <condition id="-14" inverted="1" name="Compare variable" sid="738921362245707" type="System">
                                     <param id="0" name="Variable">DEBUG_LOCALSTORAGE</param>
@@ -4803,56 +4781,20 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="-3" name="Create object" sid="937992135512953" type="System">
-                                            <param id="0" name="Object to create">JSON__COMMON</param>
-                                            <param id="1" name="Layer">0</param>
-                                            <param id="2" name="X">0</param>
-                                            <param id="3" name="Y">0</param>
+                                        <action id="0" name="Call function" sid="304417784704863" type="Function">
+                                            <param id="0" name="Name">&quot;INI2JSON&quot;</param>
+                                            <param id="1" name="Parameter {n}">NWjs.ReadFile(Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\&quot;&amp;NAME&amp;&quot;.ini&quot;)</param>
                                         </action>
-                                        <action id="60" name="LoadJSON" sid="572665414022881" type="JSON__COMMON">
-                                            <param id="0" name="JSON">INI.INI2JSON(NWjs.ReadFile(Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\&quot;&amp;NAME&amp;&quot;.ini&quot;))</param>
+                                        <action id="0" name="Call function" sid="271621440087667" type="Function">
+                                            <param id="0" name="Name">&quot;JSON_Merge&quot;</param>
+                                            <param id="1" name="Parameter {n}">Save_General.Default{###}Function.ReturnValue</param>
+                                        </action>
+                                        <action id="60" name="LoadJSON" sid="388700026948567" type="Save_General">
+                                            <param id="0" name="JSON">Function.ReturnValue</param>
                                             <param id="1" name="Reference point">0</param>
                                             <param id="2" name="Key {n}"></param>
                                         </action>
                                     </actions>
-                                    <sub-events>
-                                        <comment>convert values to numbers</comment>
-                                        <event-block sid="441577204992032">
-                                            <conditions>
-                                                <condition id="100" name="For each property" sid="846460093598273" type="JSON__COMMON">
-                                                    <param id="0" name="Reference point">0</param>
-                                                    <param id="1" name="Key {n}"></param>
-                                                </condition>
-                                                <condition id="-8" name="Compare two values" sid="451842031732388" type="System">
-                                                    <param id="0" name="First value">str(int(JSON__COMMON.Value(1)))</param>
-                                                    <param id="1" name="Comparison">0</param>
-                                                    <param id="2" name="Second value">JSON__COMMON.Value(1)</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="20" name="Set Value" sid="607199753959279" type="JSON__COMMON">
-                                                    <param id="0" name="Value">int(Self.Value(1))</param>
-                                                    <param id="1" name="Reference point">1</param>
-                                                    <param id="2" name="Key {n}"></param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                        <event-block sid="205899942786365">
-                                            <conditions />
-                                            <actions>
-                                                <action id="0" name="Call function" sid="507362298529467" type="Function">
-                                                    <param id="0" name="Name">&quot;JSON_Merge&quot;</param>
-                                                    <param id="1" name="Parameter {n}">Save_General.Default{###}JSON__COMMON.AsJson(0)</param>
-                                                </action>
-                                                <action id="60" name="LoadJSON" sid="388700026948567" type="Save_General">
-                                                    <param id="0" name="JSON">Function.ReturnValue</param>
-                                                    <param id="1" name="Reference point">0</param>
-                                                    <param id="2" name="Key {n}"></param>
-                                                </action>
-                                                <action id="-9" name="Destroy" sid="100657065487807" type="JSON__COMMON" />
-                                            </actions>
-                                        </event-block>
-                                    </sub-events>
                                 </event-block>
                                 <event-block sid="516531774722480">
                                     <conditions>
@@ -4869,10 +4811,10 @@
                         </event-block>
                         <event-block any="1" sid="716142665864375">
                             <conditions>
-                                <condition id="-14" inverted="1" name="Compare variable" sid="370981147281716" type="System">
-                                    <param id="0" name="Variable">PLATFORM</param>
+                                <condition id="-14" inverted="1" name="Compare variable" sid="476747083550330" type="System">
+                                    <param id="0" name="Variable">DESKTOP</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;NwJs&quot;</param>
+                                    <param id="2" name="Value">1</param>
                                 </condition>
                                 <condition id="-14" name="Compare variable" sid="450519970765031" type="System">
                                     <param id="0" name="Variable">DEBUG_LOCALSTORAGE</param>
@@ -4964,10 +4906,10 @@
                         </event-block>
                         <event-block sid="481467545778558">
                             <conditions>
-                                <condition id="-14" name="Compare variable" sid="568442563924824" type="System">
-                                    <param id="0" name="Variable">PLATFORM</param>
+                                <condition id="-14" name="Compare variable" sid="297635958226003" type="System">
+                                    <param id="0" name="Variable">DESKTOP</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;NwJs&quot;</param>
+                                    <param id="2" name="Value">1</param>
                                 </condition>
                                 <condition id="-14" inverted="1" name="Compare variable" sid="632475459094680" type="System">
                                     <param id="0" name="Variable">DEBUG_LOCALSTORAGE</param>
@@ -4979,18 +4921,22 @@
                                 <action id="3" name="Create folder" sid="534843097631611" type="NWjs">
                                     <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata&quot;</param>
                                 </action>
-                                <action id="0" name="Write file" sid="916502741018351" type="NWjs">
+                                <action id="0" name="Call function" sid="280577290547177" type="Function">
+                                    <param id="0" name="Name">&quot;JSON2INI&quot;</param>
+                                    <param id="1" name="Parameter {n}">Save_Online.AsJson(0)</param>
+                                </action>
+                                <action id="0" name="Write file" sid="246038751245701" type="NWjs">
                                     <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\&quot;&amp;NAME&amp;&quot;.ini&quot;</param>
-                                    <param id="1" name="Contents">INI.JSON2INI(Save_Online.AsJson(0))</param>
+                                    <param id="1" name="Contents">Function.ReturnValue</param>
                                 </action>
                             </actions>
                         </event-block>
                         <event-block any="1" sid="443596988236917">
                             <conditions>
-                                <condition id="-14" inverted="1" name="Compare variable" sid="179057299639492" type="System">
-                                    <param id="0" name="Variable">PLATFORM</param>
+                                <condition id="-14" inverted="1" name="Compare variable" sid="863443861866409" type="System">
+                                    <param id="0" name="Variable">DESKTOP</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;NwJs&quot;</param>
+                                    <param id="2" name="Value">1</param>
                                 </condition>
                                 <condition id="-14" name="Compare variable" sid="154261304985257" type="System">
                                     <param id="0" name="Variable">DEBUG_LOCALSTORAGE</param>
@@ -5032,10 +4978,10 @@
                     <sub-events>
                         <event-block sid="277092724960541">
                             <conditions>
-                                <condition id="-14" name="Compare variable" sid="292523089733418" type="System">
-                                    <param id="0" name="Variable">PLATFORM</param>
+                                <condition id="-14" name="Compare variable" sid="859902033664359" type="System">
+                                    <param id="0" name="Variable">DESKTOP</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;NwJs&quot;</param>
+                                    <param id="2" name="Value">1</param>
                                 </condition>
                                 <condition id="-14" inverted="1" name="Compare variable" sid="990649835630109" type="System">
                                     <param id="0" name="Variable">DEBUG_LOCALSTORAGE</param>
@@ -5047,8 +4993,12 @@
                                 </condition>
                             </conditions>
                             <actions>
+                                <action id="0" name="Call function" sid="336690426753945" type="Function">
+                                    <param id="0" name="Name">&quot;INI2JSON&quot;</param>
+                                    <param id="1" name="Parameter {n}">NWjs.ReadFile(Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\&quot;&amp;NAME&amp;&quot;.ini&quot;)</param>
+                                </action>
                                 <action id="60" name="LoadJSON" sid="140359647634204" type="Save_Online">
-                                    <param id="0" name="JSON">INI.INI2JSON(NWjs.ReadFile(Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\&quot;&amp;NAME&amp;&quot;.ini&quot;))</param>
+                                    <param id="0" name="JSON">Function.ReturnValue</param>
                                     <param id="1" name="Reference point">0</param>
                                     <param id="2" name="Key {n}"></param>
                                 </action>
@@ -5056,10 +5006,10 @@
                         </event-block>
                         <event-block any="1" sid="605830586581639">
                             <conditions>
-                                <condition id="-14" inverted="1" name="Compare variable" sid="934165220132465" type="System">
-                                    <param id="0" name="Variable">PLATFORM</param>
+                                <condition id="-14" inverted="1" name="Compare variable" sid="739009528817075" type="System">
+                                    <param id="0" name="Variable">DESKTOP</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;NwJs&quot;</param>
+                                    <param id="2" name="Value">1</param>
                                 </condition>
                                 <condition id="-14" name="Compare variable" sid="106266823140693" type="System">
                                     <param id="0" name="Variable">DEBUG_LOCALSTORAGE</param>
@@ -5415,10 +5365,10 @@
                 <comment>filter by level name</comment>
                 <event-block sid="275978911082745">
                     <conditions>
-                        <condition id="-14" name="Compare variable" sid="702760261827074" type="System">
-                            <param id="0" name="Variable">PLATFORM</param>
+                        <condition id="-14" name="Compare variable" sid="225431344638829" type="System">
+                            <param id="0" name="Variable">DESKTOP</param>
                             <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">&quot;NwJs&quot;</param>
+                            <param id="2" name="Value">1</param>
                         </condition>
                         <condition id="-14" inverted="1" name="Compare variable" sid="859552531760247" type="System">
                             <param id="0" name="Variable">DEBUG_LOCALSTORAGE</param>
@@ -5479,10 +5429,10 @@
                 </event-block>
                 <event-block any="1" sid="541315936793914">
                     <conditions>
-                        <condition id="-14" inverted="1" name="Compare variable" sid="148311689822217" type="System">
-                            <param id="0" name="Variable">PLATFORM</param>
+                        <condition id="-14" inverted="1" name="Compare variable" sid="361900003609053" type="System">
+                            <param id="0" name="Variable">DESKTOP</param>
                             <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">&quot;NwJs&quot;</param>
+                            <param id="2" name="Value">1</param>
                         </condition>
                         <condition id="-14" name="Compare variable" sid="541601564717850" type="System">
                             <param id="0" name="Variable">DEBUG_LOCALSTORAGE</param>
@@ -5586,7 +5536,7 @@
                 </event-block>
             </sub-events>
         </event-block>
-        <event-block sid="966918461093720">
+        <event-block disabled="1" sid="966918461093720">
             <conditions>
                 <condition id="-4" name="Trigger once while true" sid="258217685178418" type="System" />
             </conditions>

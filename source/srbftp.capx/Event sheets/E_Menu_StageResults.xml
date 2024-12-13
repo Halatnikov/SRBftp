@@ -308,12 +308,12 @@
                             <param id="1" name="Parameter {n}"></param>
                         </action>
                         <action id="-10" name="Set value" sid="924397025789537" type="Var_Misc">
-                            <param id="0" name="Instance variable">Discord_TimestampCurrent</param>
+                            <param id="0" name="Instance variable">Discord_TimestampLast</param>
                             <param id="1" name="Value">Function.ReturnValue</param>
                         </action>
                         <action id="0" name="Call function" sid="412447098849681" type="Function">
                             <param id="0" name="Name">&quot;Discord_RichPresence&quot;</param>
-                            <param id="1" name="Parameter {n}">&quot;&quot;{###}&quot;Finished a stage (&quot;&amp;Var_Misc.Discord_CurrentDetail&amp;&quot;)&quot;{###}replace(Var_Level.Level_Name,&quot;ZONE&quot;,&quot;&quot;)&amp;&quot; &quot;&amp; ( Var_Level.Level_Act = 0 ? &quot;&quot; : Var_Level.Level_Act ){###}&quot;misc_finished&quot;{###}&quot;Rings: &quot;&amp;Var_Player.Rings&amp;&quot; | Score: &quot;&amp;Var_Player.Score&amp;&quot; | TOTAL: &quot;&amp;(TimeBonus+GuardBonus+PerfectBonus+LevelScore){###}Var_Misc.Discord_CurrentSmallKey{###}Var_Misc.Discord_CurrentSmallText{###}Var_Misc.Discord_TimestampCurrent{###}Var_Misc.Discord_TimestampCurrent+Var_Level.TimerLevel{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;&quot;{###}&quot;Finished a stage (&quot;&amp;Var_Misc.Discord_CurrentDetail&amp;&quot;)&quot;{###}replace(Var_Level.Level_Name,&quot;ZONE&quot;,&quot;&quot;)&amp;&quot; &quot;&amp; ( Var_Level.Level_Act = 0 ? &quot;&quot; : Var_Level.Level_Act ){###}&quot;misc_finished&quot;{###}&quot;Rings: &quot;&amp;Var_Player.Rings&amp;&quot; | Score: &quot;&amp;Var_Player.Score&amp;&quot; | TOTAL: &quot;&amp;(TimeBonus+GuardBonus+PerfectBonus+LevelScore){###}Var_Misc.Discord_CurrentSmallKey{###}Var_Misc.Discord_CurrentSmallText{###}Var_Misc.Discord_TimestampLast{###}Var_Misc.Discord_TimestampLast+Var_Level.TimerLevel{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;</param>
                         </action>
                     </actions>
                     <sub-events>
@@ -1164,9 +1164,13 @@
                                     <param id="1" name="Reference point">0</param>
                                     <param id="2" name="Key {n}">&quot;Signature&quot;</param>
                                 </action>
-                                <action id="14" name="Log" sid="633566780085938" type="Browser">
+                                <action id="0" name="Call function" sid="158259379193846" type="Function">
+                                    <param id="0" name="Name">&quot;JSON2INI&quot;</param>
+                                    <param id="1" name="Parameter {n}">JSON__TEMP.AsJson(0)</param>
+                                </action>
+                                <action id="14" name="Log" sid="692945405751363" type="Browser">
                                     <param id="0" name="Type">0</param>
-                                    <param id="1" name="Message">INI.JSON2INI(JSON__TEMP.AsJson(0))</param>
+                                    <param id="1" name="Message">Function.ReturnValue</param>
                                 </action>
                                 <action id="-16" name="Wait" sid="927384788921639" type="System">
                                     <param id="0" name="Seconds">3</param>
@@ -1261,45 +1265,15 @@
                                 <event-block sid="970721055037009">
                                     <conditions />
                                     <actions>
-                                        <action id="-3" name="Create object" sid="971347405518542" type="System">
-                                            <param id="0" name="Object to create">JSON__COMMON</param>
-                                            <param id="1" name="Layer">0</param>
-                                            <param id="2" name="X">0</param>
-                                            <param id="3" name="Y">0</param>
+                                        <action id="0" name="Call function" sid="727736611094753" type="Function">
+                                            <param id="0" name="Name">&quot;JSON2INI&quot;</param>
+                                            <param id="1" name="Parameter {n}">JSON__TEMP.AsJson(0)</param>
                                         </action>
-                                        <action id="60" name="LoadJSON" sid="809430866246166" type="JSON__COMMON">
-                                            <param id="0" name="JSON">JSON__TEMP.AsJson(0)</param>
-                                            <param id="1" name="Reference point">0</param>
-                                            <param id="2" name="Key {n}"></param>
+                                        <action id="14" name="Log" sid="979378073406121" type="Browser">
+                                            <param id="0" name="Type">0</param>
+                                            <param id="1" name="Message">Function.ReturnValue</param>
                                         </action>
                                     </actions>
-                                    <sub-events>
-                                        <event-block sid="422361528013427">
-                                            <conditions>
-                                                <condition id="100" name="For each property" sid="733314773625374" type="JSON__COMMON">
-                                                    <param id="0" name="Reference point">0</param>
-                                                    <param id="1" name="Key {n}">&quot;Levels&quot;</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="20" name="Set Value" sid="879604896519904" type="JSON__COMMON">
-                                                    <param id="0" name="Value">replace(replace(INI.JSON2INI(JSON__COMMON.AsJson(1)),newline,&quot;|&quot;),&quot;=&quot;,&quot;:&quot;)</param>
-                                                    <param id="1" name="Reference point">1</param>
-                                                    <param id="2" name="Key {n}"></param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                        <event-block sid="793361587422757">
-                                            <conditions />
-                                            <actions>
-                                                <action id="14" name="Log" sid="937347580985521" type="Browser">
-                                                    <param id="0" name="Type">0</param>
-                                                    <param id="1" name="Message">INI.JSON2INI(JSON__COMMON.AsJson(0))</param>
-                                                </action>
-                                                <action id="-9" name="Destroy" sid="904153243768476" type="JSON__COMMON" />
-                                            </actions>
-                                        </event-block>
-                                    </sub-events>
                                 </event-block>
                             </sub-events>
                         </event-block>
@@ -1426,12 +1400,12 @@
                                     <param id="1" name="Parameter {n}"></param>
                                 </action>
                                 <action id="-10" name="Set value" sid="227649585709286" type="Var_Misc">
-                                    <param id="0" name="Instance variable">Discord_TimestampCurrent</param>
+                                    <param id="0" name="Instance variable">Discord_TimestampLast</param>
                                     <param id="1" name="Value">Function.ReturnValue</param>
                                 </action>
                                 <action id="0" name="Call function" sid="383648947205630" type="Function">
                                     <param id="0" name="Name">&quot;Discord_RichPresence&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;&quot;{###}Var_Misc.Discord_CurrentState&amp;&quot; (SRB2)&quot;{###}&quot;Got the Chaos Emerald!&quot;{###}&quot;misc_finished&quot;{###}&quot;Time Left: &quot;&amp;Var_Level.TimerLevel&amp;&quot; | Score: &quot;&amp;(LevelScore+TimeBonus+EnemyScore){###}Var_Misc.Discord_CurrentSmallKey{###}Var_Misc.Discord_CurrentSmallText{###}Var_Misc.Discord_TimestampCurrent{###}Var_Misc.Discord_TimestampCurrent+Var_Level.TimerLevel{###}&quot;&quot;{###}Var_Game.Emeralds+1{###}&quot;7&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;&quot;{###}Var_Misc.Discord_CurrentState&amp;&quot; (SRB2)&quot;{###}&quot;Got the Chaos Emerald!&quot;{###}&quot;misc_finished&quot;{###}&quot;Time Left: &quot;&amp;Var_Level.TimerLevel&amp;&quot; | Score: &quot;&amp;(LevelScore+TimeBonus+EnemyScore){###}Var_Misc.Discord_CurrentSmallKey{###}Var_Misc.Discord_CurrentSmallText{###}Var_Misc.Discord_TimestampLast{###}Var_Misc.Discord_TimestampLast+Var_Level.TimerLevel{###}&quot;&quot;{###}Var_Game.Emeralds+1{###}&quot;7&quot;</param>
                                 </action>
                             </actions>
                             <sub-events>
@@ -1475,12 +1449,12 @@
                                     <param id="1" name="Parameter {n}"></param>
                                 </action>
                                 <action id="-10" name="Set value" sid="966628939680152" type="Var_Misc">
-                                    <param id="0" name="Instance variable">Discord_TimestampCurrent</param>
+                                    <param id="0" name="Instance variable">Discord_TimestampLast</param>
                                     <param id="1" name="Value">Function.ReturnValue</param>
                                 </action>
                                 <action id="0" name="Call function" sid="274837233826661" type="Function">
                                     <param id="0" name="Name">&quot;Discord_RichPresence&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;&quot;{###}Var_Misc.Discord_CurrentState&amp;&quot; (SRB2)&quot;{###}&quot;Failed! Good luck next time!&quot;{###}&quot;misc_finished&quot;{###}&quot;Rings Left: &quot;&amp;Var_Player.Rings&amp;&quot; | Score: &quot;&amp;(LevelScore+TimeBonus+EnemyScore){###}Var_Misc.Discord_CurrentSmallKey{###}Var_Misc.Discord_CurrentSmallText{###}Var_Misc.Discord_TimestampCurrent{###}Var_Misc.Discord_TimestampCurrent+Var_Level.TimerLevel{###}&quot;&quot;{###}Var_Game.Emeralds{###}&quot;7&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;&quot;{###}Var_Misc.Discord_CurrentState&amp;&quot; (SRB2)&quot;{###}&quot;Failed! Good luck next time!&quot;{###}&quot;misc_finished&quot;{###}&quot;Rings Left: &quot;&amp;Var_Player.Rings&amp;&quot; | Score: &quot;&amp;(LevelScore+TimeBonus+EnemyScore){###}Var_Misc.Discord_CurrentSmallKey{###}Var_Misc.Discord_CurrentSmallText{###}Var_Misc.Discord_TimestampLast{###}Var_Misc.Discord_TimestampLast+Var_Level.TimerLevel{###}&quot;&quot;{###}Var_Game.Emeralds{###}&quot;7&quot;</param>
                                 </action>
                             </actions>
                         </event-block>

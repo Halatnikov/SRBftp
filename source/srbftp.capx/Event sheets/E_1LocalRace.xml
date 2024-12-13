@@ -5,33 +5,8 @@
     <events>
         <include>E_GLOBAL</include>
         <comment>explanation sorta:&#x0D;&#x0A;you race to the finish, wow, shocking&#x0D;&#x0A;there&apos;s switches that lower barriers that stops your opponent for a whopping 2(3) seconds&#x0D;&#x0A;first player to reach multiples of 3 points (3,6,9,etc) will get a &quot;lap of honour&quot;, meaning the opposite player won&apos;t be able to move&#x0D;&#x0A;first player to reach multiples of 10 points (10,20,etc) will get a SpEcIaL ScReEn saying how cool they are&#x0D;&#x0A;who the hell is going to play this for this long is the true question here</comment>
-        <event-group description="" sid="176276733504974" title="Multiplayer level management">
+        <event-group description="" sid="176276733504974" title="Multiplayer management">
             <sub-events>
-                <event-block sid="903974518780205">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="853799919090026" type="Var_Player">
-                            <param id="0" name="Instance variable">Finished</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">0</param>
-                        </condition>
-                        <condition id="-7" inverted="1" name="Compare instance variable" sid="977959791039977" type="Var_Level">
-                            <param id="0" name="Instance variable">Local_LapOfHonour</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">0</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="486120843077725" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Call function" sid="592322330070892" type="Function">
-                            <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
-                            <param id="1" name="Parameter {n}">&quot;1M__LapOfHonour&quot;{###}&quot;music&quot;{###}1</param>
-                        </action>
-                        <action id="0" name="Call function" sid="743032695503380" type="Function">
-                            <param id="0" name="Name">&quot;Discord_RichPresence&quot;</param>
-                            <param id="1" name="Parameter {n}">&quot;&quot;{###}&quot;Local race (SRB1)&quot;{###}&quot;P&quot;&amp;Var_Level.Local_LapOfHonour&amp;&quot; has a lap of honour!&quot;{###}&quot;misc_1local&quot;{###}&quot;P1: &quot;&amp;Var_Level.Local_P1Score&amp;&quot; | P2: &quot;&amp;Var_Level.Local_P2Score{###}Var_Level.Local_LapOfHonour = 2 ? &quot;small_skin_plughands&quot; : &quot;small_skin_earless&quot;{###}&quot;&quot;{###}Var_Misc.Discord_TimestampCurrent{###}&quot;&quot;{###}&quot;&quot;{###}&quot;2&quot;{###}&quot;2&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
                 <event-block sid="268837999361798">
                     <conditions>
                         <condition id="-7" name="Compare instance variable" sid="800482142916229" type="Var_Player">
@@ -39,138 +14,180 @@
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">0</param>
                         </condition>
-                        <condition id="-7" name="Compare instance variable" sid="503169958424608" type="Var_Level">
-                            <param id="0" name="Instance variable">Local_LapOfHonour</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">0</param>
-                        </condition>
                         <condition id="-4" name="Trigger once while true" sid="606132749997942" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Call function" sid="641975144245383" type="Function">
+                            <param id="0" name="Name">&quot;Discord_RichPresence_Update&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
+                        </action>
+                        <action id="0" name="Call function" sid="662588439896301" type="Function">
+                            <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
+                            <param id="1" name="Parameter {n}">LayoutName{###}&quot;music&quot;{###}1</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="903974518780205">
+                            <conditions>
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="977959791039977" type="Var_Level">
+                                    <param id="0" name="Instance variable">Local_LapOfHonour</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Call function" sid="592322330070892" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;1M__LapOfHonour&quot;{###}&quot;music&quot;{###}1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment></comment>
+                <event-block sid="146300594394325">
+                    <conditions>
+                        <condition id="0" name="On function" sid="791428893010329" type="Function">
+                            <param id="0" name="Name">&quot;Discord_RichPresence_Update&quot;</param>
+                        </condition>
                     </conditions>
                     <actions />
                     <sub-events>
-                        <comment>srb1</comment>
-                        <event-block sid="331746295145523">
+                        <variable constant="0" name="detail" sid="606851837510848" static="0" type="text"></variable>
+                        <variable constant="0" name="smallImage" sid="970740267121310" static="0" type="text"></variable>
+                        <variable constant="0" name="smallImageText" sid="928300097954732" static="0" type="text"></variable>
+                        <event-block sid="806949758492146">
                             <conditions>
-                                <condition id="-8" name="Compare two values" sid="756348214437204" type="System">
-                                    <param id="0" name="First value">LayoutName</param>
+                                <condition id="-7" name="Compare instance variable" sid="814714377952551" type="Var_Player">
+                                    <param id="0" name="Instance variable">Finished</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Second value">&quot;1M_1KnotholeRaceGrounds&quot;</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="876175739964902">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="790860016990966" type="Var_Level">
+                                            <param id="0" name="Instance variable">Local_LapOfHonour</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="928099202190563" type="System">
+                                            <param id="0" name="Variable">detail</param>
+                                            <param id="1" name="Value">JSON_LevelProperties.Value(0, LayoutName, &quot;Name&quot;)</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="521073463031814" type="System">
+                                            <param id="0" name="Variable">smallImage</param>
+                                            <param id="1" name="Value">Var_Level.Local_P1Score &gt; Var_Level.Local_P2Score ? &quot;skin_earless&quot; : &quot;skin_plughands&quot;</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="245964424566525" type="System">
+                                            <param id="0" name="Variable">smallImageText</param>
+                                            <param id="1" name="Value">(Var_Level.Local_P1Score &gt; Var_Level.Local_P2Score ? &quot;P1&quot; : &quot;P2&quot;)&amp;&quot; has the most score so far!&quot;</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="767283783763294">
+                                            <conditions>
+                                                <condition id="-7" name="Compare instance variable" sid="528727155659794" type="Var_Level">
+                                                    <param id="0" name="Instance variable">Local_P1Score</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">Self.Local_P2Score</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Set value" sid="390288774241268" type="System">
+                                                    <param id="0" name="Variable">smallImage</param>
+                                                    <param id="1" name="Value">choose(1,2) = 1 ? &quot;skin_earless&quot; : &quot;skin_plughands&quot;</param>
+                                                </action>
+                                                <action id="-9" name="Set value" sid="591554984288814" type="System">
+                                                    <param id="0" name="Variable">smallImageText</param>
+                                                    <param id="1" name="Value">&quot;It&apos;s anyone&apos;s game!&quot;</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="931275875278076">
+                                    <conditions>
+                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="872947313607334" type="Var_Level">
+                                            <param id="0" name="Instance variable">Local_LapOfHonour</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="620198722307246" type="System">
+                                            <param id="0" name="Variable">detail</param>
+                                            <param id="1" name="Value">&quot;P&quot;&amp;Var_Level.Local_LapOfHonour&amp;&quot; has a lap of honour!&quot;</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="636632966907435" type="System">
+                                            <param id="0" name="Variable">smallImage</param>
+                                            <param id="1" name="Value">Var_Level.Local_LapOfHonour = 1 ? &quot;skin_earless&quot; : &quot;skin_plughands&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="934533395946441">
+                                    <conditions>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="780169741147098" type="Var_Level">
+                                            <param id="0" name="Instance variable">Pause</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="765892184819541" type="System">
+                                            <param id="0" name="Variable">detail</param>
+                                            <param id="1" name="Value">detail&amp;&quot; (PAUSED)&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="364894532863300">
+                            <conditions>
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="885244970215801" type="Var_Player">
+                                    <param id="0" name="Instance variable">Finished</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="0" name="Call function" sid="662588439896301" type="Function">
-                                    <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;1M_1KnotholeRaceGround&quot;{###}&quot;music&quot;{###}1</param>
+                                <action id="-9" name="Set value" sid="672089906853470" type="System">
+                                    <param id="0" name="Variable">detail</param>
+                                    <param id="1" name="Value">&quot;P&quot;&amp;Var_Player.Finished&amp;&quot; won the race!&quot;</param>
                                 </action>
-                                <action id="-10" name="Set value" sid="337047715701200" type="Var_Misc">
-                                    <param id="0" name="Instance variable">Discord_CurrentDetail</param>
-                                    <param id="1" name="Value">&quot;Knothole Race Grounds&quot;</param>
+                                <action id="-9" name="Set value" sid="528483464040366" type="System">
+                                    <param id="0" name="Variable">smallImage</param>
+                                    <param id="1" name="Value">Var_Player.Finished = 1 ? &quot;skin_earless&quot; : &quot;skin_plughands&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
-                        <event-block sid="226511720549039">
+                        <event-block sid="153550325230872">
                             <conditions>
-                                <condition id="-8" name="Compare two values" sid="498519828487004" type="System">
-                                    <param id="0" name="First value">LayoutName</param>
+                                <condition id="-7" name="Compare instance variable" sid="639801005688067" type="Var_Game">
+                                    <param id="0" name="Instance variable">CurrentMenu</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Second value">&quot;1M_2IceRinks&quot;</param>
+                                    <param id="2" name="Value">&quot;raceagain&quot;</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="0" name="Call function" sid="596556387152727" type="Function">
-                                    <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;1M_2IceRinks&quot;{###}&quot;music&quot;{###}1</param>
+                                <action id="-9" name="Set value" sid="410714149386695" type="System">
+                                    <param id="0" name="Variable">detail</param>
+                                    <param id="1" name="Value">&quot;P&quot;&amp;Var_Player.Finished&amp;&quot; chooses a stage&quot;</param>
                                 </action>
-                                <action id="-10" name="Set value" sid="873980544016175" type="Var_Misc">
-                                    <param id="0" name="Instance variable">Discord_CurrentDetail</param>
-                                    <param id="1" name="Value">&quot;Ice Rinks&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="452669359901956">
-                            <conditions>
-                                <condition id="-8" name="Compare two values" sid="208058083997742" type="System">
-                                    <param id="0" name="First value">LayoutName</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Second value">&quot;1M_3VolcanoRally&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Call function" sid="789516093981607" type="Function">
-                                    <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;1M_3VolcanoRally&quot;{###}&quot;music&quot;{###}1</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="207523895567398" type="Var_Misc">
-                                    <param id="0" name="Instance variable">Discord_CurrentDetail</param>
-                                    <param id="1" name="Value">&quot;Volcano Rally&quot;</param>
+                                <action id="-9" name="Set value" sid="451550818273559" type="System">
+                                    <param id="0" name="Variable">smallImage</param>
+                                    <param id="1" name="Value">Var_Player.Finished = 1 ? &quot;skin_earless&quot; : &quot;skin_plughands&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
-                        <event-block sid="482847832064796">
-                            <conditions>
-                                <condition id="-8" name="Compare two values" sid="172532538977480" type="System">
-                                    <param id="0" name="First value">LayoutName</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Second value">&quot;1M_4Airtracks&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Call function" sid="284893751176000" type="Function">
-                                    <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;1M_4Airtracks&quot;{###}&quot;music&quot;{###}1</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="820135308394640" type="Var_Misc">
-                                    <param id="0" name="Instance variable">Discord_CurrentDetail</param>
-                                    <param id="1" name="Value">&quot;Airtracks&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="584130953666334">
-                            <conditions>
-                                <condition id="-8" name="Compare two values" sid="395130004692328" type="System">
-                                    <param id="0" name="First value">LayoutName</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Second value">&quot;1M_5TheBackfire&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Call function" sid="631312578266084" type="Function">
-                                    <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;1M_5TheBackfire&quot;{###}&quot;music&quot;{###}1</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="885343951842624" type="Var_Misc">
-                                    <param id="0" name="Instance variable">Discord_CurrentDetail</param>
-                                    <param id="1" name="Value">&quot;The Backfire&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <comment>srb1 tgf</comment>
-                        <event-block sid="829588751738639">
-                            <conditions>
-                                <condition id="-8" name="Compare two values" sid="836633210590947" type="System">
-                                    <param id="0" name="First value">LayoutName</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Second value">&quot;1M_6TGFKnothole2&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Call function" sid="443627748545110" type="Function">
-                                    <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;1M_6TGFKnothole2&quot;{###}&quot;music&quot;{###}1</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="680915167215335" type="Var_Misc">
-                                    <param id="0" name="Instance variable">Discord_CurrentDetail</param>
-                                    <param id="1" name="Value">&quot;TGF Knothole Racegrounds 2&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <comment></comment>
-                        <event-block sid="923875016271927">
+                        <event-block sid="885234063570100">
                             <conditions />
                             <actions>
-                                <action id="0" name="Call function" sid="505504043436589" type="Function">
+                                <action id="0" name="Call function" sid="114835121984155" type="Function">
                                     <param id="0" name="Name">&quot;Discord_RichPresence&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;&quot;{###}&quot;Local race (SRB1)&quot;{###}Var_Misc.Discord_CurrentDetail{###}&quot;misc_1local&quot;{###}&quot;P1: &quot;&amp;Var_Level.Local_P1Score&amp;&quot; | P2: &quot;&amp;Var_Level.Local_P2Score{###}Var_Level.Local_P2Score &gt; Var_Level.Local_P1Score ? &quot;small_skin_plughands&quot; : &quot;small_skin_earless&quot;{###}Var_Level.Local_P2Score &gt; Var_Level.Local_P1Score ? &quot;P2&quot; : &quot;P1&quot; &amp; &quot; has the most score so far!&quot;{###}Var_Misc.Discord_TimestampCurrent{###}&quot;&quot;{###}&quot;&quot;{###}&quot;2&quot;{###}&quot;2&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;&quot;{###}&quot;Local race (SRB1)&quot;{###}detail{###}&quot;misc_1local&quot;{###}&quot;P1: &quot;&amp;Var_Level.Local_P1Score&amp;&quot; | P2: &quot;&amp;Var_Level.Local_P2Score{###}smallImage{###}smallImageText{###}Var_Misc.Discord_TimestampLast{###}&quot;&quot;{###}&quot;&quot;{###}&quot;2&quot;{###}&quot;2&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -521,7 +538,6 @@
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">0</param>
                         </condition>
-                        <condition id="-1" name="Every tick" sid="760010331664713" type="System" />
                         <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="417745866292384" type="Var_Level">
                             <param id="0" name="Instance variable">Pause</param>
                         </condition>
@@ -537,29 +553,6 @@
                     </actions>
                 </event-block>
                 <comment>lap of honour</comment>
-                <event-block sid="215340473603053">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="234349099336054" type="Var_Player">
-                            <param id="0" name="Instance variable">Finished</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">-1</param>
-                        </condition>
-                        <condition id="-7" name="Compare instance variable" sid="711638811288219" type="Var_Level">
-                            <param id="0" name="Instance variable">Local_LapOfHonour</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">0</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="449160767785187" type="System" />
-                    </conditions>
-                    <actions>
-                        <action behavior="Platform" id="11" name="Set enabled" sid="995817036120266" type="Engine_Player">
-                            <param id="0" name="State">1</param>
-                        </action>
-                        <action id="-15" name="Set visible" sid="493262193303181" type="LocalHUD_LapOfHonour">
-                            <param id="0" name="Visibility">0</param>
-                        </action>
-                    </actions>
-                </event-block>
                 <event-block sid="927655581059602">
                     <conditions>
                         <condition id="-7" name="Compare instance variable" sid="268276569678001" type="Var_Level">
@@ -667,57 +660,65 @@
                             <param id="0" name="Instance variable">Finished</param>
                             <param id="1" name="Value">-1</param>
                         </action>
-                        <action id="-15" name="Set visible" sid="238382983341529" type="LocalHUD_321GO">
-                            <param id="0" name="Visibility">1</param>
-                        </action>
-                        <action id="0" name="Set text" sid="746505478947504" type="LocalHUD_321GO">
-                            <param id="0" name="Text">&quot;3&quot;</param>
-                        </action>
-                        <action id="0" name="Call function" sid="812002882402736" type="Function">
-                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
-                            <param id="1" name="Parameter {n}">&quot;Ring&quot;</param>
-                        </action>
-                        <action id="-16" name="Wait" sid="264923720799264" type="System">
-                            <param id="0" name="Seconds">1</param>
-                        </action>
-                        <action id="0" name="Set text" sid="930269676850520" type="LocalHUD_321GO">
-                            <param id="0" name="Text">&quot;2&quot;</param>
-                        </action>
-                        <action id="0" name="Call function" sid="388442907613195" type="Function">
-                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
-                            <param id="1" name="Parameter {n}">&quot;Ring&quot;</param>
-                        </action>
-                        <action id="-16" name="Wait" sid="527374704015395" type="System">
-                            <param id="0" name="Seconds">1</param>
-                        </action>
-                        <action id="0" name="Set text" sid="536888900804617" type="LocalHUD_321GO">
-                            <param id="0" name="Text">&quot;1&quot;</param>
-                        </action>
-                        <action id="0" name="Call function" sid="860447138743738" type="Function">
-                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
-                            <param id="1" name="Parameter {n}">&quot;Ring&quot;</param>
-                        </action>
-                        <action id="-16" name="Wait" sid="700645320132979" type="System">
-                            <param id="0" name="Seconds">1</param>
-                        </action>
-                        <action id="0" name="Set text" sid="808452382606773" type="LocalHUD_321GO">
-                            <param id="0" name="Text">&quot;GO&quot;</param>
-                        </action>
-                        <action id="0" name="Call function" sid="744945792614287" type="Function">
-                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
-                            <param id="1" name="Parameter {n}">&quot;Death&quot;</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="133945269034523" type="Var_Player">
-                            <param id="0" name="Instance variable">Finished</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-16" name="Wait" sid="433171250423184" type="System">
-                            <param id="0" name="Seconds">1</param>
-                        </action>
-                        <action id="-15" name="Set visible" sid="163376340625986" type="LocalHUD_321GO">
-                            <param id="0" name="Visibility">0</param>
-                        </action>
                     </actions>
+                    <sub-events>
+                        <comment>countdown</comment>
+                        <event-block sid="333683242372356">
+                            <conditions />
+                            <actions>
+                                <action id="-15" name="Set visible" sid="238382983341529" type="LocalHUD_321GO">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action id="0" name="Set text" sid="746505478947504" type="LocalHUD_321GO">
+                                    <param id="0" name="Text">&quot;3&quot;</param>
+                                </action>
+                                <action id="0" name="Call function" sid="812002882402736" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;Ring&quot;</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="264923720799264" type="System">
+                                    <param id="0" name="Seconds">1</param>
+                                </action>
+                                <action id="0" name="Set text" sid="930269676850520" type="LocalHUD_321GO">
+                                    <param id="0" name="Text">&quot;2&quot;</param>
+                                </action>
+                                <action id="0" name="Call function" sid="388442907613195" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;Ring&quot;</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="527374704015395" type="System">
+                                    <param id="0" name="Seconds">1</param>
+                                </action>
+                                <action id="0" name="Set text" sid="536888900804617" type="LocalHUD_321GO">
+                                    <param id="0" name="Text">&quot;1&quot;</param>
+                                </action>
+                                <action id="0" name="Call function" sid="860447138743738" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;Ring&quot;</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="700645320132979" type="System">
+                                    <param id="0" name="Seconds">1</param>
+                                </action>
+                                <action id="0" name="Set text" sid="808452382606773" type="LocalHUD_321GO">
+                                    <param id="0" name="Text">&quot;GO&quot;</param>
+                                </action>
+                                <action id="0" name="Call function" sid="744945792614287" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;Death&quot;</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="133945269034523" type="Var_Player">
+                                    <param id="0" name="Instance variable">Finished</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="433171250423184" type="System">
+                                    <param id="0" name="Seconds">1</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="163376340625986" type="LocalHUD_321GO">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <comment>barrier</comment>
                 <event-block sid="903971646181009">
@@ -729,38 +730,31 @@
                             <param id="0" name="Comparison">0</param>
                             <param id="1" name="Number">0</param>
                         </condition>
+                        <condition id="-33" name="Pick by comparison" sid="783495138019077" type="System">
+                            <param id="0" name="Object">Local_Barrier</param>
+                            <param id="1" name="Expression">Local_Barrier.ID</param>
+                            <param id="2" name="Comparison">0</param>
+                            <param id="3" name="Value">Local_BarrierSwitch.ID</param>
+                        </condition>
                     </conditions>
-                    <actions />
-                    <sub-events>
-                        <event-block sid="758479278366418">
-                            <conditions>
-                                <condition id="-33" name="Pick by comparison" sid="783495138019077" type="System">
-                                    <param id="0" name="Object">Local_Barrier</param>
-                                    <param id="1" name="Expression">Local_Barrier.ID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Local_BarrierSwitch.ID</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-16" name="Wait" sid="936247360642120" type="System">
-                                    <param id="0" name="Seconds">0.1</param>
-                                </action>
-                                <action id="5" name="Set frame" sid="832901507718374" type="Local_BarrierSwitch">
-                                    <param id="0" name="Frame number">1</param>
-                                </action>
-                                <action behavior="LiteTween" id="10" name="Start" sid="808322326756141" type="Local_Barrier">
-                                    <param id="0" name="Start Mode">0</param>
-                                    <param id="1" name="Force use current">0</param>
-                                </action>
-                                <action id="-16" name="Wait" sid="917988983701966" type="System">
-                                    <param id="0" name="Seconds">3</param>
-                                </action>
-                                <action behavior="LiteTween" id="11" name="Reverse" sid="786985345101029" type="Local_Barrier">
-                                    <param id="0" name="Reverse mode">1</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
+                    <actions>
+                        <action id="-16" name="Wait" sid="936247360642120" type="System">
+                            <param id="0" name="Seconds">0.1</param>
+                        </action>
+                        <action id="5" name="Set frame" sid="832901507718374" type="Local_BarrierSwitch">
+                            <param id="0" name="Frame number">1</param>
+                        </action>
+                        <action behavior="LiteTween" id="10" name="Start" sid="808322326756141" type="Local_Barrier">
+                            <param id="0" name="Start Mode">0</param>
+                            <param id="1" name="Force use current">0</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="917988983701966" type="System">
+                            <param id="0" name="Seconds">3</param>
+                        </action>
+                        <action behavior="LiteTween" id="11" name="Reverse" sid="786985345101029" type="Local_Barrier">
+                            <param id="0" name="Reverse mode">1</param>
+                        </action>
+                    </actions>
                 </event-block>
                 <comment>damage</comment>
                 <event-block sid="977481073348834">
@@ -768,32 +762,25 @@
                         <condition id="0" name="On collision with another object" sid="409202410078473" type="Engine_Player">
                             <param id="0" name="Object">Local_Damage</param>
                         </condition>
+                        <condition id="-33" name="Pick by comparison" sid="154062689600968" type="System">
+                            <param id="0" name="Object">Special_StartPos</param>
+                            <param id="1" name="Expression">Special_StartPos.MultiplayerID</param>
+                            <param id="2" name="Comparison">0</param>
+                            <param id="3" name="Value">Engine_Player.LocalMultiplayerID</param>
+                        </condition>
                     </conditions>
-                    <actions />
-                    <sub-events>
-                        <event-block sid="143633207819014">
-                            <conditions>
-                                <condition id="-33" name="Pick by comparison" sid="154062689600968" type="System">
-                                    <param id="0" name="Object">Special_StartPos</param>
-                                    <param id="1" name="Expression">Special_StartPos.MultiplayerID</param>
-                                    <param id="2" name="Comparison">0</param>
-                                    <param id="3" name="Value">Engine_Player.LocalMultiplayerID</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-4" name="Set position to another object" sid="245358355645294" type="Engine_Player">
-                                    <param id="0" name="Object">Special_StartPos</param>
-                                    <param id="1" name="Image point (optional)">0</param>
-                                </action>
-                                <action behavior="Platform" id="8" name="Set vector X" sid="294727211075671" type="Engine_Player">
-                                    <param id="0" name="Vector X">0</param>
-                                </action>
-                                <action behavior="Platform" id="9" name="Set vector Y" sid="415231238072076" type="Engine_Player">
-                                    <param id="0" name="Vector Y">0</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
+                    <actions>
+                        <action id="-4" name="Set position to another object" sid="245358355645294" type="Engine_Player">
+                            <param id="0" name="Object">Special_StartPos</param>
+                            <param id="1" name="Image point (optional)">0</param>
+                        </action>
+                        <action behavior="Platform" id="8" name="Set vector X" sid="294727211075671" type="Engine_Player">
+                            <param id="0" name="Vector X">0</param>
+                        </action>
+                        <action behavior="Platform" id="9" name="Set vector Y" sid="415231238072076" type="Engine_Player">
+                            <param id="0" name="Vector Y">0</param>
+                        </action>
+                    </actions>
                 </event-block>
                 <comment>player 1 finish</comment>
                 <event-block sid="541137850737710">
@@ -833,9 +820,9 @@
                         <action id="-16" name="Wait" sid="776115716215351" type="System">
                             <param id="0" name="Seconds">0.1</param>
                         </action>
-                        <action id="0" name="Call function" sid="129174785516722" type="Function">
-                            <param id="0" name="Name">&quot;Discord_RichPresence&quot;</param>
-                            <param id="1" name="Parameter {n}">&quot;&quot;{###}&quot;Local race (SRB1)&quot;{###}&quot;P1 won the race!&quot;{###}&quot;misc_1local&quot;{###}&quot;P1: &quot;&amp;Var_Level.Local_P1Score&amp;&quot; | P2: &quot;&amp;Var_Level.Local_P2Score{###}&quot;small_skin_earless&quot;{###}&quot;&quot;{###}Var_Misc.Discord_TimestampCurrent{###}&quot;&quot;{###}&quot;&quot;{###}&quot;2&quot;{###}&quot;2&quot;</param>
+                        <action id="0" name="Call function" sid="359517971778248" type="Function">
+                            <param id="0" name="Name">&quot;Discord_RichPresence_Update&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
                         </action>
                     </actions>
                     <sub-events>
@@ -899,9 +886,9 @@
                         <action id="-16" name="Wait" sid="648889302296119" type="System">
                             <param id="0" name="Seconds">0.1</param>
                         </action>
-                        <action id="0" name="Call function" sid="106234392011068" type="Function">
-                            <param id="0" name="Name">&quot;Discord_RichPresence&quot;</param>
-                            <param id="1" name="Parameter {n}">&quot;&quot;{###}&quot;Local race (SRB1)&quot;{###}&quot;P2 won the race!&quot;{###}&quot;misc_1local&quot;{###}&quot;P1: &quot;&amp;Var_Level.Local_P1Score&amp;&quot; | P2: &quot;&amp;Var_Level.Local_P2Score{###}&quot;small_skin_plughands&quot;{###}&quot;&quot;{###}Var_Misc.Discord_TimestampCurrent{###}&quot;&quot;{###}&quot;&quot;{###}&quot;2&quot;{###}&quot;2&quot;</param>
+                        <action id="0" name="Call function" sid="340924224051837" type="Function">
+                            <param id="0" name="Name">&quot;Discord_RichPresence_Update&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
                         </action>
                     </actions>
                     <sub-events>
@@ -1072,7 +1059,6 @@
                     </actions>
                 </event-block>
                 <comment>that&apos;s right, i did a splitscreen system for a whole 1 (one) level</comment>
-                <comment>i&apos;ve no idea why it works, but it does</comment>
                 <comment>code by valdarko</comment>
                 <event-block sid="660691606464941">
                     <conditions />
@@ -1083,10 +1069,10 @@
                             <param id="1" name="Y">116</param>
                         </action>
                         <action id="21" name="Paste Layer" sid="653745290072394" type="LocalSplitscreenP1">
-                            <param id="0" name="Layer">0</param>
+                            <param id="0" name="Layer">&quot;Background&quot;</param>
                         </action>
                         <action id="21" name="Paste Layer" sid="965474193207196" type="LocalSplitscreenP1">
-                            <param id="0" name="Layer">2</param>
+                            <param id="0" name="Layer">&quot;Level&quot;</param>
                         </action>
                         <action id="-3" name="Set position" sid="843347587443410" type="LocalSplitscreenP1">
                             <param id="0" name="X">427</param>
@@ -1098,10 +1084,10 @@
                             <param id="1" name="Y">364</param>
                         </action>
                         <action id="21" name="Paste Layer" sid="214984412258140" type="LocalSplitscreenP2">
-                            <param id="0" name="Layer">0</param>
+                            <param id="0" name="Layer">&quot;Background&quot;</param>
                         </action>
                         <action id="21" name="Paste Layer" sid="342826189977542" type="LocalSplitscreenP2">
-                            <param id="0" name="Layer">2</param>
+                            <param id="0" name="Layer">&quot;Level&quot;</param>
                         </action>
                         <action id="-3" name="Set position" sid="304863631068089" type="LocalSplitscreenP2">
                             <param id="0" name="X">427</param>
@@ -1164,39 +1150,11 @@
                             <param id="0" name="Instance variable">CurrentMenu</param>
                             <param id="1" name="Value">&quot;null&quot;</param>
                         </action>
+                        <action id="0" name="Call function" sid="804411099141990" type="Function">
+                            <param id="0" name="Name">&quot;Discord_RichPresence_Update&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
+                        </action>
                     </actions>
-                    <sub-events>
-                        <event-block sid="800639171948699">
-                            <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="829699011385783" type="Var_Level">
-                                    <param id="0" name="Instance variable">Local_LapOfHonour</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">0</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Call function" sid="405356879239842" type="Function">
-                                    <param id="0" name="Name">&quot;Discord_RichPresence&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;&quot;{###}&quot;Local race (SRB1)&quot;{###}Var_Misc.Discord_CurrentDetail{###}&quot;misc_1local&quot;{###}&quot;P1: &quot;&amp;Var_Level.Local_P1Score&amp;&quot; | P2: &quot;&amp;Var_Level.Local_P2Score{###}Var_Level.Local_P2Score &gt; Var_Level.Local_P1Score ? &quot;small_skin_plughands&quot; : &quot;small_skin_earless&quot;{###}Var_Level.Local_P2Score &gt; Var_Level.Local_P1Score ? &quot;P2&quot; : &quot;P1&quot; &amp; &quot; has the most score so far!&quot;{###}Var_Misc.Discord_TimestampCurrent{###}&quot;&quot;{###}&quot;&quot;{###}&quot;2&quot;{###}&quot;2&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="496779433599484">
-                            <conditions>
-                                <condition id="-7" inverted="1" name="Compare instance variable" sid="718818045510965" type="Var_Level">
-                                    <param id="0" name="Instance variable">Local_LapOfHonour</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">0</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Call function" sid="243124123839479" type="Function">
-                                    <param id="0" name="Name">&quot;Discord_RichPresence&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;&quot;{###}&quot;Local race (SRB1)&quot;{###}&quot;P&quot;&amp;Var_Level.Local_LapOfHonour&amp;&quot; has a lap of honour!&quot;{###}&quot;misc_1local&quot;{###}&quot;P1: &quot;&amp;Var_Level.Local_P1Score&amp;&quot; | P2: &quot;&amp;Var_Level.Local_P2Score{###}Var_Level.Local_LapOfHonour = 2 ? &quot;small_skin_plughands&quot; : &quot;small_skin_earless&quot;{###}&quot;&quot;{###}Var_Misc.Discord_TimestampCurrent{###}&quot;&quot;{###}&quot;&quot;{###}&quot;2&quot;{###}&quot;2&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
                 </event-block>
                 <comment>pause game</comment>
                 <event-block sid="713906690552210">
@@ -1227,39 +1185,11 @@
                             <param id="0" name="Instance variable">CurrentMenu</param>
                             <param id="1" name="Value">&quot;pause&quot;</param>
                         </action>
+                        <action id="0" name="Call function" sid="698235174980238" type="Function">
+                            <param id="0" name="Name">&quot;Discord_RichPresence_Update&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
+                        </action>
                     </actions>
-                    <sub-events>
-                        <event-block sid="513606241200103">
-                            <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="588815630908371" type="Var_Level">
-                                    <param id="0" name="Instance variable">Local_LapOfHonour</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">0</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Call function" sid="649993710173735" type="Function">
-                                    <param id="0" name="Name">&quot;Discord_RichPresence&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;&quot;{###}&quot;Local race (SRB1)&quot;{###}Var_Misc.Discord_CurrentDetail&amp;&quot; (PAUSED)&quot;{###}&quot;misc_1local&quot;{###}&quot;P1: &quot;&amp;Var_Level.Local_P1Score&amp;&quot; | P2: &quot;&amp;Var_Level.Local_P2Score{###}Var_Level.Local_P2Score &gt; Var_Level.Local_P1Score ? &quot;small_skin_plughands&quot; : &quot;small_skin_earless&quot;{###}Var_Level.Local_P2Score &gt; Var_Level.Local_P1Score ? &quot;P2&quot; : &quot;P1&quot; &amp; &quot; has the most score so far!&quot;{###}Var_Misc.Discord_TimestampCurrent{###}&quot;&quot;{###}&quot;&quot;{###}&quot;2&quot;{###}&quot;2&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="913225071141060">
-                            <conditions>
-                                <condition id="-7" inverted="1" name="Compare instance variable" sid="796685168801665" type="Var_Level">
-                                    <param id="0" name="Instance variable">Local_LapOfHonour</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">0</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Call function" sid="591954591691730" type="Function">
-                                    <param id="0" name="Name">&quot;Discord_RichPresence&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;&quot;{###}&quot;Local race (SRB1)&quot;{###}&quot;P&quot;&amp;Var_Level.Local_LapOfHonour&amp;&quot; has a lap of honour! (PAUSED)&quot;{###}&quot;misc_1local&quot;{###}&quot;P1: &quot;&amp;Var_Level.Local_P1Score&amp;&quot; | P2: &quot;&amp;Var_Level.Local_P2Score{###}Var_Level.Local_LapOfHonour = 2 ? &quot;small_skin_plughands&quot; : &quot;small_skin_earless&quot;{###}&quot;&quot;{###}Var_Misc.Discord_TimestampCurrent{###}&quot;&quot;{###}&quot;&quot;{###}&quot;2&quot;{###}&quot;2&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
                 </event-block>
                 <comment>the pause menu itself</comment>
                 <event-block sid="553314388897587">
@@ -1445,9 +1375,9 @@
                                     <param id="0" name="Instance variable">CurrentSelection</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
-                                <action id="0" name="Call function" sid="566055633300426" type="Function">
-                                    <param id="0" name="Name">&quot;Discord_RichPresence&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;&quot;{###}&quot;Local race (SRB1)&quot;{###}&quot;P&quot;&amp;Var_Player.Finished&amp;&quot; chooses a stage&quot;{###}&quot;misc_1local&quot;{###}&quot;P1: &quot;&amp;Var_Level.Local_P1Score&amp;&quot; | P2: &quot;&amp;Var_Level.Local_P2Score{###}Var_Player.Finished = 2 ? &quot;small_skin_plughands&quot; : &quot;small_skin_earless&quot;{###}&quot;&quot;{###}Var_Misc.Discord_TimestampCurrent{###}&quot;&quot;{###}&quot;&quot;{###}&quot;2&quot;{###}&quot;2&quot;</param>
+                                <action id="0" name="Call function" sid="990569120579654" type="Function">
+                                    <param id="0" name="Name">&quot;Discord_RichPresence_Update&quot;</param>
+                                    <param id="1" name="Parameter {n}"></param>
                                 </action>
                             </actions>
                         </event-block>

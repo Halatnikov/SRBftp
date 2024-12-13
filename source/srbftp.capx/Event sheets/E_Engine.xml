@@ -23,13 +23,9 @@
                                     <param id="0" name="Instance variable">InitialJump</param>
                                     <param id="1" name="Value">Self.Platform.JumpStrength</param>
                                 </action>
-                                <action id="-10" name="Set value" sid="984631373192908" type="Bosses">
-                                    <param id="0" name="Instance variable">InitialX</param>
-                                    <param id="1" name="Value">Self.X</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="667549036467804" type="Bosses">
-                                    <param id="0" name="Instance variable">InitialY</param>
-                                    <param id="1" name="Value">Self.Y</param>
+                                <action id="-10" name="Set value" sid="363369649640207" type="Var_Player">
+                                    <param id="0" name="Instance variable">Deaths</param>
+                                    <param id="1" name="Value">0</param>
                                 </action>
                                 <action id="-10" name="Set value" sid="938633915509455" type="Var_Level">
                                     <param id="0" name="Instance variable">TimerLevelReal</param>
@@ -39,9 +35,13 @@
                                     <param id="0" name="Instance variable">TimerLevelTicks</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
-                                <action id="-10" name="Set value" sid="363369649640207" type="Var_Player">
-                                    <param id="0" name="Instance variable">Deaths</param>
-                                    <param id="1" name="Value">0</param>
+                                <action id="-10" name="Set value" sid="775541142621129" type="Bosses">
+                                    <param id="0" name="Instance variable">InitialX</param>
+                                    <param id="1" name="Value">Self.X</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="467299421449048" type="Bosses">
+                                    <param id="0" name="Instance variable">InitialY</param>
+                                    <param id="1" name="Value">Self.Y</param>
                                 </action>
                             </actions>
                             <sub-events>
@@ -381,7 +381,7 @@
                                     <param id="1" name="Image point (optional)">0</param>
                                 </action>
                                 <action id="-10" name="Set value" sid="253224490266034" type="PlayerSkins">
-                                    <param id="0" name="Instance variable">Mirrored</param>
+                                    <param id="0" name="Instance variable">FacingDirection</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
                             </actions>
@@ -392,7 +392,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="-10" name="Set value" sid="628721579801556" type="PlayerSkins">
-                                            <param id="0" name="Instance variable">Mirrored</param>
+                                            <param id="0" name="Instance variable">FacingDirection</param>
                                             <param id="1" name="Value">0</param>
                                         </action>
                                     </actions>
@@ -1372,26 +1372,6 @@
                                 </event-block>
                             </sub-events>
                         </event-block>
-                        <comment>your winner</comment>
-                        <event-block sid="792765847617514">
-                            <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="947492087584513" type="Var_Player">
-                                    <param id="0" name="Instance variable">State</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;win&quot;</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="861465687396123" type="System" />
-                                <condition id="-8" name="Is boolean instance variable set" sid="798692813264133" type="PlayerSkins">
-                                    <param id="0" name="Instance variable">Me</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="4" name="Set animation" sid="373020135799343" type="PlayerSkins">
-                                    <param id="0" name="Animation">&quot;Win&quot;</param>
-                                    <param id="1" name="From">1</param>
-                                </action>
-                            </actions>
-                        </event-block>
                     </sub-events>
                 </event-group>
                 <event-group description="" sid="793195798137628" title="Camera">
@@ -1648,28 +1628,10 @@
                     <sub-events>
                         <comment>confine player into layout</comment>
                         <event-block sid="564575234356185">
-                            <conditions>
-                                <condition id="-1" name="Compare X" sid="981998561926653" type="Engine_Player">
-                                    <param id="0" name="Comparison">2</param>
-                                    <param id="1" name="X co-ordinate">12</param>
-                                </condition>
-                            </conditions>
+                            <conditions />
                             <actions>
                                 <action id="-1" name="Set X" sid="790396263537929" type="Engine_Player">
-                                    <param id="0" name="X">12</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="591615027254890">
-                            <conditions>
-                                <condition id="-1" name="Compare X" sid="222775427493583" type="Engine_Player">
-                                    <param id="0" name="Comparison">4</param>
-                                    <param id="1" name="X co-ordinate">LayoutWidth-12</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-1" name="Set X" sid="162085543872697" type="Engine_Player">
-                                    <param id="0" name="X">LayoutWidth-12</param>
+                                    <param id="0" name="X">clamp(Self.X, 12, LayoutWidth-12)</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -3568,28 +3530,18 @@
                                     <param id="0" name="Instance variable">RequireSpeedUp</param>
                                 </condition>
                             </conditions>
-                            <actions />
+                            <actions>
+                                <action behavior="Solid" id="0" name="Set enabled" sid="289243339512916" type="Object_Breakable">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                            </actions>
                             <sub-events>
-                                <event-block sid="308238809821835">
-                                    <conditions>
-                                        <condition id="-7" name="Compare instance variable" sid="617499951466713" type="Var_Player">
-                                            <param id="0" name="Instance variable">SpeedUpTimer</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">0</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action behavior="Solid" id="0" name="Set enabled" sid="289243339512916" type="Object_Breakable">
-                                            <param id="0" name="State">1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
                                 <event-block sid="294898830097392">
                                     <conditions>
                                         <condition id="-7" name="Compare instance variable" sid="341310519859628" type="Var_Player">
                                             <param id="0" name="Instance variable">SpeedUpTimer</param>
-                                            <param id="1" name="Comparison">5</param>
-                                            <param id="2" name="Value">1</param>
+                                            <param id="1" name="Comparison">4</param>
+                                            <param id="2" name="Value">0</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -3752,7 +3704,7 @@
                                 <action id="-9" name="Destroy" sid="410569559095194" type="Common_AirBubble" />
                             </actions>
                         </event-block>
-                        <comment>bloop bwup</comment>
+                        <comment>bwoop bwup</comment>
                         <event-block sid="779319966389788">
                             <conditions>
                                 <condition id="0" name="On collision with another object" sid="994003470690231" type="PlayerSkins">
@@ -3904,6 +3856,71 @@
                                 </action>
                                 <action behavior="Solid" id="0" name="Set enabled" sid="200085415562456" type="ObjectF_CrumblingPlatform">
                                     <param id="0" name="State">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>=collectible emblems</comment>
+                        <comment>(temporary)</comment>
+                        <event-block sid="428653093923156">
+                            <conditions>
+                                <condition id="-11" name="For Each" sid="811947467811623" type="System">
+                                    <param id="0" name="Object">ObjectF_Emblem</param>
+                                </condition>
+                                <condition id="-8" name="Is boolean instance variable set" sid="938837003198819" type="ObjectF_Emblem">
+                                    <param id="0" name="Instance variable">Used</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-15" name="Set visible" sid="909273076612100" type="ObjectF_Emblem">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="584429895781877">
+                            <conditions>
+                                <condition id="0" name="On collision with another object" sid="802816640128324" type="PlayerSkins">
+                                    <param id="0" name="Object">ObjectF_Emblem</param>
+                                </condition>
+                                <condition id="-8" name="Is boolean instance variable set" sid="690976176300373" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
+                                </condition>
+                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="608513330428303" type="ObjectF_Emblem">
+                                    <param id="0" name="Instance variable">Used</param>
+                                </condition>
+                                <condition id="2" inverted="1" name="Is playing" sid="281456117647822" type="ObjectF_Emblem">
+                                    <param id="0" name="Animation">&quot;Collected&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="707391660212082" type="ObjectF_Emblem">
+                                    <param id="0" name="Animation">&quot;Collected&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                                <action id="0" name="Call function" sid="297546465688598" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;F_Emblem&quot;</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="115362805319757" type="HUD_EmblemGot">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="736520881720938" type="System">
+                                    <param id="0" name="Seconds">2.5</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="504465494467679" type="HUD_EmblemGot">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="672925978036606">
+                            <conditions>
+                                <condition id="4" name="On finished" sid="685192661501182" type="ObjectF_Emblem">
+                                    <param id="0" name="Animation">&quot;Collected&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-13" name="Set boolean" sid="470247164308226" type="ObjectF_Emblem">
+                                    <param id="0" name="Instance variable">Used</param>
+                                    <param id="1" name="Value">1</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -4248,7 +4265,32 @@
                         </event-block>
                         <comment>=crusher</comment>
                         <comment>funny pancake</comment>
-                        <comment>simple</comment>
+                        <event-block sid="472909302728762">
+                            <conditions>
+                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="794546571800509" type="Var_Level">
+                                    <param id="0" name="Instance variable">Pause</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="457912059328698" type="System" />
+                            </conditions>
+                            <actions>
+                                <action behavior="Sine" id="0" name="Set active" sid="969147104505411" type="Object2_MovingPlatform">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="119696339007450">
+                            <conditions>
+                                <condition id="-8" name="Is boolean instance variable set" sid="449206013482009" type="Var_Level">
+                                    <param id="0" name="Instance variable">Pause</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="253418851824539" type="System" />
+                            </conditions>
+                            <actions>
+                                <action behavior="Sine" id="0" name="Set active" sid="209591934212776" type="Object2_MovingPlatform">
+                                    <param id="0" name="State">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
                         <event-block sid="356308110061054">
                             <conditions>
                                 <condition id="-8" name="Compare two values" sid="235658227127898" type="System">
@@ -4327,6 +4369,7 @@
                                 </event-block>
                             </sub-events>
                         </event-block>
+                        <comment>simple</comment>
                         <event-block sid="534754493490018">
                             <conditions>
                                 <condition id="1" name="Is overlapping another object" sid="765192456575083" type="PlayerSkins">
@@ -6063,33 +6106,6 @@
                                 </action>
                             </actions>
                         </event-block>
-                        <comment>=moving platforms</comment>
-                        <event-block sid="215730249385262">
-                            <conditions>
-                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="142985789927065" type="Var_Level">
-                                    <param id="0" name="Instance variable">Pause</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="754918196748388" type="System" />
-                            </conditions>
-                            <actions>
-                                <action behavior="Sine" id="0" name="Set active" sid="363319221953040" type="Object2_MovingPlatform">
-                                    <param id="0" name="State">1</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="421732821237048">
-                            <conditions>
-                                <condition id="-8" name="Is boolean instance variable set" sid="627751831573705" type="Var_Level">
-                                    <param id="0" name="Instance variable">Pause</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="312607078421047" type="System" />
-                            </conditions>
-                            <actions>
-                                <action behavior="Sine" id="0" name="Set active" sid="584225971328324" type="Object2_MovingPlatform">
-                                    <param id="0" name="State">0</param>
-                                </action>
-                            </actions>
-                        </event-block>
                         <comment>=water</comment>
                         <event-block sid="219395776775903">
                             <conditions>
@@ -6116,71 +6132,6 @@
                                 <action id="-13" name="Set boolean" sid="774908346003460" type="Var_Player">
                                     <param id="0" name="Instance variable">Underwater</param>
                                     <param id="1" name="Value">0</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <comment>=collectible emblems</comment>
-                        <comment>(temporary)</comment>
-                        <event-block sid="950745435868668">
-                            <conditions>
-                                <condition id="-11" name="For Each" sid="816067350387966" type="System">
-                                    <param id="0" name="Object">ObjectF_Emblem</param>
-                                </condition>
-                                <condition id="-8" name="Is boolean instance variable set" sid="678277518243806" type="ObjectF_Emblem">
-                                    <param id="0" name="Instance variable">Used</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-15" name="Set visible" sid="494038119372489" type="ObjectF_Emblem">
-                                    <param id="0" name="Visibility">0</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="541498205568469">
-                            <conditions>
-                                <condition id="0" name="On collision with another object" sid="547542560214194" type="PlayerSkins">
-                                    <param id="0" name="Object">ObjectF_Emblem</param>
-                                </condition>
-                                <condition id="-8" name="Is boolean instance variable set" sid="707944360065642" type="PlayerSkins">
-                                    <param id="0" name="Instance variable">Me</param>
-                                </condition>
-                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="215554087694847" type="ObjectF_Emblem">
-                                    <param id="0" name="Instance variable">Used</param>
-                                </condition>
-                                <condition id="2" inverted="1" name="Is playing" sid="536639363379505" type="ObjectF_Emblem">
-                                    <param id="0" name="Animation">&quot;Collected&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="4" name="Set animation" sid="223956740457938" type="ObjectF_Emblem">
-                                    <param id="0" name="Animation">&quot;Collected&quot;</param>
-                                    <param id="1" name="From">1</param>
-                                </action>
-                                <action id="0" name="Call function" sid="968241167405219" type="Function">
-                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;F_Emblem&quot;</param>
-                                </action>
-                                <action id="-15" name="Set visible" sid="230260004844626" type="HUD_EmblemGot">
-                                    <param id="0" name="Visibility">1</param>
-                                </action>
-                                <action id="-16" name="Wait" sid="967556738756177" type="System">
-                                    <param id="0" name="Seconds">2.5</param>
-                                </action>
-                                <action id="-15" name="Set visible" sid="687683121787647" type="HUD_EmblemGot">
-                                    <param id="0" name="Visibility">0</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="306048211616773">
-                            <conditions>
-                                <condition id="4" name="On finished" sid="323135134736109" type="ObjectF_Emblem">
-                                    <param id="0" name="Animation">&quot;Collected&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-13" name="Set boolean" sid="869457225196286" type="ObjectF_Emblem">
-                                    <param id="0" name="Instance variable">Used</param>
-                                    <param id="1" name="Value">1</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -6462,6 +6413,14 @@
                                     <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                     <param id="1" name="Parameter {n}">&quot;F_WaterPush&quot;</param>
                                 </action>
+                                <action id="-10" name="Set value" sid="431615121052074" type="Var_Player">
+                                    <param id="0" name="Instance variable">State</param>
+                                    <param id="1" name="Value">&quot;springhor&quot;</param>
+                                </action>
+                                <action id="4" name="Set animation" sid="166073132612385" type="PlayerSkins">
+                                    <param id="0" name="Animation">&quot;Run&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
                             </actions>
                             <sub-events>
                                 <comment>left</comment>
@@ -6473,14 +6432,6 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="-10" name="Set value" sid="431615121052074" type="Var_Player">
-                                            <param id="0" name="Instance variable">State</param>
-                                            <param id="1" name="Value">&quot;springhor&quot;</param>
-                                        </action>
-                                        <action id="4" name="Set animation" sid="166073132612385" type="PlayerSkins">
-                                            <param id="0" name="Animation">&quot;Run&quot;</param>
-                                            <param id="1" name="From">1</param>
-                                        </action>
                                         <action id="7" name="Set mirrored" sid="198754968390270" type="PlayerSkins">
                                             <param id="0" name="State">0</param>
                                         </action>
@@ -6499,14 +6450,6 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="-10" name="Set value" sid="826596276941018" type="Var_Player">
-                                            <param id="0" name="Instance variable">State</param>
-                                            <param id="1" name="Value">&quot;springhor&quot;</param>
-                                        </action>
-                                        <action id="4" name="Set animation" sid="816715340294924" type="PlayerSkins">
-                                            <param id="0" name="Animation">&quot;Run&quot;</param>
-                                            <param id="1" name="From">1</param>
-                                        </action>
                                         <action id="7" name="Set mirrored" sid="745715785947123" type="PlayerSkins">
                                             <param id="0" name="State">1</param>
                                         </action>
@@ -6528,13 +6471,13 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-10" name="Set value" sid="723729793965776" type="Var_Player">
-                                    <param id="0" name="Instance variable">SpringTimer</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
                                 <action id="-10" name="Set value" sid="583963670582793" type="Var_Player">
                                     <param id="0" name="Instance variable">State</param>
                                     <param id="1" name="Value">&quot;none&quot;</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="723729793965776" type="Var_Player">
+                                    <param id="0" name="Instance variable">SpringTimer</param>
+                                    <param id="1" name="Value">0</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -7403,7 +7346,7 @@
             <sub-events>
                 <event-group description="" sid="827070869872677" title="Enemies common">
                     <sub-events>
-                        <comment>==schmovement</comment>
+                        <comment>====schmovement</comment>
                         <comment>=horizontal steps</comment>
                         <event-block sid="564030538332034">
                             <conditions>
@@ -7840,7 +7783,7 @@
                                 </action>
                             </actions>
                         </event-block>
-                        <comment>==he protecc he attacc</comment>
+                        <comment>====he protecc he attacc</comment>
                         <comment>=horizontal projectile</comment>
                         <event-block sid="470155938690338">
                             <conditions>
@@ -7882,7 +7825,7 @@
                                             <actions>
                                                 <action id="-10" name="Set value" sid="986003102135261" type="Enemies">
                                                     <param id="0" name="Instance variable">AttackDirection</param>
-                                                    <param id="1" name="Value">0</param>
+                                                    <param id="1" name="Value">-1</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -7920,75 +7863,24 @@
                                             <param id="0" name="Instance variable">CanMove</param>
                                         </condition>
                                     </conditions>
-                                    <actions />
-                                    <sub-events>
-                                        <event-block sid="725238204961605">
-                                            <conditions>
-                                                <condition id="-7" name="Compare instance variable" sid="943291062430864" type="Var_Level">
-                                                    <param id="0" name="Instance variable">Level_Game</param>
-                                                    <param id="1" name="Comparison">0</param>
-                                                    <param id="2" name="Value">1</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions />
-                                            <sub-events>
-                                                <event-block sid="697436275170771">
-                                                    <conditions>
-                                                        <condition id="-7" name="Compare instance variable" sid="982822320847191" type="Enemies">
-                                                            <param id="0" name="Instance variable">AttackDirection</param>
-                                                            <param id="1" name="Comparison">0</param>
-                                                            <param id="2" name="Value">0</param>
-                                                        </condition>
-                                                    </conditions>
-                                                    <actions>
-                                                        <action id="0" name="Create family object" sid="141388751861636" type="CreateObjectByVal">
-                                                            <param id="0" name="Family object">EnemyProjectiles</param>
-                                                            <param id="1" name="Variable ID">0</param>
-                                                            <param id="2" name="Comparison">0</param>
-                                                            <param id="3" name="Value">Enemies.AttackProjectile</param>
-                                                            <param id="4" name="Layer">&quot;Player&quot;</param>
-                                                            <param id="5" name="X">Enemies.ImagePointX(1)</param>
-                                                            <param id="6" name="Y">Enemies.ImagePointY(1)</param>
-                                                            <param id="7" name="Tag">&quot;&quot;</param>
-                                                        </action>
-                                                        <action behavior="Bullet" id="0" name="Set speed" sid="808939704099320" type="EnemyProjectiles">
-                                                            <param id="0" name="Speed">-Enemies.AttackSpeed</param>
-                                                        </action>
-                                                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="464495140891532" type="EnemyProjectiles">
-                                                            <param id="0" name="Angle">180+random(-Enemies.AttackRandomness, Enemies.AttackRandomness)</param>
-                                                        </action>
-                                                    </actions>
-                                                </event-block>
-                                                <event-block sid="838953497772949">
-                                                    <conditions>
-                                                        <condition id="-7" name="Compare instance variable" sid="518586050754241" type="Enemies">
-                                                            <param id="0" name="Instance variable">AttackDirection</param>
-                                                            <param id="1" name="Comparison">0</param>
-                                                            <param id="2" name="Value">1</param>
-                                                        </condition>
-                                                    </conditions>
-                                                    <actions>
-                                                        <action id="0" name="Create family object" sid="432466777870756" type="CreateObjectByVal">
-                                                            <param id="0" name="Family object">EnemyProjectiles</param>
-                                                            <param id="1" name="Variable ID">0</param>
-                                                            <param id="2" name="Comparison">0</param>
-                                                            <param id="3" name="Value">Enemies.AttackProjectile</param>
-                                                            <param id="4" name="Layer">&quot;Player&quot;</param>
-                                                            <param id="5" name="X">Enemies.ImagePointX(1)</param>
-                                                            <param id="6" name="Y">Enemies.ImagePointY(1)</param>
-                                                            <param id="7" name="Tag">&quot;&quot;</param>
-                                                        </action>
-                                                        <action behavior="Bullet" id="0" name="Set speed" sid="276746858676317" type="EnemyProjectiles">
-                                                            <param id="0" name="Speed">Enemies.AttackSpeed</param>
-                                                        </action>
-                                                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="445971758899488" type="EnemyProjectiles">
-                                                            <param id="0" name="Angle">random(-Enemies.AttackRandomness, Enemies.AttackRandomness)</param>
-                                                        </action>
-                                                    </actions>
-                                                </event-block>
-                                            </sub-events>
-                                        </event-block>
-                                    </sub-events>
+                                    <actions>
+                                        <action id="0" name="Create family object" sid="141388751861636" type="CreateObjectByVal">
+                                            <param id="0" name="Family object">EnemyProjectiles</param>
+                                            <param id="1" name="Variable ID">0</param>
+                                            <param id="2" name="Comparison">0</param>
+                                            <param id="3" name="Value">Enemies.AttackProjectile</param>
+                                            <param id="4" name="Layer">&quot;Player&quot;</param>
+                                            <param id="5" name="X">Enemies.ImagePointX(1)</param>
+                                            <param id="6" name="Y">Enemies.ImagePointY(1)</param>
+                                            <param id="7" name="Tag">&quot;&quot;</param>
+                                        </action>
+                                        <action behavior="Bullet" id="0" name="Set speed" sid="808939704099320" type="EnemyProjectiles">
+                                            <param id="0" name="Speed">Enemies.AttackSpeed * Enemies.AttackDirection</param>
+                                        </action>
+                                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="464495140891532" type="EnemyProjectiles">
+                                            <param id="0" name="Angle">(Enemies.AttackDirection = 1 ? 0 : 180)+random(-Enemies.AttackRandomness, Enemies.AttackRandomness)</param>
+                                        </action>
+                                    </actions>
                                 </event-block>
                             </sub-events>
                         </event-block>
@@ -8031,9 +7923,9 @@
                                                 </condition>
                                             </conditions>
                                             <actions>
-                                                <action id="-10" name="Set value" sid="109560276256053" type="Enemies">
+                                                <action id="-10" name="Set value" sid="821751002787824" type="Enemies">
                                                     <param id="0" name="Instance variable">AttackDirection</param>
-                                                    <param id="1" name="Value">0</param>
+                                                    <param id="1" name="Value">-1</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -8071,73 +7963,38 @@
                                             <param id="0" name="Instance variable">CanMove</param>
                                         </condition>
                                     </conditions>
-                                    <actions />
+                                    <actions>
+                                        <action id="0" name="Create family object" sid="623065700660105" type="CreateObjectByVal">
+                                            <param id="0" name="Family object">EnemyProjectiles</param>
+                                            <param id="1" name="Variable ID">0</param>
+                                            <param id="2" name="Comparison">0</param>
+                                            <param id="3" name="Value">Enemies.AttackProjectile</param>
+                                            <param id="4" name="Layer">&quot;Player&quot;</param>
+                                            <param id="5" name="X">Enemies.ImagePointX(1)</param>
+                                            <param id="6" name="Y">Enemies.ImagePointY(1)</param>
+                                            <param id="7" name="Tag">&quot;&quot;</param>
+                                        </action>
+                                        <action behavior="Bullet" id="0" name="Set speed" sid="285510590275334" type="EnemyProjectiles">
+                                            <param id="0" name="Speed">Enemies.AttackSpeed</param>
+                                        </action>
+                                        <action id="-8" name="Set angle" sid="394632448899378" type="EnemyProjectiles">
+                                            <param id="0" name="Angle">270</param>
+                                        </action>
+                                    </actions>
                                     <sub-events>
-                                        <event-block sid="567571180704499">
+                                        <event-block sid="264742875796398">
                                             <conditions>
-                                                <condition id="-7" name="Compare instance variable" sid="990565227214278" type="Var_Level">
-                                                    <param id="0" name="Instance variable">Level_Game</param>
+                                                <condition id="-7" name="Compare instance variable" sid="401862245131969" type="Enemies">
+                                                    <param id="0" name="Instance variable">AttackDirection</param>
                                                     <param id="1" name="Comparison">0</param>
                                                     <param id="2" name="Value">1</param>
                                                 </condition>
                                             </conditions>
-                                            <actions />
-                                            <sub-events>
-                                                <event-block sid="695209014803909">
-                                                    <conditions>
-                                                        <condition id="-7" name="Compare instance variable" sid="431372986886537" type="Enemies">
-                                                            <param id="0" name="Instance variable">AttackDirection</param>
-                                                            <param id="1" name="Comparison">0</param>
-                                                            <param id="2" name="Value">0</param>
-                                                        </condition>
-                                                    </conditions>
-                                                    <actions>
-                                                        <action id="0" name="Create family object" sid="623065700660105" type="CreateObjectByVal">
-                                                            <param id="0" name="Family object">EnemyProjectiles</param>
-                                                            <param id="1" name="Variable ID">0</param>
-                                                            <param id="2" name="Comparison">0</param>
-                                                            <param id="3" name="Value">Enemies.AttackProjectile</param>
-                                                            <param id="4" name="Layer">&quot;Player&quot;</param>
-                                                            <param id="5" name="X">Enemies.ImagePointX(1)</param>
-                                                            <param id="6" name="Y">Enemies.ImagePointY(1)</param>
-                                                            <param id="7" name="Tag">&quot;&quot;</param>
-                                                        </action>
-                                                        <action behavior="Bullet" id="0" name="Set speed" sid="285510590275334" type="EnemyProjectiles">
-                                                            <param id="0" name="Speed">Enemies.AttackSpeed</param>
-                                                        </action>
-                                                        <action id="-8" name="Set angle" sid="394632448899378" type="EnemyProjectiles">
-                                                            <param id="0" name="Angle">270</param>
-                                                        </action>
-                                                    </actions>
-                                                </event-block>
-                                                <event-block sid="264742875796398">
-                                                    <conditions>
-                                                        <condition id="-7" name="Compare instance variable" sid="401862245131969" type="Enemies">
-                                                            <param id="0" name="Instance variable">AttackDirection</param>
-                                                            <param id="1" name="Comparison">0</param>
-                                                            <param id="2" name="Value">1</param>
-                                                        </condition>
-                                                    </conditions>
-                                                    <actions>
-                                                        <action id="0" name="Create family object" sid="802236040363478" type="CreateObjectByVal">
-                                                            <param id="0" name="Family object">EnemyProjectiles</param>
-                                                            <param id="1" name="Variable ID">0</param>
-                                                            <param id="2" name="Comparison">0</param>
-                                                            <param id="3" name="Value">Enemies.AttackProjectile</param>
-                                                            <param id="4" name="Layer">&quot;Player&quot;</param>
-                                                            <param id="5" name="X">Enemies.ImagePointX(1)</param>
-                                                            <param id="6" name="Y">Enemies.ImagePointY(1)</param>
-                                                            <param id="7" name="Tag">&quot;&quot;</param>
-                                                        </action>
-                                                        <action behavior="Bullet" id="0" name="Set speed" sid="604071229062457" type="EnemyProjectiles">
-                                                            <param id="0" name="Speed">Enemies.AttackSpeed</param>
-                                                        </action>
-                                                        <action id="-8" name="Set angle" sid="473652850298220" type="EnemyProjectiles">
-                                                            <param id="0" name="Angle">90</param>
-                                                        </action>
-                                                    </actions>
-                                                </event-block>
-                                            </sub-events>
+                                            <actions>
+                                                <action id="-8" name="Set angle" sid="473652850298220" type="EnemyProjectiles">
+                                                    <param id="0" name="Angle">90</param>
+                                                </action>
+                                            </actions>
                                         </event-block>
                                     </sub-events>
                                 </event-block>
@@ -8210,7 +8067,7 @@
                                                         </action>
                                                         <action id="-10" name="Set value" sid="783907725545609" type="Enemies">
                                                             <param id="0" name="Instance variable">AttackDirection</param>
-                                                            <param id="1" name="Value">0</param>
+                                                            <param id="1" name="Value">-1</param>
                                                         </action>
                                                     </actions>
                                                 </event-block>
@@ -8260,63 +8117,24 @@
                                                     <param id="0" name="Instance variable">CanMove</param>
                                                 </condition>
                                             </conditions>
-                                            <actions />
-                                            <sub-events>
-                                                <event-block sid="606807642953206">
-                                                    <conditions>
-                                                        <condition id="-7" name="Compare instance variable" sid="242779554807923" type="Enemies">
-                                                            <param id="0" name="Instance variable">AttackDirection</param>
-                                                            <param id="1" name="Comparison">0</param>
-                                                            <param id="2" name="Value">0</param>
-                                                        </condition>
-                                                    </conditions>
-                                                    <actions>
-                                                        <action id="0" name="Create family object" sid="314987627810663" type="CreateObjectByVal">
-                                                            <param id="0" name="Family object">EnemyProjectiles</param>
-                                                            <param id="1" name="Variable ID">0</param>
-                                                            <param id="2" name="Comparison">0</param>
-                                                            <param id="3" name="Value">Enemies.AttackProjectile</param>
-                                                            <param id="4" name="Layer">&quot;Player&quot;</param>
-                                                            <param id="5" name="X">Enemies.ImagePointX(1)</param>
-                                                            <param id="6" name="Y">Enemies.ImagePointY(1)</param>
-                                                            <param id="7" name="Tag">&quot;&quot;</param>
-                                                        </action>
-                                                        <action behavior="Bullet" id="0" name="Set speed" sid="705675566689620" type="EnemyProjectiles">
-                                                            <param id="0" name="Speed">-Enemies.AttackSpeed</param>
-                                                        </action>
-                                                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="650712684171435" type="EnemyProjectiles">
-                                                            <param id="0" name="Angle">180+random(-Enemies.AttackRandomness, Enemies.AttackRandomness)</param>
-                                                        </action>
-                                                    </actions>
-                                                </event-block>
-                                                <event-block sid="321168833029399">
-                                                    <conditions>
-                                                        <condition id="-7" name="Compare instance variable" sid="351820771314025" type="Enemies">
-                                                            <param id="0" name="Instance variable">AttackDirection</param>
-                                                            <param id="1" name="Comparison">0</param>
-                                                            <param id="2" name="Value">1</param>
-                                                        </condition>
-                                                    </conditions>
-                                                    <actions>
-                                                        <action id="0" name="Create family object" sid="483893533498013" type="CreateObjectByVal">
-                                                            <param id="0" name="Family object">EnemyProjectiles</param>
-                                                            <param id="1" name="Variable ID">0</param>
-                                                            <param id="2" name="Comparison">0</param>
-                                                            <param id="3" name="Value">Enemies.AttackProjectile</param>
-                                                            <param id="4" name="Layer">&quot;Player&quot;</param>
-                                                            <param id="5" name="X">Enemies.ImagePointX(1)</param>
-                                                            <param id="6" name="Y">Enemies.ImagePointY(1)</param>
-                                                            <param id="7" name="Tag">&quot;&quot;</param>
-                                                        </action>
-                                                        <action behavior="Bullet" id="0" name="Set speed" sid="432438792220198" type="EnemyProjectiles">
-                                                            <param id="0" name="Speed">Enemies.AttackSpeed</param>
-                                                        </action>
-                                                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="846916873580787" type="EnemyProjectiles">
-                                                            <param id="0" name="Angle">random(-Enemies.AttackRandomness, Enemies.AttackRandomness)</param>
-                                                        </action>
-                                                    </actions>
-                                                </event-block>
-                                            </sub-events>
+                                            <actions>
+                                                <action id="0" name="Create family object" sid="314987627810663" type="CreateObjectByVal">
+                                                    <param id="0" name="Family object">EnemyProjectiles</param>
+                                                    <param id="1" name="Variable ID">0</param>
+                                                    <param id="2" name="Comparison">0</param>
+                                                    <param id="3" name="Value">Enemies.AttackProjectile</param>
+                                                    <param id="4" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="5" name="X">Enemies.ImagePointX(1)</param>
+                                                    <param id="6" name="Y">Enemies.ImagePointY(1)</param>
+                                                    <param id="7" name="Tag">&quot;&quot;</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="189219281159405" type="EnemyProjectiles">
+                                                    <param id="0" name="Speed">Enemies.AttackSpeed * Enemies.AttackDirection</param>
+                                                </action>
+                                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="827280321471156" type="EnemyProjectiles">
+                                                    <param id="0" name="Angle">(Enemies.AttackDirection = 1 ? 0 : 180)+random(-Enemies.AttackRandomness, Enemies.AttackRandomness)</param>
+                                                </action>
+                                            </actions>
                                         </event-block>
                                     </sub-events>
                                 </event-block>
@@ -8389,7 +8207,7 @@
                                                         </action>
                                                         <action id="-10" name="Set value" sid="663727779263252" type="Enemies">
                                                             <param id="0" name="Instance variable">AttackDirection</param>
-                                                            <param id="1" name="Value">0</param>
+                                                            <param id="1" name="Value">-1</param>
                                                         </action>
                                                     </actions>
                                                 </event-block>
@@ -8439,35 +8257,25 @@
                                                     <param id="0" name="Instance variable">CanMove</param>
                                                 </condition>
                                             </conditions>
-                                            <actions />
+                                            <actions>
+                                                <action id="0" name="Create family object" sid="326837429418142" type="CreateObjectByVal">
+                                                    <param id="0" name="Family object">EnemyProjectiles</param>
+                                                    <param id="1" name="Variable ID">0</param>
+                                                    <param id="2" name="Comparison">0</param>
+                                                    <param id="3" name="Value">Enemies.AttackProjectile</param>
+                                                    <param id="4" name="Layer">&quot;Player&quot;</param>
+                                                    <param id="5" name="X">Enemies.ImagePointX(1)</param>
+                                                    <param id="6" name="Y">Enemies.ImagePointY(1)</param>
+                                                    <param id="7" name="Tag">&quot;&quot;</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="748690377856715" type="EnemyProjectiles">
+                                                    <param id="0" name="Speed">Enemies.AttackSpeed</param>
+                                                </action>
+                                                <action id="-8" name="Set angle" sid="998993373796933" type="EnemyProjectiles">
+                                                    <param id="0" name="Angle">270</param>
+                                                </action>
+                                            </actions>
                                             <sub-events>
-                                                <event-block sid="356749481435191">
-                                                    <conditions>
-                                                        <condition id="-7" name="Compare instance variable" sid="214716012033471" type="Enemies">
-                                                            <param id="0" name="Instance variable">AttackDirection</param>
-                                                            <param id="1" name="Comparison">0</param>
-                                                            <param id="2" name="Value">0</param>
-                                                        </condition>
-                                                    </conditions>
-                                                    <actions>
-                                                        <action id="0" name="Create family object" sid="326837429418142" type="CreateObjectByVal">
-                                                            <param id="0" name="Family object">EnemyProjectiles</param>
-                                                            <param id="1" name="Variable ID">0</param>
-                                                            <param id="2" name="Comparison">0</param>
-                                                            <param id="3" name="Value">Enemies.AttackProjectile</param>
-                                                            <param id="4" name="Layer">&quot;Player&quot;</param>
-                                                            <param id="5" name="X">Enemies.ImagePointX(1)</param>
-                                                            <param id="6" name="Y">Enemies.ImagePointY(1)</param>
-                                                            <param id="7" name="Tag">&quot;&quot;</param>
-                                                        </action>
-                                                        <action behavior="Bullet" id="0" name="Set speed" sid="748690377856715" type="EnemyProjectiles">
-                                                            <param id="0" name="Speed">Enemies.AttackSpeed</param>
-                                                        </action>
-                                                        <action id="-8" name="Set angle" sid="998993373796933" type="EnemyProjectiles">
-                                                            <param id="0" name="Angle">270</param>
-                                                        </action>
-                                                    </actions>
-                                                </event-block>
                                                 <event-block sid="224470222709403">
                                                     <conditions>
                                                         <condition id="-7" name="Compare instance variable" sid="717130894236090" type="Enemies">
@@ -8477,19 +8285,6 @@
                                                         </condition>
                                                     </conditions>
                                                     <actions>
-                                                        <action id="0" name="Create family object" sid="524666438729920" type="CreateObjectByVal">
-                                                            <param id="0" name="Family object">EnemyProjectiles</param>
-                                                            <param id="1" name="Variable ID">0</param>
-                                                            <param id="2" name="Comparison">0</param>
-                                                            <param id="3" name="Value">Enemies.AttackProjectile</param>
-                                                            <param id="4" name="Layer">&quot;Player&quot;</param>
-                                                            <param id="5" name="X">Enemies.ImagePointX(1)</param>
-                                                            <param id="6" name="Y">Enemies.ImagePointY(1)</param>
-                                                            <param id="7" name="Tag">&quot;&quot;</param>
-                                                        </action>
-                                                        <action behavior="Bullet" id="0" name="Set speed" sid="314445577801358" type="EnemyProjectiles">
-                                                            <param id="0" name="Speed">Enemies.AttackSpeed</param>
-                                                        </action>
                                                         <action id="-8" name="Set angle" sid="935954942681577" type="EnemyProjectiles">
                                                             <param id="0" name="Angle">90</param>
                                                         </action>
@@ -8501,7 +8296,7 @@
                                 </event-block>
                             </sub-events>
                         </event-block>
-                        <comment>deal damage</comment>
+                        <comment>====deal damage</comment>
                         <event-block sid="671042755396991">
                             <conditions>
                                 <condition id="1" name="Is overlapping another object" sid="860756615410127" type="PlayerSkins">
@@ -8890,6 +8685,19 @@
                                 </action>
                             </actions>
                         </event-block>
+                        <event-block sid="775720421937116">
+                            <conditions>
+                                <condition id="-8" name="Is boolean instance variable set" sid="496606617153779" type="Var_Level">
+                                    <param id="0" name="Instance variable">Pause</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="132430726962452" type="System" />
+                            </conditions>
+                            <actions>
+                                <action behavior="Spline" id="0" name="Set enabled" sid="762457455804453" type="Enemy1_6EPPogminz">
+                                    <param id="0" name="State">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
                         <event-block sid="935048022631004">
                             <conditions>
                                 <condition id="-7" name="Compare instance variable" sid="890409567101464" type="Var_Player">
@@ -8901,19 +8709,6 @@
                             </conditions>
                             <actions>
                                 <action behavior="Spline" id="0" name="Set enabled" sid="466652917782964" type="Enemy1_6EPPogminz">
-                                    <param id="0" name="State">0</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="775720421937116">
-                            <conditions>
-                                <condition id="-8" name="Is boolean instance variable set" sid="496606617153779" type="Var_Level">
-                                    <param id="0" name="Instance variable">Pause</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="132430726962452" type="System" />
-                            </conditions>
-                            <actions>
-                                <action behavior="Spline" id="0" name="Set enabled" sid="762457455804453" type="Enemy1_6EPPogminz">
                                     <param id="0" name="State">0</param>
                                 </action>
                             </actions>
@@ -12690,6 +12485,10 @@
                                             <param id="0" name="Variable">timer</param>
                                             <param id="1" name="Value">0</param>
                                         </action>
+                                        <action id="-27" name="Set effect enabled" sid="962862330773368" type="Object1_6EP1BossConveyor">
+                                            <param id="0" name="Mode">1</param>
+                                            <param id="1" name="Effect">&quot;Scroll&quot;</param>
+                                        </action>
                                     </actions>
                                     <sub-events>
                                         <event-block sid="632794505279428">
@@ -12709,17 +12508,6 @@
                                                     <param id="0" name="Seconds">0.75</param>
                                                 </action>
                                                 <action id="-27" name="Set effect enabled" sid="607219628887372" type="Object1_6EP1BossConveyor">
-                                                    <param id="0" name="Mode">1</param>
-                                                    <param id="1" name="Effect">&quot;Scroll&quot;</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                        <event-block sid="648879954742904">
-                                            <conditions>
-                                                <condition id="-22" name="Else" sid="745070656445231" type="System" />
-                                            </conditions>
-                                            <actions>
-                                                <action id="-27" name="Set effect enabled" sid="962862330773368" type="Object1_6EP1BossConveyor">
                                                     <param id="0" name="Mode">1</param>
                                                     <param id="1" name="Effect">&quot;Scroll&quot;</param>
                                                 </action>
@@ -14893,10 +14681,10 @@
                 <event-block sid="371103254725090">
                     <conditions>
                         <condition id="-2" name="On start of layout" sid="885995488177100" type="System" />
-                        <condition id="-14" inverted="1" name="Compare variable" sid="715205674112192" type="System">
-                            <param id="0" name="Variable">PLATFORM</param>
+                        <condition id="-14" inverted="1" name="Compare variable" sid="881855915905479" type="System">
+                            <param id="0" name="Variable">DESKTOP</param>
                             <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">&quot;NwJs&quot;</param>
+                            <param id="2" name="Value">1</param>
                         </condition>
                         <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="130471217055513" type="JSON_AudioPreload">
                             <param id="0" name="Instance variable">LevelPreloaded</param>
@@ -14923,6 +14711,346 @@
                         </action>
                     </actions>
                 </event-block>
+                <comment></comment>
+                <event-block sid="931308079530830">
+                    <conditions>
+                        <condition id="0" name="On function" sid="567125599339747" type="Function">
+                            <param id="0" name="Name">&quot;Discord_RichPresence_Update&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <variable constant="0" name="state" sid="693677851711335" static="0" type="text">???</variable>
+                        <variable constant="0" name="detail" sid="861329194568501" static="0" type="text">???</variable>
+                        <variable constant="0" name="largeImage" sid="466412032964083" static="0" type="text"></variable>
+                        <variable constant="0" name="largeImageText" sid="923131306730770" static="0" type="text"></variable>
+                        <variable constant="0" name="smallImage" sid="411857108504832" static="0" type="text"></variable>
+                        <variable constant="0" name="smallImageText" sid="878456501056622" static="0" type="text"></variable>
+                        <variable constant="0" name="startTimestamp" sid="166476343395036" static="0" type="text"></variable>
+                        <variable constant="0" name="endTimestamp" sid="351166733123267" static="0" type="text"></variable>
+                        <comment></comment>
+                        <event-block sid="175756950425240">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="539945972934395" type="Var_Game">
+                                    <param id="0" name="Instance variable">Gamemode</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;Singleplayer&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="839335153574781" type="System">
+                                    <param id="0" name="Variable">state</param>
+                                    <param id="1" name="Value">&quot;Singleplayer&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="379641339760921">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="405028278967679" type="Var_Game">
+                                    <param id="0" name="Instance variable">Gamemode</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;LevelSelect&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="616656894744352" type="System">
+                                    <param id="0" name="Variable">state</param>
+                                    <param id="1" name="Value">&quot;Level select&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="990220283411429">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="333135697754211" type="Var_Game">
+                                    <param id="0" name="Instance variable">Gamemode</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;RecordAttack&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="709914218906704" type="System">
+                                    <param id="0" name="Variable">state</param>
+                                    <param id="1" name="Value">&quot;Record attack&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="604493834434520">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="318194010873131" type="Var_Game">
+                                    <param id="0" name="Instance variable">Gamemode</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;Marathon&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="302915266945142" type="System">
+                                    <param id="0" name="Variable">state</param>
+                                    <param id="1" name="Value">&quot;Marathon&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment></comment>
+                        <event-block any="1" sid="390788915985819">
+                            <conditions>
+                                <condition id="-8" inverted="1" name="Compare two values" sid="386965221636119" type="System">
+                                    <param id="0" name="First value">find(LayoutName,&quot;1_&quot;)</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">-1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="692574763143352" type="System">
+                                    <param id="0" name="Variable">state</param>
+                                    <param id="1" name="Value">state&amp;&quot; (SRB1)&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block any="1" sid="916041301234803">
+                            <conditions>
+                                <condition id="-8" inverted="1" name="Compare two values" sid="901146450861506" type="System">
+                                    <param id="0" name="First value">find(LayoutName,&quot;1S_&quot;)</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">-1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="848489292532272" type="System">
+                                    <param id="0" name="Variable">state</param>
+                                    <param id="1" name="Value">state&amp;&quot; (SRB1 Super Levels)&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block any="1" sid="928350605341193">
+                            <conditions>
+                                <condition id="-8" inverted="1" name="Compare two values" sid="281644071500250" type="System">
+                                    <param id="0" name="First value">find(LayoutName,&quot;1H_&quot;)</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">-1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="785427214965267" type="System">
+                                    <param id="0" name="Variable">state</param>
+                                    <param id="1" name="Value">state&amp;&quot; (SRB1 Hyper Levels)&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="239428377540515">
+                            <conditions>
+                                <condition id="-8" inverted="1" name="Compare two values" sid="377609025530728" type="System">
+                                    <param id="0" name="First value">find(LayoutName,&quot;2_&quot;)</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">-1</param>
+                                </condition>
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="199120095741593" type="Var_Game">
+                                    <param id="0" name="Instance variable">Gamemode2</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;Christmas&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="274217334214442" type="System">
+                                    <param id="0" name="Variable">state</param>
+                                    <param id="1" name="Value">state&amp;&quot; (SRB2)&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="450454171724362">
+                            <conditions>
+                                <condition id="-8" inverted="1" name="Compare two values" sid="174120562756597" type="System">
+                                    <param id="0" name="First value">find(LayoutName,&quot;2_&quot;)</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">-1</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="613233724000679" type="Var_Game">
+                                    <param id="0" name="Instance variable">Gamemode2</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;Christmas&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="182492986132312" type="System">
+                                    <param id="0" name="Variable">state</param>
+                                    <param id="1" name="Value">state&amp;&quot; (SRB2 Christmas)&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="562634540796411">
+                            <conditions>
+                                <condition id="-8" inverted="1" name="Compare two values" sid="434177470637319" type="System">
+                                    <param id="0" name="First value">find(LayoutName,&quot;E15_&quot;)</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">-1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="388763693121685" type="System">
+                                    <param id="0" name="Variable">state</param>
+                                    <param id="1" name="Value">state&amp;&quot; (SRB1.5)&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="436527981063323">
+                            <conditions>
+                                <condition id="-8" inverted="1" name="Compare two values" sid="260282117501849" type="System">
+                                    <param id="0" name="First value">find(LayoutName,&quot;E1Sp_&quot;)</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">-1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="555802701000225" type="System">
+                                    <param id="0" name="Variable">state</param>
+                                    <param id="1" name="Value">state&amp;&quot; (SRB1 Special)&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment></comment>
+                        <event-block sid="581096649502750">
+                            <conditions />
+                            <actions>
+                                <action id="-9" name="Set value" sid="604040096918567" type="System">
+                                    <param id="0" name="Variable">detail</param>
+                                    <param id="1" name="Value">JSON_LevelProperties.Value(0, LayoutName, &quot;Name&quot;)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="882956739785498">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="935680398422306" type="Var_Game">
+                                    <param id="0" name="Instance variable">Gamemode2</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;Christmas&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="819430166249033" type="System">
+                                    <param id="0" name="Variable">detail</param>
+                                    <param id="1" name="Value">JSON_LevelProperties.Value(0, LayoutName, &quot;ChristmasName&quot;)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment></comment>
+                        <event-block sid="551872760454184">
+                            <conditions />
+                            <actions>
+                                <action id="-9" name="Set value" sid="350259478730475" type="System">
+                                    <param id="0" name="Variable">largeImage</param>
+                                    <param id="1" name="Value">JSON_LevelProperties.Value(0, LayoutName, &quot;DiscordIcon&quot;)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment></comment>
+                        <event-block any="1" sid="501380241508854">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="910596053252675" type="Var_Game">
+                                    <param id="0" name="Instance variable">Gamemode</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;Singleplayer&quot;</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="300086544608664" type="Var_Game">
+                                    <param id="0" name="Instance variable">Gamemode</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;Marathon&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="122641647353801" type="System">
+                                    <param id="0" name="Variable">largeImageText</param>
+                                    <param id="1" name="Value">&quot;Score: &quot;&amp;Var_Player.TotalScore&amp;&quot; | &quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="736826535095892">
+                            <conditions />
+                            <actions>
+                                <action id="-9" name="Set value" sid="800817069085310" type="System">
+                                    <param id="0" name="Variable">largeImageText</param>
+                                    <param id="1" name="Value">largeImageText&amp;&quot;Deaths: &quot;&amp;Var_Player.TotalDeaths</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="235188172241537">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="808855222931661" type="Var_Game">
+                                    <param id="0" name="Instance variable">Gamemode</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;Singleplayer&quot;</param>
+                                </condition>
+                                <condition id="-8" inverted="1" name="Compare two values" sid="424894689452216" type="System">
+                                    <param id="0" name="First value">find(LayoutName,&quot;2_&quot;)</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">-1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="804229819643533" type="System">
+                                    <param id="0" name="Variable">largeImageText</param>
+                                    <param id="1" name="Value">largeImageText&amp;&quot; | Emeralds: &quot;&amp;Var_Game.Emeralds</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment></comment>
+                        <event-block sid="244245890647977">
+                            <conditions>
+                                <condition id="-8" name="Is boolean instance variable set" sid="148124113176267" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="824810368542251" type="System">
+                                    <param id="0" name="Variable">smallImage</param>
+                                    <param id="1" name="Value">JSON_SkinsProperties.Value(0, PlayerSkins.Name, &quot;DiscordIcon&quot;)</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="844239550274783" type="System">
+                                    <param id="0" name="Variable">smallImageText</param>
+                                    <param id="1" name="Value">JSON_SkinsProperties.Value(0, PlayerSkins.Name, &quot;DiscordName&quot;)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment></comment>
+                        <event-block sid="174616563548342">
+                            <conditions>
+                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="465347016448344" type="Var_Level">
+                                    <param id="0" name="Instance variable">Pause</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Call function" sid="227197669603064" type="Function">
+                                    <param id="0" name="Name">&quot;Time_CurrentTimestamp&quot;</param>
+                                    <param id="1" name="Parameter {n}"></param>
+                                </action>
+                                <action id="-9" name="Set value" sid="437713419451214" type="System">
+                                    <param id="0" name="Variable">startTimestamp</param>
+                                    <param id="1" name="Value">Function.ReturnValue-int(Var_Level.TimerLevel)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="227688045966425">
+                            <conditions>
+                                <condition id="-8" name="Is boolean instance variable set" sid="350749435715239" type="Var_Level">
+                                    <param id="0" name="Instance variable">Pause</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="635028266449220" type="System">
+                                    <param id="0" name="Variable">startTimestamp</param>
+                                    <param id="1" name="Value">Var_Misc.Discord_TimestampBoot</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment></comment>
+                        <event-block sid="683897195401683">
+                            <conditions />
+                            <actions>
+                                <action id="0" name="Call function" sid="761870752979090" type="Function">
+                                    <param id="0" name="Name">&quot;Discord_RichPresence&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;&quot;{###}state{###}detail{###}largeImage{###}largeImageText{###}smallImage{###}smallImageText{###}startTimestamp{###}endTimestamp{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
                 <comment>give player control and play music</comment>
                 <event-block sid="914227738928136">
                     <conditions>
@@ -14946,26 +15074,11 @@
                             <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
                             <param id="1" name="Parameter {n}">Var_Level.Level_Music{###}&quot;music&quot;{###}1</param>
                         </action>
+                        <action id="0" name="Call function" sid="237595508538791" type="Function">
+                            <param id="0" name="Name">&quot;Discord_RichPresence_Update&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
+                        </action>
                     </actions>
-                    <sub-events>
-                        <event-block sid="722136278857309">
-                            <conditions />
-                            <actions>
-                                <action id="0" name="Call function" sid="227197669603064" type="Function">
-                                    <param id="0" name="Name">&quot;Time_CurrentTimestamp&quot;</param>
-                                    <param id="1" name="Parameter {n}"></param>
-                                </action>
-                                <action id="-10" name="Set value" sid="657038339027092" type="Var_Misc">
-                                    <param id="0" name="Instance variable">Discord_TimestampCurrent</param>
-                                    <param id="1" name="Value">Function.ReturnValue</param>
-                                </action>
-                                <action id="0" name="Call function" sid="495206496879136" type="Function">
-                                    <param id="0" name="Name">&quot;Discord_RichPresence&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;&quot;{###}Var_Misc.Discord_CurrentState&amp;&quot; (&quot;&amp;Var_Misc.Discord_CurrentDetail&amp;&quot;)&quot;{###}replace(Var_Level.Level_Name,&quot;ZONE&quot;,&quot;&quot;)&amp;&quot; &quot;&amp; ( Var_Level.Level_Act = 0 ? &quot;&quot; : Var_Level.Level_Act ){###}Var_Misc.Discord_CurrentLargeKey{###}( Var_Game.Gamemode = &quot;LevelSelect&quot; ? &quot;&quot; : &quot;Score: &quot;&amp;Var_Player.TotalScore&amp;&quot; | &quot; ) &amp;&quot;Deaths: &quot;&amp;Var_Player.TotalDeaths&amp; ( Var_Misc.Discord_CurrentDetail = &quot;SRB2&quot; &amp; Var_Game.Gamemode = &quot;Singleplayer&quot; ? &quot; | Emeralds: &quot;&amp;Var_Game.Emeralds : &quot;&quot; ){###}Var_Misc.Discord_CurrentSmallKey{###}Var_Misc.Discord_CurrentSmallText{###}Var_Misc.Discord_TimestampCurrent-Var_Level.TimerLevel{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
                 </event-block>
                 <comment>finish signpost</comment>
                 <comment>bouncing for points</comment>
@@ -15030,6 +15143,10 @@
                         <action id="-10" name="Set value" sid="643448057062044" type="Var_Player">
                             <param id="0" name="Instance variable">State</param>
                             <param id="1" name="Value">&quot;win&quot;</param>
+                        </action>
+                        <action id="4" name="Set animation" sid="763970718729319" type="PlayerSkins">
+                            <param id="0" name="Animation">&quot;Win&quot;</param>
+                            <param id="1" name="From">1</param>
                         </action>
                         <action id="-13" name="Set boolean" sid="985267221424050" type="Var_Player">
                             <param id="0" name="Instance variable">CanMove</param>
@@ -15370,6 +15487,7 @@
                                 </event-block>
                             </sub-events>
                         </event-block>
+                        <comment>your winner</comment>
                         <event-block sid="386018422512325">
                             <conditions>
                                 <condition id="-8" name="Is boolean instance variable set" sid="530446476556834" type="Common_FinishSign">
@@ -15380,6 +15498,10 @@
                                 <action id="-10" name="Set value" sid="253845303394952" type="Var_Player">
                                     <param id="0" name="Instance variable">State</param>
                                     <param id="1" name="Value">&quot;win&quot;</param>
+                                </action>
+                                <action id="4" name="Set animation" sid="782369300859440" type="PlayerSkins">
+                                    <param id="0" name="Animation">&quot;Win&quot;</param>
+                                    <param id="1" name="From">1</param>
                                 </action>
                                 <action behavior="Platform" id="11" name="Set enabled" sid="270710625868165" type="Engine_Player">
                                     <param id="0" name="State">1</param>
@@ -16748,17 +16870,9 @@
                                     <param id="0" name="Instance variable">TimerLevelActive</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
-                                <action id="0" name="Call function" sid="177881957842688" type="Function">
-                                    <param id="0" name="Name">&quot;Time_CurrentTimestamp&quot;</param>
+                                <action id="0" name="Call function" sid="344964013070825" type="Function">
+                                    <param id="0" name="Name">&quot;Discord_RichPresence_Update&quot;</param>
                                     <param id="1" name="Parameter {n}"></param>
-                                </action>
-                                <action id="-10" name="Set value" sid="999179660289417" type="Var_Misc">
-                                    <param id="0" name="Instance variable">Discord_TimestampCurrent</param>
-                                    <param id="1" name="Value">Function.ReturnValue</param>
-                                </action>
-                                <action id="0" name="Call function" sid="598448169820195" type="Function">
-                                    <param id="0" name="Name">&quot;Discord_RichPresence&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;&quot;{###}Var_Misc.Discord_CurrentState&amp;&quot; (&quot;&amp;Var_Misc.Discord_CurrentDetail&amp;&quot;)&quot;{###}replace(Var_Level.Level_Name,&quot;ZONE&quot;,&quot;&quot;)&amp;&quot; &quot;&amp; ( Var_Level.Level_Act = 0 ? &quot;&quot; : Var_Level.Level_Act ){###}Var_Misc.Discord_CurrentLargeKey{###}( Var_Game.Gamemode = &quot;LevelSelect&quot; ? &quot;&quot; : &quot;Score: &quot;&amp;Var_Player.TotalScore&amp;&quot; | &quot; ) &amp;&quot;Deaths: &quot;&amp;Var_Player.TotalDeaths&amp; ( Var_Misc.Discord_CurrentDetail = &quot;SRB2&quot; &amp; Var_Game.Gamemode = &quot;Singleplayer&quot; ? &quot; | Emeralds: &quot;&amp;Var_Game.Emeralds : &quot;&quot; ){###}Var_Misc.Discord_CurrentSmallKey{###}Var_Misc.Discord_CurrentSmallText{###}Var_Misc.Discord_TimestampCurrent-Var_Level.TimerLevel{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -16830,6 +16944,10 @@
                         <action id="-16" name="Set opacity" sid="896872595137978" type="EffectsF_ProjectileTrail">
                             <param id="0" name="Opacity">Self.Opacity</param>
                         </action>
+                        <action id="0" name="Call function" sid="720221109408866" type="Function">
+                            <param id="0" name="Name">&quot;Discord_RichPresence_Update&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
+                        </action>
                     </actions>
                     <sub-events>
                         <event-block sid="450054320295935">
@@ -16881,10 +16999,10 @@
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Second value">-1</param>
                                         </condition>
-                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="633247219738373" type="Var_Game">
+                                        <condition id="-7" name="Compare instance variable" sid="685689302042535" type="Var_Game">
                                             <param id="0" name="Instance variable">Gamemode</param>
                                             <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">&quot;Marathon&quot;</param>
+                                            <param id="2" name="Value">&quot;Singleplayer&quot;</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -16900,15 +17018,6 @@
                                     </actions>
                                 </event-block>
                             </sub-events>
-                        </event-block>
-                        <event-block sid="643856387889925">
-                            <conditions />
-                            <actions>
-                                <action id="0" name="Call function" sid="882357506062094" type="Function">
-                                    <param id="0" name="Name">&quot;Discord_RichPresence&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;&quot;{###}Var_Misc.Discord_CurrentState&amp;&quot; (&quot;&amp;Var_Misc.Discord_CurrentDetail&amp;&quot;)&quot;{###}replace(Var_Level.Level_Name,&quot;ZONE&quot;,&quot;&quot;)&amp;&quot; &quot;&amp; ( Var_Level.Level_Act = 0 ? &quot;&quot; : Var_Level.Level_Act )&amp;&quot; (PAUSED)&quot;{###}Var_Misc.Discord_CurrentLargeKey{###}( Var_Game.Gamemode = &quot;LevelSelect&quot; ? &quot;&quot; : &quot;Score: &quot;&amp;Var_Player.TotalScore&amp;&quot; | &quot; ) &amp;&quot;Deaths: &quot;&amp;Var_Player.TotalDeaths&amp; ( Var_Misc.Discord_CurrentDetail = &quot;SRB2&quot; &amp; Var_Game.Gamemode = &quot;Singleplayer&quot; ? &quot; | Emeralds: &quot;&amp;Var_Game.Emeralds : &quot;&quot; ){###}Var_Misc.Discord_CurrentSmallKey{###}Var_Misc.Discord_CurrentSmallText{###}Var_Misc.Discord_TimestampInit{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;</param>
-                                </action>
-                            </actions>
                         </event-block>
                     </sub-events>
                 </event-block>

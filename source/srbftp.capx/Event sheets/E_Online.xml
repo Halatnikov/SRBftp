@@ -682,252 +682,68 @@
         </event-group>
         <event-group description="" sid="552249654301131" title="Discord Rich Presence">
             <sub-events>
-                <event-block sid="262255543045230">
+                <event-block sid="586297287731733">
                     <conditions>
-                        <condition id="-33" name="Pick by comparison" sid="784326145040283" type="System">
-                            <param id="0" name="Object">PlayerSkins</param>
-                            <param id="1" name="Expression">PlayerSkins.ID</param>
-                            <param id="2" name="Comparison">0</param>
-                            <param id="3" name="Value">Var_Player.Skin</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="327742355621582" type="System" />
+                        <condition id="-4" name="Trigger once while true" sid="732889915311770" type="System" />
                     </conditions>
                     <actions>
-                        <action id="-10" name="Set value" sid="550729246413048" type="Var_Misc">
-                            <param id="0" name="Instance variable">Discord_CurrentSmallKey</param>
-                            <param id="1" name="Value">JSON_SkinsProperties.Value(0, PlayerSkins.Name, &quot;DiscordIcon&quot;)</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="389114239033644" type="Var_Misc">
-                            <param id="0" name="Instance variable">Discord_CurrentSmallText</param>
-                            <param id="1" name="Value">JSON_SkinsProperties.Value(0, PlayerSkins.Name, &quot;DiscordName&quot;)</param>
+                        <action id="3" name="Set client ID" sid="570394577958853" type="DiscordRPC">
+                            <param id="0" name="client_id">Var_Misc.DiscordAppID</param>
                         </action>
                     </actions>
                 </event-block>
-                <comment></comment>
-                <event-block sid="382008459434438">
+                <event-block sid="356226266220553">
                     <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="324354949908802" type="Var_Game">
-                            <param id="0" name="Instance variable">Gamemode</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">&quot;Singleplayer&quot;</param>
+                        <condition id="-8" name="Is boolean instance variable set" sid="649551431836700" type="Var_Misc">
+                            <param id="0" name="Instance variable">InitializedFiles</param>
                         </condition>
-                        <condition id="-4" name="Trigger once while true" sid="884335724204412" type="System" />
+                        <condition id="60" inverted="1" name="Is undefined" sid="681666494832126" type="JSON_Indev">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}">&quot;DiscordAppID&quot;</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="755277340659545" type="System" />
                     </conditions>
                     <actions>
-                        <action id="-10" name="Set value" sid="652656551938371" type="Var_Misc">
-                            <param id="0" name="Instance variable">Discord_CurrentState</param>
-                            <param id="1" name="Value">&quot;Singleplayer&quot;</param>
+                        <action id="3" name="Set client ID" sid="305735603864853" type="DiscordRPC">
+                            <param id="0" name="client_id">str(JSON_Indev.Value(0,&quot;DiscordAppID&quot;))</param>
                         </action>
                     </actions>
                 </event-block>
-                <event-block sid="746264880459689">
+                <event-block sid="201148365623771">
                     <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="998157935093703" type="Var_Game">
-                            <param id="0" name="Instance variable">Gamemode</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">&quot;LevelSelect&quot;</param>
+                        <condition id="-8" name="Is boolean instance variable set" sid="623853082927786" type="Var_Misc">
+                            <param id="0" name="Instance variable">InitializedFiles</param>
                         </condition>
-                        <condition id="-4" name="Trigger once while true" sid="102272020594299" type="System" />
+                        <condition id="-7" name="Compare instance variable" sid="665783530528093" type="Var_Misc">
+                            <param id="0" name="Instance variable">Discord_TimestampBoot</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="543625612080210" type="System" />
                     </conditions>
                     <actions>
-                        <action id="-10" name="Set value" sid="304311954043365" type="Var_Misc">
-                            <param id="0" name="Instance variable">Discord_CurrentState</param>
-                            <param id="1" name="Value">&quot;Level select&quot;</param>
+                        <action id="0" name="Call function" sid="373660639520286" type="Function">
+                            <param id="0" name="Name">&quot;Time_CurrentTimestamp&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
                         </action>
-                    </actions>
-                </event-block>
-                <event-block sid="154981465872629">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="577073933939096" type="Var_Game">
-                            <param id="0" name="Instance variable">Gamemode</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">&quot;Marathon&quot;</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="404386867992769" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="-10" name="Set value" sid="177195842239181" type="Var_Misc">
-                            <param id="0" name="Instance variable">Discord_CurrentState</param>
-                            <param id="1" name="Value">&quot;Marathon&quot;</param>
+                        <action id="-10" name="Set value" sid="334173397471869" type="Var_Misc">
+                            <param id="0" name="Instance variable">Discord_TimestampBoot</param>
+                            <param id="1" name="Value">Function.ReturnValue</param>
                         </action>
-                    </actions>
-                </event-block>
-                <event-block sid="471025775944261">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="757499508055317" type="Var_Game">
-                            <param id="0" name="Instance variable">Gamemode</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">&quot;RecordAttack&quot;</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="741116501540949" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="-10" name="Set value" sid="116786365893827" type="Var_Misc">
-                            <param id="0" name="Instance variable">Discord_CurrentState</param>
-                            <param id="1" name="Value">&quot;Record attack&quot;</param>
+                        <action id="0" name="Call function" sid="734708861149942" type="Function">
+                            <param id="0" name="Name">&quot;String_Random&quot;</param>
+                            <param id="1" name="Parameter {n}">8</param>
                         </action>
-                    </actions>
-                </event-block>
-                <event-block sid="381418445775949">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="726541889344078" type="Var_Game">
-                            <param id="0" name="Instance variable">Gamemode2</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">&quot;Christmas&quot;</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="121089018543469" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="-10" name="Set value" sid="378809260911757" type="Var_Misc">
-                            <param id="0" name="Instance variable">Discord_CurrentState</param>
-                            <param id="1" name="Value">&quot;Christmas&quot;</param>
+                        <action id="-10" name="Set value" sid="349119675081704" type="Var_Misc">
+                            <param id="0" name="Instance variable">Discord_FakePartyID</param>
+                            <param id="1" name="Value">Function.ReturnValue</param>
                         </action>
-                    </actions>
-                </event-block>
-                <comment></comment>
-                <event-block sid="540537022712091">
-                    <conditions>
-                        <condition id="-8" inverted="1" name="Compare two values" sid="386544543416112" type="System">
-                            <param id="0" name="First value">find(LayoutName,&quot;1_&quot;)</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Second value">-1</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="367480656715910" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="-10" name="Set value" sid="485346066414386" type="Var_Misc">
-                            <param id="0" name="Instance variable">Discord_CurrentDetail</param>
-                            <param id="1" name="Value">&quot;SRB1&quot;</param>
+                        <action id="-16" name="Wait" sid="987521093944197" type="System">
+                            <param id="0" name="Seconds">0.1</param>
                         </action>
-                    </actions>
-                </event-block>
-                <event-block sid="999051160559248">
-                    <conditions>
-                        <condition id="-8" inverted="1" name="Compare two values" sid="621597906403498" type="System">
-                            <param id="0" name="First value">find(LayoutName,&quot;1S_&quot;)</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Second value">-1</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="155030578723936" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="-10" name="Set value" sid="847788007771108" type="Var_Misc">
-                            <param id="0" name="Instance variable">Discord_CurrentDetail</param>
-                            <param id="1" name="Value">&quot;SRB1&quot;</param>
-                        </action>
-                    </actions>
-                    <sub-events>
-                        <event-block sid="850181264762543">
-                            <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="703360158240298" type="Var_Game">
-                                    <param id="0" name="Instance variable">Gamemode</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;Singleplayer&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-10" name="Set value" sid="783592351893104" type="Var_Misc">
-                                    <param id="0" name="Instance variable">Discord_CurrentState</param>
-                                    <param id="1" name="Value">&quot;Super Levels&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <event-block sid="388810840204349">
-                    <conditions>
-                        <condition id="-8" inverted="1" name="Compare two values" sid="872014129200590" type="System">
-                            <param id="0" name="First value">find(LayoutName,&quot;1H_&quot;)</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Second value">-1</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="415122517614878" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="-10" name="Set value" sid="209523131436766" type="Var_Misc">
-                            <param id="0" name="Instance variable">Discord_CurrentDetail</param>
-                            <param id="1" name="Value">&quot;SRB1&quot;</param>
-                        </action>
-                    </actions>
-                    <sub-events>
-                        <event-block sid="169681629043990">
-                            <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="943986678647346" type="Var_Game">
-                                    <param id="0" name="Instance variable">Gamemode</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;Singleplayer&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-10" name="Set value" sid="402644972543579" type="Var_Misc">
-                                    <param id="0" name="Instance variable">Discord_CurrentState</param>
-                                    <param id="1" name="Value">&quot;Hyper Levels&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <event-block sid="527226933296797">
-                    <conditions>
-                        <condition id="-8" inverted="1" name="Compare two values" sid="535425999720813" type="System">
-                            <param id="0" name="First value">find(LayoutName,&quot;2_&quot;)</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Second value">-1</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="974293218435052" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="-10" name="Set value" sid="706489563569140" type="Var_Misc">
-                            <param id="0" name="Instance variable">Discord_CurrentDetail</param>
-                            <param id="1" name="Value">&quot;SRB2&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="645931443780547">
-                    <conditions>
-                        <condition id="-8" inverted="1" name="Compare two values" sid="498469457971539" type="System">
-                            <param id="0" name="First value">find(LayoutName,&quot;E15_&quot;)</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Second value">-1</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="337199754456427" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="-10" name="Set value" sid="783301021674940" type="Var_Misc">
-                            <param id="0" name="Instance variable">Discord_CurrentDetail</param>
-                            <param id="1" name="Value">&quot;SRB1.5&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="432589801678408">
-                    <conditions>
-                        <condition id="-8" inverted="1" name="Compare two values" sid="152460412955531" type="System">
-                            <param id="0" name="First value">find(LayoutName,&quot;E1Sp_&quot;)</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Second value">-1</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="721133985434390" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="-10" name="Set value" sid="247222956401622" type="Var_Misc">
-                            <param id="0" name="Instance variable">Discord_CurrentDetail</param>
-                            <param id="1" name="Value">&quot;SRB1 Special&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="800111248497823">
-                    <conditions>
-                        <condition id="-8" inverted="1" name="Compare two values" sid="262545590832098" type="System">
-                            <param id="0" name="First value">find(LayoutName,&quot;X_&quot;)</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Second value">-1</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="568481474864601" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="-10" name="Set value" sid="817821704164729" type="Var_Misc">
-                            <param id="0" name="Instance variable">Discord_CurrentDetail</param>
-                            <param id="1" name="Value">&quot;Extra&quot;</param>
+                        <action id="0" name="Call function" sid="995449342533643" type="Function">
+                            <param id="0" name="Name">&quot;Discord_RichPresence&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;&quot;{###}&quot;Just launched the game&quot;{###}&quot;&quot;{###}&quot;icon_main&quot;{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;</param>
                         </action>
                     </actions>
                 </event-block>
@@ -956,85 +772,15 @@
                     </sub-events>
                 </event-block>
                 <comment></comment>
-                <event-block sid="429813025613435">
-                    <conditions>
-                        <condition id="0" name="On function" sid="882563460045130" type="Function">
-                            <param id="0" name="Name">&quot;Discord_Init&quot;</param>
-                        </condition>
-                        <condition id="-14" name="Compare variable" sid="567151519226072" type="System">
-                            <param id="0" name="Variable">PLATFORM</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">&quot;NwJs&quot;</param>
-                        </condition>
-                        <condition id="-8" name="Compare two values" sid="932076044597116" type="System">
-                            <param id="0" name="First value">Save_Config.Value(0,&quot;MiscDiscordRichPresence&quot;)</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Second value">1</param>
-                        </condition>
-                    </conditions>
-                    <actions />
-                    <sub-events>
-                        <event-block sid="586297287731733">
-                            <conditions />
-                            <actions>
-                                <action id="3" name="Set client ID" sid="570394577958853" type="DiscordRPC">
-                                    <param id="0" name="client_id">Var_Misc.DiscordAppID</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="356226266220553">
-                            <conditions>
-                                <condition id="60" inverted="1" name="Is undefined" sid="681666494832126" type="JSON_Indev">
-                                    <param id="0" name="Reference point">0</param>
-                                    <param id="1" name="Key {n}">&quot;DiscordAppID&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="3" name="Set client ID" sid="305735603864853" type="DiscordRPC">
-                                    <param id="0" name="client_id">str(JSON_Indev.Value(0,&quot;DiscordAppID&quot;))</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="248347982633456">
-                            <conditions />
-                            <actions>
-                                <action id="0" name="Call function" sid="373660639520286" type="Function">
-                                    <param id="0" name="Name">&quot;Time_CurrentTimestamp&quot;</param>
-                                    <param id="1" name="Parameter {n}"></param>
-                                </action>
-                                <action id="-10" name="Set value" sid="334173397471869" type="Var_Misc">
-                                    <param id="0" name="Instance variable">Discord_TimestampInit</param>
-                                    <param id="1" name="Value">Function.ReturnValue</param>
-                                </action>
-                                <action id="0" name="Call function" sid="734708861149942" type="Function">
-                                    <param id="0" name="Name">&quot;String_Random&quot;</param>
-                                    <param id="1" name="Parameter {n}">8</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="349119675081704" type="Var_Misc">
-                                    <param id="0" name="Instance variable">Discord_FakePartyID</param>
-                                    <param id="1" name="Value">Function.ReturnValue</param>
-                                </action>
-                                <action id="-16" name="Wait" sid="987521093944197" type="System">
-                                    <param id="0" name="Seconds">0.1</param>
-                                </action>
-                                <action id="0" name="Call function" sid="995449342533643" type="Function">
-                                    <param id="0" name="Name">&quot;Discord_RichPresence&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;&quot;{###}&quot;Just launched the game&quot;{###}&quot;&quot;{###}&quot;icon_main&quot;{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <comment></comment>
                 <event-block sid="830638343798995">
                     <conditions>
                         <condition id="0" name="On function" sid="648537989573798" type="Function">
                             <param id="0" name="Name">&quot;Discord_RichPresence&quot;</param>
                         </condition>
-                        <condition id="-14" name="Compare variable" sid="728152032595195" type="System">
-                            <param id="0" name="Variable">PLATFORM</param>
+                        <condition id="-14" name="Compare variable" sid="450101376025150" type="System">
+                            <param id="0" name="Variable">DESKTOP</param>
                             <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">&quot;NwJs&quot;</param>
+                            <param id="2" name="Value">1</param>
                         </condition>
                         <condition id="-8" name="Compare two values" sid="920428872959299" type="System">
                             <param id="0" name="First value">Save_Config.Value(0,&quot;MiscDiscordRichPresence&quot;)</param>
@@ -1117,7 +863,7 @@
                             <actions>
                                 <action id="-9" name="Set value" sid="635714690250812" type="System">
                                     <param id="0" name="Variable">largeImageKey</param>
-                                    <param id="1" name="Value">&quot;none&quot;</param>
+                                    <param id="1" name="Value">&quot;null&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1147,7 +893,7 @@
                             <actions>
                                 <action id="-9" name="Set value" sid="156645892091546" type="System">
                                     <param id="0" name="Variable">smallImageKey</param>
-                                    <param id="1" name="Value">&quot;none&quot;</param>
+                                    <param id="1" name="Value">&quot;empty&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
