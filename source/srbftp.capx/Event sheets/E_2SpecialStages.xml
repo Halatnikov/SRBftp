@@ -109,7 +109,6 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="33" name="Stop all" sid="599589658685887" type="BetterAudio" />
                                 <action id="0" name="Call function" sid="163590822025274" type="Function">
                                     <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
                                     <param id="1" name="Parameter {n}">&quot;2C__SpecialStage&quot;{###}&quot;music&quot;{###}1</param>
@@ -224,36 +223,23 @@
                             <param id="0" name="Instance variable">TimerLevelActive</param>
                             <param id="1" name="Value">1</param>
                         </action>
+                        <action id="-4" name="Set layer visible" sid="189081827138947" type="System">
+                            <param id="0" name="Layer">&quot;Background&quot;</param>
+                            <param id="1" name="Visibility">1</param>
+                        </action>
+                        <action id="-4" name="Set layer visible" sid="503069091780707" type="System">
+                            <param id="0" name="Layer">&quot;BackgroundMono&quot;</param>
+                            <param id="1" name="Visibility">0</param>
+                        </action>
                     </actions>
-                </event-block>
-                <event-block sid="410265985739475">
-                    <conditions>
-                        <condition id="-4" name="Trigger once while true" sid="143488359552129" type="System" />
-                    </conditions>
-                    <actions />
                     <sub-events>
                         <event-block sid="860378681496248">
                             <conditions>
                                 <condition id="-8" name="Compare two values" sid="551031760067524" type="System">
                                     <param id="0" name="First value">Save_Config.Value(0,&quot;GameplayMonotoneSpecialStages&quot;)</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Second value">0</param>
+                                    <param id="2" name="Second value">1</param>
                                 </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-4" name="Set layer visible" sid="189081827138947" type="System">
-                                    <param id="0" name="Layer">&quot;Background&quot;</param>
-                                    <param id="1" name="Visibility">1</param>
-                                </action>
-                                <action id="-4" name="Set layer visible" sid="503069091780707" type="System">
-                                    <param id="0" name="Layer">&quot;BackgroundMono&quot;</param>
-                                    <param id="1" name="Visibility">0</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="492412376845804">
-                            <conditions>
-                                <condition id="-22" name="Else" sid="994295604087223" type="System" />
                             </conditions>
                             <actions>
                                 <action id="-4" name="Set layer visible" sid="734208834806117" type="System">
@@ -1179,41 +1165,29 @@
                                 <condition id="0" name="On collision with another object" sid="220037820696092" type="SStage_Player">
                                     <param id="0" name="Object">Projectile2_Generic</param>
                                 </condition>
+                                <condition id="-7" name="Compare instance variable" sid="443218264356164" type="Var_Player">
+                                    <param id="0" name="Instance variable">IncincibilityTimer</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                                <condition behavior="Flash" id="0" inverted="1" name="Is flashing" sid="220204732996079" type="SStage_Player" />
                             </conditions>
-                            <actions />
-                            <sub-events>
-                                <event-block sid="540721220580826">
-                                    <conditions>
-                                        <condition id="-7" name="Compare instance variable" sid="443218264356164" type="Var_Player">
-                                            <param id="0" name="Instance variable">IncincibilityTimer</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">0</param>
-                                        </condition>
-                                        <condition behavior="Flash" id="0" inverted="1" name="Is flashing" sid="220204732996079" type="SStage_Player" />
-                                    </conditions>
-                                    <actions>
-                                        <action id="-12" name="Subtract from" sid="492467345989531" type="Var_Level">
-                                            <param id="0" name="Instance variable">TimerLevel</param>
-                                            <param id="1" name="Value">5</param>
-                                        </action>
-                                        <action id="0" name="Call function" sid="740414239840128" type="Function">
-                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
-                                            <param id="1" name="Parameter {n}">&quot;Death&quot;</param>
-                                        </action>
-                                        <action behavior="Flash" id="0" name="Flash" sid="333262488820520" type="SStage_Player">
-                                            <param id="0" name="&apos;On&apos; time">0.2</param>
-                                            <param id="1" name="&apos;Off&apos; time">0.2</param>
-                                            <param id="2" name="Duration">2</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="656866126778397">
-                                    <conditions />
-                                    <actions>
-                                        <action id="-9" name="Destroy" sid="190526658259534" type="Projectile2_Generic" />
-                                    </actions>
-                                </event-block>
-                            </sub-events>
+                            <actions>
+                                <action id="-9" name="Destroy" sid="190526658259534" type="Projectile2_Generic" />
+                                <action id="-12" name="Subtract from" sid="492467345989531" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevel</param>
+                                    <param id="1" name="Value">5</param>
+                                </action>
+                                <action id="0" name="Call function" sid="740414239840128" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;Death&quot;</param>
+                                </action>
+                                <action behavior="Flash" id="0" name="Flash" sid="333262488820520" type="SStage_Player">
+                                    <param id="0" name="&apos;On&apos; time">0.2</param>
+                                    <param id="1" name="&apos;Off&apos; time">0.2</param>
+                                    <param id="2" name="Duration">2</param>
+                                </action>
+                            </actions>
                         </event-block>
                     </sub-events>
                 </event-block>

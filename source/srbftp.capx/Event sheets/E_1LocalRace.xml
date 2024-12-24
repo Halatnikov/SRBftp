@@ -5,7 +5,7 @@
     <events>
         <include>E_GLOBAL</include>
         <comment>explanation sorta:&#x0D;&#x0A;you race to the finish, wow, shocking&#x0D;&#x0A;there&apos;s switches that lower barriers that stops your opponent for a whopping 2(3) seconds&#x0D;&#x0A;first player to reach multiples of 3 points (3,6,9,etc) will get a &quot;lap of honour&quot;, meaning the opposite player won&apos;t be able to move&#x0D;&#x0A;first player to reach multiples of 10 points (10,20,etc) will get a SpEcIaL ScReEn saying how cool they are&#x0D;&#x0A;who the hell is going to play this for this long is the true question here</comment>
-        <event-group description="" sid="176276733504974" title="Multiplayer management">
+        <event-group description="" sid="269025410916971" title="Local race">
             <sub-events>
                 <event-block sid="268837999361798">
                     <conditions>
@@ -14,33 +14,48 @@
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">0</param>
                         </condition>
-                        <condition id="-4" name="Trigger once while true" sid="606132749997942" type="System" />
+                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="310898105029230" type="Var_Level">
+                            <param id="0" name="Instance variable">Pause</param>
+                        </condition>
                     </conditions>
                     <actions>
-                        <action id="0" name="Call function" sid="641975144245383" type="Function">
-                            <param id="0" name="Name">&quot;Discord_RichPresence_Update&quot;</param>
-                            <param id="1" name="Parameter {n}"></param>
-                        </action>
-                        <action id="0" name="Call function" sid="662588439896301" type="Function">
-                            <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
-                            <param id="1" name="Parameter {n}">LayoutName{###}&quot;music&quot;{###}1</param>
+                        <action id="-11" name="Add to" sid="398110111512312" type="Var_Level">
+                            <param id="0" name="Instance variable">TimerLevel</param>
+                            <param id="1" name="Value">dt</param>
                         </action>
                     </actions>
                     <sub-events>
-                        <event-block sid="903974518780205">
+                        <event-block sid="214421806530545">
                             <conditions>
-                                <condition id="-7" inverted="1" name="Compare instance variable" sid="977959791039977" type="Var_Level">
-                                    <param id="0" name="Instance variable">Local_LapOfHonour</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">0</param>
-                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="606132749997942" type="System" />
                             </conditions>
                             <actions>
-                                <action id="0" name="Call function" sid="592322330070892" type="Function">
+                                <action id="0" name="Call function" sid="641975144245383" type="Function">
+                                    <param id="0" name="Name">&quot;Discord_RichPresence_Update&quot;</param>
+                                    <param id="1" name="Parameter {n}"></param>
+                                </action>
+                                <action id="0" name="Call function" sid="662588439896301" type="Function">
                                     <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;1M__LapOfHonour&quot;{###}&quot;music&quot;{###}1</param>
+                                    <param id="1" name="Parameter {n}">LayoutName{###}&quot;music&quot;{###}1</param>
                                 </action>
                             </actions>
+                            <sub-events>
+                                <event-block sid="903974518780205">
+                                    <conditions>
+                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="977959791039977" type="Var_Level">
+                                            <param id="0" name="Instance variable">Local_LapOfHonour</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="592322330070892" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;1M__LapOfHonour&quot;{###}&quot;music&quot;{###}1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-block>
@@ -193,331 +208,8 @@
                         </event-block>
                     </sub-events>
                 </event-block>
-            </sub-events>
-        </event-group>
-        <event-group description="" sid="413631787100559" title="Multiplayer controls">
-            <sub-events>
-                <comment>player 1</comment>
-                <event-block sid="641865581794271">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="834400370061133" type="Engine_Player">
-                            <param id="0" name="Instance variable">LocalMultiplayerID</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">1</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-4" name="Set position to another object" sid="634657977191299" type="Skin1_Earless">
-                            <param id="0" name="Object">Engine_Player</param>
-                            <param id="1" name="Image point (optional)">0</param>
-                        </action>
-                    </actions>
-                    <sub-events>
-                        <event-block sid="358220439557753">
-                            <conditions>
-                                <condition id="-7" inverted="1" name="Compare instance variable" sid="736456859011014" type="Var_Player">
-                                    <param id="0" name="Instance variable">Finished</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">0</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="4" name="Set animation" sid="772720772316343" type="Skin1_Earless">
-                                    <param id="0" name="Animation">&quot;Idle&quot;</param>
-                                    <param id="1" name="From">1</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="415648724139820">
-                            <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="799106918054742" type="Var_Player">
-                                    <param id="0" name="Instance variable">Finished</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">0</param>
-                                </condition>
-                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="550893229968475" type="Var_Level">
-                                    <param id="0" name="Instance variable">Pause</param>
-                                </condition>
-                            </conditions>
-                            <actions />
-                            <sub-events>
-                                <comment>basic controls</comment>
-                                <event-block sid="793965690973485">
-                                    <conditions>
-                                        <condition id="-8" name="Is boolean instance variable set" sid="752534744152149" type="Var_Input">
-                                            <param id="0" name="Instance variable">Left</param>
-                                        </condition>
-                                        <condition behavior="Platform" id="10" inverted="1" name="Is by wall" sid="492759967696519" type="Engine_Player">
-                                            <param id="0" name="Side">0</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="7" name="Set mirrored" sid="772677430553191" type="Skin1_Earless">
-                                            <param id="0" name="State">0</param>
-                                        </action>
-                                        <action behavior="Platform" id="7" name="Simulate control" sid="291720459262442" type="Engine_Player">
-                                            <param id="0" name="Control">0</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="456499158431136">
-                                    <conditions>
-                                        <condition id="-8" name="Is boolean instance variable set" sid="307664253567724" type="Var_Input">
-                                            <param id="0" name="Instance variable">Right</param>
-                                        </condition>
-                                        <condition behavior="Platform" id="10" inverted="1" name="Is by wall" sid="265275942714852" type="Engine_Player">
-                                            <param id="0" name="Side">1</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="7" name="Set mirrored" sid="451448793812160" type="Skin1_Earless">
-                                            <param id="0" name="State">1</param>
-                                        </action>
-                                        <action behavior="Platform" id="7" name="Simulate control" sid="473851389039732" type="Engine_Player">
-                                            <param id="0" name="Control">1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="870322335028074">
-                                    <conditions>
-                                        <condition id="-8" name="Is boolean instance variable set" sid="901622331167539" type="Var_Input">
-                                            <param id="0" name="Instance variable">A</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action behavior="Platform" id="7" name="Simulate control" sid="591452043181350" type="Engine_Player">
-                                            <param id="0" name="Control">2</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <comment>animations</comment>
-                                <comment>on floor</comment>
-                                <event-block sid="842200056882899">
-                                    <conditions>
-                                        <condition behavior="Platform" id="2" name="Is on floor" sid="236368762129772" type="Engine_Player" />
-                                        <condition behavior="Platform" id="0" inverted="1" name="Is moving" sid="402887965036302" type="Engine_Player" />
-                                    </conditions>
-                                    <actions>
-                                        <action id="4" name="Set animation" sid="580880546519796" type="Skin1_Earless">
-                                            <param id="0" name="Animation">&quot;Idle&quot;</param>
-                                            <param id="1" name="From">1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="286341610200861">
-                                    <conditions>
-                                        <condition behavior="Platform" id="2" name="Is on floor" sid="329024540029474" type="Engine_Player" />
-                                        <condition behavior="Platform" id="0" name="Is moving" sid="799067879930176" type="Engine_Player" />
-                                    </conditions>
-                                    <actions>
-                                        <action id="4" name="Set animation" sid="239567744270226" type="Skin1_Earless">
-                                            <param id="0" name="Animation">&quot;Run&quot;</param>
-                                            <param id="1" name="From">1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <comment>jumping</comment>
-                                <event-block sid="238683198677258">
-                                    <conditions>
-                                        <condition behavior="Platform" id="5" name="On jump" sid="888430199013123" type="Engine_Player" />
-                                    </conditions>
-                                    <actions>
-                                        <action id="0" name="Call function" sid="911869298068011" type="Function">
-                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
-                                            <param id="1" name="Parameter {n}">&quot;Jump&quot;</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="899855244410616">
-                                    <conditions>
-                                        <condition behavior="Platform" id="3" name="Is jumping" sid="866056166840459" type="Engine_Player" />
-                                    </conditions>
-                                    <actions>
-                                        <action id="4" name="Set animation" sid="411100326160262" type="Skin1_Earless">
-                                            <param id="0" name="Animation">&quot;Jump&quot;</param>
-                                            <param id="1" name="From">1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <comment>falling</comment>
-                                <event-block sid="359840154032494">
-                                    <conditions>
-                                        <condition behavior="Platform" id="4" name="Is falling" sid="971324274063512" type="Engine_Player" />
-                                    </conditions>
-                                    <actions>
-                                        <action id="4" name="Set animation" sid="903130401431224" type="Skin1_Earless">
-                                            <param id="0" name="Animation">&quot;Jump&quot;</param>
-                                            <param id="1" name="From">1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <comment>player 2</comment>
-                <event-block sid="826581305738653">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="789397886615066" type="Engine_Player">
-                            <param id="0" name="Instance variable">LocalMultiplayerID</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">2</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-4" name="Set position to another object" sid="571694380383883" type="Skin1_PlughandsKnux">
-                            <param id="0" name="Object">Engine_Player</param>
-                            <param id="1" name="Image point (optional)">0</param>
-                        </action>
-                    </actions>
-                    <sub-events>
-                        <event-block sid="901217608068483">
-                            <conditions>
-                                <condition id="-7" inverted="1" name="Compare instance variable" sid="362807459141568" type="Var_Player">
-                                    <param id="0" name="Instance variable">Finished</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">0</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="4" name="Set animation" sid="419457950900193" type="Skin1_PlughandsKnux">
-                                    <param id="0" name="Animation">&quot;Idle&quot;</param>
-                                    <param id="1" name="From">1</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="937993598880279">
-                            <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="746946909255360" type="Var_Player">
-                                    <param id="0" name="Instance variable">Finished</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">0</param>
-                                </condition>
-                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="825042968674278" type="Var_Level">
-                                    <param id="0" name="Instance variable">Pause</param>
-                                </condition>
-                            </conditions>
-                            <actions />
-                            <sub-events>
-                                <comment>basic controls</comment>
-                                <event-block sid="842873139804333">
-                                    <conditions>
-                                        <condition id="-8" name="Is boolean instance variable set" sid="797365177716145" type="Var_Input">
-                                            <param id="0" name="Instance variable">P2_Left</param>
-                                        </condition>
-                                        <condition behavior="Platform" id="10" inverted="1" name="Is by wall" sid="683838991410170" type="Engine_Player">
-                                            <param id="0" name="Side">0</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="7" name="Set mirrored" sid="500692986806756" type="Skin1_PlughandsKnux">
-                                            <param id="0" name="State">0</param>
-                                        </action>
-                                        <action behavior="Platform" id="7" name="Simulate control" sid="159801576470087" type="Engine_Player">
-                                            <param id="0" name="Control">0</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="563995688121461">
-                                    <conditions>
-                                        <condition id="-8" name="Is boolean instance variable set" sid="933272374092934" type="Var_Input">
-                                            <param id="0" name="Instance variable">P2_Right</param>
-                                        </condition>
-                                        <condition behavior="Platform" id="10" inverted="1" name="Is by wall" sid="149459557460812" type="Engine_Player">
-                                            <param id="0" name="Side">1</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="7" name="Set mirrored" sid="421245078484749" type="Skin1_PlughandsKnux">
-                                            <param id="0" name="State">1</param>
-                                        </action>
-                                        <action behavior="Platform" id="7" name="Simulate control" sid="321809663524798" type="Engine_Player">
-                                            <param id="0" name="Control">1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="858634302296476">
-                                    <conditions>
-                                        <condition id="-8" name="Is boolean instance variable set" sid="229702773528900" type="Var_Input">
-                                            <param id="0" name="Instance variable">P2_A</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action behavior="Platform" id="7" name="Simulate control" sid="249521344419245" type="Engine_Player">
-                                            <param id="0" name="Control">2</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <comment>animations</comment>
-                                <comment>on floor</comment>
-                                <event-block sid="432749945176851">
-                                    <conditions>
-                                        <condition behavior="Platform" id="2" name="Is on floor" sid="457842099297155" type="Engine_Player" />
-                                        <condition behavior="Platform" id="0" inverted="1" name="Is moving" sid="616049851240450" type="Engine_Player" />
-                                    </conditions>
-                                    <actions>
-                                        <action id="4" name="Set animation" sid="381806569440730" type="Skin1_PlughandsKnux">
-                                            <param id="0" name="Animation">&quot;Idle&quot;</param>
-                                            <param id="1" name="From">1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="770197426345676">
-                                    <conditions>
-                                        <condition behavior="Platform" id="2" name="Is on floor" sid="681779699543707" type="Engine_Player" />
-                                        <condition behavior="Platform" id="0" name="Is moving" sid="239501511108408" type="Engine_Player" />
-                                    </conditions>
-                                    <actions>
-                                        <action id="4" name="Set animation" sid="224864398192112" type="Skin1_PlughandsKnux">
-                                            <param id="0" name="Animation">&quot;Run&quot;</param>
-                                            <param id="1" name="From">1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <comment>jumping</comment>
-                                <event-block sid="505409765026726">
-                                    <conditions>
-                                        <condition behavior="Platform" id="5" name="On jump" sid="396580368851645" type="Engine_Player" />
-                                    </conditions>
-                                    <actions>
-                                        <action id="0" name="Call function" sid="484019828833358" type="Function">
-                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
-                                            <param id="1" name="Parameter {n}">&quot;Jump&quot;</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="541006154053086">
-                                    <conditions>
-                                        <condition behavior="Platform" id="3" name="Is jumping" sid="195490226606265" type="Engine_Player" />
-                                    </conditions>
-                                    <actions>
-                                        <action id="4" name="Set animation" sid="639894761112428" type="Skin1_PlughandsKnux">
-                                            <param id="0" name="Animation">&quot;Jump&quot;</param>
-                                            <param id="1" name="From">1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <comment>falling</comment>
-                                <event-block sid="528210581015363">
-                                    <conditions>
-                                        <condition behavior="Platform" id="4" name="Is falling" sid="463717080753613" type="Engine_Player" />
-                                    </conditions>
-                                    <actions>
-                                        <action id="4" name="Set animation" sid="654733260103655" type="Skin1_PlughandsKnux">
-                                            <param id="0" name="Animation">&quot;Jump&quot;</param>
-                                            <param id="1" name="From">1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-            </sub-events>
-        </event-group>
-        <event-group description="" sid="269025410916971" title="Multiplayer main">
-            <sub-events>
-                <comment>score</comment>
+                <comment>hud</comment>
+                <comment>code by Maverick1912</comment>
                 <event-block sid="670597144803427">
                     <conditions />
                     <actions>
@@ -526,26 +218,6 @@
                         </action>
                         <action id="0" name="Set text" sid="578572455322094" type="LocalHUD_P2Score">
                             <param id="0" name="Text">Var_Level.Local_P2Score</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <comment>timer</comment>
-                <comment>code by Maverick1912</comment>
-                <event-block sid="979599257440840">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="702723325823532" type="Var_Player">
-                            <param id="0" name="Instance variable">Finished</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">0</param>
-                        </condition>
-                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="417745866292384" type="Var_Level">
-                            <param id="0" name="Instance variable">Pause</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-11" name="Add to" sid="398110111512312" type="Var_Level">
-                            <param id="0" name="Instance variable">TimerLevel</param>
-                            <param id="1" name="Value">dt</param>
                         </action>
                         <action id="0" name="Set text" sid="588886294725348" type="HUD_Time">
                             <param id="0" name="Text">floor(Var_Level.TimerLevel/60)&amp;&quot; &quot;&quot;&quot;&amp;zeropad(floor(Var_Level.TimerLevel)%60,2)&amp;&quot; &quot;&quot;&quot;&amp;zeropad(floor(Var_Level.TimerLevel*100)%100,2)</param>
@@ -659,6 +331,11 @@
                         <action id="-10" name="Set value" sid="552483691269039" type="Var_Player">
                             <param id="0" name="Instance variable">Finished</param>
                             <param id="1" name="Value">-1</param>
+                        </action>
+                        <action behavior="Flash" id="0" name="Flash" sid="757213106690337" type="LocalHUD_LapOfHonour">
+                            <param id="0" name="&apos;On&apos; time">0.4</param>
+                            <param id="1" name="&apos;Off&apos; time">0.4</param>
+                            <param id="2" name="Duration">9999</param>
                         </action>
                     </actions>
                     <sub-events>
@@ -1097,7 +774,327 @@
                 </event-block>
             </sub-events>
         </event-group>
-        <event-group description="" sid="112958272285506" title="Multiplayer menus">
+        <event-group description="" sid="413631787100559" title="Local race controls">
+            <sub-events>
+                <comment>player 1</comment>
+                <event-block sid="641865581794271">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="834400370061133" type="Engine_Player">
+                            <param id="0" name="Instance variable">LocalMultiplayerID</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-4" name="Set position to another object" sid="634657977191299" type="Skin1_Earless">
+                            <param id="0" name="Object">Engine_Player</param>
+                            <param id="1" name="Image point (optional)">0</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="358220439557753">
+                            <conditions>
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="736456859011014" type="Var_Player">
+                                    <param id="0" name="Instance variable">Finished</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="772720772316343" type="Skin1_Earless">
+                                    <param id="0" name="Animation">&quot;Idle&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="415648724139820">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="799106918054742" type="Var_Player">
+                                    <param id="0" name="Instance variable">Finished</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="550893229968475" type="Var_Level">
+                                    <param id="0" name="Instance variable">Pause</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <comment>basic controls</comment>
+                                <event-block sid="793965690973485">
+                                    <conditions>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="752534744152149" type="Var_Input">
+                                            <param id="0" name="Instance variable">Left</param>
+                                        </condition>
+                                        <condition behavior="Platform" id="10" inverted="1" name="Is by wall" sid="492759967696519" type="Engine_Player">
+                                            <param id="0" name="Side">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="7" name="Set mirrored" sid="772677430553191" type="Skin1_Earless">
+                                            <param id="0" name="State">0</param>
+                                        </action>
+                                        <action behavior="Platform" id="7" name="Simulate control" sid="291720459262442" type="Engine_Player">
+                                            <param id="0" name="Control">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="456499158431136">
+                                    <conditions>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="307664253567724" type="Var_Input">
+                                            <param id="0" name="Instance variable">Right</param>
+                                        </condition>
+                                        <condition behavior="Platform" id="10" inverted="1" name="Is by wall" sid="265275942714852" type="Engine_Player">
+                                            <param id="0" name="Side">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="7" name="Set mirrored" sid="451448793812160" type="Skin1_Earless">
+                                            <param id="0" name="State">1</param>
+                                        </action>
+                                        <action behavior="Platform" id="7" name="Simulate control" sid="473851389039732" type="Engine_Player">
+                                            <param id="0" name="Control">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="870322335028074">
+                                    <conditions>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="901622331167539" type="Var_Input">
+                                            <param id="0" name="Instance variable">A</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action behavior="Platform" id="7" name="Simulate control" sid="591452043181350" type="Engine_Player">
+                                            <param id="0" name="Control">2</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <comment>animations</comment>
+                                <comment>on floor</comment>
+                                <event-block sid="842200056882899">
+                                    <conditions>
+                                        <condition behavior="Platform" id="2" name="Is on floor" sid="236368762129772" type="Engine_Player" />
+                                        <condition behavior="Platform" id="0" inverted="1" name="Is moving" sid="402887965036302" type="Engine_Player" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="4" name="Set animation" sid="580880546519796" type="Skin1_Earless">
+                                            <param id="0" name="Animation">&quot;Idle&quot;</param>
+                                            <param id="1" name="From">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="286341610200861">
+                                    <conditions>
+                                        <condition behavior="Platform" id="2" name="Is on floor" sid="329024540029474" type="Engine_Player" />
+                                        <condition behavior="Platform" id="0" name="Is moving" sid="799067879930176" type="Engine_Player" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="4" name="Set animation" sid="239567744270226" type="Skin1_Earless">
+                                            <param id="0" name="Animation">&quot;Run&quot;</param>
+                                            <param id="1" name="From">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <comment>jumping</comment>
+                                <event-block sid="238683198677258">
+                                    <conditions>
+                                        <condition behavior="Platform" id="5" name="On jump" sid="888430199013123" type="Engine_Player" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="911869298068011" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;Jump&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="899855244410616">
+                                    <conditions>
+                                        <condition behavior="Platform" id="3" name="Is jumping" sid="866056166840459" type="Engine_Player" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="4" name="Set animation" sid="411100326160262" type="Skin1_Earless">
+                                            <param id="0" name="Animation">&quot;Jump&quot;</param>
+                                            <param id="1" name="From">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <comment>falling</comment>
+                                <event-block sid="359840154032494">
+                                    <conditions>
+                                        <condition behavior="Platform" id="4" name="Is falling" sid="971324274063512" type="Engine_Player" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="4" name="Set animation" sid="903130401431224" type="Skin1_Earless">
+                                            <param id="0" name="Animation">&quot;Jump&quot;</param>
+                                            <param id="1" name="From">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>player 2</comment>
+                <event-block sid="826581305738653">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="789397886615066" type="Engine_Player">
+                            <param id="0" name="Instance variable">LocalMultiplayerID</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">2</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-4" name="Set position to another object" sid="571694380383883" type="Skin1_PlughandsKnux">
+                            <param id="0" name="Object">Engine_Player</param>
+                            <param id="1" name="Image point (optional)">0</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="901217608068483">
+                            <conditions>
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="362807459141568" type="Var_Player">
+                                    <param id="0" name="Instance variable">Finished</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="419457950900193" type="Skin1_PlughandsKnux">
+                                    <param id="0" name="Animation">&quot;Idle&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="937993598880279">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="746946909255360" type="Var_Player">
+                                    <param id="0" name="Instance variable">Finished</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="825042968674278" type="Var_Level">
+                                    <param id="0" name="Instance variable">Pause</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <comment>basic controls</comment>
+                                <event-block sid="842873139804333">
+                                    <conditions>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="797365177716145" type="Var_Input">
+                                            <param id="0" name="Instance variable">P2_Left</param>
+                                        </condition>
+                                        <condition behavior="Platform" id="10" inverted="1" name="Is by wall" sid="683838991410170" type="Engine_Player">
+                                            <param id="0" name="Side">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="7" name="Set mirrored" sid="500692986806756" type="Skin1_PlughandsKnux">
+                                            <param id="0" name="State">0</param>
+                                        </action>
+                                        <action behavior="Platform" id="7" name="Simulate control" sid="159801576470087" type="Engine_Player">
+                                            <param id="0" name="Control">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="563995688121461">
+                                    <conditions>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="933272374092934" type="Var_Input">
+                                            <param id="0" name="Instance variable">P2_Right</param>
+                                        </condition>
+                                        <condition behavior="Platform" id="10" inverted="1" name="Is by wall" sid="149459557460812" type="Engine_Player">
+                                            <param id="0" name="Side">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="7" name="Set mirrored" sid="421245078484749" type="Skin1_PlughandsKnux">
+                                            <param id="0" name="State">1</param>
+                                        </action>
+                                        <action behavior="Platform" id="7" name="Simulate control" sid="321809663524798" type="Engine_Player">
+                                            <param id="0" name="Control">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="858634302296476">
+                                    <conditions>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="229702773528900" type="Var_Input">
+                                            <param id="0" name="Instance variable">P2_A</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action behavior="Platform" id="7" name="Simulate control" sid="249521344419245" type="Engine_Player">
+                                            <param id="0" name="Control">2</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <comment>animations</comment>
+                                <comment>on floor</comment>
+                                <event-block sid="432749945176851">
+                                    <conditions>
+                                        <condition behavior="Platform" id="2" name="Is on floor" sid="457842099297155" type="Engine_Player" />
+                                        <condition behavior="Platform" id="0" inverted="1" name="Is moving" sid="616049851240450" type="Engine_Player" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="4" name="Set animation" sid="381806569440730" type="Skin1_PlughandsKnux">
+                                            <param id="0" name="Animation">&quot;Idle&quot;</param>
+                                            <param id="1" name="From">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="770197426345676">
+                                    <conditions>
+                                        <condition behavior="Platform" id="2" name="Is on floor" sid="681779699543707" type="Engine_Player" />
+                                        <condition behavior="Platform" id="0" name="Is moving" sid="239501511108408" type="Engine_Player" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="4" name="Set animation" sid="224864398192112" type="Skin1_PlughandsKnux">
+                                            <param id="0" name="Animation">&quot;Run&quot;</param>
+                                            <param id="1" name="From">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <comment>jumping</comment>
+                                <event-block sid="505409765026726">
+                                    <conditions>
+                                        <condition behavior="Platform" id="5" name="On jump" sid="396580368851645" type="Engine_Player" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="484019828833358" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;Jump&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="541006154053086">
+                                    <conditions>
+                                        <condition behavior="Platform" id="3" name="Is jumping" sid="195490226606265" type="Engine_Player" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="4" name="Set animation" sid="639894761112428" type="Skin1_PlughandsKnux">
+                                            <param id="0" name="Animation">&quot;Jump&quot;</param>
+                                            <param id="1" name="From">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <comment>falling</comment>
+                                <event-block sid="528210581015363">
+                                    <conditions>
+                                        <condition behavior="Platform" id="4" name="Is falling" sid="463717080753613" type="Engine_Player" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="4" name="Set animation" sid="654733260103655" type="Skin1_PlughandsKnux">
+                                            <param id="0" name="Animation">&quot;Jump&quot;</param>
+                                            <param id="1" name="From">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="112958272285506" title="Local race menus">
             <sub-events>
                 <comment>toggle pause</comment>
                 <event-block sid="780989157287226">

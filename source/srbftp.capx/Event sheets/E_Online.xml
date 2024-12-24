@@ -743,7 +743,7 @@
                         </action>
                         <action id="0" name="Call function" sid="995449342533643" type="Function">
                             <param id="0" name="Name">&quot;Discord_RichPresence&quot;</param>
-                            <param id="1" name="Parameter {n}">&quot;&quot;{###}&quot;Just launched the game&quot;{###}&quot;&quot;{###}&quot;icon_main&quot;{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;{###}&quot;&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;state=Just launched the game&#x0D;&#x0A;largeImage=icon_main&quot;</param>
                         </action>
                     </actions>
                 </event-block>
@@ -790,7 +790,7 @@
                     </conditions>
                     <actions />
                     <sub-events>
-                        <comment>param 0 -&#x0D;&#x0A;params 1 - 11 - down below</comment>
+                        <comment>param 0 - ini string&#x0D;&#x0A;params 1 - 11 - down below</comment>
                         <variable constant="0" name="state" sid="391117689734622" static="0" type="text"></variable>
                         <variable constant="0" name="details" sid="435077250581894" static="0" type="text"></variable>
                         <variable constant="0" name="largeImageKey" sid="908587225341430" static="0" type="text"></variable>
@@ -803,7 +803,233 @@
                         <variable constant="0" name="partySize" sid="981660231489723" static="0" type="text"></variable>
                         <variable constant="0" name="partyMax" sid="596835360660932" static="0" type="text"></variable>
                         <event-block sid="427163510994001">
-                            <conditions />
+                            <conditions>
+                                <condition id="1" inverted="1" name="Compare parameter" sid="513263309549021" type="Function">
+                                    <param id="0" name="Index">0</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="706800807394243" type="System">
+                                    <param id="0" name="Object to create">JSON__COMMON</param>
+                                    <param id="1" name="Layer">0</param>
+                                    <param id="2" name="X">0</param>
+                                    <param id="3" name="Y">0</param>
+                                </action>
+                                <action id="0" name="Call function" sid="402549352137370" type="Function">
+                                    <param id="0" name="Name">&quot;INI2JSON&quot;</param>
+                                    <param id="1" name="Parameter {n}">Function.Param(0)</param>
+                                </action>
+                                <action id="60" name="LoadJSON" sid="927649174476928" type="JSON__COMMON">
+                                    <param id="0" name="JSON">Function.ReturnValue</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}"></param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="512392184905361">
+                                    <conditions>
+                                        <condition id="100" name="For each property" sid="356779601153217" type="JSON__COMMON">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}"></param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="721299866090475">
+                                            <conditions>
+                                                <condition id="-8" name="Compare two values" sid="683322567037103" type="System">
+                                                    <param id="0" name="First value">JSON__COMMON.CurrentKey</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Second value">&quot;state&quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Set value" sid="119390740927440" type="System">
+                                                    <param id="0" name="Variable">state</param>
+                                                    <param id="1" name="Value">JSON__COMMON.CurrentValue</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="563419996292010">
+                                            <conditions>
+                                                <condition id="-8" name="Compare two values" sid="208143286252597" type="System">
+                                                    <param id="0" name="First value">JSON__COMMON.CurrentKey</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Second value">&quot;details&quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Set value" sid="661564098971983" type="System">
+                                                    <param id="0" name="Variable">details</param>
+                                                    <param id="1" name="Value">JSON__COMMON.CurrentValue</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block any="1" sid="687939339102248">
+                                            <conditions>
+                                                <condition id="-8" name="Compare two values" sid="635489632786909" type="System">
+                                                    <param id="0" name="First value">JSON__COMMON.CurrentKey</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Second value">&quot;largeImageKey&quot;</param>
+                                                </condition>
+                                                <condition id="-8" name="Compare two values" sid="321100323645040" type="System">
+                                                    <param id="0" name="First value">JSON__COMMON.CurrentKey</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Second value">&quot;largeImage&quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Set value" sid="753861598830804" type="System">
+                                                    <param id="0" name="Variable">largeImageKey</param>
+                                                    <param id="1" name="Value">JSON__COMMON.CurrentValue</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="404352354652147">
+                                            <conditions>
+                                                <condition id="-8" name="Compare two values" sid="557428220140559" type="System">
+                                                    <param id="0" name="First value">JSON__COMMON.CurrentKey</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Second value">&quot;largeImageText&quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Set value" sid="389518833876671" type="System">
+                                                    <param id="0" name="Variable">largeImageText</param>
+                                                    <param id="1" name="Value">JSON__COMMON.CurrentValue</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block any="1" sid="626220135864895">
+                                            <conditions>
+                                                <condition id="-8" name="Compare two values" sid="553179242592327" type="System">
+                                                    <param id="0" name="First value">JSON__COMMON.CurrentKey</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Second value">&quot;smallImageKey&quot;</param>
+                                                </condition>
+                                                <condition id="-8" name="Compare two values" sid="354639992604277" type="System">
+                                                    <param id="0" name="First value">JSON__COMMON.CurrentKey</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Second value">&quot;smallImage&quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Set value" sid="813110362454859" type="System">
+                                                    <param id="0" name="Variable">smallImageKey</param>
+                                                    <param id="1" name="Value">JSON__COMMON.CurrentValue</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="704413132072156">
+                                            <conditions>
+                                                <condition id="-8" name="Compare two values" sid="179222893096289" type="System">
+                                                    <param id="0" name="First value">JSON__COMMON.CurrentKey</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Second value">&quot;smallImageText&quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Set value" sid="108994126544924" type="System">
+                                                    <param id="0" name="Variable">smallImageText</param>
+                                                    <param id="1" name="Value">JSON__COMMON.CurrentValue</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="894650895693188">
+                                            <conditions>
+                                                <condition id="-8" name="Compare two values" sid="558735021952707" type="System">
+                                                    <param id="0" name="First value">JSON__COMMON.CurrentKey</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Second value">&quot;startTimestamp&quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Set value" sid="525884247298497" type="System">
+                                                    <param id="0" name="Variable">startTimestamp</param>
+                                                    <param id="1" name="Value">JSON__COMMON.CurrentValue</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="922866409060921">
+                                            <conditions>
+                                                <condition id="-8" name="Compare two values" sid="120401325869970" type="System">
+                                                    <param id="0" name="First value">JSON__COMMON.CurrentKey</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Second value">&quot;endTimestamp&quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Set value" sid="935448289991480" type="System">
+                                                    <param id="0" name="Variable">endTimestamp</param>
+                                                    <param id="1" name="Value">JSON__COMMON.CurrentValue</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="937413264563758">
+                                            <conditions>
+                                                <condition id="-8" name="Compare two values" sid="431676398076762" type="System">
+                                                    <param id="0" name="First value">JSON__COMMON.CurrentKey</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Second value">&quot;partyID&quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Set value" sid="690159969217218" type="System">
+                                                    <param id="0" name="Variable">partyID</param>
+                                                    <param id="1" name="Value">JSON__COMMON.CurrentValue</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="738567660882710">
+                                            <conditions>
+                                                <condition id="-8" name="Compare two values" sid="280815535185138" type="System">
+                                                    <param id="0" name="First value">JSON__COMMON.CurrentKey</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Second value">&quot;partySize&quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Set value" sid="420566821021635" type="System">
+                                                    <param id="0" name="Variable">partySize</param>
+                                                    <param id="1" name="Value">JSON__COMMON.CurrentValue</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="982436414058600">
+                                            <conditions>
+                                                <condition id="-8" name="Compare two values" sid="726505482535202" type="System">
+                                                    <param id="0" name="First value">JSON__COMMON.CurrentKey</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Second value">&quot;partyMax&quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Set value" sid="810150911102845" type="System">
+                                                    <param id="0" name="Variable">partyMax</param>
+                                                    <param id="1" name="Value">JSON__COMMON.CurrentValue</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="646379460690454">
+                                    <conditions />
+                                    <actions>
+                                        <action id="-9" name="Destroy" sid="447737512461118" type="JSON__COMMON" />
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="433008103077495">
+                            <conditions>
+                                <condition id="1" name="Compare parameter" sid="587054963719761" type="Function">
+                                    <param id="0" name="Index">0</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;&quot;</param>
+                                </condition>
+                            </conditions>
                             <actions>
                                 <action id="-9" name="Set value" sid="295983341582082" type="System">
                                     <param id="0" name="Variable">state</param>
@@ -881,6 +1107,38 @@
                                     <param id="1" name="Value">&quot;v&quot;&amp;projectversion</param>
                                 </action>
                             </actions>
+                            <sub-events>
+                                <event-block sid="414016377629097">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="178207536233143" type="System">
+                                            <param id="0" name="Variable">largeImageKey</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;icon_1&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="918207444377302" type="System">
+                                            <param id="0" name="Variable">largeImageText</param>
+                                            <param id="1" name="Value">&quot;Sonic The Hedgehog Robo-Blast!&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="595473878668107">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="177318234063119" type="System">
+                                            <param id="0" name="Variable">largeImageKey</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;icon_2&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="699835842989174" type="System">
+                                            <param id="0" name="Variable">largeImageText</param>
+                                            <param id="1" name="Value">&quot;Sonic Robo Blast II&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                         <event-block sid="262712305053578">
                             <conditions>
@@ -913,49 +1171,17 @@
                             </actions>
                         </event-block>
                         <event-block sid="801846928377710">
-                            <conditions />
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="755625644812679" type="System">
+                                    <param id="0" name="Variable">partyID</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;&quot;</param>
+                                </condition>
+                            </conditions>
                             <actions>
                                 <action id="-9" name="Set value" sid="349996390218579" type="System">
                                     <param id="0" name="Variable">partyID</param>
                                     <param id="1" name="Value">Var_Misc.Discord_FakePartyID</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="409464480506542">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="119951232659591" type="System">
-                                    <param id="0" name="Variable">partySize</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="360352555726154" type="System">
-                                    <param id="0" name="Variable">partySize</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="568752868193873" type="System">
-                                    <param id="0" name="Variable">partyMax</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="487314725696750">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="365746482438789" type="System">
-                                    <param id="0" name="Variable">partyMax</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="860337211879146" type="System">
-                                    <param id="0" name="Variable">partySize</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="421714381652150" type="System">
-                                    <param id="0" name="Variable">partyMax</param>
-                                    <param id="1" name="Value">0</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1070,7 +1296,7 @@
                             <actions>
                                 <action id="14" name="Log" sid="594046047481222" type="Browser">
                                     <param id="0" name="Type">0</param>
-                                    <param id="1" name="Message">&quot;===== DISCORD RICH PRESENCE =====&#x0D;&#x0A;state: &quot;&amp;state&amp;&quot;&#x0D;&#x0A;details: &quot;&amp;details&amp;&quot;&#x0D;&#x0A;largeImageKey: &quot;&amp;largeImageKey&amp;&quot;&#x0D;&#x0A;largeImageText: &quot;&amp;largeImageText&amp;&quot;&#x0D;&#x0A;smallImageKey: &quot;&amp;smallImageKey&amp;&quot;&#x0D;&#x0A;smallImageText: &quot;&amp;smallImageText&amp;&quot;&#x0D;&#x0A;startTimestamp: &quot;&amp;startTimestamp&amp;&quot;&#x0D;&#x0A;endTimestamp: &quot;&amp;endTimestamp&amp;&quot;&#x0D;&#x0A;partyID: &quot;&amp;partyID&amp;&quot;&#x0D;&#x0A;partySize: &quot;&amp;partySize&amp;&quot;&#x0D;&#x0A;partyMax: &quot;&amp;partyMax</param>
+                                    <param id="1" name="Message">&quot;===== DISCORD RICH PRESENCE =====&#x0D;&#x0A;state: &quot;&amp;state&amp;&quot;&#x0D;&#x0A;details: &quot;&amp;details&amp;&quot;&#x0D;&#x0A;largeImageKey: &quot;&amp;largeImageKey&amp;&quot;&#x0D;&#x0A;largeImageText: &quot;&amp;largeImageText&amp;&quot;&#x0D;&#x0A;smallImageKey: &quot;&amp;smallImageKey&amp;&quot;&#x0D;&#x0A;smallImageText: &quot;&amp;smallImageText&amp;&quot;&#x0D;&#x0A;startTimestamp: &quot;&amp;int(startTimestamp)&amp;&quot;&#x0D;&#x0A;endTimestamp: &quot;&amp;int(endTimestamp)&amp;&quot;&#x0D;&#x0A;partyID: &quot;&amp;partyID&amp;&quot;&#x0D;&#x0A;partySize: &quot;&amp;int(partySize)&amp;&quot;&#x0D;&#x0A;partyMax: &quot;&amp;int(partyMax)</param>
                                 </action>
                             </actions>
                         </event-block>

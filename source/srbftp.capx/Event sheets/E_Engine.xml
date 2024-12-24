@@ -2371,6 +2371,9 @@
                                         <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="226096618794580" type="Var_Level">
                                             <param id="0" name="Instance variable">Pause</param>
                                         </condition>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="713563230248786" type="Var_Level">
+                                            <param id="0" name="Instance variable">TimerLevelActive</param>
+                                        </condition>
                                     </conditions>
                                     <actions>
                                         <action id="-12" name="Subtract from" sid="794549218509067" type="Var_Player">
@@ -2427,6 +2430,9 @@
                                         </condition>
                                         <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="678222952227776" type="Var_Level">
                                             <param id="0" name="Instance variable">Pause</param>
+                                        </condition>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="467459909517874" type="Var_Level">
+                                            <param id="0" name="Instance variable">TimerLevelActive</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -2567,6 +2573,9 @@
                                             <param id="0" name="Instance variable">TimerGlobal</param>
                                             <param id="1" name="Comparison">4</param>
                                             <param id="2" name="Value">4</param>
+                                        </condition>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="457442948278057" type="Var_Level">
+                                            <param id="0" name="Instance variable">TimerLevelActive</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -14469,6 +14478,47 @@
         <comment>=post-level</comment>
         <event-group description="" sid="888320773182835" title="Level start/finish">
             <sub-events>
+                <comment>timers yadda yadda</comment>
+                <event-block sid="928972086619187">
+                    <conditions>
+                        <condition id="-8" name="Is boolean instance variable set" sid="367941708115267" type="Var_Level">
+                            <param id="0" name="Instance variable">TimerLevelActive</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-11" name="Add to" sid="211805769060949" type="Var_Level">
+                            <param id="0" name="Instance variable">TimerLevel</param>
+                            <param id="1" name="Value">dt</param>
+                        </action>
+                        <action id="-11" name="Add to" sid="143321918387007" type="Var_Level">
+                            <param id="0" name="Instance variable">TimerLevelReal</param>
+                            <param id="1" name="Value">dt</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="643532241579931">
+                    <conditions>
+                        <condition id="-1" name="Every tick" sid="684513562960680" type="System" />
+                        <condition id="-8" name="Is boolean instance variable set" sid="907178506407216" type="Var_Level">
+                            <param id="0" name="Instance variable">TimerLevelActive</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-11" name="Add to" sid="280675227729464" type="Var_Level">
+                            <param id="0" name="Instance variable">TimerLevelTicks</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="154909190042594">
+                    <conditions />
+                    <actions>
+                        <action id="-11" name="Add to" sid="629609960465364" type="Var_Game">
+                            <param id="0" name="Instance variable">TimerGlobal</param>
+                            <param id="1" name="Value">dt</param>
+                        </action>
+                    </actions>
+                </event-block>
                 <comment></comment>
                 <event-block sid="557809902418563">
                     <conditions>
@@ -15033,6 +15083,10 @@
                                 </condition>
                             </conditions>
                             <actions>
+                                <action id="-9" name="Set value" sid="102706207728493" type="System">
+                                    <param id="0" name="Variable">detail</param>
+                                    <param id="1" name="Value">detail&amp;&quot; (PAUSED)&quot;</param>
+                                </action>
                                 <action id="-9" name="Set value" sid="635028266449220" type="System">
                                     <param id="0" name="Variable">startTimestamp</param>
                                     <param id="1" name="Value">Var_Misc.Discord_TimestampBoot</param>
@@ -15633,47 +15687,6 @@
         </event-group>
         <event-group description="" sid="665187421457539" title="HUD">
             <sub-events>
-                <comment>timers yadda yadda</comment>
-                <event-block sid="891827382021981">
-                    <conditions>
-                        <condition id="-8" name="Is boolean instance variable set" sid="533886518296379" type="Var_Level">
-                            <param id="0" name="Instance variable">TimerLevelActive</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-11" name="Add to" sid="200085014405343" type="Var_Level">
-                            <param id="0" name="Instance variable">TimerLevel</param>
-                            <param id="1" name="Value">dt</param>
-                        </action>
-                        <action id="-11" name="Add to" sid="349029590929860" type="Var_Level">
-                            <param id="0" name="Instance variable">TimerLevelReal</param>
-                            <param id="1" name="Value">dt</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="618830955381046">
-                    <conditions>
-                        <condition id="-1" name="Every tick" sid="833439097752930" type="System" />
-                        <condition id="-8" name="Is boolean instance variable set" sid="320381339366668" type="Var_Level">
-                            <param id="0" name="Instance variable">TimerLevelActive</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-11" name="Add to" sid="256421109082329" type="Var_Level">
-                            <param id="0" name="Instance variable">TimerLevelTicks</param>
-                            <param id="1" name="Value">1</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="909784091527879">
-                    <conditions />
-                    <actions>
-                        <action id="-11" name="Add to" sid="929108926689421" type="Var_Game">
-                            <param id="0" name="Instance variable">TimerGlobal</param>
-                            <param id="1" name="Value">dt</param>
-                        </action>
-                    </actions>
-                </event-block>
                 <comment>skin name</comment>
                 <event-block sid="636573169268795">
                     <conditions>

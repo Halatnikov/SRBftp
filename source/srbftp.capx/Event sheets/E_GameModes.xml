@@ -956,20 +956,50 @@
                             <param id="0" name="Type">0</param>
                             <param id="1" name="Message">Function.ReturnValue&amp;&quot;kb&quot;</param>
                         </action>
+                        <action id="-3" name="Create object" sid="823646800900521" type="System">
+                            <param id="0" name="Object to create">JSON__COMMON</param>
+                            <param id="1" name="Layer">0</param>
+                            <param id="2" name="X">0</param>
+                            <param id="3" name="Y">0</param>
+                        </action>
+                        <action id="0" name="Set New Object" sid="159643460199082" type="JSON__COMMON">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </action>
                     </actions>
                     <sub-events>
+                        <event-block sid="688036299486415">
+                            <conditions>
+                                <condition id="100" name="For each property" sid="156641682114974" type="JSON__REPLAY">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}"></param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Call function" sid="447322162308745" type="Function">
+                                    <param id="0" name="Name">&quot;JSON2INI&quot;</param>
+                                    <param id="1" name="Parameter {n}">JSON__REPLAY.AsJson(0,JSON__REPLAY.CurrentKey)</param>
+                                </action>
+                                <action id="20" name="Set Value" sid="397932209075420" type="JSON__COMMON">
+                                    <param id="0" name="Value">replace(replace(trim(Function.ReturnValue),&quot;=&quot;,&quot;:&quot;),newline,&quot;,&quot;)</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">JSON__REPLAY.CurrentKey</param>
+                                </action>
+                            </actions>
+                        </event-block>
                         <variable constant="0" name="result" sid="273539119847157" static="0" type="text"></variable>
                         <event-block sid="401482272865507">
                             <conditions />
                             <actions>
                                 <action id="0" name="Call function" sid="291632234308465" type="Function">
                                     <param id="0" name="Name">&quot;JSON2INI&quot;</param>
-                                    <param id="1" name="Parameter {n}">JSON__REPLAY.AsJson(0)</param>
+                                    <param id="1" name="Parameter {n}">JSON__COMMON.AsJson(0)</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="585588613007992" type="System">
                                     <param id="0" name="Variable">result</param>
-                                    <param id="1" name="Value">Function.ReturnValue</param>
+                                    <param id="1" name="Value">replace(Function.ReturnValue,newline,&quot;|&quot;)</param>
                                 </action>
+                                <action id="-9" name="Destroy" sid="501684522771164" type="JSON__COMMON" />
                                 <action id="0" name="Call function" sid="821866945084609" type="Function">
                                     <param id="0" name="Name">&quot;Math_RoundFloat&quot;</param>
                                     <param id="1" name="Parameter {n}">len(result)/1024{###}2</param>
