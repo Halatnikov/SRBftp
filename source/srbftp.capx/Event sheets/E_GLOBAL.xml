@@ -3283,14 +3283,14 @@
                                             <param id="0" name="Instance variable">AudioSize</param>
                                             <param id="1" name="Value">Self.AudioSize + Self.CurrentValue</param>
                                         </action>
-                                        <action id="9" name="Preload (by name)" sid="434156140290763" type="BetterAudio">
-                                            <param id="0" name="Folder">1</param>
-                                            <param id="1" name="Audio file name">JSON_AudioPreload.CurrentKey</param>
-                                        </action>
                                         <action id="20" name="Set Value" sid="312294448717474" type="JSON_Audio">
                                             <param id="0" name="Value">0</param>
                                             <param id="1" name="Reference point">0</param>
                                             <param id="2" name="Key {n}">&quot;Preloaded&quot;{###}JSON_AudioPreload.CurrentKey</param>
+                                        </action>
+                                        <action id="9" name="Preload (by name)" sid="434156140290763" type="BetterAudio">
+                                            <param id="0" name="Folder">1</param>
+                                            <param id="1" name="Audio file name">JSON_AudioPreload.CurrentKey</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -3330,14 +3330,14 @@
                                     <param id="0" name="Instance variable">AudioSize</param>
                                     <param id="1" name="Value">Function.ReturnValue</param>
                                 </action>
-                                <action id="9" name="Preload (by name)" sid="913809767463789" type="BetterAudio">
-                                    <param id="0" name="Folder">1</param>
-                                    <param id="1" name="Audio file name">Function.Param(0)</param>
-                                </action>
                                 <action id="20" name="Set Value" sid="157129599584463" type="JSON_Audio">
                                     <param id="0" name="Value">0</param>
                                     <param id="1" name="Reference point">0</param>
                                     <param id="2" name="Key {n}">&quot;Preloaded&quot;{###}Function.Param(0)</param>
+                                </action>
+                                <action id="9" name="Preload (by name)" sid="913809767463789" type="BetterAudio">
+                                    <param id="0" name="Folder">1</param>
+                                    <param id="1" name="Audio file name">Function.Param(0)</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -3389,43 +3389,7 @@
                     </conditions>
                     <actions>
                         <action id="16" name="Set title" sid="153460635458750" type="NWjs">
-                            <param id="0" name="Title">JS.Value(&quot;String.format&quot;, &quot;{title} v{ver} {debug}&quot;, projectname, projectversion, (DEBUG = 1 ? &quot;(Debug mode)&quot; : &quot;&quot;))</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="928365849892750">
-                    <conditions>
-                        <condition id="-4" name="Trigger once while true" sid="728077232850325" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="-34" name="Set layer background color" sid="968572352315492" type="System">
-                            <param id="0" name="Layer">&quot;Empty&quot;</param>
-                            <param id="1" name="Color">rgb(0, 0, 0)</param>
-                        </action>
-                        <action id="-15" name="Set visible" sid="356672540653771" type="Text_ErrorHandler">
-                            <param id="0" name="Visibility">0</param>
-                        </action>
-                        <action id="-16" name="Wait" sid="853155958014202" type="System">
-                            <param id="0" name="Seconds">3</param>
-                        </action>
-                        <action id="-34" name="Set layer background color" sid="793744948788859" type="System">
-                            <param id="0" name="Layer">&quot;Empty&quot;</param>
-                            <param id="1" name="Color">rgb(60, 60, 60)</param>
-                        </action>
-                        <action id="-15" name="Set visible" sid="600960646775209" type="Text_ErrorHandler">
-                            <param id="0" name="Visibility">1</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="446656368954253">
-                    <conditions>
-                        <condition id="-6" name="Every X seconds" sid="389891098065866" type="System">
-                            <param id="0" name="Interval (seconds)">0.5</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Set text" sid="952749534354664" type="Text_ErrorHandler">
-                            <param id="0" name="Text">&quot;looks like something went wrong&#x0D;&#x0A;&#x0D;&#x0A;current menu: &quot;&amp;Var_Game.CurrentMenu</param>
+                            <param id="0" name="Title">JS.Value(&quot;String.format&quot;, &quot;{title} v{ver}{debug}&quot;, projectname, projectversion, (DEBUG = 1 ? &quot; (Debug mode)&quot; : &quot;&quot;))</param>
                         </action>
                     </actions>
                 </event-block>
@@ -3484,6 +3448,43 @@
                             </actions>
                         </event-block>
                     </sub-events>
+                </event-block>
+                <comment>wrong menu error handler</comment>
+                <event-block sid="928365849892750">
+                    <conditions>
+                        <condition id="-4" name="Trigger once while true" sid="728077232850325" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-34" name="Set layer background color" sid="968572352315492" type="System">
+                            <param id="0" name="Layer">&quot;Empty&quot;</param>
+                            <param id="1" name="Color">rgb(0, 0, 0)</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="356672540653771" type="Text_ErrorHandler">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="853155958014202" type="System">
+                            <param id="0" name="Seconds">3</param>
+                        </action>
+                        <action id="-34" name="Set layer background color" sid="793744948788859" type="System">
+                            <param id="0" name="Layer">&quot;Empty&quot;</param>
+                            <param id="1" name="Color">rgb(60, 60, 60)</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="600960646775209" type="Text_ErrorHandler">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="446656368954253">
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" sid="389891098065866" type="System">
+                            <param id="0" name="Interval (seconds)">0.5</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set text" sid="952749534354664" type="Text_ErrorHandler">
+                            <param id="0" name="Text">&quot;looks like something went wrong&#x0D;&#x0A;&#x0D;&#x0A;current menu: &quot;&amp;Var_Game.CurrentMenu</param>
+                        </action>
+                    </actions>
                 </event-block>
                 <comment>layout null management</comment>
                 <event-block sid="351219513817815">
