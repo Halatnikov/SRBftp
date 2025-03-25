@@ -2930,6 +2930,7 @@
                         </action>
                     </actions>
                 </event-block>
+                <variable constant="0" name="confirm_exit" sid="729653246687529" static="1" type="number">0</variable>
                 <event-block sid="914652418132876">
                     <conditions />
                     <actions>
@@ -3071,6 +3072,7 @@
                         </action>
                     </actions>
                 </event-block>
+                <comment></comment>
                 <event-block sid="899127023502233">
                     <conditions>
                         <condition id="-7" name="Compare instance variable" sid="563181124413318" type="Var_Game">
@@ -3215,6 +3217,7 @@
                         </event-block>
                     </sub-events>
                 </event-block>
+                <comment></comment>
                 <event-block sid="469394136610756">
                     <conditions>
                         <condition id="-7" name="Compare instance variable" sid="173609965755330" type="Var_Game">
@@ -3359,6 +3362,7 @@
                         </event-block>
                     </sub-events>
                 </event-block>
+                <comment></comment>
                 <event-block any="1" sid="580584884732109">
                     <conditions>
                         <condition id="-7" name="Compare instance variable" sid="845370372142941" type="Var_Game">
@@ -3417,6 +3421,7 @@
                         </event-block>
                     </sub-events>
                 </event-block>
+                <comment></comment>
                 <event-block sid="701125204690625">
                     <conditions>
                         <condition id="-7" name="Compare instance variable" sid="695441227307713" type="Var_Game">
@@ -3464,6 +3469,7 @@
                         </event-block>
                     </sub-events>
                 </event-block>
+                <comment></comment>
                 <event-block sid="248814314437767">
                     <conditions>
                         <condition id="-7" name="Compare instance variable" sid="676461244963315" type="Var_Game">
@@ -3604,6 +3610,7 @@
                         </event-block>
                     </sub-events>
                 </event-block>
+                <comment></comment>
                 <event-block sid="900539861781786">
                     <conditions>
                         <condition id="-7" name="Compare instance variable" sid="165588072756505" type="Var_Game">
@@ -3646,6 +3653,34 @@
                         </event-block>
                     </sub-events>
                 </event-block>
+                <comment></comment>
+                <event-block sid="442646154789925">
+                    <conditions>
+                        <condition id="-7" inverted="1" name="Compare instance variable" sid="148077089727652" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentSelection</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">8</param>
+                        </condition>
+                        <condition id="-16" name="Is on layer" sid="569980197288877" type="Menu_Options">
+                            <param id="0" name="Layer">&quot;TitleScreen&quot;</param>
+                        </condition>
+                        <condition id="-7" name="Compare instance variable" sid="851901789606071" type="Menu_Options">
+                            <param id="0" name="Instance variable">ID</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;7&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="646973891005039" type="System">
+                            <param id="0" name="Variable">confirm_exit</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="0" name="Set text" sid="904421656895850" type="Menu_Options">
+                            <param id="0" name="Text">&quot;EXIT&quot;</param>
+                        </action>
+                        <action behavior="Flash" id="1" name="Stop flashing" sid="443917478190422" type="Menu_Options" />
+                    </actions>
+                </event-block>
                 <event-block sid="607850337186754">
                     <conditions>
                         <condition id="-7" name="Compare instance variable" sid="369082392641355" type="Var_Game">
@@ -3679,23 +3714,109 @@
                                     <param id="2" name="Value">0</param>
                                 </condition>
                             </conditions>
-                            <actions>
-                                <action id="-16" name="Set opacity" sid="802269135900785" type="FadeBlack">
-                                    <param id="0" name="Opacity">0</param>
-                                </action>
-                                <action id="-15" name="Set visible" sid="539314087450474" type="FadeBlack">
-                                    <param id="0" name="Visibility">1</param>
-                                </action>
-                                <action behavior="Fade" id="0" name="Restart fade" sid="932705311760134" type="FadeBlack" />
-                                <action id="-9" name="Set value" sid="325824040140573" type="System">
-                                    <param id="0" name="Variable">lock</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                                <action id="-16" name="Wait" sid="918407918195662" type="System">
-                                    <param id="0" name="Seconds">1.6</param>
-                                </action>
-                                <action id="1" name="Close" sid="631774581733437" type="Browser" />
-                            </actions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="982425137746664">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="801732429733604" type="System">
+                                            <param id="0" name="Variable">confirm_exit</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Wait" sid="143118732743045" type="System">
+                                            <param id="0" name="Seconds">0.05</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="242406981634017" type="System">
+                                            <param id="0" name="Variable">confirm_exit</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="0" name="Call function" sid="687510659504452" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;Ring&quot;</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="250076499618434">
+                                            <conditions>
+                                                <condition id="-16" name="Is on layer" sid="215477443079783" type="Menu_Options">
+                                                    <param id="0" name="Layer">&quot;TitleScreen&quot;</param>
+                                                </condition>
+                                                <condition id="-7" name="Compare instance variable" sid="194299385083324" type="Menu_Options">
+                                                    <param id="0" name="Instance variable">ID</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">&quot;7&quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Set text" sid="126460432007820" type="Menu_Options">
+                                                    <param id="0" name="Text">&quot;ARE YOU SURE?&quot;</param>
+                                                </action>
+                                                <action behavior="Flash" id="0" name="Flash" sid="749166542729203" type="Menu_Options">
+                                                    <param id="0" name="&apos;On&apos; time">0.2</param>
+                                                    <param id="1" name="&apos;Off&apos; time">0.2</param>
+                                                    <param id="2" name="Duration">9999</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="243163994269763">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="102132805013122" type="System">
+                                            <param id="0" name="Variable">confirm_exit</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Set opacity" sid="802269135900785" type="FadeBlack">
+                                            <param id="0" name="Opacity">0</param>
+                                        </action>
+                                        <action id="-15" name="Set visible" sid="539314087450474" type="FadeBlack">
+                                            <param id="0" name="Visibility">1</param>
+                                        </action>
+                                        <action behavior="Fade" id="0" name="Restart fade" sid="932705311760134" type="FadeBlack" />
+                                        <action id="0" name="Set text" sid="354851838726802" type="Menu_Options">
+                                            <param id="0" name="Text">&quot;EXIT&quot;</param>
+                                        </action>
+                                        <action behavior="Flash" id="1" name="Stop flashing" sid="306485110581513" type="Menu_Options" />
+                                        <action id="-9" name="Set value" sid="325824040140573" type="System">
+                                            <param id="0" name="Variable">lock</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="507607729351001">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="565108952991447" type="System">
+                                                    <param id="0" name="Variable">WEB</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">1</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-16" name="Wait" sid="697989540686717" type="System">
+                                                    <param id="0" name="Seconds">1.6</param>
+                                                </action>
+                                                <action id="9" name="Reload" sid="328511861397924" type="Browser" />
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="510917000109613">
+                                            <conditions>
+                                                <condition id="-22" name="Else" sid="537795731426654" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-16" name="Wait" sid="918407918195662" type="System">
+                                                    <param id="0" name="Seconds">1.6</param>
+                                                </action>
+                                                <action id="1" name="Close" sid="631774581733437" type="Browser" />
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-block>
@@ -12854,15 +12975,15 @@
                                     <param id="0" name="Animation">&quot;Online&quot;</param>
                                     <param id="1" name="From">1</param>
                                 </action>
-                                <action id="0" name="Set text" sid="571865667300641" type="CutsceneTextA">
-                                    <param id="0" name="Text">&quot;CONNECTING TO SERVER...&quot;</param>
-                                </action>
                                 <action id="-10" name="Set value" sid="512139983785228" type="Var_Online">
                                     <param id="0" name="Instance variable">Username</param>
                                     <param id="1" name="Value">trim(left(Menu_TextBox.Text, 24))</param>
                                 </action>
                                 <action id="101" name="Set my actor name" sid="535379793598427" type="Photon">
                                     <param id="0" name="name">Var_Online.Username</param>
+                                </action>
+                                <action id="0" name="Set text" sid="571865667300641" type="CutsceneTextA">
+                                    <param id="0" name="Text">&quot;RESOLVING...&quot;</param>
                                 </action>
                                 <action id="0" name="Request URL" sid="417925821608943" type="AJAX">
                                     <param id="0" name="Tag">&quot;&quot;</param>
@@ -12909,6 +13030,9 @@
                         <action id="0" name="Set user id" sid="477513136434248" type="Photon">
                             <param id="0" name="UserId">CBHash.MD5(AJAX.LastData)&amp;Function.ReturnValue</param>
                         </action>
+                        <action id="0" name="Set text" sid="263637475491148" type="CutsceneTextA">
+                            <param id="0" name="Text">&quot;CONNECTING TO SERVER...&quot;</param>
+                        </action>
                         <action id="10" name="Connect" sid="775755251726224" type="Photon" />
                     </actions>
                 </event-block>
@@ -12923,6 +13047,9 @@
                         </action>
                         <action id="0" name="Set user id" sid="354618552341986" type="Photon">
                             <param id="0" name="UserId">CBHash.MD5(Save_General.Value(0, &quot;TimestampStart&quot;))&amp;Function.ReturnValue</param>
+                        </action>
+                        <action id="0" name="Set text" sid="831903995454098" type="CutsceneTextA">
+                            <param id="0" name="Text">&quot;CONNECTING TO SERVER...&quot;</param>
                         </action>
                         <action id="10" name="Connect" sid="461279965889909" type="Photon" />
                     </actions>
