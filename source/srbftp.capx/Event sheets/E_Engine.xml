@@ -1812,20 +1812,25 @@
                                 </action>
                             </actions>
                         </event-block>
-                        <comment>i&apos;m too lazy to check if modulos work</comment>
-                        <event-block sid="744324895306285">
+                        <comment>i have no clue if this works</comment>
+                        <event-block sid="718966673185705">
                             <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="400937623071112" type="Var_Player">
-                                    <param id="0" name="Instance variable">Rings</param>
-                                    <param id="1" name="Comparison">5</param>
-                                    <param id="2" name="Value">100</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="249755638071944" type="System" />
-                                <condition id="-7" inverted="1" name="Compare instance variable" sid="331867116551179" type="Var_Player">
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="280887552273583" type="Var_Player">
                                     <param id="0" name="Instance variable">Lives</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">-1</param>
                                 </condition>
+                                <condition id="-7" name="Compare instance variable" sid="559250970010323" type="Var_Player">
+                                    <param id="0" name="Instance variable">Rings</param>
+                                    <param id="1" name="Comparison">4</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                                <condition id="-8" name="Compare two values" sid="821331956811249" type="System">
+                                    <param id="0" name="First value">Var_Player.Rings%100</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">0</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="712676658270976" type="System" />
                             </conditions>
                             <actions>
                                 <action id="-11" name="Add to" sid="406141774407419" type="Var_Player">
@@ -1859,59 +1864,6 @@
                                     </conditions>
                                     <actions>
                                         <action id="0" name="Call function" sid="566987234682554" type="Function">
-                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
-                                            <param id="1" name="Parameter {n}">&quot;21Up&quot;</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
-                        </event-block>
-                        <event-block sid="505128161259948">
-                            <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="160232794807730" type="Var_Player">
-                                    <param id="0" name="Instance variable">Rings</param>
-                                    <param id="1" name="Comparison">5</param>
-                                    <param id="2" name="Value">200</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="439537716634126" type="System" />
-                                <condition id="-7" inverted="1" name="Compare instance variable" sid="513956975183233" type="Var_Player">
-                                    <param id="0" name="Instance variable">Lives</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">-1</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-11" name="Add to" sid="640928670422607" type="Var_Player">
-                                    <param id="0" name="Instance variable">Lives</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                            </actions>
-                            <sub-events>
-                                <event-block sid="144196707720456">
-                                    <conditions>
-                                        <condition id="-7" name="Compare instance variable" sid="782028731488963" type="Var_Level">
-                                            <param id="0" name="Instance variable">Level_Game</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">1</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="0" name="Call function" sid="206301502113518" type="Function">
-                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
-                                            <param id="1" name="Parameter {n}">&quot;1Up&quot;</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="538756398896298">
-                                    <conditions>
-                                        <condition id="-7" name="Compare instance variable" sid="442292137893019" type="Var_Level">
-                                            <param id="0" name="Instance variable">Level_Game</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">2</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="0" name="Call function" sid="674753102996628" type="Function">
                                             <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                             <param id="1" name="Parameter {n}">&quot;21Up&quot;</param>
                                         </action>
@@ -3177,6 +3129,17 @@
                                 </action>
                             </actions>
                             <sub-events>
+                                <event-block sid="509494399052594">
+                                    <conditions />
+                                    <actions>
+                                        <action id="-16" name="Wait" sid="742171755881178" type="System">
+                                            <param id="0" name="Seconds">0</param>
+                                        </action>
+                                        <action id="-2" name="Set Y" sid="599585699237988" type="Special_Trigger">
+                                            <param id="0" name="Y">-999</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
                                 <event-block sid="420441799270700">
                                     <conditions>
                                         <condition id="-8" name="Is boolean instance variable set" sid="717063724389551" type="Special_StartPos">
@@ -3213,9 +3176,12 @@
                         <comment>trigger for all sorts of things</comment>
                         <event-block sid="620704713683760">
                             <conditions>
-                                <condition id="0" name="On collision with another object" sid="653857040472907" type="Engine_Player">
+                                <condition id="9" name="Is overlapping at offset" sid="653857040472907" type="Engine_Player">
                                     <param id="0" name="Object">Special_Trigger</param>
+                                    <param id="1" name="Offset X">0</param>
+                                    <param id="2" name="Offset Y">-1</param>
                                 </condition>
+                                <condition id="-4" name="Trigger once while true" sid="661148087973116" type="System" />
                             </conditions>
                             <actions>
                                 <action id="0" name="Call function" sid="670717440856453" type="Function">
@@ -7838,7 +7804,7 @@
                                         <event-block sid="814244042166904">
                                             <conditions>
                                                 <condition id="-1" name="Compare X" sid="608672988317403" type="Engine_Player">
-                                                    <param id="0" name="Comparison">4</param>
+                                                    <param id="0" name="Comparison">5</param>
                                                     <param id="1" name="X co-ordinate">Enemies.X</param>
                                                 </condition>
                                             </conditions>
@@ -7938,7 +7904,7 @@
                                         <event-block sid="406327473529121">
                                             <conditions>
                                                 <condition id="-2" name="Compare Y" sid="850575431236766" type="Engine_Player">
-                                                    <param id="0" name="Comparison">4</param>
+                                                    <param id="0" name="Comparison">5</param>
                                                     <param id="1" name="Y co-ordinate">Enemies.Y</param>
                                                 </condition>
                                             </conditions>
@@ -8080,7 +8046,7 @@
                                                 <event-block sid="545607283635206">
                                                     <conditions>
                                                         <condition id="-1" name="Compare X" sid="384203189559534" type="Engine_Player">
-                                                            <param id="0" name="Comparison">4</param>
+                                                            <param id="0" name="Comparison">5</param>
                                                             <param id="1" name="X co-ordinate">Enemies.X</param>
                                                         </condition>
                                                     </conditions>
@@ -8220,7 +8186,7 @@
                                                 <event-block sid="529285530406638">
                                                     <conditions>
                                                         <condition id="-2" name="Compare Y" sid="530184588877680" type="Engine_Player">
-                                                            <param id="0" name="Comparison">4</param>
+                                                            <param id="0" name="Comparison">5</param>
                                                             <param id="1" name="Y co-ordinate">Enemies.Y</param>
                                                         </condition>
                                                     </conditions>
@@ -9576,17 +9542,17 @@
                                         <comment>change speed</comment>
                                         <event-block sid="930654575289634">
                                             <conditions>
-                                                <condition id="-33" name="Pick by comparison" sid="816494834260781" type="System">
-                                                    <param id="0" name="Object">Special_BossWaypoint</param>
-                                                    <param id="1" name="Expression">Special_BossWaypoint.id</param>
-                                                    <param id="2" name="Comparison">0</param>
-                                                    <param id="3" name="Value">Bosses.Active</param>
-                                                </condition>
                                                 <condition id="-33" name="Pick by comparison" sid="955001413929094" type="System">
                                                     <param id="0" name="Object">Special_BossWaypoint</param>
                                                     <param id="1" name="Expression">Special_BossWaypoint.Set</param>
                                                     <param id="2" name="Comparison">0</param>
                                                     <param id="3" name="Value">Bosses.WaypointSet</param>
+                                                </condition>
+                                                <condition id="-33" name="Pick by comparison" sid="816494834260781" type="System">
+                                                    <param id="0" name="Object">Special_BossWaypoint</param>
+                                                    <param id="1" name="Expression">Special_BossWaypoint.id</param>
+                                                    <param id="2" name="Comparison">0</param>
+                                                    <param id="3" name="Value">Bosses.Active</param>
                                                 </condition>
                                                 <condition id="-7" inverted="1" name="Compare instance variable" sid="114343821561521" type="Special_BossWaypoint">
                                                     <param id="0" name="Instance variable">ChangeSpeed</param>
@@ -9704,17 +9670,17 @@
                                     <sub-events>
                                         <event-block sid="680941306287111">
                                             <conditions>
-                                                <condition id="-33" name="Pick by comparison" sid="883283266276961" type="System">
-                                                    <param id="0" name="Object">Special_BossWaypoint</param>
-                                                    <param id="1" name="Expression">Special_BossWaypoint.id</param>
-                                                    <param id="2" name="Comparison">0</param>
-                                                    <param id="3" name="Value">Bosses.Active</param>
-                                                </condition>
                                                 <condition id="-33" name="Pick by comparison" sid="279084944830462" type="System">
                                                     <param id="0" name="Object">Special_BossWaypoint</param>
                                                     <param id="1" name="Expression">Special_BossWaypoint.Set</param>
                                                     <param id="2" name="Comparison">0</param>
                                                     <param id="3" name="Value">Bosses.WaypointSet</param>
+                                                </condition>
+                                                <condition id="-33" name="Pick by comparison" sid="883283266276961" type="System">
+                                                    <param id="0" name="Object">Special_BossWaypoint</param>
+                                                    <param id="1" name="Expression">Special_BossWaypoint.id</param>
+                                                    <param id="2" name="Comparison">0</param>
+                                                    <param id="3" name="Value">Bosses.Active</param>
                                                 </condition>
                                             </conditions>
                                             <actions>
@@ -9802,7 +9768,7 @@
                                     <conditions>
                                         <condition id="-7" name="Compare instance variable" sid="254644272272603" type="Bosses">
                                             <param id="0" name="Instance variable">FlashTimer</param>
-                                            <param id="1" name="Comparison">0</param>
+                                            <param id="1" name="Comparison">5</param>
                                             <param id="2" name="Value">2</param>
                                         </condition>
                                     </conditions>
@@ -14727,7 +14693,6 @@
                 <comment></comment>
                 <event-block sid="371103254725090">
                     <conditions>
-                        <condition id="-2" name="On start of layout" sid="885995488177100" type="System" />
                         <condition id="-14" inverted="1" name="Compare variable" sid="881855915905479" type="System">
                             <param id="0" name="Variable">DESKTOP</param>
                             <param id="1" name="Comparison">0</param>
@@ -14736,6 +14701,7 @@
                         <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="130471217055513" type="JSON_AudioPreload">
                             <param id="0" name="Instance variable">LevelPreloaded</param>
                         </condition>
+                        <condition id="-4" name="Trigger once while true" sid="849987601708615" type="System" />
                     </conditions>
                     <actions>
                         <action id="-16" name="Wait" sid="947357545910739" type="System">

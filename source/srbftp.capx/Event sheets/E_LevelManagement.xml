@@ -5147,61 +5147,420 @@
                     </actions>
                 </event-block>
                 <comment></comment>
-                <event-block sid="564344298592893">
+                <event-block any="1" sid="333583522552775">
                     <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="709425044349562" type="Boss1_7SL1">
-                            <param id="0" name="Instance variable">Active</param>
-                            <param id="1" name="Comparison">4</param>
-                            <param id="2" name="Value">Self.MaxWaypoints</param>
+                        <condition id="0" name="On function" sid="204947602897725" type="Function">
+                            <param id="0" name="Name">&quot;Player_Restart&quot;</param>
                         </condition>
-                        <condition id="-4" name="Trigger once while true" sid="926746908159751" type="System" />
+                        <condition id="-4" name="Trigger once while true" sid="510683835495253" type="System" />
                     </conditions>
                     <actions>
-                        <action id="14" name="Log" sid="368893256831278" type="Browser">
-                            <param id="0" name="Type">0</param>
-                            <param id="1" name="Message">1</param>
-                        </action>
-                        <action id="4" name="Set animation" sid="728958137136612" type="Boss1_7SL1">
-                            <param id="0" name="Animation">&quot;Idle&quot;</param>
-                            <param id="1" name="From">1</param>
-                        </action>
-                        <action behavior="MoveTo" id="1" name="Set maximum speed" sid="938503209572913" type="Boss1_7SL1">
-                            <param id="0" name="Max speed">0</param>
-                        </action>
-                        <action id="-16" name="Wait" sid="168155991008396" type="System">
-                            <param id="0" name="Seconds">1.0</param>
-                        </action>
-                        <action id="4" name="Set animation" sid="179791990257000" type="Boss1_7SL1">
-                            <param id="0" name="Animation">&quot;Spin&quot;</param>
-                            <param id="1" name="From">1</param>
-                        </action>
-                        <action behavior="MoveTo" id="1" name="Set maximum speed" sid="214904493760638" type="Boss1_7SL1">
+                        <action behavior="MoveTo" id="1" name="Set maximum speed" sid="688428143137358" type="Boss1_7SL1">
                             <param id="0" name="Max speed">Self.InitialSpeed</param>
                         </action>
-                        <action id="-11" name="Add to" sid="438476044675464" type="Boss1_7SL1">
-                            <param id="0" name="Instance variable">WaypointSet</param>
-                            <param id="1" name="Value">1</param>
-                        </action>
-                        <action id="14" name="Log" sid="470632670103474" type="Browser">
-                            <param id="0" name="Type">0</param>
-                            <param id="1" name="Message">2</param>
-                        </action>
+                        <action id="-9" name="Destroy" sid="668582798011820" type="Sprite" />
+                        <action id="-9" name="Destroy" sid="815101572049041" type="Sprite2" />
                     </actions>
+                </event-block>
+                <event-block sid="723617943137896">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="100263048250529" type="Boss1_7SL1">
+                            <param id="0" name="Instance variable">State</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;death&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions />
                     <sub-events>
-                        <event-block sid="944198517169747">
+                        <event-block sid="504091282607819">
                             <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="100990828267646" type="Boss1_7SL1">
-                                    <param id="0" name="Instance variable">WaypointSet</param>
-                                    <param id="1" name="Comparison">4</param>
-                                    <param id="2" name="Value">4</param>
+                                <condition id="-4" name="Trigger once while true" sid="392437503855810" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="935153233832814" type="Boss1_7SL1">
+                                    <param id="0" name="Animation">&quot;Charge&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                                <action id="0" name="Call function" sid="316975414671152" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;F_EvilKnucklesCharge&quot;</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="850114846192026" type="System">
+                                    <param id="0" name="Seconds">1</param>
+                                </action>
+                                <action id="0" name="Call function" sid="445101163635726" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;F_LavaFried&quot;</param>
+                                </action>
+                                <action id="4" name="Set animation" sid="725404575488148" type="Boss1_7SL1">
+                                    <param id="0" name="Animation">&quot;Spin&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="875353229801039">
+                                    <conditions>
+                                        <condition id="-12" name="Repeat" sid="956671530695200" type="System">
+                                            <param id="0" name="Count">3</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Spawn another object" sid="759552374215213" type="Boss1_7SL1">
+                                            <param id="0" name="Object">Sprite</param>
+                                            <param id="1" name="Layer">&quot;Player&quot;</param>
+                                            <param id="2" name="Image point">0</param>
+                                        </action>
+                                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="140677309175411" type="Sprite">
+                                            <param id="0" name="Angle">choose(random(205,335), random(205,335))</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="427181065216069">
+                            <conditions>
+                                <condition id="2" name="Is playing" sid="493809947338763" type="Boss1_7SL1">
+                                    <param id="0" name="Animation">&quot;Spin&quot;</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-10" name="Set value" sid="164142892958416" type="Boss1_7SL1">
-                                    <param id="0" name="Instance variable">WaypointSet</param>
+                                <action id="-2" name="Set Y" sid="787739365067539" type="Boss1_7SL1">
+                                    <param id="0" name="Y">Self.Y-5</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="658815754080200">
+                            <conditions>
+                                <condition id="-3" inverted="1" name="Is on-screen" sid="165156408671332" type="Boss1_7SL1" />
+                                <condition id="-4" name="Trigger once while true" sid="500416363898007" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="255986859732956" type="Boss1_7SL1">
+                                    <param id="0" name="Animation">&quot;Death&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="330740132869701">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="422589708817839" type="Sprite">
+                            <param id="0" name="Object">Object_LiteTween</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Bullet" id="4" name="Bounce off object" sid="613139049295883" type="Sprite">
+                            <param id="0" name="Object">Object_LiteTween</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="695665404706867">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="911481602541805" type="Sprite">
+                            <param id="0" name="Object">Special_Invisible</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Bullet" id="4" name="Bounce off object" sid="633618613433568" type="Sprite">
+                            <param id="0" name="Object">Special_Invisible</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="701584611743277">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="541211041474760" type="Sprite">
+                            <param id="0" name="Object">LevelTiles</param>
+                        </condition>
+                        <condition id="1" inverted="1" name="Is overlapping another object" sid="355673603116292" type="Sprite">
+                            <param id="0" name="Object">Special_Invisible</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="227047672659046">
+                            <conditions>
+                                <condition id="9" inverted="1" name="Is overlapping at offset" sid="522335121108528" type="Sprite">
+                                    <param id="0" name="Object">LevelTiles</param>
+                                    <param id="1" name="Offset X">0</param>
+                                    <param id="2" name="Offset Y">2</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action behavior="Bullet" id="4" name="Bounce off object" sid="681718787141792" type="Sprite">
+                                    <param id="0" name="Object">LevelTiles</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="905065413318474">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="791192579693109" type="System" />
+                            </conditions>
+                            <actions>
+                                <action behavior="Bullet" id="5" name="Set enabled" sid="805274045404631" type="Sprite">
+                                    <param id="0" name="State">0</param>
+                                </action>
+                                <action id="-13" name="Set boolean" sid="840299673191425" type="Sprite">
+                                    <param id="0" name="Instance variable">Landed</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
                             </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="725151814015940">
+                    <conditions>
+                        <condition id="-8" name="Is boolean instance variable set" sid="538709802312991" type="Sprite">
+                            <param id="0" name="Instance variable">Landed</param>
+                        </condition>
+                        <condition id="-6" name="Every X seconds" sid="866091651087352" type="System">
+                            <param id="0" name="Interval (seconds)">0.1</param>
+                        </condition>
+                        <condition id="-11" name="For Each" sid="925608330580731" type="System">
+                            <param id="0" name="Object">Sprite</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Spawn another object" sid="265538890308092" type="Sprite">
+                            <param id="0" name="Object">Sprite2</param>
+                            <param id="1" name="Layer">&quot;Player&quot;</param>
+                            <param id="2" name="Image point">choose(1,0,2)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="195964147830517">
+                    <conditions />
+                    <actions>
+                        <action id="-2" name="Set Y" sid="101947994790467" type="Sprite2">
+                            <param id="0" name="Y">Self.Y-2</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="768993322540070">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="691620689601219" type="Boss1_7SL1">
+                            <param id="0" name="Instance variable">Active</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                        <condition id="-7" inverted="1" name="Compare instance variable" sid="870833113181937" type="Boss1_7SL1">
+                            <param id="0" name="Instance variable">State</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;death&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="312713002694824">
+                            <conditions>
+                                <condition id="2" name="Is playing" sid="289089379723885" type="Boss1_7SL1">
+                                    <param id="0" name="Animation">&quot;Spin&quot;</param>
+                                </condition>
+                                <condition id="1" name="Is overlapping another object" sid="948836047792693" type="PlayerSkins">
+                                    <param id="0" name="Object">Boss1_7SL1</param>
+                                </condition>
+                                <condition id="-8" name="Is boolean instance variable set" sid="108057734832554" type="PlayerSkins">
+                                    <param id="0" name="Instance variable">Me</param>
+                                </condition>
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="854392255686301" type="Var_Player">
+                                    <param id="0" name="Instance variable">State</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;crouch&quot;</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="281554627610432" type="Var_Player">
+                                    <param id="0" name="Instance variable">Finished</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Wait" sid="688269779491464" type="System">
+                                    <param id="0" name="Seconds">0</param>
+                                </action>
+                                <action id="-13" name="Set boolean" sid="978633676265407" type="Var_Player">
+                                    <param id="0" name="Instance variable">CanMove</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="0" name="Call function" sid="428634784354553" type="Function">
+                                    <param id="0" name="Name">&quot;Player_Hurt&quot;</param>
+                                    <param id="1" name="Parameter {n}"></param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="558812206295813">
+                            <conditions>
+                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="238129121019051" type="Boss1_7SL1">
+                                    <param id="0" name="Instance variable">CanBeHit</param>
+                                </condition>
+                                <condition id="2" inverted="1" name="Is playing" sid="689514070168276" type="Boss1_7SL1">
+                                    <param id="0" name="Animation">&quot;Charge&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="302779911584001" type="Boss1_7SL1">
+                                    <param id="0" name="Animation">&quot;Spin&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="185079374773267">
+                                    <conditions>
+                                        <condition id="-6" name="Every X seconds" sid="504903002389053" type="System">
+                                            <param id="0" name="Interval (seconds)">0.05</param>
+                                        </condition>
+                                        <condition id="-8" name="Compare two values" sid="987603032185224" type="System">
+                                            <param id="0" name="First value">Save_Config.Value(0,&quot;GameplayProjectileTrails&quot;)</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Spawn another object" sid="659623694350550" type="Boss1_7SL1">
+                                            <param id="0" name="Object">EffectsF_ProjectileTrail</param>
+                                            <param id="1" name="Layer">&quot;Level&quot;</param>
+                                            <param id="2" name="Image point">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="839845807726262">
+                            <conditions>
+                                <condition id="-8" name="Is boolean instance variable set" sid="592169801191060" type="Boss1_7SL1">
+                                    <param id="0" name="Instance variable">CanBeHit</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="428675757415413">
+                                    <conditions>
+                                        <condition id="-1" name="Compare X" sid="463485666620523" type="Engine_Player">
+                                            <param id="0" name="Comparison">3</param>
+                                            <param id="1" name="X co-ordinate">Boss1_7SL1.X</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="7" name="Set mirrored" sid="742551191337469" type="Boss1_7SL1">
+                                            <param id="0" name="State">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="825633102391639">
+                                    <conditions>
+                                        <condition id="-1" name="Compare X" sid="528999146697938" type="Engine_Player">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="X co-ordinate">Boss1_7SL1.X</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="7" name="Set mirrored" sid="256627953922909" type="Boss1_7SL1">
+                                            <param id="0" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="564344298592893">
+                            <conditions>
+                                <condition id="-8" name="Is boolean instance variable set" sid="385953184256684" type="Boss1_7SL1">
+                                    <param id="0" name="Instance variable">Reverse</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="709425044349562" type="Boss1_7SL1">
+                                    <param id="0" name="Instance variable">Active</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">Self.MaxWaypoints-1</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="876443560797925" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-13" name="Set boolean" sid="466906493539214" type="Boss1_7SL1">
+                                    <param id="0" name="Instance variable">CanBeHit</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action behavior="MoveTo" id="1" name="Set maximum speed" sid="970759113146643" type="Boss1_7SL1">
+                                    <param id="0" name="Max speed">0.01</param>
+                                </action>
+                                <action id="4" name="Set animation" sid="728958137136612" type="Boss1_7SL1">
+                                    <param id="0" name="Animation">&quot;Idle&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                                <action behavior="Timer" id="0" name="Start timer" sid="658828354338355" type="Boss1_7SL1">
+                                    <param id="0" name="Duration">2</param>
+                                    <param id="1" name="Type">0</param>
+                                    <param id="2" name="Tag">&quot;1&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="382994351537522">
+                            <conditions>
+                                <condition behavior="Timer" id="0" name="On timer" sid="770268289953245" type="Boss1_7SL1">
+                                    <param id="0" name="Tag">&quot;1&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-13" name="Set boolean" sid="131089066718739" type="Boss1_7SL1">
+                                    <param id="0" name="Instance variable">CanBeHit</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="4" name="Set animation" sid="895053497143553" type="Boss1_7SL1">
+                                    <param id="0" name="Animation">&quot;Charge&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                                <action id="0" name="Call function" sid="449404142496055" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;F_EvilKnucklesCharge&quot;</param>
+                                </action>
+                                <action behavior="Timer" id="0" name="Start timer" sid="126493224035783" type="Boss1_7SL1">
+                                    <param id="0" name="Duration">1</param>
+                                    <param id="1" name="Type">0</param>
+                                    <param id="2" name="Tag">&quot;2&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="312157864780600">
+                            <conditions>
+                                <condition behavior="Timer" id="0" name="On timer" sid="285879235572084" type="Boss1_7SL1">
+                                    <param id="0" name="Tag">&quot;2&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="819509361928039" type="Boss1_7SL1">
+                                    <param id="0" name="Animation">&quot;Spin&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                                <action id="-13" name="Set boolean" sid="210462208622126" type="Boss1_7SL1">
+                                    <param id="0" name="Instance variable">Reverse</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-11" name="Add to" sid="438476044675464" type="Boss1_7SL1">
+                                    <param id="0" name="Instance variable">WaypointSet</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="599916722449575" type="Boss1_7SL1">
+                                    <param id="0" name="Instance variable">Active</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action behavior="MoveTo" id="1" name="Set maximum speed" sid="214904493760638" type="Boss1_7SL1">
+                                    <param id="0" name="Max speed">Self.InitialSpeed</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="944198517169747">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="100990828267646" type="Boss1_7SL1">
+                                            <param id="0" name="Instance variable">WaypointSet</param>
+                                            <param id="1" name="Comparison">4</param>
+                                            <param id="2" name="Value">4</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Set value" sid="164142892958416" type="Boss1_7SL1">
+                                            <param id="0" name="Instance variable">WaypointSet</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-block>

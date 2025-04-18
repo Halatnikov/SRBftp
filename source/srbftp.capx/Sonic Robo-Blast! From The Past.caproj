@@ -2,7 +2,7 @@
 <c2project>
     <name>Sonic Robo-Blast! From The Past</name>
     <description>Original games by Sonikku - Johnathan Wallbank and SSNTails - A.J. Freda</description>
-    <version>0.3.1-23</version>
+    <version>0.3.1-24</version>
     <author>Halatnikov</author>
     <author-email></author-email>
     <author-website>https://halatnikov.github.io</author-website>
@@ -53,6 +53,7 @@
         <behavior author="Scirra" id="Flash" version="1">Flash</behavior>
         <behavior author="Scirra" id="Pin" version="1">Pin</behavior>
         <behavior author="Scirra" id="Platform" version="1">Platform</behavior>
+        <behavior author="Rex.Rainbow" id="Rex_CanvasExt" version="1">Canvas Ext</behavior>
         <behavior author="Rex.Rainbow" id="Rex_MoveTo" version="1">MoveTo</behavior>
         <behavior author="Rex.Rainbow" id="Rex_Spline" version="1">Spline</behavior>
         <behavior author="Scirra" id="Rotate" version="1">Rotate</behavior>
@@ -9991,6 +9992,11 @@
             </object-type>
             <object-type name="Boss1_7SL1" sid="912217534823874">
                 <plugin id="Sprite" />
+                <behaviors>
+                    <behavior-type name="Timer" sid="871649195780864">
+                        <behavior id="Timer" />
+                    </behavior-type>
+                </behaviors>
                 <animation-folder>
                     <animation framecount="1" loop="1" name="Idle" pingpong="0" repeatcount="1" repeatto="0" sid="793285161237590" speed="12">
                         <frame duration="1" hotspotX="0.511628" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\bosses\7skylab\idle.png">
@@ -10044,7 +10050,8 @@
                             </collision-poly>
                         </frame>
                     </animation>
-                    <animation framecount="1" loop="0" name="Death" pingpong="0" repeatcount="1" repeatto="0" sid="670047147204898" speed="12">
+                    <animation framecount="2" loop="0" name="Death" pingpong="0" repeatcount="1" repeatto="0" sid="670047147204898" speed="2">
+                        <frame duration="1" hotspotX="1" hotspotY="1" />
                         <frame duration="1" hotspotX="1" hotspotY="1" />
                     </animation>
                     <animation framecount="4" loop="1" name="Spin" pingpong="0" repeatcount="1" repeatto="0" sid="302775823812663" speed="25">
@@ -10053,7 +10060,7 @@
                         <frame duration="1" hotspotX="0.576923" hotspotY="0.607143" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\bosses\7skylab\jump__3.png" />
                         <frame duration="1" hotspotX="0.384615" hotspotY="0.607143" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\bosses\7skylab\jump__4.png" />
                     </animation>
-                    <animation framecount="4" loop="1" name="Charge" pingpong="0" repeatcount="1" repeatto="0" sid="340493449730297" speed="16">
+                    <animation framecount="4" loop="1" name="Charge" pingpong="0" repeatcount="1" repeatto="0" sid="340493449730297" speed="25">
                         <frame duration="1" hotspotX="0.384615" hotspotY="0.464286" />
                         <frame duration="1" hotspotX="0.576923" hotspotY="0.464286" />
                         <frame duration="1" hotspotX="0.576923" hotspotY="0.607143" />
@@ -17123,10 +17130,20 @@
             </object-type>
             <object-type name="LocalSplitscreenP1" sid="530521514586462">
                 <plugin id="c2canvas" />
+                <behaviors>
+                    <behavior-type name="CanvasExt" sid="858779029016392">
+                        <behavior id="Rex_CanvasExt" />
+                    </behavior-type>
+                </behaviors>
                 <texture />
             </object-type>
             <object-type name="LocalSplitscreenP2" sid="461157528017506">
                 <plugin id="c2canvas" />
+                <behaviors>
+                    <behavior-type name="CanvasExt" sid="920563832331413">
+                        <behavior id="Rex_CanvasExt" />
+                    </behavior-type>
+                </behaviors>
                 <texture />
             </object-type>
             <object-type name="LocalTile_6_BG1" sid="270939545113340">
@@ -20097,6 +20114,47 @@
                 </animation-folder>
             </object-type>
         </object-folder>
+        <object-type name="Sprite" sid="558608442884675">
+            <plugin id="Sprite" />
+            <instance-variables>
+                <instance-variable name="Landed" sid="583618347678902" type="boolean" />
+            </instance-variables>
+            <behaviors>
+                <behavior-type name="DestroyOutsideLayout" sid="315931024272504">
+                    <behavior id="destroy" />
+                </behavior-type>
+                <behavior-type name="Bullet" sid="340522407338280">
+                    <behavior id="Bullet" />
+                </behavior-type>
+            </behaviors>
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="163665660293918" speed="5">
+                    <frame duration="1" hotspotX="0.521739" hotspotY="0.5">
+                        <image-point name="Imagepoint 1" x="0.217391" y="0.5" />
+                        <image-point name="Imagepoint 2" x="0.826087" y="0.5" />
+                        <collision-poly>
+                            <point x="0" y="0" />
+                            <point x="1" y="0" />
+                            <point x="1" y="0.5" />
+                            <point x="0" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="Sprite2" sid="747009250704800">
+            <plugin id="Sprite" />
+            <behaviors>
+                <behavior-type name="Fade" sid="154630444981799">
+                    <behavior id="Fade" />
+                </behavior-type>
+            </behaviors>
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="979046671437410" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                </animation>
+            </animation-folder>
+        </object-type>
     </object-folder>
     <families>
         <family name="LevelTiles" plugin-id="TiledBg" sid="888312723616125">
