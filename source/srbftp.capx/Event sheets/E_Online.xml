@@ -5,7 +5,6 @@
     <events>
         <event-group description="" sid="558958445449610" title="Photon">
             <sub-events>
-                <comment>username is 24 chars, room name is 48, room password is 16, chat message is 128</comment>
                 <comment>init</comment>
                 <event-block sid="480505158572512">
                     <conditions>
@@ -271,7 +270,7 @@
                                     <actions>
                                         <action id="17" name="Raise event" sid="657912456440080" type="Photon">
                                             <param id="0" name="Code">EVENT_CHAT</param>
-                                            <param id="1" name="Data">trim(left(Function.Param(0),128))</param>
+                                            <param id="1" name="Data">trim(left(Function.Param(0),c_chatmsg_len))</param>
                                             <param id="2" name="InterestGroup">0</param>
                                             <param id="3" name="Cache">0</param>
                                             <param id="4" name="Receivers">1</param>
@@ -301,7 +300,7 @@
                                             <actions>
                                                 <action id="17" name="Raise event" sid="618222315311595" type="Photon">
                                                     <param id="0" name="Code">EVENT_CHAT</param>
-                                                    <param id="1" name="Data">trim(left(Function.Param(0),128))</param>
+                                                    <param id="1" name="Data">trim(left(Function.Param(0),c_chatmsg_len))</param>
                                                     <param id="2" name="InterestGroup">0</param>
                                                     <param id="3" name="Cache">0</param>
                                                     <param id="4" name="Receivers">0</param>
@@ -732,7 +731,7 @@
                         </action>
                         <action id="0" name="Call function" sid="734708861149942" type="Function">
                             <param id="0" name="Name">&quot;String_Random&quot;</param>
-                            <param id="1" name="Parameter {n}">8</param>
+                            <param id="1" name="Parameter {n}">c_randomid_len</param>
                         </action>
                         <action id="-10" name="Set value" sid="349119675081704" type="Var_Misc">
                             <param id="0" name="Instance variable">Discord_FakePartyID</param>

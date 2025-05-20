@@ -1,5 +1,10 @@
 var srbftp = {};
 
+// todo: allow preceding arguments and make the json itself last
+srbftp.logJSON = function(arg) {
+	console.log(JSON.parse(arg))
+};
+
 ///////////////////////////////////////////////////////////////
 
 String.format = function () {

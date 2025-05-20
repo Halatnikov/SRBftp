@@ -3,13 +3,23 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>E_GLOBAL</name>
     <events>
-        <include>E_Online</include>
+        <comment>- platform flags</comment>
         <variable constant="0" name="DESKTOP" sid="946910129064923" static="0" type="number">0</variable>
         <variable constant="0" name="WEB" sid="545213178609611" static="0" type="number">0</variable>
         <variable constant="0" name="MOBILE" sid="872698463685861" static="0" type="number">0</variable>
-        <comment></comment>
+        <comment>- debug</comment>
         <variable constant="0" name="DEBUG" sid="698008437735178" static="0" type="number">1</variable>
         <variable constant="0" name="DEBUG_LOCALSTORAGE" sid="662686063322662" static="0" type="number">0</variable>
+        <comment>- constants</comment>
+        <variable constant="0" name="c_randomid_len" sid="371780425673200" static="0" type="number">12</variable>
+        <variable constant="0" name="c_maxrecords" sid="577853439801626" static="0" type="number">10</variable>
+        <variable constant="0" name="c_maxplayers" sid="232273817408100" static="0" type="number">16</variable>
+        <variable constant="0" name="c_username_len" sid="411745326328881" static="0" type="number">24</variable>
+        <variable constant="0" name="c_roomname_len" sid="355983000863980" static="0" type="number">48</variable>
+        <variable constant="0" name="c_roompassword_len" sid="835410080270879" static="0" type="number">16</variable>
+        <variable constant="0" name="c_chatmsg_len" sid="619884561667060" static="0" type="number">128</variable>
+        <comment></comment>
+        <include>E_Online</include>
         <event-group description="" sid="951764726633304" title="Initialize">
             <sub-events>
                 <event-block sid="411019658514068">
@@ -41,6 +51,9 @@
                             <actions>
                                 <action id="3" name="Create folder" sid="722122917338790" type="NWjs">
                                     <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata&quot;</param>
+                                </action>
+                                <action id="3" name="Create folder" sid="706162246246644" type="NWjs">
+                                    <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\records&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -396,6 +409,10 @@
                             <conditions />
                             <actions>
                                 <action id="2" name="Init alias" sid="723364550344469" type="JS">
+                                    <param id="0" name="Alias name">&quot;logjson&quot;</param>
+                                    <param id="1" name="JS">&quot;srbftp.logJSON&quot;</param>
+                                </action>
+                                <action id="2" name="Init alias" sid="636468509881918" type="JS">
                                     <param id="0" name="Alias name">&quot;format&quot;</param>
                                     <param id="1" name="JS">&quot;String.format&quot;</param>
                                 </action>
@@ -427,7 +444,7 @@
                             </conditions>
                             <actions />
                             <sub-events>
-                                <variable constant="0" name="ini" sid="679834628146053" static="1" type="text"></variable>
+                                <variable constant="0" name="ini" sid="679834628146053" static="0" type="text"></variable>
                                 <event-block sid="689959225423558">
                                     <conditions />
                                     <actions>
@@ -923,10 +940,6 @@
                                                     <param id="0" name="Value">JSON__COMMON.AsJson(0)</param>
                                                 </action>
                                                 <action id="-9" name="Destroy" sid="627581765491046" type="JSON__COMMON" />
-                                                <action id="-9" name="Set value" sid="820379810430570" type="System">
-                                                    <param id="0" name="Variable">ini</param>
-                                                    <param id="1" name="Value">&quot;&quot;</param>
-                                                </action>
                                             </actions>
                                         </event-block>
                                     </sub-events>
@@ -2161,6 +2174,19 @@
                         </action>
                     </actions>
                 </event-block>
+                <comment>reverse a JSON array</comment>
+                <event-block sid="926142526542635">
+                    <conditions>
+                        <condition id="0" name="On function" sid="199291996049854" type="Function">
+                            <param id="0" name="Name">&quot;JSON_ArrayReverse&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="1" name="Set return value" sid="482852680545310" type="Function">
+                            <param id="0" name="Value">JS.JSCodeValue(&quot;JSON.stringify(JSON.parse(#0).reverse())&quot;, Function.Param(0))</param>
+                        </action>
+                    </actions>
+                </event-block>
                 <comment></comment>
                 <event-block sid="881246347072269">
                     <conditions>
@@ -2169,8 +2195,8 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="1" name="Set return value" sid="230337450642959" type="Function">
-                            <param id="0" name="Value">JS.JSCodeValue(&quot;&#x0D;&#x0A;function func() {&#x0D;&#x0A;    let array = JSON.parse(#0);&#x0D;&#x0A;    array.sort(function(a, b) {&#x0D;&#x0A;        return b[#1] - a[#1];&#x0D;&#x0A;    });&#x0D;&#x0A;    return JSON.stringify(array);&#x0D;&#x0A;};&#x0D;&#x0A;func();&#x0D;&#x0A;&quot;, Function.Param(0), Function.Param(1))</param>
+                        <action id="1" name="Set return value" sid="378288900367438" type="Function">
+                            <param id="0" name="Value">JS.JSCodeValue(&quot;JSON.stringify(JSON.parse(#0).sort(function(a, b) {return b[#1] - a[#1]}))&quot;, Function.Param(0), Function.Param(1))</param>
                         </action>
                     </actions>
                 </event-block>
@@ -4251,7 +4277,9 @@
                             <param id="0" name="Name">&quot;Delete_Config&quot;</param>
                         </condition>
                     </conditions>
-                    <actions />
+                    <actions>
+                        <action id="11" name="Cancel fullscreen" sid="777276219164342" type="Browser" />
+                    </actions>
                     <sub-events>
                         <event-block sid="894842652106267">
                             <conditions>
@@ -4268,7 +4296,7 @@
                             </conditions>
                             <actions>
                                 <action id="2" name="Delete file" sid="317444058055506" type="NWjs">
-                                    <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\srbftp_config.ini&quot;</param>
+                                    <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\&quot;&amp;NAME&amp;&quot;.ini&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -4290,12 +4318,6 @@
                                     <param id="0" name="Expression">&quot;Storages.localStorage.remove&quot;</param>
                                     <param id="1" name="Parameter {n}">NAME</param>
                                 </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="730899025576670">
-                            <conditions />
-                            <actions>
-                                <action id="11" name="Cancel fullscreen" sid="777276219164342" type="Browser" />
                             </actions>
                         </event-block>
                     </sub-events>
@@ -5071,6 +5093,459 @@
                 </event-block>
             </sub-events>
         </event-group>
+        <event-group description="" sid="577798859300897" title="Record Attack Save">
+            <sub-events>
+                <comment></comment>
+                <event-block sid="363310462513670">
+                    <conditions>
+                        <condition id="0" name="On function" sid="816632343071659" type="Function">
+                            <param id="0" name="Name">&quot;Save_RecordAttack&quot;</param>
+                        </condition>
+                        <condition id="60" inverted="1" name="Is undefined" sid="221409515193858" type="JSON__TEMP">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}">&quot;_srbftp_record&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-3" name="Create object" sid="730075480716879" type="System">
+                            <param id="0" name="Object to create">JSON__COMMON</param>
+                            <param id="1" name="Layer">0</param>
+                            <param id="2" name="X">0</param>
+                            <param id="3" name="Y">0</param>
+                        </action>
+                        <action id="0" name="Call function" sid="266830542040015" type="Function">
+                            <param id="0" name="Name">&quot;Load_RecordAttack&quot;</param>
+                            <param id="1" name="Parameter {n}">JSON__TEMP.Value(0, &quot;Level&quot;)</param>
+                        </action>
+                        <action id="60" name="LoadJSON" sid="678686830312939" type="JSON__COMMON">
+                            <param id="0" name="JSON">Function.ReturnValue</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}"></param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <comment>if too many then remove oldest</comment>
+                        <event-block sid="623270275967968">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="133815159332540" type="System">
+                                    <param id="0" name="First value">JSON__COMMON.Size(0)</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Second value">c_maxrecords</param>
+                                </condition>
+                                <condition id="-12" name="Repeat" sid="178810899066014" type="System">
+                                    <param id="0" name="Count">(JSON__COMMON.Size(0) - c_maxrecords)+1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Call function" sid="308688934723466" type="Function">
+                                    <param id="0" name="Name">&quot;Delete_RecordAttack&quot;</param>
+                                    <param id="1" name="Parameter {n}">JSON__COMMON.Value(0, JSON__COMMON.Size(0)-1, &quot;ID&quot;)</param>
+                                </action>
+                                <action id="50" name="Delete" sid="794120126293935" type="JSON__COMMON">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}">Self.Size(0)-1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="380202136823227">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="600607540279215" type="System">
+                                    <param id="0" name="Variable">DESKTOP</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                                <condition id="-14" inverted="1" name="Compare variable" sid="691151282431207" type="System">
+                                    <param id="0" name="Variable">DEBUG_LOCALSTORAGE</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Call function" sid="193349313306570" type="Function">
+                                    <param id="0" name="Name">&quot;JSON2INI&quot;</param>
+                                    <param id="1" name="Parameter {n}">JSON__TEMP.AsJson(0)</param>
+                                </action>
+                                <action id="0" name="Write file" sid="345381314481518" type="NWjs">
+                                    <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\records\srbftp_record_&quot;&amp;JSON__TEMP.Value(0,&quot;ID&quot;)&amp;&quot;.ini&quot;</param>
+                                    <param id="1" name="Contents">Function.ReturnValue</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block any="1" sid="491587529459301">
+                            <conditions>
+                                <condition id="-14" inverted="1" name="Compare variable" sid="932350531404636" type="System">
+                                    <param id="0" name="Variable">DESKTOP</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                                <condition id="-14" name="Compare variable" sid="864755501773744" type="System">
+                                    <param id="0" name="Variable">DEBUG_LOCALSTORAGE</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="6" name="Call function" sid="753990059941747" type="JS">
+                                    <param id="0" name="Expression">&quot;Storages.localStorage.set&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;srbftp_record_&quot;&amp;JSON__TEMP.Value(0,&quot;ID&quot;){###}JSON__TEMP.AsJson(0)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="553918940901542">
+                            <conditions />
+                            <actions>
+                                <action id="0" name="Execute JS code" sid="484377539624499" type="JS">
+                                    <param id="0" name="JS code">&quot;console.log(&apos;Save_RecordAttack&apos;, JSON.parse(#0))&quot;</param>
+                                    <param id="1" name="Parameter {n}">JSON__TEMP.AsJson(0)</param>
+                                </action>
+                                <action id="55" name="Clear" sid="418992741707257" type="JSON__TEMP">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}"></param>
+                                </action>
+                                <action id="0" name="Set New Object" sid="700968764527148" type="JSON__TEMP">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}"></param>
+                                </action>
+                                <action id="-9" name="Destroy" sid="197107749337606" type="JSON__COMMON" />
+                                <action id="-15" name="Set visible" sid="747060601039922" type="Text_Saved">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action behavior="Fade" id="0" name="Restart fade" sid="362435854376528" type="Text_Saved" />
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment></comment>
+                <event-block sid="399422846798629">
+                    <conditions>
+                        <condition id="0" name="On function" sid="396380591327270" type="Function">
+                            <param id="0" name="Name">&quot;Load_RecordAttack&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-3" name="Create object" sid="881072618775254" type="System">
+                            <param id="0" name="Object to create">JSON__COMMON</param>
+                            <param id="1" name="Layer">0</param>
+                            <param id="2" name="X">0</param>
+                            <param id="3" name="Y">0</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="275978911082745">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="225431344638829" type="System">
+                                    <param id="0" name="Variable">DESKTOP</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                                <condition id="-14" inverted="1" name="Compare variable" sid="859552531760247" type="System">
+                                    <param id="0" name="Variable">DEBUG_LOCALSTORAGE</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="10" name="Set New Array" sid="228985313793703" type="JSON__COMMON">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}"></param>
+                                </action>
+                                <action id="5" name="List files" sid="185314507992604" type="NWjs">
+                                    <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\records&quot;</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="377825813674090">
+                                    <conditions>
+                                        <condition id="-12" name="Repeat" sid="108986131592228" type="System">
+                                            <param id="0" name="Count">NWjs.ListCount</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="124714222538489" type="Function">
+                                            <param id="0" name="Name">&quot;INI2JSON&quot;</param>
+                                            <param id="1" name="Parameter {n}">NWjs.ReadFile(Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\records\&quot;&amp;NWjs.ListAt(loopindex))</param>
+                                        </action>
+                                        <action id="60" name="LoadJSON" sid="967063788553181" type="JSON__COMMON">
+                                            <param id="0" name="JSON">Function.ReturnValue</param>
+                                            <param id="1" name="Reference point">0</param>
+                                            <param id="2" name="Key {n}">Self.Size(0)</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <comment>filter by level name?</comment>
+                                        <event-block sid="463755298964120">
+                                            <conditions>
+                                                <condition id="1" inverted="1" name="Compare parameter" sid="240215714157138" type="Function">
+                                                    <param id="0" name="Index">0</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">&quot;&quot;</param>
+                                                </condition>
+                                                <condition id="-8" inverted="1" name="Compare two values" sid="932619979053550" type="System">
+                                                    <param id="0" name="First value">JSON__COMMON.Value(0, JSON__COMMON.Size(0)-1, &quot;Level&quot;)</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Second value">Function.Param(0)</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="50" name="Delete" sid="535731368121579" type="JSON__COMMON">
+                                                    <param id="0" name="Reference point">0</param>
+                                                    <param id="1" name="Key {n}">Self.Size(0)-1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block any="1" sid="541315936793914">
+                            <conditions>
+                                <condition id="-14" inverted="1" name="Compare variable" sid="361900003609053" type="System">
+                                    <param id="0" name="Variable">DESKTOP</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                                <condition id="-14" name="Compare variable" sid="541601564717850" type="System">
+                                    <param id="0" name="Variable">DEBUG_LOCALSTORAGE</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Set New Object" sid="318456700637321" type="JSON__COMMON">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}"></param>
+                                </action>
+                                <action id="60" name="LoadJSON" sid="161546673721200" type="JSON__COMMON">
+                                    <param id="0" name="JSON">JS.Value(&quot;Storages.localStorage.keys&quot;)</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;keys&quot;</param>
+                                </action>
+                                <action id="10" name="Set New Array" sid="549572455865800" type="JSON__COMMON">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}">&quot;array&quot;</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="838120768915578">
+                                    <conditions>
+                                        <condition id="100" name="For each property" sid="938864594602021" type="JSON__COMMON">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}">&quot;keys&quot;</param>
+                                        </condition>
+                                        <condition id="-8" inverted="1" name="Compare two values" sid="620053561134077" type="System">
+                                            <param id="0" name="First value">find(JSON__COMMON.CurrentValue, &quot;srbftp_record_&quot;)</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">-1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="60" name="LoadJSON" sid="625844766216815" type="JSON__COMMON">
+                                            <param id="0" name="JSON">JS.Value(&quot;Storages.localStorage.get&quot;, Self.CurrentValue)</param>
+                                            <param id="1" name="Reference point">0</param>
+                                            <param id="2" name="Key {n}">&quot;array&quot;{###}Self.Size(0)</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <comment>filter by level name?</comment>
+                                        <event-block sid="529660859916624">
+                                            <conditions>
+                                                <condition id="1" inverted="1" name="Compare parameter" sid="652285282022198" type="Function">
+                                                    <param id="0" name="Index">0</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">&quot;&quot;</param>
+                                                </condition>
+                                                <condition id="-8" inverted="1" name="Compare two values" sid="816636094200357" type="System">
+                                                    <param id="0" name="First value">JSON__COMMON.Value(0, &quot;array&quot;, JSON__COMMON.Size(0, &quot;array&quot;)-1, &quot;Level&quot;)</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Second value">Function.Param(0)</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="50" name="Delete" sid="347568789472176" type="JSON__COMMON">
+                                                    <param id="0" name="Reference point">0</param>
+                                                    <param id="1" name="Key {n}">&quot;array&quot;{###}Self.Size(0, &quot;array&quot;)-1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="751249645953099">
+                                    <conditions />
+                                    <actions>
+                                        <action id="6" name="Call function" sid="399560049837248" type="JS">
+                                            <param id="0" name="Expression">&quot;logjson&quot;</param>
+                                            <param id="1" name="Parameter {n}">JSON__COMMON.AsJson(0)</param>
+                                        </action>
+                                        <action id="60" name="LoadJSON" sid="114806281947111" type="JSON__COMMON">
+                                            <param id="0" name="JSON">Self.AsJson(0, &quot;array&quot;)</param>
+                                            <param id="1" name="Reference point">0</param>
+                                            <param id="2" name="Key {n}"></param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <comment>prioritize last by default to handle ties</comment>
+                        <event-block sid="473020745860964">
+                            <conditions />
+                            <actions>
+                                <action id="0" name="Call function" sid="567249551112207" type="Function">
+                                    <param id="0" name="Name">&quot;JSON_ArraySortByKey&quot;</param>
+                                    <param id="1" name="Parameter {n}">JSON__COMMON.AsJson(0){###}&quot;TimestampEnd&quot;</param>
+                                </action>
+                                <action id="60" name="LoadJSON" sid="234444078873795" type="JSON__COMMON">
+                                    <param id="0" name="JSON">Function.ReturnValue</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}"></param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>return the full list?</comment>
+                        <event-block sid="318100304048399">
+                            <conditions />
+                            <actions>
+                                <action id="1" name="Set return value" sid="165057895970420" type="Function">
+                                    <param id="0" name="Value">JSON__COMMON.AsJson(0)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>otherwise return a single record</comment>
+                        <event-block sid="546465535240796">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="153885061282331" type="System">
+                                    <param id="0" name="First value">Function.ParamCount</param>
+                                    <param id="1" name="Comparison">4</param>
+                                    <param id="2" name="Second value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="777443006685625">
+                                    <conditions>
+                                        <condition id="1" name="Compare parameter" sid="965930681138900" type="Function">
+                                            <param id="0" name="Index">1</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;time&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="769911475726842" type="Function">
+                                            <param id="0" name="Name">&quot;JSON_ArraySortByKey&quot;</param>
+                                            <param id="1" name="Parameter {n}">Function.ReturnValue{###}&quot;Time&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="279725535469893">
+                                    <conditions>
+                                        <condition id="1" name="Compare parameter" sid="168328709950791" type="Function">
+                                            <param id="0" name="Index">1</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;score&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="281968626886719" type="Function">
+                                            <param id="0" name="Name">&quot;JSON_ArraySortByKey&quot;</param>
+                                            <param id="1" name="Parameter {n}">Function.ReturnValue{###}&quot;Score&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="984149626663457">
+                                    <conditions />
+                                    <actions>
+                                        <action id="60" name="LoadJSON" sid="630171677025345" type="JSON__COMMON">
+                                            <param id="0" name="JSON">Function.ReturnValue</param>
+                                            <param id="1" name="Reference point">0</param>
+                                            <param id="2" name="Key {n}"></param>
+                                        </action>
+                                        <action id="1" name="Set return value" sid="852020127379466" type="Function">
+                                            <param id="0" name="Value">JSON__COMMON.AsJson(0, 0)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="226558738514559">
+                            <conditions />
+                            <actions>
+                                <action id="14" name="Log" sid="936980149286962" type="Browser">
+                                    <param id="0" name="Type">0</param>
+                                    <param id="1" name="Message">JS.Value(&quot;format&quot;, &quot;Load_RecordAttack - {level} ({type}), size: {size}&quot;, Function.Param(0), Function.Param(1), JSON__COMMON.Size(0))</param>
+                                </action>
+                                <action id="-9" name="Destroy" sid="895013452050732" type="JSON__COMMON" />
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment></comment>
+                <event-block sid="279386717529512">
+                    <conditions>
+                        <condition id="0" name="On function" sid="918218855275127" type="Function">
+                            <param id="0" name="Name">&quot;Delete_RecordAttack&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="14" name="Log" sid="384144248054590" type="Browser">
+                            <param id="0" name="Type">0</param>
+                            <param id="1" name="Message">&quot;Delete_RecordAttack - &quot;&amp;Function.Param(0)</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="691349416443538">
+                            <conditions>
+                                <condition id="1" inverted="1" name="Compare parameter" sid="729544872350561" type="Function">
+                                    <param id="0" name="Index">0</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;all&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="751618318211356">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="947473506047644" type="System">
+                                            <param id="0" name="Variable">DESKTOP</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                        <condition id="-14" inverted="1" name="Compare variable" sid="218126235930076" type="System">
+                                            <param id="0" name="Variable">DEBUG_LOCALSTORAGE</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="2" name="Delete file" sid="843245479959380" type="NWjs">
+                                            <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\records\srbftp_record_&quot;&amp;Function.Param(0)&amp;&quot;.ini&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block any="1" sid="182004589469705">
+                                    <conditions>
+                                        <condition id="-14" inverted="1" name="Compare variable" sid="892916857265507" type="System">
+                                            <param id="0" name="Variable">DESKTOP</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                        <condition id="-14" name="Compare variable" sid="769295361738748" type="System">
+                                            <param id="0" name="Variable">DEBUG_LOCALSTORAGE</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="6" name="Call function" sid="651687281498255" type="JS">
+                                            <param id="0" name="Expression">&quot;Storages.localStorage.remove&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;srbftp_record_&quot;&amp;Function.Param(0)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
         <comment></comment>
         <event-block sid="958964304381177">
             <conditions>
@@ -5216,7 +5691,7 @@
                         </action>
                         <action id="0" name="Call function" sid="396021776009403" type="Function">
                             <param id="0" name="Name">&quot;String_Random&quot;</param>
-                            <param id="1" name="Parameter {n}">8</param>
+                            <param id="1" name="Parameter {n}">c_randomid_len</param>
                         </action>
                         <action id="20" name="Set Value" sid="922421152318171" type="JSON__TEMP">
                             <param id="0" name="Value">Function.ReturnValue</param>
@@ -5327,278 +5802,6 @@
                     </actions>
                 </event-block>
             </sub-events>
-        </event-block>
-        <comment></comment>
-        <event-block sid="363310462513670">
-            <conditions>
-                <condition id="0" name="On function" sid="816632343071659" type="Function">
-                    <param id="0" name="Name">&quot;Save_RecordAttack&quot;</param>
-                </condition>
-                <condition id="70" inverted="1" name="Is Empty" sid="241577712062338" type="JSON__TEMP">
-                    <param id="0" name="Reference point">0</param>
-                    <param id="1" name="Key {n}"></param>
-                </condition>
-            </conditions>
-            <actions />
-            <sub-events>
-                <variable constant="0" name="last_id" sid="560913253841906" static="0" type="text"></variable>
-                <variable constant="0" name="best_time_id" sid="460405940552789" static="0" type="text"></variable>
-                <variable constant="0" name="best_score_id" sid="896913221330647" static="0" type="text"></variable>
-                <comment>if last, then remove last that is not best&#x0D;&#x0A;if best then remove both best and last&#x0D;&#x0A;handle ties properly by prioritizing last</comment>
-                <event-block sid="906649658498622">
-                    <conditions />
-                    <actions>
-                        <action id="-3" name="Create object" sid="730075480716879" type="System">
-                            <param id="0" name="Object to create">JSON__COMMON</param>
-                            <param id="1" name="Layer">0</param>
-                            <param id="2" name="X">0</param>
-                            <param id="3" name="Y">0</param>
-                        </action>
-                        <action id="0" name="Call function" sid="266830542040015" type="Function">
-                            <param id="0" name="Name">&quot;Load_RecordAttack&quot;</param>
-                            <param id="1" name="Parameter {n}">JSON__TEMP.Value(0, &quot;Level&quot;)</param>
-                        </action>
-                        <action id="60" name="LoadJSON" sid="678686830312939" type="JSON__COMMON">
-                            <param id="0" name="JSON">Function.ReturnValue</param>
-                            <param id="1" name="Reference point">0</param>
-                            <param id="2" name="Key {n}"></param>
-                        </action>
-                    </actions>
-                </event-block>
-            </sub-events>
-        </event-block>
-        <comment></comment>
-        <event-block sid="399422846798629">
-            <conditions>
-                <condition id="0" name="On function" sid="396380591327270" type="Function">
-                    <param id="0" name="Name">&quot;Load_RecordAttack&quot;</param>
-                </condition>
-            </conditions>
-            <actions>
-                <action id="-3" name="Create object" sid="881072618775254" type="System">
-                    <param id="0" name="Object to create">JSON__COMMON</param>
-                    <param id="1" name="Layer">0</param>
-                    <param id="2" name="X">0</param>
-                    <param id="3" name="Y">0</param>
-                </action>
-                <action id="10" name="Set New Array" sid="228985313793703" type="JSON__COMMON">
-                    <param id="0" name="Reference point">0</param>
-                    <param id="1" name="Key {n}"></param>
-                </action>
-            </actions>
-            <sub-events>
-                <comment>filter by level name</comment>
-                <event-block sid="275978911082745">
-                    <conditions>
-                        <condition id="-14" name="Compare variable" sid="225431344638829" type="System">
-                            <param id="0" name="Variable">DESKTOP</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">1</param>
-                        </condition>
-                        <condition id="-14" inverted="1" name="Compare variable" sid="859552531760247" type="System">
-                            <param id="0" name="Variable">DEBUG_LOCALSTORAGE</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">1</param>
-                        </condition>
-                        <condition id="0" name="Path exists" sid="392599365919830" type="NWjs">
-                            <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\records&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="5" name="List files" sid="185314507992604" type="NWjs">
-                            <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\records&quot;</param>
-                        </action>
-                    </actions>
-                    <sub-events>
-                        <event-block sid="377825813674090">
-                            <conditions>
-                                <condition id="-12" name="Repeat" sid="108986131592228" type="System">
-                                    <param id="0" name="Count">NWjs.ListCount</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Call function" sid="124714222538489" type="Function">
-                                    <param id="0" name="Name">&quot;INI2JSON&quot;</param>
-                                    <param id="1" name="Parameter {n}">NWjs.ReadFile(Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\records\&quot;&amp;NWjs.ListAt(loopindex))</param>
-                                </action>
-                                <action id="60" name="LoadJSON" sid="967063788553181" type="JSON__COMMON">
-                                    <param id="0" name="JSON">Function.ReturnValue</param>
-                                    <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">Self.Size(0)</param>
-                                </action>
-                            </actions>
-                            <sub-events>
-                                <event-block sid="463755298964120">
-                                    <conditions>
-                                        <condition id="1" inverted="1" name="Compare parameter" sid="240215714157138" type="Function">
-                                            <param id="0" name="Index">0</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">&quot;&quot;</param>
-                                        </condition>
-                                        <condition id="-8" inverted="1" name="Compare two values" sid="932619979053550" type="System">
-                                            <param id="0" name="First value">JSON__COMMON.Value(0, JSON__COMMON.Size(0) - 1, &quot;Level&quot;)</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Second value">Function.Param(0)</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="50" name="Delete" sid="535731368121579" type="JSON__COMMON">
-                                            <param id="0" name="Reference point">0</param>
-                                            <param id="1" name="Key {n}">Self.Size(0) - 1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <event-block any="1" sid="541315936793914">
-                    <conditions>
-                        <condition id="-14" inverted="1" name="Compare variable" sid="361900003609053" type="System">
-                            <param id="0" name="Variable">DESKTOP</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">1</param>
-                        </condition>
-                        <condition id="-14" name="Compare variable" sid="541601564717850" type="System">
-                            <param id="0" name="Variable">DEBUG_LOCALSTORAGE</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">1</param>
-                        </condition>
-                    </conditions>
-                    <actions />
-                </event-block>
-                <comment>return the full list?</comment>
-                <event-block sid="318100304048399">
-                    <conditions>
-                        <condition id="-8" inverted="1" name="Compare two values" sid="833947226825540" type="System">
-                            <param id="0" name="First value">Function.ParamCount</param>
-                            <param id="1" name="Comparison">4</param>
-                            <param id="2" name="Second value">1</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="1" name="Set return value" sid="165057895970420" type="Function">
-                            <param id="0" name="Value">JSON__COMMON.AsJson(0)</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <comment>otherwise sort through filtered and return a record</comment>
-                <event-block sid="546465535240796">
-                    <conditions>
-                        <condition id="-8" name="Compare two values" sid="153885061282331" type="System">
-                            <param id="0" name="First value">Function.ParamCount</param>
-                            <param id="1" name="Comparison">4</param>
-                            <param id="2" name="Second value">1</param>
-                        </condition>
-                    </conditions>
-                    <actions />
-                    <sub-events>
-                        <event-block sid="966814619323957">
-                            <conditions>
-                                <condition id="1" name="Compare parameter" sid="176248360399045" type="Function">
-                                    <param id="0" name="Index">1</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;last&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Call function" sid="567249551112207" type="Function">
-                                    <param id="0" name="Name">&quot;JSON_ArraySortByKey&quot;</param>
-                                    <param id="1" name="Parameter {n}">JSON__COMMON.AsJson(0){###}&quot;TimestampEnd&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="777443006685625">
-                            <conditions>
-                                <condition id="1" name="Compare parameter" sid="965930681138900" type="Function">
-                                    <param id="0" name="Index">1</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;time&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Call function" sid="769911475726842" type="Function">
-                                    <param id="0" name="Name">&quot;JSON_ArraySortByKey&quot;</param>
-                                    <param id="1" name="Parameter {n}">JSON__COMMON.AsJson(0){###}&quot;Time&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="279725535469893">
-                            <conditions>
-                                <condition id="1" name="Compare parameter" sid="168328709950791" type="Function">
-                                    <param id="0" name="Index">1</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;score&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Call function" sid="281968626886719" type="Function">
-                                    <param id="0" name="Name">&quot;JSON_ArraySortByKey&quot;</param>
-                                    <param id="1" name="Parameter {n}">JSON__COMMON.AsJson(0){###}&quot;Score&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="984149626663457">
-                            <conditions />
-                            <actions>
-                                <action id="60" name="LoadJSON" sid="630171677025345" type="JSON__COMMON">
-                                    <param id="0" name="JSON">Function.ReturnValue</param>
-                                    <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}"></param>
-                                </action>
-                                <action id="1" name="Set return value" sid="852020127379466" type="Function">
-                                    <param id="0" name="Value">JSON__COMMON.AsJson(0, 0)</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <event-block sid="226558738514559">
-                    <conditions />
-                    <actions>
-                        <action id="-9" name="Destroy" sid="895013452050732" type="JSON__COMMON" />
-                    </actions>
-                </event-block>
-            </sub-events>
-        </event-block>
-        <event-block disabled="1" sid="966918461093720">
-            <conditions>
-                <condition id="-4" name="Trigger once while true" sid="258217685178418" type="System" />
-            </conditions>
-            <actions>
-                <action id="0" name="Call function" sid="666643749560188" type="Function">
-                    <param id="0" name="Name">&quot;Load_RecordAttack&quot;</param>
-                    <param id="1" name="Parameter {n}">&quot;1_1KnotholeBase1&quot;</param>
-                </action>
-                <action id="14" name="Log" sid="842507718621675" type="Browser">
-                    <param id="0" name="Type">0</param>
-                    <param id="1" name="Message">Function.ReturnValue</param>
-                </action>
-                <action id="0" name="Call function" sid="100987701702807" type="Function">
-                    <param id="0" name="Name">&quot;Load_RecordAttack&quot;</param>
-                    <param id="1" name="Parameter {n}">&quot;1_1KnotholeBase1&quot;{###}&quot;last&quot;</param>
-                </action>
-                <action id="14" name="Log" sid="937609899942137" type="Browser">
-                    <param id="0" name="Type">0</param>
-                    <param id="1" name="Message">Function.ReturnValue</param>
-                </action>
-                <action id="0" name="Call function" sid="290480777588047" type="Function">
-                    <param id="0" name="Name">&quot;Load_RecordAttack&quot;</param>
-                    <param id="1" name="Parameter {n}">&quot;1_1KnotholeBase1&quot;{###}&quot;time&quot;</param>
-                </action>
-                <action id="14" name="Log" sid="168873087910601" type="Browser">
-                    <param id="0" name="Type">0</param>
-                    <param id="1" name="Message">Function.ReturnValue</param>
-                </action>
-                <action id="0" name="Call function" sid="532185768153390" type="Function">
-                    <param id="0" name="Name">&quot;Load_RecordAttack&quot;</param>
-                    <param id="1" name="Parameter {n}">&quot;1_1KnotholeBase1&quot;{###}&quot;score&quot;</param>
-                </action>
-                <action id="14" name="Log" sid="171704449088547" type="Browser">
-                    <param id="0" name="Type">0</param>
-                    <param id="1" name="Message">Function.ReturnValue</param>
-                </action>
-            </actions>
         </event-block>
     </events>
 </c2eventsheet>

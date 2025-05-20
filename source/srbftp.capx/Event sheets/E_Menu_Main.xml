@@ -2910,7 +2910,6 @@
         </event-group>
         <event-group description="" inactive="1" sid="723105098174724" title="Main Menu">
             <sub-events>
-                <comment></comment>
                 <variable constant="0" name="lock" sid="625963792337472" static="1" type="number">0</variable>
                 <event-block sid="466622754851501">
                     <conditions>
@@ -2930,6 +2929,7 @@
                         </action>
                     </actions>
                 </event-block>
+                <comment></comment>
                 <variable constant="0" name="confirm_exit" sid="729653246687529" static="1" type="number">0</variable>
                 <event-block sid="914652418132876">
                     <conditions />
@@ -5511,7 +5511,7 @@
                                     <param id="1" name="Value">&quot;Normal&quot;</param>
                                 </action>
                                 <action id="-2" name="Go to layout" sid="576094156611432" type="System">
-                                    <param id="0" name="Layout">1_1KnotholeBase1</param>
+                                    <param id="0" name="Layout">E15_1EmeraldMeadow1</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -12980,7 +12980,7 @@
                                 </action>
                                 <action id="-10" name="Set value" sid="512139983785228" type="Var_Online">
                                     <param id="0" name="Instance variable">Username</param>
-                                    <param id="1" name="Value">trim(left(Menu_TextBox.Text, 24))</param>
+                                    <param id="1" name="Value">trim(left(Menu_TextBox.Text, c_username_len))</param>
                                 </action>
                                 <action id="101" name="Set my actor name" sid="535379793598427" type="Photon">
                                     <param id="0" name="name">Var_Online.Username</param>
@@ -14087,13 +14087,13 @@
                                         <condition id="-14" name="Compare variable" sid="623553597592595" type="System">
                                             <param id="0" name="Variable">players</param>
                                             <param id="1" name="Comparison">5</param>
-                                            <param id="2" name="Value">17</param>
+                                            <param id="2" name="Value">c_maxplayers+1</param>
                                         </condition>
                                     </conditions>
                                     <actions>
                                         <action id="-9" name="Set value" sid="386330976578671" type="System">
                                             <param id="0" name="Variable">players</param>
-                                            <param id="1" name="Value">16</param>
+                                            <param id="1" name="Value">c_maxplayers</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -14143,7 +14143,7 @@
                                     <param id="0" name="PropNames">&quot;JSON&quot;</param>
                                 </action>
                                 <action id="11" name="Create room" sid="218990869109574" type="Photon">
-                                    <param id="0" name="Room">trim(left(Menu_TextBox.Text, 48))</param>
+                                    <param id="0" name="Room">trim(left(Menu_TextBox.Text, c_roomname_len))</param>
                                     <param id="1" name="LobbyName">&quot;&quot;</param>
                                     <param id="2" name="LobbyType">0</param>
                                 </action>
@@ -14211,7 +14211,7 @@
                         </action>
                         <action id="-10" name="Set value" sid="257577716026089" type="Var_Online">
                             <param id="0" name="Instance variable">RoomPassword</param>
-                            <param id="1" name="Value">trim(left(Menu_TextBox.Text, 16))</param>
+                            <param id="1" name="Value">trim(left(Menu_TextBox.Text, c_roompassword_len))</param>
                         </action>
                         <action id="20" name="Set Value" sid="266092687012682" type="JSON_OnlineRoom">
                             <param id="0" name="Value">Var_Online.RoomPassword = &quot;&quot; ? &quot;&quot; : CBHash.MD5(Var_Online.RoomPassword)</param>
@@ -15607,7 +15607,7 @@
                         </action>
                     </actions>
                 </event-block>
-                <variable constant="0" name="maxplayers" sid="830603866180703" static="1" type="number">16</variable>
+                <variable constant="0" name="maxplayers" sid="830603866180703" static="1" type="number">8</variable>
                 <variable constant="0" name="allowjoins" sid="163189632324752" static="1" type="number">1</variable>
                 <variable constant="0" name="kickplayers" sid="477269466389964" static="1" type="number">1</variable>
                 <variable constant="0" name="kickplayers_counter" sid="743967382737124" static="1" type="number">0</variable>
@@ -15851,13 +15851,13 @@
                                         <condition id="-14" name="Compare variable" sid="532436174003090" type="System">
                                             <param id="0" name="Variable">maxplayers</param>
                                             <param id="1" name="Comparison">5</param>
-                                            <param id="2" name="Value">17</param>
+                                            <param id="2" name="Value">c_maxplayers+1</param>
                                         </condition>
                                     </conditions>
                                     <actions>
                                         <action id="-9" name="Set value" sid="291588837558069" type="System">
                                             <param id="0" name="Variable">maxplayers</param>
-                                            <param id="1" name="Value">16</param>
+                                            <param id="1" name="Value">c_maxplayers</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -15893,13 +15893,13 @@
                                         <condition id="-14" name="Compare variable" sid="532181975553749" type="System">
                                             <param id="0" name="Variable">maxplayers</param>
                                             <param id="1" name="Comparison">5</param>
-                                            <param id="2" name="Value">17</param>
+                                            <param id="2" name="Value">c_maxplayers+1</param>
                                         </condition>
                                     </conditions>
                                     <actions>
                                         <action id="-9" name="Set value" sid="520559990911365" type="System">
                                             <param id="0" name="Variable">maxplayers</param>
-                                            <param id="1" name="Value">16</param>
+                                            <param id="1" name="Value">c_maxplayers</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -16245,7 +16245,7 @@
                                     <actions>
                                         <action id="-10" name="Set value" sid="505992202251459" type="Var_Online">
                                             <param id="0" name="Instance variable">RoomPassword</param>
-                                            <param id="1" name="Value">trim(left(Menu_TextBox.Text, 16))</param>
+                                            <param id="1" name="Value">trim(left(Menu_TextBox.Text, c_roompassword_len))</param>
                                         </action>
                                         <action id="0" name="Call function" sid="301497544208598" type="Function">
                                             <param id="0" name="Name">&quot;Online_Chat&quot;</param>
