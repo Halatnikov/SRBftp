@@ -9,7 +9,7 @@
         <variable constant="0" name="MOBILE" sid="872698463685861" static="0" type="number">0</variable>
         <comment>- debug</comment>
         <variable constant="0" name="DEBUG" sid="698008437735178" static="0" type="number">1</variable>
-        <variable constant="0" name="DEBUG_LOCALSTORAGE" sid="662686063322662" static="0" type="number">0</variable>
+        <variable constant="0" name="DEBUG_LOCALSTORAGE" sid="662686063322662" static="0" type="number">1</variable>
         <comment>- constants</comment>
         <variable constant="0" name="c_randomid_len" sid="371780425673200" static="0" type="number">12</variable>
         <variable constant="0" name="c_maxrecords" sid="577853439801626" static="0" type="number">10</variable>
@@ -2187,7 +2187,20 @@
                         </action>
                     </actions>
                 </event-block>
-                <comment></comment>
+                <comment>remove an index from JSON array, without leaving a gap in it</comment>
+                <event-block sid="805590352103585">
+                    <conditions>
+                        <condition id="0" name="On function" sid="653595733833784" type="Function">
+                            <param id="0" name="Name">&quot;JSON_ArrayRemoveAt&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="1" name="Set return value" sid="838167614516387" type="Function">
+                            <param id="0" name="Value">JS.JSCodeValue(&quot;&#x0D;&#x0A;function func() {&#x0D;&#x0A;    let array = JSON.parse(#0);&#x0D;&#x0A;    array.splice(#1, 1);&#x0D;&#x0A;    return JSON.stringify(array);&#x0D;&#x0A;};&#x0D;&#x0A;func();&#x0D;&#x0A;&quot;, Function.Param(0), Function.Param(1))</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>sort a JSON array by its key, descending order</comment>
                 <event-block sid="881246347072269">
                     <conditions>
                         <condition id="0" name="On function" sid="650022084533980" type="Function">
@@ -5113,6 +5126,10 @@
                             <param id="2" name="X">0</param>
                             <param id="3" name="Y">0</param>
                         </action>
+                        <action id="0" name="Set New Object" sid="451532130711539" type="JSON__COMMON">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </action>
                         <action id="0" name="Call function" sid="266830542040015" type="Function">
                             <param id="0" name="Name">&quot;Load_RecordAttack&quot;</param>
                             <param id="1" name="Parameter {n}">JSON__TEMP.Value(0, &quot;Level&quot;)</param>
@@ -5120,32 +5137,110 @@
                         <action id="60" name="LoadJSON" sid="678686830312939" type="JSON__COMMON">
                             <param id="0" name="JSON">Function.ReturnValue</param>
                             <param id="1" name="Reference point">0</param>
-                            <param id="2" name="Key {n}"></param>
+                            <param id="2" name="Key {n}">&quot;list&quot;</param>
                         </action>
                     </actions>
                     <sub-events>
-                        <comment>if too many then remove oldest</comment>
+                        <comment>if too many then remove oldest, but accomodate for best time/score and avoid those</comment>
                         <event-block sid="623270275967968">
                             <conditions>
                                 <condition id="-8" name="Compare two values" sid="133815159332540" type="System">
-                                    <param id="0" name="First value">JSON__COMMON.Size(0)</param>
+                                    <param id="0" name="First value">JSON__COMMON.Size(0,&quot;list&quot;)</param>
                                     <param id="1" name="Comparison">5</param>
                                     <param id="2" name="Second value">c_maxrecords</param>
                                 </condition>
-                                <condition id="-12" name="Repeat" sid="178810899066014" type="System">
-                                    <param id="0" name="Count">(JSON__COMMON.Size(0) - c_maxrecords)+1</param>
-                                </condition>
                             </conditions>
                             <actions>
-                                <action id="0" name="Call function" sid="308688934723466" type="Function">
-                                    <param id="0" name="Name">&quot;Delete_RecordAttack&quot;</param>
-                                    <param id="1" name="Parameter {n}">JSON__COMMON.Value(0, JSON__COMMON.Size(0)-1, &quot;ID&quot;)</param>
+                                <action id="0" name="Call function" sid="398104359955472" type="Function">
+                                    <param id="0" name="Name">&quot;Load_RecordAttack&quot;</param>
+                                    <param id="1" name="Parameter {n}">JSON__TEMP.Value(0, &quot;Level&quot;){###}&quot;time&quot;</param>
                                 </action>
-                                <action id="50" name="Delete" sid="794120126293935" type="JSON__COMMON">
-                                    <param id="0" name="Reference point">0</param>
-                                    <param id="1" name="Key {n}">Self.Size(0)-1</param>
+                                <action id="60" name="LoadJSON" sid="344047081244774" type="JSON__COMMON">
+                                    <param id="0" name="JSON">Function.ReturnValue</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;best_time&quot;</param>
+                                </action>
+                                <action id="0" name="Call function" sid="689943320965559" type="Function">
+                                    <param id="0" name="Name">&quot;Load_RecordAttack&quot;</param>
+                                    <param id="1" name="Parameter {n}">JSON__TEMP.Value(0, &quot;Level&quot;){###}&quot;score&quot;</param>
+                                </action>
+                                <action id="60" name="LoadJSON" sid="605088516223291" type="JSON__COMMON">
+                                    <param id="0" name="JSON">Function.ReturnValue</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;best_score&quot;</param>
                                 </action>
                             </actions>
+                            <sub-events>
+                                <variable constant="0" name="index" sid="775508332791099" static="0" type="number">0</variable>
+                                <event-block sid="273732770815905">
+                                    <conditions>
+                                        <condition id="-12" name="Repeat" sid="192454184570105" type="System">
+                                            <param id="0" name="Count">(JSON__COMMON.Size(0,&quot;list&quot;) - c_maxrecords)+1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="586961112686226" type="System">
+                                            <param id="0" name="Variable">index</param>
+                                            <param id="1" name="Value">JSON__COMMON.Size(0,&quot;list&quot;)-1</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <comment>do it twice specifically, in case if encountered one after the other</comment>
+                                        <event-block sid="497719181204187">
+                                            <conditions>
+                                                <condition id="-12" name="Repeat" sid="870498158584145" type="System">
+                                                    <param id="0" name="Count">2</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions />
+                                            <sub-events>
+                                                <event-block any="1" sid="887437756986162">
+                                                    <conditions>
+                                                        <condition id="-8" name="Compare two values" sid="903737267736729" type="System">
+                                                            <param id="0" name="First value">JSON__COMMON.Value(0, &quot;list&quot;, index, &quot;ID&quot;)</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Second value">JSON__COMMON.Value(0, &quot;best_time&quot;, &quot;ID&quot;)</param>
+                                                        </condition>
+                                                        <condition id="-8" name="Compare two values" sid="597131036045257" type="System">
+                                                            <param id="0" name="First value">JSON__COMMON.Value(0, &quot;list&quot;, index, &quot;ID&quot;)</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Second value">JSON__COMMON.Value(0, &quot;best_score&quot;, &quot;ID&quot;)</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="14" name="Log" sid="267467224529056" type="Browser">
+                                                            <param id="0" name="Type">0</param>
+                                                            <param id="1" name="Message">&quot;last index is best time/score - &quot;&amp;JSON__COMMON.Value(0, &quot;list&quot;, index, &quot;ID&quot;)</param>
+                                                        </action>
+                                                        <action id="-11" name="Subtract from" sid="537643903851298" type="System">
+                                                            <param id="0" name="Variable">index</param>
+                                                            <param id="1" name="Value">1</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                        <event-block sid="697738412033773">
+                                            <conditions />
+                                            <actions>
+                                                <action id="0" name="Call function" sid="308688934723466" type="Function">
+                                                    <param id="0" name="Name">&quot;Delete_RecordAttack&quot;</param>
+                                                    <param id="1" name="Parameter {n}">JSON__COMMON.Value(0, &quot;list&quot;, index, &quot;ID&quot;)</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="786754660168072" type="Function">
+                                                    <param id="0" name="Name">&quot;JSON_ArrayRemoveAt&quot;</param>
+                                                    <param id="1" name="Parameter {n}">JSON__COMMON.AsJson(0,&quot;list&quot;){###}index</param>
+                                                </action>
+                                                <action id="60" name="LoadJSON" sid="816150538951141" type="JSON__COMMON">
+                                                    <param id="0" name="JSON">Function.ReturnValue</param>
+                                                    <param id="1" name="Reference point">0</param>
+                                                    <param id="2" name="Key {n}">&quot;list&quot;</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                         <event-block sid="380202136823227">
                             <conditions>
@@ -5315,6 +5410,10 @@
                                     <param id="0" name="Reference point">0</param>
                                     <param id="1" name="Key {n}"></param>
                                 </action>
+                                <action id="10" name="Set New Array" sid="632434935609398" type="JSON__COMMON">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}">&quot;keys&quot;</param>
+                                </action>
                                 <action id="60" name="LoadJSON" sid="161546673721200" type="JSON__COMMON">
                                     <param id="0" name="JSON">JS.Value(&quot;Storages.localStorage.keys&quot;)</param>
                                     <param id="1" name="Reference point">0</param>
@@ -5342,7 +5441,7 @@
                                         <action id="60" name="LoadJSON" sid="625844766216815" type="JSON__COMMON">
                                             <param id="0" name="JSON">JS.Value(&quot;Storages.localStorage.get&quot;, Self.CurrentValue)</param>
                                             <param id="1" name="Reference point">0</param>
-                                            <param id="2" name="Key {n}">&quot;array&quot;{###}Self.Size(0)</param>
+                                            <param id="2" name="Key {n}">&quot;array&quot;{###}Self.Size(0,&quot;array&quot;)</param>
                                         </action>
                                     </actions>
                                     <sub-events>
@@ -5372,10 +5471,6 @@
                                 <event-block sid="751249645953099">
                                     <conditions />
                                     <actions>
-                                        <action id="6" name="Call function" sid="399560049837248" type="JS">
-                                            <param id="0" name="Expression">&quot;logjson&quot;</param>
-                                            <param id="1" name="Parameter {n}">JSON__COMMON.AsJson(0)</param>
-                                        </action>
                                         <action id="60" name="LoadJSON" sid="114806281947111" type="JSON__COMMON">
                                             <param id="0" name="JSON">Self.AsJson(0, &quot;array&quot;)</param>
                                             <param id="1" name="Reference point">0</param>
@@ -5433,6 +5528,10 @@
                                             <param id="0" name="Name">&quot;JSON_ArraySortByKey&quot;</param>
                                             <param id="1" name="Parameter {n}">Function.ReturnValue{###}&quot;Time&quot;</param>
                                         </action>
+                                        <action id="0" name="Call function" sid="327721900326773" type="Function">
+                                            <param id="0" name="Name">&quot;JSON_ArrayReverse&quot;</param>
+                                            <param id="1" name="Parameter {n}">Function.ReturnValue</param>
+                                        </action>
                                     </actions>
                                 </event-block>
                                 <event-block sid="279725535469893">
@@ -5468,9 +5567,9 @@
                         <event-block sid="226558738514559">
                             <conditions />
                             <actions>
-                                <action id="14" name="Log" sid="936980149286962" type="Browser">
-                                    <param id="0" name="Type">0</param>
-                                    <param id="1" name="Message">JS.Value(&quot;format&quot;, &quot;Load_RecordAttack - {level} ({type}), size: {size}&quot;, Function.Param(0), Function.Param(1), JSON__COMMON.Size(0))</param>
+                                <action id="0" name="Execute JS code" sid="203258881234523" type="JS">
+                                    <param id="0" name="JS code">&quot;console.log(String.format(&apos;Load_RecordAttack - {level} ({type}), size: {size}&apos;, #1, #2, #3), JSON.parse(#0))&quot;</param>
+                                    <param id="1" name="Parameter {n}">Function.ReturnValue{###}Function.Param(0){###}Function.Param(1){###}JSON__COMMON.Size(0)</param>
                                 </action>
                                 <action id="-9" name="Destroy" sid="895013452050732" type="JSON__COMMON" />
                             </actions>
@@ -5547,6 +5646,7 @@
             </sub-events>
         </event-group>
         <comment></comment>
+        <comment>todo: write CurrentList somewhere and most recent entry probably</comment>
         <event-block sid="958964304381177">
             <conditions>
                 <condition id="0" name="On function" sid="472691178728448" type="Function">
