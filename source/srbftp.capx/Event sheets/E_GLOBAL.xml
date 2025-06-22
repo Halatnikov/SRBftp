@@ -9,10 +9,9 @@
         <variable constant="0" name="MOBILE" sid="872698463685861" static="0" type="number">0</variable>
         <comment>- debug</comment>
         <variable constant="0" name="DEBUG" sid="698008437735178" static="0" type="number">1</variable>
-        <variable constant="0" name="DEBUG_LOCALSTORAGE" sid="662686063322662" static="0" type="number">1</variable>
+        <variable constant="0" name="DEBUG_LOCALSTORAGE" sid="662686063322662" static="0" type="number">0</variable>
         <comment>- constants</comment>
         <variable constant="0" name="c_randomid_len" sid="371780425673200" static="0" type="number">12</variable>
-        <variable constant="0" name="c_maxrecords" sid="577853439801626" static="0" type="number">10</variable>
         <variable constant="0" name="c_maxplayers" sid="232273817408100" static="0" type="number">16</variable>
         <variable constant="0" name="c_username_len" sid="411745326328881" static="0" type="number">24</variable>
         <variable constant="0" name="c_roomname_len" sid="355983000863980" static="0" type="number">48</variable>
@@ -383,6 +382,27 @@
                             <param id="1" name="Parameter {n}">AJAX.Tag</param>
                         </action>
                         <action id="1" name="Request project file" sid="751362543445155" type="AJAX">
+                            <param id="0" name="Tag">&quot;axios.min.js&quot;</param>
+                            <param id="1" name="File">axios.min.js</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="133815238925278">
+                    <conditions>
+                        <condition id="0" name="On completed" sid="733042599544227" type="AJAX">
+                            <param id="0" name="Tag">&quot;axios.min.js&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Execute JS code" sid="464196053026848" type="JS">
+                            <param id="0" name="JS code">AJAX.LastData</param>
+                            <param id="1" name="Parameter {n}"></param>
+                        </action>
+                        <action id="0" name="Execute JS code" sid="271257653734656" type="JS">
+                            <param id="0" name="JS code">&quot;let file = document.createElement(&apos;script&apos;);&#x0D;&#x0A;file.setAttribute(&apos;type&apos;,&apos;text/javascript&apos;);&#x0D;&#x0A;file.setAttribute(&apos;src&apos;, #0);&#x0D;&#x0A;file.onerror = function() {&#x0D;&#x0A;&#x09;console.error(&apos;failed including &apos; + #0);&#x0D;&#x0A;};&#x0D;&#x0A;document.getElementsByTagName(&apos;head&apos;)[0].appendChild(file);&quot;</param>
+                            <param id="1" name="Parameter {n}">AJAX.Tag</param>
+                        </action>
+                        <action id="1" name="Request project file" sid="981057705434192" type="AJAX">
                             <param id="0" name="Tag">&quot;main.js&quot;</param>
                             <param id="1" name="File">main.js</param>
                         </action>
@@ -1225,7 +1245,6 @@
                                         <event-block sid="550625621171263">
                                             <conditions />
                                             <actions>
-                                                <action id="-9" name="Destroy" sid="819876039298988" type="JSON__COMMON" />
                                                 <action id="-9" name="Set value" sid="465925747779603" type="System">
                                                     <param id="0" name="Variable">ini</param>
                                                     <param id="1" name="Value">trim(ini)&amp;newline</param>
@@ -1233,6 +1252,7 @@
                                                 <action id="1" name="Set return value" sid="984425303701150" type="Function">
                                                     <param id="0" name="Value">ini</param>
                                                 </action>
+                                                <action id="-9" name="Destroy" sid="819876039298988" type="JSON__COMMON" />
                                             </actions>
                                         </event-block>
                                     </sub-events>
@@ -1283,7 +1303,7 @@
                                             </conditions>
                                             <actions>
                                                 <action id="1" name="Set return value" sid="216034404626842" type="Function">
-                                                    <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Config.Value(0,&quot;Input1KeyUp&quot;))</param>
+                                                    <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Config.Value(0,&quot;Input.1KeyUp&quot;))</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -1297,7 +1317,7 @@
                                             </conditions>
                                             <actions>
                                                 <action id="1" name="Set return value" sid="876280732396280" type="Function">
-                                                    <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Config.Value(0,&quot;Input1KeyDown&quot;))</param>
+                                                    <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Config.Value(0,&quot;Input.1KeyDown&quot;))</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -1311,7 +1331,7 @@
                                             </conditions>
                                             <actions>
                                                 <action id="1" name="Set return value" sid="502271158331056" type="Function">
-                                                    <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Config.Value(0,&quot;Input1KeyLeft&quot;))</param>
+                                                    <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Config.Value(0,&quot;Input.1KeyLeft&quot;))</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -1325,7 +1345,7 @@
                                             </conditions>
                                             <actions>
                                                 <action id="1" name="Set return value" sid="482282577913875" type="Function">
-                                                    <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Config.Value(0,&quot;Input1KeyRight&quot;))</param>
+                                                    <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Config.Value(0,&quot;Input.1KeyRight&quot;))</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -1339,7 +1359,7 @@
                                             </conditions>
                                             <actions>
                                                 <action id="1" name="Set return value" sid="940294085918871" type="Function">
-                                                    <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Config.Value(0,&quot;Input1KeyA&quot;))</param>
+                                                    <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Config.Value(0,&quot;Input.1KeyA&quot;))</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -1353,7 +1373,7 @@
                                             </conditions>
                                             <actions>
                                                 <action id="1" name="Set return value" sid="159281677669829" type="Function">
-                                                    <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Config.Value(0,&quot;Input1KeyStart&quot;))</param>
+                                                    <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Config.Value(0,&quot;Input.1KeyStart&quot;))</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -1367,7 +1387,7 @@
                                             </conditions>
                                             <actions>
                                                 <action id="1" name="Set return value" sid="368134253285526" type="Function">
-                                                    <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Config.Value(0,&quot;Input1KeyRestart&quot;))</param>
+                                                    <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Config.Value(0,&quot;Input.1KeyRestart&quot;))</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -1432,7 +1452,7 @@
                                                     </conditions>
                                                     <actions>
                                                         <action id="1" name="Set return value" sid="517503146919430" type="Function">
-                                                            <param id="0" name="Value">&quot;Button &quot;&amp;Save_Config.Value(0,&quot;Input1PadA&quot;)</param>
+                                                            <param id="0" name="Value">&quot;Button &quot;&amp;Save_Config.Value(0,&quot;Input.1PadA&quot;)</param>
                                                         </action>
                                                     </actions>
                                                 </event-block>
@@ -1446,7 +1466,7 @@
                                                     </conditions>
                                                     <actions>
                                                         <action id="1" name="Set return value" sid="833564648114098" type="Function">
-                                                            <param id="0" name="Value">&quot;Button &quot;&amp;Save_Config.Value(0,&quot;Input1PadStart&quot;)</param>
+                                                            <param id="0" name="Value">&quot;Button &quot;&amp;Save_Config.Value(0,&quot;Input.1PadStart&quot;)</param>
                                                         </action>
                                                     </actions>
                                                 </event-block>
@@ -1460,7 +1480,7 @@
                                                     </conditions>
                                                     <actions>
                                                         <action id="1" name="Set return value" sid="364889364697187" type="Function">
-                                                            <param id="0" name="Value">&quot;Button &quot;&amp;Save_Config.Value(0,&quot;Input1PadRestart&quot;)</param>
+                                                            <param id="0" name="Value">&quot;Button &quot;&amp;Save_Config.Value(0,&quot;Input.1PadRestart&quot;)</param>
                                                         </action>
                                                     </actions>
                                                 </event-block>
@@ -1482,7 +1502,7 @@
                                                     </conditions>
                                                     <actions>
                                                         <action id="1" name="Set return value" sid="122880899268195" type="Function">
-                                                            <param id="0" name="Value">JSON_InputKeycodes.Value(0, &quot;Gamepad_&quot;&amp;Var_Input.GamepadType, Save_Config.Value(0,&quot;Input1PadA&quot;))</param>
+                                                            <param id="0" name="Value">JSON_InputKeycodes.Value(0, &quot;Gamepad_&quot;&amp;Var_Input.GamepadType, Save_Config.Value(0,&quot;Input.1PadA&quot;))</param>
                                                         </action>
                                                     </actions>
                                                 </event-block>
@@ -1496,7 +1516,7 @@
                                                     </conditions>
                                                     <actions>
                                                         <action id="1" name="Set return value" sid="214676998718045" type="Function">
-                                                            <param id="0" name="Value">JSON_InputKeycodes.Value(0, &quot;Gamepad_&quot;&amp;Var_Input.GamepadType, Save_Config.Value(0,&quot;Input1PadStart&quot;))</param>
+                                                            <param id="0" name="Value">JSON_InputKeycodes.Value(0, &quot;Gamepad_&quot;&amp;Var_Input.GamepadType, Save_Config.Value(0,&quot;Input.1PadStart&quot;))</param>
                                                         </action>
                                                     </actions>
                                                 </event-block>
@@ -1510,7 +1530,7 @@
                                                     </conditions>
                                                     <actions>
                                                         <action id="1" name="Set return value" sid="367855285860170" type="Function">
-                                                            <param id="0" name="Value">JSON_InputKeycodes.Value(0, &quot;Gamepad_&quot;&amp;Var_Input.GamepadType, Save_Config.Value(0,&quot;Input1PadRestart&quot;))</param>
+                                                            <param id="0" name="Value">JSON_InputKeycodes.Value(0, &quot;Gamepad_&quot;&amp;Var_Input.GamepadType, Save_Config.Value(0,&quot;Input.1PadRestart&quot;))</param>
                                                         </action>
                                                     </actions>
                                                 </event-block>
@@ -1584,7 +1604,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="1" name="Set return value" sid="436537118405836" type="Function">
-                                            <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Config.Value(0,&quot;Input2KeyUp&quot;))</param>
+                                            <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Config.Value(0,&quot;Input.2KeyUp&quot;))</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -1598,7 +1618,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="1" name="Set return value" sid="255651462305551" type="Function">
-                                            <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Config.Value(0,&quot;Input2KeyDown&quot;))</param>
+                                            <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Config.Value(0,&quot;Input.2KeyDown&quot;))</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -1612,7 +1632,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="1" name="Set return value" sid="207219891047985" type="Function">
-                                            <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Config.Value(0,&quot;Input2KeyLeft&quot;))</param>
+                                            <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Config.Value(0,&quot;Input.2KeyLeft&quot;))</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -1626,7 +1646,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="1" name="Set return value" sid="724771661952114" type="Function">
-                                            <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Config.Value(0,&quot;Input2KeyRight&quot;))</param>
+                                            <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Config.Value(0,&quot;Input.2KeyRight&quot;))</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -1640,7 +1660,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="1" name="Set return value" sid="869188105802302" type="Function">
-                                            <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Config.Value(0,&quot;Input2KeyA&quot;))</param>
+                                            <param id="0" name="Value">JSON_InputKeycodes.Value(0,&quot;Keyboard&quot;,Save_Config.Value(0,&quot;Input.2KeyA&quot;))</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -2361,7 +2381,7 @@
                                             <param id="0" name="Instance variable">InitializedFiles</param>
                                         </condition>
                                         <condition id="-8" name="Compare two values" sid="610555738210458" type="System">
-                                            <param id="0" name="First value">Save_Config.Value(0,&quot;Input1PadType&quot;)</param>
+                                            <param id="0" name="First value">Save_Config.Value(0,&quot;Input.1PadType&quot;)</param>
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Second value">0</param>
                                         </condition>
@@ -2504,7 +2524,7 @@
                                 <event-block sid="131303499841550">
                                     <conditions>
                                         <condition id="5" name="Key code is down" sid="330938169466119" type="Keyboard">
-                                            <param id="0" name="Keycode">Save_Config.Value(0,&quot;Input1KeyUp&quot;)</param>
+                                            <param id="0" name="Keycode">Save_Config.Value(0,&quot;Input.1KeyUp&quot;)</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -2517,7 +2537,7 @@
                                 <event-block sid="596508943966128">
                                     <conditions>
                                         <condition id="5" name="Key code is down" sid="462703113285724" type="Keyboard">
-                                            <param id="0" name="Keycode">Save_Config.Value(0,&quot;Input1KeyDown&quot;)</param>
+                                            <param id="0" name="Keycode">Save_Config.Value(0,&quot;Input.1KeyDown&quot;)</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -2530,7 +2550,7 @@
                                 <event-block sid="337979037490920">
                                     <conditions>
                                         <condition id="5" name="Key code is down" sid="589283932218978" type="Keyboard">
-                                            <param id="0" name="Keycode">Save_Config.Value(0,&quot;Input1KeyLeft&quot;)</param>
+                                            <param id="0" name="Keycode">Save_Config.Value(0,&quot;Input.1KeyLeft&quot;)</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -2543,7 +2563,7 @@
                                 <event-block sid="948918514077013">
                                     <conditions>
                                         <condition id="5" name="Key code is down" sid="755577868929336" type="Keyboard">
-                                            <param id="0" name="Keycode">Save_Config.Value(0,&quot;Input1KeyRight&quot;)</param>
+                                            <param id="0" name="Keycode">Save_Config.Value(0,&quot;Input.1KeyRight&quot;)</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -2556,7 +2576,7 @@
                                 <event-block sid="255022456385715">
                                     <conditions>
                                         <condition id="5" name="Key code is down" sid="288494358785257" type="Keyboard">
-                                            <param id="0" name="Keycode">Save_Config.Value(0,&quot;Input1KeyA&quot;)</param>
+                                            <param id="0" name="Keycode">Save_Config.Value(0,&quot;Input.1KeyA&quot;)</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -2569,7 +2589,7 @@
                                 <event-block sid="438233594228641">
                                     <conditions>
                                         <condition id="5" name="Key code is down" sid="518617615601363" type="Keyboard">
-                                            <param id="0" name="Keycode">Save_Config.Value(0,&quot;Input1KeyRestart&quot;)</param>
+                                            <param id="0" name="Keycode">Save_Config.Value(0,&quot;Input.1KeyRestart&quot;)</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -2584,7 +2604,7 @@
                         <event-block sid="180057141925228">
                             <conditions>
                                 <condition id="5" name="Key code is down" sid="921346087481474" type="Keyboard">
-                                    <param id="0" name="Keycode">Save_Config.Value(0,&quot;Input1KeyStart&quot;)</param>
+                                    <param id="0" name="Keycode">Save_Config.Value(0,&quot;Input.1KeyStart&quot;)</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -2710,7 +2730,7 @@
                                             <conditions>
                                                 <condition id="10" name="Is button index down" sid="308836089797881" type="Gamepad">
                                                     <param id="0" name="Gamepad">loopindex</param>
-                                                    <param id="1" name="Button index">Save_Config.Value(0,&quot;Input1PadA&quot;)</param>
+                                                    <param id="1" name="Button index">Save_Config.Value(0,&quot;Input.1PadA&quot;)</param>
                                                 </condition>
                                             </conditions>
                                             <actions>
@@ -2724,7 +2744,7 @@
                                             <conditions>
                                                 <condition id="10" name="Is button index down" sid="500466035362785" type="Gamepad">
                                                     <param id="0" name="Gamepad">loopindex</param>
-                                                    <param id="1" name="Button index">Save_Config.Value(0,&quot;Input1PadRestart&quot;)</param>
+                                                    <param id="1" name="Button index">Save_Config.Value(0,&quot;Input.1PadRestart&quot;)</param>
                                                 </condition>
                                             </conditions>
                                             <actions>
@@ -2740,7 +2760,7 @@
                                     <conditions>
                                         <condition id="10" name="Is button index down" sid="823034225244616" type="Gamepad">
                                             <param id="0" name="Gamepad">loopindex</param>
-                                            <param id="1" name="Button index">Save_Config.Value(0,&quot;Input1PadStart&quot;)</param>
+                                            <param id="1" name="Button index">Save_Config.Value(0,&quot;Input.1PadStart&quot;)</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -2919,7 +2939,7 @@
                         <event-block sid="192251440410994">
                             <conditions>
                                 <condition id="5" name="Key code is down" sid="584752379612026" type="Keyboard">
-                                    <param id="0" name="Keycode">Save_Config.Value(0,&quot;Input2KeyUp&quot;)</param>
+                                    <param id="0" name="Keycode">Save_Config.Value(0,&quot;Input.2KeyUp&quot;)</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -2932,7 +2952,7 @@
                         <event-block sid="413446752357396">
                             <conditions>
                                 <condition id="5" name="Key code is down" sid="378150826049004" type="Keyboard">
-                                    <param id="0" name="Keycode">Save_Config.Value(0,&quot;Input2KeyDown&quot;)</param>
+                                    <param id="0" name="Keycode">Save_Config.Value(0,&quot;Input.2KeyDown&quot;)</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -2945,7 +2965,7 @@
                         <event-block sid="327132081672677">
                             <conditions>
                                 <condition id="5" name="Key code is down" sid="322285603962494" type="Keyboard">
-                                    <param id="0" name="Keycode">Save_Config.Value(0,&quot;Input2KeyLeft&quot;)</param>
+                                    <param id="0" name="Keycode">Save_Config.Value(0,&quot;Input.2KeyLeft&quot;)</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -2958,7 +2978,7 @@
                         <event-block sid="272553145160167">
                             <conditions>
                                 <condition id="5" name="Key code is down" sid="783357925285461" type="Keyboard">
-                                    <param id="0" name="Keycode">Save_Config.Value(0,&quot;Input2KeyRight&quot;)</param>
+                                    <param id="0" name="Keycode">Save_Config.Value(0,&quot;Input.2KeyRight&quot;)</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -2971,7 +2991,7 @@
                         <event-block sid="983818439914384">
                             <conditions>
                                 <condition id="5" name="Key code is down" sid="668794130241538" type="Keyboard">
-                                    <param id="0" name="Keycode">Save_Config.Value(0,&quot;Input2KeyA&quot;)</param>
+                                    <param id="0" name="Keycode">Save_Config.Value(0,&quot;Input.2KeyA&quot;)</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -3533,7 +3553,7 @@
                     </conditions>
                     <actions>
                         <action id="0" name="Set text" sid="952749534354664" type="Text_ErrorHandler">
-                            <param id="0" name="Text">&quot;looks like something went wrong&#x0D;&#x0A;&#x0D;&#x0A;current menu: &quot;&amp;Var_Game.CurrentMenu</param>
+                            <param id="0" name="Text">&quot;something broke&#x0D;&#x0A;&#x0D;&#x0A;layout: &quot;&amp;LayoutName&amp;&quot;&#x0D;&#x0A;current menu: &quot;&amp;Var_Game.CurrentMenu</param>
                         </action>
                     </actions>
                 </event-block>
@@ -3641,7 +3661,7 @@
                         <event-block sid="639810984476152">
                             <conditions>
                                 <condition id="-8" name="Compare two values" sid="492375490549583" type="System">
-                                    <param id="0" name="First value">Save_Config.Value(0,&quot;GraphicsShowFPS&quot;)</param>
+                                    <param id="0" name="First value">Save_Config.Value(0,&quot;Graphics.ShowFPS&quot;)</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Second value">1</param>
                                 </condition>
@@ -3656,7 +3676,7 @@
                         <event-block sid="232996174538318">
                             <conditions>
                                 <condition id="-8" name="Compare two values" sid="172119794439407" type="System">
-                                    <param id="0" name="First value">Save_Config.Value(0,&quot;GraphicsShowFPS&quot;)</param>
+                                    <param id="0" name="First value">Save_Config.Value(0,&quot;Graphics.ShowFPS&quot;)</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Second value">0</param>
                                 </condition>
@@ -3771,7 +3791,6 @@
                                 <condition id="2" name="Mouse button is down" sid="525258588358819" type="Mouse">
                                     <param id="0" name="Mouse button">0</param>
                                 </condition>
-                                <condition id="-4" name="Trigger once while true" sid="555828872620949" type="System" />
                             </conditions>
                             <actions>
                                 <action id="5" name="Set frame" sid="762903080207039" type="Menu_WindowSel_Button">
@@ -3787,7 +3806,6 @@
                                 <condition id="2" name="Mouse button is down" sid="423587169910835" type="Mouse">
                                     <param id="0" name="Mouse button">0</param>
                                 </condition>
-                                <condition id="-4" name="Trigger once while true" sid="990092384664475" type="System" />
                             </conditions>
                             <actions>
                                 <action id="5" name="Set frame" sid="868829969673817" type="Menu_ClickableButton">
@@ -3812,7 +3830,6 @@
                                 <condition id="4" name="Is touching object" sid="731273525856209" type="Touch">
                                     <param id="0" name="Object">Menu_WindowSel_Button</param>
                                 </condition>
-                                <condition id="-4" name="Trigger once while true" sid="922952438866468" type="System" />
                             </conditions>
                             <actions>
                                 <action id="5" name="Set frame" sid="338403112104440" type="Menu_WindowSel_Button">
@@ -3825,7 +3842,6 @@
                                 <condition id="4" name="Is touching object" sid="891294477302434" type="Touch">
                                     <param id="0" name="Object">Menu_ClickableButton</param>
                                 </condition>
-                                <condition id="-4" name="Trigger once while true" sid="158921326196603" type="System" />
                             </conditions>
                             <actions>
                                 <action id="5" name="Set frame" sid="464299550180773" type="Menu_ClickableButton">
@@ -3864,37 +3880,37 @@
                                 <action id="20" name="Set Value" sid="772372092888354" type="Save_Config">
                                     <param id="0" name="Value">2</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;GraphicsWindowSize&quot;</param>
+                                    <param id="2" name="Key {n}">&quot;Graphics.WindowSize&quot;</param>
                                 </action>
                                 <action id="20" name="Set Value" sid="588351979441496" type="Save_Config">
                                     <param id="0" name="Value">0</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;GraphicsFullscreen&quot;</param>
+                                    <param id="2" name="Key {n}">&quot;Graphics.Fullscreen&quot;</param>
                                 </action>
                                 <action id="20" name="Set Value" sid="597543333164744" type="Save_Config">
                                     <param id="0" name="Value">1</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;GraphicsScalingQuality&quot;</param>
+                                    <param id="2" name="Key {n}">&quot;Graphics.ScalingQuality&quot;</param>
                                 </action>
                                 <action id="20" name="Set Value" sid="716207803691985" type="Save_Config">
                                     <param id="0" name="Value">0</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;GraphicsShowFPS&quot;</param>
+                                    <param id="2" name="Key {n}">&quot;Graphics.ShowFPS&quot;</param>
                                 </action>
                                 <action id="20" name="Set Value" sid="977258241702820" type="Save_Config">
                                     <param id="0" name="Value">20</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;SoundVolume&quot;</param>
+                                    <param id="2" name="Key {n}">&quot;Sound.Volume&quot;</param>
                                 </action>
                                 <action id="20" name="Set Value" sid="651025028317223" type="Save_Config">
                                     <param id="0" name="Value">20</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;SoundVolumeMusic&quot;</param>
+                                    <param id="2" name="Key {n}">&quot;Sound.VolumeMusic&quot;</param>
                                 </action>
                                 <action id="20" name="Set Value" sid="113855403299655" type="Save_Config">
                                     <param id="0" name="Value">20</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;SoundVolumeSFX&quot;</param>
+                                    <param id="2" name="Key {n}">&quot;Sound.VolumeSFX&quot;</param>
                                 </action>
                             </actions>
                             <sub-events>
@@ -3910,7 +3926,7 @@
                                         <action id="20" name="Set Value" sid="697715633843738" type="Save_Config">
                                             <param id="0" name="Value">1</param>
                                             <param id="1" name="Reference point">0</param>
-                                            <param id="2" name="Key {n}">&quot;GraphicsShowFPS&quot;</param>
+                                            <param id="2" name="Key {n}">&quot;Graphics.ShowFPS&quot;</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -3923,82 +3939,82 @@
                                 <action id="20" name="Set Value" sid="687340377447834" type="Save_Config">
                                     <param id="0" name="Value">38</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;Input1KeyUp&quot;</param>
+                                    <param id="2" name="Key {n}">&quot;Input.1KeyUp&quot;</param>
                                 </action>
                                 <action id="20" name="Set Value" sid="607767375418078" type="Save_Config">
                                     <param id="0" name="Value">40</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;Input1KeyDown&quot;</param>
+                                    <param id="2" name="Key {n}">&quot;Input.1KeyDown&quot;</param>
                                 </action>
                                 <action id="20" name="Set Value" sid="526587730168729" type="Save_Config">
                                     <param id="0" name="Value">37</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;Input1KeyLeft&quot;</param>
+                                    <param id="2" name="Key {n}">&quot;Input.1KeyLeft&quot;</param>
                                 </action>
                                 <action id="20" name="Set Value" sid="322627922664665" type="Save_Config">
                                     <param id="0" name="Value">39</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;Input1KeyRight&quot;</param>
+                                    <param id="2" name="Key {n}">&quot;Input.1KeyRight&quot;</param>
                                 </action>
                                 <action id="20" name="Set Value" sid="910568423781020" type="Save_Config">
                                     <param id="0" name="Value">13</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;Input1KeyA&quot;</param>
+                                    <param id="2" name="Key {n}">&quot;Input.1KeyA&quot;</param>
                                 </action>
                                 <action id="20" name="Set Value" sid="754891644509346" type="Save_Config">
                                     <param id="0" name="Value">27</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;Input1KeyStart&quot;</param>
+                                    <param id="2" name="Key {n}">&quot;Input.1KeyStart&quot;</param>
                                 </action>
                                 <action id="20" name="Set Value" sid="781716877004485" type="Save_Config">
                                     <param id="0" name="Value">82</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;Input1KeyRestart&quot;</param>
+                                    <param id="2" name="Key {n}">&quot;Input.1KeyRestart&quot;</param>
                                 </action>
                                 <action id="20" name="Set Value" sid="231541750466894" type="Save_Config">
                                     <param id="0" name="Value">0</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;Input1PadType&quot;</param>
+                                    <param id="2" name="Key {n}">&quot;Input.1PadType&quot;</param>
                                 </action>
                                 <action id="20" name="Set Value" sid="620816738147553" type="Save_Config">
                                     <param id="0" name="Value">0</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;Input1PadA&quot;</param>
+                                    <param id="2" name="Key {n}">&quot;Input.1PadA&quot;</param>
                                 </action>
                                 <action id="20" name="Set Value" sid="167637884077893" type="Save_Config">
                                     <param id="0" name="Value">9</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;Input1PadStart&quot;</param>
+                                    <param id="2" name="Key {n}">&quot;Input.1PadStart&quot;</param>
                                 </action>
                                 <action id="20" name="Set Value" sid="849724714721556" type="Save_Config">
                                     <param id="0" name="Value">11</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;Input1PadRestart&quot;</param>
+                                    <param id="2" name="Key {n}">&quot;Input.1PadRestart&quot;</param>
                                 </action>
                                 <action id="20" name="Set Value" sid="205020348086764" type="Save_Config">
                                     <param id="0" name="Value">87</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;Input2KeyUp&quot;</param>
+                                    <param id="2" name="Key {n}">&quot;Input.2KeyUp&quot;</param>
                                 </action>
                                 <action id="20" name="Set Value" sid="207858594270870" type="Save_Config">
                                     <param id="0" name="Value">83</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;Input2KeyDown&quot;</param>
+                                    <param id="2" name="Key {n}">&quot;Input.2KeyDown&quot;</param>
                                 </action>
                                 <action id="20" name="Set Value" sid="700943846677415" type="Save_Config">
                                     <param id="0" name="Value">65</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;Input2KeyLeft&quot;</param>
+                                    <param id="2" name="Key {n}">&quot;Input.2KeyLeft&quot;</param>
                                 </action>
                                 <action id="20" name="Set Value" sid="512741421771030" type="Save_Config">
                                     <param id="0" name="Value">68</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;Input2KeyRight&quot;</param>
+                                    <param id="2" name="Key {n}">&quot;Input.2KeyRight&quot;</param>
                                 </action>
                                 <action id="20" name="Set Value" sid="850686207113276" type="Save_Config">
                                     <param id="0" name="Value">16</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;Input2KeyA&quot;</param>
+                                    <param id="2" name="Key {n}">&quot;Input.2KeyA&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -4009,32 +4025,43 @@
                                 <action id="20" name="Set Value" sid="980996052799332" type="Save_Config">
                                     <param id="0" name="Value">1</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;GameplayCutscenes&quot;</param>
+                                    <param id="2" name="Key {n}">&quot;Gameplay.Cutscenes&quot;</param>
                                 </action>
                                 <action id="20" name="Set Value" sid="465731450331028" type="Save_Config">
                                     <param id="0" name="Value">1</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;GameplayProjectileTrails&quot;</param>
+                                    <param id="2" name="Key {n}">&quot;Gameplay.ProjectileTrails&quot;</param>
                                 </action>
                                 <action id="20" name="Set Value" sid="335302640236649" type="Save_Config">
                                     <param id="0" name="Value">1</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;GameplayHitMarker&quot;</param>
+                                    <param id="2" name="Key {n}">&quot;Gameplay.HitMarker&quot;</param>
                                 </action>
                                 <action id="20" name="Set Value" sid="439099008438493" type="Save_Config">
                                     <param id="0" name="Value">0</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;GameplayInstantCamera&quot;</param>
+                                    <param id="2" name="Key {n}">&quot;Gameplay.InstantCamera&quot;</param>
                                 </action>
                                 <action id="20" name="Set Value" sid="113232230957117" type="Save_Config">
                                     <param id="0" name="Value">1</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;GameplayCameraPause&quot;</param>
+                                    <param id="2" name="Key {n}">&quot;Gameplay.CameraPause&quot;</param>
                                 </action>
                                 <action id="20" name="Set Value" sid="756197613836698" type="Save_Config">
                                     <param id="0" name="Value">0</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;GameplayMonotoneSpecialStages&quot;</param>
+                                    <param id="2" name="Key {n}">&quot;Gameplay.MonotoneSpecialStages&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>savedata</comment>
+                        <event-block sid="983476625932224">
+                            <conditions />
+                            <actions>
+                                <action id="20" name="Set Value" sid="930970871646103" type="Save_Config">
+                                    <param id="0" name="Value">10</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;Data.MaxRecords&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -4045,7 +4072,7 @@
                                 <action id="20" name="Set Value" sid="329762660585075" type="Save_Config">
                                     <param id="0" name="Value">1</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;MiscDiscordRichPresence&quot;</param>
+                                    <param id="2" name="Key {n}">&quot;Misc.DiscordRichPresence&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -4369,7 +4396,7 @@
                         <event-block sid="604474250428689">
                             <conditions>
                                 <condition id="-8" name="Compare two values" sid="724281753285471" type="System">
-                                    <param id="0" name="First value">Save_Config.Value(0,&quot;GraphicsWindowSize&quot;)</param>
+                                    <param id="0" name="First value">Save_Config.Value(0,&quot;Graphics.WindowSize&quot;)</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Second value">0</param>
                                 </condition>
@@ -4386,7 +4413,7 @@
                         <event-block sid="121673682099659">
                             <conditions>
                                 <condition id="-8" name="Compare two values" sid="278626201840776" type="System">
-                                    <param id="0" name="First value">Save_Config.Value(0,&quot;GraphicsWindowSize&quot;)</param>
+                                    <param id="0" name="First value">Save_Config.Value(0,&quot;Graphics.WindowSize&quot;)</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Second value">1</param>
                                 </condition>
@@ -4403,7 +4430,7 @@
                         <event-block sid="584021057761967">
                             <conditions>
                                 <condition id="-8" name="Compare two values" sid="496525631634851" type="System">
-                                    <param id="0" name="First value">Save_Config.Value(0,&quot;GraphicsWindowSize&quot;)</param>
+                                    <param id="0" name="First value">Save_Config.Value(0,&quot;Graphics.WindowSize&quot;)</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Second value">2</param>
                                 </condition>
@@ -4420,7 +4447,7 @@
                         <event-block sid="975946132038544">
                             <conditions>
                                 <condition id="-8" name="Compare two values" sid="885887341577997" type="System">
-                                    <param id="0" name="First value">Save_Config.Value(0,&quot;GraphicsWindowSize&quot;)</param>
+                                    <param id="0" name="First value">Save_Config.Value(0,&quot;Graphics.WindowSize&quot;)</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Second value">3</param>
                                 </condition>
@@ -4437,7 +4464,7 @@
                         <event-block sid="837862598407199">
                             <conditions>
                                 <condition id="-8" name="Compare two values" sid="828935942888203" type="System">
-                                    <param id="0" name="First value">Save_Config.Value(0,&quot;GraphicsWindowSize&quot;)</param>
+                                    <param id="0" name="First value">Save_Config.Value(0,&quot;Graphics.WindowSize&quot;)</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Second value">4</param>
                                 </condition>
@@ -4470,7 +4497,7 @@
                         <event-block sid="780267987160461">
                             <conditions>
                                 <condition id="-8" name="Compare two values" sid="693940077213996" type="System">
-                                    <param id="0" name="First value">Save_Config.Value(0,&quot;GraphicsFullscreen&quot;)</param>
+                                    <param id="0" name="First value">Save_Config.Value(0,&quot;Graphics.Fullscreen&quot;)</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Second value">1</param>
                                 </condition>
@@ -4493,7 +4520,7 @@
                         <event-block sid="242924455455680">
                             <conditions>
                                 <condition id="-8" name="Compare two values" sid="281079049923257" type="System">
-                                    <param id="0" name="First value">Save_Config.Value(0,&quot;GraphicsScalingQuality&quot;)</param>
+                                    <param id="0" name="First value">Save_Config.Value(0,&quot;Graphics.ScalingQuality&quot;)</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Second value">1</param>
                                 </condition>
@@ -4521,22 +4548,22 @@
                             <actions>
                                 <action id="-10" name="Set value" sid="466128638794937" type="Var_Misc">
                                     <param id="0" name="Instance variable">AudioVolume</param>
-                                    <param id="1" name="Value">-(50 - (Save_Config.Value(0,&quot;SoundVolume&quot;) * 2.5))</param>
+                                    <param id="1" name="Value">-(50 - (Save_Config.Value(0,&quot;Sound.Volume&quot;) * 2.5))</param>
                                 </action>
                                 <action id="-10" name="Set value" sid="461845463456673" type="Var_Misc">
                                     <param id="0" name="Instance variable">AudioVolumeMusic</param>
-                                    <param id="1" name="Value">-(50 - (Save_Config.Value(0,&quot;SoundVolumeMusic&quot;) * 2.5))</param>
+                                    <param id="1" name="Value">-(50 - (Save_Config.Value(0,&quot;Sound.VolumeMusic&quot;) * 2.5))</param>
                                 </action>
                                 <action id="-10" name="Set value" sid="635472931068130" type="Var_Misc">
                                     <param id="0" name="Instance variable">AudioVolumeSFX</param>
-                                    <param id="1" name="Value">-(50 - (Save_Config.Value(0,&quot;SoundVolumeSFX&quot;) * 2.5))</param>
+                                    <param id="1" name="Value">-(50 - (Save_Config.Value(0,&quot;Sound.VolumeSFX&quot;) * 2.5))</param>
                                 </action>
                             </actions>
                         </event-block>
                         <event-block sid="841023973194410">
                             <conditions>
                                 <condition id="-8" inverted="1" name="Compare two values" sid="412701311464355" type="System">
-                                    <param id="0" name="First value">Save_Config.Value(0,&quot;SoundVolume&quot;)</param>
+                                    <param id="0" name="First value">Save_Config.Value(0,&quot;Sound.Volume&quot;)</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Second value">0</param>
                                 </condition>
@@ -4553,7 +4580,7 @@
                         <event-block sid="288574591141572">
                             <conditions>
                                 <condition id="-8" name="Compare two values" sid="202095020228468" type="System">
-                                    <param id="0" name="First value">Save_Config.Value(0,&quot;SoundVolume&quot;)</param>
+                                    <param id="0" name="First value">Save_Config.Value(0,&quot;Sound.Volume&quot;)</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Second value">0</param>
                                 </condition>
@@ -4615,7 +4642,7 @@
                         <event-block sid="630430164383560">
                             <conditions>
                                 <condition id="-8" name="Compare two values" sid="230682493132791" type="System">
-                                    <param id="0" name="First value">Save_Config.Value(0,&quot;Input1PadType&quot;)</param>
+                                    <param id="0" name="First value">Save_Config.Value(0,&quot;Input.1PadType&quot;)</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Second value">1</param>
                                 </condition>
@@ -4630,7 +4657,7 @@
                         <event-block sid="920550356397298">
                             <conditions>
                                 <condition id="-8" name="Compare two values" sid="619087646471914" type="System">
-                                    <param id="0" name="First value">Save_Config.Value(0,&quot;Input1PadType&quot;)</param>
+                                    <param id="0" name="First value">Save_Config.Value(0,&quot;Input.1PadType&quot;)</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Second value">2</param>
                                 </condition>
@@ -4645,7 +4672,7 @@
                         <event-block sid="761255107834228">
                             <conditions>
                                 <condition id="-8" name="Compare two values" sid="247226834938913" type="System">
-                                    <param id="0" name="First value">Save_Config.Value(0,&quot;Input1PadType&quot;)</param>
+                                    <param id="0" name="First value">Save_Config.Value(0,&quot;Input.1PadType&quot;)</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Second value">3</param>
                                 </condition>
@@ -4692,6 +4719,16 @@
                                     <param id="1" name="Reference point">0</param>
                                     <param id="2" name="Key {n}">&quot;TimestampStart&quot;</param>
                                 </action>
+                                <action id="20" name="Set Value" sid="561602004068903" type="Save_General">
+                                    <param id="0" name="Value">Function.ReturnValue</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;TimestampPrevious&quot;</param>
+                                </action>
+                                <action id="20" name="Set Value" sid="891347464580995" type="Save_General">
+                                    <param id="0" name="Value">Function.ReturnValue</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;TimestampLast&quot;</param>
+                                </action>
                             </actions>
                         </event-block>
                         <event-block sid="769859903094710">
@@ -4732,6 +4769,11 @@
                         <event-block sid="219205387715469">
                             <conditions />
                             <actions>
+                                <action id="20" name="Set Value" sid="716505154899206" type="Save_General">
+                                    <param id="0" name="Value">Self.Value(0, &quot;TimestampLast&quot;)</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;TimestampPrevious&quot;</param>
+                                </action>
                                 <action id="0" name="Call function" sid="365371957658759" type="Function">
                                     <param id="0" name="Name">&quot;Time_CurrentTimestamp&quot;</param>
                                     <param id="1" name="Parameter {n}"></param>
@@ -4932,21 +4974,42 @@
         <event-group description="" sid="574254411664192" title="Online Save">
             <sub-events>
                 <variable constant="1" name="NAME" sid="657430010429535" static="0" type="text">srbftp_online</variable>
-                <comment>LastUsername</comment>
-                <event-block sid="983599982466764">
+                <comment>defaults</comment>
+                <event-block sid="449122691097604">
                     <conditions>
-                        <condition id="70" name="Is Empty" sid="940714187144053" type="Save_Online">
+                        <condition id="70" name="Is Empty" sid="351358934790330" type="Save_Online">
                             <param id="0" name="Reference point">0</param>
                             <param id="1" name="Key {n}"></param>
                         </condition>
-                        <condition id="-4" name="Trigger once while true" sid="671078402134351" type="System" />
+                        <condition id="-4" name="Trigger once while true" sid="564202945425344" type="System" />
                     </conditions>
                     <actions>
-                        <action id="0" name="Set New Object" sid="710895011408115" type="Save_Online">
+                        <action id="0" name="Set New Object" sid="355552579305238" type="Save_Online">
                             <param id="0" name="Reference point">0</param>
                             <param id="1" name="Key {n}"></param>
                         </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="907386767632056">
+                            <conditions />
+                            <actions>
+                                <action id="20" name="Set Value" sid="194860326821054" type="Save_Online">
+                                    <param id="0" name="Value">&quot;&quot;</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;LastUsername&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="117211746133239">
+                            <conditions />
+                            <actions>
+                                <action id="-10" name="Set value" sid="885713738867415" type="Save_Online">
+                                    <param id="0" name="Instance variable">Default</param>
+                                    <param id="1" name="Value">Self.AsJson(0)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <comment>===save</comment>
                 <event-block sid="167823363935198">
@@ -4957,6 +5020,21 @@
                     </conditions>
                     <actions />
                     <sub-events>
+                        <event-block sid="119180222864031">
+                            <conditions>
+                                <condition id="70" name="Is Empty" sid="104878982937573" type="Save_Online">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}"></param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="60" name="LoadJSON" sid="276553121014439" type="Save_Online">
+                                    <param id="0" name="JSON">Self.Default</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}"></param>
+                                </action>
+                            </actions>
+                        </event-block>
                         <event-block sid="963296128984932">
                             <conditions />
                             <actions>
@@ -5048,21 +5126,44 @@
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">1</param>
                                 </condition>
-                                <condition id="0" name="Path exists" sid="459115605922201" type="NWjs">
-                                    <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\&quot;&amp;NAME&amp;&quot;.ini&quot;</param>
-                                </condition>
                             </conditions>
-                            <actions>
-                                <action id="0" name="Call function" sid="336690426753945" type="Function">
-                                    <param id="0" name="Name">&quot;INI2JSON&quot;</param>
-                                    <param id="1" name="Parameter {n}">NWjs.ReadFile(Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\&quot;&amp;NAME&amp;&quot;.ini&quot;)</param>
-                                </action>
-                                <action id="60" name="LoadJSON" sid="140359647634204" type="Save_Online">
-                                    <param id="0" name="JSON">Function.ReturnValue</param>
-                                    <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}"></param>
-                                </action>
-                            </actions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="766657346540770">
+                                    <conditions>
+                                        <condition id="0" name="Path exists" sid="459115605922201" type="NWjs">
+                                            <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\&quot;&amp;NAME&amp;&quot;.ini&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="336690426753945" type="Function">
+                                            <param id="0" name="Name">&quot;INI2JSON&quot;</param>
+                                            <param id="1" name="Parameter {n}">NWjs.ReadFile(Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\&quot;&amp;NAME&amp;&quot;.ini&quot;)</param>
+                                        </action>
+                                        <action id="0" name="Call function" sid="816127912640821" type="Function">
+                                            <param id="0" name="Name">&quot;JSON_Merge&quot;</param>
+                                            <param id="1" name="Parameter {n}">Save_Online.Default{###}Function.ReturnValue</param>
+                                        </action>
+                                        <action id="60" name="LoadJSON" sid="140359647634204" type="Save_Online">
+                                            <param id="0" name="JSON">Function.ReturnValue</param>
+                                            <param id="1" name="Reference point">0</param>
+                                            <param id="2" name="Key {n}"></param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="711118900361778">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="208171428769169" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="60" name="LoadJSON" sid="312297199790238" type="Save_Online">
+                                            <param id="0" name="JSON">Self.Default</param>
+                                            <param id="1" name="Reference point">0</param>
+                                            <param id="2" name="Key {n}"></param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                         <event-block any="1" sid="605830586581639">
                             <conditions>
@@ -5093,8 +5194,24 @@
                                             <param id="0" name="Expression">&quot;Storages.localStorage.get&quot;</param>
                                             <param id="1" name="Parameter {n}">NAME</param>
                                         </action>
+                                        <action id="0" name="Call function" sid="315349257567989" type="Function">
+                                            <param id="0" name="Name">&quot;JSON_Merge&quot;</param>
+                                            <param id="1" name="Parameter {n}">Save_Online.Default{###}JS.StoredReturnValue</param>
+                                        </action>
                                         <action id="60" name="LoadJSON" sid="828279618471816" type="Save_Online">
-                                            <param id="0" name="JSON">JS.StoredReturnValue</param>
+                                            <param id="0" name="JSON">Function.ReturnValue</param>
+                                            <param id="1" name="Reference point">0</param>
+                                            <param id="2" name="Key {n}"></param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="818445195153607">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="510176246077212" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="60" name="LoadJSON" sid="574569462393930" type="Save_Online">
+                                            <param id="0" name="JSON">Self.Default</param>
                                             <param id="1" name="Reference point">0</param>
                                             <param id="2" name="Key {n}"></param>
                                         </action>
@@ -5119,194 +5236,200 @@
                             <param id="1" name="Key {n}">&quot;_srbftp_record&quot;</param>
                         </condition>
                     </conditions>
-                    <actions>
-                        <action id="-3" name="Create object" sid="730075480716879" type="System">
-                            <param id="0" name="Object to create">JSON__COMMON</param>
-                            <param id="1" name="Layer">0</param>
-                            <param id="2" name="X">0</param>
-                            <param id="3" name="Y">0</param>
-                        </action>
-                        <action id="0" name="Set New Object" sid="451532130711539" type="JSON__COMMON">
-                            <param id="0" name="Reference point">0</param>
-                            <param id="1" name="Key {n}"></param>
-                        </action>
-                        <action id="0" name="Call function" sid="266830542040015" type="Function">
-                            <param id="0" name="Name">&quot;Load_RecordAttack&quot;</param>
-                            <param id="1" name="Parameter {n}">JSON__TEMP.Value(0, &quot;Level&quot;)</param>
-                        </action>
-                        <action id="60" name="LoadJSON" sid="678686830312939" type="JSON__COMMON">
-                            <param id="0" name="JSON">Function.ReturnValue</param>
-                            <param id="1" name="Reference point">0</param>
-                            <param id="2" name="Key {n}">&quot;list&quot;</param>
-                        </action>
-                    </actions>
+                    <actions />
                     <sub-events>
-                        <comment>if too many then remove oldest, but accomodate for best time/score and avoid those</comment>
-                        <event-block sid="623270275967968">
-                            <conditions>
-                                <condition id="-8" name="Compare two values" sid="133815159332540" type="System">
-                                    <param id="0" name="First value">JSON__COMMON.Size(0,&quot;list&quot;)</param>
-                                    <param id="1" name="Comparison">5</param>
-                                    <param id="2" name="Second value">c_maxrecords</param>
-                                </condition>
-                            </conditions>
+                        <event-block sid="859094581041007">
+                            <conditions />
                             <actions>
-                                <action id="0" name="Call function" sid="398104359955472" type="Function">
-                                    <param id="0" name="Name">&quot;Load_RecordAttack&quot;</param>
-                                    <param id="1" name="Parameter {n}">JSON__TEMP.Value(0, &quot;Level&quot;){###}&quot;time&quot;</param>
+                                <action id="-3" name="Create object" sid="730075480716879" type="System">
+                                    <param id="0" name="Object to create">JSON__COMMON</param>
+                                    <param id="1" name="Layer">0</param>
+                                    <param id="2" name="X">0</param>
+                                    <param id="3" name="Y">0</param>
                                 </action>
-                                <action id="60" name="LoadJSON" sid="344047081244774" type="JSON__COMMON">
+                                <action id="0" name="Set New Object" sid="451532130711539" type="JSON__COMMON">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}"></param>
+                                </action>
+                                <action id="0" name="Call function" sid="266830542040015" type="Function">
+                                    <param id="0" name="Name">&quot;Load_RecordAttack&quot;</param>
+                                    <param id="1" name="Parameter {n}">JSON__TEMP.Value(0, &quot;Level&quot;)</param>
+                                </action>
+                                <action id="60" name="LoadJSON" sid="678686830312939" type="JSON__COMMON">
                                     <param id="0" name="JSON">Function.ReturnValue</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;best_time&quot;</param>
-                                </action>
-                                <action id="0" name="Call function" sid="689943320965559" type="Function">
-                                    <param id="0" name="Name">&quot;Load_RecordAttack&quot;</param>
-                                    <param id="1" name="Parameter {n}">JSON__TEMP.Value(0, &quot;Level&quot;){###}&quot;score&quot;</param>
-                                </action>
-                                <action id="60" name="LoadJSON" sid="605088516223291" type="JSON__COMMON">
-                                    <param id="0" name="JSON">Function.ReturnValue</param>
-                                    <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;best_score&quot;</param>
+                                    <param id="2" name="Key {n}">&quot;list&quot;</param>
                                 </action>
                             </actions>
                             <sub-events>
-                                <variable constant="0" name="index" sid="775508332791099" static="0" type="number">0</variable>
-                                <event-block sid="273732770815905">
+                                <comment>if too many then remove oldest, but accomodate for best time/score and avoid those</comment>
+                                <event-block sid="623270275967968">
                                     <conditions>
-                                        <condition id="-12" name="Repeat" sid="192454184570105" type="System">
-                                            <param id="0" name="Count">(JSON__COMMON.Size(0,&quot;list&quot;) - c_maxrecords)+1</param>
+                                        <condition id="-8" name="Compare two values" sid="133815159332540" type="System">
+                                            <param id="0" name="First value">JSON__COMMON.Size(0,&quot;list&quot;)</param>
+                                            <param id="1" name="Comparison">5</param>
+                                            <param id="2" name="Second value">Save_Config.Value(0,&quot;Data.MaxRecords&quot;)</param>
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="-9" name="Set value" sid="586961112686226" type="System">
-                                            <param id="0" name="Variable">index</param>
-                                            <param id="1" name="Value">JSON__COMMON.Size(0,&quot;list&quot;)-1</param>
+                                        <action id="0" name="Call function" sid="398104359955472" type="Function">
+                                            <param id="0" name="Name">&quot;Load_RecordAttack&quot;</param>
+                                            <param id="1" name="Parameter {n}">JSON__TEMP.Value(0, &quot;Level&quot;){###}&quot;time&quot;</param>
+                                        </action>
+                                        <action id="60" name="LoadJSON" sid="344047081244774" type="JSON__COMMON">
+                                            <param id="0" name="JSON">Function.ReturnValue</param>
+                                            <param id="1" name="Reference point">0</param>
+                                            <param id="2" name="Key {n}">&quot;best_time&quot;</param>
+                                        </action>
+                                        <action id="0" name="Call function" sid="689943320965559" type="Function">
+                                            <param id="0" name="Name">&quot;Load_RecordAttack&quot;</param>
+                                            <param id="1" name="Parameter {n}">JSON__TEMP.Value(0, &quot;Level&quot;){###}&quot;score&quot;</param>
+                                        </action>
+                                        <action id="60" name="LoadJSON" sid="605088516223291" type="JSON__COMMON">
+                                            <param id="0" name="JSON">Function.ReturnValue</param>
+                                            <param id="1" name="Reference point">0</param>
+                                            <param id="2" name="Key {n}">&quot;best_score&quot;</param>
                                         </action>
                                     </actions>
                                     <sub-events>
-                                        <comment>do it twice specifically, in case if encountered one after the other</comment>
-                                        <event-block sid="497719181204187">
+                                        <variable constant="0" name="index" sid="775508332791099" static="0" type="number">0</variable>
+                                        <event-block sid="273732770815905">
                                             <conditions>
-                                                <condition id="-12" name="Repeat" sid="870498158584145" type="System">
-                                                    <param id="0" name="Count">2</param>
+                                                <condition id="-12" name="Repeat" sid="192454184570105" type="System">
+                                                    <param id="0" name="Count">(JSON__COMMON.Size(0,&quot;list&quot;) - Save_Config.Value(0,&quot;Data.MaxRecords&quot;))+1</param>
                                                 </condition>
                                             </conditions>
-                                            <actions />
+                                            <actions>
+                                                <action id="-9" name="Set value" sid="586961112686226" type="System">
+                                                    <param id="0" name="Variable">index</param>
+                                                    <param id="1" name="Value">JSON__COMMON.Size(0,&quot;list&quot;)-1</param>
+                                                </action>
+                                            </actions>
                                             <sub-events>
-                                                <event-block any="1" sid="887437756986162">
+                                                <comment>do it twice specifically, in case if encountered one after the other</comment>
+                                                <event-block sid="497719181204187">
                                                     <conditions>
-                                                        <condition id="-8" name="Compare two values" sid="903737267736729" type="System">
-                                                            <param id="0" name="First value">JSON__COMMON.Value(0, &quot;list&quot;, index, &quot;ID&quot;)</param>
-                                                            <param id="1" name="Comparison">0</param>
-                                                            <param id="2" name="Second value">JSON__COMMON.Value(0, &quot;best_time&quot;, &quot;ID&quot;)</param>
-                                                        </condition>
-                                                        <condition id="-8" name="Compare two values" sid="597131036045257" type="System">
-                                                            <param id="0" name="First value">JSON__COMMON.Value(0, &quot;list&quot;, index, &quot;ID&quot;)</param>
-                                                            <param id="1" name="Comparison">0</param>
-                                                            <param id="2" name="Second value">JSON__COMMON.Value(0, &quot;best_score&quot;, &quot;ID&quot;)</param>
+                                                        <condition id="-12" name="Repeat" sid="870498158584145" type="System">
+                                                            <param id="0" name="Count">2</param>
                                                         </condition>
                                                     </conditions>
+                                                    <actions />
+                                                    <sub-events>
+                                                        <event-block any="1" sid="887437756986162">
+                                                            <conditions>
+                                                                <condition id="-8" name="Compare two values" sid="903737267736729" type="System">
+                                                                    <param id="0" name="First value">JSON__COMMON.Value(0, &quot;list&quot;, index, &quot;ID&quot;)</param>
+                                                                    <param id="1" name="Comparison">0</param>
+                                                                    <param id="2" name="Second value">JSON__COMMON.Value(0, &quot;best_time&quot;, &quot;ID&quot;)</param>
+                                                                </condition>
+                                                                <condition id="-8" name="Compare two values" sid="597131036045257" type="System">
+                                                                    <param id="0" name="First value">JSON__COMMON.Value(0, &quot;list&quot;, index, &quot;ID&quot;)</param>
+                                                                    <param id="1" name="Comparison">0</param>
+                                                                    <param id="2" name="Second value">JSON__COMMON.Value(0, &quot;best_score&quot;, &quot;ID&quot;)</param>
+                                                                </condition>
+                                                            </conditions>
+                                                            <actions>
+                                                                <action id="14" name="Log" sid="267467224529056" type="Browser">
+                                                                    <param id="0" name="Type">0</param>
+                                                                    <param id="1" name="Message">&quot;last index is best time/score - &quot;&amp;JSON__COMMON.Value(0, &quot;list&quot;, index, &quot;ID&quot;)</param>
+                                                                </action>
+                                                                <action id="-11" name="Subtract from" sid="537643903851298" type="System">
+                                                                    <param id="0" name="Variable">index</param>
+                                                                    <param id="1" name="Value">1</param>
+                                                                </action>
+                                                            </actions>
+                                                        </event-block>
+                                                    </sub-events>
+                                                </event-block>
+                                                <event-block sid="697738412033773">
+                                                    <conditions />
                                                     <actions>
-                                                        <action id="14" name="Log" sid="267467224529056" type="Browser">
-                                                            <param id="0" name="Type">0</param>
-                                                            <param id="1" name="Message">&quot;last index is best time/score - &quot;&amp;JSON__COMMON.Value(0, &quot;list&quot;, index, &quot;ID&quot;)</param>
+                                                        <action id="0" name="Call function" sid="308688934723466" type="Function">
+                                                            <param id="0" name="Name">&quot;Delete_RecordAttack&quot;</param>
+                                                            <param id="1" name="Parameter {n}">JSON__COMMON.Value(0, &quot;list&quot;, index, &quot;ID&quot;)</param>
                                                         </action>
-                                                        <action id="-11" name="Subtract from" sid="537643903851298" type="System">
-                                                            <param id="0" name="Variable">index</param>
-                                                            <param id="1" name="Value">1</param>
+                                                        <action id="0" name="Call function" sid="786754660168072" type="Function">
+                                                            <param id="0" name="Name">&quot;JSON_ArrayRemoveAt&quot;</param>
+                                                            <param id="1" name="Parameter {n}">JSON__COMMON.AsJson(0,&quot;list&quot;){###}index</param>
+                                                        </action>
+                                                        <action id="60" name="LoadJSON" sid="816150538951141" type="JSON__COMMON">
+                                                            <param id="0" name="JSON">Function.ReturnValue</param>
+                                                            <param id="1" name="Reference point">0</param>
+                                                            <param id="2" name="Key {n}">&quot;list&quot;</param>
                                                         </action>
                                                     </actions>
                                                 </event-block>
                                             </sub-events>
                                         </event-block>
-                                        <event-block sid="697738412033773">
-                                            <conditions />
-                                            <actions>
-                                                <action id="0" name="Call function" sid="308688934723466" type="Function">
-                                                    <param id="0" name="Name">&quot;Delete_RecordAttack&quot;</param>
-                                                    <param id="1" name="Parameter {n}">JSON__COMMON.Value(0, &quot;list&quot;, index, &quot;ID&quot;)</param>
-                                                </action>
-                                                <action id="0" name="Call function" sid="786754660168072" type="Function">
-                                                    <param id="0" name="Name">&quot;JSON_ArrayRemoveAt&quot;</param>
-                                                    <param id="1" name="Parameter {n}">JSON__COMMON.AsJson(0,&quot;list&quot;){###}index</param>
-                                                </action>
-                                                <action id="60" name="LoadJSON" sid="816150538951141" type="JSON__COMMON">
-                                                    <param id="0" name="JSON">Function.ReturnValue</param>
-                                                    <param id="1" name="Reference point">0</param>
-                                                    <param id="2" name="Key {n}">&quot;list&quot;</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
                                     </sub-events>
                                 </event-block>
+                                <event-block sid="380202136823227">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="600607540279215" type="System">
+                                            <param id="0" name="Variable">DESKTOP</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                        <condition id="-14" inverted="1" name="Compare variable" sid="691151282431207" type="System">
+                                            <param id="0" name="Variable">DEBUG_LOCALSTORAGE</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="193349313306570" type="Function">
+                                            <param id="0" name="Name">&quot;JSON2INI&quot;</param>
+                                            <param id="1" name="Parameter {n}">JSON__TEMP.AsJson(0)</param>
+                                        </action>
+                                        <action id="0" name="Write file" sid="345381314481518" type="NWjs">
+                                            <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\records\srbftp_record_&quot;&amp;JSON__TEMP.Value(0,&quot;ID&quot;)&amp;&quot;.ini&quot;</param>
+                                            <param id="1" name="Contents">Function.ReturnValue</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block any="1" sid="491587529459301">
+                                    <conditions>
+                                        <condition id="-14" inverted="1" name="Compare variable" sid="932350531404636" type="System">
+                                            <param id="0" name="Variable">DESKTOP</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                        <condition id="-14" name="Compare variable" sid="864755501773744" type="System">
+                                            <param id="0" name="Variable">DEBUG_LOCALSTORAGE</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="6" name="Call function" sid="753990059941747" type="JS">
+                                            <param id="0" name="Expression">&quot;Storages.localStorage.set&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;srbftp_record_&quot;&amp;JSON__TEMP.Value(0,&quot;ID&quot;){###}JSON__TEMP.AsJson(0)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="553918940901542">
+                                    <conditions />
+                                    <actions>
+                                        <action id="0" name="Execute JS code" sid="484377539624499" type="JS">
+                                            <param id="0" name="JS code">&quot;console.log(&apos;Save_RecordAttack&apos;, JSON.parse(#0))&quot;</param>
+                                            <param id="1" name="Parameter {n}">JSON__TEMP.AsJson(0)</param>
+                                        </action>
+                                        <action id="55" name="Clear" sid="418992741707257" type="JSON__TEMP">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}"></param>
+                                        </action>
+                                        <action id="0" name="Set New Object" sid="700968764527148" type="JSON__TEMP">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}"></param>
+                                        </action>
+                                        <action id="-9" name="Destroy" sid="197107749337606" type="JSON__COMMON" />
+                                        <action id="-15" name="Set visible" sid="747060601039922" type="Text_Saved">
+                                            <param id="0" name="Visibility">1</param>
+                                        </action>
+                                        <action behavior="Fade" id="0" name="Restart fade" sid="362435854376528" type="Text_Saved" />
+                                    </actions>
+                                </event-block>
                             </sub-events>
-                        </event-block>
-                        <event-block sid="380202136823227">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="600607540279215" type="System">
-                                    <param id="0" name="Variable">DESKTOP</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">1</param>
-                                </condition>
-                                <condition id="-14" inverted="1" name="Compare variable" sid="691151282431207" type="System">
-                                    <param id="0" name="Variable">DEBUG_LOCALSTORAGE</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">1</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Call function" sid="193349313306570" type="Function">
-                                    <param id="0" name="Name">&quot;JSON2INI&quot;</param>
-                                    <param id="1" name="Parameter {n}">JSON__TEMP.AsJson(0)</param>
-                                </action>
-                                <action id="0" name="Write file" sid="345381314481518" type="NWjs">
-                                    <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\records\srbftp_record_&quot;&amp;JSON__TEMP.Value(0,&quot;ID&quot;)&amp;&quot;.ini&quot;</param>
-                                    <param id="1" name="Contents">Function.ReturnValue</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block any="1" sid="491587529459301">
-                            <conditions>
-                                <condition id="-14" inverted="1" name="Compare variable" sid="932350531404636" type="System">
-                                    <param id="0" name="Variable">DESKTOP</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">1</param>
-                                </condition>
-                                <condition id="-14" name="Compare variable" sid="864755501773744" type="System">
-                                    <param id="0" name="Variable">DEBUG_LOCALSTORAGE</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">1</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="6" name="Call function" sid="753990059941747" type="JS">
-                                    <param id="0" name="Expression">&quot;Storages.localStorage.set&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;srbftp_record_&quot;&amp;JSON__TEMP.Value(0,&quot;ID&quot;){###}JSON__TEMP.AsJson(0)</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="553918940901542">
-                            <conditions />
-                            <actions>
-                                <action id="0" name="Execute JS code" sid="484377539624499" type="JS">
-                                    <param id="0" name="JS code">&quot;console.log(&apos;Save_RecordAttack&apos;, JSON.parse(#0))&quot;</param>
-                                    <param id="1" name="Parameter {n}">JSON__TEMP.AsJson(0)</param>
-                                </action>
-                                <action id="55" name="Clear" sid="418992741707257" type="JSON__TEMP">
-                                    <param id="0" name="Reference point">0</param>
-                                    <param id="1" name="Key {n}"></param>
-                                </action>
-                                <action id="0" name="Set New Object" sid="700968764527148" type="JSON__TEMP">
-                                    <param id="0" name="Reference point">0</param>
-                                    <param id="1" name="Key {n}"></param>
-                                </action>
-                                <action id="-9" name="Destroy" sid="197107749337606" type="JSON__COMMON" />
-                                <action id="-15" name="Set visible" sid="747060601039922" type="Text_Saved">
-                                    <param id="0" name="Visibility">1</param>
-                                </action>
-                                <action behavior="Fade" id="0" name="Restart fade" sid="362435854376528" type="Text_Saved" />
-                            </actions>
                         </event-block>
                     </sub-events>
                 </event-block>
@@ -5568,8 +5691,8 @@
                             <conditions />
                             <actions>
                                 <action id="0" name="Execute JS code" sid="203258881234523" type="JS">
-                                    <param id="0" name="JS code">&quot;console.log(String.format(&apos;Load_RecordAttack - {level} ({type}), size: {size}&apos;, #1, #2, #3), JSON.parse(#0))&quot;</param>
-                                    <param id="1" name="Parameter {n}">Function.ReturnValue{###}Function.Param(0){###}Function.Param(1){###}JSON__COMMON.Size(0)</param>
+                                    <param id="0" name="JS code">&quot;console.log(String.format(&apos;Load_RecordAttack - {level} ({type}), size: {size}/{max}&apos;, #1, #2, #3, #4), JSON.parse(#0))&quot;</param>
+                                    <param id="1" name="Parameter {n}">Function.ReturnValue{###}Function.Param(0){###}Function.Param(1){###}JSON__COMMON.Size(0){###}Save_Config.Value(0,&quot;Data.MaxRecords&quot;)</param>
                                 </action>
                                 <action id="-9" name="Destroy" sid="895013452050732" type="JSON__COMMON" />
                             </actions>
