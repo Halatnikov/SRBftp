@@ -2,7 +2,7 @@
 <c2project>
     <name>Sonic Robo-Blast! From The Past</name>
     <description>Original games by Sonikku - Johnathan Wallbank and SSNTails - A.J. Freda</description>
-    <version>0.3.1-29</version>
+    <version>0.3.1-30</version>
     <author>Halatnikov</author>
     <author-email></author-email>
     <author-website>https://halatnikov.github.io</author-website>
@@ -8145,6 +8145,9 @@
             </object-type>
             <object-type name="Boss2_2THZ" sid="147419452447369">
                 <plugin id="Sprite" />
+                <instance-variables>
+                    <instance-variable name="StateAttack" sid="211859191005864" type="number" />
+                </instance-variables>
                 <animation-folder>
                     <animation framecount="1" loop="1" name="Idle" pingpong="0" repeatcount="1" repeatto="0" sid="639653651299872" speed="12">
                         <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb2\assets\badniks\techno hill\boss_thz_idle.png">
@@ -20127,7 +20130,7 @@
                     </animation>
                 </animation-folder>
             </object-type>
-            <object-type name="SChaseHazard_Breakage" sid="425652194606920">
+            <object-type name="SChaseProjectile_Breakage" sid="425652194606920">
                 <plugin id="Sprite" />
                 <animation-folder>
                     <animation framecount="4" loop="1" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="286094107625444" speed="8">
@@ -20248,6 +20251,9 @@
                     <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Users\DoorOpener\Desktop\C2andWADs\srbexp\srb1\assets\tiles\8mechanical madness\moving_girder_from_hell.png" />
                 </animation>
             </animation-folder>
+        </object-type>
+        <object-type name="TextBox" sid="385630925630317">
+            <plugin id="TextBox" />
         </object-type>
     </object-folder>
     <families>
@@ -20410,7 +20416,7 @@
                 <instance-variable name="AttackMirrored" sid="194457178722030" type="boolean" />
                 <instance-variable name="AttackDirection" sid="316015717442136" type="number" />
                 <instance-variable name="AttackInterval" sid="166929321955997" type="number" />
-                <instance-variable name="AttackProjectile" sid="281937057212252" type="number" />
+                <instance-variable name="AttackProjectile" sid="820905868586897" type="string" />
                 <instance-variable name="AttackSpeed" sid="758734106593854" type="number" />
                 <instance-variable name="AttackRandomness" sid="245202304811146" type="number" />
             </instance-variables>
@@ -20487,11 +20493,13 @@
                 <member>Projectile2_3DSZBomb</member>
                 <member>Projectile2_Generic</member>
                 <member>ProjectileX_MetalFire</member>
-                <member>SChaseHazard_Breakage</member>
+                <member>SChaseProjectile_Breakage</member>
                 <member>SChaseProjectile_Generic</member>
             </members>
             <instance-variables>
-                <instance-variable name="ID" sid="118186032745397" type="number" />
+                <instance-variable name="ID" sid="545856067492813" type="string" />
+                <instance-variable name="SpawnTrails" sid="641092497915595" type="boolean" />
+                <instance-variable name="DestroyOnSolids" sid="545866993395954" type="boolean" />
             </instance-variables>
             <behaviors>
                 <behavior-type name="Bullet" sid="827903172052591">
@@ -20748,9 +20756,11 @@
             <file name="js.storage.min.js" />
             <file name="axios.min.js" />
             <file name="parse.min.js" />
+            <file name="superstruct.min.js" />
         </file-folder>
         <file-folder name="js">
             <file name="main.js" />
+            <file name="schemas.js" />
         </file-folder>
         <file name="funny.txt" />
         <file name="credits.txt" />

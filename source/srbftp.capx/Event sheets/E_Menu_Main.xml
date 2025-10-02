@@ -785,47 +785,6 @@
                             </actions>
                         </event-block>
                         <comment></comment>
-                        <event-block sid="290121383309982">
-                            <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="844454084075196" type="Var_Game">
-                                    <param id="0" name="Instance variable">CurrentMenu</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;online_error&quot;</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="523291651419495" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="-12" name="Set group active" sid="167007288342482" type="System">
-                                    <param id="0" name="Group name">&quot;Online Error&quot;</param>
-                                    <param id="1" name="State">1</param>
-                                </action>
-                                <action id="-4" name="Set layer visible" sid="739380243574898" type="System">
-                                    <param id="0" name="Layer">&quot;OnlineError&quot;</param>
-                                    <param id="1" name="Visibility">1</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="633584807055908">
-                            <conditions>
-                                <condition id="-7" inverted="1" name="Compare instance variable" sid="178819821417268" type="Var_Game">
-                                    <param id="0" name="Instance variable">CurrentMenu</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;online_error&quot;</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="885662945791911" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="-12" name="Set group active" sid="818096194116417" type="System">
-                                    <param id="0" name="Group name">&quot;Online Error&quot;</param>
-                                    <param id="1" name="State">0</param>
-                                </action>
-                                <action id="-4" name="Set layer visible" sid="154124345348499" type="System">
-                                    <param id="0" name="Layer">&quot;OnlineError&quot;</param>
-                                    <param id="1" name="Visibility">0</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <comment></comment>
                         <event-block sid="649293613484224">
                             <conditions>
                                 <condition id="-7" name="Compare instance variable" sid="385527023665532" type="Var_Game">
@@ -1740,7 +1699,6 @@
         </event-group>
         <event-group description="" inactive="1" sid="808264772218306" title="Auto-updater">
             <sub-events>
-                <variable constant="0" name="github" sid="455819953711795" static="0" type="text">Halatnikov/SRBftp</variable>
                 <variable constant="0" name="state" sid="217069991941418" static="1" type="text"></variable>
                 <event-block sid="940864420177380">
                     <conditions>
@@ -1764,23 +1722,6 @@
                             <param id="1" name="From">1</param>
                         </action>
                     </actions>
-                    <sub-events>
-                        <event-block any="1" sid="291655050269621">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="208169756382212" type="System">
-                                    <param id="0" name="Variable">WEB</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">1</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="804879582494713" type="System">
-                                    <param id="0" name="Variable">state</param>
-                                    <param id="1" name="Value">&quot;end&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
                 </event-block>
                 <comment>===checking</comment>
                 <event-block sid="398307823489150">
@@ -1793,6 +1734,7 @@
                     </conditions>
                     <actions />
                     <sub-events>
+                        <comment>todo: detect that you&apos;re checking updates from settings and from connect online</comment>
                         <event-block sid="852137073324360">
                             <conditions>
                                 <condition id="-4" name="Trigger once while true" sid="135097291479467" type="System" />
@@ -1815,7 +1757,7 @@
                                 </action>
                                 <action id="0" name="Request URL" sid="954737040390673" type="AJAX">
                                     <param id="0" name="Tag">&quot;&quot;</param>
-                                    <param id="1" name="URL">&quot;https://raw.githubusercontent.com/&quot;&amp;github&amp;&quot;/master/source/hosted/updateCheck.json&quot;</param>
+                                    <param id="1" name="URL">&quot;https://raw.githubusercontent.com/&quot;&amp;c_github&amp;&quot;/master/source/hosted/updateCheck.json&quot;</param>
                                 </action>
                                 <action id="0" name="Start" sid="933648424754311" type="Date">
                                     <param id="0" name="Name">&quot;UpdateTimeout&quot;</param>
@@ -1918,7 +1860,7 @@
                                 <condition id="-8" name="Compare two values" sid="257781256646055" type="System">
                                     <param id="0" name="First value">Date.Timer(&quot;UpdateTimeout&quot;)</param>
                                     <param id="1" name="Comparison">5</param>
-                                    <param id="2" name="Second value">5</param>
+                                    <param id="2" name="Second value">7</param>
                                 </condition>
                                 <condition id="-4" name="Trigger once while true" sid="542496334744852" type="System" />
                             </conditions>
@@ -1935,10 +1877,10 @@
                             </conditions>
                             <actions>
                                 <action id="0" name="Set text" sid="719812079567732" type="CutsceneTextA">
-                                    <param id="0" name="Text">&quot;CONNECTION ERROR&quot;</param>
+                                    <param id="0" name="Text">&quot;CHECKING FOR UPDATES&quot;&amp;newline&amp;&quot;CONNECTION ERROR&quot;</param>
                                 </action>
                                 <action id="-16" name="Wait" sid="242879191594048" type="System">
-                                    <param id="0" name="Seconds">2</param>
+                                    <param id="0" name="Seconds">3</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="846600859545754" type="System">
                                     <param id="0" name="Variable">state</param>
@@ -1951,11 +1893,11 @@
                                 <condition id="200" name="On JSON Parse Error" sid="593948880036645" type="JSON_UpdateCheck" />
                             </conditions>
                             <actions>
-                                <action id="0" name="Set text" sid="916054963839942" type="CutsceneTextA">
-                                    <param id="0" name="Text">&quot;PARSING ERROR&quot;</param>
+                                <action id="0" name="Set text" sid="257609867791162" type="CutsceneTextA">
+                                    <param id="0" name="Text">&quot;CHECKING FOR UPDATES&quot;&amp;newline&amp;&quot;PARSING ERROR&quot;</param>
                                 </action>
                                 <action id="-16" name="Wait" sid="863938231499386" type="System">
-                                    <param id="0" name="Seconds">2</param>
+                                    <param id="0" name="Seconds">3</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="193227276972134" type="System">
                                     <param id="0" name="Variable">state</param>
@@ -1989,7 +1931,7 @@
                                     <param id="0" name="Layer">&quot;UpdateAvailable&quot;</param>
                                     <param id="1" name="Visibility">1</param>
                                 </action>
-                                <action id="0" name="Set text" sid="367867741096274" type="CutsceneTextA">
+                                <action id="0" name="Set text" sid="149318039002407" type="TextBox">
                                     <param id="0" name="Text">replace(JSON_UpdateCheck.Value(0,&quot;SRBftp_UpdateCheck&quot;,&quot;ChangelogBrief&quot;),&quot;|&quot;,newline)</param>
                                 </action>
                             </actions>
@@ -2043,6 +1985,9 @@
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">1</param>
                                         </condition>
+                                        <condition id="-16" name="Is on layer" sid="531375421618238" type="Menu_ClickableButton">
+                                            <param id="0" name="Layer">&quot;UpdateAvailable&quot;</param>
+                                        </condition>
                                         <condition id="-7" name="Compare instance variable" sid="488063675418065" type="Menu_ClickableButton">
                                             <param id="0" name="Instance variable">ID</param>
                                             <param id="1" name="Comparison">0</param>
@@ -2071,13 +2016,13 @@
                             <sub-events>
                                 <event-block sid="965632453005364">
                                     <conditions>
-                                        <condition id="-14" name="Compare variable" sid="240302147155191" type="System">
-                                            <param id="0" name="Variable">DESKTOP</param>
+                                        <condition id="-7" name="Compare instance variable" sid="525471788542132" type="Menu_ClickableButton">
+                                            <param id="0" name="Instance variable">ID</param>
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">1</param>
                                         </condition>
-                                        <condition id="-7" name="Compare instance variable" sid="525471788542132" type="Menu_ClickableButton">
-                                            <param id="0" name="Instance variable">ID</param>
+                                        <condition id="-14" name="Compare variable" sid="240302147155191" type="System">
+                                            <param id="0" name="Variable">DESKTOP</param>
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">1</param>
                                         </condition>
@@ -2114,9 +2059,9 @@
                                     </conditions>
                                     <actions />
                                     <sub-events>
-                                        <event-block sid="667039126518966">
+                                        <event-block sid="677043974916203">
                                             <conditions>
-                                                <condition id="-14" name="Compare variable" sid="207825546619412" type="System">
+                                                <condition id="-14" name="Compare variable" sid="969469158422072" type="System">
                                                     <param id="0" name="Variable">DESKTOP</param>
                                                     <param id="1" name="Comparison">0</param>
                                                     <param id="2" name="Value">1</param>
@@ -2128,14 +2073,14 @@
                                                 </action>
                                             </actions>
                                         </event-block>
-                                        <event-block sid="556028670409364">
+                                        <event-block sid="982528904704285">
                                             <conditions>
-                                                <condition id="-22" name="Else" sid="448531667335998" type="System" />
+                                                <condition id="-22" name="Else" sid="752905435040909" type="System" />
                                             </conditions>
                                             <actions>
-                                                <action id="7" name="Go to URL" sid="714195204098795" type="Browser">
+                                                <action id="8" name="Open URL in new window" sid="632190844945729" type="Browser">
                                                     <param id="0" name="URL">JSON_UpdateCheck.Value(0,&quot;SRBftp_UpdateCheck&quot;,&quot;ManualURL&quot;)</param>
-                                                    <param id="1" name="Target">0</param>
+                                                    <param id="1" name="Tag">&quot;&quot;</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -2156,6 +2101,7 @@
                     </conditions>
                     <actions />
                     <sub-events>
+                        <variable constant="0" name="filesize" sid="855054222891127" static="1" type="number">0</variable>
                         <event-block sid="632873181510415">
                             <conditions>
                                 <condition id="-4" name="Trigger once while true" sid="298014669770676" type="System" />
@@ -2173,11 +2119,15 @@
                                     <param id="0" name="Animation">&quot;Default&quot;</param>
                                     <param id="1" name="From">1</param>
                                 </action>
-                                <action id="0" name="Load Zip from URL" sid="276420785814155" type="jsZip">
-                                    <param id="0" name="URL">JSON_UpdateCheck.Value(0,&quot;SRBftp_UpdateCheck&quot;,&quot;DownloadURL&quot;)</param>
+                                <action id="-9" name="Set value" sid="929630654433159" type="System">
+                                    <param id="0" name="Variable">filesize</param>
+                                    <param id="1" name="Value">float(JSON_UpdateCheck.Value(0,&quot;SRBftp_UpdateCheck&quot;,&quot;FileSize&quot;))</param>
                                 </action>
                                 <action id="0" name="Set text" sid="604543641049381" type="CutsceneTextA">
-                                    <param id="0" name="Text">&quot;STARTING DOWNLOAD&quot;</param>
+                                    <param id="0" name="Text">&quot;DOWNLOADING UPDATE... 0%&quot;&amp;newline&amp;&quot;0MB / &quot;&amp;filesize&amp;&quot;MB&quot;</param>
+                                </action>
+                                <action id="0" name="Load Zip from URL" sid="276420785814155" type="jsZip">
+                                    <param id="0" name="URL">JSON_UpdateCheck.Value(0,&quot;SRBftp_UpdateCheck&quot;,&quot;DownloadURL&quot;)</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -2186,8 +2136,12 @@
                                 <condition id="6" name="Is Loading" sid="747702238953037" type="jsZip" />
                             </conditions>
                             <actions>
-                                <action id="0" name="Set text" sid="204720876569408" type="CutsceneTextA">
-                                    <param id="0" name="Text">&quot;DOWNLOADING UPDATE... &quot;&amp;round(jsZip.LoadProgress*100)&amp;&quot;%&quot;</param>
+                                <action id="0" name="Call function" sid="111041806559670" type="Function">
+                                    <param id="0" name="Name">&quot;Math_RoundFloat&quot;</param>
+                                    <param id="1" name="Parameter {n}">jsZip.LoadProgress*filesize{###}2</param>
+                                </action>
+                                <action id="0" name="Set text" sid="302325544585333" type="CutsceneTextA">
+                                    <param id="0" name="Text">JS.Value(&quot;format&quot;, &quot;DOWNLOADING UPDATE... {progress}%&quot;&amp;newline&amp;&quot;{current}MB / {max}MB&quot;, round(jsZip.LoadProgress*100), Function.ReturnValue, filesize)</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -2199,9 +2153,6 @@
                                 <action id="1" name="Download zip to path" sid="629638007748646" type="jsZip">
                                     <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\update.zip&quot;</param>
                                 </action>
-                                <action id="0" name="Set text" sid="618817485746078" type="CutsceneTextA">
-                                    <param id="0" name="Text">&quot;STARTING SAVING&quot;</param>
-                                </action>
                             </actions>
                         </event-block>
                         <event-block sid="203735367663159">
@@ -2210,7 +2161,7 @@
                             </conditions>
                             <actions>
                                 <action id="0" name="Set text" sid="215674264781025" type="CutsceneTextA">
-                                    <param id="0" name="Text">&quot;SAVING UPDATE... &quot;&amp;round(jsZip.DownloadProgress*100)&amp;&quot;%&quot;</param>
+                                    <param id="0" name="Text">&quot;DOWNLOADING UPDATE...&quot;&amp;newline&amp;&quot;SAVING... &quot;&amp;round(jsZip.DownloadProgress*100)&amp;&quot;%&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -2222,9 +2173,6 @@
                                 <action id="2" name="Unzip to path" sid="373584743135028" type="jsZip">
                                     <param id="0" name="Path">NWjs.AppFolder</param>
                                 </action>
-                                <action id="0" name="Set text" sid="191838073271211" type="CutsceneTextA">
-                                    <param id="0" name="Text">&quot;STARTING EXTRACTING&quot;</param>
-                                </action>
                             </actions>
                         </event-block>
                         <event-block sid="923346891042267">
@@ -2233,7 +2181,7 @@
                             </conditions>
                             <actions>
                                 <action id="0" name="Set text" sid="698092698327245" type="CutsceneTextA">
-                                    <param id="0" name="Text">&quot;EXTRACTING UPDATE... &quot;&amp;round(jsZip.UnzipProgress*100)&amp;&quot;%&quot;</param>
+                                    <param id="0" name="Text">&quot;DOWNLOADING UPDATE...&quot;&amp;newline&amp;&quot;EXTRACTING... &quot;&amp;round(jsZip.UnzipProgress*100)&amp;&quot;%&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -2243,15 +2191,11 @@
                             </conditions>
                             <actions>
                                 <action id="0" name="Set text" sid="457666585947050" type="CutsceneTextA">
-                                    <param id="0" name="Text">&quot;FINISHING UPDATING...&quot;</param>
+                                    <param id="0" name="Text">&quot;DOWNLOADING UPDATE...&quot;&amp;newline&amp;&quot;FINISHING&quot;</param>
                                 </action>
                                 <action id="2" name="Delete file" sid="343549811144903" type="NWjs">
                                     <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\update.zip&quot;</param>
                                 </action>
-                                <action id="21" name="Request attention" sid="900327685751825" type="NWjs">
-                                    <param id="0" name="Mode">0</param>
-                                </action>
-                                <action id="20" name="Restore" sid="939016116883996" type="NWjs" />
                                 <action id="-16" name="Wait" sid="223382748965628" type="System">
                                     <param id="0" name="Seconds">0.1</param>
                                 </action>
@@ -2272,10 +2216,10 @@
                                     <param id="1" name="Parameter {n}">&quot;Denied&quot;</param>
                                 </action>
                                 <action id="0" name="Set text" sid="700305058311417" type="CutsceneTextA">
-                                    <param id="0" name="Text">&quot;DOWNLOAD ERROR - &quot;&amp;jsZip.LoadError</param>
+                                    <param id="0" name="Text">&quot;DOWNLOADING UPDATE... NOT!&quot;&amp;newline&amp;jsZip.LoadError</param>
                                 </action>
                                 <action id="-16" name="Wait" sid="873308567219590" type="System">
-                                    <param id="0" name="Seconds">2</param>
+                                    <param id="0" name="Seconds">3</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="996653789450502" type="System">
                                     <param id="0" name="Variable">state</param>
@@ -2293,10 +2237,10 @@
                                     <param id="1" name="Parameter {n}">&quot;Denied&quot;</param>
                                 </action>
                                 <action id="0" name="Set text" sid="928078219689841" type="CutsceneTextA">
-                                    <param id="0" name="Text">&quot;SAVING ERROR - &quot;&amp;jsZip.DownloadError</param>
+                                    <param id="0" name="Text">&quot;DOWNLOADING UPDATE... NOT!&quot;&amp;newline&amp;jsZip.DownloadError</param>
                                 </action>
                                 <action id="-16" name="Wait" sid="672109200838843" type="System">
-                                    <param id="0" name="Seconds">2</param>
+                                    <param id="0" name="Seconds">3</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="396763034991586" type="System">
                                     <param id="0" name="Variable">state</param>
@@ -2314,10 +2258,10 @@
                                     <param id="1" name="Parameter {n}">&quot;Denied&quot;</param>
                                 </action>
                                 <action id="0" name="Set text" sid="694504095676068" type="CutsceneTextA">
-                                    <param id="0" name="Text">&quot;EXTRACT ERROR - &quot;&amp;jsZip.UnzipError</param>
+                                    <param id="0" name="Text">&quot;DOWNLOADING UPDATE... NOT!&quot;&amp;newline&amp;jsZip.UnzipError</param>
                                 </action>
                                 <action id="-16" name="Wait" sid="544023859499441" type="System">
-                                    <param id="0" name="Seconds">2</param>
+                                    <param id="0" name="Seconds">3</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="552261037283066" type="System">
                                     <param id="0" name="Variable">state</param>
@@ -2328,6 +2272,56 @@
                     </sub-events>
                 </event-block>
                 <comment>===end states</comment>
+                <event-block sid="985448703857111">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="488854712314654" type="System">
+                            <param id="0" name="Variable">state</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;finish&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="763868631708473">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="548624403023142" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-4" name="Set layer visible" sid="485484140873907" type="System">
+                                    <param id="0" name="Layer">&quot;Loading&quot;</param>
+                                    <param id="1" name="Visibility">1</param>
+                                </action>
+                                <action id="-4" name="Set layer visible" sid="156606920515610" type="System">
+                                    <param id="0" name="Layer">&quot;UpdateAvailable&quot;</param>
+                                    <param id="1" name="Visibility">0</param>
+                                </action>
+                                <action id="0" name="Set text" sid="197414072223640" type="CutsceneTextA">
+                                    <param id="0" name="Text">&quot;RESTARTING&quot;</param>
+                                </action>
+                                <action id="0" name="Call function" sid="190713544418206" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;Bubble&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="506258628953850">
+                            <conditions>
+                                <condition id="0" name="On ended" sid="349595985162268" type="BetterAudio">
+                                    <param id="0" name="Tag">&quot;SFX_Bubble&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="11" name="Run file" sid="704042072371386" type="NWjs">
+                                    <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBFromThePast.exe&quot;</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="419753246975913" type="System">
+                                    <param id="0" name="Seconds">0.1</param>
+                                </action>
+                                <action id="1" name="Close" sid="744669381945346" type="Browser" />
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
                 <event-block sid="163801396917508">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="572292802356397" type="System">
@@ -2360,33 +2354,6 @@
                         <action id="-10" name="Set value" sid="500042507708847" type="Var_Game">
                             <param id="0" name="Instance variable">CurrentMenu</param>
                             <param id="1" name="Value">&quot;intro&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="985448703857111">
-                    <conditions>
-                        <condition id="-14" name="Compare variable" sid="488854712314654" type="System">
-                            <param id="0" name="Variable">state</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">&quot;finish&quot;</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="548624403023142" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="-4" name="Set layer visible" sid="485484140873907" type="System">
-                            <param id="0" name="Layer">&quot;Loading&quot;</param>
-                            <param id="1" name="Visibility">1</param>
-                        </action>
-                        <action id="-4" name="Set layer visible" sid="156606920515610" type="System">
-                            <param id="0" name="Layer">&quot;UpdateAvailable&quot;</param>
-                            <param id="1" name="Visibility">0</param>
-                        </action>
-                        <action id="0" name="Set text" sid="197414072223640" type="CutsceneTextA">
-                            <param id="0" name="Text">&quot;!!! PLEASE RESTART THE GAME !!!&quot;</param>
-                        </action>
-                        <action id="0" name="Call function" sid="190713544418206" type="Function">
-                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
-                            <param id="1" name="Parameter {n}">&quot;Bubble&quot;</param>
                         </action>
                     </actions>
                 </event-block>
@@ -3609,11 +3576,11 @@
                             <param id="0" name="X">424</param>
                             <param id="1" name="Y">402</param>
                         </action>
-                        <action disabled="1" id="0" name="Set text" sid="546342397416694" type="Menu_Description">
-                            <param id="0" name="Text">&quot;Of course there&apos;s online multiplayer, were you doubting?&quot;</param>
-                        </action>
-                        <action id="0" name="Set text" sid="631373462333823" type="Menu_Description">
+                        <action disabled="1" id="0" name="Set text" sid="631373462333823" type="Menu_Description">
                             <param id="0" name="Text">&quot;- Not implemented yet -&quot;</param>
+                        </action>
+                        <action id="0" name="Set text" sid="546342397416694" type="Menu_Description">
+                            <param id="0" name="Text">&quot;Of course there&apos;s online multiplayer, were you doubting?&quot;</param>
                         </action>
                     </actions>
                     <sub-events>
@@ -12560,7 +12527,7 @@
                     </conditions>
                     <actions>
                         <action id="0" name="Set text" sid="893457971816949" type="Menu_Description">
-                            <param id="0" name="Text">&quot;How many latest results to store per level. NOTE: excess results will be removed on your next run on that level&quot;</param>
+                            <param id="0" name="Text">&quot;How many latest results to store per level. NOTE: excess results will be removed on your next run of that level&quot;</param>
                         </action>
                     </actions>
                     <sub-events>
@@ -12583,13 +12550,9 @@
                                     <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                     <param id="1" name="Parameter {n}">&quot;Menu&quot;</param>
                                 </action>
-                                <action id="0" name="Call function" sid="886795614886370" type="Function">
-                                    <param id="0" name="Name">&quot;Math_Wrap&quot;</param>
-                                    <param id="1" name="Parameter {n}">maxrecords+1{###}0{###}1</param>
-                                </action>
                                 <action id="-9" name="Set value" sid="411556311948288" type="System">
                                     <param id="0" name="Variable">maxrecords</param>
-                                    <param id="1" name="Value">clamp(maxrecords + (Var_Input.Right - Var_Input.Left), 3, Infinity)</param>
+                                    <param id="1" name="Value">clamp(maxrecords + (Var_Input.Right - Var_Input.Left), 3, 30)</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -13148,6 +13111,11 @@
                 <event-block sid="511731957204482">
                     <conditions>
                         <condition id="-4" name="Trigger once while true" sid="694006894002081" type="System" />
+                        <condition id="-7" name="Compare instance variable" sid="669367202225287" type="Menu_Options">
+                            <param id="0" name="Instance variable">ID</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;error&quot;</param>
+                        </condition>
                     </conditions>
                     <actions>
                         <action id="-10" name="Set value" sid="384491389462705" type="Var_Game">
@@ -13159,7 +13127,42 @@
                             <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
                             <param id="1" name="Parameter {n}">&quot;F_OnlineMenu&quot;{###}&quot;music&quot;{###}1</param>
                         </action>
+                        <action id="-15" name="Set visible" sid="115002441880253" type="Menu_Options">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="787969923250055">
+                            <conditions>
+                                <condition id="-14" inverted="1" name="Compare variable" sid="932127376341901" type="System">
+                                    <param id="0" name="Variable">WEB</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block any="1" sid="930829824594772">
+                                    <conditions>
+                                        <condition id="70" name="Is Empty" sid="675362863634552" type="JSON_UpdateCheck">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}"></param>
+                                        </condition>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="226074971265510" type="Var_Online">
+                                            <param id="0" name="Instance variable">OutdatedVersion</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="33" name="Stop all" sid="994379146186119" type="BetterAudio" />
+                                        <action id="-10" name="Set value" sid="526115374347722" type="Var_Game">
+                                            <param id="0" name="Instance variable">CurrentMenu</param>
+                                            <param id="1" name="Value">&quot;autoupdater&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block sid="738794000758339">
                     <conditions>
@@ -13342,167 +13345,118 @@
                         </event-block>
                     </sub-events>
                 </event-block>
-            </sub-events>
-        </event-group>
-        <event-group description="" inactive="1" sid="496151261446084" title="Online Error">
-            <sub-events>
-                <variable constant="0" name="lock" sid="112465001263784" static="1" type="number">0</variable>
-                <event-block sid="167051710732858">
+                <comment>error text</comment>
+                <event-block sid="132504009071338">
                     <conditions>
-                        <condition id="-4" name="Trigger once while true" sid="883310855161575" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="-9" name="Set value" sid="573271073655793" type="System">
-                            <param id="0" name="Variable">lock</param>
-                            <param id="1" name="Value">1</param>
-                        </action>
-                        <action id="-16" name="Wait" sid="932935686921161" type="System">
-                            <param id="0" name="Seconds">0.5</param>
-                        </action>
-                        <action id="-9" name="Set value" sid="124435303140406" type="System">
-                            <param id="0" name="Variable">lock</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="355246107430492">
-                    <conditions>
-                        <condition id="-4" name="Trigger once while true" sid="729708477772052" type="System" />
+                        <condition id="-7" inverted="1" name="Compare instance variable" sid="538200682021254" type="Var_Online">
+                            <param id="0" name="Instance variable">Error</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;null&quot;</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="126749759906683" type="System" />
                     </conditions>
                     <actions />
                     <sub-events>
-                        <event-block sid="742476540364697">
+                        <event-block sid="374451287465886">
                             <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="786568530873184" type="Menu_Options">
+                                <condition id="-7" name="Compare instance variable" sid="902260435210081" type="Menu_Options">
                                     <param id="0" name="Instance variable">ID</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">&quot;error&quot;</param>
                                 </condition>
                             </conditions>
                             <actions>
+                                <action id="-15" name="Set visible" sid="944384704128407" type="Menu_Options">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action behavior="Flash" id="0" name="Flash" sid="230818144329384" type="Menu_Options">
+                                    <param id="0" name="&apos;On&apos; time">0.3</param>
+                                    <param id="1" name="&apos;Off&apos; time">0.3</param>
+                                    <param id="2" name="Duration">1.5</param>
+                                </action>
                                 <action id="0" name="Set text" sid="286992923651372" type="Menu_Options">
-                                    <param id="0" name="Text">&quot;something broke&quot;&amp;newline&amp;&quot;(unknown error)&quot;</param>
+                                    <param id="0" name="Text">&quot;An error occured!&quot;&amp;newline</param>
                                 </action>
                             </actions>
                             <sub-events>
-                                <event-block sid="169382875685027">
+                                <comment>todo: unused for now, figured out what to do with web</comment>
+                                <event-block sid="464572839739007">
                                     <conditions>
-                                        <condition id="-7" name="Compare instance variable" sid="563206820944078" type="Var_Online">
-                                            <param id="0" name="Instance variable">Error</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">&quot;Photon&quot;</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="0" name="Set text" sid="644651015372196" type="Menu_Options">
-                                            <param id="0" name="Text">&quot;An error occured!&quot;&amp;newline&amp;Photon.ErrorCode&amp;&quot; &quot;&amp;Photon.ErrorMessage</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="500975405798216">
-                                    <conditions>
-                                        <condition id="-7" name="Compare instance variable" sid="474710617876196" type="Var_Online">
+                                        <condition id="-7" name="Compare instance variable" sid="726769232714845" type="Var_Online">
                                             <param id="0" name="Instance variable">Error</param>
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">&quot;Update&quot;</param>
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="0" name="Set text" sid="397921102501962" type="Menu_Options">
-                                            <param id="0" name="Text">&quot;Your game needs to be updated to connect!&quot;&amp;newline&amp;&quot;You have: &quot;&amp;projectversion&amp;newline&amp;&quot;Newest version: &quot;&amp;JSON_UpdateCheck.Value(0,&quot;SRBftp_UpdateCheck&quot;,&quot;NewestVersion&quot;)</param>
+                                        <action id="1" name="Append text" sid="463852022896736" type="Menu_Options">
+                                            <param id="0" name="Text">JS.Value(&quot;format&quot;, &quot;Your game needs to be updated!&quot;&amp;newline&amp;&quot;(your: {ver}, newest: {new})&quot;, projectversion, JSON_UpdateCheck.Value(0,&quot;SRBftp_UpdateCheck&quot;,&quot;NewestVersion&quot;))</param>
                                         </action>
                                     </actions>
                                 </event-block>
-                                <event-block sid="942233255912148">
+                                <event-block sid="430229035756363">
                                     <conditions>
-                                        <condition id="-7" name="Compare instance variable" sid="197272335238174" type="Var_Online">
+                                        <condition id="-7" name="Compare instance variable" sid="109913656033622" type="Var_Online">
+                                            <param id="0" name="Instance variable">Error</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;Photon&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="1" name="Append text" sid="991783407259789" type="Menu_Options">
+                                            <param id="0" name="Text">&quot;Photon &quot;&amp;Photon.ErrorCode&amp;&quot; &quot;&amp;Photon.ErrorMessage</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="911384043029372">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="664726519316733" type="Var_Online">
                                             <param id="0" name="Instance variable">Error</param>
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">&quot;RoomClosed&quot;</param>
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="0" name="Set text" sid="615920862687676" type="Menu_Options">
+                                        <action id="1" name="Append text" sid="377468778955565" type="Menu_Options">
                                             <param id="0" name="Text">&quot;Your room was closed&quot;</param>
                                         </action>
                                     </actions>
                                 </event-block>
-                                <event-block sid="518619678334209">
+                                <event-block sid="616299977456275">
                                     <conditions>
-                                        <condition id="-7" name="Compare instance variable" sid="178245972631636" type="Var_Online">
+                                        <condition id="-7" name="Compare instance variable" sid="614148684400522" type="Var_Online">
                                             <param id="0" name="Instance variable">Error</param>
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">&quot;Kicked&quot;</param>
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="0" name="Set text" sid="439195703874843" type="Menu_Options">
-                                            <param id="0" name="Text">&quot;You were kicked!&quot;</param>
+                                        <action id="1" name="Append text" sid="180399528695733" type="Menu_Options">
+                                            <param id="0" name="Text">&quot;You were kicked from the room&quot;</param>
                                         </action>
                                     </actions>
                                 </event-block>
                             </sub-events>
                         </event-block>
-                        <event-block sid="161405431500203">
+                        <event-block sid="310439566100584">
                             <conditions />
                             <actions>
-                                <action id="14" name="Disconnect" sid="116900587885177" type="Photon" />
-                                <action id="-10" name="Set value" sid="237350095019097" type="Var_Online">
+                                <action id="-10" name="Set value" sid="715617489965497" type="Var_Online">
                                     <param id="0" name="Instance variable">Error</param>
-                                    <param id="1" name="Value">&quot;&quot;</param>
+                                    <param id="1" name="Value">&quot;null&quot;</param>
                                 </action>
-                                <action id="-4" name="Set layer visible" sid="147788755053542" type="System">
+                                <action id="-4" name="Set layer visible" sid="166803832454569" type="System">
                                     <param id="0" name="Layer">&quot;Loading&quot;</param>
                                     <param id="1" name="Visibility">0</param>
                                 </action>
-                                <action id="4" name="Set animation" sid="635256893386458" type="LoadingEmerald">
+                                <action id="4" name="Set animation" sid="326724608976835" type="LoadingEmerald">
                                     <param id="0" name="Animation">&quot;Default&quot;</param>
                                     <param id="1" name="From">1</param>
                                 </action>
+                                <action id="14" name="Disconnect" sid="569305659120421" type="Photon" />
                             </actions>
                         </event-block>
                     </sub-events>
-                </event-block>
-                <event-block sid="890147997297865">
-                    <conditions>
-                        <condition id="1" name="On any touch end" sid="613454200980040" type="Touch" />
-                        <condition id="4" name="Is touching object" sid="992988067033825" type="Touch">
-                            <param id="0" name="Object">Menu_WindowSel_Button</param>
-                        </condition>
-                        <condition id="-16" name="Is on layer" sid="119662552947162" type="Menu_WindowSel_Button">
-                            <param id="0" name="Layer">&quot;OnlineError&quot;</param>
-                        </condition>
-                        <condition id="-14" name="Compare variable" sid="683572169573115" type="System">
-                            <param id="0" name="Variable">lock</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">0</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-10" name="Set value" sid="447587183716064" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentMenu</param>
-                            <param id="1" name="Value">&quot;connect_online&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="608047436114143">
-                    <conditions>
-                        <condition id="-8" name="Is boolean instance variable set" sid="483875138061006" type="Var_Input">
-                            <param id="0" name="Instance variable">A</param>
-                        </condition>
-                        <condition id="-14" name="Compare variable" sid="152931803743870" type="System">
-                            <param id="0" name="Variable">lock</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">0</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="187480564997481" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="-10" name="Set value" sid="640806619666318" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentMenu</param>
-                            <param id="1" name="Value">&quot;connect_online&quot;</param>
-                        </action>
-                    </actions>
                 </event-block>
             </sub-events>
         </event-group>
@@ -13578,42 +13532,35 @@
                                 </action>
                             </actions>
                         </event-block>
-                        <event-block sid="520733936554135">
+                        <event-block sid="580183273728692">
                             <conditions>
-                                <condition id="-14" inverted="1" name="Compare variable" sid="998069926371536" type="System">
+                                <condition id="-14" inverted="1" name="Compare variable" sid="503110876642966" type="System">
                                     <param id="0" name="Variable">WEB</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">1</param>
                                 </condition>
-                                <condition id="70" name="Is Empty" sid="977842740506783" type="JSON_UpdateCheck">
-                                    <param id="0" name="Reference point">0</param>
-                                    <param id="1" name="Key {n}"></param>
-                                </condition>
                             </conditions>
-                            <actions>
-                                <action id="33" name="Stop all" sid="177722487406849" type="BetterAudio" />
-                                <action id="-10" name="Set value" sid="496074051297542" type="Var_Game">
-                                    <param id="0" name="Instance variable">CurrentMenu</param>
-                                    <param id="1" name="Value">&quot;autoupdater&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="374845079424207">
-                            <conditions>
-                                <condition id="70" inverted="1" name="Is Empty" sid="406220207195214" type="JSON_UpdateCheck">
-                                    <param id="0" name="Reference point">0</param>
-                                    <param id="1" name="Key {n}"></param>
-                                </condition>
-                                <condition id="-8" name="Is boolean instance variable set" sid="384643758158140" type="Var_Online">
-                                    <param id="0" name="Instance variable">OutdatedVersion</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Call function" sid="679519242134423" type="Function">
-                                    <param id="0" name="Name">&quot;Online_Error&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;Update&quot;</param>
-                                </action>
-                            </actions>
+                            <actions />
+                            <sub-events>
+                                <event-block any="1" sid="657846639635814">
+                                    <conditions>
+                                        <condition id="70" name="Is Empty" sid="811545394908668" type="JSON_UpdateCheck">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}"></param>
+                                        </condition>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="352384282575787" type="Var_Online">
+                                            <param id="0" name="Instance variable">OutdatedVersion</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="33" name="Stop all" sid="333327771072166" type="BetterAudio" />
+                                        <action id="-10" name="Set value" sid="933399643752838" type="Var_Game">
+                                            <param id="0" name="Instance variable">CurrentMenu</param>
+                                            <param id="1" name="Value">&quot;autoupdater&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                         <event-block sid="895856968944749">
                             <conditions>
@@ -13761,7 +13708,7 @@
                                     <param id="0" name="name">Var_Online.Username</param>
                                 </action>
                                 <action id="0" name="Set text" sid="571865667300641" type="CutsceneTextA">
-                                    <param id="0" name="Text">&quot;RESOLVING...&quot;</param>
+                                    <param id="0" name="Text">&quot;RESOLVING&quot;</param>
                                 </action>
                                 <action id="0" name="Request URL" sid="417925821608943" type="AJAX">
                                     <param id="0" name="Tag">&quot;&quot;</param>
@@ -13809,7 +13756,7 @@
                             <param id="0" name="UserId">CBHash.MD5(AJAX.LastData)&amp;Function.ReturnValue</param>
                         </action>
                         <action id="0" name="Set text" sid="263637475491148" type="CutsceneTextA">
-                            <param id="0" name="Text">&quot;CONNECTING TO SERVER...&quot;</param>
+                            <param id="0" name="Text">&quot;CONNECTING TO SERVER&quot;</param>
                         </action>
                         <action id="10" name="Connect" sid="775755251726224" type="Photon" />
                     </actions>
@@ -13827,7 +13774,7 @@
                             <param id="0" name="UserId">CBHash.MD5(Save_General.Value(0, &quot;TimestampStart&quot;))&amp;Function.ReturnValue</param>
                         </action>
                         <action id="0" name="Set text" sid="831903995454098" type="CutsceneTextA">
-                            <param id="0" name="Text">&quot;CONNECTING TO SERVER...&quot;</param>
+                            <param id="0" name="Text">&quot;CONNECTING TO SERVER&quot;</param>
                         </action>
                         <action id="10" name="Connect" sid="461279965889909" type="Photon" />
                     </actions>
@@ -13839,7 +13786,7 @@
                     </conditions>
                     <actions>
                         <action id="0" name="Set text" sid="355357999857618" type="CutsceneTextA">
-                            <param id="0" name="Text">&quot;LOGGING IN...&quot;</param>
+                            <param id="0" name="Text">&quot;LOGGING IN&quot;</param>
                         </action>
                     </actions>
                 </event-block>
@@ -13850,7 +13797,7 @@
                     </conditions>
                     <actions>
                         <action id="0" name="Set text" sid="719211558963310" type="CutsceneTextA">
-                            <param id="0" name="Text">&quot;JOINING LOBBY...&quot;</param>
+                            <param id="0" name="Text">&quot;JOINING LOBBY&quot;</param>
                         </action>
                     </actions>
                 </event-block>
@@ -13972,7 +13919,7 @@
                                     <param id="1" name="Visibility">1</param>
                                 </action>
                                 <action id="0" name="Set text" sid="631547109799693" type="CutsceneTextA">
-                                    <param id="0" name="Text">&quot;SEARCHING FOR ROOMS...&quot;</param>
+                                    <param id="0" name="Text">&quot;SEARCHING FOR ROOMS&quot;</param>
                                 </action>
                                 <action id="41" name="Request lobby stats" sid="770357708647829" type="Photon" />
                             </actions>
@@ -14356,7 +14303,7 @@
                                                     <param id="1" name="Visibility">1</param>
                                                 </action>
                                                 <action id="0" name="Set text" sid="174595178166076" type="CutsceneTextA">
-                                                    <param id="0" name="Text">&quot;SEARCHING FOR ROOMS...&quot;</param>
+                                                    <param id="0" name="Text">&quot;SEARCHING FOR ROOMS&quot;</param>
                                                 </action>
                                                 <action id="41" name="Request lobby stats" sid="689403725341391" type="Photon" />
                                             </actions>
@@ -14571,7 +14518,7 @@
                                                                     <param id="1" name="Visibility">1</param>
                                                                 </action>
                                                                 <action id="0" name="Set text" sid="472526692107408" type="CutsceneTextA">
-                                                                    <param id="0" name="Text">&quot;JOINING ROOM...&quot;</param>
+                                                                    <param id="0" name="Text">&quot;JOINING ROOM&quot;</param>
                                                                 </action>
                                                                 <action id="12" name="Join room" sid="647343192744701" type="Photon">
                                                                     <param id="0" name="Room">room</param>
@@ -14912,7 +14859,7 @@
                                     <param id="1" name="Visibility">1</param>
                                 </action>
                                 <action id="0" name="Set text" sid="723313491727553" type="CutsceneTextA">
-                                    <param id="0" name="Text">&quot;CREATING ROOM...&quot;</param>
+                                    <param id="0" name="Text">&quot;CREATING ROOM&quot;</param>
                                 </action>
                                 <action id="104" name="Set props listed in lobby" sid="131189423233339" type="Photon">
                                     <param id="0" name="PropNames">&quot;JSON&quot;</param>
@@ -15241,7 +15188,7 @@
                                             <param id="1" name="Visibility">1</param>
                                         </action>
                                         <action id="0" name="Set text" sid="994272772608436" type="CutsceneTextA">
-                                            <param id="0" name="Text">&quot;JOINING ROOM...&quot;</param>
+                                            <param id="0" name="Text">&quot;JOINING ROOM&quot;</param>
                                         </action>
                                         <action id="12" name="Join room" sid="300397511992488" type="Photon">
                                             <param id="0" name="Room">room</param>
@@ -16072,7 +16019,7 @@
                                                             <param id="1" name="Visibility">1</param>
                                                         </action>
                                                         <action id="0" name="Set text" sid="578656693588206" type="CutsceneTextA">
-                                                            <param id="0" name="Text">&quot;LEAVING ROOM...&quot;</param>
+                                                            <param id="0" name="Text">&quot;LEAVING ROOM&quot;</param>
                                                         </action>
                                                         <action id="16" name="Leave room" sid="396370929141195" type="Photon" />
                                                         <action behavior="Flash" id="1" name="Stop flashing" sid="233705444475082" type="Menu_Options" />
@@ -16314,7 +16261,7 @@
                                                             <param id="1" name="Visibility">1</param>
                                                         </action>
                                                         <action id="0" name="Set text" sid="308917609602669" type="CutsceneTextA">
-                                                            <param id="0" name="Text">&quot;LEAVING ROOM...&quot;</param>
+                                                            <param id="0" name="Text">&quot;LEAVING ROOM&quot;</param>
                                                         </action>
                                                         <action id="16" name="Leave room" sid="115025930815578" type="Photon" />
                                                         <action behavior="Flash" id="1" name="Stop flashing" sid="469710575396225" type="Menu_Options" />

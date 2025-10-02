@@ -3898,47 +3898,157 @@
                         </event-block>
                     </sub-events>
                 </event-group>
-                <event-group description="" sid="169556633552369" title="Hazards">
+                <event-group description="" sid="286140303913710" title="Projectiles">
                     <sub-events>
-                        <comment>=projectile does ouchie</comment>
-                        <event-block sid="119041477705508">
+                        <comment></comment>
+                        <event-block sid="755781501839634">
                             <conditions>
-                                <condition id="1" name="Is overlapping another object" sid="926832121849267" type="PlayerSkins">
+                                <condition id="0" name="On function" sid="216076896132833" type="Function">
+                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Create family object" sid="247405682900143" type="CreateObjectByVal">
+                                    <param id="0" name="Family object">EnemyProjectiles</param>
+                                    <param id="1" name="Variable ID">0</param>
+                                    <param id="2" name="Comparison">0</param>
+                                    <param id="3" name="Value">Function.Param(0)</param>
+                                    <param id="4" name="Layer">&quot;Player&quot;</param>
+                                    <param id="5" name="X">Function.Param(1)</param>
+                                    <param id="6" name="Y">Function.Param(2)</param>
+                                    <param id="7" name="Tag">&quot;&quot;</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="152317622246648" type="EnemyProjectiles">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="384959470433007">
+                                    <conditions>
+                                        <condition id="1" name="Compare parameter" sid="594348897051281" type="Function">
+                                            <param id="0" name="Index">3</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;&quot;</param>
+                                        </condition>
+                                        <condition id="-33" name="Pick by comparison" sid="249316340614902" type="System">
+                                            <param id="0" name="Object">EnemyProjectiles</param>
+                                            <param id="1" name="Expression">EnemyProjectiles.ID</param>
+                                            <param id="2" name="Comparison">0</param>
+                                            <param id="3" name="Value">Function.Param(0)</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action behavior="Bullet" id="0" name="Set speed" sid="634433763809374" type="EnemyProjectiles">
+                                            <param id="0" name="Speed">EnemyProjectiles.Bullet.Speed</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="179368754244398">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="277070737051417" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action behavior="Bullet" id="0" name="Set speed" sid="278102622209928" type="EnemyProjectiles">
+                                            <param id="0" name="Speed">Function.Param(3)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="557311858978695">
+                                    <conditions>
+                                        <condition id="1" name="Compare parameter" sid="821130897574381" type="Function">
+                                            <param id="0" name="Index">4</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;player&quot;</param>
+                                        </condition>
+                                        <condition id="-15" name="Pick nearest/furthest" sid="583384737027189" type="PlayerSkins">
+                                            <param id="0" name="Which">0</param>
+                                            <param id="1" name="X">Function.Param(1)</param>
+                                            <param id="2" name="Y">Function.Param(2)</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="321832185611102" type="EnemyProjectiles">
+                                            <param id="0" name="Angle">angle(Function.Param(1), Function.Param(2), PlayerSkins.X, PlayerSkins.Y)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="607138982111447">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="423307346297107" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="321612988418303" type="EnemyProjectiles">
+                                            <param id="0" name="Angle">Function.Param(4)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="409267267985807">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="253258540148150" type="System">
+                                            <param id="0" name="First value">Function.ParamCount</param>
+                                            <param id="1" name="Comparison">5</param>
+                                            <param id="2" name="Second value">6</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="9" name="Set scale" sid="503636984750636" type="EnemyProjectiles">
+                                            <param id="0" name="Scale">Function.Param(5)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <comment>hack to set the angle properly :/</comment>
+                                <event-block sid="933306525520644">
+                                    <conditions />
+                                    <actions>
+                                        <action id="-16" name="Wait" sid="864484775691809" type="System">
+                                            <param id="0" name="Seconds">0</param>
+                                        </action>
+                                        <action id="-15" name="Set visible" sid="756191259165452" type="EnemyProjectiles">
+                                            <param id="0" name="Visibility">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <comment>=projectile does ouchie</comment>
+                        <event-block sid="381925828674994">
+                            <conditions>
+                                <condition id="1" name="Is overlapping another object" sid="716897103554533" type="PlayerSkins">
                                     <param id="0" name="Object">EnemyProjectiles</param>
                                 </condition>
-                                <condition id="-8" name="Is boolean instance variable set" sid="700921326091582" type="PlayerSkins">
+                                <condition id="-8" name="Is boolean instance variable set" sid="447257827530241" type="PlayerSkins">
                                     <param id="0" name="Instance variable">Me</param>
                                 </condition>
-                                <condition id="-7" inverted="1" name="Compare instance variable" sid="632603900324574" type="Var_Player">
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="603301760476424" type="Var_Player">
                                     <param id="0" name="Instance variable">State</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">&quot;crouch&quot;</param>
                                 </condition>
-                                <condition id="-4" name="Trigger once while true" sid="471623196156684" type="System" />
+                                <condition id="-4" name="Trigger once while true" sid="531073128677792" type="System" />
                             </conditions>
                             <actions />
                             <sub-events>
-                                <event-block sid="766792876224596">
+                                <event-block sid="692669435202051">
                                     <conditions>
-                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="394282440077109" type="Var_Player">
+                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="675190760749047" type="Var_Player">
                                             <param id="0" name="Instance variable">Rings</param>
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">0</param>
                                         </condition>
-                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="561877784030425" type="EnemyProjectiles">
+                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="814166331567730" type="EnemyProjectiles">
                                             <param id="0" name="Instance variable">ID</param>
                                             <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">95</param>
+                                            <param id="2" name="Value">&quot;x_metalfire&quot;</param>
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="-9" name="Destroy" sid="144070022631145" type="EnemyProjectiles" />
+                                        <action id="-9" name="Destroy" sid="284059481142662" type="EnemyProjectiles" />
                                     </actions>
                                 </event-block>
-                                <event-block sid="164773898736540">
+                                <event-block sid="835580643998895">
                                     <conditions />
                                     <actions>
-                                        <action id="0" name="Call function" sid="391746408115599" type="Function">
+                                        <action id="0" name="Call function" sid="155076724174756" type="Function">
                                             <param id="0" name="Name">&quot;Player_Hurt&quot;</param>
                                             <param id="1" name="Parameter {n}"></param>
                                         </action>
@@ -3946,165 +4056,130 @@
                                 </event-block>
                             </sub-events>
                         </event-block>
-                        <event-block sid="603843395137863">
+                        <event-block sid="816368810153202">
                             <conditions>
-                                <condition id="1" name="Is overlapping another object" sid="822143458230801" type="PlayerSkins">
+                                <condition id="1" name="Is overlapping another object" sid="365129385871474" type="PlayerSkins">
                                     <param id="0" name="Object">EnemyProjectiles</param>
                                 </condition>
-                                <condition id="-8" name="Is boolean instance variable set" sid="980789393013670" type="PlayerSkins">
+                                <condition id="-8" name="Is boolean instance variable set" sid="654550259992560" type="PlayerSkins">
                                     <param id="0" name="Instance variable">Me</param>
                                 </condition>
-                                <condition id="-7" name="Compare instance variable" sid="219122952425791" type="Var_Player">
+                                <condition id="-7" name="Compare instance variable" sid="786955442068807" type="Var_Player">
                                     <param id="0" name="Instance variable">State</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">&quot;crouch&quot;</param>
                                 </condition>
-                                <condition id="-4" name="Trigger once while true" sid="259550573593903" type="System" />
-                                <condition id="-7" inverted="1" name="Compare instance variable" sid="714939404651617" type="EnemyProjectiles">
+                                <condition id="-4" name="Trigger once while true" sid="100856556128350" type="System" />
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="771556795453742" type="EnemyProjectiles">
                                     <param id="0" name="Instance variable">ID</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">95</param>
+                                    <param id="2" name="Value">&quot;x_metalfire&quot;</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-9" name="Destroy" sid="611462247080788" type="EnemyProjectiles" />
+                                <action id="-9" name="Destroy" sid="652142189079374" type="EnemyProjectiles" />
                             </actions>
                         </event-block>
                         <comment>&quot;anti-frustration features&quot; (tm)</comment>
-                        <event-block sid="717703540581569">
+                        <event-block sid="841232043728616">
                             <conditions>
-                                <condition id="0" name="On collision with another object" sid="203556008129963" type="Engine_Player">
+                                <condition id="0" name="On collision with another object" sid="756244302526737" type="Engine_Player">
                                     <param id="0" name="Object">Engine_CameraZone</param>
                                 </condition>
-                                <condition id="-7" inverted="1" name="Compare instance variable" sid="834528477520586" type="Engine_CameraZone">
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="318944161259111" type="Engine_CameraZone">
                                     <param id="0" name="Instance variable">ID</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">Engine_Camera.CurrentZone</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-9" name="Destroy" sid="103274542640888" type="EnemyProjectiles" />
+                                <action id="-9" name="Destroy" sid="684835786747225" type="EnemyProjectiles" />
                             </actions>
                         </event-block>
-                        <event-block sid="172141670741359">
+                        <event-block sid="129954598479022">
                             <conditions>
-                                <condition id="-3" inverted="1" name="Is on-screen" sid="104214953918177" type="EnemyProjectiles" />
-                                <condition id="-7" inverted="1" name="Compare instance variable" sid="791463839529186" type="EnemyProjectiles">
+                                <condition id="-3" inverted="1" name="Is on-screen" sid="135957138916483" type="EnemyProjectiles" />
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="164342271665875" type="EnemyProjectiles">
                                     <param id="0" name="Instance variable">ID</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">7</param>
+                                    <param id="2" name="Value">&quot;2_3dszbomb&quot;</param>
                                 </condition>
-                                <condition id="-4" name="Trigger once while true" sid="546630419873131" type="System" />
+                                <condition id="-4" name="Trigger once while true" sid="307467387520932" type="System" />
                             </conditions>
                             <actions>
-                                <action id="-9" name="Destroy" sid="446289412736194" type="EnemyProjectiles" />
+                                <action id="-9" name="Destroy" sid="756536480038475" type="EnemyProjectiles" />
                             </actions>
                         </event-block>
-                        <event-block sid="252370667207082">
+                        <event-block sid="239932309618280">
                             <conditions>
-                                <condition id="0" name="On collision with another object" sid="155269924042976" type="EnemyProjectiles">
+                                <condition id="0" name="On collision with another object" sid="742931782211476" type="EnemyProjectiles">
                                     <param id="0" name="Object">LevelTiles</param>
                                 </condition>
-                                <condition behavior="Solid" id="0" name="Is enabled" sid="474191324372402" type="LevelTiles" />
-                                <condition id="-7" inverted="1" name="Compare instance variable" sid="839781171406544" type="EnemyProjectiles">
-                                    <param id="0" name="Instance variable">ID</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">2</param>
-                                </condition>
-                                <condition id="-7" inverted="1" name="Compare instance variable" sid="705440230590924" type="EnemyProjectiles">
-                                    <param id="0" name="Instance variable">ID</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">3</param>
-                                </condition>
-                                <condition id="-7" inverted="1" name="Compare instance variable" sid="609343276289515" type="EnemyProjectiles">
-                                    <param id="0" name="Instance variable">ID</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">5</param>
-                                </condition>
-                                <condition id="-7" inverted="1" name="Compare instance variable" sid="398652010249642" type="EnemyProjectiles">
-                                    <param id="0" name="Instance variable">ID</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">8</param>
-                                </condition>
-                                <condition id="-7" inverted="1" name="Compare instance variable" sid="721568686314676" type="EnemyProjectiles">
-                                    <param id="0" name="Instance variable">ID</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">10</param>
-                                </condition>
-                                <condition id="-7" inverted="1" name="Compare instance variable" sid="925444555758248" type="EnemyProjectiles">
-                                    <param id="0" name="Instance variable">ID</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">95</param>
+                                <condition behavior="Solid" id="0" name="Is enabled" sid="129435881719811" type="LevelTiles" />
+                                <condition id="-8" name="Is boolean instance variable set" sid="480504030024105" type="EnemyProjectiles">
+                                    <param id="0" name="Instance variable">DestroyOnSolids</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-9" name="Destroy" sid="517172358080167" type="EnemyProjectiles" />
+                                <action id="-9" name="Destroy" sid="456521368244544" type="EnemyProjectiles" />
                             </actions>
                         </event-block>
-                        <event-block sid="936584338652565">
+                        <event-block sid="603083824343309">
                             <conditions>
-                                <condition id="0" name="On collision with another object" sid="634726012417520" type="EnemyProjectiles">
+                                <condition id="0" name="On collision with another object" sid="731780536446644" type="EnemyProjectiles">
                                     <param id="0" name="Object">Object2_MovingPlatform</param>
                                 </condition>
-                                <condition id="-7" inverted="1" name="Compare instance variable" sid="771947701649962" type="EnemyProjectiles">
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="358832184918512" type="EnemyProjectiles">
                                     <param id="0" name="Instance variable">ID</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">3</param>
+                                    <param id="2" name="Value">&quot;1_2gf2boss&quot;</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-9" name="Destroy" sid="277388123535983" type="EnemyProjectiles" />
+                                <action id="-9" name="Destroy" sid="915939768717647" type="EnemyProjectiles" />
                             </actions>
                         </event-block>
-                        <event-block sid="305120549078951">
+                        <event-block sid="495754488807839">
                             <conditions>
-                                <condition id="0" name="On collision with another object" sid="753938970498876" type="EnemyProjectiles">
+                                <condition id="0" name="On collision with another object" sid="296486784497150" type="EnemyProjectiles">
                                     <param id="0" name="Object">Object1_Door</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-9" name="Destroy" sid="515278822991531" type="EnemyProjectiles" />
+                                <action id="-9" name="Destroy" sid="183286308093767" type="EnemyProjectiles" />
                             </actions>
                         </event-block>
                         <comment>projectile trail</comment>
-                        <event-block sid="835707567475778">
+                        <event-block sid="213205075756604">
                             <conditions>
-                                <condition id="-6" name="Every X seconds" sid="920889638231410" type="System">
+                                <condition id="-6" name="Every X seconds" sid="476842103437545" type="System">
                                     <param id="0" name="Interval (seconds)">0.05</param>
                                 </condition>
-                                <condition id="-8" name="Compare two values" sid="489879814192818" type="System">
+                                <condition id="-8" name="Compare two values" sid="275331093227672" type="System">
                                     <param id="0" name="First value">Save_Config.Value(0,&quot;Gameplay.ProjectileTrails&quot;)</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Second value">1</param>
                                 </condition>
-                                <condition id="-3" name="Is on-screen" sid="832765485590549" type="EnemyProjectiles" />
-                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="737874194716786" type="Var_Level">
+                                <condition id="-3" name="Is on-screen" sid="512697691965655" type="EnemyProjectiles" />
+                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="885626255211801" type="Var_Level">
                                     <param id="0" name="Instance variable">Pause</param>
                                 </condition>
-                                <condition id="-7" inverted="1" name="Compare instance variable" sid="132215006918504" type="EnemyProjectiles">
-                                    <param id="0" name="Instance variable">ID</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">2</param>
-                                </condition>
-                                <condition id="-7" inverted="1" name="Compare instance variable" sid="932592284307067" type="EnemyProjectiles">
-                                    <param id="0" name="Instance variable">ID</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">12</param>
-                                </condition>
-                                <condition id="-7" inverted="1" name="Compare instance variable" sid="189607841851091" type="EnemyProjectiles">
-                                    <param id="0" name="Instance variable">ID</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">15</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="428579735995242" type="EnemyProjectiles">
+                                    <param id="0" name="Instance variable">SpawnTrails</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="0" name="Spawn another object" sid="913009465332853" type="EnemyProjectiles">
+                                <action id="0" name="Spawn another object" sid="805180104612338" type="EnemyProjectiles">
                                     <param id="0" name="Object">EffectsF_ProjectileTrail</param>
                                     <param id="1" name="Layer">&quot;Objects&quot;</param>
                                     <param id="2" name="Image point">0</param>
                                 </action>
                             </actions>
                         </event-block>
+                    </sub-events>
+                </event-group>
+                <event-group description="" sid="169556633552369" title="Hazards">
+                    <sub-events>
                         <comment>=flamethrower turret</comment>
                         <event-block sid="279859673225778">
                             <conditions>
@@ -4963,28 +5038,13 @@
                                         <action id="3" name="Start" sid="835449157485618" type="Hazard1_7SLTurretGunna">
                                             <param id="0" name="From">1</param>
                                         </action>
-                                        <action id="0" name="Spawn another object" sid="313861306370260" type="Hazard1_7SLTurretGunna">
-                                            <param id="0" name="Object">Projectile1_Generic</param>
-                                            <param id="1" name="Layer">&quot;Player&quot;</param>
-                                            <param id="2" name="Image point">0</param>
-                                        </action>
-                                        <action id="-10" name="Set value" sid="476245587768147" type="Projectile1_Generic">
-                                            <param id="0" name="Instance variable">ID</param>
-                                            <param id="1" name="Value">14</param>
-                                        </action>
-                                        <action id="9" name="Set scale" sid="823025156461850" type="Projectile1_Generic">
-                                            <param id="0" name="Scale">3</param>
-                                        </action>
-                                        <action behavior="Bullet" id="0" name="Set speed" sid="293221232734230" type="Projectile1_Generic">
-                                            <param id="0" name="Speed">140</param>
-                                        </action>
-                                        <action id="-22" name="Set angle toward position" sid="498940722448593" type="Projectile1_Generic">
-                                            <param id="0" name="X">Engine_Player.X</param>
-                                            <param id="1" name="Y">Engine_Player.Y</param>
-                                        </action>
                                         <action id="0" name="Call function" sid="642343008550418" type="Function">
                                             <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                             <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                        </action>
+                                        <action id="0" name="Call function" sid="615624311721285" type="Function">
+                                            <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;1_generic&quot;{###}Hazard1_7SLTurretGunna.ImagePointX(1){###}Hazard1_7SLTurretGunna.ImagePointY(1){###}140{###}&quot;player&quot;{###}3</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -5003,28 +5063,13 @@
                                         <action id="3" name="Start" sid="739019578511827" type="Hazard1_7SLTurretGunna">
                                             <param id="0" name="From">1</param>
                                         </action>
-                                        <action id="0" name="Spawn another object" sid="581852686674257" type="Hazard1_7SLTurretGunna">
-                                            <param id="0" name="Object">Projectile1_Generic</param>
-                                            <param id="1" name="Layer">&quot;Player&quot;</param>
-                                            <param id="2" name="Image point">0</param>
-                                        </action>
-                                        <action id="-10" name="Set value" sid="880350290929497" type="Projectile1_Generic">
-                                            <param id="0" name="Instance variable">ID</param>
-                                            <param id="1" name="Value">14</param>
-                                        </action>
-                                        <action id="9" name="Set scale" sid="658442139026712" type="Projectile1_Generic">
-                                            <param id="0" name="Scale">3</param>
-                                        </action>
-                                        <action behavior="Bullet" id="0" name="Set speed" sid="803573122695762" type="Projectile1_Generic">
-                                            <param id="0" name="Speed">140</param>
-                                        </action>
-                                        <action id="-22" name="Set angle toward position" sid="441347737218564" type="Projectile1_Generic">
-                                            <param id="0" name="X">Engine_Player.X</param>
-                                            <param id="1" name="Y">Engine_Player.Y</param>
-                                        </action>
                                         <action id="0" name="Call function" sid="527688245548277" type="Function">
                                             <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                             <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                        </action>
+                                        <action id="0" name="Call function" sid="526286676085043" type="Function">
+                                            <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;1_generic&quot;{###}Hazard1_7SLTurretGunna.ImagePointX(1){###}Hazard1_7SLTurretGunna.ImagePointY(1){###}140{###}&quot;player&quot;{###}3</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -5056,49 +5101,21 @@
                                     <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                     <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
                                 </action>
-                                <action id="0" name="Spawn another object" sid="449220112750318" type="Hazard1_8MMTurret">
-                                    <param id="0" name="Object">Projectile1_Generic</param>
-                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                    <param id="2" name="Image point">1</param>
+                                <action id="0" name="Call function" sid="510321063383675" type="Function">
+                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;1_generic&quot;{###}Hazard1_8MMTurret.ImagePointX(1){###}Hazard1_8MMTurret.ImagePointY(1){###}180{###}0+Hazard1_8MMTurret.Angle</param>
                                 </action>
-                                <action behavior="Bullet" id="0" name="Set speed" sid="534456019682041" type="Projectile1_Generic">
-                                    <param id="0" name="Speed">180</param>
+                                <action id="0" name="Call function" sid="329049561338188" type="Function">
+                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;1_generic&quot;{###}Hazard1_8MMTurret.ImagePointX(2){###}Hazard1_8MMTurret.ImagePointY(2){###}180{###}180+Hazard1_8MMTurret.Angle</param>
                                 </action>
-                                <action id="-8" name="Set angle" sid="190280568694086" type="Projectile1_Generic">
-                                    <param id="0" name="Angle">0+Hazard1_8MMTurret.Angle</param>
+                                <action id="0" name="Call function" sid="790972958582601" type="Function">
+                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;1_generic&quot;{###}Hazard1_8MMTurret.ImagePointX(3){###}Hazard1_8MMTurret.ImagePointY(3){###}180{###}270+Hazard1_8MMTurret.Angle</param>
                                 </action>
-                                <action id="0" name="Spawn another object" sid="576431659467937" type="Hazard1_8MMTurret">
-                                    <param id="0" name="Object">Projectile1_Generic</param>
-                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                    <param id="2" name="Image point">2</param>
-                                </action>
-                                <action behavior="Bullet" id="0" name="Set speed" sid="536796478695169" type="Projectile1_Generic">
-                                    <param id="0" name="Speed">180</param>
-                                </action>
-                                <action id="-8" name="Set angle" sid="861083048668779" type="Projectile1_Generic">
-                                    <param id="0" name="Angle">180+Hazard1_8MMTurret.Angle</param>
-                                </action>
-                                <action id="0" name="Spawn another object" sid="573820048455861" type="Hazard1_8MMTurret">
-                                    <param id="0" name="Object">Projectile1_Generic</param>
-                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                    <param id="2" name="Image point">3</param>
-                                </action>
-                                <action behavior="Bullet" id="0" name="Set speed" sid="876995178057512" type="Projectile1_Generic">
-                                    <param id="0" name="Speed">180</param>
-                                </action>
-                                <action id="-8" name="Set angle" sid="546646937055365" type="Projectile1_Generic">
-                                    <param id="0" name="Angle">270+Hazard1_8MMTurret.Angle</param>
-                                </action>
-                                <action id="0" name="Spawn another object" sid="138433262936173" type="Hazard1_8MMTurret">
-                                    <param id="0" name="Object">Projectile1_Generic</param>
-                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                    <param id="2" name="Image point">4</param>
-                                </action>
-                                <action behavior="Bullet" id="0" name="Set speed" sid="934830334378472" type="Projectile1_Generic">
-                                    <param id="0" name="Speed">180</param>
-                                </action>
-                                <action id="-8" name="Set angle" sid="793462209333808" type="Projectile1_Generic">
-                                    <param id="0" name="Angle">90+Hazard1_8MMTurret.Angle</param>
+                                <action id="0" name="Call function" sid="119285298117686" type="Function">
+                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;1_generic&quot;{###}Hazard1_8MMTurret.ImagePointX(4){###}Hazard1_8MMTurret.ImagePointY(4){###}180{###}90+Hazard1_8MMTurret.Angle</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -5796,7 +5813,7 @@
                                 </event-block>
                             </sub-events>
                         </event-block>
-                        <comment></comment>
+                        <comment>= mm lift platform</comment>
                         <event-block sid="795063838148182">
                             <conditions>
                                 <condition id="-4" name="Trigger once while true" sid="372535197243529" type="System" />
@@ -7836,21 +7853,9 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="0" name="Create family object" sid="141388751861636" type="CreateObjectByVal">
-                                            <param id="0" name="Family object">EnemyProjectiles</param>
-                                            <param id="1" name="Variable ID">0</param>
-                                            <param id="2" name="Comparison">0</param>
-                                            <param id="3" name="Value">Enemies.AttackProjectile</param>
-                                            <param id="4" name="Layer">&quot;Player&quot;</param>
-                                            <param id="5" name="X">Enemies.ImagePointX(1)</param>
-                                            <param id="6" name="Y">Enemies.ImagePointY(1)</param>
-                                            <param id="7" name="Tag">&quot;&quot;</param>
-                                        </action>
-                                        <action behavior="Bullet" id="0" name="Set speed" sid="808939704099320" type="EnemyProjectiles">
-                                            <param id="0" name="Speed">Enemies.AttackSpeed * Enemies.AttackDirection</param>
-                                        </action>
-                                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="464495140891532" type="EnemyProjectiles">
-                                            <param id="0" name="Angle">(Enemies.AttackDirection = 1 ? 0 : 180)+random(-Enemies.AttackRandomness, Enemies.AttackRandomness)</param>
+                                        <action id="0" name="Call function" sid="738935708175106" type="Function">
+                                            <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                            <param id="1" name="Parameter {n}">Enemies.AttackProjectile{###}Enemies.ImagePointX(1){###}Enemies.ImagePointY(1){###}Enemies.AttackSpeed * Enemies.AttackDirection{###}(Enemies.AttackDirection = 1 ? 0 : 180)+random(-Enemies.AttackRandomness, Enemies.AttackRandomness)</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -7936,39 +7941,11 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="0" name="Create family object" sid="623065700660105" type="CreateObjectByVal">
-                                            <param id="0" name="Family object">EnemyProjectiles</param>
-                                            <param id="1" name="Variable ID">0</param>
-                                            <param id="2" name="Comparison">0</param>
-                                            <param id="3" name="Value">Enemies.AttackProjectile</param>
-                                            <param id="4" name="Layer">&quot;Player&quot;</param>
-                                            <param id="5" name="X">Enemies.ImagePointX(1)</param>
-                                            <param id="6" name="Y">Enemies.ImagePointY(1)</param>
-                                            <param id="7" name="Tag">&quot;&quot;</param>
-                                        </action>
-                                        <action behavior="Bullet" id="0" name="Set speed" sid="285510590275334" type="EnemyProjectiles">
-                                            <param id="0" name="Speed">Enemies.AttackSpeed</param>
-                                        </action>
-                                        <action id="-8" name="Set angle" sid="394632448899378" type="EnemyProjectiles">
-                                            <param id="0" name="Angle">270</param>
+                                        <action id="0" name="Call function" sid="354167218267271" type="Function">
+                                            <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                            <param id="1" name="Parameter {n}">Enemies.AttackProjectile{###}Enemies.ImagePointX(1){###}Enemies.ImagePointY(1){###}Enemies.AttackSpeed * Enemies.AttackDirection{###}(Enemies.AttackDirection = 1 ? 90 : 270)+random(-Enemies.AttackRandomness, Enemies.AttackRandomness)</param>
                                         </action>
                                     </actions>
-                                    <sub-events>
-                                        <event-block sid="264742875796398">
-                                            <conditions>
-                                                <condition id="-7" name="Compare instance variable" sid="401862245131969" type="Enemies">
-                                                    <param id="0" name="Instance variable">AttackDirection</param>
-                                                    <param id="1" name="Comparison">0</param>
-                                                    <param id="2" name="Value">1</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="-8" name="Set angle" sid="473652850298220" type="EnemyProjectiles">
-                                                    <param id="0" name="Angle">90</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                    </sub-events>
                                 </event-block>
                             </sub-events>
                         </event-block>
@@ -8090,21 +8067,9 @@
                                                 </condition>
                                             </conditions>
                                             <actions>
-                                                <action id="0" name="Create family object" sid="314987627810663" type="CreateObjectByVal">
-                                                    <param id="0" name="Family object">EnemyProjectiles</param>
-                                                    <param id="1" name="Variable ID">0</param>
-                                                    <param id="2" name="Comparison">0</param>
-                                                    <param id="3" name="Value">Enemies.AttackProjectile</param>
-                                                    <param id="4" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="5" name="X">Enemies.ImagePointX(1)</param>
-                                                    <param id="6" name="Y">Enemies.ImagePointY(1)</param>
-                                                    <param id="7" name="Tag">&quot;&quot;</param>
-                                                </action>
-                                                <action behavior="Bullet" id="0" name="Set speed" sid="189219281159405" type="EnemyProjectiles">
-                                                    <param id="0" name="Speed">Enemies.AttackSpeed * Enemies.AttackDirection</param>
-                                                </action>
-                                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="827280321471156" type="EnemyProjectiles">
-                                                    <param id="0" name="Angle">(Enemies.AttackDirection = 1 ? 0 : 180)+random(-Enemies.AttackRandomness, Enemies.AttackRandomness)</param>
+                                                <action id="0" name="Call function" sid="891704239563260" type="Function">
+                                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                                    <param id="1" name="Parameter {n}">Enemies.AttackProjectile{###}Enemies.ImagePointX(1){###}Enemies.ImagePointY(1){###}Enemies.AttackSpeed * Enemies.AttackDirection{###}(Enemies.AttackDirection = 1 ? 0 : 180)+random(-Enemies.AttackRandomness, Enemies.AttackRandomness)</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -8230,39 +8195,11 @@
                                                 </condition>
                                             </conditions>
                                             <actions>
-                                                <action id="0" name="Create family object" sid="326837429418142" type="CreateObjectByVal">
-                                                    <param id="0" name="Family object">EnemyProjectiles</param>
-                                                    <param id="1" name="Variable ID">0</param>
-                                                    <param id="2" name="Comparison">0</param>
-                                                    <param id="3" name="Value">Enemies.AttackProjectile</param>
-                                                    <param id="4" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="5" name="X">Enemies.ImagePointX(1)</param>
-                                                    <param id="6" name="Y">Enemies.ImagePointY(1)</param>
-                                                    <param id="7" name="Tag">&quot;&quot;</param>
-                                                </action>
-                                                <action behavior="Bullet" id="0" name="Set speed" sid="748690377856715" type="EnemyProjectiles">
-                                                    <param id="0" name="Speed">Enemies.AttackSpeed</param>
-                                                </action>
-                                                <action id="-8" name="Set angle" sid="998993373796933" type="EnemyProjectiles">
-                                                    <param id="0" name="Angle">270</param>
+                                                <action id="0" name="Call function" sid="658845718015086" type="Function">
+                                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                                    <param id="1" name="Parameter {n}">Enemies.AttackProjectile{###}Enemies.ImagePointX(1){###}Enemies.ImagePointY(1){###}Enemies.AttackSpeed * Enemies.AttackDirection{###}(Enemies.AttackDirection = 1 ? 90 : 270)+random(-Enemies.AttackRandomness, Enemies.AttackRandomness)</param>
                                                 </action>
                                             </actions>
-                                            <sub-events>
-                                                <event-block sid="224470222709403">
-                                                    <conditions>
-                                                        <condition id="-7" name="Compare instance variable" sid="717130894236090" type="Enemies">
-                                                            <param id="0" name="Instance variable">AttackDirection</param>
-                                                            <param id="1" name="Comparison">0</param>
-                                                            <param id="2" name="Value">1</param>
-                                                        </condition>
-                                                    </conditions>
-                                                    <actions>
-                                                        <action id="-8" name="Set angle" sid="935954942681577" type="EnemyProjectiles">
-                                                            <param id="0" name="Angle">90</param>
-                                                        </action>
-                                                    </actions>
-                                                </event-block>
-                                            </sub-events>
                                         </event-block>
                                     </sub-events>
                                 </event-block>
@@ -8322,7 +8259,7 @@
                                                 <condition id="-7" inverted="1" name="Compare instance variable" sid="183794365060747" type="EnemyProjectiles">
                                                     <param id="0" name="Instance variable">ID</param>
                                                     <param id="1" name="Comparison">0</param>
-                                                    <param id="2" name="Value">12</param>
+                                                    <param id="2" name="Value">&quot;2_2thzbosslazer&quot;</param>
                                                 </condition>
                                             </conditions>
                                             <actions>
@@ -8359,10 +8296,10 @@
                                     <sub-events>
                                         <event-block sid="661937489201627">
                                             <conditions>
-                                                <condition id="-7" inverted="1" name="Compare instance variable" sid="711668240515392" type="EnemyProjectiles">
+                                                <condition id="-7" inverted="1" name="Compare instance variable" sid="264169394592661" type="EnemyProjectiles">
                                                     <param id="0" name="Instance variable">ID</param>
                                                     <param id="1" name="Comparison">0</param>
-                                                    <param id="2" name="Value">12</param>
+                                                    <param id="2" name="Value">&quot;2_2thzbosslazer&quot;</param>
                                                 </condition>
                                             </conditions>
                                             <actions>
@@ -8397,10 +8334,10 @@
                                     <sub-events>
                                         <event-block sid="881211071074973">
                                             <conditions>
-                                                <condition id="-7" inverted="1" name="Compare instance variable" sid="657667619033141" type="EnemyProjectiles">
+                                                <condition id="-7" inverted="1" name="Compare instance variable" sid="946724119766307" type="EnemyProjectiles">
                                                     <param id="0" name="Instance variable">ID</param>
                                                     <param id="1" name="Comparison">0</param>
-                                                    <param id="2" name="Value">12</param>
+                                                    <param id="2" name="Value">&quot;2_2thzbosslazer&quot;</param>
                                                 </condition>
                                             </conditions>
                                             <actions>
@@ -8460,7 +8397,7 @@
                                         <condition id="-7" inverted="1" name="Compare instance variable" sid="189718603671190" type="Enemies">
                                             <param id="0" name="Instance variable">MovementType</param>
                                             <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">&quot;none&quot;</param>
+                                            <param id="2" name="Value">&quot;static&quot;</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -8841,14 +8778,9 @@
                                     <param id="0" name="Animation">&quot;Firing&quot;</param>
                                     <param id="1" name="From">1</param>
                                 </action>
-                                <action id="0" name="Spawn another object" sid="890391800979416" type="Enemy2_2THZFlyBot">
-                                    <param id="0" name="Object">Projectile2_Generic</param>
-                                    <param id="1" name="Layer">0</param>
-                                    <param id="2" name="Image point">1</param>
-                                </action>
-                                <action id="-22" name="Set angle toward position" sid="234757787535546" type="Projectile2_Generic">
-                                    <param id="0" name="X">Engine_Player.X</param>
-                                    <param id="1" name="Y">Engine_Player.Y</param>
+                                <action id="0" name="Call function" sid="573522712021232" type="Function">
+                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;2_generic&quot;{###}Enemy2_2THZFlyBot.ImagePointX(1){###}Enemy2_2THZFlyBot.ImagePointY(1){###}&quot;&quot;{###}&quot;player&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -9126,6 +9058,9 @@
                         </event-block>
                         <event-block sid="803645732177650">
                             <conditions>
+                                <condition id="-11" name="For Each" sid="847370229180468" type="System">
+                                    <param id="0" name="Object">Enemy2_3DSZWaterBombman</param>
+                                </condition>
                                 <condition id="2" name="Is playing" sid="928821075302964" type="Enemy2_3DSZWaterBombman">
                                     <param id="0" name="Animation">&quot;WarmingUp&quot;</param>
                                 </condition>
@@ -9143,16 +9078,9 @@
                                     <param id="0" name="Animation">&quot;Launching&quot;</param>
                                     <param id="1" name="From">1</param>
                                 </action>
-                                <action id="0" name="Spawn another object" sid="274150175099765" type="Enemy2_3DSZWaterBombman">
-                                    <param id="0" name="Object">Projectile2_3DSZBomb</param>
-                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                    <param id="2" name="Image point">1</param>
-                                </action>
-                                <action id="-8" name="Set angle" sid="549590242676315" type="Projectile2_3DSZBomb">
-                                    <param id="0" name="Angle">90</param>
-                                </action>
-                                <action behavior="Bullet" id="0" name="Set speed" sid="427919484080532" type="Projectile2_3DSZBomb">
-                                    <param id="0" name="Speed">150</param>
+                                <action id="0" name="Call function" sid="583392184601370" type="Function">
+                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;2_3dszbomb&quot;{###}Enemy2_3DSZWaterBombman.ImagePointX(1){###}Enemy2_3DSZWaterBombman.ImagePointY(1){###}150{###}90</param>
                                 </action>
                                 <action id="-16" name="Wait" sid="249706780198849" type="System">
                                     <param id="0" name="Seconds">0.5</param>
@@ -9165,7 +9093,9 @@
                         </event-block>
                         <event-block sid="120418932581246">
                             <conditions>
-                                <condition id="-19" name="On destroyed" sid="355553175000405" type="Projectile2_3DSZBomb" />
+                                <condition id="0" name="On collision with another object" sid="972554867041650" type="Projectile2_3DSZBomb">
+                                    <param id="0" name="Object">LevelTiles</param>
+                                </condition>
                             </conditions>
                             <actions>
                                 <action id="-3" name="Create object" sid="406074750703655" type="System">
@@ -9174,6 +9104,7 @@
                                     <param id="2" name="X">Projectile2_3DSZBomb.X</param>
                                     <param id="3" name="Y">Projectile2_3DSZBomb.Y-16</param>
                                 </action>
+                                <action id="-9" name="Destroy" sid="967866714176942" type="Projectile2_3DSZBomb" />
                             </actions>
                         </event-block>
                         <comment></comment>
@@ -10052,18 +9983,13 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="0" name="Spawn another object" sid="176229997193769" type="Boss1_1KB1">
-                                    <param id="0" name="Object">Projectile1_1KBBoss</param>
-                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                    <param id="2" name="Image point">1</param>
-                                </action>
-                                <action id="-22" name="Set angle toward position" sid="740131758363815" type="Projectile1_1KBBoss">
-                                    <param id="0" name="X">Engine_Player.X</param>
-                                    <param id="1" name="Y">Engine_Player.Y</param>
-                                </action>
                                 <action id="0" name="Call function" sid="938230940123556" type="Function">
                                     <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                     <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                </action>
+                                <action id="0" name="Call function" sid="640160104464154" type="Function">
+                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;1_1kbboss&quot;{###}Boss1_1KB1.ImagePointX(1){###}Boss1_1KB1.ImagePointY(1){###}&quot;&quot;{###}&quot;player&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -10084,42 +10010,21 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="0" name="Spawn another object" sid="933889216232444" type="Boss1_1KB2">
-                                    <param id="0" name="Object">Projectile1_1KBBoss</param>
-                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                    <param id="2" name="Image point">1</param>
-                                </action>
-                                <action id="-8" name="Set angle" sid="481197398105749" type="Projectile1_1KBBoss">
-                                    <param id="0" name="Angle">90</param>
-                                </action>
-                                <action behavior="Bullet" id="0" name="Set speed" sid="577617004851587" type="Projectile1_1KBBoss">
-                                    <param id="0" name="Speed">250</param>
-                                </action>
-                                <action id="0" name="Spawn another object" sid="148151138075470" type="Boss1_1KB2">
-                                    <param id="0" name="Object">Projectile1_1KBBoss</param>
-                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                    <param id="2" name="Image point">1</param>
-                                </action>
-                                <action id="-8" name="Set angle" sid="442381562811738" type="Projectile1_1KBBoss">
-                                    <param id="0" name="Angle">135</param>
-                                </action>
-                                <action behavior="Bullet" id="0" name="Set speed" sid="589409342735191" type="Projectile1_1KBBoss">
-                                    <param id="0" name="Speed">175</param>
-                                </action>
-                                <action id="0" name="Spawn another object" sid="111347822153538" type="Boss1_1KB2">
-                                    <param id="0" name="Object">Projectile1_1KBBoss</param>
-                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                    <param id="2" name="Image point">1</param>
-                                </action>
-                                <action id="-8" name="Set angle" sid="833784367325945" type="Projectile1_1KBBoss">
-                                    <param id="0" name="Angle">45</param>
-                                </action>
-                                <action behavior="Bullet" id="0" name="Set speed" sid="752933514101668" type="Projectile1_1KBBoss">
-                                    <param id="0" name="Speed">175</param>
-                                </action>
                                 <action id="0" name="Call function" sid="348823331537843" type="Function">
                                     <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                     <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                </action>
+                                <action id="0" name="Call function" sid="496582068137089" type="Function">
+                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;1_1kbboss&quot;{###}Boss1_1KB2.ImagePointX(1){###}Boss1_1KB2.ImagePointY(1){###}250{###}90</param>
+                                </action>
+                                <action id="0" name="Call function" sid="707109219021348" type="Function">
+                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;1_1kbboss&quot;{###}Boss1_1KB2.ImagePointX(1){###}Boss1_1KB2.ImagePointY(1){###}175{###}135</param>
+                                </action>
+                                <action id="0" name="Call function" sid="190233377070691" type="Function">
+                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;1_1kbboss&quot;{###}Boss1_1KB2.ImagePointX(1){###}Boss1_1KB2.ImagePointY(1){###}175{###}45</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -10235,17 +10140,13 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="0" name="Spawn another object" sid="808717061255104" type="Boss1_2GF2">
-                                    <param id="0" name="Object">Projectile1_2GF2Boss</param>
-                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                    <param id="2" name="Image point">0</param>
-                                </action>
-                                <action id="-8" name="Set angle" sid="303961365610037" type="Projectile1_2GF2Boss">
-                                    <param id="0" name="Angle">random(0,360)</param>
-                                </action>
                                 <action id="0" name="Call function" sid="375352882297541" type="Function">
                                     <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                     <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                </action>
+                                <action id="0" name="Call function" sid="300022854674876" type="Function">
+                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;1_2gf2boss&quot;{###}Boss1_2GF2.ImagePointX(1){###}Boss1_2GF2.ImagePointY(1){###}&quot;&quot;{###}random(0,360)</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -10256,7 +10157,7 @@
                         <comment>what</comment>
                         <event-block sid="909533635096067">
                             <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="639052258901140" type="Boss1_2GF2">
+                                <condition id="-7" name="Compare instance variable" sid="639052258901140" type="Boss1_3L1">
                                     <param id="0" name="Instance variable">Active</param>
                                     <param id="1" name="Comparison">4</param>
                                     <param id="2" name="Value">0</param>
@@ -10266,49 +10167,29 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="0" name="Spawn another object" sid="884750676832162" type="Boss1_3L1">
-                                    <param id="0" name="Object">Projectile1_Generic</param>
-                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                    <param id="2" name="Image point">1</param>
-                                </action>
-                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="464961562447095" type="Projectile1_Generic">
-                                    <param id="0" name="Angle">135</param>
-                                </action>
-                                <action id="0" name="Spawn another object" sid="782565354336024" type="Boss1_3L1">
-                                    <param id="0" name="Object">Projectile1_Generic</param>
-                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                    <param id="2" name="Image point">2</param>
-                                </action>
-                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="175524678226448" type="Projectile1_Generic">
-                                    <param id="0" name="Angle">110</param>
-                                </action>
-                                <action id="0" name="Spawn another object" sid="665249522053323" type="Boss1_3L1">
-                                    <param id="0" name="Object">Projectile1_Generic</param>
-                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                    <param id="2" name="Image point">3</param>
-                                </action>
-                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="779893962290037" type="Projectile1_Generic">
-                                    <param id="0" name="Angle">90</param>
-                                </action>
-                                <action id="0" name="Spawn another object" sid="496707902949277" type="Boss1_3L1">
-                                    <param id="0" name="Object">Projectile1_Generic</param>
-                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                    <param id="2" name="Image point">4</param>
-                                </action>
-                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="579036751974094" type="Projectile1_Generic">
-                                    <param id="0" name="Angle">70</param>
-                                </action>
-                                <action id="0" name="Spawn another object" sid="114821101490888" type="Boss1_3L1">
-                                    <param id="0" name="Object">Projectile1_Generic</param>
-                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                    <param id="2" name="Image point">5</param>
-                                </action>
-                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="534538254455908" type="Projectile1_Generic">
-                                    <param id="0" name="Angle">45</param>
-                                </action>
                                 <action id="0" name="Call function" sid="560087810155883" type="Function">
                                     <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                     <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                </action>
+                                <action id="0" name="Call function" sid="977894165936727" type="Function">
+                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;1_generic&quot;{###}Boss1_3L1.ImagePointX(1){###}Boss1_3L1.ImagePointY(1){###}&quot;&quot;{###}135</param>
+                                </action>
+                                <action id="0" name="Call function" sid="286002319242378" type="Function">
+                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;1_generic&quot;{###}Boss1_3L1.ImagePointX(2){###}Boss1_3L1.ImagePointY(2){###}&quot;&quot;{###}110</param>
+                                </action>
+                                <action id="0" name="Call function" sid="244802597429083" type="Function">
+                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;1_generic&quot;{###}Boss1_3L1.ImagePointX(3){###}Boss1_3L1.ImagePointY(3){###}&quot;&quot;{###}90</param>
+                                </action>
+                                <action id="0" name="Call function" sid="991777284704096" type="Function">
+                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;1_generic&quot;{###}Boss1_3L1.ImagePointX(4){###}Boss1_3L1.ImagePointY(4){###}&quot;&quot;{###}70</param>
+                                </action>
+                                <action id="0" name="Call function" sid="561051008453470" type="Function">
+                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;1_generic&quot;{###}Boss1_3L1.ImagePointX(5){###}Boss1_3L1.ImagePointY(5){###}&quot;&quot;{###}45</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -10370,42 +10251,21 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="0" name="Spawn another object" sid="842012825537482" type="Boss1_3L2">
-                                            <param id="0" name="Object">Projectile1_3L2Boss</param>
-                                            <param id="1" name="Layer">&quot;Player&quot;</param>
-                                            <param id="2" name="Image point">1</param>
-                                        </action>
-                                        <action id="-8" name="Set angle" sid="166730946760558" type="Projectile1_3L2Boss">
-                                            <param id="0" name="Angle">90</param>
-                                        </action>
-                                        <action behavior="Bullet" id="0" name="Set speed" sid="682240812823549" type="Projectile1_3L2Boss">
-                                            <param id="0" name="Speed">175</param>
-                                        </action>
-                                        <action id="0" name="Spawn another object" sid="211479030425081" type="Boss1_3L2">
-                                            <param id="0" name="Object">Projectile1_3L2Boss</param>
-                                            <param id="1" name="Layer">&quot;Player&quot;</param>
-                                            <param id="2" name="Image point">1</param>
-                                        </action>
-                                        <action id="-8" name="Set angle" sid="838798205659921" type="Projectile1_3L2Boss">
-                                            <param id="0" name="Angle">45</param>
-                                        </action>
-                                        <action behavior="Bullet" id="0" name="Set speed" sid="278301752446105" type="Projectile1_3L2Boss">
-                                            <param id="0" name="Speed">175</param>
-                                        </action>
-                                        <action id="0" name="Spawn another object" sid="251392584587160" type="Boss1_3L2">
-                                            <param id="0" name="Object">Projectile1_3L2Boss</param>
-                                            <param id="1" name="Layer">&quot;Player&quot;</param>
-                                            <param id="2" name="Image point">1</param>
-                                        </action>
-                                        <action id="-8" name="Set angle" sid="113461339129743" type="Projectile1_3L2Boss">
-                                            <param id="0" name="Angle">130</param>
-                                        </action>
-                                        <action behavior="Bullet" id="0" name="Set speed" sid="755097692965190" type="Projectile1_3L2Boss">
-                                            <param id="0" name="Speed">175</param>
-                                        </action>
                                         <action id="0" name="Call function" sid="121342413896440" type="Function">
                                             <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                             <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                        </action>
+                                        <action id="0" name="Call function" sid="894800977418507" type="Function">
+                                            <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;1_3l2boss&quot;{###}Boss1_3L2.ImagePointX(1){###}Boss1_3L2.ImagePointY(1){###}175{###}90</param>
+                                        </action>
+                                        <action id="0" name="Call function" sid="371735475327763" type="Function">
+                                            <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;1_3l2boss&quot;{###}Boss1_3L2.ImagePointX(1){###}Boss1_3L2.ImagePointY(1){###}175{###}45</param>
+                                        </action>
+                                        <action id="0" name="Call function" sid="768619667312917" type="Function">
+                                            <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;1_3l2boss&quot;{###}Boss1_3L2.ImagePointX(1){###}Boss1_3L2.ImagePointY(1){###}175{###}130</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -10416,20 +10276,13 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="0" name="Spawn another object" sid="705184700307466" type="Boss1_3L2">
-                                            <param id="0" name="Object">Projectile1_3L2Boss</param>
-                                            <param id="1" name="Layer">&quot;Player&quot;</param>
-                                            <param id="2" name="Image point">1</param>
-                                        </action>
-                                        <action id="-8" name="Set angle" sid="846823408259309" type="Projectile1_3L2Boss">
-                                            <param id="0" name="Angle">90</param>
-                                        </action>
-                                        <action behavior="Bullet" id="0" name="Set speed" sid="790883478445783" type="Projectile1_3L2Boss">
-                                            <param id="0" name="Speed">120</param>
-                                        </action>
                                         <action id="0" name="Call function" sid="904683892488259" type="Function">
                                             <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                             <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                        </action>
+                                        <action id="0" name="Call function" sid="705714164837292" type="Function">
+                                            <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;1_3l2boss&quot;{###}Boss1_3L2.ImagePointX(1){###}Boss1_3L2.ImagePointY(1){###}120{###}90</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -10699,20 +10552,13 @@
                                                 </condition>
                                             </conditions>
                                             <actions>
-                                                <action id="0" name="Spawn another object" sid="459095252173630" type="Boss1_4IP1">
-                                                    <param id="0" name="Object">Projectile1_4IP1Boss</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">0</param>
-                                                </action>
-                                                <action id="-8" name="Set angle" sid="383907631541307" type="Projectile1_4IP1Boss">
-                                                    <param id="0" name="Angle">90</param>
-                                                </action>
-                                                <action behavior="Bullet" id="0" name="Set speed" sid="348318444612621" type="Projectile1_4IP1Boss">
-                                                    <param id="0" name="Speed">300</param>
-                                                </action>
                                                 <action id="0" name="Call function" sid="855557368865655" type="Function">
                                                     <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                                     <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="608637608517756" type="Function">
+                                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;1_4ip1boss&quot;{###}Boss1_4IP1.ImagePointX(1){###}Boss1_4IP1.ImagePointY(1){###}300{###}90</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -10789,56 +10635,35 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="0" name="Spawn another object" sid="220939965262820" type="Boss1_4IP1">
-                                            <param id="0" name="Object">Projectile1_4IP1Boss</param>
-                                            <param id="1" name="Layer">&quot;Player&quot;</param>
-                                            <param id="2" name="Image point">0</param>
-                                        </action>
-                                        <action id="-8" name="Set angle" sid="500261782691435" type="Projectile1_4IP1Boss">
-                                            <param id="0" name="Angle">90</param>
-                                        </action>
-                                        <action behavior="Bullet" id="0" name="Set speed" sid="802670211449732" type="Projectile1_4IP1Boss">
-                                            <param id="0" name="Speed">300</param>
-                                        </action>
                                         <action id="0" name="Call function" sid="775982956996116" type="Function">
                                             <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                             <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
                                         </action>
+                                        <action id="0" name="Call function" sid="624872050185159" type="Function">
+                                            <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;1_4ip1boss&quot;{###}Boss1_4IP1.ImagePointX(1){###}Boss1_4IP1.ImagePointY(1){###}300{###}90</param>
+                                        </action>
                                         <action id="-16" name="Wait" sid="579032072462518" type="System">
                                             <param id="0" name="Seconds">0.1</param>
-                                        </action>
-                                        <action id="0" name="Spawn another object" sid="439063809292882" type="Boss1_4IP1">
-                                            <param id="0" name="Object">Projectile1_4IP1Boss</param>
-                                            <param id="1" name="Layer">&quot;Player&quot;</param>
-                                            <param id="2" name="Image point">0</param>
-                                        </action>
-                                        <action id="-8" name="Set angle" sid="899795927558012" type="Projectile1_4IP1Boss">
-                                            <param id="0" name="Angle">90</param>
-                                        </action>
-                                        <action behavior="Bullet" id="0" name="Set speed" sid="409560965843344" type="Projectile1_4IP1Boss">
-                                            <param id="0" name="Speed">300</param>
                                         </action>
                                         <action id="0" name="Call function" sid="725614162168764" type="Function">
                                             <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                             <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
                                         </action>
+                                        <action id="0" name="Call function" sid="385571283326951" type="Function">
+                                            <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;1_4ip1boss&quot;{###}Boss1_4IP1.ImagePointX(1){###}Boss1_4IP1.ImagePointY(1){###}300{###}90</param>
+                                        </action>
                                         <action id="-16" name="Wait" sid="957642519742462" type="System">
                                             <param id="0" name="Seconds">0.1</param>
-                                        </action>
-                                        <action id="0" name="Spawn another object" sid="842995116840004" type="Boss1_4IP1">
-                                            <param id="0" name="Object">Projectile1_4IP1Boss</param>
-                                            <param id="1" name="Layer">&quot;Player&quot;</param>
-                                            <param id="2" name="Image point">0</param>
-                                        </action>
-                                        <action id="-8" name="Set angle" sid="450099871577646" type="Projectile1_4IP1Boss">
-                                            <param id="0" name="Angle">90</param>
-                                        </action>
-                                        <action behavior="Bullet" id="0" name="Set speed" sid="373494640801217" type="Projectile1_4IP1Boss">
-                                            <param id="0" name="Speed">300</param>
                                         </action>
                                         <action id="0" name="Call function" sid="259830751609297" type="Function">
                                             <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                             <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                        </action>
+                                        <action id="0" name="Call function" sid="115983764337976" type="Function">
+                                            <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;1_4ip1boss&quot;{###}Boss1_4IP1.ImagePointX(1){###}Boss1_4IP1.ImagePointY(1){###}300{###}90</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -11077,78 +10902,22 @@
                                             <param id="0" name="Animation">&quot;Idle1&quot;</param>
                                             <param id="1" name="From">1</param>
                                         </action>
+                                        <action id="0" name="Call function" sid="725624171821816" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                        </action>
                                     </actions>
                                     <sub-events>
                                         <event-block sid="667049727165187">
-                                            <conditions />
+                                            <conditions>
+                                                <condition id="-12" name="Repeat" sid="531811407286032" type="System">
+                                                    <param id="0" name="Count">8</param>
+                                                </condition>
+                                            </conditions>
                                             <actions>
-                                                <action id="0" name="Spawn another object" sid="673547281490723" type="Boss1_4IP2">
-                                                    <param id="0" name="Object">Projectile1_4IP2Boss</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">0</param>
-                                                </action>
-                                                <action id="-8" name="Set angle" sid="465361610498398" type="Projectile1_4IP2Boss">
-                                                    <param id="0" name="Angle">0</param>
-                                                </action>
-                                                <action id="0" name="Spawn another object" sid="784666324336469" type="Boss1_4IP2">
-                                                    <param id="0" name="Object">Projectile1_4IP2Boss</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">0</param>
-                                                </action>
-                                                <action id="-8" name="Set angle" sid="754801989691785" type="Projectile1_4IP2Boss">
-                                                    <param id="0" name="Angle">45</param>
-                                                </action>
-                                                <action id="0" name="Spawn another object" sid="720439881394108" type="Boss1_4IP2">
-                                                    <param id="0" name="Object">Projectile1_4IP2Boss</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">0</param>
-                                                </action>
-                                                <action id="-8" name="Set angle" sid="696603969168971" type="Projectile1_4IP2Boss">
-                                                    <param id="0" name="Angle">90</param>
-                                                </action>
-                                                <action id="0" name="Spawn another object" sid="193271889328268" type="Boss1_4IP2">
-                                                    <param id="0" name="Object">Projectile1_4IP2Boss</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">0</param>
-                                                </action>
-                                                <action id="-8" name="Set angle" sid="142289938001007" type="Projectile1_4IP2Boss">
-                                                    <param id="0" name="Angle">135</param>
-                                                </action>
-                                                <action id="0" name="Spawn another object" sid="703867165404497" type="Boss1_4IP2">
-                                                    <param id="0" name="Object">Projectile1_4IP2Boss</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">0</param>
-                                                </action>
-                                                <action id="-8" name="Set angle" sid="722180687246071" type="Projectile1_4IP2Boss">
-                                                    <param id="0" name="Angle">180</param>
-                                                </action>
-                                                <action id="0" name="Spawn another object" sid="666893758064762" type="Boss1_4IP2">
-                                                    <param id="0" name="Object">Projectile1_4IP2Boss</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">0</param>
-                                                </action>
-                                                <action id="-8" name="Set angle" sid="678923708448636" type="Projectile1_4IP2Boss">
-                                                    <param id="0" name="Angle">225</param>
-                                                </action>
-                                                <action id="0" name="Spawn another object" sid="347639032512479" type="Boss1_4IP2">
-                                                    <param id="0" name="Object">Projectile1_4IP2Boss</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">0</param>
-                                                </action>
-                                                <action id="-8" name="Set angle" sid="889185010351915" type="Projectile1_4IP2Boss">
-                                                    <param id="0" name="Angle">270</param>
-                                                </action>
-                                                <action id="0" name="Spawn another object" sid="147777961840734" type="Boss1_4IP2">
-                                                    <param id="0" name="Object">Projectile1_4IP2Boss</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">0</param>
-                                                </action>
-                                                <action id="-8" name="Set angle" sid="430292364805686" type="Projectile1_4IP2Boss">
-                                                    <param id="0" name="Angle">315</param>
-                                                </action>
-                                                <action id="0" name="Call function" sid="725624171821816" type="Function">
-                                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
-                                                    <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                                <action id="0" name="Call function" sid="206448805517387" type="Function">
+                                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;1_4ip2boss&quot;{###}Boss1_4IP2.ImagePointX(1){###}Boss1_4IP2.ImagePointY(1){###}&quot;&quot;{###}45*loopindex</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -11171,75 +10940,26 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="0" name="Spawn another object" sid="782067435876236" type="Boss1_4IP2">
-                                            <param id="0" name="Object">Projectile1_4IP2Boss</param>
-                                            <param id="1" name="Layer">&quot;Player&quot;</param>
-                                            <param id="2" name="Image point">0</param>
-                                        </action>
-                                        <action id="-8" name="Set angle" sid="150781138704432" type="Projectile1_4IP2Boss">
-                                            <param id="0" name="Angle">0</param>
-                                        </action>
-                                        <action id="0" name="Spawn another object" sid="191446090522235" type="Boss1_4IP2">
-                                            <param id="0" name="Object">Projectile1_4IP2Boss</param>
-                                            <param id="1" name="Layer">&quot;Player&quot;</param>
-                                            <param id="2" name="Image point">0</param>
-                                        </action>
-                                        <action id="-8" name="Set angle" sid="367162079291743" type="Projectile1_4IP2Boss">
-                                            <param id="0" name="Angle">45</param>
-                                        </action>
-                                        <action id="0" name="Spawn another object" sid="573672601401034" type="Boss1_4IP2">
-                                            <param id="0" name="Object">Projectile1_4IP2Boss</param>
-                                            <param id="1" name="Layer">&quot;Player&quot;</param>
-                                            <param id="2" name="Image point">0</param>
-                                        </action>
-                                        <action id="-8" name="Set angle" sid="762236415424471" type="Projectile1_4IP2Boss">
-                                            <param id="0" name="Angle">90</param>
-                                        </action>
-                                        <action id="0" name="Spawn another object" sid="951683715695213" type="Boss1_4IP2">
-                                            <param id="0" name="Object">Projectile1_4IP2Boss</param>
-                                            <param id="1" name="Layer">&quot;Player&quot;</param>
-                                            <param id="2" name="Image point">0</param>
-                                        </action>
-                                        <action id="-8" name="Set angle" sid="914540572035161" type="Projectile1_4IP2Boss">
-                                            <param id="0" name="Angle">135</param>
-                                        </action>
-                                        <action id="0" name="Spawn another object" sid="325495734226486" type="Boss1_4IP2">
-                                            <param id="0" name="Object">Projectile1_4IP2Boss</param>
-                                            <param id="1" name="Layer">&quot;Player&quot;</param>
-                                            <param id="2" name="Image point">0</param>
-                                        </action>
-                                        <action id="-8" name="Set angle" sid="568179942623788" type="Projectile1_4IP2Boss">
-                                            <param id="0" name="Angle">180</param>
-                                        </action>
-                                        <action id="0" name="Spawn another object" sid="396040679940837" type="Boss1_4IP2">
-                                            <param id="0" name="Object">Projectile1_4IP2Boss</param>
-                                            <param id="1" name="Layer">&quot;Player&quot;</param>
-                                            <param id="2" name="Image point">0</param>
-                                        </action>
-                                        <action id="-8" name="Set angle" sid="330109939945967" type="Projectile1_4IP2Boss">
-                                            <param id="0" name="Angle">225</param>
-                                        </action>
-                                        <action id="0" name="Spawn another object" sid="723536571604616" type="Boss1_4IP2">
-                                            <param id="0" name="Object">Projectile1_4IP2Boss</param>
-                                            <param id="1" name="Layer">&quot;Player&quot;</param>
-                                            <param id="2" name="Image point">0</param>
-                                        </action>
-                                        <action id="-8" name="Set angle" sid="331014946167440" type="Projectile1_4IP2Boss">
-                                            <param id="0" name="Angle">270</param>
-                                        </action>
-                                        <action id="0" name="Spawn another object" sid="834798770172915" type="Boss1_4IP2">
-                                            <param id="0" name="Object">Projectile1_4IP2Boss</param>
-                                            <param id="1" name="Layer">&quot;Player&quot;</param>
-                                            <param id="2" name="Image point">0</param>
-                                        </action>
-                                        <action id="-8" name="Set angle" sid="953202388914195" type="Projectile1_4IP2Boss">
-                                            <param id="0" name="Angle">315</param>
-                                        </action>
                                         <action id="0" name="Call function" sid="417826164648820" type="Function">
                                             <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                             <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
                                         </action>
                                     </actions>
+                                    <sub-events>
+                                        <event-block sid="689962976197468">
+                                            <conditions>
+                                                <condition id="-12" name="Repeat" sid="265312949113965" type="System">
+                                                    <param id="0" name="Count">8</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Call function" sid="173161563244614" type="Function">
+                                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;1_4ip2boss&quot;{###}Boss1_4IP2.ImagePointX(1){###}Boss1_4IP2.ImagePointY(1){###}&quot;&quot;{###}45*loopindex</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
                                 </event-block>
                             </sub-events>
                         </event-block>
@@ -11393,102 +11113,55 @@
                                         <condition id="-4" name="Trigger once while true" sid="987894433605522" type="System" />
                                     </conditions>
                                     <actions>
-                                        <action id="0" name="Spawn another object" sid="259260460532174" type="Boss1_4IP2">
-                                            <param id="0" name="Object">Projectile1_4IP2Boss</param>
-                                            <param id="1" name="Layer">&quot;Player&quot;</param>
-                                            <param id="2" name="Image point">0</param>
-                                        </action>
-                                        <action id="-8" name="Set angle" sid="904407575657887" type="Projectile1_4IP2Boss">
-                                            <param id="0" name="Angle">0</param>
-                                        </action>
-                                        <action behavior="Bullet" id="0" name="Set speed" sid="696019695685268" type="Projectile1_4IP2Boss">
-                                            <param id="0" name="Speed">choose(200,150,250)</param>
+                                        <action id="0" name="Call function" sid="451730612994337" type="Function">
+                                            <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;1_4ip2boss&quot;{###}Boss1_4IP2.ImagePointX(1){###}Boss1_4IP2.ImagePointY(1){###}choose(200,150,250){###}0</param>
                                         </action>
                                         <action id="-16" name="Wait" sid="178571609582584" type="System">
                                             <param id="0" name="Seconds">0.1</param>
                                         </action>
-                                        <action id="0" name="Spawn another object" sid="929341831659693" type="Boss1_4IP2">
-                                            <param id="0" name="Object">Projectile1_4IP2Boss</param>
-                                            <param id="1" name="Layer">&quot;Player&quot;</param>
-                                            <param id="2" name="Image point">0</param>
-                                        </action>
-                                        <action id="-22" name="Set angle toward position" sid="985222680588235" type="Projectile1_4IP2Boss">
-                                            <param id="0" name="X">Engine_Player.X</param>
-                                            <param id="1" name="Y">Engine_Player.Y</param>
+                                        <action id="0" name="Call function" sid="567800948701127" type="Function">
+                                            <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;1_4ip2boss&quot;{###}Boss1_4IP2.ImagePointX(1){###}Boss1_4IP2.ImagePointY(1){###}&quot;&quot;{###}&quot;player&quot;</param>
                                         </action>
                                         <action id="-16" name="Wait" sid="799518262981558" type="System">
                                             <param id="0" name="Seconds">0.1</param>
                                         </action>
-                                        <action id="0" name="Spawn another object" sid="299558054411084" type="Boss1_4IP2">
-                                            <param id="0" name="Object">Projectile1_4IP2Boss</param>
-                                            <param id="1" name="Layer">&quot;Player&quot;</param>
-                                            <param id="2" name="Image point">0</param>
-                                        </action>
-                                        <action id="-8" name="Set angle" sid="309309756293173" type="Projectile1_4IP2Boss">
-                                            <param id="0" name="Angle">90</param>
-                                        </action>
-                                        <action behavior="Bullet" id="0" name="Set speed" sid="171742273431008" type="Projectile1_4IP2Boss">
-                                            <param id="0" name="Speed">choose(200,150,250)</param>
+                                        <action id="0" name="Call function" sid="798095021787320" type="Function">
+                                            <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;1_4ip2boss&quot;{###}Boss1_4IP2.ImagePointX(1){###}Boss1_4IP2.ImagePointY(1){###}choose(200,150,250){###}90</param>
                                         </action>
                                         <action id="-16" name="Wait" sid="701319656190470" type="System">
                                             <param id="0" name="Seconds">0.1</param>
                                         </action>
-                                        <action id="0" name="Spawn another object" sid="597035595993165" type="Boss1_4IP2">
-                                            <param id="0" name="Object">Projectile1_4IP2Boss</param>
-                                            <param id="1" name="Layer">&quot;Player&quot;</param>
-                                            <param id="2" name="Image point">0</param>
-                                        </action>
-                                        <action id="-8" name="Set angle" sid="918503910685598" type="Projectile1_4IP2Boss">
-                                            <param id="0" name="Angle">random(0,360)</param>
+                                        <action id="0" name="Call function" sid="408951643261624" type="Function">
+                                            <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;1_4ip2boss&quot;{###}Boss1_4IP2.ImagePointX(1){###}Boss1_4IP2.ImagePointY(1){###}&quot;&quot;{###}random(0,360)</param>
                                         </action>
                                         <action id="-16" name="Wait" sid="953067107730703" type="System">
                                             <param id="0" name="Seconds">0.1</param>
                                         </action>
-                                        <action id="0" name="Spawn another object" sid="783256392018352" type="Boss1_4IP2">
-                                            <param id="0" name="Object">Projectile1_4IP2Boss</param>
-                                            <param id="1" name="Layer">&quot;Player&quot;</param>
-                                            <param id="2" name="Image point">0</param>
-                                        </action>
-                                        <action id="-8" name="Set angle" sid="958052096592974" type="Projectile1_4IP2Boss">
-                                            <param id="0" name="Angle">180</param>
-                                        </action>
-                                        <action behavior="Bullet" id="0" name="Set speed" sid="248375556432889" type="Projectile1_4IP2Boss">
-                                            <param id="0" name="Speed">choose(200,150,250)</param>
+                                        <action id="0" name="Call function" sid="309912134635641" type="Function">
+                                            <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;1_4ip2boss&quot;{###}Boss1_4IP2.ImagePointX(1){###}Boss1_4IP2.ImagePointY(1){###}choose(200,150,250){###}180</param>
                                         </action>
                                         <action id="-16" name="Wait" sid="355309794115262" type="System">
                                             <param id="0" name="Seconds">0.1</param>
                                         </action>
-                                        <action id="0" name="Spawn another object" sid="389073551773893" type="Boss1_4IP2">
-                                            <param id="0" name="Object">Projectile1_4IP2Boss</param>
-                                            <param id="1" name="Layer">&quot;Player&quot;</param>
-                                            <param id="2" name="Image point">0</param>
+                                        <action id="0" name="Call function" sid="983141957884527" type="Function">
+                                            <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;1_4ip2boss&quot;{###}Boss1_4IP2.ImagePointX(1){###}Boss1_4IP2.ImagePointY(1){###}&quot;&quot;{###}&quot;player&quot;</param>
                                         </action>
-                                        <action id="-22" name="Set angle toward position" sid="574193992262489" type="Projectile1_4IP2Boss">
-                                            <param id="0" name="X">Engine_Player.X</param>
-                                            <param id="1" name="Y">Engine_Player.Y</param>
-                                        </action>
-                                        <action id="0" name="Spawn another object" sid="466720945177387" type="Boss1_4IP2">
-                                            <param id="0" name="Object">Projectile1_4IP2Boss</param>
-                                            <param id="1" name="Layer">&quot;Player&quot;</param>
-                                            <param id="2" name="Image point">0</param>
-                                        </action>
-                                        <action id="-8" name="Set angle" sid="272547638106845" type="Projectile1_4IP2Boss">
-                                            <param id="0" name="Angle">270</param>
-                                        </action>
-                                        <action behavior="Bullet" id="0" name="Set speed" sid="266045328014142" type="Projectile1_4IP2Boss">
-                                            <param id="0" name="Speed">choose(200,150,250)</param>
+                                        <action id="0" name="Call function" sid="733693410818043" type="Function">
+                                            <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;1_4ip2boss&quot;{###}Boss1_4IP2.ImagePointX(1){###}Boss1_4IP2.ImagePointY(1){###}choose(200,150,250){###}270</param>
                                         </action>
                                         <action id="-16" name="Wait" sid="869864619512208" type="System">
                                             <param id="0" name="Seconds">0.1</param>
                                         </action>
-                                        <action id="0" name="Spawn another object" sid="855581147785882" type="Boss1_4IP2">
-                                            <param id="0" name="Object">Projectile1_4IP2Boss</param>
-                                            <param id="1" name="Layer">&quot;Player&quot;</param>
-                                            <param id="2" name="Image point">0</param>
-                                        </action>
-                                        <action id="-22" name="Set angle toward position" sid="277932040308479" type="Projectile1_4IP2Boss">
-                                            <param id="0" name="X">Engine_Player.X</param>
-                                            <param id="1" name="Y">Engine_Player.Y</param>
+                                        <action id="0" name="Call function" sid="596206327198949" type="Function">
+                                            <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;1_4ip2boss&quot;{###}Boss1_4IP2.ImagePointX(1){###}Boss1_4IP2.ImagePointY(1){###}&quot;&quot;{###}&quot;player&quot;</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -11696,14 +11369,9 @@
                                                     <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                                     <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
                                                 </action>
-                                                <action id="0" name="Spawn another object" sid="841987447363616" type="Boss1_5V1Gun">
-                                                    <param id="0" name="Object">Projectile1_Generic</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">1</param>
-                                                </action>
-                                                <action id="-22" name="Set angle toward position" sid="643518591754567" type="Projectile1_Generic">
-                                                    <param id="0" name="X">Engine_Player.X</param>
-                                                    <param id="1" name="Y">Engine_Player.Y</param>
+                                                <action id="0" name="Call function" sid="149752065721650" type="Function">
+                                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;1_generic&quot;{###}Boss1_5V1Gun.ImagePointX(1){###}Boss1_5V1Gun.ImagePointY(1){###}&quot;&quot;{###}&quot;player&quot;</param>
                                                 </action>
                                                 <action id="3" name="Start" sid="659757133475704" type="Boss1_5V1Gun">
                                                     <param id="0" name="From">1</param>
@@ -11723,14 +11391,9 @@
                                                     <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                                     <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
                                                 </action>
-                                                <action id="0" name="Spawn another object" sid="508462434361398" type="Boss1_5V1Gun">
-                                                    <param id="0" name="Object">Projectile1_Generic</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">1</param>
-                                                </action>
-                                                <action id="-22" name="Set angle toward position" sid="164610523773789" type="Projectile1_Generic">
-                                                    <param id="0" name="X">Engine_Player.X</param>
-                                                    <param id="1" name="Y">Engine_Player.Y</param>
+                                                <action id="0" name="Call function" sid="770198641173519" type="Function">
+                                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;1_generic&quot;{###}Boss1_5V1Gun.ImagePointX(1){###}Boss1_5V1Gun.ImagePointY(1){###}&quot;&quot;{###}&quot;player&quot;</param>
                                                 </action>
                                                 <action id="3" name="Start" sid="147638824880912" type="Boss1_5V1Gun">
                                                     <param id="0" name="From">1</param>
@@ -11750,14 +11413,9 @@
                                                     <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                                     <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
                                                 </action>
-                                                <action id="0" name="Spawn another object" sid="663560529292724" type="Boss1_5V1Gun">
-                                                    <param id="0" name="Object">Projectile1_Generic</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">1</param>
-                                                </action>
-                                                <action id="-22" name="Set angle toward position" sid="240244709482319" type="Projectile1_Generic">
-                                                    <param id="0" name="X">Engine_Player.X</param>
-                                                    <param id="1" name="Y">Engine_Player.Y</param>
+                                                <action id="0" name="Call function" sid="318996487026371" type="Function">
+                                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;1_generic&quot;{###}Boss1_5V1Gun.ImagePointX(1){###}Boss1_5V1Gun.ImagePointY(1){###}&quot;&quot;{###}&quot;player&quot;</param>
                                                 </action>
                                                 <action id="3" name="Start" sid="721214286439038" type="Boss1_5V1Gun">
                                                     <param id="0" name="From">1</param>
@@ -11774,20 +11432,13 @@
                                         <condition id="-3" name="Is on-screen" sid="967540052567330" type="Boss1_5V1" />
                                     </conditions>
                                     <actions>
-                                        <action id="0" name="Spawn another object" sid="200140164081178" type="Boss1_5V1">
-                                            <param id="0" name="Object">Projectile1_5V1Boss</param>
-                                            <param id="1" name="Layer">&quot;Player&quot;</param>
-                                            <param id="2" name="Image point">1</param>
-                                        </action>
-                                        <action id="-8" name="Set angle" sid="576542562275920" type="Projectile1_5V1Boss">
-                                            <param id="0" name="Angle">90</param>
-                                        </action>
-                                        <action behavior="Bullet" id="0" name="Set speed" sid="281086074346632" type="Projectile1_5V1Boss">
-                                            <param id="0" name="Speed">200</param>
-                                        </action>
                                         <action id="0" name="Call function" sid="468947568681398" type="Function">
                                             <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                             <param id="1" name="Parameter {n}">&quot;F_FireShot&quot;</param>
+                                        </action>
+                                        <action id="0" name="Call function" sid="953148547954012" type="Function">
+                                            <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;1_5v1boss&quot;{###}Boss1_5V1.ImagePointX(1){###}Boss1_5V1.ImagePointY(1){###}200{###}90</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -11978,20 +11629,13 @@
                                                 </condition>
                                             </conditions>
                                             <actions>
-                                                <action id="0" name="Spawn another object" sid="459510807971155" type="Boss1_5V2">
-                                                    <param id="0" name="Object">Projectile1_5V2Boss</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">1</param>
-                                                </action>
-                                                <action id="-8" name="Set angle" sid="558028586360943" type="Projectile1_5V2Boss">
-                                                    <param id="0" name="Angle">90</param>
-                                                </action>
-                                                <action behavior="Bullet" id="0" name="Set speed" sid="686964557417371" type="Projectile1_5V2Boss">
-                                                    <param id="0" name="Speed">400</param>
-                                                </action>
                                                 <action id="0" name="Call function" sid="854751432886560" type="Function">
                                                     <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                                     <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="297730705467833" type="Function">
+                                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;1_5v2boss&quot;{###}Boss1_5V2.ImagePointX(1){###}Boss1_5V2.ImagePointY(1){###}400{###}90</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -12122,20 +11766,13 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="0" name="Spawn another object" sid="788496013644157" type="Boss1_5V2">
-                                            <param id="0" name="Object">Projectile1_5V2Boss</param>
-                                            <param id="1" name="Layer">&quot;Player&quot;</param>
-                                            <param id="2" name="Image point">0</param>
-                                        </action>
-                                        <action id="-8" name="Set angle" sid="200272500224408" type="Projectile1_5V2Boss">
-                                            <param id="0" name="Angle">random(15,165)</param>
-                                        </action>
-                                        <action behavior="Bullet" id="0" name="Set speed" sid="415117576163491" type="Projectile1_5V2Boss">
-                                            <param id="0" name="Speed">500</param>
-                                        </action>
                                         <action id="0" name="Call function" sid="468406280742348" type="Function">
                                             <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                             <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                        </action>
+                                        <action id="0" name="Call function" sid="349071428087949" type="Function">
+                                            <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;1_5v2boss&quot;{###}Boss1_5V2.ImagePointX(1){###}Boss1_5V2.ImagePointY(1){###}500{###}random(15,165)</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -12152,7 +11789,7 @@
                                     <param id="0" name="Object to create">HazardF_ExplosionHarmful</param>
                                     <param id="1" name="Layer">&quot;Player&quot;</param>
                                     <param id="2" name="X">Projectile1_5V2Boss.X</param>
-                                    <param id="3" name="Y">Projectile1_5V2Boss.Y+10</param>
+                                    <param id="3" name="Y">Projectile1_5V2Boss.Y+2</param>
                                 </action>
                                 <action id="-9" name="Destroy" sid="602672932509980" type="Projectile1_5V2Boss" />
                             </actions>
@@ -13057,21 +12694,13 @@
                                                 <condition id="-4" name="Trigger once while true" sid="402728379497649" type="System" />
                                             </conditions>
                                             <actions>
-                                                <action id="0" name="Spawn another object" sid="300267835640412" type="Boss1_6EP2">
-                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">1</param>
-                                                </action>
-                                                <action id="-22" name="Set angle toward position" sid="312090810162183" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="X">Engine_Player.X</param>
-                                                    <param id="1" name="Y">Engine_Player.Y</param>
-                                                </action>
-                                                <action behavior="Bullet" id="0" name="Set speed" sid="471914463924329" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="Speed">420</param>
-                                                </action>
                                                 <action id="0" name="Call function" sid="623613344286954" type="Function">
                                                     <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                                     <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="453765257543076" type="Function">
+                                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;1_6ep2boss&quot;{###}Boss1_6EP2.ImagePointX(1){###}Boss1_6EP2.ImagePointY(1){###}420{###}&quot;player&quot;</param>
                                                 </action>
                                                 <action id="-11" name="Subtract from" sid="531166741256520" type="System">
                                                     <param id="0" name="Variable">fuel</param>
@@ -13089,21 +12718,13 @@
                                                 <condition id="-4" name="Trigger once while true" sid="717402215605780" type="System" />
                                             </conditions>
                                             <actions>
-                                                <action id="0" name="Spawn another object" sid="462657441090908" type="Boss1_6EP2">
-                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">1</param>
-                                                </action>
-                                                <action id="-22" name="Set angle toward position" sid="506768001716132" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="X">Engine_Player.X</param>
-                                                    <param id="1" name="Y">Engine_Player.Y</param>
-                                                </action>
-                                                <action behavior="Bullet" id="0" name="Set speed" sid="453659154610275" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="Speed">420</param>
-                                                </action>
                                                 <action id="0" name="Call function" sid="881806622867129" type="Function">
                                                     <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                                     <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="411742124992108" type="Function">
+                                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;1_6ep2boss&quot;{###}Boss1_6EP2.ImagePointX(1){###}Boss1_6EP2.ImagePointY(1){###}420{###}&quot;player&quot;</param>
                                                 </action>
                                                 <action id="-11" name="Subtract from" sid="521378134883182" type="System">
                                                     <param id="0" name="Variable">fuel</param>
@@ -13121,21 +12742,13 @@
                                                 <condition id="-4" name="Trigger once while true" sid="817033305592887" type="System" />
                                             </conditions>
                                             <actions>
-                                                <action id="0" name="Spawn another object" sid="317843720744038" type="Boss1_6EP2">
-                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">1</param>
-                                                </action>
-                                                <action id="-22" name="Set angle toward position" sid="458302349299584" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="X">Engine_Player.X</param>
-                                                    <param id="1" name="Y">Engine_Player.Y</param>
-                                                </action>
-                                                <action behavior="Bullet" id="0" name="Set speed" sid="926731720648158" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="Speed">420</param>
-                                                </action>
                                                 <action id="0" name="Call function" sid="570068079758602" type="Function">
                                                     <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                                     <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="274041699630326" type="Function">
+                                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;1_6ep2boss&quot;{###}Boss1_6EP2.ImagePointX(1){###}Boss1_6EP2.ImagePointY(1){###}420{###}&quot;player&quot;</param>
                                                 </action>
                                                 <action id="-11" name="Subtract from" sid="398442809412649" type="System">
                                                     <param id="0" name="Variable">fuel</param>
@@ -13153,21 +12766,13 @@
                                                 <condition id="-4" name="Trigger once while true" sid="254647600812642" type="System" />
                                             </conditions>
                                             <actions>
-                                                <action id="0" name="Spawn another object" sid="848031282999796" type="Boss1_6EP2">
-                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">1</param>
-                                                </action>
-                                                <action id="-22" name="Set angle toward position" sid="895156047548994" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="X">Engine_Player.X</param>
-                                                    <param id="1" name="Y">Engine_Player.Y</param>
-                                                </action>
-                                                <action behavior="Bullet" id="0" name="Set speed" sid="860719385803729" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="Speed">420</param>
-                                                </action>
                                                 <action id="0" name="Call function" sid="317999215698401" type="Function">
                                                     <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                                     <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="782086581531286" type="Function">
+                                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;1_6ep2boss&quot;{###}Boss1_6EP2.ImagePointX(1){###}Boss1_6EP2.ImagePointY(1){###}420{###}&quot;player&quot;</param>
                                                 </action>
                                                 <action id="-11" name="Subtract from" sid="926469497412421" type="System">
                                                     <param id="0" name="Variable">fuel</param>
@@ -13186,24 +12791,13 @@
                                                 <condition id="-4" name="Trigger once while true" sid="268021689250189" type="System" />
                                             </conditions>
                                             <actions>
-                                                <action id="0" name="Spawn another object" sid="907931570832984" type="Boss1_6EP2">
-                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">1</param>
-                                                </action>
-                                                <action id="-22" name="Set angle toward position" sid="196901524382326" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="X">Engine_Player.X</param>
-                                                    <param id="1" name="Y">Engine_Player.Y</param>
-                                                </action>
-                                                <action behavior="Bullet" id="0" name="Set speed" sid="372689907081273" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="Speed">800</param>
-                                                </action>
-                                                <action id="9" name="Set scale" sid="295058431070014" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="Scale">2</param>
-                                                </action>
                                                 <action id="0" name="Call function" sid="420884932178801" type="Function">
                                                     <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                                     <param id="1" name="Parameter {n}">&quot;2Title&quot;</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="387982078723509" type="Function">
+                                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;1_6ep2boss&quot;{###}Boss1_6EP2.ImagePointX(1){###}Boss1_6EP2.ImagePointY(1){###}800{###}&quot;player&quot;{###}2</param>
                                                 </action>
                                                 <action id="-11" name="Subtract from" sid="455306922535181" type="System">
                                                     <param id="0" name="Variable">fuel</param>
@@ -13222,42 +12816,21 @@
                                                 <condition id="-4" name="Trigger once while true" sid="866884638864461" type="System" />
                                             </conditions>
                                             <actions>
-                                                <action id="0" name="Spawn another object" sid="735551596301193" type="Boss1_6EP2">
-                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">1</param>
-                                                </action>
-                                                <action id="-8" name="Set angle" sid="235109003703380" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="Angle">90</param>
-                                                </action>
-                                                <action behavior="Bullet" id="0" name="Set speed" sid="994197866213632" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="Speed">375</param>
-                                                </action>
-                                                <action id="0" name="Spawn another object" sid="622434602285188" type="Boss1_6EP2">
-                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">1</param>
-                                                </action>
-                                                <action id="-8" name="Set angle" sid="169050239223285" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="Angle">135</param>
-                                                </action>
-                                                <action behavior="Bullet" id="0" name="Set speed" sid="496299278179779" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="Speed">290</param>
-                                                </action>
-                                                <action id="0" name="Spawn another object" sid="734640982513853" type="Boss1_6EP2">
-                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">1</param>
-                                                </action>
-                                                <action id="-8" name="Set angle" sid="328392698834356" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="Angle">45</param>
-                                                </action>
-                                                <action behavior="Bullet" id="0" name="Set speed" sid="167590459646980" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="Speed">290</param>
-                                                </action>
                                                 <action id="0" name="Call function" sid="312034112485574" type="Function">
                                                     <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                                     <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="398133274366329" type="Function">
+                                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;1_6ep2boss&quot;{###}Boss1_6EP2.ImagePointX(1){###}Boss1_6EP2.ImagePointY(1){###}375{###}90</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="118739386320362" type="Function">
+                                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;1_6ep2boss&quot;{###}Boss1_6EP2.ImagePointX(1){###}Boss1_6EP2.ImagePointY(1){###}290{###}135</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="909308222870368" type="Function">
+                                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;1_6ep2boss&quot;{###}Boss1_6EP2.ImagePointX(1){###}Boss1_6EP2.ImagePointY(1){###}290{###}45</param>
                                                 </action>
                                                 <action id="-11" name="Subtract from" sid="354757380275505" type="System">
                                                     <param id="0" name="Variable">fuel</param>
@@ -13275,42 +12848,21 @@
                                                 <condition id="-4" name="Trigger once while true" sid="379716343698875" type="System" />
                                             </conditions>
                                             <actions>
-                                                <action id="0" name="Spawn another object" sid="835157054715018" type="Boss1_6EP2">
-                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">1</param>
-                                                </action>
-                                                <action id="-8" name="Set angle" sid="497157976836834" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="Angle">90</param>
-                                                </action>
-                                                <action behavior="Bullet" id="0" name="Set speed" sid="425955764127205" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="Speed">375</param>
-                                                </action>
-                                                <action id="0" name="Spawn another object" sid="897794773987328" type="Boss1_6EP2">
-                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">1</param>
-                                                </action>
-                                                <action id="-8" name="Set angle" sid="629981802170820" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="Angle">135</param>
-                                                </action>
-                                                <action behavior="Bullet" id="0" name="Set speed" sid="708262534808260" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="Speed">290</param>
-                                                </action>
-                                                <action id="0" name="Spawn another object" sid="653896600258281" type="Boss1_6EP2">
-                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">1</param>
-                                                </action>
-                                                <action id="-8" name="Set angle" sid="961441689310865" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="Angle">45</param>
-                                                </action>
-                                                <action behavior="Bullet" id="0" name="Set speed" sid="883990562180801" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="Speed">290</param>
-                                                </action>
                                                 <action id="0" name="Call function" sid="534448760513737" type="Function">
                                                     <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                                     <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="262177973740027" type="Function">
+                                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;1_6ep2boss&quot;{###}Boss1_6EP2.ImagePointX(1){###}Boss1_6EP2.ImagePointY(1){###}375{###}90</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="505102467402841" type="Function">
+                                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;1_6ep2boss&quot;{###}Boss1_6EP2.ImagePointX(1){###}Boss1_6EP2.ImagePointY(1){###}290{###}135</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="665022699095269" type="Function">
+                                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;1_6ep2boss&quot;{###}Boss1_6EP2.ImagePointX(1){###}Boss1_6EP2.ImagePointY(1){###}290{###}45</param>
                                                 </action>
                                                 <action id="-11" name="Subtract from" sid="952778074020443" type="System">
                                                     <param id="0" name="Variable">fuel</param>
@@ -13328,42 +12880,21 @@
                                                 <condition id="-4" name="Trigger once while true" sid="869705577725578" type="System" />
                                             </conditions>
                                             <actions>
-                                                <action id="0" name="Spawn another object" sid="127600174030969" type="Boss1_6EP2">
-                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">1</param>
-                                                </action>
-                                                <action id="-8" name="Set angle" sid="122139975790519" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="Angle">90</param>
-                                                </action>
-                                                <action behavior="Bullet" id="0" name="Set speed" sid="643396288493840" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="Speed">375</param>
-                                                </action>
-                                                <action id="0" name="Spawn another object" sid="120542422913356" type="Boss1_6EP2">
-                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">1</param>
-                                                </action>
-                                                <action id="-8" name="Set angle" sid="161582335327303" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="Angle">135</param>
-                                                </action>
-                                                <action behavior="Bullet" id="0" name="Set speed" sid="382104404760054" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="Speed">290</param>
-                                                </action>
-                                                <action id="0" name="Spawn another object" sid="111094347282793" type="Boss1_6EP2">
-                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">1</param>
-                                                </action>
-                                                <action id="-8" name="Set angle" sid="326706059290561" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="Angle">45</param>
-                                                </action>
-                                                <action behavior="Bullet" id="0" name="Set speed" sid="679209860776424" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="Speed">290</param>
-                                                </action>
                                                 <action id="0" name="Call function" sid="902961003887565" type="Function">
                                                     <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                                     <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="520693723851614" type="Function">
+                                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;1_6ep2boss&quot;{###}Boss1_6EP2.ImagePointX(1){###}Boss1_6EP2.ImagePointY(1){###}375{###}90</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="780353431023184" type="Function">
+                                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;1_6ep2boss&quot;{###}Boss1_6EP2.ImagePointX(1){###}Boss1_6EP2.ImagePointY(1){###}290{###}135</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="316508295262024" type="Function">
+                                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;1_6ep2boss&quot;{###}Boss1_6EP2.ImagePointX(1){###}Boss1_6EP2.ImagePointY(1){###}290{###}45</param>
                                                 </action>
                                                 <action id="-11" name="Subtract from" sid="294802770018952" type="System">
                                                     <param id="0" name="Variable">fuel</param>
@@ -13381,42 +12912,21 @@
                                                 <condition id="-4" name="Trigger once while true" sid="232017869447367" type="System" />
                                             </conditions>
                                             <actions>
-                                                <action id="0" name="Spawn another object" sid="316249619336060" type="Boss1_6EP2">
-                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">1</param>
-                                                </action>
-                                                <action id="-8" name="Set angle" sid="841061228080960" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="Angle">90</param>
-                                                </action>
-                                                <action behavior="Bullet" id="0" name="Set speed" sid="858219883269236" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="Speed">375</param>
-                                                </action>
-                                                <action id="0" name="Spawn another object" sid="922395082621966" type="Boss1_6EP2">
-                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">1</param>
-                                                </action>
-                                                <action id="-8" name="Set angle" sid="541104589481213" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="Angle">135</param>
-                                                </action>
-                                                <action behavior="Bullet" id="0" name="Set speed" sid="359288774205310" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="Speed">290</param>
-                                                </action>
-                                                <action id="0" name="Spawn another object" sid="474087815156510" type="Boss1_6EP2">
-                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">1</param>
-                                                </action>
-                                                <action id="-8" name="Set angle" sid="191848906041858" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="Angle">45</param>
-                                                </action>
-                                                <action behavior="Bullet" id="0" name="Set speed" sid="799400806272664" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="Speed">290</param>
-                                                </action>
                                                 <action id="0" name="Call function" sid="659867960460804" type="Function">
                                                     <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                                     <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="682336185254104" type="Function">
+                                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;1_6ep2boss&quot;{###}Boss1_6EP2.ImagePointX(1){###}Boss1_6EP2.ImagePointY(1){###}375{###}90</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="428383342079455" type="Function">
+                                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;1_6ep2boss&quot;{###}Boss1_6EP2.ImagePointX(1){###}Boss1_6EP2.ImagePointY(1){###}290{###}135</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="148363831270720" type="Function">
+                                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;1_6ep2boss&quot;{###}Boss1_6EP2.ImagePointX(1){###}Boss1_6EP2.ImagePointY(1){###}290{###}45</param>
                                                 </action>
                                                 <action id="-11" name="Subtract from" sid="599026061882420" type="System">
                                                     <param id="0" name="Variable">fuel</param>
@@ -13435,20 +12945,9 @@
                                                 <condition id="-4" name="Trigger once while true" sid="158880985282026" type="System" />
                                             </conditions>
                                             <actions>
-                                                <action id="0" name="Spawn another object" sid="756985864620377" type="Boss1_6EP2">
-                                                    <param id="0" name="Object">Projectile1_6EP2Boss</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">1</param>
-                                                </action>
-                                                <action id="-22" name="Set angle toward position" sid="199791459201089" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="X">Engine_Player.X</param>
-                                                    <param id="1" name="Y">Engine_Player.Y</param>
-                                                </action>
-                                                <action behavior="Bullet" id="0" name="Set speed" sid="159326877365810" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="Speed">800</param>
-                                                </action>
-                                                <action id="9" name="Set scale" sid="271296301997889" type="Projectile1_6EP2Boss">
-                                                    <param id="0" name="Scale">2</param>
+                                                <action id="0" name="Call function" sid="986431079101584" type="Function">
+                                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;1_6ep2boss&quot;{###}Boss1_6EP2.ImagePointX(1){###}Boss1_6EP2.ImagePointY(1){###}800{###}&quot;player&quot;{###}2</param>
                                                 </action>
                                                 <action id="0" name="Call function" sid="981231143424239" type="Function">
                                                     <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
@@ -13610,6 +13109,7 @@
                                 </action>
                             </actions>
                         </event-block>
+                        <comment></comment>
                         <event-block sid="609803595352541">
                             <conditions>
                                 <condition id="-7" name="Compare instance variable" sid="247841046080777" type="Boss1_7SL1">
@@ -13805,6 +13305,7 @@
                                 </action>
                             </actions>
                         </event-block>
+                        <comment></comment>
                         <event-block sid="460544728973729">
                             <conditions>
                                 <condition id="-7" name="Compare instance variable" sid="426053541853527" type="Boss1_7SL1">
@@ -14057,34 +13558,24 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="0" name="Spawn another object" sid="369255041670067" type="Boss2_1GFZ">
-                                            <param id="0" name="Object">Projectile2_Generic</param>
-                                            <param id="1" name="Layer">&quot;Player&quot;</param>
-                                            <param id="2" name="Image point">1</param>
-                                        </action>
-                                        <action id="-22" name="Set angle toward position" sid="551057700984908" type="Projectile2_Generic">
-                                            <param id="0" name="X">Engine_Player.X</param>
-                                            <param id="1" name="Y">Engine_Player.Y</param>
-                                        </action>
                                         <action id="0" name="Call function" sid="423882401852797" type="Function">
                                             <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                             <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
                                         </action>
+                                        <action id="0" name="Call function" sid="469431559636592" type="Function">
+                                            <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;2_generic&quot;{###}Boss2_1GFZ.ImagePointX(1){###}Boss2_1GFZ.ImagePointY(1){###}&quot;&quot;{###}&quot;player&quot;</param>
+                                        </action>
                                         <action id="-16" name="Wait" sid="426795321737403" type="System">
                                             <param id="0" name="Seconds">0.5</param>
-                                        </action>
-                                        <action id="0" name="Spawn another object" sid="271877971817841" type="Boss2_1GFZ">
-                                            <param id="0" name="Object">Projectile2_Generic</param>
-                                            <param id="1" name="Layer">&quot;Player&quot;</param>
-                                            <param id="2" name="Image point">1</param>
-                                        </action>
-                                        <action id="-22" name="Set angle toward position" sid="183921878982333" type="Projectile2_Generic">
-                                            <param id="0" name="X">Engine_Player.X</param>
-                                            <param id="1" name="Y">Engine_Player.Y</param>
                                         </action>
                                         <action id="0" name="Call function" sid="547853678688351" type="Function">
                                             <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                             <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
+                                        </action>
+                                        <action id="0" name="Call function" sid="732601519718454" type="Function">
+                                            <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;2_generic&quot;{###}Boss2_1GFZ.ImagePointX(1){###}Boss2_1GFZ.ImagePointY(1){###}&quot;&quot;{###}&quot;player&quot;</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -14210,7 +13701,6 @@
                 </event-group>
                 <event-group description="" sid="206112185603810" title="THZ Boss">
                     <sub-events>
-                        <variable constant="0" name="state" sid="642992800066215" static="1" type="number">0</variable>
                         <variable constant="0" name="timer" sid="649910577495495" static="1" type="number">0</variable>
                         <comment>reset boss</comment>
                         <event-block sid="359167869994376">
@@ -14224,8 +13714,8 @@
                                     <param id="0" name="Animation">&quot;Idle&quot;</param>
                                     <param id="1" name="From">1</param>
                                 </action>
-                                <action id="-9" name="Set value" sid="603597367972160" type="System">
-                                    <param id="0" name="Variable">state</param>
+                                <action id="-10" name="Set value" sid="709554840239885" type="Boss2_2THZ">
+                                    <param id="0" name="Instance variable">StateAttack</param>
                                     <param id="1" name="Value">-1</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="572607897689572" type="System">
@@ -14336,8 +13826,8 @@
                                 <comment>entrance</comment>
                                 <event-block sid="205997971591454">
                                     <conditions>
-                                        <condition id="-14" name="Compare variable" sid="309983562446446" type="System">
-                                            <param id="0" name="Variable">state</param>
+                                        <condition id="-7" name="Compare instance variable" sid="351879411663784" type="Boss2_2THZ">
+                                            <param id="0" name="Instance variable">StateAttack</param>
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">-1</param>
                                         </condition>
@@ -14348,8 +13838,8 @@
                                         <condition id="-4" name="Trigger once while true" sid="304734158218836" type="System" />
                                     </conditions>
                                     <actions>
-                                        <action id="-9" name="Set value" sid="392569855474413" type="System">
-                                            <param id="0" name="Variable">state</param>
+                                        <action id="-10" name="Set value" sid="180873522495836" type="Boss2_2THZ">
+                                            <param id="0" name="Instance variable">StateAttack</param>
                                             <param id="1" name="Value">0</param>
                                         </action>
                                     </actions>
@@ -14357,8 +13847,8 @@
                                 <comment>random choose</comment>
                                 <event-block sid="609465457378066">
                                     <conditions>
-                                        <condition id="-14" name="Compare variable" sid="584709637410938" type="System">
-                                            <param id="0" name="Variable">state</param>
+                                        <condition id="-7" name="Compare instance variable" sid="877430041391678" type="Boss2_2THZ">
+                                            <param id="0" name="Instance variable">StateAttack</param>
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">0</param>
                                         </condition>
@@ -14389,8 +13879,8 @@
                                                 <action id="-16" name="Wait" sid="797340058045084" type="System">
                                                     <param id="0" name="Seconds">1.5</param>
                                                 </action>
-                                                <action id="-9" name="Set value" sid="842773658257419" type="System">
-                                                    <param id="0" name="Variable">state</param>
+                                                <action id="-10" name="Set value" sid="268789375981533" type="Boss2_2THZ">
+                                                    <param id="0" name="Instance variable">StateAttack</param>
                                                     <param id="1" name="Value">choose(1,1,  2,2,2)</param>
                                                 </action>
                                             </actions>
@@ -14400,8 +13890,8 @@
                                 <comment></comment>
                                 <event-block sid="580742736757979">
                                     <conditions>
-                                        <condition id="-14" name="Compare variable" sid="906419398278457" type="System">
-                                            <param id="0" name="Variable">state</param>
+                                        <condition id="-7" name="Compare instance variable" sid="103290409845687" type="Boss2_2THZ">
+                                            <param id="0" name="Instance variable">StateAttack</param>
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">1</param>
                                         </condition>
@@ -14545,8 +14035,8 @@
                                                 <condition id="-4" name="Trigger once while true" sid="505796432066076" type="System" />
                                             </conditions>
                                             <actions>
-                                                <action id="-9" name="Set value" sid="582398245715378" type="System">
-                                                    <param id="0" name="Variable">state</param>
+                                                <action id="-10" name="Set value" sid="416416673854323" type="Boss2_2THZ">
+                                                    <param id="0" name="Instance variable">StateAttack</param>
                                                     <param id="1" name="Value">0</param>
                                                 </action>
                                             </actions>
@@ -14556,8 +14046,8 @@
                                 <comment></comment>
                                 <event-block sid="107320394245120">
                                     <conditions>
-                                        <condition id="-14" name="Compare variable" sid="528451087919339" type="System">
-                                            <param id="0" name="Variable">state</param>
+                                        <condition id="-7" name="Compare instance variable" sid="619910256532949" type="Boss2_2THZ">
+                                            <param id="0" name="Instance variable">StateAttack</param>
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">2</param>
                                         </condition>
@@ -14610,21 +14100,13 @@
                                                 <condition id="-4" name="Trigger once while true" sid="217025352193874" type="System" />
                                             </conditions>
                                             <actions>
-                                                <action id="0" name="Spawn another object" sid="424825931083800" type="Boss2_2THZ">
-                                                    <param id="0" name="Object">Projectile2_2THZBossBig</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">1</param>
-                                                </action>
-                                                <action id="-22" name="Set angle toward position" sid="781934008506817" type="Projectile2_2THZBossBig">
-                                                    <param id="0" name="X">Engine_Player.X</param>
-                                                    <param id="1" name="Y">Engine_Player.Y</param>
-                                                </action>
                                                 <action id="0" name="Call function" sid="265683977610735" type="Function">
                                                     <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                                     <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
                                                 </action>
-                                                <action behavior="Bullet" id="0" name="Set speed" sid="227644109211190" type="Projectile2_2THZBossBig">
-                                                    <param id="0" name="Speed">320</param>
+                                                <action id="0" name="Call function" sid="292642957473466" type="Function">
+                                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;2_2thzbossbig&quot;{###}Boss2_2THZ.ImagePointX(1){###}Boss2_2THZ.ImagePointY(1){###}320{###}&quot;player&quot;</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -14638,21 +14120,13 @@
                                                 <condition id="-4" name="Trigger once while true" sid="522199753872651" type="System" />
                                             </conditions>
                                             <actions>
-                                                <action id="0" name="Spawn another object" sid="340420801417741" type="Boss2_2THZ">
-                                                    <param id="0" name="Object">Projectile2_2THZBossBig</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">1</param>
-                                                </action>
-                                                <action id="-22" name="Set angle toward position" sid="367054048070717" type="Projectile2_2THZBossBig">
-                                                    <param id="0" name="X">Engine_Player.X</param>
-                                                    <param id="1" name="Y">Engine_Player.Y</param>
-                                                </action>
                                                 <action id="0" name="Call function" sid="997117799206935" type="Function">
                                                     <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                                     <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
                                                 </action>
-                                                <action behavior="Bullet" id="0" name="Set speed" sid="132660167262166" type="Projectile2_2THZBossBig">
-                                                    <param id="0" name="Speed">320</param>
+                                                <action id="0" name="Call function" sid="202003379788875" type="Function">
+                                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;2_2thzbossbig&quot;{###}Boss2_2THZ.ImagePointX(1){###}Boss2_2THZ.ImagePointY(1){###}320{###}&quot;player&quot;</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -14666,21 +14140,13 @@
                                                 <condition id="-4" name="Trigger once while true" sid="619597506693263" type="System" />
                                             </conditions>
                                             <actions>
-                                                <action id="0" name="Spawn another object" sid="629342158406820" type="Boss2_2THZ">
-                                                    <param id="0" name="Object">Projectile2_2THZBossBig</param>
-                                                    <param id="1" name="Layer">&quot;Player&quot;</param>
-                                                    <param id="2" name="Image point">1</param>
-                                                </action>
-                                                <action id="-22" name="Set angle toward position" sid="857083396932858" type="Projectile2_2THZBossBig">
-                                                    <param id="0" name="X">Engine_Player.X</param>
-                                                    <param id="1" name="Y">Engine_Player.Y</param>
-                                                </action>
                                                 <action id="0" name="Call function" sid="848603505797994" type="Function">
                                                     <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
                                                     <param id="1" name="Parameter {n}">&quot;F_SmallShot&quot;</param>
                                                 </action>
-                                                <action behavior="Bullet" id="0" name="Set speed" sid="557581928077580" type="Projectile2_2THZBossBig">
-                                                    <param id="0" name="Speed">320</param>
+                                                <action id="0" name="Call function" sid="301918608390391" type="Function">
+                                                    <param id="0" name="Name">&quot;Level_CreateProjectile&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;2_2thzbossbig&quot;{###}Boss2_2THZ.ImagePointX(1){###}Boss2_2THZ.ImagePointY(1){###}320{###}&quot;player&quot;</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -14735,8 +14201,8 @@
                                                         <condition id="-4" name="Trigger once while true" sid="829589328005376" type="System" />
                                                     </conditions>
                                                     <actions>
-                                                        <action id="-9" name="Set value" sid="575233988997424" type="System">
-                                                            <param id="0" name="Variable">state</param>
+                                                        <action id="-10" name="Set value" sid="804323947988359" type="Boss2_2THZ">
+                                                            <param id="0" name="Instance variable">StateAttack</param>
                                                             <param id="1" name="Value">0</param>
                                                         </action>
                                                     </actions>

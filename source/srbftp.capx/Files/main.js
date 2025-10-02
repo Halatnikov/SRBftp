@@ -1,3 +1,4 @@
+"use strict";
 var srbftp = {};
 
 // todo: allow preceding arguments and make the json itself last

@@ -11,6 +11,8 @@
         <variable constant="0" name="DEBUG" sid="698008437735178" static="0" type="number">1</variable>
         <variable constant="0" name="DEBUG_LOCALSTORAGE" sid="662686063322662" static="0" type="number">0</variable>
         <comment>- constants</comment>
+        <variable constant="0" name="c_github" sid="496521573815364" static="0" type="text">Halatnikov/SRBftp</variable>
+        <variable constant="0" name="c_gamepad_deadzone" sid="274782719892201" static="0" type="number">25</variable>
         <variable constant="0" name="c_randomid_len" sid="371780425673200" static="0" type="number">12</variable>
         <variable constant="0" name="c_maxplayers" sid="232273817408100" static="0" type="number">16</variable>
         <variable constant="0" name="c_username_len" sid="411745326328881" static="0" type="number">24</variable>
@@ -48,6 +50,9 @@
                         <event-block sid="712457065011527">
                             <conditions />
                             <actions>
+                                <action id="3" name="Create folder" sid="316319249473961" type="NWjs">
+                                    <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp&quot;</param>
+                                </action>
                                 <action id="3" name="Create folder" sid="722122917338790" type="NWjs">
                                     <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata&quot;</param>
                                 </action>
@@ -212,13 +217,18 @@
                         <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="116011160492506" type="Var_Misc">
                             <param id="0" name="Instance variable">InitializedFiles</param>
                         </condition>
-                        <condition id="-4" name="Trigger once while true" sid="481528135760012" type="System" />
                     </conditions>
                     <actions />
                     <sub-events>
-                        <event-block sid="789709257220836">
-                            <conditions />
+                        <event-block sid="567134886534420">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="481528135760012" type="System" />
+                            </conditions>
                             <actions>
+                                <action id="1" name="Request project file" sid="522713947354922" type="AJAX">
+                                    <param id="0" name="Tag">&quot;keycodes&quot;</param>
+                                    <param id="1" name="File">keycodes.ini</param>
+                                </action>
                                 <action id="1" name="Request project file" sid="586972287519443" type="AJAX">
                                     <param id="0" name="Tag">&quot;lists&quot;</param>
                                     <param id="1" name="File">lists.ini</param>
@@ -226,10 +236,6 @@
                                 <action id="1" name="Request project file" sid="579154648539404" type="AJAX">
                                     <param id="0" name="Tag">&quot;levelsproperties&quot;</param>
                                     <param id="1" name="File">levelsproperties.ini</param>
-                                </action>
-                                <action id="1" name="Request project file" sid="522713947354922" type="AJAX">
-                                    <param id="0" name="Tag">&quot;keycodes&quot;</param>
-                                    <param id="1" name="File">keycodes.ini</param>
                                 </action>
                                 <action id="1" name="Request project file" sid="575494500318957" type="AJAX">
                                     <param id="0" name="Tag">&quot;skinssproperties&quot;</param>
@@ -244,19 +250,72 @@
                                     <param id="1" name="File">audioproperties.ini</param>
                                 </action>
                             </actions>
+                            <sub-events>
+                                <event-block sid="457864977661605">
+                                    <conditions />
+                                    <actions>
+                                        <action id="1" name="Request project file" sid="862672173943352" type="AJAX">
+                                            <param id="0" name="Tag">&quot;js.storage.min.js&quot;</param>
+                                            <param id="1" name="File">js.storage.min.js</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
-                        <event-block sid="457864977661605">
-                            <conditions />
+                        <event-block sid="497640992101595">
+                            <conditions>
+                                <condition id="3" name="On any completed" sid="855718049403670" type="AJAX" />
+                                <condition id="-8" name="Compare two values" sid="364335419613432" type="System">
+                                    <param id="0" name="First value">right(AJAX.Tag,3)</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">&quot;.js&quot;</param>
+                                </condition>
+                            </conditions>
                             <actions>
-                                <action id="1" name="Request project file" sid="862672173943352" type="AJAX">
-                                    <param id="0" name="Tag">&quot;js.storage.min.js&quot;</param>
-                                    <param id="1" name="File">js.storage.min.js</param>
+                                <action id="0" name="Execute JS code" sid="985478095864636" type="JS">
+                                    <param id="0" name="JS code">AJAX.LastData</param>
+                                    <param id="1" name="Parameter {n}"></param>
+                                </action>
+                                <action id="0" name="Execute JS code" sid="740795482052710" type="JS">
+                                    <param id="0" name="JS code">&quot;let file = document.createElement(&apos;script&apos;);&#x0D;&#x0A;file.setAttribute(&apos;type&apos;,&apos;text/javascript&apos;);&#x0D;&#x0A;file.setAttribute(&apos;src&apos;, #0);&#x0D;&#x0A;file.onerror = function() {&#x0D;&#x0A;&#x09;console.error(&apos;failed including &apos; + #0);&#x0D;&#x0A;};&#x0D;&#x0A;document.getElementsByTagName(&apos;head&apos;)[0].appendChild(file);&quot;</param>
+                                    <param id="1" name="Parameter {n}">AJAX.Tag</param>
                                 </action>
                             </actions>
                         </event-block>
                     </sub-events>
                 </event-block>
+                <event-block sid="810983114710181">
+                    <conditions>
+                        <condition id="-8" name="Is boolean instance variable set" sid="732239482996966" type="Var_Misc">
+                            <param id="0" name="Instance variable">InitializedFiles</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="306845284833138" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Wait" sid="927581207856512" type="System">
+                            <param id="0" name="Seconds">0</param>
+                        </action>
+                    </actions>
+                </event-block>
                 <comment></comment>
+                <event-block sid="704353488214618">
+                    <conditions>
+                        <condition id="0" name="On completed" sid="306486745686037" type="AJAX">
+                            <param id="0" name="Tag">&quot;keycodes&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Call function" sid="127679894591349" type="Function">
+                            <param id="0" name="Name">&quot;INI2JSON&quot;</param>
+                            <param id="1" name="Parameter {n}">AJAX.LastData</param>
+                        </action>
+                        <action id="60" name="LoadJSON" sid="563935465293579" type="JSON_InputKeycodes">
+                            <param id="0" name="JSON">Function.ReturnValue</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}"></param>
+                        </action>
+                    </actions>
+                </event-block>
                 <event-block sid="666020545546164">
                     <conditions>
                         <condition id="0" name="On completed" sid="123769047512206" type="AJAX">
@@ -287,24 +346,6 @@
                             <param id="1" name="Parameter {n}">AJAX.LastData</param>
                         </action>
                         <action id="60" name="LoadJSON" sid="416529203802945" type="JSON_LevelProperties">
-                            <param id="0" name="JSON">Function.ReturnValue</param>
-                            <param id="1" name="Reference point">0</param>
-                            <param id="2" name="Key {n}"></param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="704353488214618">
-                    <conditions>
-                        <condition id="0" name="On completed" sid="306486745686037" type="AJAX">
-                            <param id="0" name="Tag">&quot;keycodes&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Call function" sid="127679894591349" type="Function">
-                            <param id="0" name="Name">&quot;INI2JSON&quot;</param>
-                            <param id="1" name="Parameter {n}">AJAX.LastData</param>
-                        </action>
-                        <action id="60" name="LoadJSON" sid="563935465293579" type="JSON_InputKeycodes">
                             <param id="0" name="JSON">Function.ReturnValue</param>
                             <param id="1" name="Reference point">0</param>
                             <param id="2" name="Key {n}"></param>
@@ -373,36 +414,46 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="0" name="Execute JS code" sid="985478095864636" type="JS">
-                            <param id="0" name="JS code">AJAX.LastData</param>
-                            <param id="1" name="Parameter {n}"></param>
-                        </action>
-                        <action id="0" name="Execute JS code" sid="740795482052710" type="JS">
-                            <param id="0" name="JS code">&quot;let file = document.createElement(&apos;script&apos;);&#x0D;&#x0A;file.setAttribute(&apos;type&apos;,&apos;text/javascript&apos;);&#x0D;&#x0A;file.setAttribute(&apos;src&apos;, #0);&#x0D;&#x0A;file.onerror = function() {&#x0D;&#x0A;&#x09;console.error(&apos;failed including &apos; + #0);&#x0D;&#x0A;};&#x0D;&#x0A;document.getElementsByTagName(&apos;head&apos;)[0].appendChild(file);&quot;</param>
-                            <param id="1" name="Parameter {n}">AJAX.Tag</param>
-                        </action>
-                        <action id="1" name="Request project file" sid="751362543445155" type="AJAX">
-                            <param id="0" name="Tag">&quot;axios.min.js&quot;</param>
-                            <param id="1" name="File">axios.min.js</param>
+                        <action id="1" name="Request project file" sid="981057705434192" type="AJAX">
+                            <param id="0" name="Tag">&quot;superstruct.min.js&quot;</param>
+                            <param id="1" name="File">superstruct.min.js</param>
                         </action>
                     </actions>
                 </event-block>
                 <event-block sid="133815238925278">
                     <conditions>
                         <condition id="0" name="On completed" sid="733042599544227" type="AJAX">
+                            <param id="0" name="Tag">&quot;superstruct.min.js&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="1" name="Request project file" sid="751362543445155" type="AJAX">
+                            <param id="0" name="Tag">&quot;axios.min.js&quot;</param>
+                            <param id="1" name="File">axios.min.js</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="782707580018884">
+                    <conditions>
+                        <condition id="0" name="On completed" sid="458715910977781" type="AJAX">
                             <param id="0" name="Tag">&quot;axios.min.js&quot;</param>
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="0" name="Execute JS code" sid="464196053026848" type="JS">
-                            <param id="0" name="JS code">AJAX.LastData</param>
-                            <param id="1" name="Parameter {n}"></param>
+                        <action id="1" name="Request project file" sid="328266990820608" type="AJAX">
+                            <param id="0" name="Tag">&quot;parse.min.js&quot;</param>
+                            <param id="1" name="File">parse.min.js</param>
                         </action>
-                        <action id="0" name="Execute JS code" sid="271257653734656" type="JS">
-                            <param id="0" name="JS code">&quot;let file = document.createElement(&apos;script&apos;);&#x0D;&#x0A;file.setAttribute(&apos;type&apos;,&apos;text/javascript&apos;);&#x0D;&#x0A;file.setAttribute(&apos;src&apos;, #0);&#x0D;&#x0A;file.onerror = function() {&#x0D;&#x0A;&#x09;console.error(&apos;failed including &apos; + #0);&#x0D;&#x0A;};&#x0D;&#x0A;document.getElementsByTagName(&apos;head&apos;)[0].appendChild(file);&quot;</param>
-                            <param id="1" name="Parameter {n}">AJAX.Tag</param>
-                        </action>
-                        <action id="1" name="Request project file" sid="981057705434192" type="AJAX">
+                    </actions>
+                </event-block>
+                <event-block sid="837478167834480">
+                    <conditions>
+                        <condition id="0" name="On completed" sid="191149673229285" type="AJAX">
+                            <param id="0" name="Tag">&quot;parse.min.js&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="1" name="Request project file" sid="235100780945267" type="AJAX">
                             <param id="0" name="Tag">&quot;main.js&quot;</param>
                             <param id="1" name="File">main.js</param>
                         </action>
@@ -415,33 +466,39 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="0" name="Execute JS code" sid="915743001515380" type="JS">
-                            <param id="0" name="JS code">AJAX.LastData</param>
-                            <param id="1" name="Parameter {n}"></param>
+                        <action id="2" name="Init alias" sid="723364550344469" type="JS">
+                            <param id="0" name="Alias name">&quot;logjson&quot;</param>
+                            <param id="1" name="JS">&quot;srbftp.logJSON&quot;</param>
                         </action>
-                        <action id="0" name="Execute JS code" sid="678960727965480" type="JS">
-                            <param id="0" name="JS code">&quot;let file = document.createElement(&apos;script&apos;);&#x0D;&#x0A;file.setAttribute(&apos;type&apos;,&apos;text/javascript&apos;);&#x0D;&#x0A;file.setAttribute(&apos;src&apos;, #0);&#x0D;&#x0A;file.onerror = function() {&#x0D;&#x0A;&#x09;console.error(&apos;failed including &apos; + #0);&#x0D;&#x0A;};&#x0D;&#x0A;document.getElementsByTagName(&apos;head&apos;)[0].appendChild(file);&quot;</param>
-                            <param id="1" name="Parameter {n}">AJAX.Tag</param>
+                        <action id="2" name="Init alias" sid="636468509881918" type="JS">
+                            <param id="0" name="Alias name">&quot;format&quot;</param>
+                            <param id="1" name="JS">&quot;String.format&quot;</param>
                         </action>
                     </actions>
                     <sub-events>
-                        <event-block sid="643512159406367">
+                        <event-block sid="167503525909746">
                             <conditions />
                             <actions>
-                                <action id="2" name="Init alias" sid="723364550344469" type="JS">
-                                    <param id="0" name="Alias name">&quot;logjson&quot;</param>
-                                    <param id="1" name="JS">&quot;srbftp.logJSON&quot;</param>
-                                </action>
-                                <action id="2" name="Init alias" sid="636468509881918" type="JS">
-                                    <param id="0" name="Alias name">&quot;format&quot;</param>
-                                    <param id="1" name="JS">&quot;String.format&quot;</param>
+                                <action id="1" name="Request project file" sid="692675009619641" type="AJAX">
+                                    <param id="0" name="Tag">&quot;schemas.js&quot;</param>
+                                    <param id="1" name="File">schemas.js</param>
                                 </action>
                             </actions>
                         </event-block>
-                        <event-block sid="941134747986458">
+                    </sub-events>
+                </event-block>
+                <event-block sid="549486665222388">
+                    <conditions>
+                        <condition id="0" name="On completed" sid="838117055320468" type="AJAX">
+                            <param id="0" name="Tag">&quot;schemas.js&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="288178002294560">
                             <conditions />
                             <actions>
-                                <action id="-13" name="Set boolean" sid="299088836738800" type="Var_Misc">
+                                <action id="-13" name="Set boolean" sid="954146975761296" type="Var_Misc">
                                     <param id="0" name="Instance variable">InitializedFiles</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
@@ -1502,7 +1559,7 @@
                                                     </conditions>
                                                     <actions>
                                                         <action id="1" name="Set return value" sid="122880899268195" type="Function">
-                                                            <param id="0" name="Value">JSON_InputKeycodes.Value(0, &quot;Gamepad_&quot;&amp;Var_Input.GamepadType, Save_Config.Value(0,&quot;Input.1PadA&quot;))</param>
+                                                            <param id="0" name="Value">Save_Config.Value(0,&quot;Input.1PadA&quot;) &lt; JSON_InputKeycodes.Size(0, &quot;Gamepad_&quot;&amp;Var_Input.GamepadType) &#x0D;&#x0A;? JSON_InputKeycodes.Value(0, &quot;Gamepad_&quot;&amp;Var_Input.GamepadType, Save_Config.Value(0,&quot;Input.1PadA&quot;)) &#x0D;&#x0A;: &quot;Button &quot;&amp;Save_Config.Value(0,&quot;Input.1PadA&quot;)</param>
                                                         </action>
                                                     </actions>
                                                 </event-block>
@@ -1515,8 +1572,8 @@
                                                         </condition>
                                                     </conditions>
                                                     <actions>
-                                                        <action id="1" name="Set return value" sid="214676998718045" type="Function">
-                                                            <param id="0" name="Value">JSON_InputKeycodes.Value(0, &quot;Gamepad_&quot;&amp;Var_Input.GamepadType, Save_Config.Value(0,&quot;Input.1PadStart&quot;))</param>
+                                                        <action id="1" name="Set return value" sid="664781315394453" type="Function">
+                                                            <param id="0" name="Value">Save_Config.Value(0,&quot;Input.1PadStart&quot;) &lt; JSON_InputKeycodes.Size(0, &quot;Gamepad_&quot;&amp;Var_Input.GamepadType) &#x0D;&#x0A;? JSON_InputKeycodes.Value(0, &quot;Gamepad_&quot;&amp;Var_Input.GamepadType, Save_Config.Value(0,&quot;Input.1PadStart&quot;)) &#x0D;&#x0A;: &quot;Button &quot;&amp;Save_Config.Value(0,&quot;Input.1PadStart&quot;)</param>
                                                         </action>
                                                     </actions>
                                                 </event-block>
@@ -1529,8 +1586,8 @@
                                                         </condition>
                                                     </conditions>
                                                     <actions>
-                                                        <action id="1" name="Set return value" sid="367855285860170" type="Function">
-                                                            <param id="0" name="Value">JSON_InputKeycodes.Value(0, &quot;Gamepad_&quot;&amp;Var_Input.GamepadType, Save_Config.Value(0,&quot;Input.1PadRestart&quot;))</param>
+                                                        <action id="1" name="Set return value" sid="905475051858649" type="Function">
+                                                            <param id="0" name="Value">Save_Config.Value(0,&quot;Input.1PadRestart&quot;) &lt; JSON_InputKeycodes.Size(0, &quot;Gamepad_&quot;&amp;Var_Input.GamepadType) &#x0D;&#x0A;? JSON_InputKeycodes.Value(0, &quot;Gamepad_&quot;&amp;Var_Input.GamepadType, Save_Config.Value(0,&quot;Input.1PadRestart&quot;)) &#x0D;&#x0A;: &quot;Button &quot;&amp;Save_Config.Value(0,&quot;Input.1PadRestart&quot;)</param>
                                                         </action>
                                                     </actions>
                                                 </event-block>
@@ -2135,6 +2192,30 @@
                         </event-block>
                     </sub-events>
                 </event-block>
+                <comment>get pre-formatted date</comment>
+                <event-block sid="379061651348803">
+                    <conditions>
+                        <condition id="0" name="On function" sid="595432623248761" type="Function">
+                            <param id="0" name="Name">&quot;Time_DateString&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <variable constant="0" name="date" sid="644440426040091" static="0" type="number">0</variable>
+                        <event-block sid="353135502697922">
+                            <conditions />
+                            <actions>
+                                <action id="-9" name="Set value" sid="247960257560103" type="System">
+                                    <param id="0" name="Variable">date</param>
+                                    <param id="1" name="Value">Function.ParamCount = 0 ? Date.UnixTimestamp : Function.Param(0)</param>
+                                </action>
+                                <action id="1" name="Set return value" sid="575615475972376" type="Function">
+                                    <param id="0" name="Value">Date.Date(date)&#x0D;&#x0A;&amp;&quot; &quot;&amp;&#x0D;&#x0A;tokenat(&quot;Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec&quot;,Date.Month(date)-1,&quot;|&quot;)&#x0D;&#x0A;&amp;&quot; &quot;&amp;&#x0D;&#x0A;Date.Year(date)&#x0D;&#x0A;&amp;&quot; | &quot;&amp;&#x0D;&#x0A;zeropad(Date.Hours(date),2)&#x0D;&#x0A;&amp;&quot;:&quot;&amp;&#x0D;&#x0A;zeropad(Date.Minutes(date),2)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
                 <comment>generate random string</comment>
                 <event-block sid="262283849288638">
                     <conditions>
@@ -2350,7 +2431,7 @@
                                 <condition id="-8" name="Compare two values" sid="348271016542331" type="System">
                                     <param id="0" name="First value">abs(Gamepad.Axis(loopindex(&quot;id&quot;), loopindex(&quot;axis&quot;)))</param>
                                     <param id="1" name="Comparison">4</param>
-                                    <param id="2" name="Second value">25</param>
+                                    <param id="2" name="Second value">c_gamepad_deadzone</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -2652,7 +2733,7 @@
                                                     <param id="0" name="Gamepad">loopindex</param>
                                                     <param id="1" name="Axis">1</param>
                                                     <param id="2" name="Comparison">2</param>
-                                                    <param id="3" name="Value">-25</param>
+                                                    <param id="3" name="Value">-c_gamepad_deadzone</param>
                                                 </condition>
                                                 <condition id="3" name="Is button down" sid="459097497626292" type="Gamepad">
                                                     <param id="0" name="Gamepad">loopindex</param>
@@ -2672,7 +2753,7 @@
                                                     <param id="0" name="Gamepad">loopindex</param>
                                                     <param id="1" name="Axis">1</param>
                                                     <param id="2" name="Comparison">4</param>
-                                                    <param id="3" name="Value">25</param>
+                                                    <param id="3" name="Value">c_gamepad_deadzone</param>
                                                 </condition>
                                                 <condition id="3" name="Is button down" sid="432873020349229" type="Gamepad">
                                                     <param id="0" name="Gamepad">loopindex</param>
@@ -2692,7 +2773,7 @@
                                                     <param id="0" name="Gamepad">loopindex</param>
                                                     <param id="1" name="Axis">0</param>
                                                     <param id="2" name="Comparison">2</param>
-                                                    <param id="3" name="Value">-25</param>
+                                                    <param id="3" name="Value">-c_gamepad_deadzone</param>
                                                 </condition>
                                                 <condition id="3" name="Is button down" sid="715496303099665" type="Gamepad">
                                                     <param id="0" name="Gamepad">loopindex</param>
@@ -2712,7 +2793,7 @@
                                                     <param id="0" name="Gamepad">loopindex</param>
                                                     <param id="1" name="Axis">0</param>
                                                     <param id="2" name="Comparison">4</param>
-                                                    <param id="3" name="Value">25</param>
+                                                    <param id="3" name="Value">c_gamepad_deadzone</param>
                                                 </condition>
                                                 <condition id="3" name="Is button down" sid="821045977381717" type="Gamepad">
                                                     <param id="0" name="Gamepad">loopindex</param>

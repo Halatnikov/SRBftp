@@ -1738,20 +1738,10 @@
                     </conditions>
                     <actions />
                     <sub-events>
-                        <variable constant="0" name="date" sid="146353327622938" static="0" type="number">0</variable>
                         <variable constant="0" name="timer" sid="136161394177624" static="0" type="number">0</variable>
                         <variable constant="0" name="levelcount" sid="464786030105181" static="0" type="number">0</variable>
                         <variable constant="0" name="score" sid="307940525714744" static="0" type="number">0</variable>
                         <variable constant="0" name="deaths" sid="907674316115255" static="0" type="number">0</variable>
-                        <event-block sid="855869331574395">
-                            <conditions />
-                            <actions>
-                                <action id="-9" name="Set value" sid="132196336180630" type="System">
-                                    <param id="0" name="Variable">date</param>
-                                    <param id="1" name="Value">JSON__TEMP.Value(0,&quot;Levels&quot;,0,&quot;TimestampStart&quot;)</param>
-                                </action>
-                            </actions>
-                        </event-block>
                         <event-block sid="816773312696265">
                             <conditions>
                                 <condition id="100" name="For each property" sid="958989888487156" type="JSON__TEMP">
@@ -1992,8 +1982,12 @@
                                 </condition>
                             </conditions>
                             <actions>
+                                <action id="0" name="Call function" sid="255179923356738" type="Function">
+                                    <param id="0" name="Name">&quot;Time_DateString&quot;</param>
+                                    <param id="1" name="Parameter {n}">JSON__TEMP.Value(0,&quot;Levels&quot;,0,&quot;TimestampStart&quot;)</param>
+                                </action>
                                 <action id="0" name="Set text" sid="484342102821078" type="Menu_Options">
-                                    <param id="0" name="Text">Date.Date(date)&#x0D;&#x0A;&amp;&quot; &quot;&amp;&#x0D;&#x0A;tokenat(&quot;January|February|March|April|May|June|July|August|September|October|November|December&quot;,Date.Month(date)-1,&quot;|&quot;)&#x0D;&#x0A;&amp;&quot; &quot;&amp;&#x0D;&#x0A;Date.Year(date)&#x0D;&#x0A;&amp;&quot; | &quot;&amp;&#x0D;&#x0A;zeropad(Date.Hours(date),2)&#x0D;&#x0A;&amp;&quot;:&quot;&amp;&#x0D;&#x0A;zeropad(Date.Minutes(date),2)</param>
+                                    <param id="0" name="Text">Function.ReturnValue</param>
                                 </action>
                             </actions>
                         </event-block>
