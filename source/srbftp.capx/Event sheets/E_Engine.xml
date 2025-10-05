@@ -10,6 +10,21 @@
                 <event-group description="" sid="149836422550262" title="Startup">
                     <sub-events>
                         <comment>set initial properties before starting</comment>
+                        <event-block sid="260297569907736">
+                            <conditions>
+                                <condition id="-2" name="On start of layout" sid="830627858608776" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Set value" sid="415803409767863" type="Bosses">
+                                    <param id="0" name="Instance variable">InitialX</param>
+                                    <param id="1" name="Value">Self.X</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="638009284900848" type="Bosses">
+                                    <param id="0" name="Instance variable">InitialY</param>
+                                    <param id="1" name="Value">Self.Y</param>
+                                </action>
+                            </actions>
+                        </event-block>
                         <event-block sid="157530431448493">
                             <conditions>
                                 <condition id="-2" name="On start of layout" sid="739947339122373" type="System" />
@@ -34,14 +49,6 @@
                                 <action id="-10" name="Set value" sid="359075291427997" type="Var_Level">
                                     <param id="0" name="Instance variable">TimerLevelTicks</param>
                                     <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="775541142621129" type="Bosses">
-                                    <param id="0" name="Instance variable">InitialX</param>
-                                    <param id="1" name="Value">Self.X</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="467299421449048" type="Bosses">
-                                    <param id="0" name="Instance variable">InitialY</param>
-                                    <param id="1" name="Value">Self.Y</param>
                                 </action>
                             </actions>
                             <sub-events>
@@ -87,6 +94,10 @@
                                 </condition>
                             </conditions>
                             <actions>
+                                <action id="14" name="Log" sid="809991363973361" type="Browser">
+                                    <param id="0" name="Type">0</param>
+                                    <param id="1" name="Message">&quot;Player_Restart()&quot;</param>
+                                </action>
                                 <action id="-10" name="Set value" sid="441457831688248" type="Var_Game">
                                     <param id="0" name="Instance variable">CurrentMenu</param>
                                     <param id="1" name="Value">&quot;null&quot;</param>
@@ -1398,13 +1409,23 @@
                                     </conditions>
                                     <actions />
                                     <sub-events>
+                                        <event-block sid="669652902376660">
+                                            <conditions>
+                                                <condition behavior="LiteTween" id="1" inverted="1" name="Compare progress" sid="494212404700573" type="HUD_TitleCardBG">
+                                                    <param id="0" name="Comparison">0</param>
+                                                    <param id="1" name="Value">0</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-4" name="Set position to another object" sid="885265671716017" type="Engine_Camera">
+                                                    <param id="0" name="Object">Engine_CameraZone</param>
+                                                    <param id="1" name="Image point (optional)">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
                                         <event-block sid="705109536402346">
                                             <conditions>
-                                                <condition id="-7" name="Compare instance variable" sid="948107181948010" type="Var_Game">
-                                                    <param id="0" name="Instance variable">TimerGlobal</param>
-                                                    <param id="1" name="Comparison">5</param>
-                                                    <param id="2" name="Value">4</param>
-                                                </condition>
+                                                <condition id="-22" name="Else" sid="701163682058407" type="System" />
                                             </conditions>
                                             <actions />
                                             <sub-events>
@@ -1443,21 +1464,6 @@
                                                     </actions>
                                                 </event-block>
                                             </sub-events>
-                                        </event-block>
-                                        <event-block sid="669652902376660">
-                                            <conditions>
-                                                <condition id="-7" name="Compare instance variable" sid="842648868693560" type="Var_Game">
-                                                    <param id="0" name="Instance variable">TimerGlobal</param>
-                                                    <param id="1" name="Comparison">2</param>
-                                                    <param id="2" name="Value">4</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="-4" name="Set position to another object" sid="885265671716017" type="Engine_Camera">
-                                                    <param id="0" name="Object">Engine_CameraZone</param>
-                                                    <param id="1" name="Image point (optional)">0</param>
-                                                </action>
-                                            </actions>
                                         </event-block>
                                     </sub-events>
                                 </event-block>
@@ -1525,10 +1531,9 @@
                                                             <param id="1" name="Comparison">0</param>
                                                             <param id="2" name="Value">0</param>
                                                         </condition>
-                                                        <condition id="-7" name="Compare instance variable" sid="479553823561774" type="Var_Game">
-                                                            <param id="0" name="Instance variable">TimerGlobal</param>
-                                                            <param id="1" name="Comparison">5</param>
-                                                            <param id="2" name="Value">4</param>
+                                                        <condition behavior="LiteTween" id="1" name="Compare progress" sid="611238282162690" type="HUD_TitleCardBG">
+                                                            <param id="0" name="Comparison">0</param>
+                                                            <param id="1" name="Value">0</param>
                                                         </condition>
                                                     </conditions>
                                                     <actions>
@@ -2518,11 +2523,6 @@
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">0</param>
                                         </condition>
-                                        <condition id="-7" name="Compare instance variable" sid="997743658266798" type="Var_Game">
-                                            <param id="0" name="Instance variable">TimerGlobal</param>
-                                            <param id="1" name="Comparison">4</param>
-                                            <param id="2" name="Value">4</param>
-                                        </condition>
                                         <condition id="-8" name="Is boolean instance variable set" sid="457442948278057" type="Var_Level">
                                             <param id="0" name="Instance variable">TimerLevelActive</param>
                                         </condition>
@@ -2655,10 +2655,8 @@
                                 </condition>
                                 <condition id="-4" name="Trigger once while true" sid="653715887965052" type="System" />
                                 <condition behavior="Platform" id="2" inverted="1" name="Is on floor" sid="739569817707683" type="Engine_Player" />
-                                <condition id="-7" name="Compare instance variable" sid="350654237125275" type="Var_Game">
-                                    <param id="0" name="Instance variable">TimerGlobal</param>
-                                    <param id="1" name="Comparison">5</param>
-                                    <param id="2" name="Value">4</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="353148486685136" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevelActive</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -2681,10 +2679,8 @@
                                 </condition>
                                 <condition id="-4" name="Trigger once while true" sid="362398655651686" type="System" />
                                 <condition behavior="Platform" id="2" inverted="1" name="Is on floor" sid="687656466520808" type="Engine_Player" />
-                                <condition id="-7" name="Compare instance variable" sid="213572973095415" type="Var_Game">
-                                    <param id="0" name="Instance variable">TimerGlobal</param>
-                                    <param id="1" name="Comparison">5</param>
-                                    <param id="2" name="Value">4</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="575178387548745" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevelActive</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -3119,27 +3115,12 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-13" name="Set boolean" sid="202532585871744" type="Special_Trigger">
-                                    <param id="0" name="Instance variable">Activated</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
                                 <action id="-3" name="Set position" sid="960987075426653" type="Engine_Player">
                                     <param id="0" name="X">Special_StartPos.X</param>
                                     <param id="1" name="Y">Special_StartPos.Y</param>
                                 </action>
                             </actions>
                             <sub-events>
-                                <event-block sid="509494399052594">
-                                    <conditions />
-                                    <actions>
-                                        <action id="-16" name="Wait" sid="742171755881178" type="System">
-                                            <param id="0" name="Seconds">0</param>
-                                        </action>
-                                        <action id="-2" name="Set Y" sid="599585699237988" type="Special_Trigger">
-                                            <param id="0" name="Y">-999</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
                                 <event-block sid="420441799270700">
                                     <conditions>
                                         <condition id="-8" name="Is boolean instance variable set" sid="717063724389551" type="Special_StartPos">
@@ -3174,8 +3155,30 @@
                             </actions>
                         </event-block>
                         <comment>trigger for all sorts of things</comment>
+                        <event-block sid="840035934381090">
+                            <conditions>
+                                <condition id="0" name="On function" sid="101345268559278" type="Function">
+                                    <param id="0" name="Name">&quot;Player_Restart&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Wait" sid="963625648359868" type="System">
+                                    <param id="0" name="Seconds">0</param>
+                                </action>
+                                <action id="-2" name="Set Y" sid="126371182909059" type="Special_Trigger">
+                                    <param id="0" name="Y">Self.InitialY</param>
+                                </action>
+                                <action id="-13" name="Set boolean" sid="707645806163650" type="Special_Trigger">
+                                    <param id="0" name="Instance variable">Activated</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
                         <event-block sid="620704713683760">
                             <conditions>
+                                <condition id="-8" name="Is boolean instance variable set" sid="134877270917028" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevelActive</param>
+                                </condition>
                                 <condition id="9" name="Is overlapping at offset" sid="653857040472907" type="Engine_Player">
                                     <param id="0" name="Object">Special_Trigger</param>
                                     <param id="1" name="Offset X">0</param>
@@ -3219,25 +3222,6 @@
                                     </actions>
                                 </event-block>
                             </sub-events>
-                        </event-block>
-                        <event-block sid="115938407268131">
-                            <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="260281023799579" type="Var_Game">
-                                    <param id="0" name="Instance variable">TimerGlobal</param>
-                                    <param id="1" name="Comparison">5</param>
-                                    <param id="2" name="Value">4</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="984806378128803" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="-2" name="Set Y" sid="933615647579979" type="Special_Trigger">
-                                    <param id="0" name="Y">Self.InitialY</param>
-                                </action>
-                                <action id="-13" name="Set boolean" sid="207333058334028" type="Special_Trigger">
-                                    <param id="0" name="Instance variable">Activated</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                            </actions>
                         </event-block>
                         <comment>invisible checkpoint</comment>
                         <event-block sid="387671169710538">
@@ -3900,7 +3884,7 @@
                 </event-group>
                 <event-group description="" sid="286140303913710" title="Projectiles">
                     <sub-events>
-                        <comment></comment>
+                        <comment>TODO: laying foundation for online</comment>
                         <event-block sid="755781501839634">
                             <conditions>
                                 <condition id="0" name="On function" sid="216076896132833" type="Function">
@@ -3996,7 +3980,7 @@
                                         </action>
                                     </actions>
                                 </event-block>
-                                <comment>hack to set the angle properly :/</comment>
+                                <comment>hack to set the angle properly :/&#x0D;&#x0A;technically bullets are all late by 1 tick now</comment>
                                 <event-block sid="933306525520644">
                                     <conditions />
                                     <actions>
@@ -4099,12 +4083,12 @@
                         <event-block sid="129954598479022">
                             <conditions>
                                 <condition id="-3" inverted="1" name="Is on-screen" sid="135957138916483" type="EnemyProjectiles" />
+                                <condition id="-4" name="Trigger once while true" sid="307467387520932" type="System" />
                                 <condition id="-7" inverted="1" name="Compare instance variable" sid="164342271665875" type="EnemyProjectiles">
                                     <param id="0" name="Instance variable">ID</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">&quot;2_3dszbomb&quot;</param>
                                 </condition>
-                                <condition id="-4" name="Trigger once while true" sid="307467387520932" type="System" />
                             </conditions>
                             <actions>
                                 <action id="-9" name="Destroy" sid="756536480038475" type="EnemyProjectiles" />
@@ -4224,9 +4208,6 @@
                                 <action id="3" name="Start" sid="582170752648697" type="Projectile1_2GF1Boss">
                                     <param id="0" name="From">0</param>
                                 </action>
-                                <action id="3" name="Start" sid="133286072207107" type="Projectile1_4IP2Boss">
-                                    <param id="0" name="From">0</param>
-                                </action>
                             </actions>
                         </event-block>
                         <event-block sid="907134040485832">
@@ -4238,7 +4219,6 @@
                             </conditions>
                             <actions>
                                 <action id="2" name="Stop" sid="481001442539000" type="Projectile1_2GF1Boss" />
-                                <action id="2" name="Stop" sid="911221235734967" type="Projectile1_4IP2Boss" />
                             </actions>
                         </event-block>
                         <comment>=srb1 spikes</comment>
@@ -4997,10 +4977,8 @@
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">0</param>
                                 </condition>
-                                <condition id="-7" name="Compare instance variable" sid="581298205132587" type="Var_Game">
-                                    <param id="0" name="Instance variable">TimerGlobal</param>
-                                    <param id="1" name="Comparison">4</param>
-                                    <param id="2" name="Value">4</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="975537589995459" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevelActive</param>
                                 </condition>
                                 <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="550804813803389" type="Var_Level">
                                     <param id="0" name="Instance variable">Pause</param>
@@ -5080,6 +5058,9 @@
                             <conditions>
                                 <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="362121711304146" type="Var_Level">
                                     <param id="0" name="Instance variable">Pause</param>
+                                </condition>
+                                <condition id="-8" name="Is boolean instance variable set" sid="799615256318973" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevelActive</param>
                                 </condition>
                                 <condition id="1" name="Is overlapping another object" sid="908216194625547" type="Hazard1_8MMTurret">
                                     <param id="0" name="Object">Engine_CameraZone</param>
@@ -5834,9 +5815,6 @@
                                 </condition>
                                 <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="547775861810302" type="Var_Level">
                                     <param id="0" name="Instance variable">Pause</param>
-                                </condition>
-                                <condition id="-8" name="Is boolean instance variable set" sid="232422299916501" type="Var_Player">
-                                    <param id="0" name="Instance variable">CanMove</param>
                                 </condition>
                                 <condition id="-8" name="Is boolean instance variable set" sid="507674900764921" type="Var_Level">
                                     <param id="0" name="Instance variable">TimerLevelActive</param>
@@ -6939,11 +6917,6 @@
                                 <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="846960442403921" type="Var_Level">
                                     <param id="0" name="Instance variable">Pause</param>
                                 </condition>
-                                <condition id="-7" name="Compare instance variable" sid="625287445332168" type="Var_Game">
-                                    <param id="0" name="Instance variable">TimerGlobal</param>
-                                    <param id="1" name="Comparison">5</param>
-                                    <param id="2" name="Value">4</param>
-                                </condition>
                             </conditions>
                             <actions />
                             <sub-events>
@@ -7071,10 +7044,8 @@
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">0</param>
                                 </condition>
-                                <condition id="-7" name="Compare instance variable" sid="951640032451567" type="Var_Game">
-                                    <param id="0" name="Instance variable">TimerGlobal</param>
-                                    <param id="1" name="Comparison">4</param>
-                                    <param id="2" name="Value">4</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="395890364547571" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevelActive</param>
                                 </condition>
                                 <condition id="-6" name="Every X seconds" sid="404021191772379" type="System">
                                     <param id="0" name="Interval (seconds)">1.25</param>
@@ -7228,11 +7199,6 @@
                                     <param id="0" name="Instance variable">Finished</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">0</param>
-                                </condition>
-                                <condition id="-7" name="Compare instance variable" sid="916184163502194" type="Var_Game">
-                                    <param id="0" name="Instance variable">TimerGlobal</param>
-                                    <param id="1" name="Comparison">4</param>
-                                    <param id="2" name="Value">4</param>
                                 </condition>
                                 <condition id="-11" name="For Each" sid="390091552537441" type="System">
                                     <param id="0" name="Object">HazardE1Sp_FloatingSpikeball</param>
@@ -7843,13 +7809,11 @@
                                         <condition id="-11" name="For Each" sid="684997063320604" type="System">
                                             <param id="0" name="Object">Enemies</param>
                                         </condition>
-                                        <condition id="-7" name="Compare instance variable" sid="507385694315797" type="Var_Game">
-                                            <param id="0" name="Instance variable">TimerGlobal</param>
-                                            <param id="1" name="Comparison">4</param>
-                                            <param id="2" name="Value">4</param>
-                                        </condition>
                                         <condition id="-8" name="Is boolean instance variable set" sid="788025501519700" type="Var_Player">
                                             <param id="0" name="Instance variable">CanMove</param>
+                                        </condition>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="688340570750023" type="Var_Level">
+                                            <param id="0" name="Instance variable">TimerLevelActive</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -7931,13 +7895,11 @@
                                         <condition id="-11" name="For Each" sid="981393004535827" type="System">
                                             <param id="0" name="Object">Enemies</param>
                                         </condition>
-                                        <condition id="-7" name="Compare instance variable" sid="487335397375788" type="Var_Game">
-                                            <param id="0" name="Instance variable">TimerGlobal</param>
-                                            <param id="1" name="Comparison">4</param>
-                                            <param id="2" name="Value">4</param>
-                                        </condition>
                                         <condition id="-8" name="Is boolean instance variable set" sid="928985608529862" type="Var_Player">
                                             <param id="0" name="Instance variable">CanMove</param>
+                                        </condition>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="300607766956643" type="Var_Level">
+                                            <param id="0" name="Instance variable">TimerLevelActive</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -7956,11 +7918,6 @@
                                     <param id="0" name="Instance variable">AttackType</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">&quot;swatbot&quot;</param>
-                                </condition>
-                                <condition id="-7" name="Compare instance variable" sid="909594554673355" type="Var_Game">
-                                    <param id="0" name="Instance variable">TimerGlobal</param>
-                                    <param id="1" name="Comparison">4</param>
-                                    <param id="2" name="Value">4</param>
                                 </condition>
                             </conditions>
                             <actions />
@@ -8065,6 +8022,9 @@
                                                 <condition id="-8" name="Is boolean instance variable set" sid="181717246057728" type="Var_Player">
                                                     <param id="0" name="Instance variable">CanMove</param>
                                                 </condition>
+                                                <condition id="-8" name="Is boolean instance variable set" sid="911865381348901" type="Var_Level">
+                                                    <param id="0" name="Instance variable">TimerLevelActive</param>
+                                                </condition>
                                             </conditions>
                                             <actions>
                                                 <action id="0" name="Call function" sid="891704239563260" type="Function">
@@ -8084,11 +8044,6 @@
                                     <param id="0" name="Instance variable">AttackType</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">&quot;swatbotver&quot;</param>
-                                </condition>
-                                <condition id="-7" name="Compare instance variable" sid="533406811483043" type="Var_Game">
-                                    <param id="0" name="Instance variable">TimerGlobal</param>
-                                    <param id="1" name="Comparison">4</param>
-                                    <param id="2" name="Value">4</param>
                                 </condition>
                             </conditions>
                             <actions />
@@ -8192,6 +8147,9 @@
                                             <conditions>
                                                 <condition id="-8" name="Is boolean instance variable set" sid="474489772453513" type="Var_Player">
                                                     <param id="0" name="Instance variable">CanMove</param>
+                                                </condition>
+                                                <condition id="-8" name="Is boolean instance variable set" sid="601261515391793" type="Var_Level">
+                                                    <param id="0" name="Instance variable">TimerLevelActive</param>
                                                 </condition>
                                             </conditions>
                                             <actions>
@@ -8674,10 +8632,8 @@
                         <event-block sid="344684323334959">
                             <conditions>
                                 <condition id="-19" name="On destroyed" sid="294568470590617" type="Enemy1S_FusionSwatBot" />
-                                <condition id="-7" name="Compare instance variable" sid="512458420641820" type="Var_Game">
-                                    <param id="0" name="Instance variable">TimerGlobal</param>
-                                    <param id="1" name="Comparison">4</param>
-                                    <param id="2" name="Value">4</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="808575680223422" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevelActive</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -8695,10 +8651,8 @@
                         <event-block sid="682064420341429">
                             <conditions>
                                 <condition id="-19" name="On destroyed" sid="682780373194426" type="Enemy1S_3VFusionSwatBot" />
-                                <condition id="-7" name="Compare instance variable" sid="268589209163689" type="Var_Game">
-                                    <param id="0" name="Instance variable">TimerGlobal</param>
-                                    <param id="1" name="Comparison">4</param>
-                                    <param id="2" name="Value">4</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="258451264453776" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevelActive</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -8737,7 +8691,6 @@
                         <comment>=flybot</comment>
                         <event-block sid="172131258518970">
                             <conditions>
-                                <condition id="-3" name="Is on-screen" sid="367200390251937" type="Enemy2_2THZFlyBot" />
                                 <condition id="-6" name="Every X seconds" sid="886028771784334" type="System">
                                     <param id="0" name="Interval (seconds)">3</param>
                                 </condition>
@@ -8750,10 +8703,8 @@
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">0</param>
                                 </condition>
-                                <condition id="-7" name="Compare instance variable" sid="956200044423269" type="Var_Game">
-                                    <param id="0" name="Instance variable">TimerGlobal</param>
-                                    <param id="1" name="Comparison">4</param>
-                                    <param id="2" name="Value">4</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="203706365302832" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevelActive</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -8768,7 +8719,6 @@
                                 <condition id="4" name="On finished" sid="316512215724085" type="Enemy2_2THZFlyBot">
                                     <param id="0" name="Animation">&quot;Charging&quot;</param>
                                 </condition>
-                                <condition id="-3" name="Is on-screen" sid="806446330963338" type="Enemy2_2THZFlyBot" />
                                 <condition id="-11" name="For Each" sid="645188600746227" type="System">
                                     <param id="0" name="Object">Enemy2_2THZFlyBot</param>
                                 </condition>
@@ -8845,10 +8795,8 @@
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">0</param>
                                 </condition>
-                                <condition id="-7" name="Compare instance variable" sid="899663765057801" type="Var_Game">
-                                    <param id="0" name="Instance variable">TimerGlobal</param>
-                                    <param id="1" name="Comparison">4</param>
-                                    <param id="2" name="Value">4</param>
+                                <condition id="-8" name="Is boolean instance variable set" sid="277994420904086" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevelActive</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -10805,6 +10753,30 @@
                                 </action>
                             </actions>
                         </event-block>
+                        <event-block sid="526960126268219">
+                            <conditions>
+                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="111143799256915" type="Var_Level">
+                                    <param id="0" name="Instance variable">Pause</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="760922662073412" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="3" name="Start" sid="280676490191367" type="Projectile1_4IP2Boss">
+                                    <param id="0" name="From">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="923552169225363">
+                            <conditions>
+                                <condition id="-8" name="Is boolean instance variable set" sid="159544414648284" type="Var_Level">
+                                    <param id="0" name="Instance variable">Pause</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="983548186367351" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="2" name="Stop" sid="952400556111059" type="Projectile1_4IP2Boss" />
+                            </actions>
+                        </event-block>
                         <event-block sid="920285321393823">
                             <conditions>
                                 <condition id="-7" name="Compare instance variable" sid="121395769188275" type="Boss1_4IP2">
@@ -10822,10 +10794,8 @@
                             <sub-events>
                                 <event-block sid="743959857834888">
                                     <conditions>
-                                        <condition id="-7" name="Compare instance variable" sid="157931646490453" type="Var_Game">
-                                            <param id="0" name="Instance variable">TimerGlobal</param>
-                                            <param id="1" name="Comparison">5</param>
-                                            <param id="2" name="Value">4</param>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="756360033272678" type="Var_Level">
+                                            <param id="0" name="Instance variable">TimerLevelActive</param>
                                         </condition>
                                     </conditions>
                                     <actions />
@@ -11525,10 +11495,8 @@
                             <sub-events>
                                 <event-block sid="302830621759064">
                                     <conditions>
-                                        <condition id="-7" name="Compare instance variable" sid="509710813969245" type="Var_Game">
-                                            <param id="0" name="Instance variable">TimerGlobal</param>
-                                            <param id="1" name="Comparison">5</param>
-                                            <param id="2" name="Value">4</param>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="346151011520450" type="Var_Level">
+                                            <param id="0" name="Instance variable">TimerLevelActive</param>
                                         </condition>
                                     </conditions>
                                     <actions />
@@ -14322,41 +14290,55 @@
                     </actions>
                 </event-block>
                 <comment></comment>
-                <event-block sid="557809902418563">
+                <event-block sid="246455775386034">
                     <conditions>
-                        <condition id="-8" name="Is boolean instance variable set" sid="406099886091184" type="Var_Level">
-                            <param id="0" name="Instance variable">Level_NoTitleCard</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="554911695672336" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="-16" name="Wait" sid="607475695051051" type="System">
-                            <param id="0" name="Seconds">0.1</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="159955372701064" type="Var_Game">
-                            <param id="0" name="Instance variable">TimerGlobal</param>
-                            <param id="1" name="Value">4</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="670109062808476">
-                    <conditions>
-                        <condition id="0" name="On function" sid="911860229497331" type="Function">
+                        <condition id="0" name="On function" sid="557985569869658" type="Function">
                             <param id="0" name="Name">&quot;Player_Restart&quot;</param>
                         </condition>
-                        <condition id="-8" name="Is boolean instance variable set" sid="453324925663175" type="Var_Level">
-                            <param id="0" name="Instance variable">Level_NoTitleCard</param>
-                        </condition>
                     </conditions>
                     <actions>
-                        <action id="-16" name="Wait" sid="661765615789152" type="System">
-                            <param id="0" name="Seconds">0.1</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="407666666379693" type="Var_Game">
-                            <param id="0" name="Instance variable">TimerGlobal</param>
-                            <param id="1" name="Value">4</param>
+                        <action id="-16" name="Wait" sid="508968543903340" type="System">
+                            <param id="0" name="Seconds">0</param>
                         </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="287018377941870">
+                            <conditions>
+                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="212545819561666" type="Var_Level">
+                                    <param id="0" name="Instance variable">Level_NoTitleCard</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Call function" sid="997981123847372" type="Function">
+                                    <param id="0" name="Name">&quot;Level_TitleCard&quot;</param>
+                                    <param id="1" name="Parameter {n}"></param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="110094089779487">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="870467549249969" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-13" name="Set boolean" sid="700397865224883" type="Var_Player">
+                                    <param id="0" name="Instance variable">CanMove</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-13" name="Set boolean" sid="722298113539878" type="Var_Level">
+                                    <param id="0" name="Instance variable">TimerLevelActive</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="0" name="Call function" sid="299947130608470" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
+                                    <param id="1" name="Parameter {n}">Var_Level.Level_Music{###}&quot;music&quot;{###}1</param>
+                                </action>
+                                <action id="0" name="Call function" sid="664748860901753" type="Function">
+                                    <param id="0" name="Name">&quot;Discord_RichPresence_Update&quot;</param>
+                                    <param id="1" name="Parameter {n}"></param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <comment>quick restart</comment>
                 <event-block sid="365097610641758">
@@ -14365,15 +14347,14 @@
                             <param id="0" name="Instance variable">QuickRestart</param>
                         </condition>
                         <condition id="-4" name="Trigger once while true" sid="708884645600700" type="System" />
-                        <condition id="-7" name="Compare instance variable" sid="788780211106241" type="Var_Game">
-                            <param id="0" name="Instance variable">TimerGlobal</param>
-                            <param id="1" name="Comparison">5</param>
-                            <param id="2" name="Value">4</param>
-                        </condition>
                         <condition id="-7" name="Compare instance variable" sid="661604234072766" type="Var_Player">
                             <param id="0" name="Instance variable">Finished</param>
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">0</param>
+                        </condition>
+                        <condition behavior="LiteTween" id="1" name="Compare progress" sid="332670752267617" type="HUD_TitleCardBG">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Value">0</param>
                         </condition>
                     </conditions>
                     <actions />
@@ -14906,35 +14887,6 @@
                             </actions>
                         </event-block>
                     </sub-events>
-                </event-block>
-                <comment>give player control and play music</comment>
-                <event-block sid="914227738928136">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="273206438345121" type="Var_Game">
-                            <param id="0" name="Instance variable">TimerGlobal</param>
-                            <param id="1" name="Comparison">5</param>
-                            <param id="2" name="Value">4</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="709188598202735" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="-13" name="Set boolean" sid="532154794338615" type="Var_Player">
-                            <param id="0" name="Instance variable">CanMove</param>
-                            <param id="1" name="Value">1</param>
-                        </action>
-                        <action id="-13" name="Set boolean" sid="356341995192560" type="Var_Level">
-                            <param id="0" name="Instance variable">TimerLevelActive</param>
-                            <param id="1" name="Value">1</param>
-                        </action>
-                        <action id="0" name="Call function" sid="174463580879784" type="Function">
-                            <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
-                            <param id="1" name="Parameter {n}">Var_Level.Level_Music{###}&quot;music&quot;{###}1</param>
-                        </action>
-                        <action id="0" name="Call function" sid="237595508538791" type="Function">
-                            <param id="0" name="Name">&quot;Discord_RichPresence_Update&quot;</param>
-                            <param id="1" name="Parameter {n}"></param>
-                        </action>
-                    </actions>
                 </event-block>
                 <comment>finish signpost</comment>
                 <comment>bouncing for points</comment>
@@ -15630,67 +15582,79 @@
                     </actions>
                 </event-block>
                 <comment>titlecard</comment>
-                <event-block sid="117945033235074">
+                <event-block sid="856183234316975">
                     <conditions>
-                        <condition id="0" name="On function" sid="686477277082357" type="Function">
-                            <param id="0" name="Name">&quot;Player_Restart&quot;</param>
-                        </condition>
-                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="456787852431688" type="Var_Level">
-                            <param id="0" name="Instance variable">Level_NoTitleCard</param>
+                        <condition id="0" name="On function" sid="128423588972747" type="Function">
+                            <param id="0" name="Name">&quot;Level_TitleCard&quot;</param>
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-16" name="Wait" sid="167734264109125" type="System">
-                            <param id="0" name="Seconds">0.01</param>
+                        <action id="0" name="Call function" sid="393527656736333" type="Function">
+                            <param id="0" name="Name">&quot;Discord_RichPresence_Update&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
                         </action>
-                        <action id="0" name="Set text" sid="507509717877024" type="HUD_TitleCardGame">
+                        <action id="6" name="Stop" sid="384623243248768" type="BetterAudio">
+                            <param id="0" name="Tag">&quot;music&quot;</param>
+                        </action>
+                        <action id="-13" name="Set boolean" sid="181296627159094" type="Var_Player">
+                            <param id="0" name="Instance variable">CanMove</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-13" name="Set boolean" sid="250038129522636" type="Var_Level">
+                            <param id="0" name="Instance variable">TimerLevelActive</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="0" name="Set text" sid="280938990467453" type="HUD_TitleCardGame">
                             <param id="0" name="Text">Var_Level.Level_Subname</param>
                         </action>
-                        <action id="0" name="Set text" sid="173056126916130" type="HUD_TitleCardName">
+                        <action id="0" name="Set text" sid="735851039127895" type="HUD_TitleCardName">
                             <param id="0" name="Text">Var_Level.Level_Name</param>
                         </action>
-                        <action id="0" name="Set text" sid="581615573337860" type="HUD_TitleCardAct">
+                        <action id="0" name="Set text" sid="334681429226283" type="HUD_TitleCardAct">
                             <param id="0" name="Text">&quot;ACT &quot;&amp;Var_Level.Level_Act</param>
                         </action>
-                        <action behavior="LiteTween" id="10" name="Start" sid="965619862912729" type="HUD_TitleCardBG">
+                        <action behavior="LiteTween" id="10" name="Start" sid="835576333368173" type="HUD_TitleCardBG">
                             <param id="0" name="Start Mode">0</param>
                             <param id="1" name="Force use current">0</param>
                         </action>
-                        <action behavior="LiteTween" id="10" name="Start" sid="126721796278771" type="HUD_TitleCardGame">
+                        <action behavior="LiteTween" id="10" name="Start" sid="425310498397459" type="HUD_TitleCardGame">
                             <param id="0" name="Start Mode">0</param>
                             <param id="1" name="Force use current">0</param>
                         </action>
-                        <action behavior="LiteTween" id="10" name="Start" sid="243825957288771" type="HUD_TitleCardName">
+                        <action behavior="LiteTween" id="10" name="Start" sid="602609578219137" type="HUD_TitleCardName">
                             <param id="0" name="Start Mode">0</param>
                             <param id="1" name="Force use current">0</param>
                         </action>
-                        <action behavior="LiteTween" id="10" name="Start" sid="860578929690891" type="HUD_TitleCardAct">
+                        <action behavior="LiteTween" id="10" name="Start" sid="435409180993733" type="HUD_TitleCardAct">
                             <param id="0" name="Start Mode">0</param>
                             <param id="1" name="Force use current">0</param>
                         </action>
-                    </actions>
-                </event-block>
-                <event-block sid="484596646735475">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="554174081817328" type="Var_Game">
-                            <param id="0" name="Instance variable">TimerGlobal</param>
-                            <param id="1" name="Comparison">5</param>
-                            <param id="2" name="Value">4</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="244182617257891" type="System" />
-                    </conditions>
-                    <actions>
-                        <action behavior="LiteTween" id="14" name="Stop" sid="380196260689096" type="HUD_TitleCardBG">
+                        <action id="-16" name="Wait" sid="794923381553421" type="System">
+                            <param id="0" name="Seconds">4</param>
+                        </action>
+                        <action behavior="LiteTween" id="14" name="Stop" sid="705851304681851" type="HUD_TitleCardBG">
                             <param id="0" name="Stop Mode">1</param>
                         </action>
-                        <action behavior="LiteTween" id="14" name="Stop" sid="702362297982851" type="HUD_TitleCardGame">
+                        <action behavior="LiteTween" id="14" name="Stop" sid="777583696538038" type="HUD_TitleCardGame">
                             <param id="0" name="Stop Mode">1</param>
                         </action>
-                        <action behavior="LiteTween" id="14" name="Stop" sid="772688362077561" type="HUD_TitleCardName">
+                        <action behavior="LiteTween" id="14" name="Stop" sid="223116952814085" type="HUD_TitleCardName">
                             <param id="0" name="Stop Mode">1</param>
                         </action>
-                        <action behavior="LiteTween" id="14" name="Stop" sid="644821853810824" type="HUD_TitleCardAct">
+                        <action behavior="LiteTween" id="14" name="Stop" sid="576201664484537" type="HUD_TitleCardAct">
                             <param id="0" name="Stop Mode">1</param>
+                        </action>
+                        <action id="-13" name="Set boolean" sid="513970935348685" type="Var_Player">
+                            <param id="0" name="Instance variable">CanMove</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-13" name="Set boolean" sid="559002144147162" type="Var_Level">
+                            <param id="0" name="Instance variable">TimerLevelActive</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="0" name="Call function" sid="820930624249119" type="Function">
+                            <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
+                            <param id="1" name="Parameter {n}">Var_Level.Level_Music{###}&quot;music&quot;{###}1</param>
                         </action>
                     </actions>
                 </event-block>
@@ -15841,6 +15805,45 @@
                         </action>
                     </actions>
                 </event-block>
+                <comment></comment>
+                <event-block sid="414769721376586">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="450518584231254" type="Var_Player">
+                            <param id="0" name="Instance variable">Rings</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="971099119269999" type="System" />
+                        <condition id="0" name="Compare text" sid="691312652964402" type="HUD_TextStatic">
+                            <param id="0" name="Text to compare">&quot;Rings:&quot;</param>
+                            <param id="1" name="Case sensitivity">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Flash" id="0" name="Flash" sid="317971512540784" type="HUD_TextStatic">
+                            <param id="0" name="&apos;On&apos; time">0.2</param>
+                            <param id="1" name="&apos;Off&apos; time">0.2</param>
+                            <param id="2" name="Duration">9999</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="628489005419064">
+                    <conditions>
+                        <condition id="-7" inverted="1" name="Compare instance variable" sid="910635009116728" type="Var_Player">
+                            <param id="0" name="Instance variable">Rings</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="940573317193806" type="System" />
+                        <condition id="0" name="Compare text" sid="554734525179157" type="HUD_TextStatic">
+                            <param id="0" name="Text to compare">&quot;Rings:&quot;</param>
+                            <param id="1" name="Case sensitivity">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Flash" id="1" name="Stop flashing" sid="534813889318165" type="HUD_TextStatic" />
+                    </actions>
+                </event-block>
                 <comment>boss hp</comment>
                 <event-block sid="277411446018419">
                     <conditions>
@@ -15876,6 +15879,25 @@
                     </conditions>
                     <actions />
                     <sub-events>
+                        <event-block sid="910407978242065">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="827971406929662" type="Var_Player">
+                                    <param id="0" name="Instance variable">SpeedUpTimer</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="281160388489724" type="System" />
+                            </conditions>
+                            <actions>
+                                <action behavior="Flash" id="1" name="Stop flashing" sid="702372542702682" type="HUD_CountdownIcon" />
+                                <action id="-15" name="Set visible" sid="134755796174876" type="HUD_CountdownIcon">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="250436424918470" type="HUD_Countdown">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
                         <event-block sid="490736577356838">
                             <conditions>
                                 <condition id="-7" name="Compare instance variable" sid="893607730722215" type="Var_Player">
@@ -15910,25 +15932,6 @@
                                 </event-block>
                             </sub-events>
                         </event-block>
-                        <event-block sid="910407978242065">
-                            <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="827971406929662" type="Var_Player">
-                                    <param id="0" name="Instance variable">SpeedUpTimer</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">0</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="281160388489724" type="System" />
-                            </conditions>
-                            <actions>
-                                <action behavior="Flash" id="1" name="Stop flashing" sid="702372542702682" type="HUD_CountdownIcon" />
-                                <action id="-15" name="Set visible" sid="134755796174876" type="HUD_CountdownIcon">
-                                    <param id="0" name="Visibility">0</param>
-                                </action>
-                                <action id="-15" name="Set visible" sid="250436424918470" type="HUD_Countdown">
-                                    <param id="0" name="Visibility">0</param>
-                                </action>
-                            </actions>
-                        </event-block>
                     </sub-events>
                 </event-block>
                 <comment>invulnerability timer</comment>
@@ -15947,6 +15950,25 @@
                     </conditions>
                     <actions />
                     <sub-events>
+                        <event-block sid="760512022616097">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="595721470780435" type="Var_Player">
+                                    <param id="0" name="Instance variable">IncincibilityTimer</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="243810573413816" type="System" />
+                            </conditions>
+                            <actions>
+                                <action behavior="Flash" id="1" name="Stop flashing" sid="567037768778961" type="HUD_CountdownIcon" />
+                                <action id="-15" name="Set visible" sid="976847108045683" type="HUD_CountdownIcon">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="520653516765676" type="HUD_Countdown">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
                         <event-block sid="279635095240285">
                             <conditions>
                                 <condition id="-7" name="Compare instance variable" sid="373983466300263" type="Var_Player">
@@ -15981,37 +16003,9 @@
                                 </event-block>
                             </sub-events>
                         </event-block>
-                        <event-block sid="760512022616097">
-                            <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="595721470780435" type="Var_Player">
-                                    <param id="0" name="Instance variable">IncincibilityTimer</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">0</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="243810573413816" type="System" />
-                            </conditions>
-                            <actions>
-                                <action behavior="Flash" id="1" name="Stop flashing" sid="567037768778961" type="HUD_CountdownIcon" />
-                                <action id="-15" name="Set visible" sid="976847108045683" type="HUD_CountdownIcon">
-                                    <param id="0" name="Visibility">0</param>
-                                </action>
-                                <action id="-15" name="Set visible" sid="520653516765676" type="HUD_Countdown">
-                                    <param id="0" name="Visibility">0</param>
-                                </action>
-                            </actions>
-                        </event-block>
                     </sub-events>
                 </event-block>
                 <comment>drowning timer</comment>
-                <event-block sid="946045077292958">
-                    <conditions />
-                    <actions>
-                        <action id="-3" name="Set position" sid="153157662780375" type="Effects_Drowning">
-                            <param id="0" name="X">Engine_Player.X</param>
-                            <param id="1" name="Y">Engine_Player.Y-40</param>
-                        </action>
-                    </actions>
-                </event-block>
                 <event-block sid="179402180204105">
                     <conditions>
                         <condition id="-7" name="Compare instance variable" sid="308085348255143" type="HUD_CountdownIcon">
@@ -16027,6 +16021,15 @@
                     </conditions>
                     <actions />
                     <sub-events>
+                        <event-block sid="946045077292958">
+                            <conditions />
+                            <actions>
+                                <action id="-3" name="Set position" sid="153157662780375" type="Effects_Drowning">
+                                    <param id="0" name="X">Engine_Player.X</param>
+                                    <param id="1" name="Y">Engine_Player.Y-40</param>
+                                </action>
+                            </actions>
+                        </event-block>
                         <event-block sid="569832488350019">
                             <conditions>
                                 <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="930343694233387" type="Var_Player">
@@ -16162,276 +16165,8 @@
                     </sub-events>
                 </event-block>
                 <comment></comment>
-                <event-block sid="414769721376586">
-                    <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="450518584231254" type="Var_Player">
-                            <param id="0" name="Instance variable">Rings</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">0</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="971099119269999" type="System" />
-                        <condition id="0" name="Compare text" sid="691312652964402" type="HUD_TextStatic">
-                            <param id="0" name="Text to compare">&quot;Rings:&quot;</param>
-                            <param id="1" name="Case sensitivity">0</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action behavior="Flash" id="0" name="Flash" sid="317971512540784" type="HUD_TextStatic">
-                            <param id="0" name="&apos;On&apos; time">0.2</param>
-                            <param id="1" name="&apos;Off&apos; time">0.2</param>
-                            <param id="2" name="Duration">9999</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="628489005419064">
-                    <conditions>
-                        <condition id="-7" inverted="1" name="Compare instance variable" sid="910635009116728" type="Var_Player">
-                            <param id="0" name="Instance variable">Rings</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">0</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="940573317193806" type="System" />
-                        <condition id="0" name="Compare text" sid="554734525179157" type="HUD_TextStatic">
-                            <param id="0" name="Text to compare">&quot;Rings:&quot;</param>
-                            <param id="1" name="Case sensitivity">0</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action behavior="Flash" id="1" name="Stop flashing" sid="534813889318165" type="HUD_TextStatic" />
-                    </actions>
-                </event-block>
-                <comment></comment>
-                <event-block sid="581176584691713">
-                    <conditions>
-                        <condition id="-7" inverted="1" name="Compare instance variable" sid="547429556185439" type="Var_Level">
-                            <param id="0" name="Instance variable">ZoneResetTimer</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">-1</param>
-                        </condition>
-                    </conditions>
-                    <actions />
-                    <sub-events>
-                        <event-block sid="687011554220563">
-                            <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="410505462362458" type="Var_Level">
-                                    <param id="0" name="Instance variable">ZoneResetTimer</param>
-                                    <param id="1" name="Comparison">4</param>
-                                    <param id="2" name="Value">10</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="229107352363408" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="6" name="Stop" sid="541797194187056" type="BetterAudio">
-                                    <param id="0" name="Tag">&quot;Eruption&quot;</param>
-                                </action>
-                                <action behavior="ScrollTo" id="0" name="Shake" sid="519992142517040" type="Engine_Camera">
-                                    <param id="0" name="Magnitude">0</param>
-                                    <param id="1" name="Duration">0</param>
-                                    <param id="2" name="Mode">1</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="688307084243664">
-                            <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="483750768498379" type="Var_Level">
-                                    <param id="0" name="Instance variable">ZoneResetTimer</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">60</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="197811952158643" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Call function" sid="871096185554625" type="Function">
-                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;F_EruptionSmall&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="676449934761524">
-                            <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="326601680827565" type="Var_Level">
-                                    <param id="0" name="Instance variable">ZoneResetTimer</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">45</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="857324046747207" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Call function" sid="873654244306202" type="Function">
-                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;F_EruptionSmall&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="389229757569996">
-                            <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="355132441321438" type="Var_Level">
-                                    <param id="0" name="Instance variable">ZoneResetTimer</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">30</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="713906879530359" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Call function" sid="328515047994178" type="Function">
-                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;DrownTimer&quot;</param>
-                                </action>
-                                <action id="0" name="Call function" sid="820257129381390" type="Function">
-                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;F_EruptionSmall&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="301119538081917">
-                            <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="685264816682651" type="Var_Level">
-                                    <param id="0" name="Instance variable">ZoneResetTimer</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">20</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="874057691529341" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Call function" sid="954848978928204" type="Function">
-                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;DrownTimer&quot;</param>
-                                </action>
-                                <action id="0" name="Call function" sid="798474581490203" type="Function">
-                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;F_Eruption&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="587214569131819">
-                            <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="875531425139978" type="Var_Level">
-                                    <param id="0" name="Instance variable">ZoneResetTimer</param>
-                                    <param id="1" name="Comparison">3</param>
-                                    <param id="2" name="Value">10</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="930393763614078" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Call function" sid="430260924618662" type="Function">
-                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;DrownTimer&quot;</param>
-                                </action>
-                                <action id="0" name="Call function" sid="203525407363165" type="Function">
-                                    <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;Eruption&quot;{###}&quot;Eruption&quot;{###}2</param>
-                                </action>
-                                <action behavior="ScrollTo" id="0" name="Shake" sid="142426813305951" type="Engine_Camera">
-                                    <param id="0" name="Magnitude">4</param>
-                                    <param id="1" name="Duration">9999</param>
-                                    <param id="2" name="Mode">1</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="251600597290039">
-                            <conditions>
-                                <condition id="0" name="On function" sid="835790837755581" type="Function">
-                                    <param id="0" name="Name">&quot;Player_Restart&quot;</param>
-                                </condition>
-                                <condition id="-7" name="Compare instance variable" sid="891274968403560" type="Var_Level">
-                                    <param id="0" name="Instance variable">ZoneResetTimer</param>
-                                    <param id="1" name="Comparison">3</param>
-                                    <param id="2" name="Value">10</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="846027244011548" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Call function" sid="418803570670971" type="Function">
-                                    <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;Eruption&quot;{###}&quot;Eruption&quot;{###}2</param>
-                                </action>
-                                <action behavior="ScrollTo" id="0" name="Shake" sid="337079472906620" type="Engine_Camera">
-                                    <param id="0" name="Magnitude">4</param>
-                                    <param id="1" name="Duration">9999</param>
-                                    <param id="2" name="Mode">1</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="482105397874365">
-                            <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="544006887867364" type="Var_Level">
-                                    <param id="0" name="Instance variable">ZoneResetTimer</param>
-                                    <param id="1" name="Comparison">3</param>
-                                    <param id="2" name="Value">5</param>
-                                </condition>
-                                <condition id="-7" name="Compare instance variable" sid="644223142184086" type="Var_Level">
-                                    <param id="0" name="Instance variable">ZoneResetTimer</param>
-                                    <param id="1" name="Comparison">4</param>
-                                    <param id="2" name="Value">2</param>
-                                </condition>
-                            </conditions>
-                            <actions />
-                            <sub-events>
-                                <event-block sid="862008584573552">
-                                    <conditions>
-                                        <condition id="-4" name="Trigger once while true" sid="920776249609950" type="System" />
-                                    </conditions>
-                                    <actions>
-                                        <action id="0" name="Call function" sid="775120297362932" type="Function">
-                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
-                                            <param id="1" name="Parameter {n}">&quot;DrownTimer&quot;</param>
-                                        </action>
-                                        <action id="0" name="Call function" sid="801282720096479" type="Function">
-                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
-                                            <param id="1" name="Parameter {n}">&quot;F_Eruption&quot;</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="278945613918664">
-                                    <conditions>
-                                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="238263155462912" type="Var_Level">
-                                            <param id="0" name="Instance variable">Pause</param>
-                                        </condition>
-                                        <condition id="-6" name="Every X seconds" sid="817767099378721" type="System">
-                                            <param id="0" name="Interval (seconds)">0.5</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="0" name="Call function" sid="861939971854560" type="Function">
-                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
-                                            <param id="1" name="Parameter {n}">&quot;Explode&quot;</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
-                        </event-block>
-                        <event-block sid="958229406476471">
-                            <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="988308107034499" type="Var_Level">
-                                    <param id="0" name="Instance variable">ZoneResetTimer</param>
-                                    <param id="1" name="Comparison">3</param>
-                                    <param id="2" name="Value">2</param>
-                                </condition>
-                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="998838037596594" type="Var_Level">
-                                    <param id="0" name="Instance variable">Pause</param>
-                                </condition>
-                                <condition id="-6" name="Every X seconds" sid="591136405608306" type="System">
-                                    <param id="0" name="Interval (seconds)">0.25</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Call function" sid="427360710580005" type="Function">
-                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;Explode&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <comment></comment>
                 <event-block sid="403062791908058">
                     <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="910375351622664" type="Var_Level">
-                            <param id="0" name="Instance variable">ZoneResetTimer</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">-1</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="123399774012081" type="System" />
                         <condition id="-7" name="Compare instance variable" sid="825237410166590" type="HUD_CountdownIcon">
                             <param id="0" name="Instance variable">ID</param>
                             <param id="1" name="Comparison">0</param>
@@ -16443,65 +16178,36 @@
                             <param id="2" name="Value">&quot;TimeLimit&quot;</param>
                         </condition>
                     </conditions>
-                    <actions>
-                        <action id="-15" name="Set visible" sid="413196542385865" type="HUD_CountdownIcon">
-                            <param id="0" name="Visibility">0</param>
-                        </action>
-                        <action id="-15" name="Set visible" sid="261239160530958" type="HUD_Countdown">
-                            <param id="0" name="Visibility">0</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="117609834014952">
-                    <conditions>
-                        <condition id="-7" inverted="1" name="Compare instance variable" sid="320495355321771" type="Var_Level">
-                            <param id="0" name="Instance variable">ZoneResetTimer</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">-1</param>
-                        </condition>
-                    </conditions>
                     <actions />
                     <sub-events>
-                        <event-block sid="481959566478939">
+                        <event-block sid="211378146763717">
                             <conditions>
-                                <condition id="-6" name="Every X seconds" sid="435460607185948" type="System">
-                                    <param id="0" name="Interval (seconds)">1.0</param>
+                                <condition id="-7" name="Compare instance variable" sid="910375351622664" type="Var_Level">
+                                    <param id="0" name="Instance variable">ZoneCountdown</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">-1</param>
                                 </condition>
-                                <condition id="-8" name="Is boolean instance variable set" sid="325702183214246" type="Var_Level">
-                                    <param id="0" name="Instance variable">TimerLevelActive</param>
-                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="123399774012081" type="System" />
                             </conditions>
                             <actions>
-                                <action id="-12" name="Subtract from" sid="144304661101120" type="Var_Level">
-                                    <param id="0" name="Instance variable">ZoneResetTimer</param>
-                                    <param id="1" name="Value">1</param>
+                                <action id="-15" name="Set visible" sid="413196542385865" type="HUD_CountdownIcon">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="261239160530958" type="HUD_Countdown">
+                                    <param id="0" name="Visibility">0</param>
                                 </action>
                             </actions>
                         </event-block>
-                        <event-block sid="898690456067516">
+                        <event-block sid="117609834014952">
                             <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="999648897722145" type="HUD_CountdownIcon">
-                                    <param id="0" name="Instance variable">ID</param>
+                                <condition id="-7" inverted="1" name="Compare instance variable" sid="320495355321771" type="Var_Level">
+                                    <param id="0" name="Instance variable">ZoneCountdown</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;TimeLimit&quot;</param>
-                                </condition>
-                                <condition id="-7" name="Compare instance variable" sid="458720001203739" type="HUD_Countdown">
-                                    <param id="0" name="Instance variable">ID</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;TimeLimit&quot;</param>
+                                    <param id="2" name="Value">-1</param>
                                 </condition>
                             </conditions>
                             <actions />
                             <sub-events>
-                                <comment>code by Maverick1912</comment>
-                                <event-block sid="390825698734559">
-                                    <conditions />
-                                    <actions>
-                                        <action id="0" name="Set text" sid="627701613485013" type="HUD_Countdown">
-                                            <param id="0" name="Text">floor(Var_Level.ZoneResetTimer/60)&amp;&quot;  &quot;&amp;zeropad(floor(Var_Level.ZoneResetTimer)%60,2)</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
                                 <event-block sid="533704180174235">
                                     <conditions>
                                         <condition id="-4" name="Trigger once while true" sid="653199944625869" type="System" />
@@ -16512,6 +16218,242 @@
                                         </action>
                                         <action id="-15" name="Set visible" sid="826168292832138" type="HUD_Countdown">
                                             <param id="0" name="Visibility">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="481959566478939">
+                                    <conditions>
+                                        <condition id="-6" name="Every X seconds" sid="435460607185948" type="System">
+                                            <param id="0" name="Interval (seconds)">1.0</param>
+                                        </condition>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="325702183214246" type="Var_Level">
+                                            <param id="0" name="Instance variable">TimerLevelActive</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Subtract from" sid="144304661101120" type="Var_Level">
+                                            <param id="0" name="Instance variable">ZoneCountdown</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <comment>code by Maverick1912</comment>
+                                <event-block sid="390825698734559">
+                                    <conditions />
+                                    <actions>
+                                        <action id="0" name="Set text" sid="627701613485013" type="HUD_Countdown">
+                                            <param id="0" name="Text">floor(Var_Level.ZoneCountdown/60)&amp;&quot;  &quot;&amp;zeropad(floor(Var_Level.ZoneCountdown)%60,2)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <comment>audio/visual effects for the countdown</comment>
+                                <event-block sid="687011554220563">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="410505462362458" type="Var_Level">
+                                            <param id="0" name="Instance variable">ZoneCountdown</param>
+                                            <param id="1" name="Comparison">4</param>
+                                            <param id="2" name="Value">10</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="229107352363408" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="6" name="Stop" sid="541797194187056" type="BetterAudio">
+                                            <param id="0" name="Tag">&quot;Eruption&quot;</param>
+                                        </action>
+                                        <action behavior="ScrollTo" id="0" name="Shake" sid="519992142517040" type="Engine_Camera">
+                                            <param id="0" name="Magnitude">0</param>
+                                            <param id="1" name="Duration">0</param>
+                                            <param id="2" name="Mode">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="688307084243664">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="483750768498379" type="Var_Level">
+                                            <param id="0" name="Instance variable">ZoneCountdown</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">60</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="197811952158643" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="871096185554625" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;F_EruptionSmall&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="676449934761524">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="326601680827565" type="Var_Level">
+                                            <param id="0" name="Instance variable">ZoneCountdown</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">45</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="857324046747207" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="873654244306202" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;F_EruptionSmall&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="389229757569996">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="355132441321438" type="Var_Level">
+                                            <param id="0" name="Instance variable">ZoneCountdown</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">30</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="713906879530359" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="328515047994178" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;DrownTimer&quot;</param>
+                                        </action>
+                                        <action id="0" name="Call function" sid="820257129381390" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;F_EruptionSmall&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="301119538081917">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="685264816682651" type="Var_Level">
+                                            <param id="0" name="Instance variable">ZoneCountdown</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">20</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="874057691529341" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="954848978928204" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;DrownTimer&quot;</param>
+                                        </action>
+                                        <action id="0" name="Call function" sid="798474581490203" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;F_Eruption&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="587214569131819">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="875531425139978" type="Var_Level">
+                                            <param id="0" name="Instance variable">ZoneCountdown</param>
+                                            <param id="1" name="Comparison">3</param>
+                                            <param id="2" name="Value">10</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="930393763614078" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="430260924618662" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;DrownTimer&quot;</param>
+                                        </action>
+                                        <action id="0" name="Call function" sid="203525407363165" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;Eruption&quot;{###}&quot;Eruption&quot;{###}2</param>
+                                        </action>
+                                        <action behavior="ScrollTo" id="0" name="Shake" sid="142426813305951" type="Engine_Camera">
+                                            <param id="0" name="Magnitude">4</param>
+                                            <param id="1" name="Duration">9999</param>
+                                            <param id="2" name="Mode">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="251600597290039">
+                                    <conditions>
+                                        <condition id="0" name="On function" sid="835790837755581" type="Function">
+                                            <param id="0" name="Name">&quot;Player_Restart&quot;</param>
+                                        </condition>
+                                        <condition id="-7" name="Compare instance variable" sid="891274968403560" type="Var_Level">
+                                            <param id="0" name="Instance variable">ZoneCountdown</param>
+                                            <param id="1" name="Comparison">3</param>
+                                            <param id="2" name="Value">10</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="846027244011548" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="418803570670971" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;Eruption&quot;{###}&quot;Eruption&quot;{###}2</param>
+                                        </action>
+                                        <action behavior="ScrollTo" id="0" name="Shake" sid="337079472906620" type="Engine_Camera">
+                                            <param id="0" name="Magnitude">4</param>
+                                            <param id="1" name="Duration">9999</param>
+                                            <param id="2" name="Mode">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="482105397874365">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="544006887867364" type="Var_Level">
+                                            <param id="0" name="Instance variable">ZoneCountdown</param>
+                                            <param id="1" name="Comparison">3</param>
+                                            <param id="2" name="Value">5</param>
+                                        </condition>
+                                        <condition id="-7" name="Compare instance variable" sid="644223142184086" type="Var_Level">
+                                            <param id="0" name="Instance variable">ZoneCountdown</param>
+                                            <param id="1" name="Comparison">4</param>
+                                            <param id="2" name="Value">2</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="862008584573552">
+                                            <conditions>
+                                                <condition id="-4" name="Trigger once while true" sid="920776249609950" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Call function" sid="775120297362932" type="Function">
+                                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;DrownTimer&quot;</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="801282720096479" type="Function">
+                                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;F_Eruption&quot;</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="278945613918664">
+                                            <conditions>
+                                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="238263155462912" type="Var_Level">
+                                                    <param id="0" name="Instance variable">Pause</param>
+                                                </condition>
+                                                <condition id="-6" name="Every X seconds" sid="817767099378721" type="System">
+                                                    <param id="0" name="Interval (seconds)">0.5</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Call function" sid="861939971854560" type="Function">
+                                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;Explode&quot;</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="958229406476471">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="988308107034499" type="Var_Level">
+                                            <param id="0" name="Instance variable">ZoneCountdown</param>
+                                            <param id="1" name="Comparison">3</param>
+                                            <param id="2" name="Value">2</param>
+                                        </condition>
+                                        <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="998838037596594" type="Var_Level">
+                                            <param id="0" name="Instance variable">Pause</param>
+                                        </condition>
+                                        <condition id="-6" name="Every X seconds" sid="591136405608306" type="System">
+                                            <param id="0" name="Interval (seconds)">0.25</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="427360710580005" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;Explode&quot;</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -16550,10 +16492,9 @@
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">0</param>
                         </condition>
-                        <condition id="-7" name="Compare instance variable" sid="475083485390145" type="Var_Game">
-                            <param id="0" name="Instance variable">TimerGlobal</param>
-                            <param id="1" name="Comparison">5</param>
-                            <param id="2" name="Value">4</param>
+                        <condition behavior="LiteTween" id="1" name="Compare progress" sid="677649196173220" type="HUD_TitleCardBG">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Value">0</param>
                         </condition>
                     </conditions>
                     <actions>
