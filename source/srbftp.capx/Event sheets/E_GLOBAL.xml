@@ -479,6 +479,9 @@
                         <event-block sid="167503525909746">
                             <conditions />
                             <actions>
+                                <action id="-16" name="Wait" sid="954776352374449" type="System">
+                                    <param id="0" name="Seconds">0</param>
+                                </action>
                                 <action id="1" name="Request project file" sid="692675009619641" type="AJAX">
                                     <param id="0" name="Tag">&quot;schemas.js&quot;</param>
                                     <param id="1" name="File">schemas.js</param>
@@ -487,6 +490,7 @@
                         </event-block>
                     </sub-events>
                 </event-block>
+                <comment>&quot;srbftp is not defined&quot;, maybe check for its validity?</comment>
                 <event-block sid="549486665222388">
                     <conditions>
                         <condition id="0" name="On completed" sid="838117055320468" type="AJAX">
@@ -510,6 +514,77 @@
         </event-group>
         <event-group description="" sid="840403875393779" title="Utilities">
             <sub-events>
+                <comment>how did it get to this point</comment>
+                <event-block sid="659408431385420">
+                    <conditions>
+                        <condition id="0" name="On function" sid="798655342102210" type="Function">
+                            <param id="0" name="Name">&quot;Debug_UnitTests&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="192359342278152">
+                            <conditions />
+                            <actions>
+                                <action id="14" name="Log" sid="388213081955030" type="Browser">
+                                    <param id="0" name="Type">0</param>
+                                    <param id="1" name="Message">&quot;=== BEGIN UNIT TESTING ===&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="664278007705941">
+                            <conditions />
+                            <actions>
+                                <action id="6" name="Call function" sid="643603848918118" type="JS">
+                                    <param id="0" name="Expression">&quot;srbftp.testFunction&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;String_IsNumber&quot;{###}0</param>
+                                </action>
+                                <action id="6" name="Call function" sid="265837700791830" type="JS">
+                                    <param id="0" name="Expression">&quot;srbftp.testFunction&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;String_IsNumber&quot;{###}1.55</param>
+                                </action>
+                                <action id="6" name="Call function" sid="934214266869284" type="JS">
+                                    <param id="0" name="Expression">&quot;srbftp.testFunction&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;String_IsNumber&quot;{###}&quot;&quot;</param>
+                                </action>
+                                <action id="6" name="Call function" sid="465279853541111" type="JS">
+                                    <param id="0" name="Expression">&quot;srbftp.testFunction&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;String_IsNumber&quot;{###}&quot;a string&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="397987125904646">
+                            <conditions />
+                            <actions>
+                                <action id="6" name="Call function" sid="336788691956933" type="JS">
+                                    <param id="0" name="Expression">&quot;srbftp.testFunction&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;Time_DateString&quot;</param>
+                                </action>
+                                <action id="6" name="Call function" sid="264603400107558" type="JS">
+                                    <param id="0" name="Expression">&quot;srbftp.testFunction&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;Time_DateString&quot;{###}&quot;chatstart&quot;</param>
+                                </action>
+                                <action id="6" name="Call function" sid="838303321795751" type="JS">
+                                    <param id="0" name="Expression">&quot;srbftp.testFunction&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;Time_DateString&quot;{###}886357020000</param>
+                                </action>
+                                <action id="6" name="Call function" sid="403928616679735" type="JS">
+                                    <param id="0" name="Expression">&quot;srbftp.testFunction&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;Time_DateString&quot;{###}886357020000{###}&quot;chatstart&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="785205166377490">
+                            <conditions />
+                            <actions>
+                                <action id="14" name="Log" sid="725221298458467" type="Browser">
+                                    <param id="0" name="Type">0</param>
+                                    <param id="1" name="Message">&quot;=== END UNIT TESTING ===&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
                 <event-group description="" sid="344573746778672" title="INI parser">
                     <sub-events>
                         <comment>read</comment>
@@ -2207,6 +2282,7 @@
                     </sub-events>
                 </event-block>
                 <comment>get pre-formatted date</comment>
+                <comment>&quot;timestamp, format&quot; or &quot;format&quot;</comment>
                 <event-block sid="379061651348803">
                     <conditions>
                         <condition id="0" name="On function" sid="595432623248761" type="Function">
@@ -2216,19 +2292,126 @@
                     <actions />
                     <sub-events>
                         <variable constant="0" name="date" sid="644440426040091" static="0" type="number">0</variable>
-                        <event-block sid="353135502697922">
+                        <variable constant="0" name="format" sid="824171807528696" static="0" type="text"></variable>
+                        <event-block sid="304955078031509">
                             <conditions />
                             <actions>
-                                <action id="-9" name="Set value" sid="247960257560103" type="System">
+                                <action id="-9" name="Set value" sid="302218788797759" type="System">
                                     <param id="0" name="Variable">date</param>
-                                    <param id="1" name="Value">Function.ParamCount = 0 ? Date.UnixTimestamp : Function.Param(0)</param>
+                                    <param id="1" name="Value">Date.UnixTimestamp</param>
                                 </action>
-                                <action id="1" name="Set return value" sid="575615475972376" type="Function">
-                                    <param id="0" name="Value">Date.Date(date)&#x0D;&#x0A;&amp;&quot; &quot;&amp;&#x0D;&#x0A;tokenat(&quot;Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec&quot;,Date.Month(date)-1,&quot;|&quot;)&#x0D;&#x0A;&amp;&quot; &quot;&amp;&#x0D;&#x0A;Date.Year(date)&#x0D;&#x0A;&amp;&quot; | &quot;&amp;&#x0D;&#x0A;zeropad(Date.Hours(date),2)&#x0D;&#x0A;&amp;&quot;:&quot;&amp;&#x0D;&#x0A;zeropad(Date.Minutes(date),2)</param>
+                            </actions>
+                        </event-block>
+                        <event-block sid="243433598261299">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="316168946665053" type="System">
+                                    <param id="0" name="First value">Function.ParamCount</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Call function" sid="419733158339669" type="Function">
+                                    <param id="0" name="Name">&quot;String_IsNumber&quot;</param>
+                                    <param id="1" name="Parameter {n}">Function.Param(0)</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="391950411118229">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="376839681591156" type="System">
+                                            <param id="0" name="First value">Function.ReturnValue</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="106164272452657" type="System">
+                                            <param id="0" name="Variable">date</param>
+                                            <param id="1" name="Value">Function.Param(0)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="615021955495761">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="368428410471862" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="604187101581024" type="System">
+                                            <param id="0" name="Variable">format</param>
+                                            <param id="1" name="Value">Function.Param(0)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="612835262422378">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="643240484231222" type="System">
+                                    <param id="0" name="First value">Function.ParamCount</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">2</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="298635047342830" type="System">
+                                    <param id="0" name="Variable">date</param>
+                                    <param id="1" name="Value">Function.Param(0)</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="513073535263318" type="System">
+                                    <param id="0" name="Variable">format</param>
+                                    <param id="1" name="Value">Function.Param(1)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>default</comment>
+                        <event-block any="1" sid="306007167933813">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="646860994354304" type="System">
+                                    <param id="0" name="Variable">format</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;&quot;</param>
+                                </condition>
+                                <condition id="-14" name="Compare variable" sid="788867752771937" type="System">
+                                    <param id="0" name="Variable">format</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;readable&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="1" name="Set return value" sid="903323236922244" type="Function">
+                                    <param id="0" name="Value">JS.Value(&quot;format&quot;, &quot;{dd} {mon} {yyyy} | {hh}:{mm}&quot;, &#x0D;&#x0A;Date.Date(date),&#x0D;&#x0A;tokenat(&quot;Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec&quot;,Date.Month(date)-1,&quot;|&quot;),&#x0D;&#x0A;Date.Year(date),&#x0D;&#x0A;zeropad(Date.Hours(date), 2),&#x0D;&#x0A;zeropad(Date.Minutes(date), 2)&#x0D;&#x0A;)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="164161871083371">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="637172876691559" type="System">
+                                    <param id="0" name="Variable">format</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;chatstart&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="1" name="Set return value" sid="446313473703487" type="Function">
+                                    <param id="0" name="Value">JS.Value(&quot;format&quot;, &quot;{yyyy}-{mm}-{dd} | {hh}:{mm}&quot;, &#x0D;&#x0A;Date.Year(date),&#x0D;&#x0A;zeropad(Date.Month(date), 2),&#x0D;&#x0A;zeropad(Date.Date(date), 2),&#x0D;&#x0A;zeropad(Date.Hours(date), 2),&#x0D;&#x0A;zeropad(Date.Minutes(date), 2)&#x0D;&#x0A;)</param>
                                 </action>
                             </actions>
                         </event-block>
                     </sub-events>
+                </event-block>
+                <comment>check if a string is a valid number</comment>
+                <event-block sid="124559900707926">
+                    <conditions>
+                        <condition id="0" name="On function" sid="253241400820649" type="Function">
+                            <param id="0" name="Name">&quot;String_IsNumber&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="1" name="Set return value" sid="881716131732420" type="Function">
+                            <param id="0" name="Value">JS.JSCodeValue(&quot;!isNaN(parseFloat(#0)) &amp;&amp; isFinite(#0)&quot;, Function.Param(0))</param>
+                        </action>
+                    </actions>
                 </event-block>
                 <comment>generate random string</comment>
                 <event-block sid="262283849288638">
@@ -3129,6 +3312,28 @@
                         </action>
                     </actions>
                 </event-block>
+                <event-block sid="496806912634968">
+                    <conditions>
+                        <condition id="-8" name="Is boolean instance variable set" sid="409918106562657" type="Var_Misc">
+                            <param id="0" name="Instance variable">InitializedFiles</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="805498892447801" type="System" />
+                        <condition id="70" name="Is Empty" sid="627472957328559" type="JSON_Audio">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}">&quot;Preloaded&quot;</param>
+                        </condition>
+                        <condition id="100" name="For each property" sid="479093154082660" type="JSON_AudioPreload">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set New Object" sid="213206263181649" type="JSON_Audio">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}">&quot;Preloaded&quot;{###}JSON_AudioPreload.CurrentKey</param>
+                        </action>
+                    </actions>
+                </event-block>
                 <event-block sid="978056638309232">
                     <conditions>
                         <condition id="100" name="For each property" sid="568227362616807" type="JSON_Audio">
@@ -3397,6 +3602,9 @@
                         </event-block>
                     </sub-events>
                 </event-block>
+                <comment>TODO: this is for DEBUG_AUDIOPRELOAD</comment>
+                <variable constant="0" name="preload" sid="399049308424056" static="1" type="text"></variable>
+                <variable constant="0" name="preload_complete" sid="629036014920723" static="1" type="number">0</variable>
                 <comment>preload audio file (for web, android)</comment>
                 <event-block sid="338316560511645">
                     <conditions>
@@ -3409,15 +3617,9 @@
                             <param id="2" name="Value">1</param>
                         </condition>
                     </conditions>
-                    <actions>
-                        <action id="-10" name="Set value" sid="242767397552644" type="JSON_AudioPreload">
-                            <param id="0" name="Instance variable">CurrentTask</param>
-                            <param id="1" name="Value">Function.Param(0)</param>
-                        </action>
-                    </actions>
+                    <actions />
                     <sub-events>
                         <comment>0 - load a list</comment>
-                        <comment>1 - load a single track from Music</comment>
                         <event-block sid="730498958379184">
                             <conditions>
                                 <condition id="-8" name="Compare two values" sid="835520664490548" type="System">
@@ -3431,6 +3633,11 @@
                                 </condition>
                             </conditions>
                             <actions>
+                                <action id="-10" name="Set value" sid="242767397552644" type="JSON_AudioPreload">
+                                    <param id="0" name="Instance variable">CurrentTask</param>
+                                    <param id="1" name="Value">Function.Param(0)</param>
+                                </action>
+                                <action id="2" name="Clear" sid="492271896344653" type="Queue_AudioPreload" />
                                 <action id="-10" name="Set value" sid="432887111802430" type="JSON_AudioPreload">
                                     <param id="0" name="Instance variable">AudioSize</param>
                                     <param id="1" name="Value">0</param>
@@ -3443,20 +3650,18 @@
                                             <param id="0" name="Reference point">0</param>
                                             <param id="1" name="Key {n}">Function.Param(0)</param>
                                         </condition>
+                                        <condition id="60" name="Is undefined" sid="934186909647565" type="JSON_Audio">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}">&quot;Preloaded&quot;{###}Function.Param(0){###}JSON_AudioPreload.CurrentKey</param>
+                                        </condition>
                                     </conditions>
                                     <actions>
                                         <action id="-10" name="Set value" sid="280957812336301" type="JSON_AudioPreload">
                                             <param id="0" name="Instance variable">AudioSize</param>
                                             <param id="1" name="Value">Self.AudioSize + Self.CurrentValue</param>
                                         </action>
-                                        <action id="20" name="Set Value" sid="312294448717474" type="JSON_Audio">
-                                            <param id="0" name="Value">0</param>
-                                            <param id="1" name="Reference point">0</param>
-                                            <param id="2" name="Key {n}">&quot;Preloaded&quot;{###}JSON_AudioPreload.CurrentKey</param>
-                                        </action>
-                                        <action id="9" name="Preload (by name)" sid="434156140290763" type="BetterAudio">
-                                            <param id="0" name="Folder">1</param>
-                                            <param id="1" name="Audio file name">JSON_AudioPreload.CurrentKey</param>
+                                        <action id="0" name="Enqueue" sid="197030057618200" type="Queue_AudioPreload">
+                                            <param id="0" name="Element">JSON_AudioPreload.CurrentKey</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -3471,10 +3676,37 @@
                                             <param id="0" name="Instance variable">AudioSize</param>
                                             <param id="1" name="Value">Function.ReturnValue</param>
                                         </action>
+                                        <action id="-10" name="Set value" sid="915778711039887" type="JSON_AudioPreload">
+                                            <param id="0" name="Instance variable">AudioSizeLeft</param>
+                                            <param id="1" name="Value">Self.AudioSize</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="811135172299656">
+                                    <conditions>
+                                        <condition id="0" inverted="1" name="Is empty" sid="528796288393323" type="Queue_AudioPreload" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="9" name="Preload (by name)" sid="434156140290763" type="BetterAudio">
+                                            <param id="0" name="Folder">1</param>
+                                            <param id="1" name="Audio file name">Queue_AudioPreload.Peek</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="192844799087925">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="296442901596763" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="333074516774146" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_OnPreloadComplete&quot;</param>
+                                            <param id="1" name="Parameter {n}">Function.Param(0)</param>
+                                        </action>
                                     </actions>
                                 </event-block>
                             </sub-events>
                         </event-block>
+                        <comment>1 - load a single track from Music</comment>
                         <event-block sid="629029984001602">
                             <conditions>
                                 <condition id="-8" name="Compare two values" sid="444237400330825" type="System">
@@ -3488,27 +3720,58 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="0" name="Call function" sid="373752427114932" type="Function">
-                                    <param id="0" name="Name">&quot;Math_RoundFloat&quot;</param>
-                                    <param id="1" name="Parameter {n}">JSON_AudioPreload.Value(0,&quot;Music&quot;,Function.Param(0)){###}2</param>
+                                <action id="-10" name="Set value" sid="236340862152708" type="JSON_AudioPreload">
+                                    <param id="0" name="Instance variable">CurrentTask</param>
+                                    <param id="1" name="Value">Function.Param(0)</param>
                                 </action>
-                                <action id="-10" name="Set value" sid="486028963915981" type="JSON_AudioPreload">
-                                    <param id="0" name="Instance variable">AudioSize</param>
-                                    <param id="1" name="Value">Function.ReturnValue</param>
-                                </action>
-                                <action id="20" name="Set Value" sid="157129599584463" type="JSON_Audio">
-                                    <param id="0" name="Value">0</param>
-                                    <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;Preloaded&quot;{###}Function.Param(0)</param>
-                                </action>
-                                <action id="9" name="Preload (by name)" sid="913809767463789" type="BetterAudio">
-                                    <param id="0" name="Folder">1</param>
-                                    <param id="1" name="Audio file name">Function.Param(0)</param>
-                                </action>
+                                <action id="2" name="Clear" sid="222499749072066" type="Queue_AudioPreload" />
                             </actions>
+                            <sub-events>
+                                <event-block sid="150708765674240">
+                                    <conditions>
+                                        <condition id="60" name="Is undefined" sid="700879812895976" type="JSON_Audio">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}">&quot;Preloaded&quot;{###}&quot;Music&quot;{###}Function.Param(0)</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="373752427114932" type="Function">
+                                            <param id="0" name="Name">&quot;Math_RoundFloat&quot;</param>
+                                            <param id="1" name="Parameter {n}">JSON_AudioPreload.Value(0,&quot;Music&quot;,Function.Param(0)){###}2</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="486028963915981" type="JSON_AudioPreload">
+                                            <param id="0" name="Instance variable">AudioSize</param>
+                                            <param id="1" name="Value">Function.ReturnValue</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="655295055786333" type="JSON_AudioPreload">
+                                            <param id="0" name="Instance variable">AudioSizeLeft</param>
+                                            <param id="1" name="Value">Self.AudioSize</param>
+                                        </action>
+                                        <action id="0" name="Enqueue" sid="179528065688942" type="Queue_AudioPreload">
+                                            <param id="0" name="Element">Function.Param(0)</param>
+                                        </action>
+                                        <action id="9" name="Preload (by name)" sid="913809767463789" type="BetterAudio">
+                                            <param id="0" name="Folder">1</param>
+                                            <param id="1" name="Audio file name">Queue_AudioPreload.Peek</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="358218311532319">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="587131635802593" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="309001526906033" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_OnPreloadComplete&quot;</param>
+                                            <param id="1" name="Parameter {n}">Function.Param(0)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-block>
+                <comment>preloading queue (for tracking progress)</comment>
                 <event-block sid="625710793155806">
                     <conditions>
                         <condition id="-7" inverted="1" name="Compare instance variable" sid="974566738239099" type="JSON_AudioPreload">
@@ -3517,15 +3780,79 @@
                             <param id="2" name="Value">&quot;&quot;</param>
                         </condition>
                         <condition id="1" name="Preloads complete" sid="394755240637166" type="BetterAudio" />
-                        <condition id="-4" name="Trigger once while true" sid="462668012405759" type="System" />
+                        <condition id="-4" name="Trigger once while true" sid="760477450423346" type="System" />
                     </conditions>
-                    <actions>
-                        <action id="0" name="Call function" sid="347308066855905" type="Function">
-                            <param id="0" name="Name">&quot;Audio_OnPreloadComplete&quot;</param>
-                            <param id="1" name="Parameter {n}">JSON_AudioPreload.CurrentTask</param>
-                        </action>
-                    </actions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="642482982008794">
+                            <conditions>
+                                <condition id="60" inverted="1" name="Is undefined" sid="439892741031947" type="JSON_AudioPreload">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}">JSON_AudioPreload.CurrentTask</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Call function" sid="824401867007051" type="Function">
+                                    <param id="0" name="Name">&quot;Math_RoundFloat&quot;</param>
+                                    <param id="1" name="Parameter {n}">JSON_AudioPreload.AudioSizeLeft - JSON_AudioPreload.Value(0, JSON_AudioPreload.CurrentTask, Queue_AudioPreload.Peek){###}2</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="422089415498414" type="JSON_AudioPreload">
+                                    <param id="0" name="Instance variable">AudioSizeLeft</param>
+                                    <param id="1" name="Value">clamp(Function.ReturnValue, 0 ,Self.AudioSize)</param>
+                                </action>
+                                <action id="20" name="Set Value" sid="312294448717474" type="JSON_Audio">
+                                    <param id="0" name="Value">0</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;Preloaded&quot;{###}JSON_AudioPreload.CurrentTask{###}Queue_AudioPreload.Peek</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="880929515523831">
+                            <conditions>
+                                <condition id="60" inverted="1" name="Is undefined" sid="777757003350152" type="JSON_AudioPreload">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}">&quot;Music&quot;{###}JSON_AudioPreload.CurrentTask</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="20" name="Set Value" sid="157129599584463" type="JSON_Audio">
+                                    <param id="0" name="Value">0</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;Preloaded&quot;{###}&quot;Music&quot;{###}Queue_AudioPreload.Peek</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="767100124198667">
+                            <conditions />
+                            <actions>
+                                <action id="1" name="Dequeue" sid="438259091093318" type="Queue_AudioPreload" />
+                            </actions>
+                        </event-block>
+                        <event-block sid="384123684205179">
+                            <conditions>
+                                <condition id="0" inverted="1" name="Is empty" sid="203049051344089" type="Queue_AudioPreload" />
+                            </conditions>
+                            <actions>
+                                <action id="9" name="Preload (by name)" sid="411030531943928" type="BetterAudio">
+                                    <param id="0" name="Folder">1</param>
+                                    <param id="1" name="Audio file name">Queue_AudioPreload.Peek</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="512453359114959">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="899590716907109" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Call function" sid="946084906683303" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_OnPreloadComplete&quot;</param>
+                                    <param id="1" name="Parameter {n}">JSON_AudioPreload.CurrentTask</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
+                <comment>callback</comment>
                 <event-block sid="949608532720625">
                     <conditions>
                         <condition id="0" name="On function" sid="633715219630502" type="Function">
@@ -3537,11 +3864,89 @@
                             <param id="0" name="Instance variable">CurrentTask</param>
                             <param id="1" name="Value">&quot;&quot;</param>
                         </action>
+                        <action id="2" name="Clear" sid="367939339318169" type="Queue_AudioPreload" />
                         <action id="-10" name="Set value" sid="794241244377439" type="JSON_AudioPreload">
                             <param id="0" name="Instance variable">AudioSize</param>
                             <param id="1" name="Value">0</param>
                         </action>
+                        <action id="-10" name="Set value" sid="357197545857416" type="JSON_AudioPreload">
+                            <param id="0" name="Instance variable">AudioSizeLeft</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
                     </actions>
+                </event-block>
+                <event-block sid="833675554167557">
+                    <conditions>
+                        <condition id="0" name="On function" sid="505335169526784" type="Function">
+                            <param id="0" name="Name">&quot;Audio_GetPreloadProgress&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="703058468514383">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="856149867737656" type="System">
+                                    <param id="0" name="Variable">WEB</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="1" name="Set return value" sid="223335775236494" type="Function">
+                                    <param id="0" name="Value">&quot;LOADING MUSIC (&quot;&amp;JSON_AudioPreload.AudioSize&amp;&quot;MB)&quot;</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="806986388940547">
+                                    <conditions>
+                                        <condition id="60" inverted="1" name="Is undefined" sid="770472902193023" type="JSON_AudioPreload">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}">JSON_AudioPreload.CurrentTask</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="440391369457059" type="Function">
+                                            <param id="0" name="Name">&quot;Math_RoundFloat&quot;</param>
+                                            <param id="1" name="Parameter {n}">JSON_AudioPreload.AudioSize - JSON_AudioPreload.AudioSizeLeft{###}2</param>
+                                        </action>
+                                        <action id="1" name="Set return value" sid="606926022954533" type="Function">
+                                            <param id="0" name="Value">JS.Value(&quot;format&quot;, &quot;LOADING {what}... {progress}%&quot;&amp;newline&amp;&quot;{current}MB / {max}MB&quot;, JSON_AudioPreload.CurrentTask = &quot;SoundEffects&quot; ? &quot;SOUNDS&quot; : &quot;MUSIC&quot;, &#x0D;&#x0A;round((Function.ReturnValue / JSON_AudioPreload.AudioSize) * 100), &#x0D;&#x0A;Function.ReturnValue, &#x0D;&#x0A;JSON_AudioPreload.AudioSize)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <comment>don&apos;t show filesizes on native android version?</comment>
+                        <event-block sid="172515624105399">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="989158197241363" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="1" name="Set return value" sid="671532467877048" type="Function">
+                                    <param id="0" name="Value">&quot;LOADING MUSIC&quot;</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="990274788400820">
+                                    <conditions>
+                                        <condition id="60" inverted="1" name="Is undefined" sid="644978976825503" type="JSON_AudioPreload">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}">JSON_AudioPreload.CurrentTask</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="745395810328520" type="Function">
+                                            <param id="0" name="Name">&quot;Math_RoundFloat&quot;</param>
+                                            <param id="1" name="Parameter {n}">JSON_AudioPreload.AudioSize - JSON_AudioPreload.AudioSizeLeft{###}2</param>
+                                        </action>
+                                        <action id="1" name="Set return value" sid="954967027682233" type="Function">
+                                            <param id="0" name="Value">JS.Value(&quot;format&quot;, &quot;LOADING {what}... {progress}%&quot;, JSON_AudioPreload.CurrentTask = &quot;SoundEffects&quot; ? &quot;SOUNDS&quot; : &quot;MUSIC&quot;, &#x0D;&#x0A;round((Function.ReturnValue / JSON_AudioPreload.AudioSize) * 100))</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
                 </event-block>
             </sub-events>
         </event-group>
@@ -3712,39 +4117,6 @@
                     </sub-events>
                 </event-block>
                 <comment>fps counter/other info overlay</comment>
-                <event-block sid="485977544719084">
-                    <conditions />
-                    <actions>
-                        <action id="0" name="Set text" sid="403397581423881" type="Text_FPS">
-                            <param id="0" name="Text">fps</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="326087920936398">
-                    <conditions>
-                        <condition id="-27" inverted="1" name="Effects are supported" sid="542940775867714" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Set text" sid="474159991335566" type="Text_FPS">
-                            <param id="0" name="Text">Self.Text&amp;newline&amp;&quot;webgl not supported&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="999218732019343">
-                    <conditions>
-                        <condition id="-18" inverted="1" name="Is in preview" sid="150124500591500" type="System" />
-                        <condition id="-14" inverted="1" name="Compare variable" sid="405530983343384" type="System">
-                            <param id="0" name="Variable">DEBUG</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">0</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Set text" sid="579360897005501" type="Text_FPS">
-                            <param id="0" name="Text">Self.Text&amp;newline&amp;&quot;debug mode&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
                 <event-block sid="653705730034381">
                     <conditions>
                         <condition id="-8" name="Is boolean instance variable set" sid="175599803219466" type="Var_Misc">
@@ -3785,6 +4157,42 @@
                         </event-block>
                     </sub-events>
                 </event-block>
+                <event-block sid="485977544719084">
+                    <conditions />
+                    <actions>
+                        <action id="0" name="Set text" sid="403397581423881" type="Text_FPS">
+                            <param id="0" name="Text">fps</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="326087920936398">
+                    <conditions>
+                        <condition id="-27" inverted="1" name="Effects are supported" sid="542940775867714" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set text" sid="474159991335566" type="Text_FPS">
+                            <param id="0" name="Text">Self.Text&amp;newline&amp;&quot;webgl not supported&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="999218732019343">
+                    <conditions>
+                        <condition id="-18" inverted="1" name="Is in preview" sid="150124500591500" type="System" />
+                        <condition id="-14" inverted="1" name="Compare variable" sid="405530983343384" type="System">
+                            <param id="0" name="Variable">DEBUG</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set text" sid="579360897005501" type="Text_FPS">
+                            <param id="0" name="Text">Self.Text&amp;newline&amp;&quot;debug mode&quot;</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="639097799472871" type="Text_FPS">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                    </actions>
+                </event-block>
                 <comment>restart</comment>
                 <event-block sid="239796542433649">
                     <conditions>
@@ -3808,21 +4216,6 @@
                     </actions>
                 </event-block>
                 <comment>platform specific</comment>
-                <event-block sid="756162674837697">
-                    <conditions>
-                        <condition id="-14" name="Compare variable" sid="704950107502590" type="System">
-                            <param id="0" name="Variable">MOBILE</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">1</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="757086891182604" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="10" name="Request fullscreen" sid="986810333555906" type="Browser">
-                            <param id="0" name="Mode">3</param>
-                        </action>
-                    </actions>
-                </event-block>
                 <event-block sid="307828170805330">
                     <conditions>
                         <condition id="-14" inverted="1" name="Compare variable" sid="847934194312510" type="System">
@@ -3855,6 +4248,54 @@
                             <param id="0" name="Visibility">0</param>
                         </action>
                     </actions>
+                </event-block>
+                <comment>a call for help </comment>
+                <event-block sid="809877708615117">
+                    <conditions>
+                        <condition id="-8" name="Is boolean instance variable set" sid="188600309100917" type="Var_Misc">
+                            <param id="0" name="Instance variable">InitializedFiles</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="148905547308678" type="System" />
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block any="1" sid="376545460512965">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="696251737861599" type="System">
+                                    <param id="0" name="Variable">WEB</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                                <condition id="-14" name="Compare variable" sid="679187040729028" type="System">
+                                    <param id="0" name="Variable">DEBUG_LOCALSTORAGE</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="552233001913280">
+                                    <conditions>
+                                        <condition id="6" inverted="1" name="Compare value" sid="793270680694289" type="JS">
+                                            <param id="0" name="Value">1</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Expression">&quot;Storages.localStorage.isSet&quot;</param>
+                                            <param id="3" name="Parameter {n}">&quot;_OldBrowserWarning&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="6" name="Call function" sid="439630674966996" type="JS">
+                                            <param id="0" name="Expression">&quot;Storages.localStorage.set&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;_OldBrowserWarning&quot;{###}1</param>
+                                        </action>
+                                        <action id="0" name="Alert" sid="996771178161907" type="Browser">
+                                            <param id="0" name="Message">&quot;Notice!&quot;&amp;newline&#x0D;&#x0A;&amp;newline&amp;&#x0D;&#x0A;&quot;Please use a browser that&apos;s at least newer than 2018 before reporting issues, i&apos;m begging you, thanks!&quot;&amp;newline&amp;&#x0D;&#x0A;&quot;This is a one-time reminder&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <comment>clickable buttons</comment>
                 <event-block sid="102176552351848">

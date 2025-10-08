@@ -1548,6 +1548,21 @@
         <comment></comment>
         <event-group description="" inactive="1" sid="436551713517462" title="Preload">
             <sub-events>
+                <event-block sid="707424334285068">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="501603707423724" type="System">
+                            <param id="0" name="Variable">MOBILE</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="516360998383244" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="10" name="Request fullscreen" sid="731173586354429" type="Browser">
+                            <param id="0" name="Mode">3</param>
+                        </action>
+                    </actions>
+                </event-block>
                 <event-block sid="877163135453280">
                     <conditions>
                         <condition id="-4" name="Trigger once while true" sid="706355777062255" type="System" />
@@ -1633,9 +1648,6 @@
                                             <param id="0" name="Name">&quot;Audio_Preload&quot;</param>
                                             <param id="1" name="Parameter {n}">&quot;SoundEffects&quot;{###}0</param>
                                         </action>
-                                        <action id="0" name="Set text" sid="234822789994666" type="CutsceneTextA">
-                                            <param id="0" name="Text">&quot;LOADING SOUNDS (&quot;&amp;JSON_AudioPreload.AudioSize&amp;&quot;mb)&quot;</param>
-                                        </action>
                                     </actions>
                                 </event-block>
                                 <event-block sid="880854375268568">
@@ -1654,8 +1666,23 @@
                                             <param id="0" name="Name">&quot;Audio_Preload&quot;</param>
                                             <param id="1" name="Parameter {n}">&quot;Common&quot;{###}0</param>
                                         </action>
-                                        <action id="0" name="Set text" sid="976859796234127" type="CutsceneTextA">
-                                            <param id="0" name="Text">&quot;LOADING MUSIC (&quot;&amp;JSON_AudioPreload.AudioSize&amp;&quot;mb)&quot;</param>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="915523393174694">
+                                    <conditions>
+                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="963321333139899" type="JSON_AudioPreload">
+                                            <param id="0" name="Instance variable">CurrentTask</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="878416124291570" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_GetPreloadProgress&quot;</param>
+                                            <param id="1" name="Parameter {n}"></param>
+                                        </action>
+                                        <action id="0" name="Set text" sid="234822789994666" type="CutsceneTextA">
+                                            <param id="0" name="Text">Function.ReturnValue</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -2371,8 +2398,26 @@
                             <param id="0" name="Layer">&quot;Loading&quot;</param>
                             <param id="1" name="Visibility">1</param>
                         </action>
-                        <action id="0" name="Set text" sid="871952308739544" type="CutsceneTextA">
-                            <param id="0" name="Text">&quot;LOADING MUSIC (&quot;&amp;JSON_AudioPreload.AudioSize&amp;&quot;mb)&quot;</param>
+                        <action id="0" name="Set text" sid="552786064184353" type="CutsceneTextA">
+                            <param id="0" name="Text">&quot;LOADING MUSIC (&quot;&amp;JSON_AudioPreload.AudioSize&amp;&quot;MB)&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="388953664479627">
+                    <conditions>
+                        <condition id="-7" inverted="1" name="Compare instance variable" sid="524832824784175" type="JSON_AudioPreload">
+                            <param id="0" name="Instance variable">CurrentTask</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Call function" sid="822417341982471" type="Function">
+                            <param id="0" name="Name">&quot;Audio_GetPreloadProgress&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
+                        </action>
+                        <action id="0" name="Set text" sid="804337694261336" type="CutsceneTextA">
+                            <param id="0" name="Text">Function.ReturnValue</param>
                         </action>
                     </actions>
                 </event-block>
@@ -2483,8 +2528,26 @@
                             <param id="0" name="Layer">&quot;Loading&quot;</param>
                             <param id="1" name="Visibility">1</param>
                         </action>
-                        <action id="0" name="Set text" sid="921510715216007" type="CutsceneTextA">
-                            <param id="0" name="Text">&quot;LOADING MUSIC (&quot;&amp;JSON_AudioPreload.AudioSize&amp;&quot;mb)&quot;</param>
+                        <action id="0" name="Set text" sid="131653805706577" type="CutsceneTextA">
+                            <param id="0" name="Text">&quot;LOADING MUSIC (&quot;&amp;JSON_AudioPreload.AudioSize&amp;&quot;MB)&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="697025269866495">
+                    <conditions>
+                        <condition id="-7" inverted="1" name="Compare instance variable" sid="247909232884928" type="JSON_AudioPreload">
+                            <param id="0" name="Instance variable">CurrentTask</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Call function" sid="559675699692860" type="Function">
+                            <param id="0" name="Name">&quot;Audio_GetPreloadProgress&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
+                        </action>
+                        <action id="0" name="Set text" sid="352298073289930" type="CutsceneTextA">
+                            <param id="0" name="Text">Function.ReturnValue</param>
                         </action>
                     </actions>
                 </event-block>
@@ -3255,8 +3318,23 @@
                                             <param id="0" name="Layer">&quot;Loading&quot;</param>
                                             <param id="1" name="Visibility">1</param>
                                         </action>
-                                        <action id="0" name="Set text" sid="899734101819357" type="CutsceneTextA">
-                                            <param id="0" name="Text">&quot;LOADING MUSIC (&quot;&amp;JSON_AudioPreload.AudioSize&amp;&quot;mb)&quot;</param>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="530041997490755">
+                                    <conditions>
+                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="204342169868361" type="JSON_AudioPreload">
+                                            <param id="0" name="Instance variable">CurrentTask</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="901857033717104" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_GetPreloadProgress&quot;</param>
+                                            <param id="1" name="Parameter {n}"></param>
+                                        </action>
+                                        <action id="0" name="Set text" sid="808444247695642" type="CutsceneTextA">
+                                            <param id="0" name="Text">Function.ReturnValue</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -3400,8 +3478,23 @@
                                             <param id="0" name="Layer">&quot;Loading&quot;</param>
                                             <param id="1" name="Visibility">1</param>
                                         </action>
-                                        <action id="0" name="Set text" sid="386670664131746" type="CutsceneTextA">
-                                            <param id="0" name="Text">&quot;LOADING MUSIC (&quot;&amp;JSON_AudioPreload.AudioSize&amp;&quot;mb)&quot;</param>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="740917415126089">
+                                    <conditions>
+                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="899080909738001" type="JSON_AudioPreload">
+                                            <param id="0" name="Instance variable">CurrentTask</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="638752521743781" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_GetPreloadProgress&quot;</param>
+                                            <param id="1" name="Parameter {n}"></param>
+                                        </action>
+                                        <action id="0" name="Set text" sid="887031078581756" type="CutsceneTextA">
+                                            <param id="0" name="Text">Function.ReturnValue</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -3646,8 +3739,23 @@
                                             <param id="0" name="Name">&quot;Audio_Preload&quot;</param>
                                             <param id="1" name="Parameter {n}">&quot;Online&quot;{###}0</param>
                                         </action>
-                                        <action id="0" name="Set text" sid="886453722231734" type="CutsceneTextA">
-                                            <param id="0" name="Text">&quot;LOADING MUSIC (&quot;&amp;JSON_AudioPreload.AudioSize&amp;&quot;mb)&quot;</param>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="494628455857368">
+                                    <conditions>
+                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="272256225030496" type="JSON_AudioPreload">
+                                            <param id="0" name="Instance variable">CurrentTask</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="106968736685715" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_GetPreloadProgress&quot;</param>
+                                            <param id="1" name="Parameter {n}"></param>
+                                        </action>
+                                        <action id="0" name="Set text" sid="713060354990860" type="CutsceneTextA">
+                                            <param id="0" name="Text">Function.ReturnValue</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -4991,8 +5099,23 @@
                                             <param id="0" name="Name">&quot;Audio_Preload&quot;</param>
                                             <param id="1" name="Parameter {n}">&quot;SonicBoom&quot;{###}0</param>
                                         </action>
-                                        <action id="0" name="Set text" sid="800518000699988" type="CutsceneTextA">
-                                            <param id="0" name="Text">&quot;LOADING MUSIC (&quot;&amp;JSON_AudioPreload.AudioSize&amp;&quot;mb)&quot;</param>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="905977665549472">
+                                    <conditions>
+                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="889020558851909" type="JSON_AudioPreload">
+                                            <param id="0" name="Instance variable">CurrentTask</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="354339471424011" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_GetPreloadProgress&quot;</param>
+                                            <param id="1" name="Parameter {n}"></param>
+                                        </action>
+                                        <action id="0" name="Set text" sid="522848115065150" type="CutsceneTextA">
+                                            <param id="0" name="Text">Function.ReturnValue</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -14566,9 +14689,13 @@
                     </conditions>
                     <actions>
                         <action id="33" name="Stop all" sid="660274008144385" type="BetterAudio" />
-                        <action id="-10" name="Set value" sid="387386811256285" type="Var_Online">
+                        <action id="0" name="Call function" sid="773610110506611" type="Function">
+                            <param id="0" name="Name">&quot;Time_DateString&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;chatstart&quot;</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="369023515845940" type="Var_Online">
                             <param id="0" name="Instance variable">Chat</param>
-                            <param id="1" name="Value">&quot;* &quot;&amp;Date.Year&amp;&quot;-&quot;&amp;Date.Month&amp;&quot;-&quot;&amp;Date.Date&amp;&quot; | &quot;&amp;Date.Hours&amp;&quot;:&quot;&amp;zeropad(Date.Minutes,2)&#x0D;&#x0A;&amp;newline&amp;&quot;* You are now in &quot;&quot;&quot;&amp;Photon.MyRoomName&amp;&quot;&quot;&quot; as &quot;&amp;Var_Online.Username</param>
+                            <param id="1" name="Value">&quot;* &quot;&amp;Function.ReturnValue&#x0D;&#x0A;&amp;newline&amp;&quot;* You are now in &quot;&quot;&quot;&amp;Photon.MyRoomName&amp;&quot;&quot;&quot; as &quot;&amp;Var_Online.Username</param>
                         </action>
                         <action id="-4" name="Set layer visible" sid="145981309798396" type="System">
                             <param id="0" name="Layer">&quot;Loading&quot;</param>
@@ -14967,9 +15094,13 @@
                         <event-block sid="897749828366393">
                             <conditions />
                             <actions>
+                                <action id="0" name="Call function" sid="909160855197639" type="Function">
+                                    <param id="0" name="Name">&quot;Time_DateString&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;chatstart&quot;</param>
+                                </action>
                                 <action id="-10" name="Set value" sid="737349177529311" type="Var_Online">
                                     <param id="0" name="Instance variable">Chat</param>
-                                    <param id="1" name="Value">&quot;* &quot;&amp;Date.Year&amp;&quot;-&quot;&amp;Date.Month&amp;&quot;-&quot;&amp;Date.Date&amp;&quot; | &quot;&amp;Date.Hours&amp;&quot;:&quot;&amp;zeropad(Date.Minutes,2)&#x0D;&#x0A;&amp;newline&amp;&quot;* You are now in &quot;&quot;&quot;&amp;Photon.MyRoomName&amp;&quot;&quot;&quot; as &quot;&amp;Var_Online.Username</param>
+                                    <param id="1" name="Value">&quot;* &quot;&amp;Function.ReturnValue&#x0D;&#x0A;&amp;newline&amp;&quot;* You are now in &quot;&quot;&quot;&amp;Photon.MyRoomName&amp;&quot;&quot;&quot; as &quot;&amp;Var_Online.Username</param>
                                 </action>
                                 <action id="33" name="Stop all" sid="265465370377336" type="BetterAudio" />
                                 <action id="-4" name="Set layer visible" sid="494559562551088" type="System">
@@ -15226,9 +15357,13 @@
                     </conditions>
                     <actions>
                         <action id="33" name="Stop all" sid="222208572136011" type="BetterAudio" />
+                        <action id="0" name="Call function" sid="992956537469550" type="Function">
+                            <param id="0" name="Name">&quot;Time_DateString&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;chatstart&quot;</param>
+                        </action>
                         <action id="-10" name="Set value" sid="545580508875358" type="Var_Online">
                             <param id="0" name="Instance variable">Chat</param>
-                            <param id="1" name="Value">&quot;* &quot;&amp;Date.Year&amp;&quot;-&quot;&amp;Date.Month&amp;&quot;-&quot;&amp;Date.Date&amp;&quot; | &quot;&amp;Date.Hours&amp;&quot;:&quot;&amp;zeropad(Date.Minutes,2)&#x0D;&#x0A;&amp;newline&amp;&quot;* You are now in &quot;&quot;&quot;&amp;Photon.MyRoomName&amp;&quot;&quot;&quot; as &quot;&amp;Var_Online.Username</param>
+                            <param id="1" name="Value">&quot;* &quot;&amp;Function.ReturnValue&#x0D;&#x0A;&amp;newline&amp;&quot;* You are now in &quot;&quot;&quot;&amp;Photon.MyRoomName&amp;&quot;&quot;&quot; as &quot;&amp;Var_Online.Username</param>
                         </action>
                         <action id="-4" name="Set layer visible" sid="395364078186297" type="System">
                             <param id="0" name="Layer">&quot;Loading&quot;</param>

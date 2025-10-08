@@ -6,6 +6,14 @@ srbftp.logJSON = function(arg) {
 	console.log(JSON.parse(arg))
 };
 
+srbftp.testFunction = function(...args) {
+	let funcname = args[0], funcargs = args.slice(1);
+    //wrap the param names in quotes for readability
+    let argnames = funcargs.map(arg => `"${arg}"`);
+	
+	console.log(`${funcname}(${argnames.join(', ')}) =`, c2_callFunction(funcname, funcargs));
+};
+
 ///////////////////////////////////////////////////////////////
 
 String.format = function () {
