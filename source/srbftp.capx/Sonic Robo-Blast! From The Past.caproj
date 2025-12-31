@@ -2,7 +2,7 @@
 <c2project>
     <name>Sonic Robo-Blast! From The Past</name>
     <description>Original games by Sonikku - Johnathan Wallbank and SSNTails - A.J. Freda</description>
-    <version>0.3.1-32</version>
+    <version>0.3.1-33</version>
     <author>Halatnikov</author>
     <author-email></author-email>
     <author-website>https://halatnikov.github.io</author-website>
@@ -41,6 +41,7 @@
         <plugin author="Eren Ertuğrul" id="eren_DiscordRPC_edit" version="1">DiscordRPC (edit)</plugin>
         <plugin author="Scirra" id="gamepad" version="1">Gamepad</plugin>
         <plugin author="Jcw87" id="jcw_trace" version="0.400000006">Trace</plugin>
+        <plugin author="R0J0hound" id="rojoPaster" version="0.5">Paster</plugin>
         <plugin author="skymen" id="skymen_jszip" version="1.399999976">jsZip</plugin>
         <plugin author="skymen" id="skymen_queue" version="1.200000048">Queue</plugin>
         <plugin author="Scirra" id="video" version="1">Video</plugin>
@@ -48,6 +49,7 @@
     <used-behaviors>
         <behavior author="Scirra" id="Bullet" version="1">Bullet</behavior>
         <behavior author="Mutuware" id="Circle" version="1">Circle</behavior>
+        <behavior author="Scirra" id="DragnDrop" version="1">Drag &amp; Drop</behavior>
         <behavior author="Scirra" id="EightDir" version="1">8 Direction</behavior>
         <behavior author="Scirra" id="Fade" version="1">Fade</behavior>
         <behavior author="Scirra" id="Flash" version="1">Flash</behavior>
@@ -98,7 +100,7 @@
         <prop name="Pause on unfocus">No</prop>
         <prop name="Physics engine">Box2D asm.js</prop>
         <prop name="Preload sounds">No</prop>
-        <prop name="Preview browser">Custom</prop>
+        <prop name="Preview browser">NW.js</prop>
         <prop name="Sampling">Point</prop>
         <prop name="Use high-DPI display">Yes</prop>
     </configuration-settings>
@@ -15862,6 +15864,11 @@
                         <instance-variable name="TableID" sid="432576912411061" type="number" />
                         <instance-variable name="ID" sid="884788275867409" type="string" />
                     </instance-variables>
+                    <behaviors>
+                        <behavior-type name="Pin" sid="273212605395411">
+                            <behavior id="Pin" />
+                        </behavior-type>
+                    </behaviors>
                 </object-type>
                 <object-type name="Text_Static2" sid="372591986771476">
                     <plugin id="Text" />
@@ -20260,6 +20267,18 @@
         <object-type name="TextBox" sid="385630925630317">
             <plugin id="TextBox" />
         </object-type>
+        <object-type name="BG_Black2" sid="668211345421201">
+            <plugin id="TiledBg" />
+            <behaviors>
+                <behavior-type name="DragDrop" sid="953704715102269">
+                    <behavior id="DragnDrop" />
+                </behavior-type>
+            </behaviors>
+            <texture />
+        </object-type>
+        <object-type name="Paster" sid="559488973052287">
+            <plugin id="rojoPaster" />
+        </object-type>
     </object-folder>
     <families>
         <family name="LevelTiles" plugin-id="TiledBg" sid="888312723616125">
@@ -20653,6 +20672,7 @@
         </layout-folder>
         <layout>__ObjectStorage.xml</layout>
         <layout>_LAUNCH.xml</layout>
+        <layout>_Pause.xml</layout>
     </layout-folder>
     <event-folder>
         <event-folder name="Menus">
@@ -20675,6 +20695,7 @@
             <event-sheet>E_1SpaceChase.xml</event-sheet>
         </event-folder>
         <event-sheet>E_GLOBAL.xml</event-sheet>
+        <event-sheet>E_Pause.xml</event-sheet>
     </event-folder>
     <global-instances>
         <global-instance type="Keyboard" uid="2" />

@@ -1,0 +1,631 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2eventsheet>
+    <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
+    <name>E_Pause</name>
+    <events>
+        <include>E_GLOBAL</include>
+        <event-group description="" sid="654370611723491" title="Pause management" />
+        <event-group description="" sid="182287631995814" title="Generic menus">
+            <sub-events>
+                <variable constant="0" name="lock" sid="740006658092469" static="1" type="number">0</variable>
+                <event-block sid="113126544337951">
+                    <conditions>
+                        <condition id="-4" name="Trigger once while true" sid="215662947608033" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="213603659125465" type="System">
+                            <param id="0" name="Variable">lock</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="142827726075535" type="System">
+                            <param id="0" name="Seconds">0.5</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="575111524643833" type="System">
+                            <param id="0" name="Variable">lock</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <variable constant="0" name="width" sid="601404256158934" static="0" type="number">440</variable>
+                <variable constant="0" name="start_function" sid="918030175642384" static="0" type="text">null</variable>
+                <variable constant="0" name="options" sid="267482684785663" static="1" type="number">0</variable>
+                <comment></comment>
+                <event-block sid="577381882194443">
+                    <conditions>
+                        <condition id="0" name="On function" sid="183277624243110" type="Function">
+                            <param id="0" name="Name">&quot;Menu_Start&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="746115715137235" type="Menu_Options2" />
+                        <action id="-9" name="Set value" sid="887137299060020" type="System">
+                            <param id="0" name="Variable">options</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="834462456386498">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="386233597602009" type="System">
+                                    <param id="0" name="First value">Function.ParamCount</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Call function" sid="294012623512620" type="Function">
+                                    <param id="0" name="Name">&quot;String_IsNumber&quot;</param>
+                                    <param id="1" name="Parameter {n}">Function.Param(0)</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="610871006475277">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="611828798673328" type="System">
+                                            <param id="0" name="First value">Function.ReturnValue</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="295296759456644" type="System">
+                                            <param id="0" name="Variable">start_function</param>
+                                            <param id="1" name="Value">Function.Param(0)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="904654404271875">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="432485430608805" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="852523545633120" type="System">
+                                            <param id="0" name="Variable">width</param>
+                                            <param id="1" name="Value">Function.Param(0)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="250580209104151">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="954774908864830" type="System">
+                                    <param id="0" name="First value">Function.ParamCount</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">2</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="191899414221443" type="System">
+                                    <param id="0" name="Variable">width</param>
+                                    <param id="1" name="Value">Function.Param(0)</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="489355627979660" type="System">
+                                    <param id="0" name="Variable">start_function</param>
+                                    <param id="1" name="Value">Function.Param(1)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="196821693186407">
+                            <conditions />
+                            <actions>
+                                <action id="-7" name="Set size" sid="114462082930117" type="BG_Black2">
+                                    <param id="0" name="Width">width</param>
+                                    <param id="1" name="Height">5</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="888333333700107" type="BG_Black2">
+                                    <param id="0" name="X">LayoutWidth/2</param>
+                                    <param id="1" name="Y">LayoutHeight/2-Self.Height/2</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment></comment>
+                <event-block sid="824183084954388">
+                    <conditions>
+                        <condition id="0" name="On function" sid="828634479861579" type="Function">
+                            <param id="0" name="Name">&quot;Menu_Label&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-3" name="Create object" sid="519445048539173" type="System">
+                            <param id="0" name="Object to create">Menu_Options2</param>
+                            <param id="1" name="Layer">&quot;BG&quot;</param>
+                            <param id="2" name="X">BG_Black2.BBoxLeft</param>
+                            <param id="3" name="Y">BG_Black2.BBoxTop + 5 + (Menu_Options2.Count*32) - 32</param>
+                        </action>
+                        <action id="-7" name="Set size" sid="383961070995289" type="Menu_Options2">
+                            <param id="0" name="Width">width</param>
+                            <param id="1" name="Height">35</param>
+                        </action>
+                        <action id="2" name="Set font face" sid="804169054911895" type="Menu_Options2">
+                            <param id="0" name="Font face">&quot;Arial&quot;</param>
+                            <param id="1" name="Style">0</param>
+                        </action>
+                        <action id="3" name="Set font size" sid="744841403267317" type="Menu_Options2">
+                            <param id="0" name="Size (pt)">18</param>
+                        </action>
+                        <action id="-30" name="Set from JSON" sid="888353455593381" type="Menu_Options2">
+                            <param id="0" name="JSON">replace(Self.AsJSON,&quot;&quot;&quot;ha&quot;&quot;:0&quot;,&quot;&quot;&quot;ha&quot;&quot;:1&quot;)</param>
+                        </action>
+                        <action id="0" name="Set text" sid="296811459817420" type="Menu_Options2">
+                            <param id="0" name="Text">Function.ParamCount &gt; 0 ? Function.Param(0) : &quot;&quot;</param>
+                        </action>
+                        <action id="4" name="Set font color" sid="788775657006747" type="Menu_Options2">
+                            <param id="0" name="Color">Function.ParamCount &gt; 1 ? Function.Param(1) : rgb(255, 0, 0)</param>
+                        </action>
+                        <action behavior="Pin" id="0" name="Pin to object" sid="191503231246375" type="Menu_Options2">
+                            <param id="0" name="Pin to">BG_Black2</param>
+                            <param id="1" name="Mode">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment></comment>
+                <event-block sid="460014993042199">
+                    <conditions>
+                        <condition id="0" name="On function" sid="350820966636385" type="Function">
+                            <param id="0" name="Name">&quot;Menu_Button&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-3" name="Create object" sid="577875581923127" type="System">
+                            <param id="0" name="Object to create">Menu_Options2</param>
+                            <param id="1" name="Layer">&quot;BG&quot;</param>
+                            <param id="2" name="X">BG_Black2.BBoxLeft</param>
+                            <param id="3" name="Y">BG_Black2.BBoxTop + 5 + (Menu_Options2.Count*32) - 32</param>
+                        </action>
+                        <action id="-7" name="Set size" sid="851773250875903" type="Menu_Options2">
+                            <param id="0" name="Width">width</param>
+                            <param id="1" name="Height">35</param>
+                        </action>
+                        <action id="2" name="Set font face" sid="327103873966085" type="Menu_Options2">
+                            <param id="0" name="Font face">&quot;Arial&quot;</param>
+                            <param id="1" name="Style">0</param>
+                        </action>
+                        <action id="3" name="Set font size" sid="410025657995173" type="Menu_Options2">
+                            <param id="0" name="Size (pt)">18</param>
+                        </action>
+                        <action id="-30" name="Set from JSON" sid="380744290928819" type="Menu_Options2">
+                            <param id="0" name="JSON">replace(Self.AsJSON,&quot;&quot;&quot;ha&quot;&quot;:0&quot;,&quot;&quot;&quot;ha&quot;&quot;:1&quot;)</param>
+                        </action>
+                        <action id="0" name="Set text" sid="810232704672540" type="Menu_Options2">
+                            <param id="0" name="Text">Function.Param(0)</param>
+                        </action>
+                        <action id="4" name="Set font color" sid="288902549999829" type="Menu_Options2">
+                            <param id="0" name="Color">rgb(255,0,0)</param>
+                        </action>
+                        <action id="-10" name="Add to" sid="419620098020807" type="System">
+                            <param id="0" name="Variable">options</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="156035316184248" type="Menu_Options2">
+                            <param id="0" name="Instance variable">TableID</param>
+                            <param id="1" name="Value">options</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="246041605269554" type="Menu_Options2">
+                            <param id="0" name="Instance variable">ID</param>
+                            <param id="1" name="Value">&quot;resume&quot;</param>
+                        </action>
+                        <action behavior="Pin" id="0" name="Pin to object" sid="333058164683343" type="Menu_Options2">
+                            <param id="0" name="Pin to">BG_Black2</param>
+                            <param id="1" name="Mode">0</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="239329591061976">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="759044756250371" type="System">
+                                    <param id="0" name="First value">Function.ParamCount</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">2</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Call function" sid="318505125744895" type="Function">
+                                    <param id="0" name="Name">&quot;String_IsNumber&quot;</param>
+                                    <param id="1" name="Parameter {n}">Function.Param(1)</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="547343373493655">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="858767832975013" type="System">
+                                            <param id="0" name="First value">Function.ReturnValue</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Set value" sid="701546401358303" type="Menu_Options2">
+                                            <param id="0" name="Instance variable">ID</param>
+                                            <param id="1" name="Value">Function.Param(1)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="844317644575580">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="557973996375267" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="4" name="Set font color" sid="656228800045572" type="Menu_Options2">
+                                            <param id="0" name="Color">Function.Param(1)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="152521415825288">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="405281289925128" type="System">
+                                    <param id="0" name="First value">Function.ParamCount</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">3</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set font color" sid="149406409889223" type="Menu_Options2">
+                                    <param id="0" name="Color">Function.Param(1)</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="698851461034695" type="Menu_Options2">
+                                    <param id="0" name="Instance variable">ID</param>
+                                    <param id="1" name="Value">Function.Param(2)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment></comment>
+                <event-block sid="579525198864523">
+                    <conditions>
+                        <condition id="0" name="On function" sid="169702577837144" type="Function">
+                            <param id="0" name="Name">&quot;Menu_End&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Set value" sid="562780642710411" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentMenu</param>
+                            <param id="1" name="Value">&quot;generic&quot;</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="859522752889306" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentSelection</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-7" name="Set size" sid="877696492994104" type="BG_Black2">
+                            <param id="0" name="Width">width</param>
+                            <param id="1" name="Height">5*2 + (Menu_Options2.Count*32) - 32</param>
+                        </action>
+                        <action id="-3" name="Set position" sid="145037989166131" type="BG_Black2">
+                            <param id="0" name="X">LayoutWidth/2</param>
+                            <param id="1" name="Y">LayoutHeight/2-Self.Height/2</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="795267413039671">
+                            <conditions>
+                                <condition id="-11" name="For Each" sid="924510121279027" type="System">
+                                    <param id="0" name="Object">Menu_Cursor</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-1" name="Set X" sid="790041018805563" type="Menu_Cursor">
+                                    <param id="0" name="X">loopindex = 0 ? (LayoutWidth/2)-(width/2)+25 : (LayoutWidth/2)+(width/2)-25</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment></comment>
+                <event-block sid="431115578451359">
+                    <conditions>
+                        <condition id="0" name="On function" sid="512005663962842" type="Function">
+                            <param id="0" name="Name">&quot;Menu_DoFunction&quot;</param>
+                        </condition>
+                        <condition id="1" inverted="1" name="Compare parameter" sid="104277906592818" type="Function">
+                            <param id="0" name="Index">0</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;null&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="444107227601485">
+                            <conditions>
+                                <condition id="1" name="Compare parameter" sid="483153379123483" type="Function">
+                                    <param id="0" name="Index">0</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;resume&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                        </event-block>
+                        <comment>move these specifically into E_Engine into a function named OnUnpause</comment>
+                        <event-block sid="479443636464605">
+                            <conditions>
+                                <condition id="1" name="Compare parameter" sid="919928472769539" type="Function">
+                                    <param id="0" name="Index">0</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;restart_checkpoint&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                        </event-block>
+                        <event-block sid="908047755766691">
+                            <conditions>
+                                <condition id="1" name="Compare parameter" sid="657166150140810" type="Function">
+                                    <param id="0" name="Index">0</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;restart_level&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                        </event-block>
+                        <event-block sid="606377400287725">
+                            <conditions>
+                                <condition id="1" name="Compare parameter" sid="707861773085468" type="Function">
+                                    <param id="0" name="Index">0</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;exit&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment></comment>
+                <event-block sid="961144258667516">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="526158772525749" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentMenu</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;generic&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="969366522100956">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="701254417005405" type="System">
+                                    <param id="0" name="First value">Var_Input.Up = 1 | Var_Input.Down = 1</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">1</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="489833488201580" type="System" />
+                                <condition id="-14" name="Compare variable" sid="641235147746616" type="System">
+                                    <param id="0" name="Variable">lock</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Call function" sid="898834574943736" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;Menu&quot;</param>
+                                </action>
+                                <action id="0" name="Call function" sid="942544310294740" type="Function">
+                                    <param id="0" name="Name">&quot;Math_Wrap&quot;</param>
+                                    <param id="1" name="Parameter {n}">Var_Game.CurrentSelection + (Var_Input.Down - Var_Input.Up){###}1{###}options</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="217999768300609" type="Var_Game">
+                                    <param id="0" name="Instance variable">CurrentSelection</param>
+                                    <param id="1" name="Value">Function.ReturnValue</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="576025319411754">
+                            <conditions>
+                                <condition id="-8" name="Is boolean instance variable set" sid="134011703595164" type="Var_Input">
+                                    <param id="0" name="Instance variable">Start</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="949404565811009" type="System" />
+                                <condition id="-14" name="Compare variable" sid="183786663935045" type="System">
+                                    <param id="0" name="Variable">lock</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Call function" sid="907812598314947" type="Function">
+                                    <param id="0" name="Name">&quot;Menu_DoFunction&quot;</param>
+                                    <param id="1" name="Parameter {n}">start_function</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="857216066187353">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="527515091094537" type="Menu_Options2">
+                                    <param id="0" name="Instance variable">TableID</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">Var_Game.CurrentSelection</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Set Y" sid="170937480498108" type="Menu_Cursor">
+                                    <param id="0" name="Y">Menu_Options2.Y+15</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="578299027414025">
+                                    <conditions>
+                                        <condition id="-8" name="Is boolean instance variable set" sid="308288811500114" type="Var_Input">
+                                            <param id="0" name="Instance variable">A</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="246926743197496" type="System" />
+                                        <condition id="-14" name="Compare variable" sid="558000008464922" type="System">
+                                            <param id="0" name="Variable">lock</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="114297472511621" type="Function">
+                                            <param id="0" name="Name">&quot;Menu_DoFunction&quot;</param>
+                                            <param id="1" name="Parameter {n}">Menu_Options2.ID</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="208225542263575" title="Pause menu">
+            <sub-events>
+                <event-block sid="697486122928551">
+                    <conditions>
+                        <condition id="-4" name="Trigger once while true" sid="757290905080522" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Wait" sid="245166145358433" type="System">
+                            <param id="0" name="Seconds">0</param>
+                        </action>
+                        <action id="9" name="Load texture from canvas" sid="703752069963544" type="Paster" />
+                    </actions>
+                </event-block>
+                <comment>init</comment>
+                <event-block sid="403523510669752">
+                    <conditions>
+                        <condition id="-4" name="Trigger once while true" sid="497874054519263" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="33" name="Stop all" sid="218499610591001" type="BetterAudio" />
+                    </actions>
+                    <sub-events>
+                        <comment>totals</comment>
+                        <event-block sid="731126418091717">
+                            <conditions />
+                            <actions>
+                                <action id="0" name="Set text" sid="507810463389419" type="HUD_PauseTotalScore">
+                                    <param id="0" name="Text">&quot;TOTAL SCORE: &quot;&amp;Var_Player.TotalScore</param>
+                                </action>
+                                <action id="0" name="Set text" sid="373561122715540" type="HUD_PauseTotalDeaths">
+                                    <param id="0" name="Text">&quot;DEATHS: &quot;&amp;Var_Player.TotalDeaths</param>
+                                </action>
+                                <action id="-5" name="Set width" sid="767591047898410" type="ResultsSpecial_Emeralds">
+                                    <param id="0" name="Width">40*Var_Game.Emeralds</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="164581865337521">
+                            <conditions />
+                            <actions>
+                                <action id="-15" name="Set visible" sid="735410562032139" type="HUD_PauseTotalScore">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="715985080548493" type="HUD_PauseScoreBG">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="286557958788753" type="HUD_PauseEmeraldsBG">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="637209757036005" type="ResultsSpecial_Emeralds">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="460738591427216" type="ResultsSpecial_BG">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block any="1" sid="363523091484725">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="198612923214114" type="Var_Game">
+                                    <param id="0" name="Instance variable">Gamemode</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;Singleplayer&quot;</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="315171574559528" type="Var_Game">
+                                    <param id="0" name="Instance variable">Gamemode</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;Marathon&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-15" name="Set visible" sid="978623633303794" type="HUD_PauseTotalScore">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="397500589041549" type="HUD_PauseScoreBG">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="967609302645036">
+                            <conditions>
+                                <condition id="-8" inverted="1" name="Compare two values" sid="281369779069747" type="System">
+                                    <param id="0" name="First value">find(Var_Game.RecentLevel,&quot;2_&quot;)</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">-1</param>
+                                </condition>
+                                <condition id="-7" name="Compare instance variable" sid="327859099928722" type="Var_Game">
+                                    <param id="0" name="Instance variable">Gamemode</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;Singleplayer&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-15" name="Set visible" sid="744909046785591" type="HUD_PauseEmeraldsBG">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="982327732099267" type="ResultsSpecial_Emeralds">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="182431750095567" type="ResultsSpecial_BG">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="221684885278330">
+                            <conditions />
+                            <actions>
+                                <action id="0" name="Call function" sid="550823665086951" type="Function">
+                                    <param id="0" name="Name">&quot;Menu_Start&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;resume&quot;</param>
+                                </action>
+                                <action id="0" name="Call function" sid="696927085059446" type="Function">
+                                    <param id="0" name="Name">&quot;Menu_Label&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;&gt; - PAUSED - &lt;&quot;{###}rgb(255,255,0)</param>
+                                </action>
+                                <action id="0" name="Call function" sid="525571252128714" type="Function">
+                                    <param id="0" name="Name">&quot;Menu_Label&quot;</param>
+                                    <param id="1" name="Parameter {n}"></param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="119892374423528">
+                                    <conditions />
+                                    <actions>
+                                        <action id="0" name="Call function" sid="932098802669441" type="Function">
+                                            <param id="0" name="Name">&quot;Menu_Button&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;RESUME&quot;</param>
+                                        </action>
+                                        <action id="0" name="Call function" sid="795610493881740" type="Function">
+                                            <param id="0" name="Name">&quot;Menu_Button&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;RESTART FROM CHECKPOINT&quot;{###}&quot;restart_checkpoint&quot;</param>
+                                        </action>
+                                        <action id="0" name="Call function" sid="819282208912618" type="Function">
+                                            <param id="0" name="Name">&quot;Menu_Button&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;RESTART LEVEL&quot;{###}&quot;restart_level&quot;</param>
+                                        </action>
+                                        <action id="0" name="Call function" sid="673416938295424" type="Function">
+                                            <param id="0" name="Name">&quot;Menu_Button&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;EXIT TO MAIN MENU&quot;{###}&quot;exit&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="591963712385901">
+                                    <conditions />
+                                    <actions>
+                                        <action id="0" name="Call function" sid="901688031538553" type="Function">
+                                            <param id="0" name="Name">&quot;Menu_End&quot;</param>
+                                            <param id="1" name="Parameter {n}"></param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
+    </events>
+</c2eventsheet>
