@@ -30,6 +30,10 @@
                                 <condition id="-2" name="On start of layout" sid="739947339122373" type="System" />
                             </conditions>
                             <actions>
+                                <action id="-10" name="Set value" sid="270585911552295" type="Var_Game">
+                                    <param id="0" name="Instance variable">RecentLevel</param>
+                                    <param id="1" name="Value">LayoutName</param>
+                                </action>
                                 <action id="-10" name="Set value" sid="398006358089218" type="Engine_Player">
                                     <param id="0" name="Instance variable">InitialSpeed</param>
                                     <param id="1" name="Value">Self.Platform.MaxSpeed</param>
@@ -16416,6 +16420,388 @@
         </event-group>
         <event-group description="" sid="959262536033223" title="Pause">
             <sub-events>
+                <event-block sid="995727703424808">
+                    <conditions>
+                        <condition id="-8" name="Is boolean instance variable set" sid="367473364041780" type="Var_Input">
+                            <param id="0" name="Instance variable">Start</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="146229202867460" type="System" />
+                        <condition id="-7" name="Compare instance variable" sid="167133670712266" type="Var_Player">
+                            <param id="0" name="Instance variable">Finished</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                        <condition behavior="LiteTween" id="1" name="Compare progress" sid="322737173240077" type="HUD_TitleCardBG">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-36" name="Save" sid="189065102524606" type="System">
+                            <param id="0" name="Slot">&quot;unpause&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="227258562312390">
+                    <conditions>
+                        <condition id="-28" name="On save complete" sid="416030489379571" type="System" />
+                    </conditions>
+                    <actions>
+                        <action disabled="1" id="-13" name="Set boolean" sid="610054655641019" type="Var_Level">
+                            <param id="0" name="Instance variable">Pause</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="0" name="Call function" sid="547428677879683" type="Function">
+                            <param id="0" name="Name">&quot;Discord_RichPresence_Update&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
+                        </action>
+                        <action id="-2" name="Go to layout" sid="640650570267552" type="System">
+                            <param id="0" name="Layout">_Pause</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="817367719457948">
+                    <conditions>
+                        <condition id="-29" name="On load complete" sid="898170586566497" type="System" />
+                    </conditions>
+                    <actions>
+                        <action disabled="1" id="-13" name="Set boolean" sid="545843521778427" type="Var_Level">
+                            <param id="0" name="Instance variable">Pause</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="0" name="Call function" sid="528054896107124" type="Function">
+                            <param id="0" name="Name">&quot;Discord_RichPresence_Update&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="736546265584193">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="714686377834022" type="Var_Player">
+                                    <param id="0" name="Instance variable">DrowningCounter</param>
+                                    <param id="1" name="Comparison">4</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="22" name="Set paused" sid="674855201719359" type="BetterAudio">
+                                    <param id="0" name="Tag">&quot;music&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="513647329341103">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="783229641797588" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="22" name="Set paused" sid="253430360221996" type="BetterAudio">
+                                    <param id="0" name="Tag">&quot;drowning&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="662124245317859">
+                            <conditions>
+                                <condition id="6" name="Compare value" sid="889777342710589" type="JS">
+                                    <param id="0" name="Value">1</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Expression">&quot;Storages.sessionStorage.isSet&quot;</param>
+                                    <param id="3" name="Parameter {n}">&quot;UnpauseState&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="6" name="Call function" sid="730315442757588" type="JS">
+                                    <param id="0" name="Expression">&quot;Storages.sessionStorage.get&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;UnpauseState&quot;</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <comment></comment>
+                                <event-block sid="680433832844621">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="435381634709213" type="System">
+                                            <param id="0" name="First value">JS.StoredReturnValue</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">&quot;restart_checkpoint&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-11" name="Add to" sid="522257815129572" type="Var_Player">
+                                            <param id="0" name="Instance variable">TotalDeaths</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-11" name="Add to" sid="836183229695435" type="Var_Player">
+                                            <param id="0" name="Instance variable">Deaths</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="0" name="Call function" sid="386591218982218" type="Function">
+                                            <param id="0" name="Name">&quot;Player_Restart&quot;</param>
+                                            <param id="1" name="Parameter {n}"></param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="134206554211084">
+                                            <conditions>
+                                                <condition id="-7" name="Compare instance variable" sid="768367496000780" type="Var_Player">
+                                                    <param id="0" name="Instance variable">Lives</param>
+                                                    <param id="1" name="Comparison">4</param>
+                                                    <param id="2" name="Value">1</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-12" name="Subtract from" sid="577317260917651" type="Var_Player">
+                                                    <param id="0" name="Instance variable">Lives</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <comment></comment>
+                                <event-block sid="585919175036395">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="322493460891700" type="System">
+                                            <param id="0" name="First value">JS.StoredReturnValue</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">&quot;restart_level&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Set value" sid="683936480728589" type="Var_Player">
+                                            <param id="0" name="Instance variable">Checkpoint</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                        <action id="4" name="Set animation" sid="213675890393064" type="ObjectF_Checkpoint">
+                                            <param id="0" name="Animation">&quot;Idle&quot;</param>
+                                            <param id="1" name="From">1</param>
+                                        </action>
+                                        <action id="-2" name="Set Y" sid="947637607306438" type="Special_Checkpoint">
+                                            <param id="0" name="Y">Self.InitialY</param>
+                                        </action>
+                                        <action id="-3" name="Set position" sid="588650829337406" type="Special_StartPos">
+                                            <param id="0" name="X">Self.InitialX</param>
+                                            <param id="1" name="Y">Self.InitialY</param>
+                                        </action>
+                                        <action id="-11" name="Add to" sid="399343888859499" type="Var_Player">
+                                            <param id="0" name="Instance variable">TotalDeaths</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-11" name="Add to" sid="457042358634117" type="Var_Player">
+                                            <param id="0" name="Instance variable">Deaths</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="0" name="Call function" sid="135731137337348" type="Function">
+                                            <param id="0" name="Name">&quot;Player_Restart&quot;</param>
+                                            <param id="1" name="Parameter {n}"></param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="925032146696212">
+                                            <conditions>
+                                                <condition id="-7" name="Compare instance variable" sid="164979486343398" type="Var_Player">
+                                                    <param id="0" name="Instance variable">Lives</param>
+                                                    <param id="1" name="Comparison">4</param>
+                                                    <param id="2" name="Value">1</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-12" name="Subtract from" sid="848972709115328" type="Var_Player">
+                                                    <param id="0" name="Instance variable">Lives</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <comment></comment>
+                                <event-block sid="273568407114523">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="366828793646764" type="System">
+                                            <param id="0" name="First value">JS.StoredReturnValue</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">&quot;exit&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="621894334529259" type="Function">
+                                            <param id="0" name="Name">&quot;Player_ResetVars&quot;</param>
+                                            <param id="1" name="Parameter {n}"></param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="774916260894325">
+                                            <conditions>
+                                                <condition id="-7" inverted="1" name="Compare instance variable" sid="757165905850813" type="Var_Game">
+                                                    <param id="0" name="Instance variable">Gamemode</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">&quot;Marathon&quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions />
+                                            <sub-events>
+                                                <event-block sid="160569312766820">
+                                                    <conditions>
+                                                        <condition id="-7" name="Compare instance variable" sid="437054073033682" type="Var_Level">
+                                                            <param id="0" name="Instance variable">Level_Game</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Value">1</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-2" name="Go to layout" sid="650617616078345" type="System">
+                                                            <param id="0" name="Layout">Menu_SRB1</param>
+                                                        </action>
+                                                        <action id="-10" name="Set value" sid="347725480743678" type="Var_Game">
+                                                            <param id="0" name="Instance variable">CurrentMenu</param>
+                                                            <param id="1" name="Value">&quot;main&quot;</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="664298658451218">
+                                                    <conditions>
+                                                        <condition id="-7" name="Compare instance variable" sid="287052602927750" type="Var_Level">
+                                                            <param id="0" name="Instance variable">Level_Game</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Value">2</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions />
+                                                    <sub-events>
+                                                        <event-block any="1" sid="836889356714312">
+                                                            <conditions>
+                                                                <condition id="-8" inverted="1" name="Compare two values" sid="663853678294851" type="System">
+                                                                    <param id="0" name="First value">find(LayoutName,&quot;E15_&quot;)</param>
+                                                                    <param id="1" name="Comparison">0</param>
+                                                                    <param id="2" name="Second value">-1</param>
+                                                                </condition>
+                                                                <condition id="-8" inverted="1" name="Compare two values" sid="187333804246024" type="System">
+                                                                    <param id="0" name="First value">find(LayoutName,&quot;E1Sp_&quot;)</param>
+                                                                    <param id="1" name="Comparison">0</param>
+                                                                    <param id="2" name="Second value">-1</param>
+                                                                </condition>
+                                                            </conditions>
+                                                            <actions>
+                                                                <action id="-2" name="Go to layout" sid="358394073200071" type="System">
+                                                                    <param id="0" name="Layout">Menu_Main</param>
+                                                                </action>
+                                                                <action id="-10" name="Set value" sid="541458018378464" type="Var_Game">
+                                                                    <param id="0" name="Instance variable">CurrentMenu</param>
+                                                                    <param id="1" name="Value">&quot;extralevels&quot;</param>
+                                                                </action>
+                                                                <action id="0" name="Call function" sid="500774763856163" type="Function">
+                                                                    <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
+                                                                    <param id="1" name="Parameter {n}">&quot;F_ExtraLevels&quot;{###}&quot;music&quot;{###}1</param>
+                                                                </action>
+                                                            </actions>
+                                                        </event-block>
+                                                        <event-block sid="977682212607643">
+                                                            <conditions>
+                                                                <condition id="-8" name="Compare two values" sid="404428971100059" type="System">
+                                                                    <param id="0" name="First value">find(LayoutName,&quot;E15_&quot;)</param>
+                                                                    <param id="1" name="Comparison">0</param>
+                                                                    <param id="2" name="Second value">-1</param>
+                                                                </condition>
+                                                                <condition id="-8" name="Compare two values" sid="542334761437739" type="System">
+                                                                    <param id="0" name="First value">find(LayoutName,&quot;E1Sp_&quot;)</param>
+                                                                    <param id="1" name="Comparison">0</param>
+                                                                    <param id="2" name="Second value">-1</param>
+                                                                </condition>
+                                                            </conditions>
+                                                            <actions>
+                                                                <action id="-2" name="Go to layout" sid="322310103532667" type="System">
+                                                                    <param id="0" name="Layout">Menu_SRB2</param>
+                                                                </action>
+                                                                <action id="-10" name="Set value" sid="437279963110430" type="Var_Game">
+                                                                    <param id="0" name="Instance variable">CurrentMenu</param>
+                                                                    <param id="1" name="Value">&quot;main&quot;</param>
+                                                                </action>
+                                                            </actions>
+                                                        </event-block>
+                                                    </sub-events>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                        <comment>abandon marathon, but still show results</comment>
+                                        <event-block sid="633281104013054">
+                                            <conditions>
+                                                <condition id="-7" name="Compare instance variable" sid="923916081104764" type="Var_Game">
+                                                    <param id="0" name="Instance variable">Gamemode</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">&quot;Marathon&quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions />
+                                            <sub-events>
+                                                <event-block sid="468888523758027">
+                                                    <conditions>
+                                                        <condition id="-8" name="Compare two values" sid="569084267159037" type="System">
+                                                            <param id="0" name="First value">(JSON__TEMP.Size(0, &quot;Levels&quot;) - Queue_LevelList.Length)</param>
+                                                            <param id="1" name="Comparison">4</param>
+                                                            <param id="2" name="Second value">1</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-2" name="Go to layout" sid="978307761085846" type="System">
+                                                            <param id="0" name="Layout">Menu_Cutscenes</param>
+                                                        </action>
+                                                        <action id="-10" name="Set value" sid="398188548562418" type="Var_Game">
+                                                            <param id="0" name="Instance variable">CurrentMenu</param>
+                                                            <param id="1" name="Value">&quot;gameover&quot;</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="864089582059184">
+                                                    <conditions>
+                                                        <condition id="-22" name="Else" sid="157083212207575" type="System" />
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-2" name="Go to layout" sid="896701291850089" type="System">
+                                                            <param id="0" name="Layout">Menu_Main</param>
+                                                        </action>
+                                                        <action id="-10" name="Set value" sid="571514482441923" type="Var_Game">
+                                                            <param id="0" name="Instance variable">CurrentMenu</param>
+                                                            <param id="1" name="Value">&quot;marathon&quot;</param>
+                                                        </action>
+                                                        <action id="0" name="Call function" sid="646577412236767" type="Function">
+                                                            <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
+                                                            <param id="1" name="Parameter {n}">&quot;F_BonusModes&quot;{###}&quot;music&quot;{###}1</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="851983365783015">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="888564896088590" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="14" name="Log" sid="225741859197771" type="Browser">
+                                    <param id="0" name="Type">2</param>
+                                    <param id="1" name="Message">&quot;UnpauseState load failed!&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="439817147590864">
+                    <conditions>
+                        <condition id="-43" name="On save failed" sid="208930452313438" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="14" name="Log" sid="175306165970523" type="Browser">
+                            <param id="0" name="Type">2</param>
+                            <param id="1" name="Message">&quot;Pause savestate failed!&quot;</param>
+                        </action>
+                        <action id="0" name="Alert" sid="885105641423836" type="Browser">
+                            <param id="0" name="Message">&quot;Pause savestate failed!&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
                 <comment>totals in pause menu</comment>
                 <event-block sid="974868191891832">
                     <conditions />
@@ -16432,7 +16818,7 @@
                     </actions>
                 </event-block>
                 <comment>toggle pause</comment>
-                <event-block sid="124315687257886">
+                <event-block disabled="1" sid="124315687257886">
                     <conditions>
                         <condition id="-8" name="Is boolean instance variable set" sid="870360334324974" type="Var_Input">
                             <param id="0" name="Instance variable">Start</param>
@@ -16458,7 +16844,7 @@
                     </actions>
                 </event-block>
                 <comment>unpause game</comment>
-                <event-block sid="914700913880900">
+                <event-block disabled="1" sid="914700913880900">
                     <conditions>
                         <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="272754868801228" type="Var_Level">
                             <param id="0" name="Instance variable">Pause</param>
@@ -16483,7 +16869,7 @@
                         <action id="-9" name="Destroy" sid="228104574641423" type="EffectsF_ProjectileTrail" />
                     </actions>
                     <sub-events>
-                        <event-block sid="455886534624031">
+                        <event-block disabled="1" sid="455886534624031">
                             <conditions>
                                 <condition id="-7" name="Compare instance variable" sid="669227924574472" type="Var_Player">
                                     <param id="0" name="Instance variable">State</param>
@@ -16497,7 +16883,7 @@
                                 </action>
                             </actions>
                         </event-block>
-                        <event-block sid="469509156226333">
+                        <event-block disabled="1" sid="469509156226333">
                             <conditions>
                                 <condition id="-7" inverted="1" name="Compare instance variable" sid="569504227207612" type="Var_Player">
                                     <param id="0" name="Instance variable">State</param>
@@ -16511,7 +16897,7 @@
                                 </action>
                             </actions>
                         </event-block>
-                        <event-block sid="522978460490448">
+                        <event-block disabled="1" sid="522978460490448">
                             <conditions />
                             <actions>
                                 <action id="-15" name="Set visible" sid="310692955587259" type="HUD_Pause">
@@ -16546,7 +16932,7 @@
                                 </action>
                             </actions>
                         </event-block>
-                        <event-block sid="579754408573362">
+                        <event-block disabled="1" sid="579754408573362">
                             <conditions>
                                 <condition id="-7" name="Compare instance variable" sid="913041046876830" type="Var_Game">
                                     <param id="0" name="Instance variable">TimerGlobal</param>
@@ -16565,7 +16951,7 @@
                                 </action>
                             </actions>
                         </event-block>
-                        <event-block sid="859831503882381">
+                        <event-block disabled="1" sid="859831503882381">
                             <conditions>
                                 <condition id="-7" name="Compare instance variable" sid="510726075602392" type="Var_Player">
                                     <param id="0" name="Instance variable">DrowningCounter</param>
@@ -16583,7 +16969,7 @@
                     </sub-events>
                 </event-block>
                 <comment>pause game</comment>
-                <event-block sid="489181241020869">
+                <event-block disabled="1" sid="489181241020869">
                     <conditions>
                         <condition id="-8" name="Is boolean instance variable set" sid="197339362067472" type="Var_Level">
                             <param id="0" name="Instance variable">Pause</param>
@@ -16711,7 +17097,7 @@
                     </sub-events>
                 </event-block>
                 <comment>the pause menu itself</comment>
-                <event-block sid="690665977863509">
+                <event-block disabled="1" sid="690665977863509">
                     <conditions>
                         <condition id="-8" name="Is boolean instance variable set" sid="415753889853925" type="Var_Level">
                             <param id="0" name="Instance variable">Pause</param>
@@ -16719,7 +17105,7 @@
                     </conditions>
                     <actions />
                     <sub-events>
-                        <event-block sid="888137655639766">
+                        <event-block disabled="1" sid="888137655639766">
                             <conditions>
                                 <condition id="-4" name="Trigger once while true" sid="824043149545857" type="System" />
                             </conditions>
@@ -16730,7 +17116,7 @@
                                 </action>
                             </actions>
                         </event-block>
-                        <event-block sid="218730208527608">
+                        <event-block disabled="1" sid="218730208527608">
                             <conditions>
                                 <condition id="-8" name="Is boolean instance variable set" sid="484290329661040" type="Var_Input">
                                     <param id="0" name="Instance variable">Up</param>
@@ -16748,7 +17134,7 @@
                                 </action>
                             </actions>
                         </event-block>
-                        <event-block sid="812687694486292">
+                        <event-block disabled="1" sid="812687694486292">
                             <conditions>
                                 <condition id="-8" name="Is boolean instance variable set" sid="266908241009065" type="Var_Input">
                                     <param id="0" name="Instance variable">Down</param>
@@ -16766,7 +17152,7 @@
                                 </action>
                             </actions>
                         </event-block>
-                        <event-block sid="137002448171813">
+                        <event-block disabled="1" sid="137002448171813">
                             <conditions>
                                 <condition id="-7" name="Compare instance variable" sid="356139515265338" type="Var_Game">
                                     <param id="0" name="Instance variable">CurrentSelection</param>
@@ -16781,7 +17167,7 @@
                                 </action>
                             </actions>
                         </event-block>
-                        <event-block sid="127264546594924">
+                        <event-block disabled="1" sid="127264546594924">
                             <conditions>
                                 <condition id="-7" name="Compare instance variable" sid="733698061314115" type="Var_Game">
                                     <param id="0" name="Instance variable">CurrentSelection</param>
@@ -16797,7 +17183,7 @@
                             </actions>
                         </event-block>
                         <comment>resume</comment>
-                        <event-block sid="493190987949457">
+                        <event-block disabled="1" sid="493190987949457">
                             <conditions>
                                 <condition id="-7" name="Compare instance variable" sid="240265560886910" type="Var_Game">
                                     <param id="0" name="Instance variable">CurrentSelection</param>
@@ -16811,7 +17197,7 @@
                                 </action>
                             </actions>
                             <sub-events>
-                                <event-block sid="272801431780723">
+                                <event-block disabled="1" sid="272801431780723">
                                     <conditions>
                                         <condition id="-8" name="Is boolean instance variable set" sid="185405536559247" type="Var_Input">
                                             <param id="0" name="Instance variable">A</param>
@@ -16828,7 +17214,7 @@
                             </sub-events>
                         </event-block>
                         <comment>restart from checkpoint</comment>
-                        <event-block sid="102344252705084">
+                        <event-block disabled="1" sid="102344252705084">
                             <conditions>
                                 <condition id="-7" name="Compare instance variable" sid="740906794301276" type="Var_Game">
                                     <param id="0" name="Instance variable">CurrentSelection</param>
@@ -16842,7 +17228,7 @@
                                 </action>
                             </actions>
                             <sub-events>
-                                <event-block sid="216620783770589">
+                                <event-block disabled="1" sid="216620783770589">
                                     <conditions>
                                         <condition id="-8" name="Is boolean instance variable set" sid="852120071600618" type="Var_Input">
                                             <param id="0" name="Instance variable">A</param>
@@ -16851,7 +17237,7 @@
                                     </conditions>
                                     <actions />
                                     <sub-events>
-                                        <event-block any="1" sid="221681472901586">
+                                        <event-block any="1" disabled="1" sid="221681472901586">
                                             <conditions>
                                                 <condition id="-7" name="Compare instance variable" sid="877481458207321" type="Var_Player">
                                                     <param id="0" name="Instance variable">Lives</param>
@@ -16879,7 +17265,7 @@
                                                 </action>
                                             </actions>
                                             <sub-events>
-                                                <event-block sid="698962129451019">
+                                                <event-block disabled="1" sid="698962129451019">
                                                     <conditions>
                                                         <condition id="-7" name="Compare instance variable" sid="632475111071142" type="Var_Player">
                                                             <param id="0" name="Instance variable">Lives</param>
@@ -16896,7 +17282,7 @@
                                                 </event-block>
                                             </sub-events>
                                         </event-block>
-                                        <event-block sid="248508688171542">
+                                        <event-block disabled="1" sid="248508688171542">
                                             <conditions>
                                                 <condition id="-22" name="Else" sid="719068664582290" type="System" />
                                             </conditions>
@@ -16912,7 +17298,7 @@
                             </sub-events>
                         </event-block>
                         <comment>restart the whole level</comment>
-                        <event-block sid="620093560764093">
+                        <event-block disabled="1" sid="620093560764093">
                             <conditions>
                                 <condition id="-7" name="Compare instance variable" sid="622730758631770" type="Var_Game">
                                     <param id="0" name="Instance variable">CurrentSelection</param>
@@ -16926,7 +17312,7 @@
                                 </action>
                             </actions>
                             <sub-events>
-                                <event-block sid="432168190026957">
+                                <event-block disabled="1" sid="432168190026957">
                                     <conditions>
                                         <condition id="-8" name="Is boolean instance variable set" sid="206015836581265" type="Var_Input">
                                             <param id="0" name="Instance variable">A</param>
@@ -16935,7 +17321,7 @@
                                     </conditions>
                                     <actions />
                                     <sub-events>
-                                        <event-block any="1" sid="792826194528651">
+                                        <event-block any="1" disabled="1" sid="792826194528651">
                                             <conditions>
                                                 <condition id="-7" name="Compare instance variable" sid="585501412675425" type="Var_Player">
                                                     <param id="0" name="Instance variable">Lives</param>
@@ -16981,7 +17367,7 @@
                                                 </action>
                                             </actions>
                                             <sub-events>
-                                                <event-block sid="203446236284286">
+                                                <event-block disabled="1" sid="203446236284286">
                                                     <conditions>
                                                         <condition id="-7" name="Compare instance variable" sid="160143057847462" type="Var_Player">
                                                             <param id="0" name="Instance variable">Lives</param>
@@ -16998,7 +17384,7 @@
                                                 </event-block>
                                             </sub-events>
                                         </event-block>
-                                        <event-block sid="389539945618480">
+                                        <event-block disabled="1" sid="389539945618480">
                                             <conditions>
                                                 <condition id="-22" name="Else" sid="876737682485462" type="System" />
                                             </conditions>
@@ -17014,7 +17400,7 @@
                             </sub-events>
                         </event-block>
                         <comment>exit to main menu</comment>
-                        <event-block sid="685087879358584">
+                        <event-block disabled="1" sid="685087879358584">
                             <conditions>
                                 <condition id="-7" name="Compare instance variable" sid="264890321872902" type="Var_Game">
                                     <param id="0" name="Instance variable">CurrentSelection</param>
@@ -17028,7 +17414,7 @@
                                 </action>
                             </actions>
                             <sub-events>
-                                <event-block sid="808445188815402">
+                                <event-block disabled="1" sid="808445188815402">
                                     <conditions>
                                         <condition id="-8" name="Is boolean instance variable set" sid="560618681172238" type="Var_Input">
                                             <param id="0" name="Instance variable">A</param>
@@ -17042,7 +17428,7 @@
                                         </action>
                                     </actions>
                                     <sub-events>
-                                        <event-block sid="422049166865579">
+                                        <event-block disabled="1" sid="422049166865579">
                                             <conditions>
                                                 <condition id="-7" inverted="1" name="Compare instance variable" sid="529912131707327" type="Var_Game">
                                                     <param id="0" name="Instance variable">Gamemode</param>
@@ -17052,7 +17438,7 @@
                                             </conditions>
                                             <actions />
                                             <sub-events>
-                                                <event-block sid="653442580037252">
+                                                <event-block disabled="1" sid="653442580037252">
                                                     <conditions>
                                                         <condition id="-7" name="Compare instance variable" sid="856416962979369" type="Var_Level">
                                                             <param id="0" name="Instance variable">Level_Game</param>
@@ -17070,7 +17456,7 @@
                                                         </action>
                                                     </actions>
                                                 </event-block>
-                                                <event-block sid="158677452351349">
+                                                <event-block disabled="1" sid="158677452351349">
                                                     <conditions>
                                                         <condition id="-7" name="Compare instance variable" sid="908584808800064" type="Var_Level">
                                                             <param id="0" name="Instance variable">Level_Game</param>
@@ -17080,7 +17466,7 @@
                                                     </conditions>
                                                     <actions />
                                                     <sub-events>
-                                                        <event-block any="1" sid="987692866186684">
+                                                        <event-block any="1" disabled="1" sid="987692866186684">
                                                             <conditions>
                                                                 <condition id="-8" inverted="1" name="Compare two values" sid="104740488993142" type="System">
                                                                     <param id="0" name="First value">find(LayoutName,&quot;E15_&quot;)</param>
@@ -17107,7 +17493,7 @@
                                                                 </action>
                                                             </actions>
                                                         </event-block>
-                                                        <event-block sid="649508432973912">
+                                                        <event-block disabled="1" sid="649508432973912">
                                                             <conditions>
                                                                 <condition id="-8" name="Compare two values" sid="944393575438246" type="System">
                                                                     <param id="0" name="First value">find(LayoutName,&quot;E15_&quot;)</param>
@@ -17134,7 +17520,7 @@
                                                 </event-block>
                                             </sub-events>
                                         </event-block>
-                                        <event-block sid="300742362790268">
+                                        <event-block disabled="1" sid="300742362790268">
                                             <conditions>
                                                 <condition id="-7" name="Compare instance variable" sid="542764035978053" type="Var_Game">
                                                     <param id="0" name="Instance variable">Gamemode</param>
@@ -17145,7 +17531,7 @@
                                             <actions />
                                             <sub-events>
                                                 <comment>abandon marathon, but still show results</comment>
-                                                <event-block sid="282943778712861">
+                                                <event-block disabled="1" sid="282943778712861">
                                                     <conditions>
                                                         <condition id="-8" name="Compare two values" sid="262127853413348" type="System">
                                                             <param id="0" name="First value">(JSON__TEMP.Size(0, &quot;Levels&quot;) - Queue_LevelList.Length)</param>
@@ -17163,7 +17549,7 @@
                                                         </action>
                                                     </actions>
                                                 </event-block>
-                                                <event-block sid="394212795455756">
+                                                <event-block disabled="1" sid="394212795455756">
                                                     <conditions>
                                                         <condition id="-22" name="Else" sid="649875902608608" type="System" />
                                                     </conditions>

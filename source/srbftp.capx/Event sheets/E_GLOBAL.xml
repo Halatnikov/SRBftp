@@ -225,6 +225,10 @@
                                 <condition id="-4" name="Trigger once while true" sid="481528135760012" type="System" />
                             </conditions>
                             <actions>
+                                <action id="14" name="Log" sid="375833844924612" type="Browser">
+                                    <param id="0" name="Type">0</param>
+                                    <param id="1" name="Message">&quot;not initialized files&quot;</param>
+                                </action>
                                 <action id="1" name="Request project file" sid="522713947354922" type="AJAX">
                                     <param id="0" name="Tag">&quot;keycodes&quot;</param>
                                     <param id="1" name="File">keycodes.ini</param>
@@ -254,33 +258,154 @@
                                 <event-block sid="457864977661605">
                                     <conditions />
                                     <actions>
-                                        <action id="1" name="Request project file" sid="862672173943352" type="AJAX">
-                                            <param id="0" name="Tag">&quot;js.storage.min.js&quot;</param>
-                                            <param id="1" name="File">js.storage.min.js</param>
+                                        <action id="14" name="Log" sid="805671269295812" type="Browser">
+                                            <param id="0" name="Type">0</param>
+                                            <param id="1" name="Message">&quot;first js load&quot;</param>
+                                        </action>
+                                        <action id="0" name="Call function" sid="245222463513540" type="Function">
+                                            <param id="0" name="Name">&quot;JS_Load&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;js.storage.min.js&quot;</param>
                                         </action>
                                     </actions>
                                 </event-block>
                             </sub-events>
                         </event-block>
-                        <event-block sid="497640992101595">
+                        <event-block sid="764951844843568">
                             <conditions>
-                                <condition id="3" name="On any completed" sid="855718049403670" type="AJAX" />
-                                <condition id="-8" name="Compare two values" sid="364335419613432" type="System">
-                                    <param id="0" name="First value">right(AJAX.Tag,3)</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Second value">&quot;.js&quot;</param>
+                                <condition id="0" name="On function" sid="538320835542815" type="Function">
+                                    <param id="0" name="Name">&quot;JS_Load&quot;</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="0" name="Execute JS code" sid="985478095864636" type="JS">
-                                    <param id="0" name="JS code">AJAX.LastData</param>
-                                    <param id="1" name="Parameter {n}"></param>
+                                <action id="14" name="Log" sid="242126669162471" type="Browser">
+                                    <param id="0" name="Type">0</param>
+                                    <param id="1" name="Message">&quot;js_load &quot;&amp;Function.Param(0)</param>
                                 </action>
-                                <action id="0" name="Execute JS code" sid="740795482052710" type="JS">
-                                    <param id="0" name="JS code">&quot;let file = document.createElement(&apos;script&apos;);&#x0D;&#x0A;file.setAttribute(&apos;type&apos;,&apos;text/javascript&apos;);&#x0D;&#x0A;file.setAttribute(&apos;src&apos;, #0);&#x0D;&#x0A;file.onerror = function() {&#x0D;&#x0A;&#x09;console.error(&apos;failed including &apos; + #0);&#x0D;&#x0A;};&#x0D;&#x0A;document.getElementsByTagName(&apos;head&apos;)[0].appendChild(file);&quot;</param>
-                                    <param id="1" name="Parameter {n}">AJAX.Tag</param>
+                                <action id="0" name="Execute JS code" sid="509185610642596" type="JS">
+                                    <param id="0" name="JS code">&quot;if (!document.querySelector(`script[src=&apos;${#0}&apos;]`)) {&#x0D;&#x0A;let file = document.createElement(&apos;script&apos;);&#x0D;&#x0A;file.setAttribute(&apos;type&apos;,&apos;text/javascript&apos;);&#x0D;&#x0A;file.setAttribute(&apos;src&apos;, #0);&#x0D;&#x0A;file.onload = () =&gt; {file.onload = null; c2_callFunction(&apos;JS_OnLoad&apos;, [#0])};&#x0D;&#x0A;file.onerror = () =&gt; console.error(&apos;failed including &apos; + #0);&#x0D;&#x0A;document.getElementsByTagName(&apos;head&apos;)[0].appendChild(file);&#x0D;&#x0A;}&quot;</param>
+                                    <param id="1" name="Parameter {n}">Function.Param(0)</param>
                                 </action>
                             </actions>
+                        </event-block>
+                        <event-block sid="702679312832641">
+                            <conditions>
+                                <condition id="0" name="On function" sid="953144132342552" type="Function">
+                                    <param id="0" name="Name">&quot;JS_OnLoad&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="14" name="Log" sid="795371698607510" type="Browser">
+                                    <param id="0" name="Type">0</param>
+                                    <param id="1" name="Message">&quot;js_ONload &quot;&amp;Function.Param(0)</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="682017245795943">
+                                    <conditions>
+                                        <condition id="1" name="Compare parameter" sid="116347819209150" type="Function">
+                                            <param id="0" name="Index">0</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;js.storage.min.js&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="173018948371490" type="Function">
+                                            <param id="0" name="Name">&quot;JS_Load&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;superstruct.min.js&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="775412757646515">
+                                    <conditions>
+                                        <condition id="1" name="Compare parameter" sid="430519992779038" type="Function">
+                                            <param id="0" name="Index">0</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;superstruct.min.js&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="748991435165287" type="Function">
+                                            <param id="0" name="Name">&quot;JS_Load&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;axios.min.js&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="752500144187224">
+                                    <conditions>
+                                        <condition id="1" name="Compare parameter" sid="870459387795500" type="Function">
+                                            <param id="0" name="Index">0</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;axios.min.js&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="985998270985686" type="Function">
+                                            <param id="0" name="Name">&quot;JS_Load&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;main.js&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="597578250341881">
+                                    <conditions>
+                                        <condition id="1" name="Compare parameter" sid="555130085677082" type="Function">
+                                            <param id="0" name="Index">0</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;main.js&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="842759144448389" type="Function">
+                                            <param id="0" name="Name">&quot;JS_Load&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;schemas.js&quot;</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="994778930294425">
+                                            <conditions />
+                                            <actions>
+                                                <action id="2" name="Init alias" sid="986088750218119" type="JS">
+                                                    <param id="0" name="Alias name">&quot;logjson&quot;</param>
+                                                    <param id="1" name="JS">&quot;srbftp.logJSON&quot;</param>
+                                                </action>
+                                                <action id="2" name="Init alias" sid="601772590777910" type="JS">
+                                                    <param id="0" name="Alias name">&quot;format&quot;</param>
+                                                    <param id="1" name="JS">&quot;srbftp.format&quot;</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="464256435531263">
+                                    <conditions>
+                                        <condition id="1" name="Compare parameter" sid="390707470797308" type="Function">
+                                            <param id="0" name="Index">0</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;schemas.js&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="363325440270667" type="Function">
+                                            <param id="0" name="Name">&quot;JS_Load&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;online.js&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="829856829803915">
+                                    <conditions>
+                                        <condition id="1" name="Compare parameter" sid="428624647923254" type="Function">
+                                            <param id="0" name="Index">0</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;online.js&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-13" name="Set boolean" sid="954146975761296" type="Var_Misc">
+                                            <param id="0" name="Instance variable">InitializedFiles</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-block>
@@ -405,110 +530,6 @@
                             <param id="2" name="Key {n}"></param>
                         </action>
                     </actions>
-                </event-block>
-                <comment></comment>
-                <event-block sid="904922218496492">
-                    <conditions>
-                        <condition id="0" name="On completed" sid="701554513445192" type="AJAX">
-                            <param id="0" name="Tag">&quot;js.storage.min.js&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="1" name="Request project file" sid="981057705434192" type="AJAX">
-                            <param id="0" name="Tag">&quot;superstruct.min.js&quot;</param>
-                            <param id="1" name="File">superstruct.min.js</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="133815238925278">
-                    <conditions>
-                        <condition id="0" name="On completed" sid="733042599544227" type="AJAX">
-                            <param id="0" name="Tag">&quot;superstruct.min.js&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="1" name="Request project file" sid="751362543445155" type="AJAX">
-                            <param id="0" name="Tag">&quot;axios.min.js&quot;</param>
-                            <param id="1" name="File">axios.min.js</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="782707580018884">
-                    <conditions>
-                        <condition id="0" name="On completed" sid="458715910977781" type="AJAX">
-                            <param id="0" name="Tag">&quot;axios.min.js&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="1" name="Request project file" sid="328266990820608" type="AJAX">
-                            <param id="0" name="Tag">&quot;parse.min.js&quot;</param>
-                            <param id="1" name="File">parse.min.js</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="837478167834480">
-                    <conditions>
-                        <condition id="0" name="On completed" sid="191149673229285" type="AJAX">
-                            <param id="0" name="Tag">&quot;parse.min.js&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="1" name="Request project file" sid="235100780945267" type="AJAX">
-                            <param id="0" name="Tag">&quot;main.js&quot;</param>
-                            <param id="1" name="File">main.js</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="277451180337119">
-                    <conditions>
-                        <condition id="0" name="On completed" sid="185183424132317" type="AJAX">
-                            <param id="0" name="Tag">&quot;main.js&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="2" name="Init alias" sid="723364550344469" type="JS">
-                            <param id="0" name="Alias name">&quot;logjson&quot;</param>
-                            <param id="1" name="JS">&quot;srbftp.logJSON&quot;</param>
-                        </action>
-                        <action id="2" name="Init alias" sid="636468509881918" type="JS">
-                            <param id="0" name="Alias name">&quot;format&quot;</param>
-                            <param id="1" name="JS">&quot;String.format&quot;</param>
-                        </action>
-                    </actions>
-                    <sub-events>
-                        <event-block sid="167503525909746">
-                            <conditions />
-                            <actions>
-                                <action id="-16" name="Wait" sid="954776352374449" type="System">
-                                    <param id="0" name="Seconds">0</param>
-                                </action>
-                                <action id="1" name="Request project file" sid="692675009619641" type="AJAX">
-                                    <param id="0" name="Tag">&quot;schemas.js&quot;</param>
-                                    <param id="1" name="File">schemas.js</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <comment>&quot;srbftp is not defined&quot;, maybe check for its validity?</comment>
-                <event-block sid="549486665222388">
-                    <conditions>
-                        <condition id="0" name="On completed" sid="838117055320468" type="AJAX">
-                            <param id="0" name="Tag">&quot;schemas.js&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions />
-                    <sub-events>
-                        <event-block sid="288178002294560">
-                            <conditions />
-                            <actions>
-                                <action id="-13" name="Set boolean" sid="954146975761296" type="Var_Misc">
-                                    <param id="0" name="Instance variable">InitializedFiles</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
                 </event-block>
             </sub-events>
         </event-group>
@@ -2006,172 +2027,6 @@
                                 <action id="-13" name="Set boolean" sid="816387859306911" type="Var_Level">
                                     <param id="0" name="Instance variable">Level_NoPerfectBonus</param>
                                     <param id="1" name="Value">0</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <comment>compare two semver versions</comment>
-                <event-block sid="789943670349233">
-                    <conditions>
-                        <condition id="0" name="On function" sid="229466511788098" type="Function">
-                            <param id="0" name="Name">&quot;Version_GreaterThan&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions />
-                    <sub-events>
-                        <variable constant="0" name="from" sid="293449096184663" static="0" type="text"></variable>
-                        <variable constant="0" name="from_x" sid="853775938250790" static="0" type="number">0</variable>
-                        <variable constant="0" name="from_y" sid="386946511261203" static="0" type="number">0</variable>
-                        <variable constant="0" name="from_z" sid="663155367420525" static="0" type="number">0</variable>
-                        <variable constant="0" name="to" sid="691298021135436" static="0" type="text"></variable>
-                        <variable constant="0" name="to_x" sid="114549227889775" static="0" type="number">0</variable>
-                        <variable constant="0" name="to_y" sid="151959491763110" static="0" type="number">0</variable>
-                        <variable constant="0" name="to_z" sid="240106855553240" static="0" type="number">0</variable>
-                        <event-block sid="650903675519191">
-                            <conditions />
-                            <actions>
-                                <action id="-9" name="Set value" sid="653745543403846" type="System">
-                                    <param id="0" name="Variable">from</param>
-                                    <param id="1" name="Value">tokenat(Function.Param(0), 0, &quot;-&quot;)</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="893748190797675" type="System">
-                                    <param id="0" name="Variable">from_x</param>
-                                    <param id="1" name="Value">int(tokenat(from, 0, &quot;.&quot;))</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="622714388721989" type="System">
-                                    <param id="0" name="Variable">from_y</param>
-                                    <param id="1" name="Value">int(tokenat(from, 1, &quot;.&quot;))</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="134820379554987" type="System">
-                                    <param id="0" name="Variable">from_z</param>
-                                    <param id="1" name="Value">int(tokenat(from, 2, &quot;.&quot;))</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="130652918962348" type="System">
-                                    <param id="0" name="Variable">to</param>
-                                    <param id="1" name="Value">tokenat(Function.Param(1), 0, &quot;-&quot;)</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="976671442368301" type="System">
-                                    <param id="0" name="Variable">to_x</param>
-                                    <param id="1" name="Value">int(tokenat(to, 0, &quot;.&quot;))</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="393588973774715" type="System">
-                                    <param id="0" name="Variable">to_y</param>
-                                    <param id="1" name="Value">int(tokenat(to, 1, &quot;.&quot;))</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="670211116829884" type="System">
-                                    <param id="0" name="Variable">to_z</param>
-                                    <param id="1" name="Value">int(tokenat(to, 2, &quot;.&quot;))</param>
-                                </action>
-                                <action id="14" name="Log" sid="382744901853584" type="Browser">
-                                    <param id="0" name="Type">0</param>
-                                    <param id="1" name="Message">JS.Value(&quot;format&quot;, &quot;comparing version {x}.{y}.{z} ({string}) to {x}.{y}.{z} ({string})&quot;, from_x, from_y, from_z, Function.Param(0), to_x, to_y, to_z, Function.Param(1))</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <variable constant="0" name="greater" sid="794914425698782" static="0" type="number">1</variable>
-                        <event-block sid="922522634332312">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="560887460204423" type="System">
-                                    <param id="0" name="Variable">from_x</param>
-                                    <param id="1" name="Comparison">2</param>
-                                    <param id="2" name="Value">to_x</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="253477650594836" type="System">
-                                    <param id="0" name="Variable">greater</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="14" name="Log" sid="176004544972111" type="Browser">
-                                    <param id="0" name="Type">0</param>
-                                    <param id="1" name="Message">&quot;from_x &lt; to_x&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="457087888168628">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="324264089114497" type="System">
-                                    <param id="0" name="Variable">from_x</param>
-                                    <param id="1" name="Comparison">3</param>
-                                    <param id="2" name="Value">to_x</param>
-                                </condition>
-                                <condition id="-14" name="Compare variable" sid="339275987695189" type="System">
-                                    <param id="0" name="Variable">from_y</param>
-                                    <param id="1" name="Comparison">2</param>
-                                    <param id="2" name="Value">to_y</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="972330596471472" type="System">
-                                    <param id="0" name="Variable">greater</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="14" name="Log" sid="327112320462309" type="Browser">
-                                    <param id="0" name="Type">0</param>
-                                    <param id="1" name="Message">&quot;from_y &lt; to_y&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="658872778262949">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="834391069151208" type="System">
-                                    <param id="0" name="Variable">from_x</param>
-                                    <param id="1" name="Comparison">3</param>
-                                    <param id="2" name="Value">to_x</param>
-                                </condition>
-                                <condition id="-14" name="Compare variable" sid="524276027039906" type="System">
-                                    <param id="0" name="Variable">from_y</param>
-                                    <param id="1" name="Comparison">3</param>
-                                    <param id="2" name="Value">to_y</param>
-                                </condition>
-                                <condition id="-14" name="Compare variable" sid="737219183417870" type="System">
-                                    <param id="0" name="Variable">from_z</param>
-                                    <param id="1" name="Comparison">2</param>
-                                    <param id="2" name="Value">to_z</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="935993238028927" type="System">
-                                    <param id="0" name="Variable">greater</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="14" name="Log" sid="389475869393029" type="Browser">
-                                    <param id="0" name="Type">0</param>
-                                    <param id="1" name="Message">&quot;from_z &lt; to_z&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <comment>using a pre-release when release is available</comment>
-                        <event-block sid="750580445455529">
-                            <conditions>
-                                <condition id="-8" name="Compare two values" sid="136653100956483" type="System">
-                                    <param id="0" name="First value">from</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Second value">to</param>
-                                </condition>
-                                <condition id="-8" inverted="1" name="Compare two values" sid="606281364726678" type="System">
-                                    <param id="0" name="First value">find(Function.Param(0), &quot;-&quot;)</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Second value">-1</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="944994111594913" type="System">
-                                    <param id="0" name="Variable">greater</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="408126318640150">
-                            <conditions />
-                            <actions>
-                                <action id="1" name="Set return value" sid="654072038280496" type="Function">
-                                    <param id="0" name="Value">greater</param>
-                                </action>
-                                <action id="14" name="Log" sid="399528946255427" type="Browser">
-                                    <param id="0" name="Type">0</param>
-                                    <param id="1" name="Message">Function.Param(0)&amp;(greater = 1 ? &quot; &gt; &quot; : &quot; &lt; &quot;)&amp;Function.Param(1)</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -3960,7 +3815,7 @@
                     </conditions>
                     <actions>
                         <action id="16" name="Set title" sid="153460635458750" type="NWjs">
-                            <param id="0" name="Title">JS.Value(&quot;String.format&quot;, &quot;{title} v{ver}{debug}&quot;, projectname, projectversion, (DEBUG = 1 ? &quot; (Debug mode)&quot; : &quot;&quot;))</param>
+                            <param id="0" name="Title">JS.Value(&quot;srbftp.format&quot;, &quot;{title} v{ver}{debug}&quot;, projectname, projectversion, (DEBUG = 1 ? &quot; (Debug mode)&quot; : &quot;&quot;))</param>
                         </action>
                     </actions>
                 </event-block>
@@ -4053,7 +3908,7 @@
                     </conditions>
                     <actions>
                         <action id="0" name="Set text" sid="952749534354664" type="Text_ErrorHandler">
-                            <param id="0" name="Text">&quot;something broke&#x0D;&#x0A;&#x0D;&#x0A;layout: &quot;&amp;LayoutName&amp;&quot;&#x0D;&#x0A;current menu: &quot;&amp;Var_Game.CurrentMenu</param>
+                            <param id="0" name="Text">&quot;invalid menu&#x0D;&#x0A;&#x0D;&#x0A;layout: &quot;&amp;LayoutName&amp;&quot;&#x0D;&#x0A;current menu: &quot;&amp;Var_Game.CurrentMenu</param>
                         </action>
                     </actions>
                 </event-block>
@@ -6227,7 +6082,7 @@
                             <conditions />
                             <actions>
                                 <action id="0" name="Execute JS code" sid="203258881234523" type="JS">
-                                    <param id="0" name="JS code">&quot;console.log(String.format(&apos;Load_RecordAttack - {level} ({type}), size: {size}/{max}&apos;, #1, #2, #3, #4), JSON.parse(#0))&quot;</param>
+                                    <param id="0" name="JS code">&quot;console.log(srbftp.format(&apos;Load_RecordAttack - {level} ({type}), size: {size}/{max}&apos;, #1, #2, #3, #4), JSON.parse(#0))&quot;</param>
                                     <param id="1" name="Parameter {n}">Function.ReturnValue{###}Function.Param(0){###}Function.Param(1){###}JSON__COMMON.Size(0){###}Save_Config.Value(0,&quot;Data.MaxRecords&quot;)</param>
                                 </action>
                                 <action id="-9" name="Destroy" sid="895013452050732" type="JSON__COMMON" />

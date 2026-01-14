@@ -1310,5 +1310,117 @@
                 </event-block>
             </sub-events>
         </event-group>
+        <event-group description="" sid="281895944216841" title="PocketBase">
+            <sub-events>
+                <event-block sid="161555139885383">
+                    <conditions>
+                        <condition id="-8" name="Is boolean instance variable set" sid="158374454652891" type="Var_Misc">
+                            <param id="0" name="Instance variable">InitializedFiles</param>
+                        </condition>
+                        <condition id="60" inverted="1" name="Is undefined" sid="867865617196709" type="JSON_Indev">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}">&quot;PocketBaseURL&quot;</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="661853476591510" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Set value" sid="415225578803532" type="Var_Misc">
+                            <param id="0" name="Instance variable">PocketBaseURL</param>
+                            <param id="1" name="Value">JSON_Indev.Value(0,&quot;PocketBaseURL&quot;)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="462814952520477">
+                    <conditions>
+                        <condition id="0" name="On function" sid="826362050415456" type="Function">
+                            <param id="0" name="Name">&quot;PB_Request&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <variable constant="0" name="tag" sid="960022077767022" static="0" type="text"></variable>
+                        <variable constant="0" name="data" sid="512266675049396" static="0" type="text"></variable>
+                        <event-block sid="536032714620022">
+                            <conditions />
+                            <actions>
+                                <action id="-9" name="Set value" sid="389768082388766" type="System">
+                                    <param id="0" name="Variable">tag</param>
+                                    <param id="1" name="Value">Function.Param(0)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="310453459094216">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="683473664658746" type="System">
+                                    <param id="0" name="First value">Function.ParamCount</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Second value">2</param>
+                                </condition>
+                                <condition id="1" inverted="1" name="Compare parameter" sid="413575030827042" type="Function">
+                                    <param id="0" name="Index">1</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="363054545555186" type="System">
+                                    <param id="0" name="Variable">tag</param>
+                                    <param id="1" name="Value">Function.Param(1)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="633853596292018">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="379953066904603" type="System">
+                                    <param id="0" name="First value">Function.ParamCount</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Second value">3</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="254275347789858" type="System">
+                                    <param id="0" name="Variable">data</param>
+                                    <param id="1" name="Value">Function.Param(2)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="469487351932372">
+                            <conditions />
+                            <actions>
+                                <action id="6" name="Call function" sid="273704886063545" type="JS">
+                                    <param id="0" name="Expression">&quot;srbftp.online.&quot;&amp;Function.Param(0)</param>
+                                    <param id="1" name="Parameter {n}">&quot;{&#x0D;&#x0A;tag: &quot;&amp;tag&amp;&quot;,&#x0D;&#x0A;url: &quot;&amp;Var_Misc.PocketBaseURL&amp;&quot;,&#x0D;&#x0A;version: &quot;&amp;projectversion&amp;&quot;,&#x0D;&#x0A;data: &quot;&amp;data&amp;&quot;,&#x0D;&#x0A;}&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block disabled="1" sid="770889294549012">
+                    <conditions>
+                        <condition disabled="1" id="0" name="On function" sid="898237591450555" type="Function">
+                            <param id="0" name="Name">&quot;PB_HealthCheck&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Call function" sid="629158394458828" type="Function">
+                            <param id="0" name="Name">&quot;PB_Request&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;health&quot;</param>
+                        </action>
+                        <action id="0" name="Call function" sid="274197264676652" type="Function">
+                            <param id="0" name="Name">&quot;PB_Request&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;login&quot;{###}&quot;&quot;{###}&quot;{&#x0D;&#x0A;username: &quot;&amp;&quot;a&quot;&amp;&quot;,&#x0D;&#x0A;password: &quot;&amp;&quot;a&quot;&amp;&quot;,&#x0D;&#x0A;}&quot;</param>
+                        </action>
+                        <action id="0" name="Call function" sid="166279621329072" type="Function">
+                            <param id="0" name="Name">&quot;PB_Request&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;signup&quot;{###}&quot;&quot;{###}&quot;{&#x0D;&#x0A;username: &quot;&amp;&quot;a&quot;&amp;&quot;,&#x0D;&#x0A;password: &quot;&amp;&quot;a&quot;&amp;&quot;,&#x0D;&#x0A;passwordconfirm: &quot;&amp;&quot;a&quot;&amp;&quot;,&#x0D;&#x0A;}&quot;</param>
+                        </action>
+                        <action id="0" name="Call function" sid="354822519942903" type="Function">
+                            <param id="0" name="Name">&quot;PB_Request&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;refresh_login&quot;{###}&quot;&quot;{###}&quot;token go here&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
     </events>
 </c2eventsheet>

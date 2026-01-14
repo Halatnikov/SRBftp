@@ -57,6 +57,6 @@ schemas.srbftp_config = s.object({
 });
 
 srbftp.schemas = schemas;
-//Object.freeze(srbftp)
+//Object.freeze(schemas)
 
 //s.validate(test, schemas.srbftp_config, {coerce:true})

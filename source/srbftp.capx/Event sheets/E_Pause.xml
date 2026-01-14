@@ -26,8 +26,8 @@
                         </action>
                     </actions>
                 </event-block>
-                <variable constant="0" name="width" sid="601404256158934" static="0" type="number">440</variable>
-                <variable constant="0" name="start_function" sid="918030175642384" static="0" type="text">null</variable>
+                <variable constant="0" name="width" sid="601404256158934" static="1" type="number">440</variable>
+                <variable constant="0" name="start_function" sid="918030175642384" static="1" type="text">null</variable>
                 <variable constant="0" name="options" sid="267482684785663" static="1" type="number">0</variable>
                 <comment></comment>
                 <event-block sid="577381882194443">
@@ -38,6 +38,14 @@
                     </conditions>
                     <actions>
                         <action id="-9" name="Destroy" sid="746115715137235" type="Menu_Options2" />
+                        <action id="-9" name="Set value" sid="807259631721238" type="System">
+                            <param id="0" name="Variable">width</param>
+                            <param id="1" name="Value">440</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="524672781546183" type="System">
+                            <param id="0" name="Variable">start_function</param>
+                            <param id="1" name="Value">&quot;null&quot;</param>
+                        </action>
                         <action id="-9" name="Set value" sid="887137299060020" type="System">
                             <param id="0" name="Variable">options</param>
                             <param id="1" name="Value">0</param>
@@ -265,11 +273,11 @@
                             </conditions>
                             <actions>
                                 <action id="4" name="Set font color" sid="149406409889223" type="Menu_Options2">
-                                    <param id="0" name="Color">Function.Param(1)</param>
+                                    <param id="0" name="Color">Function.Param(2)</param>
                                 </action>
                                 <action id="-10" name="Set value" sid="698851461034695" type="Menu_Options2">
                                     <param id="0" name="Instance variable">ID</param>
-                                    <param id="1" name="Value">Function.Param(2)</param>
+                                    <param id="1" name="Value">Function.Param(1)</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -316,12 +324,42 @@
                     </sub-events>
                 </event-block>
                 <comment></comment>
+                <event-block sid="383039675085057">
+                    <conditions>
+                        <condition id="0" name="On function" sid="943434163716441" type="Function">
+                            <param id="0" name="Name">&quot;Unpause&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="6" name="Call function" sid="905411189850544" type="JS">
+                            <param id="0" name="Expression">&quot;Storages.sessionStorage.set&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;UnpauseState&quot;{###}Function.Param(0)</param>
+                        </action>
+                        <action id="-37" name="Load" sid="449625984547089" type="System">
+                            <param id="0" name="Slot">&quot;unpause&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="625319935123898">
+                    <conditions>
+                        <condition id="-30" name="On load failed" sid="509003904785261" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="14" name="Log" sid="661000740640396" type="Browser">
+                            <param id="0" name="Type">2</param>
+                            <param id="1" name="Message">&quot;Pause savestate load failed!&quot;</param>
+                        </action>
+                        <action id="0" name="Alert" sid="924320521358207" type="Browser">
+                            <param id="0" name="Message">&quot;Pause savestate load failed!&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
                 <event-block sid="431115578451359">
                     <conditions>
                         <condition id="0" name="On function" sid="512005663962842" type="Function">
                             <param id="0" name="Name">&quot;Menu_DoFunction&quot;</param>
                         </condition>
-                        <condition id="1" inverted="1" name="Compare parameter" sid="104277906592818" type="Function">
+                        <condition id="1" inverted="1" name="Compare parameter" sid="582089291513743" type="Function">
                             <param id="0" name="Index">0</param>
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">&quot;null&quot;</param>
@@ -329,46 +367,20 @@
                     </conditions>
                     <actions />
                     <sub-events>
-                        <event-block sid="444107227601485">
+                        <event-block sid="291253955790439">
                             <conditions>
-                                <condition id="1" name="Compare parameter" sid="483153379123483" type="Function">
+                                <condition disabled="1" id="1" name="Compare parameter" sid="616750529832318" type="Function">
                                     <param id="0" name="Index">0</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">&quot;resume&quot;</param>
                                 </condition>
                             </conditions>
-                            <actions />
-                        </event-block>
-                        <comment>move these specifically into E_Engine into a function named OnUnpause</comment>
-                        <event-block sid="479443636464605">
-                            <conditions>
-                                <condition id="1" name="Compare parameter" sid="919928472769539" type="Function">
-                                    <param id="0" name="Index">0</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;restart_checkpoint&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions />
-                        </event-block>
-                        <event-block sid="908047755766691">
-                            <conditions>
-                                <condition id="1" name="Compare parameter" sid="657166150140810" type="Function">
-                                    <param id="0" name="Index">0</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;restart_level&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions />
-                        </event-block>
-                        <event-block sid="606377400287725">
-                            <conditions>
-                                <condition id="1" name="Compare parameter" sid="707861773085468" type="Function">
-                                    <param id="0" name="Index">0</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;exit&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions />
+                            <actions>
+                                <action id="0" name="Call function" sid="587761327106796" type="Function">
+                                    <param id="0" name="Name">&quot;Unpause&quot;</param>
+                                    <param id="1" name="Parameter {n}">Function.Param(0)</param>
+                                </action>
+                            </actions>
                         </event-block>
                     </sub-events>
                 </event-block>
@@ -425,6 +437,9 @@
                                 </condition>
                             </conditions>
                             <actions>
+                                <action id="-16" name="Wait" sid="861357528498736" type="System">
+                                    <param id="0" name="Seconds">0</param>
+                                </action>
                                 <action id="0" name="Call function" sid="907812598314947" type="Function">
                                     <param id="0" name="Name">&quot;Menu_DoFunction&quot;</param>
                                     <param id="1" name="Parameter {n}">start_function</param>
@@ -477,10 +492,10 @@
                         <condition id="-4" name="Trigger once while true" sid="757290905080522" type="System" />
                     </conditions>
                     <actions>
+                        <action id="9" name="Load texture from canvas" sid="703752069963544" type="Paster" />
                         <action id="-16" name="Wait" sid="245166145358433" type="System">
                             <param id="0" name="Seconds">0</param>
                         </action>
-                        <action id="9" name="Load texture from canvas" sid="703752069963544" type="Paster" />
                     </actions>
                 </event-block>
                 <comment>init</comment>
@@ -489,7 +504,14 @@
                         <condition id="-4" name="Trigger once while true" sid="497874054519263" type="System" />
                     </conditions>
                     <actions>
-                        <action id="33" name="Stop all" sid="218499610591001" type="BetterAudio" />
+                        <action id="22" name="Set paused" sid="827053047347631" type="BetterAudio">
+                            <param id="0" name="Tag">&quot;music&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="22" name="Set paused" sid="936136551095807" type="BetterAudio">
+                            <param id="0" name="Tag">&quot;drowning&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
                     </actions>
                     <sub-events>
                         <comment>totals</comment>
@@ -591,26 +613,68 @@
                                 </action>
                             </actions>
                             <sub-events>
-                                <event-block sid="119892374423528">
+                                <event-block sid="897591017044651">
                                     <conditions />
-                                    <actions>
-                                        <action id="0" name="Call function" sid="932098802669441" type="Function">
-                                            <param id="0" name="Name">&quot;Menu_Button&quot;</param>
-                                            <param id="1" name="Parameter {n}">&quot;RESUME&quot;</param>
-                                        </action>
-                                        <action id="0" name="Call function" sid="795610493881740" type="Function">
-                                            <param id="0" name="Name">&quot;Menu_Button&quot;</param>
-                                            <param id="1" name="Parameter {n}">&quot;RESTART FROM CHECKPOINT&quot;{###}&quot;restart_checkpoint&quot;</param>
-                                        </action>
-                                        <action id="0" name="Call function" sid="819282208912618" type="Function">
-                                            <param id="0" name="Name">&quot;Menu_Button&quot;</param>
-                                            <param id="1" name="Parameter {n}">&quot;RESTART LEVEL&quot;{###}&quot;restart_level&quot;</param>
-                                        </action>
-                                        <action id="0" name="Call function" sid="673416938295424" type="Function">
-                                            <param id="0" name="Name">&quot;Menu_Button&quot;</param>
-                                            <param id="1" name="Parameter {n}">&quot;EXIT TO MAIN MENU&quot;{###}&quot;exit&quot;</param>
-                                        </action>
-                                    </actions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="119892374423528">
+                                            <conditions />
+                                            <actions>
+                                                <action id="0" name="Call function" sid="932098802669441" type="Function">
+                                                    <param id="0" name="Name">&quot;Menu_Button&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;RESUME&quot;</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block any="1" sid="884603024993571">
+                                            <conditions>
+                                                <condition id="-7" name="Compare instance variable" sid="212803169219430" type="Var_Player">
+                                                    <param id="0" name="Instance variable">Lives</param>
+                                                    <param id="1" name="Comparison">4</param>
+                                                    <param id="2" name="Value">1</param>
+                                                </condition>
+                                                <condition id="-7" name="Compare instance variable" sid="916989755226132" type="Var_Player">
+                                                    <param id="0" name="Instance variable">Lives</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">-1</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Call function" sid="795610493881740" type="Function">
+                                                    <param id="0" name="Name">&quot;Menu_Button&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;RESTART FROM CHECKPOINT&quot;{###}&quot;restart_checkpoint&quot;</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="819282208912618" type="Function">
+                                                    <param id="0" name="Name">&quot;Menu_Button&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;RESTART LEVEL&quot;{###}&quot;restart_level&quot;</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="771479840694141">
+                                            <conditions>
+                                                <condition id="-22" name="Else" sid="258765002488993" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Call function" sid="329125459399405" type="Function">
+                                                    <param id="0" name="Name">&quot;Menu_Label&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;RESTART FROM CHECKPOINT&quot;{###}rgb(90,90,90)</param>
+                                                </action>
+                                                <action id="0" name="Call function" sid="401391562720740" type="Function">
+                                                    <param id="0" name="Name">&quot;Menu_Label&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;RESTART LEVEL&quot;{###}rgb(90,90,90)</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="444511811893157">
+                                            <conditions />
+                                            <actions>
+                                                <action id="0" name="Call function" sid="673416938295424" type="Function">
+                                                    <param id="0" name="Name">&quot;Menu_Button&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;EXIT TO MAIN MENU&quot;{###}&quot;exit&quot;</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
                                 </event-block>
                                 <event-block sid="591963712385901">
                                     <conditions />
