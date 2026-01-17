@@ -1,16 +1,15 @@
-// figure out how to do variables only accessible to the scope of one file
-// make all functions constants
-
+"use strict"
 srbftp.online = {}
-let online = srbftp.online
+const online = srbftp.online
 
-let lazyjson = srbftp.lazyjson
+let ini2json = (arg) => srbftp.ini2json(arg, true)
 
 const request = function(options) {
 	let config = {
 		baseURL: options.url,
 		headers: {
 			"SRBftp": options.version,
+			"Timestamp": options.time,
 		},
 		timeout: 10000, // 10 sec
 	}
@@ -24,7 +23,7 @@ const request = function(options) {
 //////////////////////////////////////////////// general
 
 online.health = function(options) {
-	options = lazyjson(options)
+	options = ini2json(options)
 	options.config = {
 		url: "/api/health",
 		method: "get",
@@ -35,48 +34,48 @@ online.health = function(options) {
 //////////////////////////////////////////////// user
 
 online.login = function(options) {
-	options = lazyjson(options)
+	options = ini2json(options)
 	options.config = {
 		url: "/api/collections/users/auth-with-password",
 		method: "post",
 		data: {
-			"identity": options.data.username,
-			"password": options.data.password,
+			"identity": String(options.data.username),
+			"password": String(options.data.password),
 		}
 	}
 	request(options)
 }
 
 online.signup = function(options) {
-	options = lazyjson(options)
+	options = ini2json(options)
 	options.config = {
 		url: "/api/collections/users/records",
 		method: "post",
 		data: {
-			"name": options.data.username,
-			"password": options.data.password,
-			"passwordConfirm": options.data.passwordconfirm,
+			"name": String(options.data.username),
+			"password": String(options.data.password),
+			"passwordConfirm": String(options.data.passwordconfirm),
 		}
 	}
 	request(options)
 }
 
 online.refresh_login = function(options) {
-	options = lazyjson(options)
+	options = ini2json(options)
 	options.config = {
 		url: "/api/collections/users/auth-refresh",
 		method: "post",
 		headers: {
-			authorization: "Bearer " + options.data,
+			authorization: "Bearer " + String(options.data.token),
 		}
 	}
 	request(options)
 }
 
 online.get_user = function(options) {
-	options = lazyjson(options)
+	options = ini2json(options)
 	options.config = {
-		url: "/api/collections/users/records/" + options.data,
+		url: "/api/collections/users/records/" + String(options.data.id),
 		method: "get",
 	}
 	request(options)
@@ -85,17 +84,17 @@ online.get_user = function(options) {
 //////////////////////////////////////////////// leaderboards
 
 online.leaderboards_levels = function(options) {
-	options = lazyjson(options)
+	options = ini2json(options)
 	options.config = {
 		url: "/api/collections/leaderboards_levels/records",
 		method: "get",
-		params: {skipTotal: "true", fields: "id,total_time,total_score"},
+		params: {skipTotal: "true", fields: "id, total_time, total_score"},
 	}
 	request(options)
 }
 
 online.leaderboards = function(options) {
-	options = lazyjson(options)
+	options = ini2json(options)
 	let level = /^\w+$/.test(options.data.level) ? options.data.level : ""
 	let type = options.data.type != "time" ? "score" : "time"
 	

@@ -1,5 +1,7 @@
-"use strict";
-var srbftp = {};
+"use strict"
+// figure out how to do variables only accessible to the scope of one file
+// make all functions constants
+var srbftp = {}
 
 srbftp.logJSON = function(...args) {
 	let last = args.length - 1;
@@ -24,69 +26,34 @@ srbftp.format = function () {
 	return string;
 };
 
-// returns 1 if check is passed
 srbftp.semver = function(a,b) {
 	// 1 major, 2 minor, 3 patch, 4 prerelease
 	const pattern = /^(\d+)\.(\d+)\.(\d+)(?:-([\w.-]+))?$/;
 	a = a.match(pattern), b = b.match(pattern);
-	if (!a || !b) return 0; // invalid input
+	if (!a || !b) return false; // invalid input
 	
 	for (let i = 1; i <= 3; i++) {
 		let n1 = parseInt(a[i]), n2 = parseInt(b[i]);
-		if (n1 > n2) return 1;
-		if (n1 < n2) return 0;
+		if (n1 > n2) return true;
+		if (n1 < n2) return false;
 	};
 	
 	// using a prerelease when release is available
 	let prea = a[4], preb = b[4];
-	if (prea && !preb) return 0;
+	if (prea && !preb) return false;
 	
-	return 1;
+	return true; // equals
 };
-
-// for like actual json objects like records and saves, please just make a new param (or do i????)
-// perhaps replace discord rpc inis to these?
-srbftp.lazyjson = function(arg) {
-	const escape = {"\\": "\\\\", '"': '\\"', "\n": "\\n", "\r": "\\r", "\t": "\\t"};
-	let processed = arg.split("\n")
-		.map(line => {
-			line = line.trim()
-			if (!line || ["{", "}", "},"].includes(line)) return line;
-
-			let separator = line.indexOf(":");
-			if (separator == -1) return line;
-			let key = line.substring(0, separator).trim();
-			let value = line.substring(separator + 1).trim().replace(/,$/, '');
-			
-			// nested objects
-			if (value == "{") return `"${key}": {`;
-			// sanitize
-			key = key.replace(/[\\"\n\r\t]/g, char => escape[char]);
-			value = value.replace(/[\\"\n\r\t]/g, char => escape[char]);
-			value = ["true", "false", "null"].includes(value) ? value : `"${value}"`;
-			return `"${key}": ${value},`;
-		})
-		.join("\n")
-		// trailing commas
-		.replace(/,\s*([}\]])/g, "$1");
-	
-	try {
-		return JSON.parse(processed)
-	} catch (err) {
-		console.error("lazyjson failed:\n", processed) //replace these with a vague error in release
-		console.error(err.message)
-	}
-}
 
 ///////////////////////////////////////////////////////////////
 
-var proxies = {};
+const proxies = {};
 
 // workarounds so that js.storage returns construct-readable jsons
 proxies.localStorage_get = Storages.localStorage.get;
 Storages.localStorage.get = function() {
 	let proxied = proxies.localStorage_get.apply(this, arguments);
-	return (proxied !== null && typeof proxied === 'object') ? JSON.stringify(proxied) : proxied;
+	return (proxied != null && typeof proxied == "object") ? JSON.stringify(proxied) : proxied;
 };
 
 proxies.localStorage_keys = Storages.localStorage.keys;
@@ -94,3 +61,15 @@ Storages.localStorage.keys = function() {
 	let proxied = proxies.localStorage_keys.apply(this, arguments);
 	return JSON.stringify(proxied);
 };
+
+(()=>{
+const c2_callFunction = window.c2_callFunction
+window.c2_callFunction = function(name, params) {
+	const names = ["String_IsNumber", "Time_DateString", "JS_OnLoad", "PB_OnSuccess", "PB_OnError"];
+	if (names.includes(name)) {
+		return c2_callFunction.apply(this, arguments)
+	}
+}
+})()
+
+Object.freeze(proxies)

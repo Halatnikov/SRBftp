@@ -120,66 +120,21 @@
                         </action>
                     </actions>
                 </event-block>
-                <event-block sid="668393181104072">
+                <event-block sid="967511456606782">
                     <conditions>
-                        <condition id="-14" name="Compare variable" sid="855706303748765" type="System">
-                            <param id="0" name="Variable">DESKTOP</param>
+                        <condition id="-18" inverted="1" name="Is in preview" sid="405927840089195" type="System" />
+                        <condition id="-14" name="Compare variable" sid="213483902827153" type="System">
+                            <param id="0" name="Variable">DEBUG</param>
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">1</param>
                         </condition>
                     </conditions>
-                    <actions />
-                    <sub-events>
-                        <event-block sid="568561603230544">
-                            <conditions>
-                                <condition id="0" name="Path exists" sid="460068265929722" type="NWjs">
-                                    <param id="0" name="Path">NWjs.AppFolder&amp;&quot;\debugdebugdebug.txt&quot;</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="149682303899077" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="816102692405606" type="System">
-                                    <param id="0" name="Variable">DEBUG</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="352916751580611">
-                            <conditions>
-                                <condition id="0" name="Path exists" sid="425963373191662" type="NWjs">
-                                    <param id="0" name="Path">NWjs.AppFolder&amp;&quot;\srbftp_indev.ini&quot;</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="906107590218081" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Call function" sid="663316458740136" type="Function">
-                                    <param id="0" name="Name">&quot;INI2JSON&quot;</param>
-                                    <param id="1" name="Parameter {n}">NWjs.ReadFile(NWjs.AppFolder&amp;&quot;\srbftp_indev.ini&quot;)</param>
-                                </action>
-                                <action id="60" name="LoadJSON" sid="471625227841409" type="JSON_Indev">
-                                    <param id="0" name="JSON">Function.ReturnValue</param>
-                                    <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}"></param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <comment></comment>
-                        <event-block sid="779085577990387">
-                            <conditions>
-                                <condition id="60" inverted="1" name="Is undefined" sid="710394011967945" type="JSON_Indev">
-                                    <param id="0" name="Reference point">0</param>
-                                    <param id="1" name="Key {n}">&quot;ResourceFolder&quot;</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="712765218858448" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="-10" name="Set value" sid="313350213258120" type="Var_Misc">
-                                    <param id="0" name="Instance variable">ResourceFolder</param>
-                                    <param id="1" name="Value">replace(JSON_Indev.Value(0,&quot;ResourceFolder&quot;), &quot;/&quot;, &quot;\&quot;)</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
+                    <actions>
+                        <action disabled="1" id="-9" name="Set value" sid="833479352604464" type="System">
+                            <param id="0" name="Variable">DEBUG</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
                 </event-block>
                 <comment></comment>
                 <event-block sid="646503035913642">
@@ -212,7 +167,7 @@
         <comment></comment>
         <event-group description="" sid="963834884412106" title="External files">
             <sub-events>
-                <event-block sid="725126179821962">
+                <event-block sid="567134886534420">
                     <conditions>
                         <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="116011160492506" type="Var_Misc">
                             <param id="0" name="Instance variable">InitializedFiles</param>
@@ -220,48 +175,20 @@
                     </conditions>
                     <actions />
                     <sub-events>
-                        <event-block sid="567134886534420">
+                        <comment>simple browser feature check</comment>
+                        <event-block sid="299082636327842">
                             <conditions>
                                 <condition id="-4" name="Trigger once while true" sid="481528135760012" type="System" />
                             </conditions>
                             <actions>
-                                <action id="14" name="Log" sid="375833844924612" type="Browser">
-                                    <param id="0" name="Type">0</param>
-                                    <param id="1" name="Message">&quot;not initialized files&quot;</param>
-                                </action>
-                                <action id="1" name="Request project file" sid="522713947354922" type="AJAX">
-                                    <param id="0" name="Tag">&quot;keycodes&quot;</param>
-                                    <param id="1" name="File">keycodes.ini</param>
-                                </action>
-                                <action id="1" name="Request project file" sid="586972287519443" type="AJAX">
-                                    <param id="0" name="Tag">&quot;lists&quot;</param>
-                                    <param id="1" name="File">lists.ini</param>
-                                </action>
-                                <action id="1" name="Request project file" sid="579154648539404" type="AJAX">
-                                    <param id="0" name="Tag">&quot;levelsproperties&quot;</param>
-                                    <param id="1" name="File">levelsproperties.ini</param>
-                                </action>
-                                <action id="1" name="Request project file" sid="575494500318957" type="AJAX">
-                                    <param id="0" name="Tag">&quot;skinssproperties&quot;</param>
-                                    <param id="1" name="File">skinsproperties.ini</param>
-                                </action>
-                                <action id="1" name="Request project file" sid="596545688720134" type="AJAX">
-                                    <param id="0" name="Tag">&quot;audiolist&quot;</param>
-                                    <param id="1" name="File">audiolist.ini</param>
-                                </action>
-                                <action id="1" name="Request project file" sid="207363745878159" type="AJAX">
-                                    <param id="0" name="Tag">&quot;audioproperties&quot;</param>
-                                    <param id="1" name="File">audioproperties.ini</param>
+                                <action id="17" name="Execute Javascript" sid="471723997069108" type="Browser">
+                                    <param id="0" name="Javascript">&quot;(function () {if (!(window.Intl &amp;&amp; Intl.RelativeTimeFormat &amp;&amp; Array.prototype.flat)) alert(&apos;Notice!\n\nIt appears that your browser might be too old (before 2019), please play the game in something newer or expect things breaking&apos;);})();&quot;</param>
                                 </action>
                             </actions>
                             <sub-events>
                                 <event-block sid="457864977661605">
                                     <conditions />
                                     <actions>
-                                        <action id="14" name="Log" sid="805671269295812" type="Browser">
-                                            <param id="0" name="Type">0</param>
-                                            <param id="1" name="Message">&quot;first js load&quot;</param>
-                                        </action>
                                         <action id="0" name="Call function" sid="245222463513540" type="Function">
                                             <param id="0" name="Name">&quot;JS_Load&quot;</param>
                                             <param id="1" name="Parameter {n}">&quot;js.storage.min.js&quot;</param>
@@ -277,12 +204,8 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="14" name="Log" sid="242126669162471" type="Browser">
-                                    <param id="0" name="Type">0</param>
-                                    <param id="1" name="Message">&quot;js_load &quot;&amp;Function.Param(0)</param>
-                                </action>
                                 <action id="0" name="Execute JS code" sid="509185610642596" type="JS">
-                                    <param id="0" name="JS code">&quot;if (!document.querySelector(`script[src=&apos;${#0}&apos;]`)) {&#x0D;&#x0A;let file = document.createElement(&apos;script&apos;);&#x0D;&#x0A;file.setAttribute(&apos;type&apos;,&apos;text/javascript&apos;);&#x0D;&#x0A;file.setAttribute(&apos;src&apos;, #0);&#x0D;&#x0A;file.onload = () =&gt; {file.onload = null; c2_callFunction(&apos;JS_OnLoad&apos;, [#0])};&#x0D;&#x0A;file.onerror = () =&gt; console.error(&apos;failed including &apos; + #0);&#x0D;&#x0A;document.getElementsByTagName(&apos;head&apos;)[0].appendChild(file);&#x0D;&#x0A;}&quot;</param>
+                                    <param id="0" name="JS code">&quot;if (!document.querySelector(&apos;script[src=\&apos;&apos;+#0+&apos;\&apos;]&apos;)) {&#x0D;&#x0A;  var file = document.createElement(&apos;script&apos;);&#x0D;&#x0A;  file.setAttribute(&apos;type&apos;,&apos;text/javascript&apos;);&#x0D;&#x0A;  file.setAttribute(&apos;src&apos;, #0);&#x0D;&#x0A;  file.onload = function () {file.onload = null; c2_callFunction(&apos;JS_OnLoad&apos;, [#0]);};&#x0D;&#x0A;  file.onerror = function () {console.error(&apos;failed including &apos; + #0);};&#x0D;&#x0A;  document.getElementsByTagName(&apos;head&apos;)[0].appendChild(file);&#x0D;&#x0A;}&quot;</param>
                                     <param id="1" name="Parameter {n}">Function.Param(0)</param>
                                 </action>
                             </actions>
@@ -293,12 +216,7 @@
                                     <param id="0" name="Name">&quot;JS_OnLoad&quot;</param>
                                 </condition>
                             </conditions>
-                            <actions>
-                                <action id="14" name="Log" sid="795371698607510" type="Browser">
-                                    <param id="0" name="Type">0</param>
-                                    <param id="1" name="Message">&quot;js_ONload &quot;&amp;Function.Param(0)</param>
-                                </action>
-                            </actions>
+                            <actions />
                             <sub-events>
                                 <event-block sid="682017245795943">
                                     <conditions>
@@ -339,7 +257,7 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="0" name="Call function" sid="985998270985686" type="Function">
+                                        <action id="0" name="Call function" sid="302901174757415" type="Function">
                                             <param id="0" name="Name">&quot;JS_Load&quot;</param>
                                             <param id="1" name="Parameter {n}">&quot;main.js&quot;</param>
                                         </action>
@@ -354,28 +272,58 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="0" name="Call function" sid="842759144448389" type="Function">
-                                            <param id="0" name="Name">&quot;JS_Load&quot;</param>
-                                            <param id="1" name="Parameter {n}">&quot;schemas.js&quot;</param>
+                                        <action id="2" name="Init alias" sid="986088750218119" type="JS">
+                                            <param id="0" name="Alias name">&quot;logjson&quot;</param>
+                                            <param id="1" name="JS">&quot;srbftp.logJSON&quot;</param>
+                                        </action>
+                                        <action id="2" name="Init alias" sid="601772590777910" type="JS">
+                                            <param id="0" name="Alias name">&quot;format&quot;</param>
+                                            <param id="1" name="JS">&quot;srbftp.format&quot;</param>
                                         </action>
                                     </actions>
                                     <sub-events>
                                         <event-block sid="994778930294425">
                                             <conditions />
                                             <actions>
-                                                <action id="2" name="Init alias" sid="986088750218119" type="JS">
-                                                    <param id="0" name="Alias name">&quot;logjson&quot;</param>
-                                                    <param id="1" name="JS">&quot;srbftp.logJSON&quot;</param>
-                                                </action>
-                                                <action id="2" name="Init alias" sid="601772590777910" type="JS">
-                                                    <param id="0" name="Alias name">&quot;format&quot;</param>
-                                                    <param id="1" name="JS">&quot;srbftp.format&quot;</param>
+                                                <action id="0" name="Call function" sid="985998270985686" type="Function">
+                                                    <param id="0" name="Name">&quot;JS_Load&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;ini.js&quot;</param>
                                                 </action>
                                             </actions>
                                         </event-block>
                                     </sub-events>
                                 </event-block>
                                 <event-block sid="464256435531263">
+                                    <conditions>
+                                        <condition id="1" name="Compare parameter" sid="460240718530065" type="Function">
+                                            <param id="0" name="Index">0</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;ini.js&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="2" name="Init alias" sid="496715974320066" type="JS">
+                                            <param id="0" name="Alias name">&quot;ini2json&quot;</param>
+                                            <param id="1" name="JS">&quot;srbftp.ini2json&quot;</param>
+                                        </action>
+                                        <action id="2" name="Init alias" sid="756630641947084" type="JS">
+                                            <param id="0" name="Alias name">&quot;json2ini&quot;</param>
+                                            <param id="1" name="JS">&quot;srbftp.json2ini&quot;</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="740355265069794">
+                                            <conditions />
+                                            <actions>
+                                                <action id="0" name="Call function" sid="842759144448389" type="Function">
+                                                    <param id="0" name="Name">&quot;JS_Load&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;schemas.js&quot;</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="829856829803915">
                                     <conditions>
                                         <condition id="1" name="Compare parameter" sid="390707470797308" type="Function">
                                             <param id="0" name="Index">0</param>
@@ -390,7 +338,7 @@
                                         </action>
                                     </actions>
                                 </event-block>
-                                <event-block sid="829856829803915">
+                                <event-block sid="203426364173271">
                                     <conditions>
                                         <condition id="1" name="Compare parameter" sid="428624647923254" type="Function">
                                             <param id="0" name="Index">0</param>
@@ -399,13 +347,149 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="-13" name="Set boolean" sid="954146975761296" type="Var_Misc">
-                                            <param id="0" name="Instance variable">InitializedFiles</param>
-                                            <param id="1" name="Value">1</param>
+                                        <action id="1" name="Request project file" sid="522713947354922" type="AJAX">
+                                            <param id="0" name="Tag">&quot;keycodes&quot;</param>
+                                            <param id="1" name="File">keycodes.ini</param>
                                         </action>
                                     </actions>
                                 </event-block>
                             </sub-events>
+                        </event-block>
+                        <comment></comment>
+                        <event-block sid="704353488214618">
+                            <conditions>
+                                <condition id="0" name="On completed" sid="306486745686037" type="AJAX">
+                                    <param id="0" name="Tag">&quot;keycodes&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="6" name="Call function" sid="650544724791998" type="JS">
+                                    <param id="0" name="Expression">&quot;ini2json&quot;</param>
+                                    <param id="1" name="Parameter {n}">URLEncode(AJAX.LastData)</param>
+                                </action>
+                                <action id="60" name="LoadJSON" sid="563935465293579" type="JSON_InputKeycodes">
+                                    <param id="0" name="JSON">JS.StoredReturnValue</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}"></param>
+                                </action>
+                                <action id="1" name="Request project file" sid="586972287519443" type="AJAX">
+                                    <param id="0" name="Tag">&quot;lists&quot;</param>
+                                    <param id="1" name="File">lists.ini</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="666020545546164">
+                            <conditions>
+                                <condition id="0" name="On completed" sid="123769047512206" type="AJAX">
+                                    <param id="0" name="Tag">&quot;lists&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="6" name="Call function" sid="121330464442139" type="JS">
+                                    <param id="0" name="Expression">&quot;ini2json&quot;</param>
+                                    <param id="1" name="Parameter {n}">URLEncode(AJAX.LastData)</param>
+                                </action>
+                                <action id="60" name="LoadJSON" sid="140540162740817" type="JSON_Lists">
+                                    <param id="0" name="JSON">JS.StoredReturnValue</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}"></param>
+                                </action>
+                                <action id="1" name="Request project file" sid="579154648539404" type="AJAX">
+                                    <param id="0" name="Tag">&quot;levelsproperties&quot;</param>
+                                    <param id="1" name="File">levelsproperties.ini</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="735327961230084">
+                            <conditions>
+                                <condition id="0" name="On completed" sid="161537500053850" type="AJAX">
+                                    <param id="0" name="Tag">&quot;levelsproperties&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="6" name="Call function" sid="341384604472945" type="JS">
+                                    <param id="0" name="Expression">&quot;ini2json&quot;</param>
+                                    <param id="1" name="Parameter {n}">URLEncode(AJAX.LastData)</param>
+                                </action>
+                                <action id="60" name="LoadJSON" sid="416529203802945" type="JSON_LevelProperties">
+                                    <param id="0" name="JSON">JS.StoredReturnValue</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}"></param>
+                                </action>
+                                <action id="1" name="Request project file" sid="575494500318957" type="AJAX">
+                                    <param id="0" name="Tag">&quot;skinssproperties&quot;</param>
+                                    <param id="1" name="File">skinsproperties.ini</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="709630387852625">
+                            <conditions>
+                                <condition id="0" name="On completed" sid="571187017844659" type="AJAX">
+                                    <param id="0" name="Tag">&quot;skinssproperties&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="6" name="Call function" sid="960492197310199" type="JS">
+                                    <param id="0" name="Expression">&quot;ini2json&quot;</param>
+                                    <param id="1" name="Parameter {n}">URLEncode(AJAX.LastData)</param>
+                                </action>
+                                <action id="60" name="LoadJSON" sid="301071263740249" type="JSON_SkinsProperties">
+                                    <param id="0" name="JSON">JS.StoredReturnValue</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}"></param>
+                                </action>
+                                <action id="1" name="Request project file" sid="596545688720134" type="AJAX">
+                                    <param id="0" name="Tag">&quot;audiolist&quot;</param>
+                                    <param id="1" name="File">audiolist.ini</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="623284608760105">
+                            <conditions>
+                                <condition id="0" name="On completed" sid="664384547862015" type="AJAX">
+                                    <param id="0" name="Tag">&quot;audiolist&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="6" name="Call function" sid="450356301514453" type="JS">
+                                    <param id="0" name="Expression">&quot;ini2json&quot;</param>
+                                    <param id="1" name="Parameter {n}">URLEncode(AJAX.LastData)</param>
+                                </action>
+                                <action id="60" name="LoadJSON" sid="185310249961443" type="JSON_AudioPreload">
+                                    <param id="0" name="JSON">JS.StoredReturnValue</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}"></param>
+                                </action>
+                                <action id="1" name="Request project file" sid="207363745878159" type="AJAX">
+                                    <param id="0" name="Tag">&quot;audioproperties&quot;</param>
+                                    <param id="1" name="File">audioproperties.ini</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="489703845885361">
+                            <conditions>
+                                <condition id="0" name="On completed" sid="424256181024190" type="AJAX">
+                                    <param id="0" name="Tag">&quot;audioproperties&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="6" name="Call function" sid="300140181681502" type="JS">
+                                    <param id="0" name="Expression">&quot;ini2json&quot;</param>
+                                    <param id="1" name="Parameter {n}">URLEncode(AJAX.LastData)</param>
+                                </action>
+                                <action id="60" name="LoadJSON" sid="585468518575926" type="JSON_AudioProperties">
+                                    <param id="0" name="JSON">JS.StoredReturnValue</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}"></param>
+                                </action>
+                                <action id="-16" name="Wait" sid="728032885287492" type="System">
+                                    <param id="0" name="Seconds">0</param>
+                                </action>
+                                <action id="-13" name="Set boolean" sid="954146975761296" type="Var_Misc">
+                                    <param id="0" name="Instance variable">InitializedFiles</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
                         </event-block>
                     </sub-events>
                 </event-block>
@@ -414,122 +498,70 @@
                         <condition id="-8" name="Is boolean instance variable set" sid="732239482996966" type="Var_Misc">
                             <param id="0" name="Instance variable">InitializedFiles</param>
                         </condition>
-                        <condition id="-4" name="Trigger once while true" sid="306845284833138" type="System" />
                     </conditions>
-                    <actions>
-                        <action id="-16" name="Wait" sid="927581207856512" type="System">
-                            <param id="0" name="Seconds">0</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <comment></comment>
-                <event-block sid="704353488214618">
-                    <conditions>
-                        <condition id="0" name="On completed" sid="306486745686037" type="AJAX">
-                            <param id="0" name="Tag">&quot;keycodes&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Call function" sid="127679894591349" type="Function">
-                            <param id="0" name="Name">&quot;INI2JSON&quot;</param>
-                            <param id="1" name="Parameter {n}">AJAX.LastData</param>
-                        </action>
-                        <action id="60" name="LoadJSON" sid="563935465293579" type="JSON_InputKeycodes">
-                            <param id="0" name="JSON">Function.ReturnValue</param>
-                            <param id="1" name="Reference point">0</param>
-                            <param id="2" name="Key {n}"></param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="666020545546164">
-                    <conditions>
-                        <condition id="0" name="On completed" sid="123769047512206" type="AJAX">
-                            <param id="0" name="Tag">&quot;lists&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Call function" sid="450931586244391" type="Function">
-                            <param id="0" name="Name">&quot;INI2JSON&quot;</param>
-                            <param id="1" name="Parameter {n}">AJAX.LastData</param>
-                        </action>
-                        <action id="60" name="LoadJSON" sid="140540162740817" type="JSON_Lists">
-                            <param id="0" name="JSON">Function.ReturnValue</param>
-                            <param id="1" name="Reference point">0</param>
-                            <param id="2" name="Key {n}"></param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="735327961230084">
-                    <conditions>
-                        <condition id="0" name="On completed" sid="161537500053850" type="AJAX">
-                            <param id="0" name="Tag">&quot;levelsproperties&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Call function" sid="943031851380713" type="Function">
-                            <param id="0" name="Name">&quot;INI2JSON&quot;</param>
-                            <param id="1" name="Parameter {n}">AJAX.LastData</param>
-                        </action>
-                        <action id="60" name="LoadJSON" sid="416529203802945" type="JSON_LevelProperties">
-                            <param id="0" name="JSON">Function.ReturnValue</param>
-                            <param id="1" name="Reference point">0</param>
-                            <param id="2" name="Key {n}"></param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="709630387852625">
-                    <conditions>
-                        <condition id="0" name="On completed" sid="571187017844659" type="AJAX">
-                            <param id="0" name="Tag">&quot;skinssproperties&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Call function" sid="102509636356693" type="Function">
-                            <param id="0" name="Name">&quot;INI2JSON&quot;</param>
-                            <param id="1" name="Parameter {n}">AJAX.LastData</param>
-                        </action>
-                        <action id="60" name="LoadJSON" sid="301071263740249" type="JSON_SkinsProperties">
-                            <param id="0" name="JSON">Function.ReturnValue</param>
-                            <param id="1" name="Reference point">0</param>
-                            <param id="2" name="Key {n}"></param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="623284608760105">
-                    <conditions>
-                        <condition id="0" name="On completed" sid="664384547862015" type="AJAX">
-                            <param id="0" name="Tag">&quot;audiolist&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Call function" sid="510169648151993" type="Function">
-                            <param id="0" name="Name">&quot;INI2JSON&quot;</param>
-                            <param id="1" name="Parameter {n}">AJAX.LastData</param>
-                        </action>
-                        <action id="60" name="LoadJSON" sid="185310249961443" type="JSON_AudioPreload">
-                            <param id="0" name="JSON">Function.ReturnValue</param>
-                            <param id="1" name="Reference point">0</param>
-                            <param id="2" name="Key {n}"></param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="489703845885361">
-                    <conditions>
-                        <condition id="0" name="On completed" sid="424256181024190" type="AJAX">
-                            <param id="0" name="Tag">&quot;audioproperties&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Call function" sid="225159450826996" type="Function">
-                            <param id="0" name="Name">&quot;INI2JSON&quot;</param>
-                            <param id="1" name="Parameter {n}">AJAX.LastData</param>
-                        </action>
-                        <action id="60" name="LoadJSON" sid="585468518575926" type="JSON_AudioProperties">
-                            <param id="0" name="JSON">Function.ReturnValue</param>
-                            <param id="1" name="Reference point">0</param>
-                            <param id="2" name="Key {n}"></param>
-                        </action>
-                    </actions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="668393181104072">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="855706303748765" type="System">
+                                    <param id="0" name="Variable">DESKTOP</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block disabled="1" sid="568561603230544">
+                                    <conditions>
+                                        <condition id="0" name="Path exists" sid="460068265929722" type="NWjs">
+                                            <param id="0" name="Path">NWjs.AppFolder&amp;&quot;\debugdebugdebug.txt&quot;</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="149682303899077" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="816102692405606" type="System">
+                                            <param id="0" name="Variable">DEBUG</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="352916751580611">
+                                    <conditions>
+                                        <condition id="0" name="Path exists" sid="425963373191662" type="NWjs">
+                                            <param id="0" name="Path">NWjs.AppFolder&amp;&quot;\srbftp_indev.ini&quot;</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="906107590218081" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="6" name="Call function" sid="324938391385135" type="JS">
+                                            <param id="0" name="Expression">&quot;ini2json&quot;</param>
+                                            <param id="1" name="Parameter {n}">URLEncode(NWjs.ReadFile(NWjs.AppFolder&amp;&quot;\srbftp_indev.ini&quot;))</param>
+                                        </action>
+                                        <action id="60" name="LoadJSON" sid="471625227841409" type="JSON_Indev">
+                                            <param id="0" name="JSON">JS.StoredReturnValue</param>
+                                            <param id="1" name="Reference point">0</param>
+                                            <param id="2" name="Key {n}"></param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="779085577990387">
+                                    <conditions>
+                                        <condition id="60" inverted="1" name="Is undefined" sid="710394011967945" type="JSON_Indev">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}">&quot;ResourceFolder&quot;</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="712765218858448" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Set value" sid="313350213258120" type="Var_Misc">
+                                            <param id="0" name="Instance variable">ResourceFolder</param>
+                                            <param id="1" name="Value">JSON_Indev.Value(0,&quot;ResourceFolder&quot;)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
                 </event-block>
             </sub-events>
         </event-group>
@@ -3807,10 +3839,13 @@
         </event-group>
         <event-group description="" sid="693787369828304" title="Misc">
             <sub-events>
-                <event-block any="1" sid="607442416688816">
+                <event-block sid="607442416688816">
                     <conditions>
-                        <condition id="-6" name="Every X seconds" sid="661258038426224" type="System">
-                            <param id="0" name="Interval (seconds)">0.5</param>
+                        <condition id="-8" name="Is boolean instance variable set" sid="266001073602960" type="Var_Misc">
+                            <param id="0" name="Instance variable">InitializedFiles</param>
+                        </condition>
+                        <condition id="-6" name="Every X seconds" sid="452976948637567" type="System">
+                            <param id="0" name="Interval (seconds)">1</param>
                         </condition>
                     </conditions>
                     <actions>
@@ -4103,54 +4138,6 @@
                             <param id="0" name="Visibility">0</param>
                         </action>
                     </actions>
-                </event-block>
-                <comment>a call for help </comment>
-                <event-block sid="809877708615117">
-                    <conditions>
-                        <condition id="-8" name="Is boolean instance variable set" sid="188600309100917" type="Var_Misc">
-                            <param id="0" name="Instance variable">InitializedFiles</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="148905547308678" type="System" />
-                    </conditions>
-                    <actions />
-                    <sub-events>
-                        <event-block any="1" sid="376545460512965">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="696251737861599" type="System">
-                                    <param id="0" name="Variable">WEB</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">1</param>
-                                </condition>
-                                <condition id="-14" name="Compare variable" sid="679187040729028" type="System">
-                                    <param id="0" name="Variable">DEBUG_LOCALSTORAGE</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">1</param>
-                                </condition>
-                            </conditions>
-                            <actions />
-                            <sub-events>
-                                <event-block sid="552233001913280">
-                                    <conditions>
-                                        <condition id="6" inverted="1" name="Compare value" sid="793270680694289" type="JS">
-                                            <param id="0" name="Value">1</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Expression">&quot;Storages.localStorage.isSet&quot;</param>
-                                            <param id="3" name="Parameter {n}">&quot;_OldBrowserWarning&quot;</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="6" name="Call function" sid="439630674966996" type="JS">
-                                            <param id="0" name="Expression">&quot;Storages.localStorage.set&quot;</param>
-                                            <param id="1" name="Parameter {n}">&quot;_OldBrowserWarning&quot;{###}1</param>
-                                        </action>
-                                        <action id="0" name="Alert" sid="996771178161907" type="Browser">
-                                            <param id="0" name="Message">&quot;Notice!&quot;&amp;newline&#x0D;&#x0A;&amp;newline&amp;&#x0D;&#x0A;&quot;Please use a browser that&apos;s at least newer than 2018 before reporting issues, i&apos;m begging you, thanks!&quot;&amp;newline&amp;&#x0D;&#x0A;&quot;This is a one-time reminder&quot;</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
-                        </event-block>
-                    </sub-events>
                 </event-block>
                 <comment>clickable buttons</comment>
                 <event-block sid="102176552351848">
@@ -4708,9 +4695,7 @@
                             <param id="0" name="Name">&quot;Delete_Config&quot;</param>
                         </condition>
                     </conditions>
-                    <actions>
-                        <action id="11" name="Cancel fullscreen" sid="777276219164342" type="Browser" />
-                    </actions>
+                    <actions />
                     <sub-events>
                         <event-block sid="894842652106267">
                             <conditions>
@@ -5387,7 +5372,17 @@
                                 <action id="20" name="Set Value" sid="194860326821054" type="Save_Online">
                                     <param id="0" name="Value">&quot;&quot;</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;LastUsername&quot;</param>
+                                    <param id="2" name="Key {n}">&quot;MultiUsername&quot;</param>
+                                </action>
+                                <action id="20" name="Set Value" sid="594214643300890" type="Save_Online">
+                                    <param id="0" name="Value">&quot;&quot;</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;Username&quot;</param>
+                                </action>
+                                <action id="20" name="Set Value" sid="434112649028498" type="Save_Online">
+                                    <param id="0" name="Value">&quot;&quot;</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;Auth&quot;</param>
                                 </action>
                             </actions>
                         </event-block>

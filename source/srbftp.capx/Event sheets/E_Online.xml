@@ -3,6 +3,43 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>E_Online</name>
     <events>
+        <event-block sid="831914251282361">
+            <conditions>
+                <condition id="0" name="On function" sid="837856410195022" type="Function">
+                    <param id="0" name="Name">&quot;Online_Error&quot;</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="143518997970698">
+                    <conditions>
+                        <condition id="-8" inverted="1" name="Compare two values" sid="781874251671261" type="System">
+                            <param id="0" name="First value">LayoutName</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Second value">&quot;Menu_Main&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Go to layout" sid="578478791464671" type="System">
+                            <param id="0" name="Layout">Menu_Main</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="803818156747716">
+                    <conditions />
+                    <actions>
+                        <action id="-10" name="Set value" sid="554701411031312" type="Var_Game">
+                            <param id="0" name="Instance variable">CurrentMenu</param>
+                            <param id="1" name="Value">&quot;connect_online&quot;</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="798751202499690" type="Var_Online">
+                            <param id="0" name="Instance variable">Error</param>
+                            <param id="1" name="Value">Function.Param(0)</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
         <event-group description="" sid="558958445449610" title="Photon">
             <sub-events>
                 <comment>init</comment>
@@ -354,44 +391,6 @@
                         </event-block>
                     </sub-events>
                 </event-group>
-                <comment>an error occured</comment>
-                <event-block sid="831914251282361">
-                    <conditions>
-                        <condition id="0" name="On function" sid="837856410195022" type="Function">
-                            <param id="0" name="Name">&quot;Online_Error&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions />
-                    <sub-events>
-                        <event-block sid="143518997970698">
-                            <conditions>
-                                <condition id="-8" inverted="1" name="Compare two values" sid="781874251671261" type="System">
-                                    <param id="0" name="First value">LayoutName</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Second value">&quot;Menu_Main&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-2" name="Go to layout" sid="578478791464671" type="System">
-                                    <param id="0" name="Layout">Menu_Main</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="803818156747716">
-                            <conditions />
-                            <actions>
-                                <action id="-10" name="Set value" sid="554701411031312" type="Var_Game">
-                                    <param id="0" name="Instance variable">CurrentMenu</param>
-                                    <param id="1" name="Value">&quot;connect_online&quot;</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="798751202499690" type="Var_Online">
-                                    <param id="0" name="Instance variable">Error</param>
-                                    <param id="1" name="Value">Function.Param(0)</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
                 <comment>generic error</comment>
                 <event-block sid="620544959659637">
                     <conditions>
@@ -806,12 +805,12 @@
                                     <param id="2" name="X">0</param>
                                     <param id="3" name="Y">0</param>
                                 </action>
-                                <action id="0" name="Call function" sid="402549352137370" type="Function">
-                                    <param id="0" name="Name">&quot;INI2JSON&quot;</param>
+                                <action id="6" name="Call function" sid="344481473063373" type="JS">
+                                    <param id="0" name="Expression">&quot;ini2json&quot;</param>
                                     <param id="1" name="Parameter {n}">Function.Param(0)</param>
                                 </action>
                                 <action id="60" name="LoadJSON" sid="927649174476928" type="JSON__COMMON">
-                                    <param id="0" name="JSON">Function.ReturnValue</param>
+                                    <param id="0" name="JSON">JS.StoredReturnValue</param>
                                     <param id="1" name="Reference point">0</param>
                                     <param id="2" name="Key {n}"></param>
                                 </action>
@@ -1274,27 +1273,27 @@
                                         </action>
                                     </actions>
                                 </event-block>
+                                <event-block sid="113045287831183">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="356056214834793" type="System">
+                                            <param id="0" name="Variable">details</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;&quot;</param>
+                                        </condition>
+                                        <condition id="-14" inverted="1" name="Compare variable" sid="928421585529517" type="System">
+                                            <param id="0" name="Variable">endTimestamp</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="14" name="Log" sid="172805668048745" type="Browser">
+                                            <param id="0" name="Type">1</param>
+                                            <param id="1" name="Message">&quot;incorrect discord rich presense: provided end timestamp, but not details&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
                             </sub-events>
-                        </event-block>
-                        <event-block sid="113045287831183">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="356056214834793" type="System">
-                                    <param id="0" name="Variable">details</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;&quot;</param>
-                                </condition>
-                                <condition id="-14" inverted="1" name="Compare variable" sid="928421585529517" type="System">
-                                    <param id="0" name="Variable">endTimestamp</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="14" name="Log" sid="172805668048745" type="Browser">
-                                    <param id="0" name="Type">1</param>
-                                    <param id="1" name="Message">&quot;incorrect discord rich presense: provided end timestamp, but not details&quot;</param>
-                                </action>
-                            </actions>
                         </event-block>
                         <comment></comment>
                         <event-block sid="994419992182060">
@@ -1330,6 +1329,87 @@
                         </action>
                     </actions>
                 </event-block>
+                <event-block sid="143955788540994">
+                    <conditions>
+                        <condition id="-8" name="Is boolean instance variable set" sid="700490217360262" type="Var_Misc">
+                            <param id="0" name="Instance variable">InitializedFiles</param>
+                        </condition>
+                        <condition id="60" inverted="1" name="Is undefined" sid="235674869605786" type="JSON_Indev">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}">&quot;PublicKey&quot;</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="493424687179506" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Set value" sid="382272712712870" type="Var_Misc">
+                            <param id="0" name="Instance variable">PublicKey</param>
+                            <param id="1" name="Value">JSON_Indev.Value(0,&quot;PublicKey&quot;)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="644863232976055">
+                    <conditions>
+                        <condition id="70" name="Is Empty" sid="661753990049969" type="JSON_OnlineCache">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="449035811726132" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set New Object" sid="667740803998100" type="JSON_OnlineCache">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </action>
+                        <action id="0" name="Set New Object" sid="314495133798163" type="JSON_OnlineCache">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}">&quot;timestamps&quot;</param>
+                        </action>
+                        <action id="20" name="Set Value" sid="683485304667768" type="JSON_OnlineCache">
+                            <param id="0" name="Value">&quot;&quot;</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}">&quot;token&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="878455632460558">
+                    <conditions>
+                        <condition id="0" name="On function" sid="622042693450882" type="Function">
+                            <param id="0" name="Name">&quot;PB_OnSuccess&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="14" name="Log" sid="559832255201294" type="Browser">
+                            <param id="0" name="Type">0</param>
+                            <param id="1" name="Message">&quot;Online_OnSuccess &quot;&amp;Function.Param(0)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>todo: detect errors like username needing to be at least 2 chars long (better yet sanitize clientside but that too)</comment>
+                <event-block sid="850522004911434">
+                    <conditions>
+                        <condition id="0" name="On function" sid="722378338738930" type="Function">
+                            <param id="0" name="Name">&quot;PB_OnError&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-3" name="Create object" sid="929729057026166" type="System">
+                            <param id="0" name="Object to create">JSON__COMMON</param>
+                            <param id="1" name="Layer">0</param>
+                            <param id="2" name="X">0</param>
+                            <param id="3" name="Y">0</param>
+                        </action>
+                        <action id="60" name="LoadJSON" sid="911665206705615" type="JSON__COMMON">
+                            <param id="0" name="JSON">Function.Param(1)</param>
+                            <param id="1" name="Reference point">0</param>
+                            <param id="2" name="Key {n}"></param>
+                        </action>
+                        <action id="6" name="Call function" sid="423211624970331" type="JS">
+                            <param id="0" name="Expression">&quot;logjson&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;Online_OnError &quot;&amp;Function.Param(0)&amp;newline&amp;&#x0D;&#x0A;JSON__COMMON.Value(0,&quot;code&quot;)&amp;&quot; &quot;&amp;JSON__COMMON.Value(0,&quot;message&quot;)&amp;newline&amp;&#x0D;&#x0A;JSON__COMMON.Value(0,&quot;response&quot;,&quot;status&quot;)&amp;&quot; &quot;&amp;JSON__COMMON.Value(0,&quot;response&quot;,&quot;statusText&quot;){###}JSON__COMMON.AsJson(0,&quot;response&quot;,&quot;data&quot;)</param>
+                        </action>
+                        <action id="-9" name="Destroy" sid="117215403621729" type="JSON__COMMON" />
+                    </actions>
+                </event-block>
                 <event-block sid="462814952520477">
                     <conditions>
                         <condition id="0" name="On function" sid="826362050415456" type="Function">
@@ -1340,6 +1420,7 @@
                     <sub-events>
                         <variable constant="0" name="tag" sid="960022077767022" static="0" type="text"></variable>
                         <variable constant="0" name="data" sid="512266675049396" static="0" type="text"></variable>
+                        <variable constant="0" name="object" sid="602613799097360" static="0" type="text">null</variable>
                         <event-block sid="536032714620022">
                             <conditions />
                             <actions>
@@ -1384,41 +1465,35 @@
                                 </action>
                             </actions>
                         </event-block>
+                        <event-block sid="624574536569205">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="948298879363366" type="System">
+                                    <param id="0" name="First value">Function.ParamCount</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Second value">4</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="517347994449771" type="System">
+                                    <param id="0" name="Variable">object</param>
+                                    <param id="1" name="Value">Function.Param(3)</param>
+                                </action>
+                            </actions>
+                        </event-block>
                         <event-block sid="469487351932372">
                             <conditions />
                             <actions>
+                                <action id="14" name="Log" sid="674047534805156" type="Browser">
+                                    <param id="0" name="Type">0</param>
+                                    <param id="1" name="Message">&quot;Online_Request &quot;&amp;Function.Param(0)</param>
+                                </action>
                                 <action id="6" name="Call function" sid="273704886063545" type="JS">
                                     <param id="0" name="Expression">&quot;srbftp.online.&quot;&amp;Function.Param(0)</param>
-                                    <param id="1" name="Parameter {n}">&quot;{&#x0D;&#x0A;tag: &quot;&amp;tag&amp;&quot;,&#x0D;&#x0A;url: &quot;&amp;Var_Misc.PocketBaseURL&amp;&quot;,&#x0D;&#x0A;version: &quot;&amp;projectversion&amp;&quot;,&#x0D;&#x0A;data: &quot;&amp;data&amp;&quot;,&#x0D;&#x0A;}&quot;</param>
+                                    <param id="1" name="Parameter {n}">URLEncode(&quot;&#x0D;&#x0A;tag=&quot;&amp;tag&amp;&quot;&#x0D;&#x0A;url=&quot;&amp;Var_Misc.PocketBaseURL&amp;&quot;&#x0D;&#x0A;version=&quot;&amp;projectversion&amp;&quot;&#x0D;&#x0A;time=&quot;&amp;Date.UnixTimestamp&amp;&quot;&#x0D;&#x0A;[data]&quot;&amp;newline&#x0D;&#x0A;&amp;data){###}JS.JSCodeValue(&quot;JSON.parse(#0)&quot;, object)</param>
                                 </action>
                             </actions>
                         </event-block>
                     </sub-events>
-                </event-block>
-                <event-block disabled="1" sid="770889294549012">
-                    <conditions>
-                        <condition disabled="1" id="0" name="On function" sid="898237591450555" type="Function">
-                            <param id="0" name="Name">&quot;PB_HealthCheck&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Call function" sid="629158394458828" type="Function">
-                            <param id="0" name="Name">&quot;PB_Request&quot;</param>
-                            <param id="1" name="Parameter {n}">&quot;health&quot;</param>
-                        </action>
-                        <action id="0" name="Call function" sid="274197264676652" type="Function">
-                            <param id="0" name="Name">&quot;PB_Request&quot;</param>
-                            <param id="1" name="Parameter {n}">&quot;login&quot;{###}&quot;&quot;{###}&quot;{&#x0D;&#x0A;username: &quot;&amp;&quot;a&quot;&amp;&quot;,&#x0D;&#x0A;password: &quot;&amp;&quot;a&quot;&amp;&quot;,&#x0D;&#x0A;}&quot;</param>
-                        </action>
-                        <action id="0" name="Call function" sid="166279621329072" type="Function">
-                            <param id="0" name="Name">&quot;PB_Request&quot;</param>
-                            <param id="1" name="Parameter {n}">&quot;signup&quot;{###}&quot;&quot;{###}&quot;{&#x0D;&#x0A;username: &quot;&amp;&quot;a&quot;&amp;&quot;,&#x0D;&#x0A;password: &quot;&amp;&quot;a&quot;&amp;&quot;,&#x0D;&#x0A;passwordconfirm: &quot;&amp;&quot;a&quot;&amp;&quot;,&#x0D;&#x0A;}&quot;</param>
-                        </action>
-                        <action id="0" name="Call function" sid="354822519942903" type="Function">
-                            <param id="0" name="Name">&quot;PB_Request&quot;</param>
-                            <param id="1" name="Parameter {n}">&quot;refresh_login&quot;{###}&quot;&quot;{###}&quot;token go here&quot;</param>
-                        </action>
-                    </actions>
                 </event-block>
             </sub-events>
         </event-group>
