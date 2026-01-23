@@ -12,12 +12,13 @@ const request = function(options) {
 			"Timestamp": options.time,
 		},
 		timeout: 10000, // 10 sec
+		transitional: {clarifyTimeoutError: true},
 	}
 	let instance = axios.create(config)
 	
 	instance(options.config)
 	.then((res) => {c2_callFunction("PB_OnSuccess", [options.tag, JSON.stringify(res)]); console.log(res)})
-	.catch((err) => {c2_callFunction("PB_OnError", [options.tag, JSON.stringify(err)]); console.log(err)})
+	.catch((err) => {c2_callFunction("PB_OnError", [options.tag, JSON.stringify(err), JSON.stringify(err.response)]);  console.log(err)})
 }
 
 //////////////////////////////////////////////// general
@@ -77,6 +78,7 @@ online.get_user = function(options) {
 	options.config = {
 		url: "/api/collections/users/records/" + String(options.data.id),
 		method: "get",
+		params: {expand: "leaderboards_users_via_user"},
 	}
 	request(options)
 }
@@ -97,21 +99,30 @@ online.leaderboards = function(options) {
 	options = ini2json(options)
 	let level = /^\w+$/.test(options.data.level) ? options.data.level : ""
 	let type = options.data.type != "time" ? "score" : "time"
+	let user = /^\w+$/.test(options.data.user) ? options.data.user : ""
+	
+	function daysago(days) {
+		let diff = new Date()
+		diff.setDate(diff.getDate() - days)
+		return diff.toISOString().replace("T", " ")
+	}
 	
 	const filter_types = {
 		normal: `level = "${level}" && type = "${type}"`,
+		user: `level = "${level}" && type = "${type}" && user = "${user}"`,
+		weekly: `level = "${level}" && type = "${type}" && created >= "${daysago(7)}"`,	
+		monthly: `level = "${level}" && type = "${type}" && created >= "${daysago(30)}"`,	
 	}
 	let filter = filter_types[options.data.filter] || filter_types.normal
 	
 	const sort_types = {
-		time: {
-			best: "value",
-		},
-		score: {
-			best: "-value",
-		},
+		best: "rank",
+		worst: "-rank",
+		recent: "-created",
+		oldest: "created",
+		random: "@random",
 	}
-	let sort = sort_types[type][options.data.sort] || sort_types[type].best
+	let sort = sort_types[options.data.sort] || sort_types.best
 	
 	options.config = {
 		url: "/api/collections/leaderboards/records",
@@ -120,9 +131,10 @@ online.leaderboards = function(options) {
 			filter: filter,
 			sort: sort,
 			page: options.data.page,
+			perPage: 10,
 			expand: "user",
 			skipTotal: "true", 
-			fields: "contents, created, user, expand.user.name"
+			fields: "rank, contents, created, user, expand.user.name"
 		},
 	}
 	request(options)

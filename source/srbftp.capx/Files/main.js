@@ -1,6 +1,6 @@
 "use strict"
 // figure out how to do variables only accessible to the scope of one file
-// make all functions constants
+// make all functions constants, deep freeze objects?
 var srbftp = {}
 
 srbftp.logJSON = function(...args) {
@@ -21,7 +21,7 @@ srbftp.testFunction = function(...args) {
 srbftp.format = function () {
 	let string = arguments[0];
 	for (let i = 1; i < arguments.length; i++) {
-		string = string.replace(/{[A-Za-z0-9]+}/, arguments[i]);
+		string = string.replace(/{\w+}/, arguments[i]);
 	};
 	return string;
 };

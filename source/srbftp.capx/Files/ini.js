@@ -4,7 +4,7 @@ srbftp.ini2json = function (arg, raw = false) {
 	let result = {}, scope = result, section = null
 	
 	// type conversion
-	const cast = (arg) => {
+	function cast(arg) {
 		let num = Number(arg)
 		return (!isNaN(num) && arg != "") ? num : arg
 	}
@@ -18,48 +18,51 @@ srbftp.ini2json = function (arg, raw = false) {
 		if (line.startsWith("[") && line.endsWith("]")) {
 			section = line.slice(1, -1).trim()
 			
-			// [array[]] with objects
+			// [array[]] with values or objects
 			if (section.endsWith("[]")) {
-				let name = section.slice(0, -2).trim()
-				if (!Array.isArray(result[name])) result[name] = []
-				let obj = {}
-				result[name].push(obj)
-				scope = obj
-			// [section] with key=values
-			} else {
-				if (!result[section]) result[section] = {}
-				scope = result[section]
+				section = section.slice(0, -2).trim()
+				if (!Array.isArray(result[section])) result[section] = []
 			}
-			// [array] with values is handled later
-			return
+			// [object] with key=values
+			else {
+				if (!result[section]) result[section] = {}
+			}
+			
+			scope = result[section]
 		}
 		// key=value lines
-		if (line.includes("=")) {
+		else if (line.includes("=")) {
 			let separator = line.indexOf("=")
 			let key = line.substring(0, separator).trim()
 			let value = cast(line.substring(separator + 1).trim())
 			
+			// inside an array
+			if (section && Array.isArray(scope)) {
+				let obj = {}
+				result[section].push(obj)
+				scope = obj
+			} 
+			
 			// key[]=value array
 			if (key.endsWith("[]")) {
-				let name = key.slice(0, -2).trim()
-				if (!Array.isArray(scope[name])) scope[name] = []
-				scope[name].push(value)
+				key = key.slice(0, -2).trim()
+				if (!Array.isArray(scope[key])) scope[key] = []
+				scope[key].push(value)
+			}
 			// key=value
-			} else {
+			else {
 				scope[key] = value
 			}
 		}
-		// out of global scope
-		else if (section) {
-			// [array] with values
-			// initialize
-			if (!Array.isArray(scope) && Object.keys(scope).length == 0) {
-				result[section] = []
-				scope = result[section]
-			}
-			// put values
-			if (Array.isArray(scope)) {
+		// otherwise eligible lines
+		else {
+			// inside an array
+			if (section && Array.isArray(scope)) {
 				scope.push(cast(line.trim()))
+			}
+			// global scope or in an object
+			else {
+				scope[line.trim()] = ""
 			}
 		}
 	})
@@ -76,6 +79,8 @@ srbftp.json2ini = function (arg, raw = false) {
 		
 		// order matters
 		// [array[]] with objects
+		// TODO: doesn't handle these very well, make a unified "serialize object" function
+		// TODO: maybe stop differentiating arrays
 		if (Array.isArray(value) && value.length > 0 && typeof value[0] == "object") {
 			let arr = value
 			arr.forEach(obj => {
@@ -85,10 +90,10 @@ srbftp.json2ini = function (arg, raw = false) {
 				}
 			})
 		}
-		// [array] with values
+		// [array[]] with values
 		else if (Array.isArray(value)) {
 			let arr = value
-			result.push(`\n[${key}]`)
+			result.push(`\n[${key}[]]`)
 			arr.forEach(value => {
 				result.push(String(value))
 			})
