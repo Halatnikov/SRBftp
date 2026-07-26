@@ -18,7 +18,7 @@ srbftp.testFunction = function(...args) {
 };
 
 // bootleg string.format
-srbftp.format = function () {
+srbftp.format = function() {
 	let string = arguments[0];
 	for (let i = 1; i < arguments.length; i++) {
 		string = string.replace(/{\w+}/, arguments[i]);
@@ -53,7 +53,7 @@ const proxies = {};
 proxies.localStorage_get = Storages.localStorage.get;
 Storages.localStorage.get = function() {
 	let proxied = proxies.localStorage_get.apply(this, arguments);
-	return (proxied != null && typeof proxied == "object") ? JSON.stringify(proxied) : proxied;
+	return (typeof proxied == "object") ? JSON.stringify(proxied) : proxied;
 };
 
 proxies.localStorage_keys = Storages.localStorage.keys;
@@ -65,7 +65,7 @@ Storages.localStorage.keys = function() {
 (()=>{
 const c2_callFunction = window.c2_callFunction
 window.c2_callFunction = function(name, params) {
-	const names = ["String_IsNumber", "Time_DateString", "JS_OnLoad", "PB_OnSuccess", "PB_OnError"];
+	const names = ["String_IsNumber", "Time_DateString", "JS_OnLoad", "PB_OnSuccess", "PB_OnError"]
 	if (names.includes(name)) {
 		return c2_callFunction.apply(this, arguments)
 	}

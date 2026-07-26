@@ -19,8 +19,8 @@
                             <param id="0" name="Layer">&quot;Pause&quot;</param>
                             <param id="1" name="Visibility">0</param>
                         </action>
-                        <action id="-12" name="Set group active" sid="898433127438106" type="System">
-                            <param id="0" name="Group name">&quot;Pop-up menu&quot;</param>
+                        <action id="-12" name="Set group active" sid="459418378330593" type="System">
+                            <param id="0" name="Group name">&quot;Pop-up&quot;</param>
                             <param id="1" name="State">0</param>
                         </action>
                     </actions>
@@ -45,18 +45,18 @@
                         </action>
                     </actions>
                 </event-block>
-                <event-block sid="799905435537898">
+                <event-block sid="743540798709629">
                     <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="546136295770344" type="Var_Game">
+                        <condition id="-7" name="Compare instance variable" sid="375106792970680" type="Var_Game">
                             <param id="0" name="Instance variable">CurrentMenu</param>
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">&quot;popup&quot;</param>
                         </condition>
-                        <condition id="-4" name="Trigger once while true" sid="842412402960593" type="System" />
+                        <condition id="-4" name="Trigger once while true" sid="854405800950547" type="System" />
                     </conditions>
                     <actions>
-                        <action id="-12" name="Set group active" sid="506438826051214" type="System">
-                            <param id="0" name="Group name">&quot;Pop-up menu&quot;</param>
+                        <action id="-12" name="Set group active" sid="103477114895958" type="System">
+                            <param id="0" name="Group name">&quot;Pop-up&quot;</param>
                             <param id="1" name="State">1</param>
                         </action>
                     </actions>
@@ -106,7 +106,7 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-9" name="Destroy" sid="746115715137235" type="Menu_Options2" />
+                        <action id="-9" name="Destroy" sid="746115715137235" type="Menu_PopupOption" />
                         <action id="-9" name="Set value" sid="807259631721238" type="System">
                             <param id="0" name="Variable">width</param>
                             <param id="1" name="Value">440</param>
@@ -207,34 +207,38 @@
                     </conditions>
                     <actions>
                         <action id="-3" name="Create object" sid="519445048539173" type="System">
-                            <param id="0" name="Object to create">Menu_Options2</param>
+                            <param id="0" name="Object to create">Menu_PopupOption</param>
                             <param id="1" name="Layer">&quot;BG&quot;</param>
                             <param id="2" name="X">BG_Black2.BBoxLeft</param>
-                            <param id="3" name="Y">BG_Black2.BBoxTop + 5 + (Menu_Options2.Count*32) - 32</param>
+                            <param id="3" name="Y">BG_Black2.BBoxTop + 5 + (Menu_PopupOption.Count*32) - 32</param>
                         </action>
-                        <action id="-7" name="Set size" sid="383961070995289" type="Menu_Options2">
+                        <action id="-7" name="Set size" sid="383961070995289" type="Menu_PopupOption">
                             <param id="0" name="Width">width</param>
                             <param id="1" name="Height">35</param>
                         </action>
-                        <action id="2" name="Set font face" sid="804169054911895" type="Menu_Options2">
-                            <param id="0" name="Font face">&quot;Arial&quot;</param>
-                            <param id="1" name="Style">0</param>
+                        <action id="0" name="Set text" sid="296811459817420" type="Menu_PopupOption">
+                            <param id="0" name="Text">Function.Param(0)</param>
                         </action>
-                        <action id="3" name="Set font size" sid="744841403267317" type="Menu_Options2">
-                            <param id="0" name="Size (pt)">18</param>
-                        </action>
-                        <action id="-30" name="Set from JSON" sid="888353455593381" type="Menu_Options2">
-                            <param id="0" name="JSON">replace(Self.AsJSON,&quot;&quot;&quot;ha&quot;&quot;:0&quot;,&quot;&quot;&quot;ha&quot;&quot;:1&quot;)</param>
-                        </action>
-                        <action id="0" name="Set text" sid="296811459817420" type="Menu_Options2">
-                            <param id="0" name="Text">Function.ParamCount &gt; 0 ? Function.Param(0) : &quot;&quot;</param>
-                        </action>
-                        <action id="4" name="Set font color" sid="788775657006747" type="Menu_Options2">
+                        <action id="4" name="Set font color" sid="788775657006747" type="Menu_PopupOption">
                             <param id="0" name="Color">Function.ParamCount &gt; 1 ? Function.Param(1) : rgb(255, 0, 0)</param>
                         </action>
-                        <action behavior="Pin" id="0" name="Pin to object" sid="191503231246375" type="Menu_Options2">
+                        <action behavior="Pin" id="0" name="Pin to object" sid="191503231246375" type="Menu_PopupOption">
                             <param id="0" name="Pin to">BG_Black2</param>
                             <param id="1" name="Mode">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment></comment>
+                <event-block sid="686321641290818">
+                    <conditions>
+                        <condition id="0" name="On function" sid="701437756919270" type="Function">
+                            <param id="0" name="Name">&quot;Popup_Spacer&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Call function" sid="276161628579420" type="Function">
+                            <param id="0" name="Name">&quot;Popup_Label&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;&quot;</param>
                         </action>
                     </actions>
                 </event-block>
@@ -247,46 +251,36 @@
                     </conditions>
                     <actions>
                         <action id="-3" name="Create object" sid="577875581923127" type="System">
-                            <param id="0" name="Object to create">Menu_Options2</param>
+                            <param id="0" name="Object to create">Menu_PopupOption</param>
                             <param id="1" name="Layer">&quot;BG&quot;</param>
                             <param id="2" name="X">BG_Black2.BBoxLeft</param>
-                            <param id="3" name="Y">BG_Black2.BBoxTop + 5 + (Menu_Options2.Count*32) - 32</param>
+                            <param id="3" name="Y">BG_Black2.BBoxTop + 5 + (Menu_PopupOption.Count*32) - 32</param>
                         </action>
-                        <action id="-7" name="Set size" sid="851773250875903" type="Menu_Options2">
+                        <action id="-7" name="Set size" sid="851773250875903" type="Menu_PopupOption">
                             <param id="0" name="Width">width</param>
                             <param id="1" name="Height">35</param>
                         </action>
-                        <action id="2" name="Set font face" sid="327103873966085" type="Menu_Options2">
-                            <param id="0" name="Font face">&quot;Arial&quot;</param>
-                            <param id="1" name="Style">0</param>
-                        </action>
-                        <action id="3" name="Set font size" sid="410025657995173" type="Menu_Options2">
-                            <param id="0" name="Size (pt)">18</param>
-                        </action>
-                        <action id="-30" name="Set from JSON" sid="380744290928819" type="Menu_Options2">
-                            <param id="0" name="JSON">replace(Self.AsJSON,&quot;&quot;&quot;ha&quot;&quot;:0&quot;,&quot;&quot;&quot;ha&quot;&quot;:1&quot;)</param>
-                        </action>
-                        <action id="0" name="Set text" sid="810232704672540" type="Menu_Options2">
+                        <action id="0" name="Set text" sid="810232704672540" type="Menu_PopupOption">
                             <param id="0" name="Text">Function.Param(0)</param>
                         </action>
-                        <action id="4" name="Set font color" sid="288902549999829" type="Menu_Options2">
+                        <action id="4" name="Set font color" sid="288902549999829" type="Menu_PopupOption">
                             <param id="0" name="Color">rgb(255,0,0)</param>
+                        </action>
+                        <action behavior="Pin" id="0" name="Pin to object" sid="333058164683343" type="Menu_PopupOption">
+                            <param id="0" name="Pin to">BG_Black2</param>
+                            <param id="1" name="Mode">0</param>
                         </action>
                         <action id="-10" name="Add to" sid="419620098020807" type="System">
                             <param id="0" name="Variable">options</param>
                             <param id="1" name="Value">1</param>
                         </action>
-                        <action id="-10" name="Set value" sid="156035316184248" type="Menu_Options2">
-                            <param id="0" name="Instance variable">TableID</param>
+                        <action id="-10" name="Set value" sid="156035316184248" type="Menu_PopupOption">
+                            <param id="0" name="Instance variable">OptionID</param>
                             <param id="1" name="Value">options</param>
                         </action>
-                        <action id="-10" name="Set value" sid="246041605269554" type="Menu_Options2">
-                            <param id="0" name="Instance variable">ID</param>
+                        <action id="-10" name="Set value" sid="246041605269554" type="Menu_PopupOption">
+                            <param id="0" name="Instance variable">Function</param>
                             <param id="1" name="Value">&quot;resume&quot;</param>
-                        </action>
-                        <action behavior="Pin" id="0" name="Pin to object" sid="333058164683343" type="Menu_Options2">
-                            <param id="0" name="Pin to">BG_Black2</param>
-                            <param id="1" name="Mode">0</param>
                         </action>
                     </actions>
                     <sub-events>
@@ -314,8 +308,8 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="-10" name="Set value" sid="701546401358303" type="Menu_Options2">
-                                            <param id="0" name="Instance variable">ID</param>
+                                        <action id="-10" name="Set value" sid="701546401358303" type="Menu_PopupOption">
+                                            <param id="0" name="Instance variable">Function</param>
                                             <param id="1" name="Value">Function.Param(1)</param>
                                         </action>
                                     </actions>
@@ -325,7 +319,7 @@
                                         <condition id="-22" name="Else" sid="557973996375267" type="System" />
                                     </conditions>
                                     <actions>
-                                        <action id="4" name="Set font color" sid="656228800045572" type="Menu_Options2">
+                                        <action id="4" name="Set font color" sid="656228800045572" type="Menu_PopupOption">
                                             <param id="0" name="Color">Function.Param(1)</param>
                                         </action>
                                     </actions>
@@ -341,12 +335,86 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="4" name="Set font color" sid="149406409889223" type="Menu_Options2">
-                                    <param id="0" name="Color">Function.Param(2)</param>
-                                </action>
-                                <action id="-10" name="Set value" sid="698851461034695" type="Menu_Options2">
-                                    <param id="0" name="Instance variable">ID</param>
+                                <action id="-10" name="Set value" sid="698851461034695" type="Menu_PopupOption">
+                                    <param id="0" name="Instance variable">Function</param>
                                     <param id="1" name="Value">Function.Param(1)</param>
+                                </action>
+                                <action id="0" name="Call function" sid="222820521526542" type="Function">
+                                    <param id="0" name="Name">&quot;String_IsNumber&quot;</param>
+                                    <param id="1" name="Parameter {n}">Function.Param(2)</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="209819658649803">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="305298035154264" type="System">
+                                            <param id="0" name="First value">Function.ReturnValue</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Set value" sid="636640798443807" type="Menu_PopupOption">
+                                            <param id="0" name="Instance variable">Description</param>
+                                            <param id="1" name="Value">Function.Param(2)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="942890048643951">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="173060249432214" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="4" name="Set font color" sid="511513321342368" type="Menu_PopupOption">
+                                            <param id="0" name="Color">Function.Param(2)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="308004659061955">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="425484819859796" type="System">
+                                    <param id="0" name="First value">Function.ParamCount</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">4</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Set value" sid="259105495715638" type="Menu_PopupOption">
+                                    <param id="0" name="Instance variable">Function</param>
+                                    <param id="1" name="Value">Function.Param(1)</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="239449066160879" type="Menu_PopupOption">
+                                    <param id="0" name="Instance variable">Description</param>
+                                    <param id="1" name="Value">Function.Param(2)</param>
+                                </action>
+                                <action id="4" name="Set font color" sid="552615430475901" type="Menu_PopupOption">
+                                    <param id="0" name="Color">Function.Param(3)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>special case</comment>
+                        <event-block sid="292452396121988">
+                            <conditions>
+                                <condition id="-7" name="Compare instance variable" sid="854292140046152" type="Menu_PopupOption">
+                                    <param id="0" name="Instance variable">Function</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;change_skin&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Wait" sid="254602865226867" type="System">
+                                    <param id="0" name="Seconds">0</param>
+                                </action>
+                                <action id="-3" name="Create object" sid="521753307417709" type="System">
+                                    <param id="0" name="Object to create">HUD_SkinIcon</param>
+                                    <param id="1" name="Layer">&quot;BG&quot;</param>
+                                    <param id="2" name="X">Menu_PopupOption.X + Menu_PopupOption.TextWidth/2 - 26</param>
+                                    <param id="3" name="Y">Menu_PopupOption.Y + Menu_PopupOption.Height/3</param>
+                                </action>
+                                <action id="5" name="Set frame" sid="383885386638687" type="HUD_SkinIcon">
+                                    <param id="0" name="Frame number">Var_Player.Skin</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -370,7 +438,7 @@
                         </action>
                         <action id="-7" name="Set size" sid="877696492994104" type="BG_Black2">
                             <param id="0" name="Width">width</param>
-                            <param id="1" name="Height">5*2 + (Menu_Options2.Count*32) - 32</param>
+                            <param id="1" name="Height">5*2 + (Menu_PopupOption.Count*32) - 32</param>
                         </action>
                         <action id="-3" name="Set position" sid="145037989166131" type="BG_Black2">
                             <param id="0" name="X">LayoutWidth/2</param>
@@ -514,15 +582,18 @@
                         </event-block>
                         <event-block sid="857216066187353">
                             <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="527515091094537" type="Menu_Options2">
-                                    <param id="0" name="Instance variable">TableID</param>
+                                <condition id="-7" name="Compare instance variable" sid="527515091094537" type="Menu_PopupOption">
+                                    <param id="0" name="Instance variable">OptionID</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">Var_Game.CurrentSelection</param>
                                 </condition>
                             </conditions>
                             <actions>
                                 <action id="-2" name="Set Y" sid="170937480498108" type="Menu_Cursor">
-                                    <param id="0" name="Y">Menu_Options2.Y+15</param>
+                                    <param id="0" name="Y">Menu_PopupOption.Y+15</param>
+                                </action>
+                                <action id="0" name="Set text" sid="311971918803782" type="Menu_Description">
+                                    <param id="0" name="Text">Menu_PopupOption.Description</param>
                                 </action>
                             </actions>
                             <sub-events>
@@ -541,7 +612,7 @@
                                     <actions>
                                         <action id="0" name="Call function" sid="114297472511621" type="Function">
                                             <param id="0" name="Name">&quot;Popup_DoFunction&quot;</param>
-                                            <param id="1" name="Parameter {n}">Menu_Options2.ID</param>
+                                            <param id="1" name="Parameter {n}">Menu_PopupOption.Function</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -650,6 +721,7 @@
                                 </action>
                             </actions>
                         </event-block>
+                        <comment></comment>
                         <event-block sid="221684885278330">
                             <conditions />
                             <actions>
@@ -661,14 +733,18 @@
                                     <param id="0" name="Name">&quot;Popup_Label&quot;</param>
                                     <param id="1" name="Parameter {n}">&quot;&gt; - PAUSED - &lt;&quot;{###}rgb(255,255,0)</param>
                                 </action>
-                                <action id="0" name="Call function" sid="525571252128714" type="Function">
-                                    <param id="0" name="Name">&quot;Popup_Label&quot;</param>
+                                <action id="0" name="Call function" sid="194799528545616" type="Function">
+                                    <param id="0" name="Name">&quot;Popup_Spacer&quot;</param>
                                     <param id="1" name="Parameter {n}"></param>
                                 </action>
                             </actions>
                             <sub-events>
                                 <event-block sid="897591017044651">
-                                    <conditions />
+                                    <conditions>
+                                        <condition id="3" name="Add comment (bold and italic)" sid="599138704947292" type="Comment">
+                                            <param id="0" name="Comment">&quot;singleplayer&quot;</param>
+                                        </condition>
+                                    </conditions>
                                     <actions />
                                     <sub-events>
                                         <event-block sid="119892374423528">
@@ -745,94 +821,201 @@
                 </event-block>
             </sub-events>
         </event-group>
-        <event-group description="" inactive="1" sid="166421109301104" title="Pop-up menu">
+        <event-group description="" inactive="1" sid="509980583610784" title="Pop-up">
             <sub-events>
-                <event-block sid="811625403510920">
+                <event-block sid="935744785136113">
                     <conditions>
-                        <condition id="-4" name="Trigger once while true" sid="853992661663423" type="System" />
+                        <condition id="-4" name="Trigger once while true" sid="341021341065729" type="System" />
                     </conditions>
                     <actions />
                     <sub-events>
-                        <variable constant="0" name="maxw" sid="485599490343165" static="0" type="number">0</variable>
-                        <event-block sid="245387707595190">
+                        <event-block any="1" sid="632430107580373">
                             <conditions>
-                                <condition id="-12" name="Repeat" sid="193098510287888" type="System">
-                                    <param id="0" name="Count">tokencount(Var_Online.Error, newline)</param>
+                                <condition id="60" name="Is undefined" sid="995679442091860" type="JSON_Menus">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}">&quot;popup&quot;</param>
+                                </condition>
+                                <condition id="0" inverted="1" name="Is object" sid="556943555923935" type="JSON_Menus">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}">&quot;popup&quot;</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="0" name="Call function" sid="947936737553561" type="Function">
-                                    <param id="0" name="Name">&quot;String_Width&quot;</param>
-                                    <param id="1" name="Parameter {n}">tokenat(Var_Online.Error, loopindex, newline){###}18</param>
+                                <action id="0" name="Set New Object" sid="461971299169388" type="JSON_Menus">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}">&quot;popup&quot;</param>
                                 </action>
                             </actions>
-                            <sub-events>
-                                <event-block sid="324683338827411">
-                                    <conditions>
-                                        <condition id="-8" name="Compare two values" sid="864576692613544" type="System">
-                                            <param id="0" name="First value">Function.ReturnValue</param>
-                                            <param id="1" name="Comparison">4</param>
-                                            <param id="2" name="Second value">maxw</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-9" name="Set value" sid="364470348025830" type="System">
-                                            <param id="0" name="Variable">maxw</param>
-                                            <param id="1" name="Value">Function.ReturnValue</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
                         </event-block>
-                        <event-block sid="223092262544924">
+                        <event-block sid="456792300538218">
+                            <conditions>
+                                <condition id="60" name="Is undefined" sid="577625580817206" type="JSON_Menus">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}">&quot;popup&quot;{###}&quot;message&quot;</param>
+                                </condition>
+                                <condition id="60" name="Is undefined" sid="360274507239053" type="JSON_Menus">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}">&quot;popup&quot;{###}&quot;choices&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="20" name="Set Value" sid="845961985112772" type="JSON_Menus">
+                                    <param id="0" name="Value">&quot;Unknown error&quot;</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;popup&quot;{###}&quot;message&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <variable constant="0" name="message" sid="496146911101207" static="0" type="text"></variable>
+                        <variable constant="0" name="maxw" sid="369895611439651" static="0" type="number">0</variable>
+                        <event-block sid="319435945987957">
+                            <conditions>
+                                <condition id="60" inverted="1" name="Is undefined" sid="375580584469850" type="JSON_Menus">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}">&quot;popup&quot;{###}&quot;message&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="284739503878549" type="System">
+                                    <param id="0" name="Variable">message</param>
+                                    <param id="1" name="Value">JSON_Menus.Value(0,&quot;popup&quot;,&quot;message&quot;)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="766817436391586">
+                            <conditions>
+                                <condition id="-12" name="Repeat" sid="725574274416495" type="System">
+                                    <param id="0" name="Count">tokencount(message, newline)</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Call function" sid="421705975526521" type="Function">
+                                    <param id="0" name="Name">&quot;String_Width&quot;</param>
+                                    <param id="1" name="Parameter {n}">tokenat(message, loopindex, newline){###}18</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="145062825213213" type="System">
+                                    <param id="0" name="Variable">maxw</param>
+                                    <param id="1" name="Value">max(maxw, Function.ReturnValue)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="167634375784643">
+                            <conditions>
+                                <condition id="60" inverted="1" name="Is undefined" sid="808068058758676" type="JSON_Menus">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}">&quot;popup&quot;{###}&quot;choices&quot;</param>
+                                </condition>
+                                <condition id="-12" name="Repeat" sid="674690688770071" type="System">
+                                    <param id="0" name="Count">JSON_Menus.Size(0,&quot;popup&quot;,&quot;choices&quot;)</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Call function" sid="917883825194672" type="Function">
+                                    <param id="0" name="Name">&quot;String_Width&quot;</param>
+                                    <param id="1" name="Parameter {n}">JSON_Menus.Value(0,&quot;popup&quot;,&quot;choices&quot;, loopindex, &quot;text&quot;){###}18</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="540088237069495" type="System">
+                                    <param id="0" name="Variable">maxw</param>
+                                    <param id="1" name="Value">max(maxw, Function.ReturnValue + (Menu_Cursor.Width*2)+15)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment></comment>
+                        <event-block sid="733167553633419">
                             <conditions />
                             <actions>
-                                <action id="0" name="Call function" sid="330158974601662" type="Function">
+                                <action id="0" name="Call function" sid="732943971123637" type="Function">
                                     <param id="0" name="Name">&quot;Popup_Start&quot;</param>
-                                    <param id="1" name="Parameter {n}">clamp(maxw+16, 100, 680)</param>
+                                    <param id="1" name="Parameter {n}">clamp(maxw+16, 100, 680){###}JSON_Menus.TypeOf(0,&quot;popup&quot;,&quot;start_function&quot;) = &quot;undefined&quot; ? &quot;null&quot; : JSON_Menus.Value(0,&quot;popup&quot;,&quot;start_function&quot;)</param>
                                 </action>
                             </actions>
                             <sub-events>
-                                <event-block sid="139537403237845">
+                                <event-block sid="478395242368817">
                                     <conditions>
-                                        <condition id="-12" name="Repeat" sid="331002783048499" type="System">
-                                            <param id="0" name="Count">tokencount(Var_Online.Error, newline)</param>
+                                        <condition id="60" inverted="1" name="Is undefined" sid="963684910389218" type="JSON_Menus">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}">&quot;popup&quot;{###}&quot;message&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="739564084520541">
+                                            <conditions>
+                                                <condition id="-12" name="Repeat" sid="306786378976024" type="System">
+                                                    <param id="0" name="Count">tokencount(message, newline)</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Call function" sid="612048115900246" type="Function">
+                                                    <param id="0" name="Name">&quot;Popup_Label&quot;</param>
+                                                    <param id="1" name="Parameter {n}">tokenat(message, loopindex, newline)</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="519891590453814">
+                                            <conditions />
+                                            <actions>
+                                                <action id="0" name="Call function" sid="648473807103897" type="Function">
+                                                    <param id="0" name="Name">&quot;Popup_Spacer&quot;</param>
+                                                    <param id="1" name="Parameter {n}"></param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="522103006749994">
+                                    <conditions>
+                                        <condition id="60" inverted="1" name="Is undefined" sid="614371975900858" type="JSON_Menus">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}">&quot;popup&quot;{###}&quot;choices&quot;</param>
+                                        </condition>
+                                        <condition id="-12" name="Repeat" sid="330457966553159" type="System">
+                                            <param id="0" name="Count">JSON_Menus.Size(0,&quot;popup&quot;,&quot;choices&quot;)</param>
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="0" name="Call function" sid="737289493995638" type="Function">
-                                            <param id="0" name="Name">&quot;Popup_Label&quot;</param>
-                                            <param id="1" name="Parameter {n}">tokenat(Var_Online.Error, loopindex, newline)</param>
+                                        <action id="200" name="Set Current Path" sid="514658302236849" type="JSON_Menus">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}">&quot;popup&quot;{###}&quot;choices&quot;{###}loopindex</param>
+                                        </action>
+                                        <action id="0" name="Call function" sid="756466401592249" type="Function">
+                                            <param id="0" name="Name">&quot;Popup_Button&quot;</param>
+                                            <param id="1" name="Parameter {n}">JSON_Menus.Value(1,&quot;text&quot;){###}JSON_Menus.TypeOf(1,&quot;function&quot;) = &quot;undefined&quot; ? &quot;resume&quot; : JSON_Menus.Value(1,&quot;function&quot;){###}JSON_Menus.TypeOf(1,&quot;description&quot;) = &quot;undefined&quot; ? &quot;&quot; : JSON_Menus.Value(1,&quot;description&quot;){###}JSON_Menus.TypeOf(1,&quot;color&quot;) = &quot;undefined&quot; ? rgb(255,0,0) : JSON_Menus.Value(1,&quot;color&quot;)</param>
+                                        </action>
+                                        <action id="200" name="Set Current Path" sid="809813148668952" type="JSON_Menus">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}"></param>
                                         </action>
                                     </actions>
                                 </event-block>
-                                <event-block sid="872843498966500">
-                                    <conditions />
+                                <event-block sid="641573843352790">
+                                    <conditions>
+                                        <condition id="60" name="Is undefined" sid="317102191290696" type="JSON_Menus">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}">&quot;popup&quot;{###}&quot;choices&quot;</param>
+                                        </condition>
+                                    </conditions>
                                     <actions>
-                                        <action id="0" name="Call function" sid="575141800736487" type="Function">
-                                            <param id="0" name="Name">&quot;Popup_Label&quot;</param>
-                                            <param id="1" name="Parameter {n}"></param>
-                                        </action>
-                                        <action id="0" name="Call function" sid="619214039918915" type="Function">
+                                        <action id="0" name="Call function" sid="927648798299491" type="Function">
                                             <param id="0" name="Name">&quot;Popup_Button&quot;</param>
                                             <param id="1" name="Parameter {n}">&quot;OK&quot;</param>
                                         </action>
-                                        <action id="0" name="Call function" sid="487834007193889" type="Function">
+                                    </actions>
+                                </event-block>
+                                <event-block sid="837059317248373">
+                                    <conditions />
+                                    <actions>
+                                        <action id="0" name="Call function" sid="785927928170304" type="Function">
                                             <param id="0" name="Name">&quot;Popup_End&quot;</param>
                                             <param id="1" name="Parameter {n}"></param>
+                                        </action>
+                                        <action id="50" name="Delete" sid="952481566965021" type="JSON_Menus">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}">&quot;popup&quot;</param>
                                         </action>
                                     </actions>
                                 </event-block>
                             </sub-events>
-                        </event-block>
-                        <event-block sid="875995287994465">
-                            <conditions />
-                            <actions>
-                                <action id="-10" name="Set value" sid="732084541210607" type="Var_Online">
-                                    <param id="0" name="Instance variable">Error</param>
-                                    <param id="1" name="Value">&quot;null&quot;</param>
-                                </action>
-                            </actions>
                         </event-block>
                     </sub-events>
                 </event-block>

@@ -27,7 +27,6 @@ srbftp.ini2json = function (arg, raw = false) {
 			else {
 				if (!result[section]) result[section] = {}
 			}
-			
 			scope = result[section]
 		}
 		// key=value lines

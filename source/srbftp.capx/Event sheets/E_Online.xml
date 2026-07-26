@@ -5,7 +5,7 @@
     <events>
         <event-group description="" sid="517907923645269" title="General Online">
             <sub-events>
-                <comment>error popup</comment>
+                <comment>error handling</comment>
                 <event-block sid="831914251282361">
                     <conditions>
                         <condition id="0" name="On function" sid="837856410195022" type="Function">
@@ -14,53 +14,46 @@
                     </conditions>
                     <actions />
                     <sub-events>
+                        <variable constant="0" name="error" sid="831969350583946" static="0" type="text"></variable>
                         <event-block sid="803818156747716">
                             <conditions />
                             <actions>
-                                <action id="-10" name="Set value" sid="798751202499690" type="Var_Online">
-                                    <param id="0" name="Instance variable">Error</param>
+                                <action id="-9" name="Set value" sid="874226749467100" type="System">
+                                    <param id="0" name="Variable">error</param>
                                     <param id="1" name="Value">Function.Param(0)</param>
-                                </action>
-                                <action id="-4" name="Set layer visible" sid="573335105572424" type="System">
-                                    <param id="0" name="Layer">&quot;Loading&quot;</param>
-                                    <param id="1" name="Visibility">0</param>
-                                </action>
-                                <action id="4" name="Set animation" sid="556509406485170" type="LoadingEmerald">
-                                    <param id="0" name="Animation">&quot;Default&quot;</param>
-                                    <param id="1" name="From">1</param>
                                 </action>
                             </actions>
                         </event-block>
                         <event-block any="1" sid="157756709693245">
                             <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="956477980718566" type="Var_Online">
-                                    <param id="0" name="Instance variable">Error</param>
+                                <condition id="-14" name="Compare variable" sid="956477980718566" type="System">
+                                    <param id="0" name="Variable">error</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">&quot;null&quot;</param>
                                 </condition>
-                                <condition id="-7" name="Compare instance variable" sid="467576332139100" type="Var_Online">
-                                    <param id="0" name="Instance variable">Error</param>
+                                <condition id="-14" name="Compare variable" sid="467576332139100" type="System">
+                                    <param id="0" name="Variable">error</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">&quot;&quot;</param>
                                 </condition>
-                                <condition id="-7" name="Compare instance variable" sid="384212918412881" type="Var_Online">
-                                    <param id="0" name="Instance variable">Error</param>
+                                <condition id="-14" name="Compare variable" sid="764186136098422" type="System">
+                                    <param id="0" name="Variable">error</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">&quot;0&quot;</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-10" name="Set value" sid="757145786458885" type="Var_Online">
-                                    <param id="0" name="Instance variable">Error</param>
+                                <action id="-9" name="Set value" sid="114365428246724" type="System">
+                                    <param id="0" name="Variable">error</param>
                                     <param id="1" name="Value">&quot;Unknown error&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
-                        <comment>pb error handling</comment>
+                        <comment>database</comment>
                         <event-block sid="662938776510295">
                             <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="456943695397160" type="Var_Online">
-                                    <param id="0" name="Instance variable">Error</param>
+                                <condition id="-14" name="Compare variable" sid="975950072421994" type="System">
+                                    <param id="0" name="Variable">error</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">&quot;request&quot;</param>
                                 </condition>
@@ -76,6 +69,17 @@
                                     </conditions>
                                     <actions />
                                     <sub-events>
+                                        <variable constant="0" name="tag" sid="191097418235929" static="0" type="text"></variable>
+                                        <variable constant="0" name="message" sid="826298724168494" static="0" type="text"></variable>
+                                        <event-block sid="137327133278763">
+                                            <conditions />
+                                            <actions>
+                                                <action id="-9" name="Set value" sid="456104035164413" type="System">
+                                                    <param id="0" name="Variable">tag</param>
+                                                    <param id="1" name="Value">JSON_OnlineCache.Value(0,&quot;error&quot;,&quot;tag&quot;)</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
                                         <event-block sid="996726050746453">
                                             <conditions>
                                                 <condition id="60" inverted="1" name="Is undefined" sid="144199568850006" type="JSON_OnlineCache">
@@ -98,15 +102,9 @@
                                                     </conditions>
                                                     <actions />
                                                     <sub-events>
-                                                        <variable constant="0" name="tag" sid="191097418235929" static="0" type="text"></variable>
-                                                        <variable constant="0" name="message" sid="826298724168494" static="0" type="text"></variable>
                                                         <event-block sid="629096402587175">
                                                             <conditions />
                                                             <actions>
-                                                                <action id="-9" name="Set value" sid="456104035164413" type="System">
-                                                                    <param id="0" name="Variable">tag</param>
-                                                                    <param id="1" name="Value">JSON_OnlineCache.Value(0,&quot;error&quot;,&quot;tag&quot;)</param>
-                                                                </action>
                                                                 <action id="-9" name="Set value" sid="274195269553918" type="System">
                                                                     <param id="0" name="Variable">message</param>
                                                                     <param id="1" name="Value">JSON_OnlineCache.Value(0,&quot;error&quot;,&quot;response&quot;,&quot;data&quot;,&quot;message&quot;)</param>
@@ -176,8 +174,8 @@
                                                                 <event-block sid="926406563276677">
                                                                     <conditions />
                                                                     <actions>
-                                                                        <action id="-10" name="Set value" sid="467578202196923" type="Var_Online">
-                                                                            <param id="0" name="Instance variable">Error</param>
+                                                                        <action id="-9" name="Set value" sid="550606505495136" type="System">
+                                                                            <param id="0" name="Variable">error</param>
                                                                             <param id="1" name="Value">message</param>
                                                                         </action>
                                                                     </actions>
@@ -235,9 +233,9 @@
                                                                 <event-block sid="939589391610737">
                                                                     <conditions />
                                                                     <actions>
-                                                                        <action id="-10" name="Set value" sid="920865070938291" type="Var_Online">
-                                                                            <param id="0" name="Instance variable">Error</param>
-                                                                            <param id="1" name="Value">Self.Error&amp;newline&amp;&#x0D;&#x0A;JSON_OnlineCache.CurrentKey&amp;&quot;: &quot;&amp;message</param>
+                                                                        <action id="-9" name="Set value" sid="223436742173565" type="System">
+                                                                            <param id="0" name="Variable">error</param>
+                                                                            <param id="1" name="Value">error&amp;newline&amp;&#x0D;&#x0A;JSON_OnlineCache.CurrentKey&amp;&quot;: &quot;&amp;message</param>
                                                                         </action>
                                                                     </actions>
                                                                 </event-block>
@@ -245,42 +243,53 @@
                                                         </event-block>
                                                     </sub-events>
                                                 </event-block>
+                                                <comment>no data</comment>
                                                 <event-block sid="279261364644708">
                                                     <conditions>
                                                         <condition id="-22" name="Else" sid="237316956195954" type="System" />
                                                     </conditions>
                                                     <actions>
-                                                        <action id="-10" name="Set value" sid="908722841641387" type="Var_Online">
-                                                            <param id="0" name="Instance variable">Error</param>
+                                                        <action id="-9" name="Set value" sid="322601434633461" type="System">
+                                                            <param id="0" name="Variable">error</param>
                                                             <param id="1" name="Value">JSON_OnlineCache.Value(0,&quot;error&quot;,&quot;response&quot;,&quot;status&quot;)&amp;&quot; &quot;&amp;JSON_OnlineCache.Value(0,&quot;error&quot;,&quot;response&quot;,&quot;statusText&quot;)</param>
                                                         </action>
                                                     </actions>
                                                 </event-block>
                                             </sub-events>
                                         </event-block>
+                                        <comment>no response</comment>
                                         <event-block sid="246712211945272">
                                             <conditions>
                                                 <condition id="-22" name="Else" sid="255911787829695" type="System" />
                                             </conditions>
                                             <actions>
-                                                <action id="-10" name="Set value" sid="923943159979501" type="Var_Online">
-                                                    <param id="0" name="Instance variable">Error</param>
+                                                <action id="-9" name="Set value" sid="369284423154651" type="System">
+                                                    <param id="0" name="Variable">message</param>
                                                     <param id="1" name="Value">JSON_OnlineCache.Value(0,&quot;error&quot;,&quot;message&quot;)</param>
                                                 </action>
                                             </actions>
                                             <sub-events>
                                                 <event-block sid="558328458459105">
                                                     <conditions>
-                                                        <condition id="-7" name="Compare instance variable" sid="352424171473123" type="Var_Online">
-                                                            <param id="0" name="Instance variable">Error</param>
+                                                        <condition id="-14" name="Compare variable" sid="352424171473123" type="System">
+                                                            <param id="0" name="Variable">message</param>
                                                             <param id="1" name="Comparison">0</param>
                                                             <param id="2" name="Value">&quot;Network Error&quot;</param>
                                                         </condition>
                                                     </conditions>
                                                     <actions>
-                                                        <action id="-10" name="Set value" sid="193516336821706" type="Var_Online">
-                                                            <param id="0" name="Instance variable">Error</param>
+                                                        <action id="-9" name="Set value" sid="934140996148925" type="System">
+                                                            <param id="0" name="Variable">message</param>
                                                             <param id="1" name="Value">&quot;Unable to connect&quot;</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="417988591527438">
+                                                    <conditions />
+                                                    <actions>
+                                                        <action id="-9" name="Set value" sid="730979959260049" type="System">
+                                                            <param id="0" name="Variable">error</param>
+                                                            <param id="1" name="Value">message</param>
                                                         </action>
                                                     </actions>
                                                 </event-block>
@@ -297,20 +306,21 @@
                                         </event-block>
                                     </sub-events>
                                 </event-block>
+                                <comment>no error returned</comment>
                                 <event-block sid="389064891725270">
                                     <conditions>
                                         <condition id="-22" name="Else" sid="524829646195641" type="System" />
                                     </conditions>
                                     <actions>
-                                        <action id="-10" name="Set value" sid="609284170696237" type="Var_Online">
-                                            <param id="0" name="Instance variable">Error</param>
+                                        <action id="-9" name="Set value" sid="913792306855941" type="System">
+                                            <param id="0" name="Variable">error</param>
                                             <param id="1" name="Value">&quot;Unknown error&quot;</param>
                                         </action>
                                     </actions>
                                 </event-block>
                             </sub-events>
                         </event-block>
-                        <comment></comment>
+                        <comment>multiplayer</comment>
                         <event-block any="1" sid="499696130455050">
                             <conditions>
                                 <condition id="-8" name="Compare two values" sid="291381352580118" type="System">
@@ -354,55 +364,23 @@
                             <actions>
                                 <action id="14" name="Log" sid="556110568806791" type="Browser">
                                     <param id="0" name="Type">2</param>
-                                    <param id="1" name="Message">Var_Online.Error</param>
+                                    <param id="1" name="Message">error</param>
                                 </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="284140211212578">
-                            <conditions>
-                                <condition id="-8" inverted="1" name="Compare two values" sid="336336445923777" type="System">
-                                    <param id="0" name="First value">LayoutName</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Second value">&quot;_Pause&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-36" name="Save" sid="121008629331440" type="System">
-                                    <param id="0" name="Slot">&quot;unpause&quot;</param>
+                                <action id="0" name="Call function" sid="794118376282826" type="Function">
+                                    <param id="0" name="Name">&quot;Menu_Popup&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;message=&quot;&amp;error</param>
                                 </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="265347048883297">
-                            <conditions>
-                                <condition id="-22" name="Else" sid="104811587646174" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="14" name="Log" sid="115439043228241" type="Browser">
-                                    <param id="0" name="Type">2</param>
-                                    <param id="1" name="Message">&quot;huh?&quot;</param>
+                                <action id="-4" name="Set layer visible" sid="573335105572424" type="System">
+                                    <param id="0" name="Layer">&quot;Loading&quot;</param>
+                                    <param id="1" name="Visibility">0</param>
+                                </action>
+                                <action id="4" name="Set animation" sid="556509406485170" type="LoadingEmerald">
+                                    <param id="0" name="Animation">&quot;Default&quot;</param>
+                                    <param id="1" name="From">1</param>
                                 </action>
                             </actions>
                         </event-block>
                     </sub-events>
-                </event-block>
-                <event-block sid="846426658534532">
-                    <conditions>
-                        <condition id="-28" name="On save complete" sid="199699924747870" type="System" />
-                        <condition id="-7" inverted="1" name="Compare instance variable" sid="519820872667660" type="Var_Online">
-                            <param id="0" name="Instance variable">Error</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">&quot;null&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-2" name="Go to layout" sid="845992524296953" type="System">
-                            <param id="0" name="Layout">_Pause</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="563414462343299" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentMenu</param>
-                            <param id="1" name="Value">&quot;popup&quot;</param>
-                        </action>
-                    </actions>
                 </event-block>
             </sub-events>
         </event-group>
@@ -436,7 +414,7 @@
                         </action>
                     </actions>
                 </event-block>
-                <comment></comment>
+                <comment>TODO: remove those?</comment>
                 <event-block sid="645352077029934">
                     <conditions />
                     <actions>
@@ -485,10 +463,16 @@
                         <variable constant="1" name="EVENT_CHAT" sid="417255060559651" static="0" type="number">100</variable>
                         <variable constant="1" name="EVENT_KICKPLAYER" sid="268025331878909" static="0" type="number">101</variable>
                         <comment>===sync room data</comment>
+                        <comment>TODO: apparently there&apos;s already ways to check if player or room properties changed instead of doing it manually like i am (should i tho? since other users are already stored in room props and users notify the host on updates instead of reading from user props, so room props are kinda like a &quot;source of truth&quot;)</comment>
                         <event-block sid="777376807938532">
                             <conditions>
                                 <condition id="3" name="On event" sid="936261445662989" type="Photon">
                                     <param id="0" name="Code">EVENT_SYNCROOM</param>
+                                </condition>
+                                <condition id="-8" name="Compare two values" sid="920816999798208" type="System">
+                                    <param id="0" name="First value">Photon.ActorNr</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">Photon.MasterActorNr</param>
                                 </condition>
                             </conditions>
                             <actions />
@@ -673,7 +657,7 @@
                                     <actions>
                                         <action id="17" name="Raise event" sid="657912456440080" type="Photon">
                                             <param id="0" name="Code">EVENT_CHAT</param>
-                                            <param id="1" name="Data">trim(left(Function.Param(0),c_chatmsg_len))</param>
+                                            <param id="1" name="Data">trim(left(Function.Param(0),CHATMSG_LEN))</param>
                                             <param id="2" name="InterestGroup">0</param>
                                             <param id="3" name="Cache">0</param>
                                             <param id="4" name="Receivers">1</param>
@@ -703,7 +687,7 @@
                                             <actions>
                                                 <action id="17" name="Raise event" sid="618222315311595" type="Photon">
                                                     <param id="0" name="Code">EVENT_CHAT</param>
-                                                    <param id="1" name="Data">trim(left(Function.Param(0),c_chatmsg_len))</param>
+                                                    <param id="1" name="Data">trim(left(Function.Param(0),CHATMSG_LEN))</param>
                                                     <param id="2" name="InterestGroup">0</param>
                                                     <param id="3" name="Cache">0</param>
                                                     <param id="4" name="Receivers">0</param>
@@ -717,11 +701,15 @@
                             </sub-events>
                         </event-block>
                         <comment>===kicked by host</comment>
-                        <comment>todo: check if it&apos;s actually a host on the recieving end</comment>
                         <event-block sid="872961951483854">
                             <conditions>
                                 <condition id="3" name="On event" sid="134199621315441" type="Photon">
                                     <param id="0" name="Code">EVENT_KICKPLAYER</param>
+                                </condition>
+                                <condition id="-8" name="Compare two values" sid="157769406962524" type="System">
+                                    <param id="0" name="First value">Photon.ActorNr</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">Photon.MasterActorNr</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -1097,7 +1085,7 @@
                         </action>
                         <action id="0" name="Call function" sid="734708861149942" type="Function">
                             <param id="0" name="Name">&quot;String_Random&quot;</param>
-                            <param id="1" name="Parameter {n}">c_randomid_len</param>
+                            <param id="1" name="Parameter {n}">randomid_len</param>
                         </action>
                         <action id="-10" name="Set value" sid="349119675081704" type="Var_Misc">
                             <param id="0" name="Instance variable">Discord_FakePartyID</param>
@@ -1703,29 +1691,14 @@
                         </condition>
                         <condition id="60" inverted="1" name="Is undefined" sid="235674869605786" type="JSON_Indev">
                             <param id="0" name="Reference point">0</param>
-                            <param id="1" name="Key {n}">&quot;PublicKey&quot;</param>
+                            <param id="1" name="Key {n}">&quot;ClientKey&quot;</param>
                         </condition>
                         <condition id="-4" name="Trigger once while true" sid="493424687179506" type="System" />
                     </conditions>
                     <actions>
                         <action id="-10" name="Set value" sid="382272712712870" type="Var_Misc">
-                            <param id="0" name="Instance variable">PublicKey</param>
-                            <param id="1" name="Value">JSON_Indev.Value(0,&quot;PublicKey&quot;)</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="644863232976055">
-                    <conditions>
-                        <condition id="70" name="Is Empty" sid="661753990049969" type="JSON_OnlineCache">
-                            <param id="0" name="Reference point">0</param>
-                            <param id="1" name="Key {n}"></param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="449035811726132" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Call function" sid="317747636605544" type="Function">
-                            <param id="0" name="Name">&quot;PB_ResetCache&quot;</param>
-                            <param id="1" name="Parameter {n}"></param>
+                            <param id="0" name="Instance variable">ClientKey</param>
+                            <param id="1" name="Value">JSON_Indev.Value(0,&quot;ClientKey&quot;)</param>
                         </action>
                     </actions>
                 </event-block>
@@ -1748,6 +1721,21 @@
                             <param id="0" name="Value">&quot;&quot;</param>
                             <param id="1" name="Reference point">0</param>
                             <param id="2" name="Key {n}">&quot;token&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="644863232976055">
+                    <conditions>
+                        <condition id="70" name="Is Empty" sid="661753990049969" type="JSON_OnlineCache">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="449035811726132" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Call function" sid="317747636605544" type="Function">
+                            <param id="0" name="Name">&quot;PB_ResetCache&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
                         </action>
                     </actions>
                 </event-block>

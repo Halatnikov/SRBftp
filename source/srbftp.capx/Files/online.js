@@ -83,14 +83,17 @@ online.get_user = function(options) {
 	request(options)
 }
 
+//online.edit_user (differentiate between change username and change password)
+//online.delete_user (username and password protected)
+
 //////////////////////////////////////////////// leaderboards
 
-online.leaderboards_levels = function(options) {
+online.get_levels = function(options) {
 	options = ini2json(options)
 	options.config = {
 		url: "/api/collections/leaderboards_levels/records",
 		method: "get",
-		params: {skipTotal: "true", fields: "id, total_time, total_score"},
+		params: {skipTotal: "true", fields: "id, total_time, weekly_time, monthly_time"},
 	}
 	request(options)
 }
