@@ -71,56 +71,70 @@ srbftp.ini2json = function (arg, raw = false) {
 
 srbftp.json2ini = function (arg, raw = false) {
 	arg = raw ? arg : JSON.parse(arg)
-	let result = []
+	let result = [], global = {}, sections = {}
+	// there's a funny edgecase when if there's an empty array inside an object, it prints nothing, but should be fine to ignore?
+	// also doesn't know what to do with an array containing both objects and values, but that doesn't sound useful here
+	// inside global scope, arrays as a [section[]] instead of array[]=value probably look cleaner
 	
-	for (let key in arg) {
-		let value = arg[key]
-		
-		// order matters
-		// [array[]] with objects
-		// TODO: doesn't handle these very well, make a unified "serialize object" function
-		// TODO: maybe stop differentiating arrays
-		if (Array.isArray(value) && value.length > 0 && typeof value[0] == "object") {
-			let arr = value
-			arr.forEach(obj => {
-				result.push(`\n[${key}[]]`)
-				for (let key in obj) {
-					result.push(`${key}=${String(obj[key])}`)
-				}
-			})
-		}
-		// [array[]] with values
-		else if (Array.isArray(value)) {
-			let arr = value
-			result.push(`\n[${key}[]]`)
-			arr.forEach(value => {
-				result.push(String(value))
-			})
-		}
-		// [section] with key=values
-		else if (typeof value == "object") {
-			let obj = value
-			result.push(`\n[${key}]`)
-			for (let key in obj) {
-				let value = obj[key]
-				
-				// key[]=value array
-				if (Array.isArray(value)) {
-					let arr = value
-					arr.forEach(value => {
-						result.push(`${key}[]=${String(value)}`)
-					})
-				// key=value
-				} else {
-					result.push(`${key}=${String(value)}`)
-				}
+	function serialize(obj) {
+		Object.keys(obj).forEach(key => {
+			let value = obj[key]
+			
+			// key[]=value arrays
+			if (Array.isArray(value)) {
+				value.forEach(item => result.push(`${key}[]=${String(item)}`))
+			} 
+			// key=value properties
+			else {
+				result.push(`${key}=${String(value)}`)
 			}
-		}
-		// global key=values
-		else {
-			result.push(`${key}=${String(value)}`)
-		}
+		})
 	}
 	
+	// split into global scope and sections
+	Object.keys(arg).forEach(key => {
+		let value = arg[key]
+		
+		if (typeof value == "object") { // reminder both objects and arrays are "objects" in js
+			sections[key] = value
+		} 
+		else {
+			global[key] = value
+		}
+	})
+	// print global scope first
+	serialize(global)
+	
+	// do the mario
+	Object.keys(sections).forEach(name => {
+		let section = sections[name]
+		
+		// [array[]] with objects or keyless values
+		if (Array.isArray(section)) {
+			// preserve empty arrays
+			if (section.length == 0) {
+				result.push(`\n[${name}[]]`)
+			
+			// containing objects
+			} else if (section.every(item => typeof item == "object")) {
+				section.forEach(item => {
+					result.push(`\n[${name}[]]`)
+					serialize(item)
+				})
+			
+			// containing keyless values
+			} else {
+				result.push(`\n[${name}[]]`)
+				section.forEach(item => result.push(String(item)))
+			}
+		
+		// [object] with key=values
+		} else {
+			result.push(`\n[${name}]`)
+			serialize(section)
+		}
+	})
+	
+	result.push("") // eof
 	return result.join("\n")
 }

@@ -141,6 +141,10 @@
                             <param id="0" name="Reference point">0</param>
                             <param id="1" name="Key {n}"></param>
                         </action>
+                        <action id="0" name="Set New Object" sid="930584270366641" type="JSON__TEMP">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </action>
                     </actions>
                 </event-block>
                 <event-block sid="967511456606782">
@@ -757,6 +761,21 @@
                                         <action id="-10" name="Set value" sid="313350213258120" type="Var_Misc">
                                             <param id="0" name="Instance variable">ResourceFolder</param>
                                             <param id="1" name="Value">JSON_Indev.Value(0,&quot;ResourceFolder&quot;)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="205322360351338">
+                                    <conditions>
+                                        <condition id="60" inverted="1" name="Is undefined" sid="834180404723364" type="JSON_Indev">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}">&quot;ClientKey&quot;</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="756443678624548" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Set value" sid="749360099477065" type="Var_Misc">
+                                            <param id="0" name="Instance variable">ClientKey</param>
+                                            <param id="1" name="Value">JSON_Indev.Value(0,&quot;ClientKey&quot;)</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -2181,19 +2200,19 @@
                             <conditions />
                             <actions>
                                 <action id="-10" name="Set value" sid="297644155800424" type="Var_Level">
-                                    <param id="0" name="Instance variable">TimerLevel</param>
+                                    <param id="0" name="Instance variable">Timer</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
                                 <action id="-10" name="Set value" sid="444116681526840" type="Var_Level">
-                                    <param id="0" name="Instance variable">TimerLevelReal</param>
+                                    <param id="0" name="Instance variable">TimerReal</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
                                 <action id="-10" name="Set value" sid="770010705533681" type="Var_Level">
-                                    <param id="0" name="Instance variable">TimerLevelTicks</param>
+                                    <param id="0" name="Instance variable">TimerTicks</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
                                 <action id="-13" name="Set boolean" sid="201608614082941" type="Var_Level">
-                                    <param id="0" name="Instance variable">TimerLevelActive</param>
+                                    <param id="0" name="Instance variable">TimerActive</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
                                 <action id="-10" name="Set value" sid="710970130293502" type="Var_Level">
@@ -4500,6 +4519,7 @@
                     </conditions>
                     <actions />
                     <sub-events>
+                        <comment>TODO: make this a more general function like OnUnpause, since i don&apos;t think there&apos;s a need for a distinction</comment>
                         <event-block sid="213213741313859">
                             <conditions>
                                 <condition id="6" name="Compare value" sid="888146269000643" type="JS">
@@ -5382,13 +5402,13 @@
                                 <event-block sid="587361793884562">
                                     <conditions />
                                     <actions>
-                                        <action id="0" name="Call function" sid="141822633969362" type="Function">
-                                            <param id="0" name="Name">&quot;JSON2INI&quot;</param>
+                                        <action id="6" name="Call function" sid="234006842796072" type="JS">
+                                            <param id="0" name="Expression">&quot;json2ini&quot;</param>
                                             <param id="1" name="Parameter {n}">Save_Config.AsJson(0)</param>
                                         </action>
                                         <action id="0" name="Write file" sid="444102717269338" type="NWjs">
                                             <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\&quot;&amp;NAME&amp;&quot;.ini&quot;</param>
-                                            <param id="1" name="Contents">Function.ReturnValue</param>
+                                            <param id="1" name="Contents">JS.StoredReturnValue</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -5498,13 +5518,13 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="0" name="Call function" sid="523445396782207" type="Function">
-                                            <param id="0" name="Name">&quot;INI2JSON&quot;</param>
-                                            <param id="1" name="Parameter {n}">NWjs.ReadFile(Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\&quot;&amp;NAME&amp;&quot;.ini&quot;)</param>
+                                        <action id="6" name="Call function" sid="298615200771871" type="JS">
+                                            <param id="0" name="Expression">&quot;ini2json&quot;</param>
+                                            <param id="1" name="Parameter {n}">URLEncode(NWjs.ReadFile(Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\&quot;&amp;NAME&amp;&quot;.ini&quot;))</param>
                                         </action>
                                         <action id="0" name="Call function" sid="470020013232579" type="Function">
                                             <param id="0" name="Name">&quot;JSON_Merge&quot;</param>
-                                            <param id="1" name="Parameter {n}">Save_Config.Default{###}Function.ReturnValue</param>
+                                            <param id="1" name="Parameter {n}">Save_Config.Default{###}JS.StoredReturnValue</param>
                                         </action>
                                         <action id="60" name="LoadJSON" sid="308780391425036" type="Save_Config">
                                             <param id="0" name="JSON">Function.ReturnValue</param>
@@ -6130,13 +6150,13 @@
                                 <event-block sid="659805806732210">
                                     <conditions />
                                     <actions>
-                                        <action id="0" name="Call function" sid="860623669094845" type="Function">
-                                            <param id="0" name="Name">&quot;JSON2INI&quot;</param>
+                                        <action id="6" name="Call function" sid="198664802679013" type="JS">
+                                            <param id="0" name="Expression">&quot;json2ini&quot;</param>
                                             <param id="1" name="Parameter {n}">Save_General.AsJson(0)</param>
                                         </action>
-                                        <action id="0" name="Write file" sid="524743340712436" type="NWjs">
+                                        <action id="0" name="Write file" sid="911598712315017" type="NWjs">
                                             <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\&quot;&amp;NAME&amp;&quot;.ini&quot;</param>
-                                            <param id="1" name="Contents">Function.ReturnValue</param>
+                                            <param id="1" name="Contents">JS.StoredReturnValue</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -6239,13 +6259,13 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="0" name="Call function" sid="304417784704863" type="Function">
-                                            <param id="0" name="Name">&quot;INI2JSON&quot;</param>
-                                            <param id="1" name="Parameter {n}">NWjs.ReadFile(Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\&quot;&amp;NAME&amp;&quot;.ini&quot;)</param>
+                                        <action id="6" name="Call function" sid="685429954586121" type="JS">
+                                            <param id="0" name="Expression">&quot;ini2json&quot;</param>
+                                            <param id="1" name="Parameter {n}">URLEncode(NWjs.ReadFile(Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\&quot;&amp;NAME&amp;&quot;.ini&quot;))</param>
                                         </action>
-                                        <action id="0" name="Call function" sid="271621440087667" type="Function">
+                                        <action id="0" name="Call function" sid="222095421733816" type="Function">
                                             <param id="0" name="Name">&quot;JSON_Merge&quot;</param>
-                                            <param id="1" name="Parameter {n}">Save_General.Default{###}Function.ReturnValue</param>
+                                            <param id="1" name="Parameter {n}">Save_General.Default{###}JS.StoredReturnValue</param>
                                         </action>
                                         <action id="60" name="LoadJSON" sid="388700026948567" type="Save_General">
                                             <param id="0" name="JSON">Function.ReturnValue</param>
@@ -6452,13 +6472,13 @@
                                 <event-block sid="915560490685597">
                                     <conditions />
                                     <actions>
-                                        <action id="0" name="Call function" sid="280577290547177" type="Function">
-                                            <param id="0" name="Name">&quot;JSON2INI&quot;</param>
+                                        <action id="6" name="Call function" sid="680870777442343" type="JS">
+                                            <param id="0" name="Expression">&quot;json2ini&quot;</param>
                                             <param id="1" name="Parameter {n}">Save_Online.AsJson(0)</param>
                                         </action>
-                                        <action id="0" name="Write file" sid="246038751245701" type="NWjs">
+                                        <action id="0" name="Write file" sid="162921556976031" type="NWjs">
                                             <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\&quot;&amp;NAME&amp;&quot;.ini&quot;</param>
-                                            <param id="1" name="Contents">Function.ReturnValue</param>
+                                            <param id="1" name="Contents">JS.StoredReturnValue</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -6561,13 +6581,13 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="0" name="Call function" sid="336690426753945" type="Function">
-                                            <param id="0" name="Name">&quot;INI2JSON&quot;</param>
-                                            <param id="1" name="Parameter {n}">NWjs.ReadFile(Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\&quot;&amp;NAME&amp;&quot;.ini&quot;)</param>
+                                        <action id="6" name="Call function" sid="565614261259854" type="JS">
+                                            <param id="0" name="Expression">&quot;ini2json&quot;</param>
+                                            <param id="1" name="Parameter {n}">URLEncode(NWjs.ReadFile(Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\&quot;&amp;NAME&amp;&quot;.ini&quot;))</param>
                                         </action>
-                                        <action id="0" name="Call function" sid="816127912640821" type="Function">
+                                        <action id="0" name="Call function" sid="271857349431053" type="Function">
                                             <param id="0" name="Name">&quot;JSON_Merge&quot;</param>
-                                            <param id="1" name="Parameter {n}">Save_Online.Default{###}Function.ReturnValue</param>
+                                            <param id="1" name="Parameter {n}">Save_Online.Default{###}JS.StoredReturnValue</param>
                                         </action>
                                         <action id="60" name="LoadJSON" sid="140359647634204" type="Save_Online">
                                             <param id="0" name="JSON">Function.ReturnValue</param>
@@ -6656,7 +6676,7 @@
                 </event-block>
             </sub-events>
         </event-group>
-        <event-group description="" sid="577798859300897" title="Record Attack Save">
+        <event-group description="also saves General Save" sid="577798859300897" title="Record Attack Save">
             <sub-events>
                 <comment></comment>
                 <event-block sid="363310462513670">
@@ -6811,13 +6831,13 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="0" name="Call function" sid="193349313306570" type="Function">
-                                            <param id="0" name="Name">&quot;JSON2INI&quot;</param>
+                                        <action id="6" name="Call function" sid="646135652643587" type="JS">
+                                            <param id="0" name="Expression">&quot;json2ini&quot;</param>
                                             <param id="1" name="Parameter {n}">JSON__TEMP.AsJson(0)</param>
                                         </action>
                                         <action id="0" name="Write file" sid="345381314481518" type="NWjs">
                                             <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\records\srbftp_record_&quot;&amp;JSON__TEMP.Value(0,&quot;ID&quot;)&amp;&quot;.ini&quot;</param>
-                                            <param id="1" name="Contents">Function.ReturnValue</param>
+                                            <param id="1" name="Contents">JS.StoredReturnValue</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -6844,9 +6864,9 @@
                                 <event-block sid="553918940901542">
                                     <conditions />
                                     <actions>
-                                        <action id="0" name="Execute JS code" sid="484377539624499" type="JS">
-                                            <param id="0" name="JS code">&quot;console.log(&apos;Save_RecordAttack&apos;, JSON.parse(#0))&quot;</param>
-                                            <param id="1" name="Parameter {n}">JSON__TEMP.AsJson(0)</param>
+                                        <action id="6" name="Call function" sid="309479832653516" type="JS">
+                                            <param id="0" name="Expression">&quot;logjson&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;Save_RecordAttack&quot;{###}JSON__TEMP.AsJson(0)</param>
                                         </action>
                                         <action id="55" name="Clear" sid="418992741707257" type="JSON__TEMP">
                                             <param id="0" name="Reference point">0</param>
@@ -6861,6 +6881,10 @@
                                             <param id="0" name="Visibility">1</param>
                                         </action>
                                         <action behavior="Fade" id="0" name="Restart fade" sid="362435854376528" type="Text_Saved" />
+                                        <action id="0" name="Call function" sid="286142301135379" type="Function">
+                                            <param id="0" name="Name">&quot;Save_General&quot;</param>
+                                            <param id="1" name="Parameter {n}"></param>
+                                        </action>
                                     </actions>
                                 </event-block>
                             </sub-events>
@@ -6913,12 +6937,12 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="0" name="Call function" sid="124714222538489" type="Function">
-                                            <param id="0" name="Name">&quot;INI2JSON&quot;</param>
-                                            <param id="1" name="Parameter {n}">NWjs.ReadFile(Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\records\&quot;&amp;NWjs.ListAt(loopindex))</param>
+                                        <action id="6" name="Call function" sid="611212111755895" type="JS">
+                                            <param id="0" name="Expression">&quot;ini2json&quot;</param>
+                                            <param id="1" name="Parameter {n}">URLEncode(NWjs.ReadFile(Var_Misc.ResourceFolder&amp;&quot;\SRBftp\savedata\records\&quot;&amp;NWjs.ListAt(loopindex)))</param>
                                         </action>
                                         <action id="60" name="LoadJSON" sid="967063788553181" type="JSON__COMMON">
-                                            <param id="0" name="JSON">Function.ReturnValue</param>
+                                            <param id="0" name="JSON">JS.StoredReturnValue</param>
                                             <param id="1" name="Reference point">0</param>
                                             <param id="2" name="Key {n}">Self.Size(0)</param>
                                         </action>

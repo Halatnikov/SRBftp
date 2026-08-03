@@ -5,6 +5,7 @@
     <events>
         <include>E_GLOBAL</include>
         <comment>explanation sorta:&#x0D;&#x0A;you race to the finish, wow, shocking&#x0D;&#x0A;there&apos;s switches that lower barriers that stops your opponent for a whopping 2(3) seconds&#x0D;&#x0A;first player to reach multiples of 3 points (3,6,9,etc) will get a &quot;lap of honour&quot;, meaning the opposite player won&apos;t be able to move&#x0D;&#x0A;first player to reach multiples of 10 points (10,20,etc) will get a SpEcIaL ScReEn saying how cool they are&#x0D;&#x0A;who the hell is going to play this for this long is the true question here</comment>
+        <comment>TODO: maybe make barriers reusable if you died</comment>
         <event-group description="" sid="269025410916971" title="Local race">
             <sub-events>
                 <event-block sid="268837999361798">
@@ -20,7 +21,7 @@
                     </conditions>
                     <actions>
                         <action id="-11" name="Add to" sid="398110111512312" type="Var_Level">
-                            <param id="0" name="Instance variable">TimerLevel</param>
+                            <param id="0" name="Instance variable">Timer</param>
                             <param id="1" name="Value">dt</param>
                         </action>
                     </actions>
@@ -220,7 +221,7 @@
                             <param id="0" name="Text">Var_Level.Local_P2Score</param>
                         </action>
                         <action id="0" name="Set text" sid="588886294725348" type="HUD_Time">
-                            <param id="0" name="Text">floor(Var_Level.TimerLevel/60)&amp;&quot; &quot;&quot;&quot;&amp;zeropad(floor(Var_Level.TimerLevel)%60,2)&amp;&quot; &quot;&quot;&quot;&amp;zeropad(floor(Var_Level.TimerLevel*100)%100,2)</param>
+                            <param id="0" name="Text">floor(Var_Level.Timer/60)&amp;&quot; &quot;&quot;&quot;&amp;zeropad(floor(Var_Level.Timer)%60,2)&amp;&quot; &quot;&quot;&quot;&amp;zeropad(floor(Var_Level.Timer*100)%100,2)</param>
                         </action>
                     </actions>
                 </event-block>
@@ -335,7 +336,7 @@
                             <param id="1" name="Visibility">0</param>
                         </action>
                         <action id="-10" name="Set value" sid="685724580791767" type="Var_Level">
-                            <param id="0" name="Instance variable">TimerLevel</param>
+                            <param id="0" name="Instance variable">Timer</param>
                             <param id="1" name="Value">0</param>
                         </action>
                         <action id="-10" name="Set value" sid="552483691269039" type="Var_Player">
