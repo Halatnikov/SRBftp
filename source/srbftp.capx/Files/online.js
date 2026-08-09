@@ -2,7 +2,7 @@
 srbftp.online = {}
 const online = srbftp.online
 
-let ini2json = (arg) => srbftp.ini2json(arg, true)
+const ini2json = (arg) => srbftp.ini2json(arg, true)
 
 const request = function(options) {
 	let config = {
@@ -27,7 +27,7 @@ online.health = function(options) {
 	options = ini2json(options)
 	options.config = {
 		url: "/api/health",
-		method: "get",
+		method: "GET",
 	}
 	request(options)
 }
@@ -38,7 +38,7 @@ online.login = function(options) {
 	options = ini2json(options)
 	options.config = {
 		url: "/api/collections/users/auth-with-password",
-		method: "post",
+		method: "POST",
 		data: {
 			"identity": String(options.data.username),
 			"password": String(options.data.password),
@@ -51,7 +51,7 @@ online.signup = function(options) {
 	options = ini2json(options)
 	options.config = {
 		url: "/api/collections/users/records",
-		method: "post",
+		method: "POST",
 		data: {
 			"name": String(options.data.username),
 			"password": String(options.data.password),
@@ -65,7 +65,7 @@ online.refresh_login = function(options) {
 	options = ini2json(options)
 	options.config = {
 		url: "/api/collections/users/auth-refresh",
-		method: "post",
+		method: "POST",
 		headers: {
 			authorization: "Bearer " + String(options.data.token),
 		}
@@ -77,7 +77,7 @@ online.get_user = function(options) {
 	options = ini2json(options)
 	options.config = {
 		url: "/api/collections/users/records/" + String(options.data.id),
-		method: "get",
+		method: "GET",
 		params: {expand: "leaderboards_users_via_user"},
 	}
 	request(options)
@@ -92,7 +92,7 @@ online.get_levels = function(options) {
 	options = ini2json(options)
 	options.config = {
 		url: "/api/collections/leaderboards_levels/records",
-		method: "get",
+		method: "GET",
 		params: {skipTotal: "true", fields: "id, total_time, weekly_time, monthly_time"},
 	}
 	request(options)
@@ -129,7 +129,7 @@ online.leaderboards = function(options) {
 	
 	options.config = {
 		url: "/api/collections/leaderboards/records",
-		method: "get",
+		method: "GET",
 		params: {
 			filter: filter,
 			sort: sort,

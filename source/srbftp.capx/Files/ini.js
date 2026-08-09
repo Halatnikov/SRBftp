@@ -35,7 +35,7 @@ srbftp.ini2json = function (arg, raw = false) {
 			let key = line.substring(0, separator).trim()
 			let value = cast(line.substring(separator + 1).trim())
 			
-			// inside an array
+			// inside an array, assume object
 			if (section && Array.isArray(scope)) {
 				let obj = {}
 				result[section].push(obj)
@@ -55,11 +55,12 @@ srbftp.ini2json = function (arg, raw = false) {
 		}
 		// otherwise eligible lines
 		else {
-			// inside an array
+			// inside an array, assume keyless value
 			if (section && Array.isArray(scope)) {
 				scope.push(cast(line.trim()))
 			}
 			// global scope or in an object
+			// interpret as having an empty value
 			else {
 				scope[line.trim()] = ""
 			}

@@ -1644,6 +1644,7 @@
                                 </action>
                             </actions>
                         </event-block>
+                        <comment>TODO: perhaps load savedata like Save_Online when it&apos;s actually needed and not here</comment>
                         <event-block sid="168343389202099">
                             <conditions>
                                 <condition id="60" inverted="1" name="Is undefined" sid="880486452613685" type="Save_Config">
@@ -1654,7 +1655,7 @@
                                     <param id="0" name="Reference point">0</param>
                                     <param id="1" name="Key {n}">&quot;_srbftp_general&quot;</param>
                                 </condition>
-                                <condition id="60" inverted="1" name="Is undefined" sid="127544445565831" type="Save_Online">
+                                <condition disabled="1" id="60" inverted="1" name="Is undefined" sid="127544445565831" type="Save_Online">
                                     <param id="0" name="Reference point">0</param>
                                     <param id="1" name="Key {n}">&quot;_srbftp_online&quot;</param>
                                 </condition>
@@ -1718,8 +1719,8 @@
                                         </event-block>
                                         <event-block sid="915523393174694">
                                             <conditions>
-                                                <condition id="-7" inverted="1" name="Compare instance variable" sid="963321333139899" type="JSON_AudioPreload">
-                                                    <param id="0" name="Instance variable">CurrentTask</param>
+                                                <condition id="-7" inverted="1" name="Compare instance variable" sid="826035842254529" type="Var_Audio">
+                                                    <param id="0" name="Instance variable">PreloadTask</param>
                                                     <param id="1" name="Comparison">0</param>
                                                     <param id="2" name="Value">&quot;&quot;</param>
                                                 </condition>
@@ -2449,14 +2450,14 @@
                             <param id="1" name="Visibility">1</param>
                         </action>
                         <action id="0" name="Set text" sid="552786064184353" type="CutsceneTextA">
-                            <param id="0" name="Text">&quot;LOADING MUSIC (&quot;&amp;JSON_AudioPreload.AudioSize&amp;&quot;MB)&quot;</param>
+                            <param id="0" name="Text">&quot;LOADING MUSIC (&quot;&amp;Var_Audio.PreloadSizeTotal&amp;&quot;MB)&quot;</param>
                         </action>
                     </actions>
                 </event-block>
                 <event-block sid="388953664479627">
                     <conditions>
-                        <condition id="-7" inverted="1" name="Compare instance variable" sid="524832824784175" type="JSON_AudioPreload">
-                            <param id="0" name="Instance variable">CurrentTask</param>
+                        <condition id="-7" inverted="1" name="Compare instance variable" sid="912775124006152" type="Var_Audio">
+                            <param id="0" name="Instance variable">PreloadTask</param>
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">&quot;&quot;</param>
                         </condition>
@@ -2483,15 +2484,15 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-13" name="Set boolean" sid="273178345677881" type="JSON_AudioPreload">
-                            <param id="0" name="Instance variable">LevelPreloaded</param>
+                        <action id="-13" name="Set boolean" sid="283222842858808" type="Var_Audio">
+                            <param id="0" name="Instance variable">LevelPreloadedTEMP</param>
                             <param id="1" name="Value">1</param>
                         </action>
                         <action id="-25" name="Go to layout (by name)" sid="752949988781280" type="System">
-                            <param id="0" name="Layout">JSON_AudioPreload.LevelLayout</param>
+                            <param id="0" name="Layout">Var_Audio.LevelLayoutTEMP</param>
                         </action>
-                        <action id="-10" name="Set value" sid="433346805103851" type="JSON_AudioPreload">
-                            <param id="0" name="Instance variable">LevelLayout</param>
+                        <action id="-10" name="Set value" sid="347838732409834" type="Var_Audio">
+                            <param id="0" name="Instance variable">LevelLayoutTEMP</param>
                             <param id="1" name="Value">&quot;&quot;</param>
                         </action>
                         <action id="-10" name="Set value" sid="597718837796112" type="Var_Game">
@@ -2512,15 +2513,15 @@
                         <condition id="-4" name="Trigger once while true" sid="637893496455190" type="System" />
                     </conditions>
                     <actions>
-                        <action id="-13" name="Set boolean" sid="452126131447042" type="JSON_AudioPreload">
-                            <param id="0" name="Instance variable">LevelPreloaded</param>
+                        <action id="-13" name="Set boolean" sid="620570276186065" type="Var_Audio">
+                            <param id="0" name="Instance variable">LevelPreloadedTEMP</param>
                             <param id="1" name="Value">1</param>
                         </action>
                         <action id="-25" name="Go to layout (by name)" sid="785180624782650" type="System">
-                            <param id="0" name="Layout">JSON_AudioPreload.LevelLayout</param>
+                            <param id="0" name="Layout">Var_Audio.LevelLayoutTEMP</param>
                         </action>
-                        <action id="-10" name="Set value" sid="997148948382562" type="JSON_AudioPreload">
-                            <param id="0" name="Instance variable">LevelLayout</param>
+                        <action id="-10" name="Set value" sid="778669208048217" type="Var_Audio">
+                            <param id="0" name="Instance variable">LevelLayoutTEMP</param>
                             <param id="1" name="Value">&quot;&quot;</param>
                         </action>
                         <action id="-10" name="Set value" sid="938708087513427" type="Var_Game">
@@ -2535,23 +2536,23 @@
                 </event-block>
                 <event-block sid="758283974568458">
                     <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="154797550972976" type="JSON_AudioPreload">
-                            <param id="0" name="Instance variable">AudioSize</param>
+                        <condition id="-7" name="Compare instance variable" sid="405680928636237" type="Var_Audio">
+                            <param id="0" name="Instance variable">PreloadSizeTotal</param>
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">0</param>
                         </condition>
                         <condition id="-4" name="Trigger once while true" sid="626311303886717" type="System" />
                     </conditions>
                     <actions>
-                        <action id="-13" name="Set boolean" sid="588327034253966" type="JSON_AudioPreload">
-                            <param id="0" name="Instance variable">LevelPreloaded</param>
+                        <action id="-13" name="Set boolean" sid="320168877592687" type="Var_Audio">
+                            <param id="0" name="Instance variable">LevelPreloadedTEMP</param>
                             <param id="1" name="Value">1</param>
                         </action>
                         <action id="-25" name="Go to layout (by name)" sid="912739643124840" type="System">
-                            <param id="0" name="Layout">JSON_AudioPreload.LevelLayout</param>
+                            <param id="0" name="Layout">Var_Audio.LevelLayoutTEMP</param>
                         </action>
-                        <action id="-10" name="Set value" sid="987904386698749" type="JSON_AudioPreload">
-                            <param id="0" name="Instance variable">LevelLayout</param>
+                        <action id="-10" name="Set value" sid="217701913665222" type="Var_Audio">
+                            <param id="0" name="Instance variable">LevelLayoutTEMP</param>
                             <param id="1" name="Value">&quot;&quot;</param>
                         </action>
                         <action id="-10" name="Set value" sid="136738849766643" type="Var_Game">
@@ -2579,14 +2580,14 @@
                             <param id="1" name="Visibility">1</param>
                         </action>
                         <action id="0" name="Set text" sid="131653805706577" type="CutsceneTextA">
-                            <param id="0" name="Text">&quot;LOADING MUSIC (&quot;&amp;JSON_AudioPreload.AudioSize&amp;&quot;MB)&quot;</param>
+                            <param id="0" name="Text">&quot;LOADING MUSIC (&quot;&amp;Var_Audio.PreloadSizeTotal&amp;&quot;MB)&quot;</param>
                         </action>
                     </actions>
                 </event-block>
                 <event-block sid="697025269866495">
                     <conditions>
-                        <condition id="-7" inverted="1" name="Compare instance variable" sid="247909232884928" type="JSON_AudioPreload">
-                            <param id="0" name="Instance variable">CurrentTask</param>
+                        <condition id="-7" inverted="1" name="Compare instance variable" sid="454129278588675" type="Var_Audio">
+                            <param id="0" name="Instance variable">PreloadTask</param>
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">&quot;&quot;</param>
                         </condition>
@@ -2608,8 +2609,8 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-13" name="Set boolean" sid="176447266916695" type="JSON_AudioPreload">
-                            <param id="0" name="Instance variable">LevelPreloaded</param>
+                        <action id="-13" name="Set boolean" sid="942012517235966" type="Var_Audio">
+                            <param id="0" name="Instance variable">LevelPreloadedTEMP</param>
                             <param id="1" name="Value">1</param>
                         </action>
                         <action id="-2" name="Go to layout" sid="446788347543023" type="System">
@@ -2617,10 +2618,10 @@
                         </action>
                         <action id="-10" name="Set value" sid="338456547703765" type="Var_Game">
                             <param id="0" name="Instance variable">CurrentMenu</param>
-                            <param id="1" name="Value">JSON_AudioPreload.LevelLayout</param>
+                            <param id="1" name="Value">Var_Audio.LevelLayoutTEMP</param>
                         </action>
-                        <action id="-10" name="Set value" sid="422784465318738" type="JSON_AudioPreload">
-                            <param id="0" name="Instance variable">LevelLayout</param>
+                        <action id="-10" name="Set value" sid="404961778444599" type="Var_Audio">
+                            <param id="0" name="Instance variable">LevelLayoutTEMP</param>
                             <param id="1" name="Value">&quot;&quot;</param>
                         </action>
                         <action id="-4" name="Set layer visible" sid="486436285742276" type="System">
@@ -2637,8 +2638,8 @@
                         <condition id="-4" name="Trigger once while true" sid="140940499299619" type="System" />
                     </conditions>
                     <actions>
-                        <action id="-13" name="Set boolean" sid="994443187808733" type="JSON_AudioPreload">
-                            <param id="0" name="Instance variable">LevelPreloaded</param>
+                        <action id="-13" name="Set boolean" sid="759787149673770" type="Var_Audio">
+                            <param id="0" name="Instance variable">LevelPreloadedTEMP</param>
                             <param id="1" name="Value">1</param>
                         </action>
                         <action id="-2" name="Go to layout" sid="603138602725056" type="System">
@@ -2646,10 +2647,10 @@
                         </action>
                         <action id="-10" name="Set value" sid="453098412728474" type="Var_Game">
                             <param id="0" name="Instance variable">CurrentMenu</param>
-                            <param id="1" name="Value">JSON_AudioPreload.LevelLayout</param>
+                            <param id="1" name="Value">Var_Audio.LevelLayoutTEMP</param>
                         </action>
-                        <action id="-10" name="Set value" sid="417903640352958" type="JSON_AudioPreload">
-                            <param id="0" name="Instance variable">LevelLayout</param>
+                        <action id="-10" name="Set value" sid="930753160076080" type="Var_Audio">
+                            <param id="0" name="Instance variable">LevelLayoutTEMP</param>
                             <param id="1" name="Value">&quot;&quot;</param>
                         </action>
                         <action id="-4" name="Set layer visible" sid="755392540756573" type="System">
@@ -2660,16 +2661,16 @@
                 </event-block>
                 <event-block sid="436532388700148">
                     <conditions>
-                        <condition id="-7" name="Compare instance variable" sid="597777873813603" type="JSON_AudioPreload">
-                            <param id="0" name="Instance variable">AudioSize</param>
+                        <condition id="-7" name="Compare instance variable" sid="157781387315957" type="Var_Audio">
+                            <param id="0" name="Instance variable">PreloadSizeTotal</param>
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">0</param>
                         </condition>
                         <condition id="-4" name="Trigger once while true" sid="402753035232764" type="System" />
                     </conditions>
                     <actions>
-                        <action id="-13" name="Set boolean" sid="158441178332394" type="JSON_AudioPreload">
-                            <param id="0" name="Instance variable">LevelPreloaded</param>
+                        <action id="-13" name="Set boolean" sid="143168252239001" type="Var_Audio">
+                            <param id="0" name="Instance variable">LevelPreloadedTEMP</param>
                             <param id="1" name="Value">1</param>
                         </action>
                         <action id="-2" name="Go to layout" sid="461092376516838" type="System">
@@ -2677,10 +2678,10 @@
                         </action>
                         <action id="-10" name="Set value" sid="130869279130122" type="Var_Game">
                             <param id="0" name="Instance variable">CurrentMenu</param>
-                            <param id="1" name="Value">JSON_AudioPreload.LevelLayout</param>
+                            <param id="1" name="Value">Var_Audio.LevelLayoutTEMP</param>
                         </action>
-                        <action id="-10" name="Set value" sid="419873314473003" type="JSON_AudioPreload">
-                            <param id="0" name="Instance variable">LevelLayout</param>
+                        <action id="-10" name="Set value" sid="472238734005734" type="Var_Audio">
+                            <param id="0" name="Instance variable">LevelLayoutTEMP</param>
                             <param id="1" name="Value">&quot;&quot;</param>
                         </action>
                         <action id="-4" name="Set layer visible" sid="843766988357731" type="System">
@@ -3367,8 +3368,8 @@
                                 </event-block>
                                 <event-block sid="530041997490755">
                                     <conditions>
-                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="204342169868361" type="JSON_AudioPreload">
-                                            <param id="0" name="Instance variable">CurrentTask</param>
+                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="865939000842861" type="Var_Audio">
+                                            <param id="0" name="Instance variable">PreloadTask</param>
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">&quot;&quot;</param>
                                         </condition>
@@ -3527,8 +3528,8 @@
                                 </event-block>
                                 <event-block sid="740917415126089">
                                     <conditions>
-                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="899080909738001" type="JSON_AudioPreload">
-                                            <param id="0" name="Instance variable">CurrentTask</param>
+                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="421560909659345" type="Var_Audio">
+                                            <param id="0" name="Instance variable">PreloadTask</param>
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">&quot;&quot;</param>
                                         </condition>
@@ -3789,8 +3790,8 @@
                                 </event-block>
                                 <event-block sid="494628455857368">
                                     <conditions>
-                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="272256225030496" type="JSON_AudioPreload">
-                                            <param id="0" name="Instance variable">CurrentTask</param>
+                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="615183736327055" type="Var_Audio">
+                                            <param id="0" name="Instance variable">PreloadTask</param>
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">&quot;&quot;</param>
                                         </condition>
@@ -5169,8 +5170,8 @@
                                 </event-block>
                                 <event-block sid="905977665549472">
                                     <conditions>
-                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="889020558851909" type="JSON_AudioPreload">
-                                            <param id="0" name="Instance variable">CurrentTask</param>
+                                        <condition id="-7" inverted="1" name="Compare instance variable" sid="680324805142483" type="Var_Audio">
+                                            <param id="0" name="Instance variable">PreloadTask</param>
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">&quot;&quot;</param>
                                         </condition>
@@ -7896,6 +7897,10 @@
                         </condition>
                     </conditions>
                     <actions>
+                        <action id="1" name="Set playback time" sid="336767669924359" type="MenuCredits_Video">
+                            <param id="0" name="Time">0</param>
+                        </action>
+                        <action id="5" name="Pause" sid="974055642775647" type="MenuCredits_Video" />
                         <action id="-9" name="Destroy" sid="274479685356144" type="MenuCredits_Text" />
                         <action id="-10" name="Set value" sid="290220234368229" type="Var_Game">
                             <param id="0" name="Instance variable">CurrentMenu</param>

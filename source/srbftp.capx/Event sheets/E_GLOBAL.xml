@@ -10,6 +10,8 @@
         <comment>- debug</comment>
         <variable constant="0" name="DEBUG" sid="698008437735178" static="0" type="number">1</variable>
         <variable constant="0" name="DEBUG_LOCALSTORAGE" sid="662686063322662" static="0" type="number">0</variable>
+        <variable constant="0" name="DEBUG_AUDIOPRELOAD" sid="832208957479328" static="0" type="number">0</variable>
+        <variable constant="0" name="DEBUG_MOBILE" sid="508359941510481" static="0" type="number">0</variable>
         <comment>- constants</comment>
         <variable constant="1" name="gamepad_deadzone" sid="274782719892201" static="0" type="number">25</variable>
         <variable constant="1" name="randomid_len" sid="371780425673200" static="0" type="number">12</variable>
@@ -141,7 +143,18 @@
                             <param id="0" name="Reference point">0</param>
                             <param id="1" name="Key {n}"></param>
                         </action>
-                        <action id="0" name="Set New Object" sid="930584270366641" type="JSON__TEMP">
+                    </actions>
+                </event-block>
+                <event-block sid="354173633205130">
+                    <conditions>
+                        <condition id="70" name="Is Empty" sid="355451928889758" type="JSON__TEMP">
+                            <param id="0" name="Reference point">0</param>
+                            <param id="1" name="Key {n}"></param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="479985700368024" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set New Object" sid="290034256516302" type="JSON__TEMP">
                             <param id="0" name="Reference point">0</param>
                             <param id="1" name="Key {n}"></param>
                         </action>
@@ -592,15 +605,15 @@
                                     <param id="1" name="Message">&quot;skins: &quot;&amp;JSON_SkinsProperties.Size(0)</param>
                                 </action>
                                 <action id="1" name="Request project file" sid="596545688720134" type="AJAX">
-                                    <param id="0" name="Tag">&quot;audiolist.ini&quot;</param>
-                                    <param id="1" name="File">audiolist.ini</param>
+                                    <param id="0" name="Tag">&quot;audiopreload.ini&quot;</param>
+                                    <param id="1" name="File">audiopreload.ini</param>
                                 </action>
                             </actions>
                         </event-block>
                         <event-block sid="623284608760105">
                             <conditions>
                                 <condition id="0" name="On completed" sid="664384547862015" type="AJAX">
-                                    <param id="0" name="Tag">&quot;audiolist.ini&quot;</param>
+                                    <param id="0" name="Tag">&quot;audiopreload.ini&quot;</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -858,815 +871,6 @@
                         </event-block>
                     </sub-events>
                 </event-block>
-                <event-group description="" sid="344573746778672" title="INI parser">
-                    <sub-events>
-                        <comment>read</comment>
-                        <event-block sid="567493982793190">
-                            <conditions>
-                                <condition id="0" name="On function" sid="452277142100344" type="Function">
-                                    <param id="0" name="Name">&quot;INI2JSON&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions />
-                            <sub-events>
-                                <variable constant="0" name="ini" sid="679834628146053" static="0" type="text"></variable>
-                                <event-block sid="689959225423558">
-                                    <conditions />
-                                    <actions>
-                                        <action id="-9" name="Set value" sid="139918551083170" type="System">
-                                            <param id="0" name="Variable">ini</param>
-                                            <param id="1" name="Value">Function.Param(0)</param>
-                                        </action>
-                                        <action id="-3" name="Create object" sid="742011877706195" type="System">
-                                            <param id="0" name="Object to create">JSON__COMMON</param>
-                                            <param id="1" name="Layer">0</param>
-                                            <param id="2" name="X">0</param>
-                                            <param id="3" name="Y">0</param>
-                                        </action>
-                                        <action id="0" name="Set New Object" sid="198301215543213" type="JSON__COMMON">
-                                            <param id="0" name="Reference point">0</param>
-                                            <param id="1" name="Key {n}"></param>
-                                        </action>
-                                        <action id="0" name="Set New Object" sid="744360819583660" type="JSON__COMMON">
-                                            <param id="0" name="Reference point">0</param>
-                                            <param id="1" name="Key {n}">&quot;global&quot;</param>
-                                        </action>
-                                    </actions>
-                                    <sub-events>
-                                        <variable constant="0" name="scope" sid="890911828337446" static="0" type="text">global</variable>
-                                        <variable constant="0" name="scope_array_counter" sid="685764711613607" static="0" type="number">-1</variable>
-                                        <event-block sid="672079912608626">
-                                            <conditions>
-                                                <condition id="-12" name="Repeat" sid="594385497722967" type="System">
-                                                    <param id="0" name="Count">tokencount(ini, newline)</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions />
-                                            <sub-events>
-                                                <variable constant="0" name="line" sid="895296610331607" static="0" type="text"></variable>
-                                                <event-block sid="527236801699207">
-                                                    <conditions />
-                                                    <actions>
-                                                        <action id="-9" name="Set value" sid="963876753433622" type="System">
-                                                            <param id="0" name="Variable">line</param>
-                                                            <param id="1" name="Value">trim(tokenat(ini, loopindex, newline))</param>
-                                                        </action>
-                                                    </actions>
-                                                </event-block>
-                                                <comment>not emtpy and not a comment</comment>
-                                                <event-block sid="412338958016990">
-                                                    <conditions>
-                                                        <condition id="-8" inverted="1" name="Compare two values" sid="855990789531663" type="System">
-                                                            <param id="0" name="First value">line</param>
-                                                            <param id="1" name="Comparison">0</param>
-                                                            <param id="2" name="Second value">&quot;&quot;</param>
-                                                        </condition>
-                                                        <condition id="-8" name="Compare two values" sid="393894328538990" type="System">
-                                                            <param id="0" name="First value">find(line, &quot;#&quot;)</param>
-                                                            <param id="1" name="Comparison">0</param>
-                                                            <param id="2" name="Second value">-1</param>
-                                                        </condition>
-                                                    </conditions>
-                                                    <actions />
-                                                    <sub-events>
-                                                        <comment>=== key=value pair</comment>
-                                                        <event-block sid="973675605164365">
-                                                            <conditions>
-                                                                <condition id="-8" inverted="1" name="Compare two values" sid="497909479670375" type="System">
-                                                                    <param id="0" name="First value">left(line, 1)</param>
-                                                                    <param id="1" name="Comparison">0</param>
-                                                                    <param id="2" name="Second value">&quot;[&quot;</param>
-                                                                </condition>
-                                                                <condition id="-8" inverted="1" name="Compare two values" sid="570220296075795" type="System">
-                                                                    <param id="0" name="First value">right(line, len(line)-1)</param>
-                                                                    <param id="1" name="Comparison">0</param>
-                                                                    <param id="2" name="Second value">&quot;]&quot;</param>
-                                                                </condition>
-                                                            </conditions>
-                                                            <actions />
-                                                            <sub-events>
-                                                                <variable constant="0" name="key" sid="179466643247374" static="0" type="text"></variable>
-                                                                <variable constant="0" name="value" sid="922681487837305" static="0" type="text"></variable>
-                                                                <event-block sid="814427895946486">
-                                                                    <conditions>
-                                                                        <condition id="-8" inverted="1" name="Compare two values" sid="964904207265789" type="System">
-                                                                            <param id="0" name="First value">find(line, &quot;=&quot;)</param>
-                                                                            <param id="1" name="Comparison">0</param>
-                                                                            <param id="2" name="Second value">-1</param>
-                                                                        </condition>
-                                                                    </conditions>
-                                                                    <actions>
-                                                                        <action id="-9" name="Set value" sid="706690498171279" type="System">
-                                                                            <param id="0" name="Variable">key</param>
-                                                                            <param id="1" name="Value">trim(tokenat(line, 0, &quot;=&quot;))</param>
-                                                                        </action>
-                                                                        <action id="-9" name="Set value" sid="647157299516106" type="System">
-                                                                            <param id="0" name="Variable">value</param>
-                                                                            <param id="1" name="Value">trim(tokenat(line, 1, &quot;=&quot;))</param>
-                                                                        </action>
-                                                                    </actions>
-                                                                </event-block>
-                                                                <event-block sid="384527125055785">
-                                                                    <conditions>
-                                                                        <condition id="-22" name="Else" sid="920916476239562" type="System" />
-                                                                    </conditions>
-                                                                    <actions>
-                                                                        <action id="-9" name="Set value" sid="410362386050145" type="System">
-                                                                            <param id="0" name="Variable">key</param>
-                                                                            <param id="1" name="Value">line</param>
-                                                                        </action>
-                                                                    </actions>
-                                                                </event-block>
-                                                                <comment>escape = if it&apos;s in a value</comment>
-                                                                <event-block sid="591307488013862">
-                                                                    <conditions>
-                                                                        <condition id="-8" name="Compare two values" sid="174168738731807" type="System">
-                                                                            <param id="0" name="First value">tokencount(line, &quot;=&quot;)</param>
-                                                                            <param id="1" name="Comparison">4</param>
-                                                                            <param id="2" name="Second value">2</param>
-                                                                        </condition>
-                                                                        <condition id="-12" name="Repeat" sid="251655478786325" type="System">
-                                                                            <param id="0" name="Count">tokencount(line, &quot;=&quot;) - 2</param>
-                                                                        </condition>
-                                                                    </conditions>
-                                                                    <actions>
-                                                                        <action id="-9" name="Set value" sid="148684683651487" type="System">
-                                                                            <param id="0" name="Variable">value</param>
-                                                                            <param id="1" name="Value">value&amp;tokenat(line, 2 + loopindex, &quot;=&quot;)</param>
-                                                                        </action>
-                                                                    </actions>
-                                                                    <sub-events>
-                                                                        <event-block sid="136166892536228">
-                                                                            <conditions>
-                                                                                <condition id="-8" name="Compare two values" sid="895059278210349" type="System">
-                                                                                    <param id="0" name="First value">tokenat(line, 2 + loopindex, &quot;=&quot;)</param>
-                                                                                    <param id="1" name="Comparison">0</param>
-                                                                                    <param id="2" name="Second value">&quot;&quot;</param>
-                                                                                </condition>
-                                                                            </conditions>
-                                                                            <actions>
-                                                                                <action id="-9" name="Set value" sid="176221186114608" type="System">
-                                                                                    <param id="0" name="Variable">value</param>
-                                                                                    <param id="1" name="Value">value&amp;&quot;=&quot;</param>
-                                                                                </action>
-                                                                            </actions>
-                                                                        </event-block>
-                                                                    </sub-events>
-                                                                </event-block>
-                                                                <comment>== section is not an array</comment>
-                                                                <event-block sid="528826765882210">
-                                                                    <conditions>
-                                                                        <condition id="-14" inverted="1" name="Compare variable" sid="264075997234045" type="System">
-                                                                            <param id="0" name="Variable">key</param>
-                                                                            <param id="1" name="Comparison">0</param>
-                                                                            <param id="2" name="Value">&quot;&quot;</param>
-                                                                        </condition>
-                                                                    </conditions>
-                                                                    <actions />
-                                                                    <sub-events>
-                                                                        <comment>= key is an array (key[]=value)</comment>
-                                                                        <event-block sid="290322529662987">
-                                                                            <conditions>
-                                                                                <condition id="-8" name="Compare two values" sid="694361644424757" type="System">
-                                                                                    <param id="0" name="First value">right(key,2)</param>
-                                                                                    <param id="1" name="Comparison">0</param>
-                                                                                    <param id="2" name="Second value">&quot;[]&quot;</param>
-                                                                                </condition>
-                                                                            </conditions>
-                                                                            <actions>
-                                                                                <action id="-9" name="Set value" sid="433060458295807" type="System">
-                                                                                    <param id="0" name="Variable">key</param>
-                                                                                    <param id="1" name="Value">left(key, len(key)-2)</param>
-                                                                                </action>
-                                                                            </actions>
-                                                                            <sub-events>
-                                                                                <event-block sid="923502988873030">
-                                                                                    <conditions>
-                                                                                        <condition id="60" name="Is undefined" sid="320745476200094" type="JSON__COMMON">
-                                                                                            <param id="0" name="Reference point">0</param>
-                                                                                            <param id="1" name="Key {n}">scope{###}key</param>
-                                                                                        </condition>
-                                                                                    </conditions>
-                                                                                    <actions>
-                                                                                        <action id="10" name="Set New Array" sid="579788387556748" type="JSON__COMMON">
-                                                                                            <param id="0" name="Reference point">0</param>
-                                                                                            <param id="1" name="Key {n}">scope{###}key</param>
-                                                                                        </action>
-                                                                                    </actions>
-                                                                                </event-block>
-                                                                                <comment>value type conversion</comment>
-                                                                                <event-block sid="680523366587553">
-                                                                                    <conditions />
-                                                                                    <actions>
-                                                                                        <action id="20" name="Set Value" sid="423209319321536" type="JSON__COMMON">
-                                                                                            <param id="0" name="Value">value</param>
-                                                                                            <param id="1" name="Reference point">0</param>
-                                                                                            <param id="2" name="Key {n}">scope{###}key{###}Self.Size(0, scope, key)</param>
-                                                                                        </action>
-                                                                                    </actions>
-                                                                                </event-block>
-                                                                                <event-block sid="892951585960055">
-                                                                                    <conditions>
-                                                                                        <condition id="-8" name="Compare two values" sid="528599591800799" type="System">
-                                                                                            <param id="0" name="First value">str(int(value))</param>
-                                                                                            <param id="1" name="Comparison">0</param>
-                                                                                            <param id="2" name="Second value">value</param>
-                                                                                        </condition>
-                                                                                    </conditions>
-                                                                                    <actions>
-                                                                                        <action id="20" name="Set Value" sid="781997992831835" type="JSON__COMMON">
-                                                                                            <param id="0" name="Value">int(value)</param>
-                                                                                            <param id="1" name="Reference point">0</param>
-                                                                                            <param id="2" name="Key {n}">scope{###}key{###}Self.Size(0, scope, key)</param>
-                                                                                        </action>
-                                                                                    </actions>
-                                                                                </event-block>
-                                                                                <event-block sid="244306911928896">
-                                                                                    <conditions>
-                                                                                        <condition id="-8" name="Compare two values" sid="271696841662429" type="System">
-                                                                                            <param id="0" name="First value">str(float(value))</param>
-                                                                                            <param id="1" name="Comparison">0</param>
-                                                                                            <param id="2" name="Second value">value</param>
-                                                                                        </condition>
-                                                                                    </conditions>
-                                                                                    <actions>
-                                                                                        <action id="20" name="Set Value" sid="452136766736219" type="JSON__COMMON">
-                                                                                            <param id="0" name="Value">float(value)</param>
-                                                                                            <param id="1" name="Reference point">0</param>
-                                                                                            <param id="2" name="Key {n}">scope{###}key{###}Self.Size(0, scope, key)</param>
-                                                                                        </action>
-                                                                                    </actions>
-                                                                                </event-block>
-                                                                            </sub-events>
-                                                                        </event-block>
-                                                                        <comment>= normal pair</comment>
-                                                                        <event-block sid="316573878385907">
-                                                                            <conditions>
-                                                                                <condition id="-22" name="Else" sid="755542042513098" type="System" />
-                                                                            </conditions>
-                                                                            <actions>
-                                                                                <action id="20" name="Set Value" sid="963324355236898" type="JSON__COMMON">
-                                                                                    <param id="0" name="Value">value</param>
-                                                                                    <param id="1" name="Reference point">0</param>
-                                                                                    <param id="2" name="Key {n}">scope{###}key</param>
-                                                                                </action>
-                                                                            </actions>
-                                                                            <sub-events>
-                                                                                <comment>value type conversion</comment>
-                                                                                <event-block sid="289606957191969">
-                                                                                    <conditions>
-                                                                                        <condition id="-8" name="Compare two values" sid="646087441410284" type="System">
-                                                                                            <param id="0" name="First value">str(int(value))</param>
-                                                                                            <param id="1" name="Comparison">0</param>
-                                                                                            <param id="2" name="Second value">value</param>
-                                                                                        </condition>
-                                                                                    </conditions>
-                                                                                    <actions>
-                                                                                        <action id="20" name="Set Value" sid="277824833165385" type="JSON__COMMON">
-                                                                                            <param id="0" name="Value">int(value)</param>
-                                                                                            <param id="1" name="Reference point">0</param>
-                                                                                            <param id="2" name="Key {n}">scope{###}key</param>
-                                                                                        </action>
-                                                                                    </actions>
-                                                                                </event-block>
-                                                                                <event-block sid="234770449914149">
-                                                                                    <conditions>
-                                                                                        <condition id="-8" name="Compare two values" sid="588379996005580" type="System">
-                                                                                            <param id="0" name="First value">str(float(value))</param>
-                                                                                            <param id="1" name="Comparison">0</param>
-                                                                                            <param id="2" name="Second value">value</param>
-                                                                                        </condition>
-                                                                                    </conditions>
-                                                                                    <actions>
-                                                                                        <action id="20" name="Set Value" sid="437704683004400" type="JSON__COMMON">
-                                                                                            <param id="0" name="Value">float(value)</param>
-                                                                                            <param id="1" name="Reference point">0</param>
-                                                                                            <param id="2" name="Key {n}">scope{###}key</param>
-                                                                                        </action>
-                                                                                    </actions>
-                                                                                </event-block>
-                                                                            </sub-events>
-                                                                        </event-block>
-                                                                    </sub-events>
-                                                                </event-block>
-                                                                <comment>== section is an array (values with no keys)</comment>
-                                                                <event-block sid="433460503704345">
-                                                                    <conditions>
-                                                                        <condition id="-22" name="Else" sid="521478642367316" type="System" />
-                                                                    </conditions>
-                                                                    <actions />
-                                                                    <sub-events>
-                                                                        <event-block sid="265459796055314">
-                                                                            <conditions>
-                                                                                <condition id="10" inverted="1" name="Is array" sid="461864195271627" type="JSON__COMMON">
-                                                                                    <param id="0" name="Reference point">0</param>
-                                                                                    <param id="1" name="Key {n}">scope</param>
-                                                                                </condition>
-                                                                            </conditions>
-                                                                            <actions>
-                                                                                <action id="10" name="Set New Array" sid="328367282806728" type="JSON__COMMON">
-                                                                                    <param id="0" name="Reference point">0</param>
-                                                                                    <param id="1" name="Key {n}">scope</param>
-                                                                                </action>
-                                                                            </actions>
-                                                                        </event-block>
-                                                                        <comment>value type conversion</comment>
-                                                                        <event-block sid="720430378969876">
-                                                                            <conditions />
-                                                                            <actions>
-                                                                                <action id="20" name="Set Value" sid="472383436192952" type="JSON__COMMON">
-                                                                                    <param id="0" name="Value">value</param>
-                                                                                    <param id="1" name="Reference point">0</param>
-                                                                                    <param id="2" name="Key {n}">scope{###}Self.Size(0, scope)</param>
-                                                                                </action>
-                                                                            </actions>
-                                                                        </event-block>
-                                                                        <event-block sid="366623858269677">
-                                                                            <conditions>
-                                                                                <condition id="-8" name="Compare two values" sid="104362926500515" type="System">
-                                                                                    <param id="0" name="First value">str(int(value))</param>
-                                                                                    <param id="1" name="Comparison">0</param>
-                                                                                    <param id="2" name="Second value">value</param>
-                                                                                </condition>
-                                                                            </conditions>
-                                                                            <actions>
-                                                                                <action id="20" name="Set Value" sid="170602358677958" type="JSON__COMMON">
-                                                                                    <param id="0" name="Value">int(value)</param>
-                                                                                    <param id="1" name="Reference point">0</param>
-                                                                                    <param id="2" name="Key {n}">scope{###}Self.Size(0, scope)</param>
-                                                                                </action>
-                                                                            </actions>
-                                                                        </event-block>
-                                                                        <event-block sid="260993430359358">
-                                                                            <conditions>
-                                                                                <condition id="-8" name="Compare two values" sid="820500070591516" type="System">
-                                                                                    <param id="0" name="First value">str(float(value))</param>
-                                                                                    <param id="1" name="Comparison">0</param>
-                                                                                    <param id="2" name="Second value">value</param>
-                                                                                </condition>
-                                                                            </conditions>
-                                                                            <actions>
-                                                                                <action id="20" name="Set Value" sid="560257698349450" type="JSON__COMMON">
-                                                                                    <param id="0" name="Value">float(value)</param>
-                                                                                    <param id="1" name="Reference point">0</param>
-                                                                                    <param id="2" name="Key {n}">scope{###}Self.Size(0, scope)</param>
-                                                                                </action>
-                                                                            </actions>
-                                                                        </event-block>
-                                                                    </sub-events>
-                                                                </event-block>
-                                                            </sub-events>
-                                                        </event-block>
-                                                        <comment>=== [section] start</comment>
-                                                        <event-block sid="152291133461374">
-                                                            <conditions>
-                                                                <condition id="-22" name="Else" sid="695461720369778" type="System" />
-                                                            </conditions>
-                                                            <actions>
-                                                                <action id="-9" name="Set value" sid="713813106642692" type="System">
-                                                                    <param id="0" name="Variable">scope</param>
-                                                                    <param id="1" name="Value">mid(line,1,len(line)-2)</param>
-                                                                </action>
-                                                            </actions>
-                                                            <sub-events>
-                                                                <comment>section is an array containing objects</comment>
-                                                                <event-block sid="141614892543980">
-                                                                    <conditions>
-                                                                        <condition id="-8" inverted="1" name="Compare two values" sid="467657870443030" type="System">
-                                                                            <param id="0" name="First value">find(scope, &quot;[]&quot;)</param>
-                                                                            <param id="1" name="Comparison">0</param>
-                                                                            <param id="2" name="Second value">-1</param>
-                                                                        </condition>
-                                                                    </conditions>
-                                                                    <actions>
-                                                                        <action id="-10" name="Add to" sid="291130408180569" type="System">
-                                                                            <param id="0" name="Variable">scope_array_counter</param>
-                                                                            <param id="1" name="Value">1</param>
-                                                                        </action>
-                                                                        <action id="-9" name="Set value" sid="107300901837814" type="System">
-                                                                            <param id="0" name="Variable">scope</param>
-                                                                            <param id="1" name="Value">scope&amp;scope_array_counter</param>
-                                                                        </action>
-                                                                    </actions>
-                                                                </event-block>
-                                                                <event-block sid="201780141382927">
-                                                                    <conditions>
-                                                                        <condition id="-22" name="Else" sid="216721709497964" type="System" />
-                                                                    </conditions>
-                                                                    <actions>
-                                                                        <action id="-9" name="Set value" sid="383124104641637" type="System">
-                                                                            <param id="0" name="Variable">scope_array_counter</param>
-                                                                            <param id="1" name="Value">-1</param>
-                                                                        </action>
-                                                                    </actions>
-                                                                </event-block>
-                                                                <event-block sid="810645643361242">
-                                                                    <conditions />
-                                                                    <actions>
-                                                                        <action id="0" name="Set New Object" sid="349151121393499" type="JSON__COMMON">
-                                                                            <param id="0" name="Reference point">0</param>
-                                                                            <param id="1" name="Key {n}">scope</param>
-                                                                        </action>
-                                                                    </actions>
-                                                                </event-block>
-                                                            </sub-events>
-                                                        </event-block>
-                                                    </sub-events>
-                                                </event-block>
-                                            </sub-events>
-                                        </event-block>
-                                        <comment>move values from &quot;global&quot; into a global scope</comment>
-                                        <event-block sid="189651236245401">
-                                            <conditions>
-                                                <condition id="70" inverted="1" name="Is Empty" sid="948185621059430" type="JSON__COMMON">
-                                                    <param id="0" name="Reference point">0</param>
-                                                    <param id="1" name="Key {n}">&quot;global&quot;</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="0" name="Call function" sid="452080559021911" type="Function">
-                                                    <param id="0" name="Name">&quot;JSON_Merge&quot;</param>
-                                                    <param id="1" name="Parameter {n}">JSON__COMMON.AsJson(0, &quot;global&quot;){###}JSON__COMMON.AsJson(0)</param>
-                                                </action>
-                                                <action id="60" name="LoadJSON" sid="515543163765578" type="JSON__COMMON">
-                                                    <param id="0" name="JSON">Function.ReturnValue</param>
-                                                    <param id="1" name="Reference point">0</param>
-                                                    <param id="2" name="Key {n}"></param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                        <comment>merge arrays with objects</comment>
-                                        <event-block sid="888805989287890">
-                                            <conditions>
-                                                <condition id="100" name="For each property" sid="968026343577233" type="JSON__COMMON">
-                                                    <param id="0" name="Reference point">0</param>
-                                                    <param id="1" name="Key {n}"></param>
-                                                </condition>
-                                                <condition id="0" name="Is object" sid="306651452394408" type="JSON__COMMON">
-                                                    <param id="0" name="Reference point">1</param>
-                                                    <param id="1" name="Key {n}"></param>
-                                                </condition>
-                                                <condition id="-8" inverted="1" name="Compare two values" sid="258833621316583" type="System">
-                                                    <param id="0" name="First value">find(JSON__COMMON.CurrentKey, &quot;[]&quot;)</param>
-                                                    <param id="1" name="Comparison">0</param>
-                                                    <param id="2" name="Second value">-1</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions />
-                                            <sub-events>
-                                                <variable constant="0" name="array_name" sid="999897012829491" static="0" type="text"></variable>
-                                                <event-block sid="763441785513358">
-                                                    <conditions />
-                                                    <actions>
-                                                        <action id="-9" name="Set value" sid="563431143357776" type="System">
-                                                            <param id="0" name="Variable">array_name</param>
-                                                            <param id="1" name="Value">left(JSON__COMMON.CurrentKey, find(JSON__COMMON.CurrentKey, &quot;[]&quot;))</param>
-                                                        </action>
-                                                    </actions>
-                                                </event-block>
-                                                <event-block sid="716889736866733">
-                                                    <conditions>
-                                                        <condition id="60" name="Is undefined" sid="533224388521117" type="JSON__COMMON">
-                                                            <param id="0" name="Reference point">0</param>
-                                                            <param id="1" name="Key {n}">array_name</param>
-                                                        </condition>
-                                                    </conditions>
-                                                    <actions>
-                                                        <action id="10" name="Set New Array" sid="151450797282986" type="JSON__COMMON">
-                                                            <param id="0" name="Reference point">0</param>
-                                                            <param id="1" name="Key {n}">array_name</param>
-                                                        </action>
-                                                    </actions>
-                                                </event-block>
-                                                <event-block sid="256279037766085">
-                                                    <conditions />
-                                                    <actions>
-                                                        <action id="60" name="LoadJSON" sid="255566399274380" type="JSON__COMMON">
-                                                            <param id="0" name="JSON">JSON__COMMON.AsJson(1)</param>
-                                                            <param id="1" name="Reference point">0</param>
-                                                            <param id="2" name="Key {n}">array_name{###}JSON__COMMON.Size(0, array_name)</param>
-                                                        </action>
-                                                        <action id="50" name="Delete" sid="223859115456794" type="JSON__COMMON">
-                                                            <param id="0" name="Reference point">1</param>
-                                                            <param id="1" name="Key {n}"></param>
-                                                        </action>
-                                                    </actions>
-                                                </event-block>
-                                            </sub-events>
-                                        </event-block>
-                                        <event-block sid="831084148201457">
-                                            <conditions />
-                                            <actions>
-                                                <action id="50" name="Delete" sid="963028580632978" type="JSON__COMMON">
-                                                    <param id="0" name="Reference point">0</param>
-                                                    <param id="1" name="Key {n}">&quot;global&quot;</param>
-                                                </action>
-                                                <action id="1" name="Set return value" sid="276781259061924" type="Function">
-                                                    <param id="0" name="Value">JSON__COMMON.AsJson(0)</param>
-                                                </action>
-                                                <action id="-9" name="Destroy" sid="627581765491046" type="JSON__COMMON" />
-                                            </actions>
-                                        </event-block>
-                                    </sub-events>
-                                </event-block>
-                            </sub-events>
-                        </event-block>
-                        <comment>write</comment>
-                        <event-block sid="256253835973224">
-                            <conditions>
-                                <condition id="0" name="On function" sid="437067522257813" type="Function">
-                                    <param id="0" name="Name">&quot;JSON2INI&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions />
-                            <sub-events>
-                                <variable constant="0" name="ini" sid="539559306496675" static="0" type="text"></variable>
-                                <event-block sid="829647023646580">
-                                    <conditions />
-                                    <actions>
-                                        <action id="-3" name="Create object" sid="608008257903632" type="System">
-                                            <param id="0" name="Object to create">JSON__COMMON</param>
-                                            <param id="1" name="Layer">0</param>
-                                            <param id="2" name="X">0</param>
-                                            <param id="3" name="Y">0</param>
-                                        </action>
-                                        <action id="60" name="LoadJSON" sid="332226097493777" type="JSON__COMMON">
-                                            <param id="0" name="JSON">Function.Param(0)</param>
-                                            <param id="1" name="Reference point">0</param>
-                                            <param id="2" name="Key {n}"></param>
-                                        </action>
-                                    </actions>
-                                    <sub-events>
-                                        <comment>write global scope first, since it&apos;s on top</comment>
-                                        <event-block sid="867498122173382">
-                                            <conditions>
-                                                <condition id="100" name="For each property" sid="353506423404749" type="JSON__COMMON">
-                                                    <param id="0" name="Reference point">0</param>
-                                                    <param id="1" name="Key {n}"></param>
-                                                </condition>
-                                                <condition id="0" inverted="1" name="Is object" sid="653226106363909" type="JSON__COMMON">
-                                                    <param id="0" name="Reference point">1</param>
-                                                    <param id="1" name="Key {n}"></param>
-                                                </condition>
-                                                <condition id="10" inverted="1" name="Is array" sid="128874871559859" type="JSON__COMMON">
-                                                    <param id="0" name="Reference point">1</param>
-                                                    <param id="1" name="Key {n}"></param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="-9" name="Set value" sid="716165039786599" type="System">
-                                                    <param id="0" name="Variable">ini</param>
-                                                    <param id="1" name="Value">ini&amp;newline&amp;JSON__COMMON.CurrentKey&amp;&quot;=&quot;&amp;JSON__COMMON.CurrentValue</param>
-                                                </action>
-                                                <action id="50" name="Delete" sid="783129423820476" type="JSON__COMMON">
-                                                    <param id="0" name="Reference point">1</param>
-                                                    <param id="1" name="Key {n}"></param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                        <comment>write everything else</comment>
-                                        <event-block sid="418812548858195">
-                                            <conditions>
-                                                <condition id="100" name="For each property" sid="986557355437795" type="JSON__COMMON">
-                                                    <param id="0" name="Reference point">0</param>
-                                                    <param id="1" name="Key {n}"></param>
-                                                </condition>
-                                            </conditions>
-                                            <actions />
-                                            <sub-events>
-                                                <comment>== an object</comment>
-                                                <event-block sid="349926353079301">
-                                                    <conditions>
-                                                        <condition id="0" name="Is object" sid="754364650349204" type="JSON__COMMON">
-                                                            <param id="0" name="Reference point">1</param>
-                                                            <param id="1" name="Key {n}"></param>
-                                                        </condition>
-                                                    </conditions>
-                                                    <actions>
-                                                        <action id="-9" name="Set value" sid="194388232600762" type="System">
-                                                            <param id="0" name="Variable">ini</param>
-                                                            <param id="1" name="Value">ini&amp;newline&amp;newline&amp;&quot;[&quot;&amp;JSON__COMMON.CurrentKey&amp;&quot;]&quot;</param>
-                                                        </action>
-                                                    </actions>
-                                                    <sub-events>
-                                                        <event-block sid="324060351333833">
-                                                            <conditions>
-                                                                <condition id="100" name="For each property" sid="883158629350262" type="JSON__COMMON">
-                                                                    <param id="0" name="Reference point">1</param>
-                                                                    <param id="1" name="Key {n}"></param>
-                                                                </condition>
-                                                            </conditions>
-                                                            <actions />
-                                                            <sub-events>
-                                                                <comment>array in an object</comment>
-                                                                <event-block sid="610953834738045">
-                                                                    <conditions>
-                                                                        <condition id="10" name="Is array" sid="623125823072136" type="JSON__COMMON">
-                                                                            <param id="0" name="Reference point">1</param>
-                                                                            <param id="1" name="Key {n}"></param>
-                                                                        </condition>
-                                                                    </conditions>
-                                                                    <actions />
-                                                                    <sub-events>
-                                                                        <variable constant="0" name="array_name" sid="597239271313298" static="0" type="text"></variable>
-                                                                        <event-block sid="758401256265670">
-                                                                            <conditions />
-                                                                            <actions>
-                                                                                <action id="-9" name="Set value" sid="141299953121431" type="System">
-                                                                                    <param id="0" name="Variable">array_name</param>
-                                                                                    <param id="1" name="Value">JSON__COMMON.CurrentKey</param>
-                                                                                </action>
-                                                                            </actions>
-                                                                        </event-block>
-                                                                        <event-block sid="685871791603856">
-                                                                            <conditions>
-                                                                                <condition id="100" name="For each property" sid="566790323950948" type="JSON__COMMON">
-                                                                                    <param id="0" name="Reference point">1</param>
-                                                                                    <param id="1" name="Key {n}"></param>
-                                                                                </condition>
-                                                                            </conditions>
-                                                                            <actions>
-                                                                                <action id="-9" name="Set value" sid="662465264960226" type="System">
-                                                                                    <param id="0" name="Variable">ini</param>
-                                                                                    <param id="1" name="Value">ini&amp;newline&amp;array_name&amp;&quot;[]=&quot;&amp;JSON__COMMON.CurrentValue</param>
-                                                                                </action>
-                                                                            </actions>
-                                                                        </event-block>
-                                                                    </sub-events>
-                                                                </event-block>
-                                                                <event-block sid="506542272108899">
-                                                                    <conditions>
-                                                                        <condition id="-22" name="Else" sid="634658478818298" type="System" />
-                                                                    </conditions>
-                                                                    <actions>
-                                                                        <action id="-9" name="Set value" sid="745916526352180" type="System">
-                                                                            <param id="0" name="Variable">ini</param>
-                                                                            <param id="1" name="Value">ini&amp;newline&amp;JSON__COMMON.CurrentKey&amp;&quot;=&quot;&amp;JSON__COMMON.CurrentValue</param>
-                                                                        </action>
-                                                                    </actions>
-                                                                </event-block>
-                                                            </sub-events>
-                                                        </event-block>
-                                                    </sub-events>
-                                                </event-block>
-                                                <comment>== top level regular array</comment>
-                                                <event-block sid="875620005033478">
-                                                    <conditions>
-                                                        <condition id="10" name="Is array" sid="709259497609518" type="JSON__COMMON">
-                                                            <param id="0" name="Reference point">1</param>
-                                                            <param id="1" name="Key {n}"></param>
-                                                        </condition>
-                                                        <condition id="0" inverted="1" name="Is object" sid="314280819569097" type="JSON__COMMON">
-                                                            <param id="0" name="Reference point">1</param>
-                                                            <param id="1" name="Key {n}">0</param>
-                                                        </condition>
-                                                    </conditions>
-                                                    <actions>
-                                                        <action id="-9" name="Set value" sid="117072135812872" type="System">
-                                                            <param id="0" name="Variable">ini</param>
-                                                            <param id="1" name="Value">ini&amp;newline&amp;newline&amp;&quot;[&quot;&amp;JSON__COMMON.CurrentKey&amp;&quot;]&quot;</param>
-                                                        </action>
-                                                    </actions>
-                                                    <sub-events>
-                                                        <event-block sid="641773639260331">
-                                                            <conditions>
-                                                                <condition id="100" name="For each property" sid="872184883295992" type="JSON__COMMON">
-                                                                    <param id="0" name="Reference point">1</param>
-                                                                    <param id="1" name="Key {n}"></param>
-                                                                </condition>
-                                                            </conditions>
-                                                            <actions>
-                                                                <action id="-9" name="Set value" sid="747052075808219" type="System">
-                                                                    <param id="0" name="Variable">ini</param>
-                                                                    <param id="1" name="Value">ini&amp;newline&amp;&quot;=&quot;&amp;JSON__COMMON.CurrentValue</param>
-                                                                </action>
-                                                            </actions>
-                                                        </event-block>
-                                                    </sub-events>
-                                                </event-block>
-                                                <comment>== an array containing objects</comment>
-                                                <event-block sid="276587058811469">
-                                                    <conditions>
-                                                        <condition id="10" name="Is array" sid="282436290028500" type="JSON__COMMON">
-                                                            <param id="0" name="Reference point">1</param>
-                                                            <param id="1" name="Key {n}"></param>
-                                                        </condition>
-                                                        <condition id="0" name="Is object" sid="341330315062947" type="JSON__COMMON">
-                                                            <param id="0" name="Reference point">1</param>
-                                                            <param id="1" name="Key {n}">0</param>
-                                                        </condition>
-                                                    </conditions>
-                                                    <actions />
-                                                    <sub-events>
-                                                        <variable constant="0" name="array_name" sid="546417571669104" static="0" type="text"></variable>
-                                                        <event-block sid="828473254434092">
-                                                            <conditions />
-                                                            <actions>
-                                                                <action id="-9" name="Set value" sid="757722754479782" type="System">
-                                                                    <param id="0" name="Variable">array_name</param>
-                                                                    <param id="1" name="Value">JSON__COMMON.CurrentKey</param>
-                                                                </action>
-                                                            </actions>
-                                                        </event-block>
-                                                        <comment>loop through objects in array</comment>
-                                                        <event-block sid="498067123596442">
-                                                            <conditions>
-                                                                <condition id="100" name="For each property" sid="915504753887702" type="JSON__COMMON">
-                                                                    <param id="0" name="Reference point">1</param>
-                                                                    <param id="1" name="Key {n}"></param>
-                                                                </condition>
-                                                            </conditions>
-                                                            <actions>
-                                                                <action id="-9" name="Set value" sid="122477186970731" type="System">
-                                                                    <param id="0" name="Variable">ini</param>
-                                                                    <param id="1" name="Value">ini&amp;newline&amp;newline&amp;&quot;[&quot;&amp;array_name&amp;&quot;[]]&quot;</param>
-                                                                </action>
-                                                            </actions>
-                                                            <sub-events>
-                                                                <event-block sid="352374614968147">
-                                                                    <conditions>
-                                                                        <condition id="100" name="For each property" sid="279454682773398" type="JSON__COMMON">
-                                                                            <param id="0" name="Reference point">1</param>
-                                                                            <param id="1" name="Key {n}"></param>
-                                                                        </condition>
-                                                                    </conditions>
-                                                                    <actions />
-                                                                    <sub-events>
-                                                                        <comment>array in an object</comment>
-                                                                        <event-block sid="263765261204936">
-                                                                            <conditions>
-                                                                                <condition id="10" name="Is array" sid="265656041638864" type="JSON__COMMON">
-                                                                                    <param id="0" name="Reference point">1</param>
-                                                                                    <param id="1" name="Key {n}"></param>
-                                                                                </condition>
-                                                                            </conditions>
-                                                                            <actions />
-                                                                            <sub-events>
-                                                                                <variable constant="0" name="inner_array_name" sid="935728922372616" static="0" type="text"></variable>
-                                                                                <event-block sid="235328146128071">
-                                                                                    <conditions />
-                                                                                    <actions>
-                                                                                        <action id="-9" name="Set value" sid="487355649072168" type="System">
-                                                                                            <param id="0" name="Variable">inner_array_name</param>
-                                                                                            <param id="1" name="Value">JSON__COMMON.CurrentKey</param>
-                                                                                        </action>
-                                                                                    </actions>
-                                                                                </event-block>
-                                                                                <event-block sid="708967384470792">
-                                                                                    <conditions>
-                                                                                        <condition id="100" name="For each property" sid="434624155292195" type="JSON__COMMON">
-                                                                                            <param id="0" name="Reference point">1</param>
-                                                                                            <param id="1" name="Key {n}"></param>
-                                                                                        </condition>
-                                                                                    </conditions>
-                                                                                    <actions>
-                                                                                        <action id="-9" name="Set value" sid="223204194067543" type="System">
-                                                                                            <param id="0" name="Variable">ini</param>
-                                                                                            <param id="1" name="Value">ini&amp;newline&amp;inner_array_name&amp;&quot;[]=&quot;&amp;JSON__COMMON.CurrentValue</param>
-                                                                                        </action>
-                                                                                    </actions>
-                                                                                </event-block>
-                                                                            </sub-events>
-                                                                        </event-block>
-                                                                        <event-block sid="857962693894467">
-                                                                            <conditions>
-                                                                                <condition id="-22" name="Else" sid="933534256854228" type="System" />
-                                                                            </conditions>
-                                                                            <actions>
-                                                                                <action id="-9" name="Set value" sid="148537376658907" type="System">
-                                                                                    <param id="0" name="Variable">ini</param>
-                                                                                    <param id="1" name="Value">ini&amp;newline&amp;JSON__COMMON.CurrentKey&amp;&quot;=&quot;&amp;JSON__COMMON.CurrentValue</param>
-                                                                                </action>
-                                                                            </actions>
-                                                                        </event-block>
-                                                                    </sub-events>
-                                                                </event-block>
-                                                            </sub-events>
-                                                        </event-block>
-                                                    </sub-events>
-                                                </event-block>
-                                            </sub-events>
-                                        </event-block>
-                                        <event-block sid="550625621171263">
-                                            <conditions />
-                                            <actions>
-                                                <action id="-9" name="Set value" sid="465925747779603" type="System">
-                                                    <param id="0" name="Variable">ini</param>
-                                                    <param id="1" name="Value">trim(ini)&amp;newline</param>
-                                                </action>
-                                                <action id="1" name="Set return value" sid="984425303701150" type="Function">
-                                                    <param id="0" name="Value">ini</param>
-                                                </action>
-                                                <action id="-9" name="Destroy" sid="819876039298988" type="JSON__COMMON" />
-                                            </actions>
-                                        </event-block>
-                                    </sub-events>
-                                </event-block>
-                            </sub-events>
-                        </event-block>
-                        <comment></comment>
-                    </sub-events>
-                </event-group>
                 <comment>get input prompt</comment>
                 <event-block sid="287902010826587">
                     <conditions>
@@ -2097,8 +1301,8 @@
                                     <param id="0" name="Instance variable">InputStolen</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
-                                <action id="-13" name="Set boolean" sid="545971862826976" type="JSON_AudioPreload">
-                                    <param id="0" name="Instance variable">LevelPreloaded</param>
+                                <action id="-13" name="Set boolean" sid="533200754773034" type="Var_Audio">
+                                    <param id="0" name="Instance variable">LevelPreloadedTEMP</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
                                 <action id="-10" name="Set value" sid="382485057385807" type="Var_Game">
@@ -2529,7 +1733,7 @@
                     </conditions>
                     <actions>
                         <action id="1" name="Set return value" sid="640219397507060" type="Function">
-                            <param id="0" name="Value">JS.JSCodeValue(&quot;(()=&gt;{&#x0D;&#x0A;let canvas = document.createElement(&apos;canvas&apos;)&#x0D;&#x0A;let context = canvas.getContext(&apos;2d&apos;)&#x0D;&#x0A;context.font = #1 + &apos;px Arial&apos;&#x0D;&#x0A;return context.measureText(decodeURIComponent(#0)).width&#x0D;&#x0A;})()&quot;, replace(Function.Param(0), &quot;&apos;&quot;, &quot;%27&quot;), ceil(Function.Param(1) * 1.33))</param>
+                            <param id="0" name="Value">JS.JSCodeValue(&quot;(()=&gt;{&#x0D;&#x0A;let string = decodeURIComponent(#0)&#x0D;&#x0A;let canvas = document.createElement(&apos;canvas&apos;)&#x0D;&#x0A;let context = canvas.getContext(&apos;2d&apos;)&#x0D;&#x0A;context.font = #1 + &apos;px Arial&apos;&#x0D;&#x0A;return context.measureText(string).width&#x0D;&#x0A;})()&quot;, replace(Function.Param(0), &quot;&apos;&quot;, &quot;%27&quot;), ceil(Function.Param(1) * 1.33))</param>
                         </action>
                     </actions>
                 </event-block>
@@ -2579,7 +1783,7 @@
                         </action>
                     </actions>
                 </event-block>
-                <comment>shuffle a JSON array</comment>
+                <comment>shuffle an array</comment>
                 <event-block sid="205241768867331">
                     <conditions>
                         <condition id="0" name="On function" sid="698935990584130" type="Function">
@@ -2588,11 +1792,11 @@
                     </conditions>
                     <actions>
                         <action id="1" name="Set return value" sid="877836762436353" type="Function">
-                            <param id="0" name="Value">JS.JSCodeValue(&quot;&#x0D;&#x0A;function func() {&#x0D;&#x0A;    let array = JSON.parse(#0);&#x0D;&#x0A;    for (let i = array.length - 1; i &gt;= 0; i--) {&#x0D;&#x0A;        const j = Math.floor(Math.random() * (i + 1));&#x0D;&#x0A;        [array[i], array[j]] = [array[j], array[i]];&#x0D;&#x0A;    };&#x0D;&#x0A;    return JSON.stringify(array);&#x0D;&#x0A;};&#x0D;&#x0A;func();&#x0D;&#x0A;&quot;, Function.Param(0))</param>
+                            <param id="0" name="Value">JS.JSCodeValue(&quot;(()=&gt;{&#x0D;&#x0A;let array = JSON.parse(#0)&#x0D;&#x0A;for (let i = array.length - 1; i &gt;= 0; i--) {&#x0D;&#x0A;    let j = Math.floor(Math.random() * (i + 1));&#x0D;&#x0A;    [array[i], array[j]] = [array[j], array[i]]&#x0D;&#x0A;}&#x0D;&#x0A;return JSON.stringify(array)&#x0D;&#x0A;})()&quot;, Function.Param(0))</param>
                         </action>
                     </actions>
                 </event-block>
-                <comment>reverse a JSON array</comment>
+                <comment>reverse an array</comment>
                 <event-block sid="926142526542635">
                     <conditions>
                         <condition id="0" name="On function" sid="199291996049854" type="Function">
@@ -2605,20 +1809,7 @@
                         </action>
                     </actions>
                 </event-block>
-                <comment>remove an index from JSON array, without leaving a gap in it</comment>
-                <event-block sid="805590352103585">
-                    <conditions>
-                        <condition id="0" name="On function" sid="653595733833784" type="Function">
-                            <param id="0" name="Name">&quot;JSON_ArrayRemoveAt&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="1" name="Set return value" sid="838167614516387" type="Function">
-                            <param id="0" name="Value">JS.JSCodeValue(&quot;&#x0D;&#x0A;function func() {&#x0D;&#x0A;    let array = JSON.parse(#0);&#x0D;&#x0A;    array.splice(#1, 1);&#x0D;&#x0A;    return JSON.stringify(array);&#x0D;&#x0A;};&#x0D;&#x0A;func();&#x0D;&#x0A;&quot;, Function.Param(0), Function.Param(1))</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <comment>sort a JSON array by its key, descending order</comment>
+                <comment>sort an array by its key, descending order</comment>
                 <event-block sid="881246347072269">
                     <conditions>
                         <condition id="0" name="On function" sid="650022084533980" type="Function">
@@ -2627,20 +1818,46 @@
                     </conditions>
                     <actions>
                         <action id="1" name="Set return value" sid="378288900367438" type="Function">
-                            <param id="0" name="Value">JS.JSCodeValue(&quot;JSON.stringify(JSON.parse(#0).sort(function(a, b) {return b[#1] - a[#1]}))&quot;, Function.Param(0), Function.Param(1))</param>
+                            <param id="0" name="Value">JS.JSCodeValue(&quot;JSON.stringify(JSON.parse(#0).sort((a, b) =&gt; b[#1] - a[#1]))&quot;, Function.Param(0), Function.Param(1))</param>
                         </action>
                     </actions>
                 </event-block>
-                <comment></comment>
+                <comment>remove an index from array, without leaving a gap in it</comment>
+                <event-block sid="805590352103585">
+                    <conditions>
+                        <condition id="0" name="On function" sid="653595733833784" type="Function">
+                            <param id="0" name="Name">&quot;JSON_ArrayRemoveAt&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="1" name="Set return value" sid="838167614516387" type="Function">
+                            <param id="0" name="Value">JS.JSCodeValue(&quot;(()=&gt;{&#x0D;&#x0A;let array = JSON.parse(#0)&#x0D;&#x0A;array.splice(#1, 1)&#x0D;&#x0A;return JSON.stringify(array)&#x0D;&#x0A;})()&quot;, Function.Param(0), Function.Param(1))</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>see above, but remove by value</comment>
+                <event-block sid="951969025446211">
+                    <conditions>
+                        <condition id="0" name="On function" sid="957991250913575" type="Function">
+                            <param id="0" name="Name">&quot;JSON_ArrayRemove&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="1" name="Set return value" sid="583372956652575" type="Function">
+                            <param id="0" name="Value">JS.JSCodeValue(&quot;(()=&gt;{&#x0D;&#x0A;let array = JSON.parse(#0)&#x0D;&#x0A;let index = array.indexOf(#1)&#x0D;&#x0A;if (index &gt; -1) array.splice(index, 1)&#x0D;&#x0A;return JSON.stringify(array)&#x0D;&#x0A;})()&quot;, Function.Param(0), Function.Param(1))</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>check if array contains a value</comment>
                 <event-block sid="224020659907790">
                     <conditions>
                         <condition id="0" name="On function" sid="150406866352674" type="Function">
-                            <param id="0" name="Name">&quot;JSON_ArrayHas&quot;</param>
+                            <param id="0" name="Name">&quot;JSON_ArrayFind&quot;</param>
                         </condition>
                     </conditions>
                     <actions>
                         <action id="1" name="Set return value" sid="289067580131220" type="Function">
-                            <param id="0" name="Value">JS.JSCodeValue(&quot;JSON.stringify(JSON.parse(#0).includes(#1))&quot;, Function.Param(0), Function.Param(1)) = &quot;true&quot; ? 1 : 0</param>
+                            <param id="0" name="Value">JS.JSCodeValue(&quot;JSON.parse(#0).indexOf(#1)&quot;, Function.Param(0), Function.Param(1))</param>
                         </action>
                     </actions>
                 </event-block>
@@ -2897,18 +2114,30 @@
                 <event-block sid="362595595915503">
                     <conditions>
                         <condition id="0" name="On any touch start" sid="613949949740526" type="Touch" />
-                        <condition id="-14" name="Compare variable" sid="310508497895611" type="System">
-                            <param id="0" name="Variable">MOBILE</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">1</param>
-                        </condition>
                     </conditions>
-                    <actions>
-                        <action id="-10" name="Set value" sid="662194057563871" type="Var_Input">
-                            <param id="0" name="Instance variable">InputMode</param>
-                            <param id="1" name="Value">&quot;Mobile&quot;</param>
-                        </action>
-                    </actions>
+                    <actions />
+                    <sub-events>
+                        <event-block any="1" sid="506094551615735">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="310508497895611" type="System">
+                                    <param id="0" name="Variable">MOBILE</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                                <condition id="-14" name="Compare variable" sid="332168721757212" type="System">
+                                    <param id="0" name="Variable">DEBUG_MOBILE</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Set value" sid="662194057563871" type="Var_Input">
+                                    <param id="0" name="Instance variable">InputMode</param>
+                                    <param id="1" name="Value">&quot;Mobile&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <comment>keyboard</comment>
                 <event-block sid="783064618955226">
@@ -3445,27 +2674,49 @@
                         </action>
                     </actions>
                 </event-block>
-                <event-block sid="496806912634968">
+                <event-block sid="690398559532351">
                     <conditions>
-                        <condition id="-8" name="Is boolean instance variable set" sid="409918106562657" type="Var_Misc">
+                        <condition id="-8" name="Is boolean instance variable set" sid="128147318346958" type="Var_Misc">
                             <param id="0" name="Instance variable">InitializedFiles</param>
                         </condition>
-                        <condition id="-4" name="Trigger once while true" sid="805498892447801" type="System" />
-                        <condition id="70" name="Is Empty" sid="627472957328559" type="JSON_Audio">
+                        <condition id="70" name="Is Empty" sid="631735544902706" type="JSON_Audio">
                             <param id="0" name="Reference point">0</param>
                             <param id="1" name="Key {n}">&quot;Preloaded&quot;</param>
                         </condition>
-                        <condition id="100" name="For each property" sid="479093154082660" type="JSON_AudioPreload">
-                            <param id="0" name="Reference point">0</param>
-                            <param id="1" name="Key {n}"></param>
-                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="167764428960016" type="System" />
                     </conditions>
-                    <actions>
-                        <action id="0" name="Set New Object" sid="213206263181649" type="JSON_Audio">
-                            <param id="0" name="Reference point">0</param>
-                            <param id="1" name="Key {n}">&quot;Preloaded&quot;{###}JSON_AudioPreload.CurrentKey</param>
-                        </action>
-                    </actions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="995450844459086">
+                            <conditions>
+                                <condition id="100" name="For each property" sid="725132733666444" type="JSON_AudioPreload">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}"></param>
+                                </condition>
+                                <condition id="100" name="For each property" sid="273949600908671" type="JSON_AudioPreload">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}">JSON_AudioPreload.CurrentKey</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="30" name="Set Boolean" sid="720319656737727" type="JSON_Audio">
+                                    <param id="0" name="value">1</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;Preloaded&quot;{###}JSON_AudioPreload.CurrentKey</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="953542022137576">
+                            <conditions />
+                            <actions>
+                                <action id="20" name="Set Value" sid="798641775144436" type="JSON_Audio">
+                                    <param id="0" name="Value">Self.Size(0, &quot;Preloaded&quot;)</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}">&quot;Preloaded&quot;{###}&quot;Size&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block sid="978056638309232">
                     <conditions>
@@ -3556,7 +2807,7 @@
                                 </action>
                                 <action id="3" name="Set volume" sid="138071765356893" type="BetterAudio">
                                     <param id="0" name="Tag">&quot;SFX_&quot;&amp;Function.Param(0)</param>
-                                    <param id="1" name="dB">Var_Misc.AudioVolumeSFX</param>
+                                    <param id="1" name="dB">Var_Audio.VolumeSFX</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -3714,7 +2965,7 @@
                                 </action>
                                 <action id="3" name="Set volume" sid="169026051690508" type="BetterAudio">
                                     <param id="0" name="Tag">Function.Param(1)</param>
-                                    <param id="1" name="dB">Var_Misc.AudioVolumeMusic</param>
+                                    <param id="1" name="dB">Var_Audio.VolumeMusic</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -3729,7 +2980,7 @@
                             <actions>
                                 <action id="3" name="Set volume" sid="321945781184569" type="BetterAudio">
                                     <param id="0" name="Tag">Function.Param(1)</param>
-                                    <param id="1" name="dB">Var_Misc.AudioVolumeSFX</param>
+                                    <param id="1" name="dB">Var_Audio.VolumeSFX</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -3744,17 +2995,17 @@
                             </conditions>
                             <actions>
                                 <action id="0" name="Call function" sid="913579649017766" type="Function">
-                                    <param id="0" name="Name">&quot;JSON_ArrayHas&quot;</param>
+                                    <param id="0" name="Name">&quot;JSON_ArrayFind&quot;</param>
                                     <param id="1" name="Parameter {n}">Save_General.AsJson(0,&quot;Music&quot;){###}Function.Param(0)</param>
                                 </action>
                             </actions>
                             <sub-events>
                                 <event-block sid="517080409686492">
                                     <conditions>
-                                        <condition id="-8" inverted="1" name="Compare two values" sid="677815223403971" type="System">
+                                        <condition id="-8" name="Compare two values" sid="677815223403971" type="System">
                                             <param id="0" name="First value">Function.ReturnValue</param>
                                             <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Second value">1</param>
+                                            <param id="2" name="Second value">-1</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -3816,7 +3067,7 @@
                             </conditions>
                             <actions>
                                 <action id="0" name="Call function" sid="731131249502827" type="Function">
-                                    <param id="0" name="Name">&quot;JSON_ArrayHas&quot;</param>
+                                    <param id="0" name="Name">&quot;JSON_ArrayFind&quot;</param>
                                     <param id="1" name="Parameter {n}">Save_General.AsJson(0,&quot;Music&quot;){###}JSON_AudioProperties.Value(1,&quot;Dependency&quot;)</param>
                                 </action>
                             </actions>
@@ -3824,10 +3075,10 @@
                                 <comment>Dependency not listened to</comment>
                                 <event-block sid="704977967183243">
                                     <conditions>
-                                        <condition id="-8" inverted="1" name="Compare two values" sid="825848834174574" type="System">
+                                        <condition id="-8" name="Compare two values" sid="825848834174574" type="System">
                                             <param id="0" name="First value">Function.ReturnValue</param>
                                             <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Second value">1</param>
+                                            <param id="2" name="Second value">-1</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -3871,7 +3122,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="0" name="Call function" sid="855253286154015" type="Function">
-                                            <param id="0" name="Name">&quot;JSON_ArrayHas&quot;</param>
+                                            <param id="0" name="Name">&quot;JSON_ArrayFind&quot;</param>
                                             <param id="1" name="Parameter {n}">Save_General.AsJson(0,&quot;Music&quot;){###}Function.Param(0)</param>
                                         </action>
                                     </actions>
@@ -3879,10 +3130,10 @@
                                         <comment>has been listened to</comment>
                                         <event-block sid="640760928481107">
                                             <conditions>
-                                                <condition id="-8" name="Compare two values" sid="302062819140666" type="System">
+                                                <condition id="-8" inverted="1" name="Compare two values" sid="302062819140666" type="System">
                                                     <param id="0" name="First value">Function.ReturnValue</param>
                                                     <param id="1" name="Comparison">0</param>
-                                                    <param id="2" name="Second value">1</param>
+                                                    <param id="2" name="Second value">-1</param>
                                                 </condition>
                                             </conditions>
                                             <actions>
@@ -3910,9 +3161,6 @@
                         </event-block>
                     </sub-events>
                 </event-block>
-                <comment>TODO: this is for DEBUG_AUDIOPRELOAD</comment>
-                <variable constant="0" name="preload" sid="399049308424056" static="1" type="text"></variable>
-                <variable constant="0" name="preload_complete" sid="629036014920723" static="1" type="number">0</variable>
                 <comment>preload audio file (for web, android)</comment>
                 <event-block sid="338316560511645">
                     <conditions>
@@ -3925,9 +3173,23 @@
                             <param id="2" name="Value">1</param>
                         </condition>
                     </conditions>
-                    <actions />
+                    <actions>
+                        <action id="-10" name="Set value" sid="358108256560591" type="Var_Audio">
+                            <param id="0" name="Instance variable">PreloadTask</param>
+                            <param id="1" name="Value">Function.Param(0)</param>
+                        </action>
+                        <action id="2" name="Clear" sid="492271896344653" type="Queue_AudioPreload" />
+                        <action id="-10" name="Set value" sid="918950248037665" type="Var_Audio">
+                            <param id="0" name="Instance variable">PreloadSizeTotal</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="508124956554354" type="Var_Audio">
+                            <param id="0" name="Instance variable">PreloadProgress</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
                     <sub-events>
-                        <comment>0 - load a list</comment>
+                        <comment>0 - load a group</comment>
                         <event-block sid="730498958379184">
                             <conditions>
                                 <condition id="-8" name="Compare two values" sid="835520664490548" type="System">
@@ -3939,80 +3201,25 @@
                                     <param id="0" name="Reference point">0</param>
                                     <param id="1" name="Key {n}">Function.Param(0)</param>
                                 </condition>
+                                <condition id="100" name="For each property" sid="131863186613017" type="JSON_AudioPreload">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}">Function.Param(0)</param>
+                                </condition>
+                                <condition id="-8" name="Compare two values" sid="538989620517949" type="System">
+                                    <param id="0" name="First value">JSON_Audio.Value(0, &quot;Preloaded&quot;, JSON_AudioPreload.CurrentKey)</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">0</param>
+                                </condition>
                             </conditions>
                             <actions>
-                                <action id="-10" name="Set value" sid="242767397552644" type="JSON_AudioPreload">
-                                    <param id="0" name="Instance variable">CurrentTask</param>
-                                    <param id="1" name="Value">Function.Param(0)</param>
+                                <action id="-10" name="Set value" sid="571393270069336" type="Var_Audio">
+                                    <param id="0" name="Instance variable">PreloadSizeTotal</param>
+                                    <param id="1" name="Value">Self.PreloadSizeTotal + JSON_AudioPreload.CurrentValue</param>
                                 </action>
-                                <action id="2" name="Clear" sid="492271896344653" type="Queue_AudioPreload" />
-                                <action id="-10" name="Set value" sid="432887111802430" type="JSON_AudioPreload">
-                                    <param id="0" name="Instance variable">AudioSize</param>
-                                    <param id="1" name="Value">0</param>
+                                <action id="0" name="Enqueue" sid="197030057618200" type="Queue_AudioPreload">
+                                    <param id="0" name="Element">JSON_AudioPreload.CurrentKey</param>
                                 </action>
                             </actions>
-                            <sub-events>
-                                <event-block sid="470579080209692">
-                                    <conditions>
-                                        <condition id="100" name="For each property" sid="131863186613017" type="JSON_AudioPreload">
-                                            <param id="0" name="Reference point">0</param>
-                                            <param id="1" name="Key {n}">Function.Param(0)</param>
-                                        </condition>
-                                        <condition id="60" name="Is undefined" sid="934186909647565" type="JSON_Audio">
-                                            <param id="0" name="Reference point">0</param>
-                                            <param id="1" name="Key {n}">&quot;Preloaded&quot;{###}Function.Param(0){###}JSON_AudioPreload.CurrentKey</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-10" name="Set value" sid="280957812336301" type="JSON_AudioPreload">
-                                            <param id="0" name="Instance variable">AudioSize</param>
-                                            <param id="1" name="Value">Self.AudioSize + Self.CurrentValue</param>
-                                        </action>
-                                        <action id="0" name="Enqueue" sid="197030057618200" type="Queue_AudioPreload">
-                                            <param id="0" name="Element">JSON_AudioPreload.CurrentKey</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="293057343349133">
-                                    <conditions />
-                                    <actions>
-                                        <action id="0" name="Call function" sid="740889943429450" type="Function">
-                                            <param id="0" name="Name">&quot;Math_RoundFloat&quot;</param>
-                                            <param id="1" name="Parameter {n}">JSON_AudioPreload.AudioSize{###}2</param>
-                                        </action>
-                                        <action id="-10" name="Set value" sid="488024537136610" type="JSON_AudioPreload">
-                                            <param id="0" name="Instance variable">AudioSize</param>
-                                            <param id="1" name="Value">Function.ReturnValue</param>
-                                        </action>
-                                        <action id="-10" name="Set value" sid="915778711039887" type="JSON_AudioPreload">
-                                            <param id="0" name="Instance variable">AudioSizeLeft</param>
-                                            <param id="1" name="Value">Self.AudioSize</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="811135172299656">
-                                    <conditions>
-                                        <condition id="0" inverted="1" name="Is empty" sid="528796288393323" type="Queue_AudioPreload" />
-                                    </conditions>
-                                    <actions>
-                                        <action id="9" name="Preload (by name)" sid="434156140290763" type="BetterAudio">
-                                            <param id="0" name="Folder">1</param>
-                                            <param id="1" name="Audio file name">Queue_AudioPreload.Peek</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="192844799087925">
-                                    <conditions>
-                                        <condition id="-22" name="Else" sid="296442901596763" type="System" />
-                                    </conditions>
-                                    <actions>
-                                        <action id="0" name="Call function" sid="333074516774146" type="Function">
-                                            <param id="0" name="Name">&quot;Audio_OnPreloadComplete&quot;</param>
-                                            <param id="1" name="Parameter {n}">Function.Param(0)</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
                         </event-block>
                         <comment>1 - load a single track from Music</comment>
                         <event-block sid="629029984001602">
@@ -4026,69 +3233,95 @@
                                     <param id="0" name="Reference point">0</param>
                                     <param id="1" name="Key {n}">&quot;Music&quot;{###}Function.Param(0)</param>
                                 </condition>
+                                <condition id="-8" name="Compare two values" sid="483288087257545" type="System">
+                                    <param id="0" name="First value">JSON_Audio.Value(0, &quot;Preloaded&quot;, JSON_AudioPreload.CurrentKey)</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">0</param>
+                                </condition>
                             </conditions>
                             <actions>
-                                <action id="-10" name="Set value" sid="236340862152708" type="JSON_AudioPreload">
-                                    <param id="0" name="Instance variable">CurrentTask</param>
-                                    <param id="1" name="Value">Function.Param(0)</param>
+                                <action id="-10" name="Set value" sid="159870651594369" type="Var_Audio">
+                                    <param id="0" name="Instance variable">PreloadSizeTotal</param>
+                                    <param id="1" name="Value">JSON_AudioPreload.Value(0, &quot;Music&quot;, Function.Param(0))</param>
                                 </action>
-                                <action id="2" name="Clear" sid="222499749072066" type="Queue_AudioPreload" />
+                                <action id="0" name="Enqueue" sid="353669720212509" type="Queue_AudioPreload">
+                                    <param id="0" name="Element">Function.Param(0)</param>
+                                </action>
                             </actions>
-                            <sub-events>
-                                <event-block sid="150708765674240">
-                                    <conditions>
-                                        <condition id="60" name="Is undefined" sid="700879812895976" type="JSON_Audio">
-                                            <param id="0" name="Reference point">0</param>
-                                            <param id="1" name="Key {n}">&quot;Preloaded&quot;{###}&quot;Music&quot;{###}Function.Param(0)</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="0" name="Call function" sid="373752427114932" type="Function">
-                                            <param id="0" name="Name">&quot;Math_RoundFloat&quot;</param>
-                                            <param id="1" name="Parameter {n}">JSON_AudioPreload.Value(0,&quot;Music&quot;,Function.Param(0)){###}2</param>
-                                        </action>
-                                        <action id="-10" name="Set value" sid="486028963915981" type="JSON_AudioPreload">
-                                            <param id="0" name="Instance variable">AudioSize</param>
-                                            <param id="1" name="Value">Function.ReturnValue</param>
-                                        </action>
-                                        <action id="-10" name="Set value" sid="655295055786333" type="JSON_AudioPreload">
-                                            <param id="0" name="Instance variable">AudioSizeLeft</param>
-                                            <param id="1" name="Value">Self.AudioSize</param>
-                                        </action>
-                                        <action id="0" name="Enqueue" sid="179528065688942" type="Queue_AudioPreload">
-                                            <param id="0" name="Element">Function.Param(0)</param>
-                                        </action>
-                                        <action id="9" name="Preload (by name)" sid="913809767463789" type="BetterAudio">
-                                            <param id="0" name="Folder">1</param>
-                                            <param id="1" name="Audio file name">Queue_AudioPreload.Peek</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="358218311532319">
-                                    <conditions>
-                                        <condition id="-22" name="Else" sid="587131635802593" type="System" />
-                                    </conditions>
-                                    <actions>
-                                        <action id="0" name="Call function" sid="309001526906033" type="Function">
-                                            <param id="0" name="Name">&quot;Audio_OnPreloadComplete&quot;</param>
-                                            <param id="1" name="Parameter {n}">Function.Param(0)</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
+                        </event-block>
+                        <comment></comment>
+                        <event-block sid="811135172299656">
+                            <conditions>
+                                <condition id="0" inverted="1" name="Is empty" sid="528796288393323" type="Queue_AudioPreload" />
+                            </conditions>
+                            <actions>
+                                <action id="9" name="Preload (by name)" sid="434156140290763" type="BetterAudio">
+                                    <param id="0" name="Folder">1</param>
+                                    <param id="1" name="Audio file name">Queue_AudioPreload.Peek</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="192844799087925">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="296442901596763" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Call function" sid="333074516774146" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_OnPreloadComplete&quot;</param>
+                                    <param id="1" name="Parameter {n}">Function.Param(0)</param>
+                                </action>
+                            </actions>
                         </event-block>
                     </sub-events>
                 </event-block>
                 <comment>preloading queue (for tracking progress)</comment>
                 <event-block sid="625710793155806">
                     <conditions>
-                        <condition id="-7" inverted="1" name="Compare instance variable" sid="974566738239099" type="JSON_AudioPreload">
-                            <param id="0" name="Instance variable">CurrentTask</param>
+                        <condition id="-7" inverted="1" name="Compare instance variable" sid="197191799462570" type="Var_Audio">
+                            <param id="0" name="Instance variable">PreloadTask</param>
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">&quot;&quot;</param>
                         </condition>
                         <condition id="1" name="Preloads complete" sid="394755240637166" type="BetterAudio" />
                         <condition id="-4" name="Trigger once while true" sid="760477450423346" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Call function" sid="809596643228070" type="Function">
+                            <param id="0" name="Name">&quot;Audio_PreloadStep&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="522705880216135">
+                    <conditions>
+                        <condition id="-7" inverted="1" name="Compare instance variable" sid="632442563577560" type="Var_Audio">
+                            <param id="0" name="Instance variable">PreloadTask</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;&quot;</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="758445501697332" type="System">
+                            <param id="0" name="Variable">DEBUG_AUDIOPRELOAD</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                        <condition id="0" inverted="1" name="Is empty" sid="302859118414589" type="Queue_AudioPreload" />
+                        <condition id="-4" name="Trigger once while true" sid="917209738302217" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Wait" sid="805861400229904" type="System">
+                            <param id="0" name="Seconds">0.1</param>
+                        </action>
+                        <action id="0" name="Call function" sid="259452017176395" type="Function">
+                            <param id="0" name="Name">&quot;Audio_PreloadStep&quot;</param>
+                            <param id="1" name="Parameter {n}"></param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="664201535851824">
+                    <conditions>
+                        <condition id="0" name="On function" sid="136324621030100" type="Function">
+                            <param id="0" name="Name">&quot;Audio_PreloadStep&quot;</param>
+                        </condition>
                     </conditions>
                     <actions />
                     <sub-events>
@@ -4096,65 +3329,62 @@
                             <conditions>
                                 <condition id="60" inverted="1" name="Is undefined" sid="439892741031947" type="JSON_AudioPreload">
                                     <param id="0" name="Reference point">0</param>
-                                    <param id="1" name="Key {n}">JSON_AudioPreload.CurrentTask</param>
+                                    <param id="1" name="Key {n}">Var_Audio.PreloadTask</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="0" name="Call function" sid="824401867007051" type="Function">
-                                    <param id="0" name="Name">&quot;Math_RoundFloat&quot;</param>
-                                    <param id="1" name="Parameter {n}">JSON_AudioPreload.AudioSizeLeft - JSON_AudioPreload.Value(0, JSON_AudioPreload.CurrentTask, Queue_AudioPreload.Peek){###}2</param>
+                                <action id="-10" name="Set value" sid="170977248531621" type="Var_Audio">
+                                    <param id="0" name="Instance variable">PreloadProgress</param>
+                                    <param id="1" name="Value">clamp(Self.PreloadProgress + JSON_AudioPreload.Value(0, Self.PreloadTask, Queue_AudioPreload.Peek), 0 ,Self.PreloadSizeTotal)</param>
                                 </action>
-                                <action id="-10" name="Set value" sid="422089415498414" type="JSON_AudioPreload">
-                                    <param id="0" name="Instance variable">AudioSizeLeft</param>
-                                    <param id="1" name="Value">clamp(Function.ReturnValue, 0 ,Self.AudioSize)</param>
-                                </action>
-                                <action id="20" name="Set Value" sid="312294448717474" type="JSON_Audio">
-                                    <param id="0" name="Value">0</param>
+                                <action id="30" name="Set Boolean" sid="593684297099356" type="JSON_Audio">
+                                    <param id="0" name="value">0</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;Preloaded&quot;{###}JSON_AudioPreload.CurrentTask{###}Queue_AudioPreload.Peek</param>
+                                    <param id="2" name="Key {n}">&quot;Preloaded&quot;{###}Queue_AudioPreload.Peek</param>
                                 </action>
+                                <action id="1" name="Dequeue" sid="438259091093318" type="Queue_AudioPreload" />
                             </actions>
+                            <sub-events>
+                                <event-block sid="384123684205179">
+                                    <conditions>
+                                        <condition id="0" inverted="1" name="Is empty" sid="203049051344089" type="Queue_AudioPreload" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="9" name="Preload (by name)" sid="411030531943928" type="BetterAudio">
+                                            <param id="0" name="Folder">1</param>
+                                            <param id="1" name="Audio file name">Queue_AudioPreload.Peek</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="512453359114959">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="899590716907109" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="946084906683303" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_OnPreloadComplete&quot;</param>
+                                            <param id="1" name="Parameter {n}">Var_Audio.PreloadTask</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                         <event-block sid="880929515523831">
                             <conditions>
                                 <condition id="60" inverted="1" name="Is undefined" sid="777757003350152" type="JSON_AudioPreload">
                                     <param id="0" name="Reference point">0</param>
-                                    <param id="1" name="Key {n}">&quot;Music&quot;{###}JSON_AudioPreload.CurrentTask</param>
+                                    <param id="1" name="Key {n}">&quot;Music&quot;{###}Var_Audio.PreloadTask</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="20" name="Set Value" sid="157129599584463" type="JSON_Audio">
-                                    <param id="0" name="Value">0</param>
+                                <action id="30" name="Set Boolean" sid="121780112824071" type="JSON_Audio">
+                                    <param id="0" name="value">0</param>
                                     <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;Preloaded&quot;{###}&quot;Music&quot;{###}Queue_AudioPreload.Peek</param>
+                                    <param id="2" name="Key {n}">&quot;Preloaded&quot;{###}Queue_AudioPreload.Peek</param>
                                 </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="767100124198667">
-                            <conditions />
-                            <actions>
-                                <action id="1" name="Dequeue" sid="438259091093318" type="Queue_AudioPreload" />
-                            </actions>
-                        </event-block>
-                        <event-block sid="384123684205179">
-                            <conditions>
-                                <condition id="0" inverted="1" name="Is empty" sid="203049051344089" type="Queue_AudioPreload" />
-                            </conditions>
-                            <actions>
-                                <action id="9" name="Preload (by name)" sid="411030531943928" type="BetterAudio">
-                                    <param id="0" name="Folder">1</param>
-                                    <param id="1" name="Audio file name">Queue_AudioPreload.Peek</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="512453359114959">
-                            <conditions>
-                                <condition id="-22" name="Else" sid="899590716907109" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Call function" sid="946084906683303" type="Function">
+                                <action id="0" name="Call function" sid="437191602711944" type="Function">
                                     <param id="0" name="Name">&quot;Audio_OnPreloadComplete&quot;</param>
-                                    <param id="1" name="Parameter {n}">JSON_AudioPreload.CurrentTask</param>
+                                    <param id="1" name="Parameter {n}">Var_Audio.PreloadTask</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -4169,17 +3399,17 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-10" name="Set value" sid="106780344299992" type="JSON_AudioPreload">
-                            <param id="0" name="Instance variable">CurrentTask</param>
+                        <action id="-10" name="Set value" sid="589651098955800" type="Var_Audio">
+                            <param id="0" name="Instance variable">PreloadTask</param>
                             <param id="1" name="Value">&quot;&quot;</param>
                         </action>
                         <action id="2" name="Clear" sid="367939339318169" type="Queue_AudioPreload" />
-                        <action id="-10" name="Set value" sid="794241244377439" type="JSON_AudioPreload">
-                            <param id="0" name="Instance variable">AudioSize</param>
+                        <action id="-10" name="Set value" sid="241964162890277" type="Var_Audio">
+                            <param id="0" name="Instance variable">PreloadSizeTotal</param>
                             <param id="1" name="Value">0</param>
                         </action>
-                        <action id="-10" name="Set value" sid="357197545857416" type="JSON_AudioPreload">
-                            <param id="0" name="Instance variable">AudioSizeLeft</param>
+                        <action id="-10" name="Set value" sid="398507295843803" type="Var_Audio">
+                            <param id="0" name="Instance variable">PreloadProgress</param>
                             <param id="1" name="Value">0</param>
                         </action>
                     </actions>
@@ -4192,17 +3422,28 @@
                     </conditions>
                     <actions />
                     <sub-events>
-                        <event-block sid="703058468514383">
+                        <variable constant="0" name="progress" sid="488360714149024" static="0" type="number">0</variable>
+                        <variable constant="0" name="total" sid="442244764914967" static="0" type="number">0</variable>
+                        <event-block any="1" sid="703058468514383">
                             <conditions>
                                 <condition id="-14" name="Compare variable" sid="856149867737656" type="System">
                                     <param id="0" name="Variable">WEB</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">1</param>
                                 </condition>
+                                <condition id="-14" name="Compare variable" sid="738692724587795" type="System">
+                                    <param id="0" name="Variable">DEBUG_AUDIOPRELOAD</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
                             </conditions>
                             <actions>
+                                <action id="-9" name="Set value" sid="108428164352267" type="System">
+                                    <param id="0" name="Variable">total</param>
+                                    <param id="1" name="Value">Function.Call(&quot;Math_RoundFloat&quot;, Var_Audio.PreloadSizeTotal, 2)</param>
+                                </action>
                                 <action id="1" name="Set return value" sid="223335775236494" type="Function">
-                                    <param id="0" name="Value">&quot;LOADING MUSIC (&quot;&amp;JSON_AudioPreload.AudioSize&amp;&quot;MB)&quot;</param>
+                                    <param id="0" name="Value">&quot;LOADING MUSIC (&quot;&amp;total&amp;&quot;MB)&quot;</param>
                                 </action>
                             </actions>
                             <sub-events>
@@ -4210,16 +3451,16 @@
                                     <conditions>
                                         <condition id="60" inverted="1" name="Is undefined" sid="770472902193023" type="JSON_AudioPreload">
                                             <param id="0" name="Reference point">0</param>
-                                            <param id="1" name="Key {n}">JSON_AudioPreload.CurrentTask</param>
+                                            <param id="1" name="Key {n}">Var_Audio.PreloadTask</param>
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="0" name="Call function" sid="440391369457059" type="Function">
-                                            <param id="0" name="Name">&quot;Math_RoundFloat&quot;</param>
-                                            <param id="1" name="Parameter {n}">JSON_AudioPreload.AudioSize - JSON_AudioPreload.AudioSizeLeft{###}2</param>
+                                        <action id="-9" name="Set value" sid="139701472372330" type="System">
+                                            <param id="0" name="Variable">progress</param>
+                                            <param id="1" name="Value">Function.Call(&quot;Math_RoundFloat&quot;, Var_Audio.PreloadProgress, 2)</param>
                                         </action>
                                         <action id="1" name="Set return value" sid="606926022954533" type="Function">
-                                            <param id="0" name="Value">JS.Value(&quot;format&quot;, &quot;LOADING {what}... {progress}%&quot;&amp;newline&amp;&quot;{current}MB / {max}MB&quot;, JSON_AudioPreload.CurrentTask = &quot;SoundEffects&quot; ? &quot;SOUNDS&quot; : &quot;MUSIC&quot;, &#x0D;&#x0A;round((Function.ReturnValue / JSON_AudioPreload.AudioSize) * 100), &#x0D;&#x0A;Function.ReturnValue, &#x0D;&#x0A;JSON_AudioPreload.AudioSize)</param>
+                                            <param id="0" name="Value">JS.Value(&quot;format&quot;, &quot;LOADING {what}... {progress}%&quot;&amp;newline&amp;&quot;{current}MB / {max}MB&quot;, Var_Audio.PreloadTask = &quot;SoundEffects&quot; ? &quot;SOUNDS&quot; : &quot;MUSIC&quot;, &#x0D;&#x0A;round((Var_Audio.PreloadProgress / Var_Audio.PreloadSizeTotal) * 100), &#x0D;&#x0A;progress, &#x0D;&#x0A;total)</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -4240,16 +3481,12 @@
                                     <conditions>
                                         <condition id="60" inverted="1" name="Is undefined" sid="644978976825503" type="JSON_AudioPreload">
                                             <param id="0" name="Reference point">0</param>
-                                            <param id="1" name="Key {n}">JSON_AudioPreload.CurrentTask</param>
+                                            <param id="1" name="Key {n}">Var_Audio.PreloadTask</param>
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="0" name="Call function" sid="745395810328520" type="Function">
-                                            <param id="0" name="Name">&quot;Math_RoundFloat&quot;</param>
-                                            <param id="1" name="Parameter {n}">JSON_AudioPreload.AudioSize - JSON_AudioPreload.AudioSizeLeft{###}2</param>
-                                        </action>
                                         <action id="1" name="Set return value" sid="954967027682233" type="Function">
-                                            <param id="0" name="Value">JS.Value(&quot;format&quot;, &quot;LOADING {what}... {progress}%&quot;, JSON_AudioPreload.CurrentTask = &quot;SoundEffects&quot; ? &quot;SOUNDS&quot; : &quot;MUSIC&quot;, &#x0D;&#x0A;round((Function.ReturnValue / JSON_AudioPreload.AudioSize) * 100))</param>
+                                            <param id="0" name="Value">JS.Value(&quot;format&quot;, &quot;LOADING {what}... {progress}%&quot;, Var_Audio.PreloadTask = &quot;SoundEffects&quot; ? &quot;SOUNDS&quot; : &quot;MUSIC&quot;, &#x0D;&#x0A;round((Var_Audio.PreloadProgress / Var_Audio.PreloadSizeTotal) * 100))</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -4845,6 +4082,11 @@
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">1</param>
                         </condition>
+                        <condition id="-14" inverted="1" name="Compare variable" sid="907231755462987" type="System">
+                            <param id="0" name="Variable">DEBUG_MOBILE</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
                         <condition id="-4" name="Trigger once while true" sid="476719036345013" type="System" />
                     </conditions>
                     <actions>
@@ -4925,10 +4167,15 @@
                         </event-block>
                     </sub-events>
                 </event-block>
-                <event-block sid="725984955761497">
+                <event-block any="1" sid="725984955761497">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="577192371347400" type="System">
                             <param id="0" name="Variable">MOBILE</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="260240122988961" type="System">
+                            <param id="0" name="Variable">DEBUG_MOBILE</param>
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">1</param>
                         </condition>
@@ -5861,16 +5108,16 @@
                         <event-block sid="496147017707562">
                             <conditions />
                             <actions>
-                                <action id="-10" name="Set value" sid="466128638794937" type="Var_Misc">
-                                    <param id="0" name="Instance variable">AudioVolume</param>
+                                <action id="-10" name="Set value" sid="593755794244296" type="Var_Audio">
+                                    <param id="0" name="Instance variable">Volume</param>
                                     <param id="1" name="Value">-(50 - (Save_Config.Value(0,&quot;Sound.Volume&quot;) * 2.5))</param>
                                 </action>
-                                <action id="-10" name="Set value" sid="461845463456673" type="Var_Misc">
-                                    <param id="0" name="Instance variable">AudioVolumeMusic</param>
+                                <action id="-10" name="Set value" sid="409559978260063" type="Var_Audio">
+                                    <param id="0" name="Instance variable">VolumeMusic</param>
                                     <param id="1" name="Value">-(50 - (Save_Config.Value(0,&quot;Sound.VolumeMusic&quot;) * 2.5))</param>
                                 </action>
-                                <action id="-10" name="Set value" sid="635472931068130" type="Var_Misc">
-                                    <param id="0" name="Instance variable">AudioVolumeSFX</param>
+                                <action id="-10" name="Set value" sid="436399935463715" type="Var_Audio">
+                                    <param id="0" name="Instance variable">VolumeSFX</param>
                                     <param id="1" name="Value">-(50 - (Save_Config.Value(0,&quot;Sound.VolumeSFX&quot;) * 2.5))</param>
                                 </action>
                             </actions>
@@ -5888,7 +5135,7 @@
                                     <param id="0" name="Mode">1</param>
                                 </action>
                                 <action id="10" name="Set master volume" sid="630391329047223" type="BetterAudio">
-                                    <param id="0" name="dB">Var_Misc.AudioVolume</param>
+                                    <param id="0" name="dB">Var_Audio.Volume</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -5917,7 +5164,7 @@
                             <actions>
                                 <action id="3" name="Set volume" sid="826000103783548" type="BetterAudio">
                                     <param id="0" name="Tag">JSON_Audio.CurrentKey</param>
-                                    <param id="1" name="dB">Var_Misc.AudioVolumeSFX</param>
+                                    <param id="1" name="dB">Var_Audio.VolumeSFX</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -5931,7 +5178,7 @@
                             <actions>
                                 <action id="3" name="Set volume" sid="814888274916077" type="BetterAudio">
                                     <param id="0" name="Tag">JSON_Audio.CurrentKey</param>
-                                    <param id="1" name="dB">Var_Misc.AudioVolumeMusic</param>
+                                    <param id="1" name="dB">Var_Audio.VolumeMusic</param>
                                 </action>
                             </actions>
                             <sub-events>
@@ -5947,7 +5194,7 @@
                                     <actions>
                                         <action id="3" name="Set volume" sid="992268601977968" type="BetterAudio">
                                             <param id="0" name="Tag">JSON_Audio.CurrentKey</param>
-                                            <param id="1" name="dB">Var_Misc.AudioVolumeSFX</param>
+                                            <param id="1" name="dB">Var_Audio.VolumeSFX</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -6537,6 +5784,10 @@
                                     <param id="0" name="Visibility">1</param>
                                 </action>
                                 <action behavior="Fade" id="0" name="Restart fade" sid="859254235890927" type="Text_Saved" />
+                                <action id="0" name="Call function" sid="248628940802662" type="Function">
+                                    <param id="0" name="Name">&quot;Save_General&quot;</param>
+                                    <param id="1" name="Parameter {n}"></param>
+                                </action>
                             </actions>
                         </event-block>
                     </sub-events>
@@ -6676,7 +5927,7 @@
                 </event-block>
             </sub-events>
         </event-group>
-        <event-group description="also saves General Save" sid="577798859300897" title="Record Attack Save">
+        <event-group description="" sid="577798859300897" title="Record Attack Save">
             <sub-events>
                 <comment></comment>
                 <event-block sid="363310462513670">

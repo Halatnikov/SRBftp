@@ -2,7 +2,7 @@
 <c2project>
     <name>Sonic Robo-Blast! From The Past</name>
     <description>Original games by Sonikku - Johnathan Wallbank and SSNTails - A.J. Freda</description>
-    <version>0.3.1-38</version>
+    <version>0.3.1-39</version>
     <author>Halatnikov</author>
     <author-email></author-email>
     <author-website>https://halatnikov.github.io</author-website>
@@ -101,7 +101,7 @@
         <prop name="Pause on unfocus">No</prop>
         <prop name="Physics engine">Box2D asm.js</prop>
         <prop name="Preload sounds">No</prop>
-        <prop name="Preview browser">NW.js</prop>
+        <prop name="Preview browser">Custom</prop>
         <prop name="Sampling">Point</prop>
         <prop name="Use high-DPI display">Yes</prop>
     </configuration-settings>
@@ -163,13 +163,6 @@
             </object-type>
             <object-type global="1" name="JSON_AudioPreload" sid="998840539944831">
                 <plugin id="JSON" />
-                <instance-variables>
-                    <instance-variable name="CurrentTask" sid="429003126564775" type="string" />
-                    <instance-variable name="AudioSize" sid="762748204792995" type="number" />
-                    <instance-variable name="AudioSizeLeft" sid="769184392292361" type="number" />
-                    <instance-variable name="LevelPreloaded" sid="703973728226478" type="boolean" />
-                    <instance-variable name="LevelLayout" sid="661382165620558" type="string" />
-                </instance-variables>
             </object-type>
             <object-type global="1" name="JSON_Lists" sid="960908361044093">
                 <plugin id="JSON" />
@@ -352,9 +345,6 @@
                 <instance-variables>
                     <instance-variable name="ResourceFolder" sid="970983865592895" type="string" />
                     <instance-variable name="InitializedFiles" sid="235908532623839" type="boolean" />
-                    <instance-variable name="AudioVolume" sid="789583943303300" type="number" />
-                    <instance-variable name="AudioVolumeMusic" sid="550799132632313" type="number" />
-                    <instance-variable name="AudioVolumeSFX" sid="933405286778804" type="number" />
                     <instance-variable name="UpdateCheckURL" sid="267584112751242" type="string" />
                     <instance-variable name="GameJoltPageURL" sid="671385730335366" type="string" />
                     <instance-variable name="PocketBaseURL" sid="564245825414035" type="string" />
@@ -381,6 +371,19 @@
                     <instance-variable name="Error" sid="400228566818535" type="string" />
                     <instance-variable name="Chat" sid="130817124633105" type="string" />
                     <instance-variable name="RoomPassword" sid="105717122302192" type="string" />
+                </instance-variables>
+            </object-type>
+            <object-type global="1" name="Var_Audio" sid="895694423830597">
+                <plugin id="Globals" />
+                <instance-variables>
+                    <instance-variable name="Volume" sid="907552023108081" type="number" />
+                    <instance-variable name="VolumeMusic" sid="788679100431291" type="number" />
+                    <instance-variable name="VolumeSFX" sid="918933009436339" type="number" />
+                    <instance-variable name="PreloadTask" sid="623306713466419" type="string" />
+                    <instance-variable name="PreloadProgress" sid="254436289090185" type="number" />
+                    <instance-variable name="PreloadSizeTotal" sid="982025455833086" type="number" />
+                    <instance-variable name="LevelPreloadedTEMP" sid="669941855368580" type="boolean" />
+                    <instance-variable name="LevelLayoutTEMP" sid="173963183274528" type="string" />
                 </instance-variables>
             </object-type>
         </object-folder>
@@ -20879,7 +20882,7 @@
         </file-folder>
         <file name="funny.txt" />
         <file name="credits.txt" />
-        <file name="audiolist.ini" />
+        <file name="audiopreload.ini" />
         <file name="keycodes.ini" />
         <file name="levelsproperties.ini" />
         <file name="audioproperties.ini" />
