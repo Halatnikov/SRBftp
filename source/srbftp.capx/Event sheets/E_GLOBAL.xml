@@ -328,7 +328,7 @@
                             </conditions>
                             <actions>
                                 <action id="0" name="Execute JS code" sid="509185610642596" type="JS">
-                                    <param id="0" name="JS code">&quot;if (!document.querySelector(&apos;script[src=\&apos;&apos;+#0+&apos;\&apos;]&apos;)) {&#x0D;&#x0A;  var file = document.createElement(&apos;script&apos;);&#x0D;&#x0A;  file.setAttribute(&apos;type&apos;,&apos;text/javascript&apos;);&#x0D;&#x0A;  file.setAttribute(&apos;src&apos;, #0);&#x0D;&#x0A;  file.onload = function() {file.onload = null; c2_callFunction(&apos;JS_OnLoad&apos;, [#0]);};&#x0D;&#x0A;  file.onerror = function() {console.error(&apos;failed including &apos; + #0);};&#x0D;&#x0A;  document.getElementsByTagName(&apos;head&apos;)[0].appendChild(file);&#x0D;&#x0A;}&quot;</param>
+                                    <param id="0" name="JS code">&quot;if (!document.querySelector(`script[src=&apos;${#0}&apos;]`)) {&#x0D;&#x0A;  let file = document.createElement(&apos;script&apos;)&#x0D;&#x0A;  file.setAttribute(&apos;type&apos;,&apos;text/javascript&apos;)&#x0D;&#x0A;  file.setAttribute(&apos;src&apos;, #0)&#x0D;&#x0A;  file.onload = ()=&gt; {file.onload = null; c2_callFunction(&apos;JS_OnLoad&apos;, [#0])}&#x0D;&#x0A;  file.onerror = ()=&gt; console.error(`failed including ${#0}`)&#x0D;&#x0A;  document.getElementsByTagName(&apos;head&apos;)[0].appendChild(file)&#x0D;&#x0A;}&quot;</param>
                                     <param id="1" name="Parameter {n}">Function.Param(0)</param>
                                 </action>
                             </actions>
@@ -2709,12 +2709,94 @@
                         <event-block sid="953542022137576">
                             <conditions />
                             <actions>
-                                <action id="20" name="Set Value" sid="798641775144436" type="JSON_Audio">
-                                    <param id="0" name="Value">Self.Size(0, &quot;Preloaded&quot;)</param>
-                                    <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}">&quot;Preloaded&quot;{###}&quot;Size&quot;</param>
+                                <action id="14" name="Log" sid="527362263058367" type="Browser">
+                                    <param id="0" name="Type">0</param>
+                                    <param id="1" name="Message">&quot;audio files to preload: &quot;&amp;JSON_Audio.Size(0, &quot;Preloaded&quot;)</param>
                                 </action>
                             </actions>
+                            <sub-events>
+                                <comment>list the actual files and compare what&apos;s missing to the audiopreload.ini</comment>
+                                <event-block sid="417737199913151">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="894076435955023" type="System">
+                                            <param id="0" name="Variable">DESKTOP</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-3" name="Create object" sid="337803353667365" type="System">
+                                            <param id="0" name="Object to create">JSON__COMMON</param>
+                                            <param id="1" name="Layer">0</param>
+                                            <param id="2" name="X">0</param>
+                                            <param id="3" name="Y">0</param>
+                                        </action>
+                                        <action id="10" name="Set New Array" sid="621065262807613" type="JSON__COMMON">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}"></param>
+                                        </action>
+                                        <action id="5" name="List files" sid="838879894928071" type="NWjs">
+                                            <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\assets\sounds\&quot;</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="307123282013975">
+                                            <conditions>
+                                                <condition id="-12" name="Repeat" sid="231405878335950" type="System">
+                                                    <param id="0" name="Count">NWjs.ListCount</param>
+                                                </condition>
+                                                <condition id="60" name="Is undefined" sid="220919432883543" type="JSON_Audio">
+                                                    <param id="0" name="Reference point">0</param>
+                                                    <param id="1" name="Key {n}">&quot;Preloaded&quot;{###}left(NWjs.ListAt(loopindex), len(NWjs.ListAt(loopindex))-4)</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="20" name="Set Value" sid="670102627712509" type="JSON__COMMON">
+                                                    <param id="0" name="Value">left(NWjs.ListAt(loopindex), len(NWjs.ListAt(loopindex))-4)</param>
+                                                    <param id="1" name="Reference point">0</param>
+                                                    <param id="2" name="Key {n}">Self.Size(0)</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="288864973673224">
+                                            <conditions />
+                                            <actions>
+                                                <action id="5" name="List files" sid="350703736289795" type="NWjs">
+                                                    <param id="0" name="Path">Var_Misc.ResourceFolder&amp;&quot;\SRBftp\assets\music\&quot;</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="365848879667736">
+                                            <conditions>
+                                                <condition id="-12" name="Repeat" sid="475902459097547" type="System">
+                                                    <param id="0" name="Count">NWjs.ListCount</param>
+                                                </condition>
+                                                <condition id="60" name="Is undefined" sid="979286458905801" type="JSON_Audio">
+                                                    <param id="0" name="Reference point">0</param>
+                                                    <param id="1" name="Key {n}">&quot;Preloaded&quot;{###}left(NWjs.ListAt(loopindex), len(NWjs.ListAt(loopindex))-4)</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="20" name="Set Value" sid="846424297429825" type="JSON__COMMON">
+                                                    <param id="0" name="Value">left(NWjs.ListAt(loopindex), len(NWjs.ListAt(loopindex))-4)</param>
+                                                    <param id="1" name="Reference point">0</param>
+                                                    <param id="2" name="Key {n}">Self.Size(0)</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="662241721626425">
+                                            <conditions />
+                                            <actions>
+                                                <action id="6" name="Call function" sid="717607186724575" type="JS">
+                                                    <param id="0" name="Expression">&quot;logjson&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;missing audio files: &quot;{###}JSON__COMMON.AsJson(0)</param>
+                                                </action>
+                                                <action id="-9" name="Destroy" sid="618049376264622" type="JSON__COMMON" />
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-block>
@@ -3234,7 +3316,7 @@
                                     <param id="1" name="Key {n}">&quot;Music&quot;{###}Function.Param(0)</param>
                                 </condition>
                                 <condition id="-8" name="Compare two values" sid="483288087257545" type="System">
-                                    <param id="0" name="First value">JSON_Audio.Value(0, &quot;Preloaded&quot;, JSON_AudioPreload.CurrentKey)</param>
+                                    <param id="0" name="First value">JSON_Audio.Value(0, &quot;Preloaded&quot;, Function.Param(0))</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Second value">0</param>
                                 </condition>
@@ -3335,7 +3417,7 @@
                             <actions>
                                 <action id="-10" name="Set value" sid="170977248531621" type="Var_Audio">
                                     <param id="0" name="Instance variable">PreloadProgress</param>
-                                    <param id="1" name="Value">clamp(Self.PreloadProgress + JSON_AudioPreload.Value(0, Self.PreloadTask, Queue_AudioPreload.Peek), 0 ,Self.PreloadSizeTotal)</param>
+                                    <param id="1" name="Value">min(Self.PreloadProgress + JSON_AudioPreload.Value(0, Self.PreloadTask, Queue_AudioPreload.Peek), Self.PreloadSizeTotal)</param>
                                 </action>
                                 <action id="30" name="Set Boolean" sid="593684297099356" type="JSON_Audio">
                                     <param id="0" name="value">0</param>
@@ -3514,7 +3596,7 @@
                             <param id="0" name="Instance variable">CurrentMenu</param>
                             <param id="1" name="Value">Function.Param(0)</param>
                         </action>
-                        <action id="50" name="Delete" sid="949914500311864" type="JSON_Menus">
+                        <action id="0" name="Set New Object" sid="949914500311864" type="JSON_Menus">
                             <param id="0" name="Reference point">0</param>
                             <param id="1" name="Key {n}">&quot;data&quot;</param>
                         </action>

@@ -2,7 +2,7 @@
 srbftp.online = {}
 const online = srbftp.online
 
-const ini2json = (arg) => srbftp.ini2json(arg, true)
+const ini2json = arg => srbftp.ini2json(arg, true)
 
 const request = function(options) {
 	let config = {

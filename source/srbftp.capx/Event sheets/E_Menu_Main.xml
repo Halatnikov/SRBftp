@@ -26,10 +26,6 @@
                                     <param id="0" name="Group name">&quot;Preload&quot;</param>
                                     <param id="1" name="State">1</param>
                                 </action>
-                                <action id="-4" name="Set layer visible" sid="850609916936909" type="System">
-                                    <param id="0" name="Layer">&quot;Loading&quot;</param>
-                                    <param id="1" name="Visibility">1</param>
-                                </action>
                             </actions>
                         </event-block>
                         <event-block sid="444573922996430">
@@ -46,7 +42,7 @@
                                     <param id="0" name="Group name">&quot;Preload&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
-                                <action id="-4" name="Set layer visible" sid="338983906625719" type="System">
+                                <action disabled="1" id="-4" name="Set layer visible" sid="338983906625719" type="System">
                                     <param id="0" name="Layer">&quot;Loading&quot;</param>
                                     <param id="1" name="Visibility">0</param>
                                 </action>
@@ -142,22 +138,6 @@
                     <actions />
                     <sub-events>
                         <comment></comment>
-                        <event-block sid="665404546511559">
-                            <conditions>
-                                <condition id="-7" name="Compare instance variable" sid="505361138380089" type="Var_Game">
-                                    <param id="0" name="Instance variable">CurrentMenu</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;autoupdater&quot;</param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="255968180288385" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="-12" name="Set group active" sid="722966483330420" type="System">
-                                    <param id="0" name="Group name">&quot;Auto-updater&quot;</param>
-                                    <param id="1" name="State">1</param>
-                                </action>
-                            </actions>
-                        </event-block>
                         <event-block sid="911646416315517">
                             <conditions>
                                 <condition id="-7" inverted="1" name="Compare instance variable" sid="176347766760809" type="Var_Game">
@@ -1600,6 +1580,21 @@
                         </action>
                     </actions>
                 </event-block>
+                <event-block sid="509644879468338">
+                    <conditions>
+                        <condition id="-8" name="Compare two values" sid="316145686439928" type="System">
+                            <param id="0" name="First value">Date.Timer(&quot;timeout&quot;)</param>
+                            <param id="1" name="Comparison">4</param>
+                            <param id="2" name="Second value">10</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="411439451145134" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Alert" sid="401720148721330" type="Browser">
+                            <param id="0" name="Message">&quot;This is taking longer than expected&quot;&amp;newline&amp;&quot;Perhaps check your browser console for errors&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
                 <event-block sid="877163135453280">
                     <conditions>
                         <condition id="-4" name="Trigger once while true" sid="706355777062255" type="System" />
@@ -1611,6 +1606,9 @@
                         <action id="-4" name="Set layer visible" sid="477102685497239" type="System">
                             <param id="0" name="Layer">&quot;Loading&quot;</param>
                             <param id="1" name="Visibility">1</param>
+                        </action>
+                        <action id="0" name="Start" sid="336660222380376" type="Date">
+                            <param id="0" name="Name">&quot;timeout&quot;</param>
                         </action>
                     </actions>
                 </event-block>
@@ -1642,6 +1640,9 @@
                                     <param id="0" name="Name">&quot;Load_Online&quot;</param>
                                     <param id="1" name="Parameter {n}"></param>
                                 </action>
+                                <action id="0" name="Start" sid="911281231029526" type="Date">
+                                    <param id="0" name="Name">&quot;timeout&quot;</param>
+                                </action>
                             </actions>
                         </event-block>
                         <comment>TODO: perhaps load savedata like Save_Online when it&apos;s actually needed and not here</comment>
@@ -1672,9 +1673,9 @@
                                         <condition id="-4" name="Trigger once while true" sid="308435230183143" type="System" />
                                     </conditions>
                                     <actions>
-                                        <action id="-10" name="Set value" sid="916682414521464" type="Var_Game">
-                                            <param id="0" name="Instance variable">CurrentMenu</param>
-                                            <param id="1" name="Value">&quot;autoupdater&quot;</param>
+                                        <action id="0" name="Call function" sid="968959910725730" type="Function">
+                                            <param id="0" name="Name">&quot;Menu_Set&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;autoupdater&quot;</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -1693,6 +1694,9 @@
                                                 <condition id="-4" name="Trigger once while true" sid="751901395105365" type="System" />
                                             </conditions>
                                             <actions>
+                                                <action id="1" name="Pause" sid="284064412795248" type="Date">
+                                                    <param id="0" name="Name">&quot;timeout&quot;</param>
+                                                </action>
                                                 <action id="0" name="Call function" sid="642698997680837" type="Function">
                                                     <param id="0" name="Name">&quot;Audio_Preload&quot;</param>
                                                     <param id="1" name="Parameter {n}">&quot;SoundEffects&quot;{###}0</param>
@@ -1747,9 +1751,9 @@
                                                 </condition>
                                             </conditions>
                                             <actions>
-                                                <action id="-10" name="Set value" sid="446474502913424" type="Var_Game">
-                                                    <param id="0" name="Instance variable">CurrentMenu</param>
-                                                    <param id="1" name="Value">&quot;autoupdater&quot;</param>
+                                                <action id="0" name="Call function" sid="385711551371819" type="Function">
+                                                    <param id="0" name="Name">&quot;Menu_Set&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;autoupdater&quot;</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -1761,9 +1765,9 @@
                                                 <condition id="-4" name="Trigger once while true" sid="852804280428921" type="System" />
                                             </conditions>
                                             <actions>
-                                                <action id="-10" name="Set value" sid="242315219605838" type="Var_Game">
-                                                    <param id="0" name="Instance variable">CurrentMenu</param>
-                                                    <param id="1" name="Value">&quot;autoupdater&quot;</param>
+                                                <action id="0" name="Call function" sid="428542849791249" type="Function">
+                                                    <param id="0" name="Name">&quot;Menu_Set&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;autoupdater&quot;</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -1780,7 +1784,9 @@
                 <variable constant="0" name="state" sid="217069991941418" static="1" type="text"></variable>
                 <event-block sid="940864420177380">
                     <conditions>
-                        <condition id="-4" name="Trigger once while true" sid="628808812387751" type="System" />
+                        <condition id="0" name="On function" sid="982192548876098" type="Function">
+                            <param id="0" name="Name">&quot;Menu_Init&quot;</param>
+                        </condition>
                     </conditions>
                     <actions>
                         <action id="-9" name="Set value" sid="602251174072357" type="System">
@@ -1812,7 +1818,6 @@
                     </conditions>
                     <actions />
                     <sub-events>
-                        <comment>todo: detect that you&apos;re checking updates from settings and from connect online</comment>
                         <event-block sid="852137073324360">
                             <conditions>
                                 <condition id="-4" name="Trigger once while true" sid="135097291479467" type="System" />
@@ -1822,13 +1827,17 @@
                                     <param id="0" name="Reference point">0</param>
                                     <param id="1" name="Key {n}"></param>
                                 </action>
-                                <action id="-4" name="Set layer visible" sid="827824005765234" type="System">
-                                    <param id="0" name="Layer">&quot;UpdateAvailable&quot;</param>
-                                    <param id="1" name="Visibility">0</param>
+                                <action id="200" name="Set Current Path" sid="729218761713423" type="JSON_UpdateCheck">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}"></param>
                                 </action>
-                                <action id="-4" name="Set layer visible" sid="370848412480631" type="System">
+                                <action id="-4" name="Set layer visible" sid="227095586975179" type="System">
                                     <param id="0" name="Layer">&quot;Loading&quot;</param>
                                     <param id="1" name="Visibility">1</param>
+                                </action>
+                                <action id="-4" name="Set layer visible" sid="973437284334754" type="System">
+                                    <param id="0" name="Layer">&quot;UpdateAvailable&quot;</param>
+                                    <param id="1" name="Visibility">0</param>
                                 </action>
                                 <action id="0" name="Set text" sid="870666892100535" type="CutsceneTextA">
                                     <param id="0" name="Text">&quot;CHECKING FOR UPDATES&quot;</param>
@@ -1842,79 +1851,6 @@
                                 </action>
                             </actions>
                         </event-block>
-                        <event-block sid="364621500305819">
-                            <conditions>
-                                <condition id="3" name="On any completed" sid="353936710984698" type="AJAX" />
-                            </conditions>
-                            <actions>
-                                <action id="60" name="LoadJSON" sid="779745496916469" type="JSON_UpdateCheck">
-                                    <param id="0" name="JSON">AJAX.LastData</param>
-                                    <param id="1" name="Reference point">0</param>
-                                    <param id="2" name="Key {n}"></param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="239668846319630">
-                            <conditions>
-                                <condition id="70" inverted="1" name="Is Empty" sid="741300383547050" type="JSON_UpdateCheck">
-                                    <param id="0" name="Reference point">0</param>
-                                    <param id="1" name="Key {n}"></param>
-                                </condition>
-                                <condition id="-4" name="Trigger once while true" sid="616332586512243" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="6" name="Call function" sid="327033369251862" type="JS">
-                                    <param id="0" name="Expression">&quot;srbftp.semver&quot;</param>
-                                    <param id="1" name="Parameter {n}">projectversion{###}JSON_UpdateCheck.Value(0,&quot;SRBftp_UpdateCheck&quot;,&quot;NewestVersion&quot;)</param>
-                                </action>
-                            </actions>
-                            <sub-events>
-                                <event-block sid="921658977140211">
-                                    <conditions>
-                                        <condition id="-8" name="Compare two values" sid="682802623250589" type="System">
-                                            <param id="0" name="First value">JS.StoredReturnValue</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Second value">0</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-13" name="Set boolean" sid="104156192290001" type="Var_Online">
-                                            <param id="0" name="Instance variable">OutdatedVersion</param>
-                                            <param id="1" name="Value">1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="513111624535457">
-                                    <conditions>
-                                        <condition id="-8" name="Is boolean instance variable set" sid="205368219875093" type="Var_Online">
-                                            <param id="0" name="Instance variable">OutdatedVersion</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-9" name="Set value" sid="375027372206152" type="System">
-                                            <param id="0" name="Variable">state</param>
-                                            <param id="1" name="Value">&quot;menu&quot;</param>
-                                        </action>
-                                        <action id="-4" name="Set layer visible" sid="419341371254296" type="System">
-                                            <param id="0" name="Layer">&quot;Loading&quot;</param>
-                                            <param id="1" name="Visibility">0</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="399363388526545">
-                                    <conditions>
-                                        <condition id="-22" name="Else" sid="796436332849746" type="System" />
-                                    </conditions>
-                                    <actions>
-                                        <action id="-9" name="Set value" sid="432804553710094" type="System">
-                                            <param id="0" name="Variable">state</param>
-                                            <param id="1" name="Value">&quot;end&quot;</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
-                        </event-block>
-                        <comment></comment>
                         <event-block sid="155667978536323">
                             <conditions>
                                 <condition id="-8" name="Is boolean instance variable set" sid="500883574123687" type="Var_Input">
@@ -1929,6 +1865,142 @@
                                 </action>
                             </actions>
                         </event-block>
+                        <event-block sid="364621500305819">
+                            <conditions>
+                                <condition id="3" name="On any completed" sid="353936710984698" type="AJAX" />
+                            </conditions>
+                            <actions>
+                                <action id="60" name="LoadJSON" sid="779745496916469" type="JSON_UpdateCheck">
+                                    <param id="0" name="JSON">AJAX.LastData</param>
+                                    <param id="1" name="Reference point">0</param>
+                                    <param id="2" name="Key {n}"></param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="239668846319630">
+                                    <conditions>
+                                        <condition id="70" inverted="1" name="Is Empty" sid="741300383547050" type="JSON_UpdateCheck">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}"></param>
+                                        </condition>
+                                        <condition id="0" name="Is object" sid="289037016538814" type="JSON_UpdateCheck">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}">&quot;SRBftp_UpdateCheck&quot;</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="616332586512243" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="200" name="Set Current Path" sid="763316765004763" type="JSON_UpdateCheck">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}">&quot;SRBftp_UpdateCheck&quot;</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="853569239497555">
+                                            <conditions>
+                                                <condition id="-8" name="Compare two values" sid="260528856764320" type="System">
+                                                    <param id="0" name="First value">JSON_UpdateCheck.Value(1, &quot;Ignore&quot;)</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Second value">1</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action disabled="1" id="55" name="Clear" sid="270148547867702" type="JSON_UpdateCheck">
+                                                    <param id="0" name="Reference point">0</param>
+                                                    <param id="1" name="Key {n}"></param>
+                                                </action>
+                                                <action id="-9" name="Set value" sid="122639991861051" type="System">
+                                                    <param id="0" name="Variable">state</param>
+                                                    <param id="1" name="Value">&quot;end&quot;</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="862338081961909">
+                                            <conditions>
+                                                <condition id="-22" name="Else" sid="106387380388581" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="6" name="Call function" sid="327033369251862" type="JS">
+                                                    <param id="0" name="Expression">&quot;srbftp.semver&quot;</param>
+                                                    <param id="1" name="Parameter {n}">projectversion{###}JSON_UpdateCheck.Value(1, &quot;NewestVersion&quot;)</param>
+                                                </action>
+                                            </actions>
+                                            <sub-events>
+                                                <event-block sid="921658977140211">
+                                                    <conditions>
+                                                        <condition id="-8" name="Compare two values" sid="682802623250589" type="System">
+                                                            <param id="0" name="First value">JS.StoredReturnValue</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Second value">0</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-13" name="Set boolean" sid="104156192290001" type="Var_Online">
+                                                            <param id="0" name="Instance variable">OutdatedVersion</param>
+                                                            <param id="1" name="Value">1</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block any="1" sid="513111624535457">
+                                                    <conditions>
+                                                        <condition id="-8" name="Is boolean instance variable set" sid="205368219875093" type="Var_Online">
+                                                            <param id="0" name="Instance variable">OutdatedVersion</param>
+                                                        </condition>
+                                                        <condition id="60" inverted="1" name="Is undefined" sid="609898625341859" type="JSON_Menus">
+                                                            <param id="0" name="Reference point">0</param>
+                                                            <param id="1" name="Key {n}">&quot;data&quot;{###}&quot;force&quot;</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-9" name="Set value" sid="375027372206152" type="System">
+                                                            <param id="0" name="Variable">state</param>
+                                                            <param id="1" name="Value">&quot;menu&quot;</param>
+                                                        </action>
+                                                        <action id="-4" name="Set layer visible" sid="419341371254296" type="System">
+                                                            <param id="0" name="Layer">&quot;Loading&quot;</param>
+                                                            <param id="1" name="Visibility">0</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="399363388526545">
+                                                    <conditions>
+                                                        <condition id="-22" name="Else" sid="796436332849746" type="System" />
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-9" name="Set value" sid="432804553710094" type="System">
+                                                            <param id="0" name="Variable">state</param>
+                                                            <param id="1" name="Value">&quot;end&quot;</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="907300892035101">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="806469653952197" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="14" name="Log" sid="479701272878411" type="Browser">
+                                            <param id="0" name="Type">2</param>
+                                            <param id="1" name="Message">&quot;update json structure error&quot;</param>
+                                        </action>
+                                        <action id="0" name="Set text" sid="250273464343337" type="CutsceneTextA">
+                                            <param id="0" name="Text">&quot;CHECKING FOR UPDATES&quot;&amp;newline&amp;&quot;RESPONSE ERROR&quot;</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="236768414196433" type="System">
+                                            <param id="0" name="Seconds">3</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="196666084502463" type="System">
+                                            <param id="0" name="Variable">state</param>
+                                            <param id="1" name="Value">&quot;end&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <comment></comment>
                         <event-block sid="155046681600315">
                             <conditions>
                                 <condition id="70" name="Is Empty" sid="273002351841740" type="JSON_UpdateCheck">
@@ -1943,17 +2015,59 @@
                                 <condition id="-4" name="Trigger once while true" sid="542496334744852" type="System" />
                             </conditions>
                             <actions>
-                                <action id="-9" name="Set value" sid="857455070060011" type="System">
-                                    <param id="0" name="Variable">state</param>
-                                    <param id="1" name="Value">&quot;end&quot;</param>
+                                <action id="14" name="Log" sid="641475232491976" type="Browser">
+                                    <param id="0" name="Type">1</param>
+                                    <param id="1" name="Message">&quot;update timeout&quot;</param>
                                 </action>
                             </actions>
+                            <sub-events>
+                                <event-block sid="563728698911153">
+                                    <conditions>
+                                        <condition id="60" name="Is undefined" sid="511059818698692" type="JSON_Menus">
+                                            <param id="0" name="Reference point">0</param>
+                                            <param id="1" name="Key {n}">&quot;data&quot;{###}&quot;return&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="944882168889643" type="System">
+                                            <param id="0" name="Variable">state</param>
+                                            <param id="1" name="Value">&quot;end&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <comment>inform the user that it timed out when actually necessary</comment>
+                                <comment>TODO: maybe show error popups when checking updates from elsewhere</comment>
+                                <event-block sid="913967823957829">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="403771634882023" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Set text" sid="347423495052893" type="CutsceneTextA">
+                                            <param id="0" name="Text">&quot;CHECKING FOR UPDATES&quot;&amp;newline&amp;&quot;TIMED OUT&quot;</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="196828900403660" type="System">
+                                            <param id="0" name="Seconds">3</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="808641105195174" type="System">
+                                            <param id="0" name="Variable">state</param>
+                                            <param id="1" name="Value">&quot;end&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                         <event-block sid="787642350371674">
                             <conditions>
                                 <condition id="4" name="On any error" sid="574332167727449" type="AJAX" />
                             </conditions>
                             <actions>
+                                <action id="14" name="Log" sid="751436495502893" type="Browser">
+                                    <param id="0" name="Type">2</param>
+                                    <param id="1" name="Message">&quot;update connection error&quot;</param>
+                                </action>
+                                <action id="1" name="Pause" sid="199788853510237" type="Date">
+                                    <param id="0" name="Name">&quot;UpdateTimeout&quot;</param>
+                                </action>
                                 <action id="0" name="Set text" sid="719812079567732" type="CutsceneTextA">
                                     <param id="0" name="Text">&quot;CHECKING FOR UPDATES&quot;&amp;newline&amp;&quot;CONNECTION ERROR&quot;</param>
                                 </action>
@@ -1971,8 +2085,12 @@
                                 <condition id="200" name="On JSON Parse Error" sid="593948880036645" type="JSON_UpdateCheck" />
                             </conditions>
                             <actions>
+                                <action id="14" name="Log" sid="871930579685090" type="Browser">
+                                    <param id="0" name="Type">2</param>
+                                    <param id="1" name="Message">&quot;update parsing error&quot;</param>
+                                </action>
                                 <action id="0" name="Set text" sid="257609867791162" type="CutsceneTextA">
-                                    <param id="0" name="Text">&quot;CHECKING FOR UPDATES&quot;&amp;newline&amp;&quot;PARSING ERROR&quot;</param>
+                                    <param id="0" name="Text">&quot;CHECKING FOR UPDATES&quot;&amp;newline&amp;&quot;RESPONSE ERROR&quot;</param>
                                 </action>
                                 <action id="-16" name="Wait" sid="863938231499386" type="System">
                                     <param id="0" name="Seconds">3</param>
@@ -1996,9 +2114,15 @@
                     </conditions>
                     <actions />
                     <sub-events>
+                        <variable constant="0" name="allow_download" sid="113081895657593" static="1" type="number">1</variable>
                         <event-block sid="921982657653675">
                             <conditions>
                                 <condition id="-4" name="Trigger once while true" sid="728664632387453" type="System" />
+                                <condition id="-7" name="Compare instance variable" sid="871222887865146" type="Menu_TextBox">
+                                    <param id="0" name="Instance variable">ID</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">&quot;Changelog&quot;</param>
+                                </condition>
                             </conditions>
                             <actions>
                                 <action id="-4" name="Set layer visible" sid="730971428083011" type="System">
@@ -2009,11 +2133,50 @@
                                     <param id="0" name="Layer">&quot;UpdateAvailable&quot;</param>
                                     <param id="1" name="Visibility">1</param>
                                 </action>
-                                <action id="0" name="Set text" sid="149318039002407" type="TextBox">
-                                    <param id="0" name="Text">replace(JSON_UpdateCheck.Value(0,&quot;SRBftp_UpdateCheck&quot;,&quot;ChangelogBrief&quot;),&quot;|&quot;,newline)</param>
+                                <action id="0" name="Set text" sid="149318039002407" type="Menu_TextBox">
+                                    <param id="0" name="Text">replace(JSON_UpdateCheck.Value(1,&quot;ChangelogBrief&quot;),&quot;|&quot;,newline)</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="298515263322244" type="System">
+                                    <param id="0" name="Variable">allow_download</param>
+                                    <param id="1" name="Value">1</param>
                                 </action>
                             </actions>
                             <sub-events>
+                                <event-block sid="498872575075643">
+                                    <conditions>
+                                        <condition id="-14" inverted="1" name="Compare variable" sid="180851736506546" type="System">
+                                            <param id="0" name="Variable">DESKTOP</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="348885913924389" type="System">
+                                            <param id="0" name="Variable">allow_download</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="650777110263086">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="432730948747110" type="System">
+                                            <param id="0" name="Variable">DESKTOP</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                        <condition id="-8" name="Compare two values" sid="833104400752024" type="System">
+                                            <param id="0" name="First value">JSON_UpdateCheck.Value(1, &quot;BlockDownload_NWjs&quot;)</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="141982060390064" type="System">
+                                            <param id="0" name="Variable">allow_download</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
                                 <event-block sid="606732346018413">
                                     <conditions>
                                         <condition id="-7" name="Compare instance variable" sid="124253429186943" type="Menu_Options">
@@ -2038,7 +2201,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="0" name="Set text" sid="711624881357244" type="Menu_Options">
-                                            <param id="0" name="Text">JSON_UpdateCheck.Value(0,&quot;SRBftp_UpdateCheck&quot;,&quot;NewestVersion&quot;)</param>
+                                            <param id="0" name="Text">JSON_UpdateCheck.Value(1,&quot;NewestVersion&quot;)</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -2049,17 +2212,41 @@
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">&quot;size&quot;</param>
                                         </condition>
+                                        <condition id="-14" name="Compare variable" sid="310890311069331" type="System">
+                                            <param id="0" name="Variable">allow_download</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
                                     </conditions>
                                     <actions>
                                         <action id="0" name="Set text" sid="382916737074814" type="Menu_Options">
-                                            <param id="0" name="Text">&quot;Download?  (&quot;&amp;JSON_UpdateCheck.Value(0,&quot;SRBftp_UpdateCheck&quot;,&quot;FileSize&quot;)&amp;&quot;mb)&quot;</param>
+                                            <param id="0" name="Text">&quot;Download?  (&quot;&amp;JSON_UpdateCheck.Value(1,&quot;FileSize&quot;)&amp;&quot;mb)&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="900423238750894">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="336671646302043" type="Menu_Options">
+                                            <param id="0" name="Instance variable">ID</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">&quot;size&quot;</param>
+                                        </condition>
+                                        <condition id="-14" inverted="1" name="Compare variable" sid="412647272187119" type="System">
+                                            <param id="0" name="Variable">allow_download</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Set text" sid="654039273644686" type="Menu_Options">
+                                            <param id="0" name="Text">&quot;Open the web page to obtain it?&quot;</param>
                                         </action>
                                     </actions>
                                 </event-block>
                                 <event-block sid="914111241920504">
                                     <conditions>
-                                        <condition id="-14" inverted="1" name="Compare variable" sid="321695941232352" type="System">
-                                            <param id="0" name="Variable">DESKTOP</param>
+                                        <condition id="-14" inverted="1" name="Compare variable" sid="222321302291128" type="System">
+                                            <param id="0" name="Variable">allow_download</param>
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">1</param>
                                         </condition>
@@ -2069,7 +2256,7 @@
                                         <condition id="-7" name="Compare instance variable" sid="488063675418065" type="Menu_ClickableButton">
                                             <param id="0" name="Instance variable">ID</param>
                                             <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">1</param>
+                                            <param id="2" name="Value">3</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -2099,18 +2286,51 @@
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">1</param>
                                         </condition>
-                                        <condition id="-14" name="Compare variable" sid="240302147155191" type="System">
-                                            <param id="0" name="Variable">DESKTOP</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">1</param>
-                                        </condition>
                                     </conditions>
-                                    <actions>
-                                        <action id="-9" name="Set value" sid="578309380386345" type="System">
-                                            <param id="0" name="Variable">state</param>
-                                            <param id="1" name="Value">&quot;download&quot;</param>
-                                        </action>
-                                    </actions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="870069875110402">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="608679846613498" type="System">
+                                                    <param id="0" name="Variable">allow_download</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">1</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Set value" sid="578309380386345" type="System">
+                                                    <param id="0" name="Variable">state</param>
+                                                    <param id="1" name="Value">&quot;download&quot;</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="135914339933932">
+                                            <conditions>
+                                                <condition id="-22" name="Else" sid="961351750092968" type="System" />
+                                                <condition id="-14" name="Compare variable" sid="240302147155191" type="System">
+                                                    <param id="0" name="Variable">DESKTOP</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">1</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="29" name="Open browser" sid="194301293250728" type="NWjs">
+                                                    <param id="0" name="URL">JSON_UpdateCheck.Value(1,&quot;ManualURL&quot;)</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="962210363638750">
+                                            <conditions>
+                                                <condition id="-22" name="Else" sid="590982574202109" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="8" name="Open URL in new window" sid="632190844945729" type="Browser">
+                                                    <param id="0" name="URL">JSON_UpdateCheck.Value(1,&quot;ManualURL&quot;)</param>
+                                                    <param id="1" name="Tag">&quot;&quot;</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
                                 </event-block>
                                 <event-block sid="959608839031123">
                                     <conditions>
@@ -2134,35 +2354,17 @@
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">3</param>
                                         </condition>
+                                        <condition id="-14" name="Compare variable" sid="553083729093592" type="System">
+                                            <param id="0" name="Variable">allow_download</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
                                     </conditions>
-                                    <actions />
-                                    <sub-events>
-                                        <event-block sid="677043974916203">
-                                            <conditions>
-                                                <condition id="-14" name="Compare variable" sid="969469158422072" type="System">
-                                                    <param id="0" name="Variable">DESKTOP</param>
-                                                    <param id="1" name="Comparison">0</param>
-                                                    <param id="2" name="Value">1</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="29" name="Open browser" sid="881679997944955" type="NWjs">
-                                                    <param id="0" name="URL">JSON_UpdateCheck.Value(0,&quot;SRBftp_UpdateCheck&quot;,&quot;ManualURL&quot;)</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                        <event-block sid="982528904704285">
-                                            <conditions>
-                                                <condition id="-22" name="Else" sid="752905435040909" type="System" />
-                                            </conditions>
-                                            <actions>
-                                                <action id="8" name="Open URL in new window" sid="632190844945729" type="Browser">
-                                                    <param id="0" name="URL">JSON_UpdateCheck.Value(0,&quot;SRBftp_UpdateCheck&quot;,&quot;ManualURL&quot;)</param>
-                                                    <param id="1" name="Tag">&quot;&quot;</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                    </sub-events>
+                                    <actions>
+                                        <action id="29" name="Open browser" sid="881679997944955" type="NWjs">
+                                            <param id="0" name="URL">JSON_UpdateCheck.Value(1,&quot;ManualURL&quot;)</param>
+                                        </action>
+                                    </actions>
                                 </event-block>
                             </sub-events>
                         </event-block>
@@ -2199,13 +2401,13 @@
                                 </action>
                                 <action id="-9" name="Set value" sid="929630654433159" type="System">
                                     <param id="0" name="Variable">filesize</param>
-                                    <param id="1" name="Value">float(JSON_UpdateCheck.Value(0,&quot;SRBftp_UpdateCheck&quot;,&quot;FileSize&quot;))</param>
+                                    <param id="1" name="Value">float(JSON_UpdateCheck.Value(1, &quot;FileSize&quot;))</param>
                                 </action>
                                 <action id="0" name="Set text" sid="604543641049381" type="CutsceneTextA">
                                     <param id="0" name="Text">&quot;DOWNLOADING UPDATE... 0%&quot;&amp;newline&amp;&quot;0MB / &quot;&amp;filesize&amp;&quot;MB&quot;</param>
                                 </action>
                                 <action id="0" name="Load Zip from URL" sid="276420785814155" type="jsZip">
-                                    <param id="0" name="URL">JSON_UpdateCheck.Value(0,&quot;SRBftp_UpdateCheck&quot;,&quot;DownloadURL&quot;)</param>
+                                    <param id="0" name="URL">JSON_UpdateCheck.Value(1,&quot;DownloadURL&quot;)</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -2296,6 +2498,10 @@
                                 <action id="0" name="Set text" sid="700305058311417" type="CutsceneTextA">
                                     <param id="0" name="Text">&quot;DOWNLOADING UPDATE... NOT!&quot;&amp;newline&amp;jsZip.LoadError</param>
                                 </action>
+                                <action id="14" name="Log" sid="349230698123854" type="Browser">
+                                    <param id="0" name="Type">2</param>
+                                    <param id="1" name="Message">jsZip.LoadError</param>
+                                </action>
                                 <action id="-16" name="Wait" sid="873308567219590" type="System">
                                     <param id="0" name="Seconds">3</param>
                                 </action>
@@ -2317,6 +2523,10 @@
                                 <action id="0" name="Set text" sid="928078219689841" type="CutsceneTextA">
                                     <param id="0" name="Text">&quot;DOWNLOADING UPDATE... NOT!&quot;&amp;newline&amp;jsZip.DownloadError</param>
                                 </action>
+                                <action id="14" name="Log" sid="167361443454688" type="Browser">
+                                    <param id="0" name="Type">2</param>
+                                    <param id="1" name="Message">jsZip.DownloadError</param>
+                                </action>
                                 <action id="-16" name="Wait" sid="672109200838843" type="System">
                                     <param id="0" name="Seconds">3</param>
                                 </action>
@@ -2337,6 +2547,10 @@
                                 </action>
                                 <action id="0" name="Set text" sid="694504095676068" type="CutsceneTextA">
                                     <param id="0" name="Text">&quot;DOWNLOADING UPDATE... NOT!&quot;&amp;newline&amp;jsZip.UnzipError</param>
+                                </action>
+                                <action id="14" name="Log" sid="821922376366458" type="Browser">
+                                    <param id="0" name="Type">2</param>
+                                    <param id="1" name="Message">jsZip.UnzipError</param>
                                 </action>
                                 <action id="-16" name="Wait" sid="544023859499441" type="System">
                                     <param id="0" name="Seconds">3</param>
@@ -2425,15 +2639,110 @@
                             <param id="0" name="Animation">&quot;Default&quot;</param>
                             <param id="1" name="From">1</param>
                         </action>
-                        <action disabled="1" id="-10" name="Set value" sid="544751212273302" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentMenu</param>
-                            <param id="1" name="Value">&quot;sage&quot;</param>
-                        </action>
-                        <action id="-10" name="Set value" sid="500042507708847" type="Var_Game">
-                            <param id="0" name="Instance variable">CurrentMenu</param>
-                            <param id="1" name="Value">&quot;intro&quot;</param>
-                        </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="847352992382750">
+                            <conditions>
+                                <condition id="60" name="Is undefined" sid="351607183527938" type="JSON_Menus">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}">&quot;data&quot;{###}&quot;return&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action disabled="1" id="-10" name="Set value" sid="544751212273302" type="Var_Game">
+                                    <param id="0" name="Instance variable">CurrentMenu</param>
+                                    <param id="1" name="Value">&quot;sage&quot;</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="500042507708847" type="Var_Game">
+                                    <param id="0" name="Instance variable">CurrentMenu</param>
+                                    <param id="1" name="Value">&quot;intro&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="230170216361139">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="415808634626347" type="System" />
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="328574782800485">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="946908143392678" type="System">
+                                            <param id="0" name="First value">JSON_Menus.Value(0,&quot;data&quot;,&quot;return&quot;)</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">&quot;settings&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Call function" sid="189894678847147" type="Function">
+                                            <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
+                                            <param id="1" name="Parameter {n}">&quot;F_MainMenu&quot;{###}&quot;music&quot;{###}1</param>
+                                        </action>
+                                        <action id="23" name="Seek to" sid="384126894109771" type="BetterAudio">
+                                            <param id="0" name="Tag">&quot;music&quot;</param>
+                                            <param id="1" name="Position">6.25</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="869364810485920" type="Var_Game">
+                                            <param id="0" name="Instance variable">CurrentMenu</param>
+                                            <param id="1" name="Value">&quot;settings_miscellanious&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="451084677243528">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="981272590933453" type="System">
+                                            <param id="0" name="First value">JSON_Menus.Value(0,&quot;data&quot;,&quot;return&quot;)</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">&quot;online&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block any="1" sid="702140084169919">
+                                            <conditions>
+                                                <condition id="70" name="Is Empty" sid="464762206508724" type="JSON_UpdateCheck">
+                                                    <param id="0" name="Reference point">0</param>
+                                                    <param id="1" name="Key {n}"></param>
+                                                </condition>
+                                                <condition id="-8" name="Is boolean instance variable set" sid="275964488590268" type="Var_Online">
+                                                    <param id="0" name="Instance variable">OutdatedVersion</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Call function" sid="903058262306961" type="Function">
+                                                    <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;F_MainMenu&quot;{###}&quot;music&quot;{###}1</param>
+                                                </action>
+                                                <action id="23" name="Seek to" sid="263090843095932" type="BetterAudio">
+                                                    <param id="0" name="Tag">&quot;music&quot;</param>
+                                                    <param id="1" name="Position">6.25</param>
+                                                </action>
+                                                <action id="-10" name="Set value" sid="778403911708811" type="Var_Game">
+                                                    <param id="0" name="Instance variable">CurrentMenu</param>
+                                                    <param id="1" name="Value">&quot;main&quot;</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="390023775959848">
+                                            <conditions>
+                                                <condition id="-22" name="Else" sid="426193797010767" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Call function" sid="230289261704787" type="Function">
+                                                    <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
+                                                    <param id="1" name="Parameter {n}">&quot;F_OnlineMenu&quot;{###}&quot;online&quot;{###}1</param>
+                                                </action>
+                                                <action id="-10" name="Set value" sid="298719291746239" type="Var_Game">
+                                                    <param id="0" name="Instance variable">CurrentMenu</param>
+                                                    <param id="1" name="Value">&quot;connect_online&quot;</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
                 </event-block>
             </sub-events>
         </event-group>
@@ -2832,7 +3141,7 @@
                                     <param id="0" name="Name">&quot;Audio_PlayMusic&quot;</param>
                                     <param id="1" name="Parameter {n}">&quot;F_SAGE&quot;{###}&quot;music&quot;{###}0</param>
                                 </action>
-                                <action id="1" name="Set playback time" sid="362780462960508" type="MenuCredits_Video">
+                                <action id="1" name="Set playback time" sid="362780462960508" type="Logo_SAGE">
                                     <param id="0" name="Time">0</param>
                                 </action>
                                 <action id="-15" name="Set visible" sid="466020085084897" type="Logo_SAGE">
@@ -2871,10 +3180,10 @@
                         <action id="-15" name="Set visible" sid="415765286693283" type="Logo_SAGE">
                             <param id="0" name="Visibility">0</param>
                         </action>
-                        <action id="1" name="Set playback time" sid="607416150041519" type="MenuCredits_Video">
+                        <action id="1" name="Set playback time" sid="607416150041519" type="Logo_SAGE">
                             <param id="0" name="Time">0</param>
                         </action>
-                        <action id="5" name="Pause" sid="270263552967141" type="MenuCredits_Video" />
+                        <action id="5" name="Pause" sid="270263552967141" type="Logo_SAGE" />
                         <action id="-10" name="Set value" sid="647678951708128" type="Var_Game">
                             <param id="0" name="Instance variable">CurrentMenu</param>
                             <param id="1" name="Value">&quot;intro&quot;</param>
@@ -2896,10 +3205,10 @@
                         <action id="-15" name="Set visible" sid="953243869251156" type="Logo_SAGE">
                             <param id="0" name="Visibility">0</param>
                         </action>
-                        <action id="1" name="Set playback time" sid="146343303059228" type="MenuCredits_Video">
+                        <action id="1" name="Set playback time" sid="146343303059228" type="Logo_SAGE">
                             <param id="0" name="Time">0</param>
                         </action>
-                        <action id="5" name="Pause" sid="213203139950666" type="MenuCredits_Video" />
+                        <action id="5" name="Pause" sid="213203139950666" type="Logo_SAGE" />
                         <action id="-10" name="Set value" sid="252817538275796" type="Var_Game">
                             <param id="0" name="Instance variable">CurrentMenu</param>
                             <param id="1" name="Value">&quot;intro&quot;</param>
@@ -3271,7 +3580,7 @@
                         </action>
                     </actions>
                 </event-block>
-                <comment></comment>
+                <comment>- srb1</comment>
                 <event-block sid="899127023502233">
                     <conditions>
                         <condition id="-7" name="Compare instance variable" sid="563181124413318" type="Var_Game">
@@ -3431,7 +3740,7 @@
                         </event-block>
                     </sub-events>
                 </event-block>
-                <comment></comment>
+                <comment>- srb2</comment>
                 <event-block sid="469394136610756">
                     <conditions>
                         <condition id="-7" name="Compare instance variable" sid="173609965755330" type="Var_Game">
@@ -3591,7 +3900,7 @@
                         </event-block>
                     </sub-events>
                 </event-block>
-                <comment></comment>
+                <comment>- extra levels</comment>
                 <event-block any="1" sid="580584884732109">
                     <conditions>
                         <condition id="-7" name="Compare instance variable" sid="845370372142941" type="Var_Game">
@@ -3650,7 +3959,7 @@
                         </event-block>
                     </sub-events>
                 </event-block>
-                <comment></comment>
+                <comment>- bonus modes</comment>
                 <event-block sid="701125204690625">
                     <conditions>
                         <condition id="-7" name="Compare instance variable" sid="695441227307713" type="Var_Game">
@@ -3698,7 +4007,7 @@
                         </event-block>
                     </sub-events>
                 </event-block>
-                <comment></comment>
+                <comment>- online</comment>
                 <event-block sid="248814314437767">
                     <conditions>
                         <condition id="-7" name="Compare instance variable" sid="676461244963315" type="Var_Game">
@@ -3857,7 +4166,7 @@
                         </event-block>
                     </sub-events>
                 </event-block>
-                <comment></comment>
+                <comment>- settings</comment>
                 <event-block sid="900539861781786">
                     <conditions>
                         <condition id="-7" name="Compare instance variable" sid="165588072756505" type="Var_Game">
@@ -3900,7 +4209,7 @@
                         </event-block>
                     </sub-events>
                 </event-block>
-                <comment></comment>
+                <comment>- exit</comment>
                 <event-block sid="442646154789925">
                     <conditions>
                         <condition id="-7" inverted="1" name="Compare instance variable" sid="148077089727652" type="Var_Game">
@@ -4026,7 +4335,7 @@
                                         </action>
                                         <action behavior="Fade" id="0" name="Restart fade" sid="932705311760134" type="FadeBlack" />
                                         <action id="0" name="Set text" sid="354851838726802" type="Menu_Options">
-                                            <param id="0" name="Text">&quot;EXIT&quot;</param>
+                                            <param id="0" name="Text">&quot;FADING AWAAAY&quot;</param>
                                         </action>
                                         <action behavior="Flash" id="1" name="Stop flashing" sid="306485110581513" type="Menu_Options" />
                                         <action id="-9" name="Set value" sid="325824040140573" type="System">
@@ -9143,6 +9452,11 @@
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">1</param>
                                 </condition>
+                                <condition id="-14" name="Compare variable" sid="207942394520385" type="System">
+                                    <param id="0" name="Variable">lock</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
                             </conditions>
                             <actions>
                                 <action id="0" name="Call function" sid="324245160801903" type="Function">
@@ -9227,6 +9541,11 @@
                                     <param id="2" name="Second value">1</param>
                                 </condition>
                                 <condition id="-4" name="Trigger once while true" sid="349436840951246" type="System" />
+                                <condition id="-14" name="Compare variable" sid="396890641086996" type="System">
+                                    <param id="0" name="Variable">lock</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
                             </conditions>
                             <actions />
                             <sub-events>
@@ -9311,6 +9630,11 @@
                                     <param id="2" name="Second value">1</param>
                                 </condition>
                                 <condition id="-4" name="Trigger once while true" sid="121368451896596" type="System" />
+                                <condition id="-14" name="Compare variable" sid="750443614016465" type="System">
+                                    <param id="0" name="Variable">lock</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
                             </conditions>
                             <actions>
                                 <action id="0" name="Call function" sid="790750675224221" type="Function">
@@ -9378,6 +9702,11 @@
                                     <param id="2" name="Second value">1</param>
                                 </condition>
                                 <condition id="-4" name="Trigger once while true" sid="818128094245453" type="System" />
+                                <condition id="-14" name="Compare variable" sid="409774181871647" type="System">
+                                    <param id="0" name="Variable">lock</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
                             </conditions>
                             <actions>
                                 <action id="0" name="Call function" sid="454037735613916" type="Function">
@@ -9643,6 +9972,11 @@
                                     <param id="2" name="Second value">1</param>
                                 </condition>
                                 <condition id="-4" name="Trigger once while true" sid="890015903502186" type="System" />
+                                <condition id="-14" name="Compare variable" sid="630760509056807" type="System">
+                                    <param id="0" name="Variable">lock</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
                             </conditions>
                             <actions>
                                 <action id="0" name="Call function" sid="231303514507558" type="Function">
@@ -9706,6 +10040,11 @@
                                     <param id="2" name="Second value">1</param>
                                 </condition>
                                 <condition id="-4" name="Trigger once while true" sid="252576844272167" type="System" />
+                                <condition id="-14" name="Compare variable" sid="749913216483665" type="System">
+                                    <param id="0" name="Variable">lock</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
                             </conditions>
                             <actions>
                                 <action id="0" name="Call function" sid="646225948770932" type="Function">
@@ -9769,6 +10108,11 @@
                                     <param id="2" name="Second value">1</param>
                                 </condition>
                                 <condition id="-4" name="Trigger once while true" sid="107651194358764" type="System" />
+                                <condition id="-14" name="Compare variable" sid="301267709463542" type="System">
+                                    <param id="0" name="Variable">lock</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
                             </conditions>
                             <actions>
                                 <action id="0" name="Call function" sid="677961034963262" type="Function">
@@ -10145,6 +10489,11 @@
                                     <param id="2" name="Second value">1</param>
                                 </condition>
                                 <condition id="-4" name="Trigger once while true" sid="485936144037215" type="System" />
+                                <condition id="-14" name="Compare variable" sid="425971011957305" type="System">
+                                    <param id="0" name="Variable">lock</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
                             </conditions>
                             <actions>
                                 <action id="0" name="Call function" sid="571821441396890" type="Function">
@@ -11992,6 +12341,11 @@
                                     <param id="2" name="Second value">1</param>
                                 </condition>
                                 <condition id="-4" name="Trigger once while true" sid="916733135424236" type="System" />
+                                <condition id="-14" name="Compare variable" sid="195715474788314" type="System">
+                                    <param id="0" name="Variable">lock</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
                             </conditions>
                             <actions>
                                 <action id="0" name="Call function" sid="618355824113279" type="Function">
@@ -12050,6 +12404,11 @@
                                     <param id="2" name="Second value">1</param>
                                 </condition>
                                 <condition id="-4" name="Trigger once while true" sid="819496651591945" type="System" />
+                                <condition id="-14" name="Compare variable" sid="809653311023143" type="System">
+                                    <param id="0" name="Variable">lock</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
                             </conditions>
                             <actions>
                                 <action id="0" name="Call function" sid="878719763693113" type="Function">
@@ -12108,6 +12467,11 @@
                                     <param id="2" name="Second value">1</param>
                                 </condition>
                                 <condition id="-4" name="Trigger once while true" sid="767683479966025" type="System" />
+                                <condition id="-14" name="Compare variable" sid="633184346806264" type="System">
+                                    <param id="0" name="Variable">lock</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
                             </conditions>
                             <actions>
                                 <action id="0" name="Call function" sid="176558501866871" type="Function">
@@ -12166,6 +12530,11 @@
                                     <param id="2" name="Second value">1</param>
                                 </condition>
                                 <condition id="-4" name="Trigger once while true" sid="995728083790763" type="System" />
+                                <condition id="-14" name="Compare variable" sid="900366951787176" type="System">
+                                    <param id="0" name="Variable">lock</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
                             </conditions>
                             <actions>
                                 <action id="0" name="Call function" sid="878686430941528" type="Function">
@@ -12224,6 +12593,11 @@
                                     <param id="2" name="Second value">1</param>
                                 </condition>
                                 <condition id="-4" name="Trigger once while true" sid="760020005455240" type="System" />
+                                <condition id="-14" name="Compare variable" sid="790043722916844" type="System">
+                                    <param id="0" name="Variable">lock</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
                             </conditions>
                             <actions>
                                 <action id="0" name="Call function" sid="270571227186293" type="Function">
@@ -12282,6 +12656,11 @@
                                     <param id="2" name="Second value">1</param>
                                 </condition>
                                 <condition id="-4" name="Trigger once while true" sid="572076039374605" type="System" />
+                                <condition id="-14" name="Compare variable" sid="560180049191099" type="System">
+                                    <param id="0" name="Variable">lock</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
                             </conditions>
                             <actions>
                                 <action id="0" name="Call function" sid="858267639829141" type="Function">
@@ -12569,7 +12948,7 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-10" name="Set value" sid="291896221961420" type="Var_Game">
+                                <action disabled="1" id="-10" name="Set value" sid="291896221961420" type="Var_Game">
                                     <param id="0" name="Instance variable">CurrentMenu</param>
                                     <param id="1" name="Value">&quot;settings_erasedata&quot;</param>
                                 </action>
@@ -12778,6 +13157,11 @@
                                     <param id="2" name="Value">1</param>
                                 </condition>
                                 <condition id="-4" name="Trigger once while true" sid="257432226257103" type="System" />
+                                <condition id="-14" name="Compare variable" sid="402304024694293" type="System">
+                                    <param id="0" name="Variable">lock</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
                             </conditions>
                             <actions>
                                 <action id="0" name="Call function" sid="930517515074844" type="Function">
@@ -13031,6 +13415,11 @@
                                     <param id="2" name="Value">1</param>
                                 </condition>
                                 <condition id="-4" name="Trigger once while true" sid="490556230348865" type="System" />
+                                <condition id="-14" name="Compare variable" sid="300339939647243" type="System">
+                                    <param id="0" name="Variable">lock</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
                             </conditions>
                             <actions>
                                 <action id="0" name="Call function" sid="466524876466856" type="Function">
@@ -13066,22 +13455,6 @@
                             <param id="0" name="Text">&quot;CHECK FOR UPDATES&quot;</param>
                         </action>
                     </actions>
-                    <sub-events>
-                        <event-block any="1" sid="528482695244663">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="197151264945650" type="System">
-                                    <param id="0" name="Variable">WEB</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">1</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Set text" sid="344184165537266" type="Menu_Options">
-                                    <param id="0" name="Text">&quot;---&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
                 </event-block>
                 <event-block sid="737867859582776">
                     <conditions>
@@ -13099,6 +13472,9 @@
                     <sub-events>
                         <event-block sid="619003576301121">
                             <conditions>
+                                <condition id="-8" inverted="1" name="Is boolean instance variable set" sid="572474376742651" type="Var_Input">
+                                    <param id="0" name="Instance variable">Right</param>
+                                </condition>
                                 <condition id="-8" name="Is boolean instance variable set" sid="375299642038081" type="Var_Input">
                                     <param id="0" name="Instance variable">A</param>
                                 </condition>
@@ -13108,17 +13484,39 @@
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">0</param>
                                 </condition>
-                                <condition id="-14" inverted="1" name="Compare variable" sid="538851575164859" type="System">
-                                    <param id="0" name="Variable">WEB</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">1</param>
-                                </condition>
                             </conditions>
                             <actions>
                                 <action id="33" name="Stop all" sid="267646072142044" type="BetterAudio" />
-                                <action id="-10" name="Set value" sid="783308466044045" type="Var_Game">
-                                    <param id="0" name="Instance variable">CurrentMenu</param>
-                                    <param id="1" name="Value">&quot;autoupdater&quot;</param>
+                                <action id="0" name="Call function" sid="900855213382451" type="Function">
+                                    <param id="0" name="Name">&quot;Menu_Set&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;autoupdater&quot;{###}&quot;return=settings&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="561433999609456">
+                            <conditions>
+                                <condition id="-8" name="Is boolean instance variable set" sid="905778695764635" type="Var_Input">
+                                    <param id="0" name="Instance variable">Right</param>
+                                </condition>
+                                <condition id="-8" name="Is boolean instance variable set" sid="498852884483672" type="Var_Input">
+                                    <param id="0" name="Instance variable">A</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="415904186422226" type="System" />
+                                <condition id="-14" name="Compare variable" sid="783964869187463" type="System">
+                                    <param id="0" name="Variable">lock</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="33" name="Stop all" sid="952511197499305" type="BetterAudio" />
+                                <action id="0" name="Call function" sid="641858258400064" type="Function">
+                                    <param id="0" name="Name">&quot;Audio_PlaySFX&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;Ring&quot;</param>
+                                </action>
+                                <action id="0" name="Call function" sid="766659506902336" type="Function">
+                                    <param id="0" name="Name">&quot;Menu_Set&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;autoupdater&quot;{###}&quot;force&#x0D;&#x0A;return=settings&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -13377,35 +13775,23 @@
                             </actions>
                         </event-block>
                         <comment>todo: figure out what to do with web</comment>
-                        <event-block sid="787969923250055">
+                        <event-block any="1" sid="930829824594772">
                             <conditions>
-                                <condition id="-14" inverted="1" name="Compare variable" sid="932127376341901" type="System">
-                                    <param id="0" name="Variable">WEB</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">1</param>
+                                <condition id="70" name="Is Empty" sid="675362863634552" type="JSON_UpdateCheck">
+                                    <param id="0" name="Reference point">0</param>
+                                    <param id="1" name="Key {n}"></param>
+                                </condition>
+                                <condition id="-8" name="Is boolean instance variable set" sid="226074971265510" type="Var_Online">
+                                    <param id="0" name="Instance variable">OutdatedVersion</param>
                                 </condition>
                             </conditions>
-                            <actions />
-                            <sub-events>
-                                <event-block any="1" sid="930829824594772">
-                                    <conditions>
-                                        <condition id="70" name="Is Empty" sid="675362863634552" type="JSON_UpdateCheck">
-                                            <param id="0" name="Reference point">0</param>
-                                            <param id="1" name="Key {n}"></param>
-                                        </condition>
-                                        <condition id="-8" name="Is boolean instance variable set" sid="226074971265510" type="Var_Online">
-                                            <param id="0" name="Instance variable">OutdatedVersion</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="33" name="Stop all" sid="994379146186119" type="BetterAudio" />
-                                        <action id="-10" name="Set value" sid="526115374347722" type="Var_Game">
-                                            <param id="0" name="Instance variable">CurrentMenu</param>
-                                            <param id="1" name="Value">&quot;autoupdater&quot;</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
+                            <actions>
+                                <action id="33" name="Stop all" sid="994379146186119" type="BetterAudio" />
+                                <action id="0" name="Call function" sid="308330478427248" type="Function">
+                                    <param id="0" name="Name">&quot;Menu_Set&quot;</param>
+                                    <param id="1" name="Parameter {n}">&quot;autoupdater&quot;{###}&quot;return=online&quot;</param>
+                                </action>
+                            </actions>
                         </event-block>
                     </sub-events>
                 </event-block>
@@ -13955,7 +14341,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="1" name="Append text" sid="463852022896736" type="Menu_Options">
-                                            <param id="0" name="Text">JS.Value(&quot;format&quot;, &quot;Your game needs to be updated!&quot;&amp;newline&amp;&quot;(your: {ver}, newest: {new})&quot;, projectversion, JSON_UpdateCheck.Value(0,&quot;SRBftp_UpdateCheck&quot;,&quot;NewestVersion&quot;))</param>
+                                            <param id="0" name="Text">JS.Value(&quot;format&quot;, &quot;Your game needs to be updated!&quot;&amp;newline&amp;&quot;(your: {ver}, newest: {new})&quot;, projectversion, JSON_UpdateCheck.Value(1,&quot;NewestVersion&quot;))</param>
                                         </action>
                                     </actions>
                                 </event-block>
